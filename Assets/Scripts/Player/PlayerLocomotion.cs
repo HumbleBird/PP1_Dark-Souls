@@ -19,6 +19,7 @@ public class PlayerLocomotion : MonoBehaviour
     [Header("Stats")]
     [SerializeField]
     float movementSpeed = 5;
+    [SerializeField]
     float rotationSpeed = 10;
 
     private void Start()
