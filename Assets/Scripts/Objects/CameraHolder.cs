@@ -56,4 +56,68 @@ public class CameraHolder : MonoBehaviour
         ignoreLayers = ~(1 << 8 | 1 << 9 | 1 << 10);
         enviromentLayer = LayerMask.NameToLayer("Obstacle");
     }
+
+    public void FollwTarget(float delta)
+    {
+        Vector3 targetPositoin = Vector3.SmoothDamp(myTranform.position, targetTransform.position, ref cameraFollwVelocity, delta / follwSpeed);
+        myTranform.position = targetPositoin;
+
+        //HandleCameraCollision(delta);
+    }
+
+    public void HandleCameraRotation(float delta, float mouseXInput, float mouseYInput)
+    {
+        lookAngle += (mouseXInput * lookSpeed) / delta;
+        pivotAngle -= (mouseYInput * pivotSpeed) / delta;
+        pivotAngle = Mathf.Clamp(pivotAngle, minimumPivot, maximumPivot);
+
+        Vector3 rotation = Vector3.zero;
+        rotation.y = lookAngle;
+        Quaternion targetRotation = Quaternion.Euler(rotation);
+        myTranform.rotation = targetRotation;
+
+        rotation = Vector3.zero;
+        rotation.x = pivotAngle;
+
+        targetRotation = Quaternion.Euler(rotation);
+        cameraPivotTranform.localRotation = targetRotation;
+
+        //if (Managers.Object.myPlayer.m_bLockOnFlag == false && m_trCurrentLockOnTarget == null)
+        //{
+        //    lookAngle += (mouseXInput * lookSpeed) / delta;
+        //    pivotAngle -= (mouseYInput * pivotSpeed) / delta;
+        //    pivotAngle = Mathf.Clamp(pivotAngle, minimumPivot, maximumPivot);
+
+        //    Vector3 rotation = Vector3.zero;
+        //    rotation.y = lookAngle;
+        //    Quaternion targetRotation = Quaternion.Euler(rotation);
+        //    myTranform.rotation = targetRotation;
+
+        //    rotation = Vector3.zero;
+        //    rotation.x = pivotAngle;
+
+        //    targetRotation = Quaternion.Euler(rotation);
+        //    cameraPivotTranform.localRotation = targetRotation;
+        //}
+        //else
+        //{
+        //    float velocity = 0;
+
+        //    Vector3 dir = m_trCurrentLockOnTarget.position - transform.position;
+        //    dir.Normalize();
+        //    dir.y = 0;
+
+        //    Quaternion targetRotation = Quaternion.LookRotation(dir);
+        //    transform.rotation = targetRotation;
+
+        //    dir = m_trCurrentLockOnTarget.position - cameraPivotTranform.position;
+        //    dir.Normalize();
+
+        //    targetRotation = Quaternion.LookRotation(dir);
+        //    Vector3 eulerAngle = targetRotation.eulerAngles;
+        //    eulerAngle.y = 0;
+        //    cameraPivotTranform.localEulerAngles = eulerAngle;
+
+        //}
+    }
 }
