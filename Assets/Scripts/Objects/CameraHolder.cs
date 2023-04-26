@@ -52,9 +52,7 @@ public class CameraHolder : MonoBehaviour
         singleton = this;
         myTranform = transform;
         defaultPosition = cameraTransform.localPosition.z;
-        //targetTransform = Managers.Object.myPlayer.gameObject.transform;
         ignoreLayers = ~(1 << 8 | 1 << 9 | 1 << 10);
-        enviromentLayer = LayerMask.NameToLayer("Obstacle");
     }
 
     public void FollwTarget(float delta)
@@ -62,7 +60,7 @@ public class CameraHolder : MonoBehaviour
         Vector3 targetPositoin = Vector3.SmoothDamp(myTranform.position, targetTransform.position, ref cameraFollwVelocity, delta / follwSpeed);
         myTranform.position = targetPositoin;
 
-        //HandleCameraCollision(delta);
+        HandleCameraCollision(delta);
     }
 
     public void HandleCameraRotation(float delta, float mouseXInput, float mouseYInput)
@@ -119,5 +117,29 @@ public class CameraHolder : MonoBehaviour
         //    cameraPivotTranform.localEulerAngles = eulerAngle;
 
         //}
+    }
+
+    private void HandleCameraCollision(float delta)
+    {
+        targetPostion = defaultPosition;
+        RaycastHit hit;
+        Vector3 direction = cameraTransform.position - cameraPivotTranform.position;
+        direction.Normalize();
+
+        if (Physics.SphereCast
+            (cameraPivotTranform.position, cameraSphereRadius, direction, out hit, Mathf.Abs(targetPostion)
+            , ignoreLayers))
+        {
+            float dis = Vector3.Distance(cameraPivotTranform.position, hit.point);
+            targetPostion = -(dis - cameraCollisionOffSet);
+        }
+
+        if (Mathf.Abs(targetPostion) < minimumCollisionOffSet)
+        {
+            targetPostion = -minimumCollisionOffSet;
+        }
+
+        cameraTransformPosition.z = Mathf.Lerp(cameraTransform.localPosition.z, targetPostion, delta / 0.2f);
+        cameraTransform.localPosition = cameraTransformPosition;
     }
 }

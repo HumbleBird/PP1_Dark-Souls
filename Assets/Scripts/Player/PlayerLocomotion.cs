@@ -41,6 +41,7 @@ public class PlayerLocomotion : MonoBehaviour
         movedirection = cameraObject.forward * inputHandler.vertical;
         movedirection += cameraObject.right * inputHandler.horizontal;
         movedirection.Normalize();
+        movedirection.y = 0;
 
         float speed = movementSpeed;
         movedirection *= speed;
