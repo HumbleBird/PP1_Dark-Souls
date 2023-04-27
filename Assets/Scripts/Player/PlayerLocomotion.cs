@@ -13,10 +13,13 @@ public class PlayerLocomotion : MonoBehaviour
     [HideInInspector]
     public AnimatorHandler animatorHandler;
 
+    PlayerManager playerManager;
+
+
     public new Rigidbody rigidbody;
     public GameObject normalCamera;
 
-    [Header("Stats")]
+    [Header("Movement Stats")]
     [SerializeField]
     float movementSpeed = 5;
     [SerializeField]
@@ -24,10 +27,10 @@ public class PlayerLocomotion : MonoBehaviour
     [SerializeField]
     float rotationSpeed = 10;
 
-    public bool isSprinting;
 
     private void Start()
     {
+        playerManager = GetComponent<PlayerManager>();
         rigidbody = GetComponent<Rigidbody>();
         inputHandler = GetComponent<InputHandler>();
         animatorHandler = GetComponentInChildren<AnimatorHandler>();
@@ -36,15 +39,7 @@ public class PlayerLocomotion : MonoBehaviour
         animatorHandler.Initialize();
     }
 
-    public void Update()
-    {
-        float delta = Time.deltaTime;
 
-        isSprinting = inputHandler.b_Input;
-        inputHandler.TickInput(delta);
-        HandleMovement(delta);
-        HandleRollingAndSprinting(delta);
-    }
 
     #region Movement
     Vector3 normalVector;
@@ -86,7 +81,7 @@ public class PlayerLocomotion : MonoBehaviour
         if (inputHandler.sprintFlag)
         {
             speed = sprintSpeed;
-            isSprinting = true;
+            playerManager.isSprinting = true;
             movedirection *= speed;
         }
         else
@@ -99,7 +94,7 @@ public class PlayerLocomotion : MonoBehaviour
         rigidbody.velocity = projecteedVelocity;
 
 
-        animatorHandler.UpdateAnimatorValues(inputHandler.moveAmount, 0, isSprinting);
+        animatorHandler.UpdateAnimatorValues(inputHandler.moveAmount, 0, playerManager.isSprinting);
 
         if (animatorHandler.canRotate)
         {
