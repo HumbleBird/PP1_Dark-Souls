@@ -14,6 +14,8 @@ public class AnimatorHandler : MonoBehaviour
     public void Initialize()
     {
         anim = GetComponent<Animator>();
+        inputHandler = GetComponentInParent<InputHandler>();
+        playerLocomotion = GetComponentInParent<PlayerLocomotion>();
         vertical = Animator.StringToHash("Vertical");
         horizontal = Animator.StringToHash("Horizontal");
     }
@@ -84,8 +86,6 @@ public class AnimatorHandler : MonoBehaviour
     public void PlayerTargetAnimation(string targetAnim, bool isInteracting)
     {
         anim.applyRootMotion = isInteracting;
-        inputHandler = GetComponentInParent<InputHandler>();
-        playerLocomotion = GetComponentInParent<PlayerLocomotion>();
         anim.SetBool("isInteracting", isInteracting);
         anim.CrossFade(targetAnim, 0.2f);
     }
