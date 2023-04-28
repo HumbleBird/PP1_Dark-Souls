@@ -18,12 +18,12 @@ public class PlayerManager : MonoBehaviour
 
     private void Awake()
     {
-        cameraHolder = CameraHolder.singleton;
     }
 
     // Start is called before the first frame update
     void Start()
     {
+        cameraHolder = CameraHolder.singleton;
         inputHandler = GetComponent<InputHandler>();
         anim = GetComponentInChildren<Animator>();
         playerLocomotion = GetComponent<PlayerLocomotion>();

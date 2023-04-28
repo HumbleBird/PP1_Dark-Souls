@@ -189,17 +189,20 @@ public class PlayerLocomotion : MonoBehaviour
 
             if (playerManager.isInAir)
             {
-                Debug.Log("YOu were in the air for " + inAirTimer);
-                animatorHandler.PlayerTargetAnimation("Land", true);
-                inAirTimer = 0;
-            }
-            else
-            {
-                animatorHandler.PlayerTargetAnimation("Locomotion", false);
-                inAirTimer = 0;
-            }
+                if(inAirTimer > 0.5)
+                {
+                    Debug.Log("YOu were in the air for " + inAirTimer);
+                    animatorHandler.PlayerTargetAnimation("Land", true);
+                    inAirTimer = 0;
+                }
+                else
+                {
+                    animatorHandler.PlayerTargetAnimation("Locomotion", false);
+                    inAirTimer = 0;
+                }
 
-            playerManager.isInAir = false;
+                playerManager.isInAir = false;
+            }
         }
         else
         {
