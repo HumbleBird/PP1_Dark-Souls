@@ -11,6 +11,8 @@ public class InputHandler : MonoBehaviour
     public float mouseY;
 
     public bool b_Input;
+    public bool rb_Input;
+    public bool rt_Input;
 
     public bool rollFlag;
     public bool sprintFlag;
@@ -18,13 +20,17 @@ public class InputHandler : MonoBehaviour
     public float rollInputTimer;
 
     PlayerControls inputActions;
+    PlayerAttacker playerAttacker;
+    PlayerInventory playerInventory;
 
     Vector2 movementInput;
     Vector2 cameraInput;
 
-
-
-
+    private void Awake()
+    {
+        playerAttacker = GetComponent<PlayerAttacker>();
+        playerInventory = GetComponent<PlayerInventory>();
+    }
 
     public void OnEnable()
     {
@@ -47,6 +53,7 @@ public class InputHandler : MonoBehaviour
     {
         MoveInput(delta);
         HandleRollInput(delta);
+        HandleAttackInput(delta);
     }
 
     private void MoveInput(float delta)
@@ -76,6 +83,22 @@ public class InputHandler : MonoBehaviour
             }
 
             rollInputTimer = 0;
+        }
+    }
+
+    private void HandleAttackInput(float delta)
+    {
+        inputActions.PlayerActions.RB.performed += i => rb_Input = true;
+        inputActions.PlayerActions.RT.performed += i => rt_Input = true;
+
+        if(rb_Input)
+        {
+            playerAttacker.HandleLightAttack(playerInventory.rightWeapon);
+        }
+
+        if (rt_Input)
+        {
+            playerAttacker.HandleHeavyAttack(playerInventory.rightWeapon);
         }
     }
 }
