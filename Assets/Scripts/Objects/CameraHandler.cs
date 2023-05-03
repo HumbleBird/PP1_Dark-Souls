@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class CameraHolder : MonoBehaviour
+public class CameraHandler : MonoBehaviour
 {
     #region Variable
 
@@ -16,7 +16,7 @@ public class CameraHolder : MonoBehaviour
     public LayerMask enviromentLayer;
     private Vector3 cameraFollwVelocity = Vector3.zero;
 
-    public static CameraHolder singleton;
+    public static CameraHandler singleton;
 
     public float lookSpeed = 0.1f;
     public float follwSpeed = 0.1f;
@@ -53,6 +53,7 @@ public class CameraHolder : MonoBehaviour
         myTranform = transform;
         defaultPosition = cameraTransform.localPosition.z;
         ignoreLayers = ~(1 << 8 | 1 << 9 | 1 << 10);
+        targetTransform = FindObjectOfType<PlayerManager>().transform;
     }
 
     public void FollwTarget(float delta)

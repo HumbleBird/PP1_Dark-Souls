@@ -197,7 +197,7 @@ public class PlayerLocomotion : MonoBehaviour
                 }
                 else
                 {
-                    animatorHandler.PlayerTargetAnimation("Locomotion", false);
+                    animatorHandler.PlayerTargetAnimation("Empty", false);
                     inAirTimer = 0;
                 }
 
@@ -225,7 +225,7 @@ public class PlayerLocomotion : MonoBehaviour
             }
         }
 
-        if(playerManager.isGrounded)
+        //if(playerManager.isGrounded)
         {
             if (playerManager.isInteracting || inputHandler.moveAmount > 0)
             {

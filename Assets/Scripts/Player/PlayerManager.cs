@@ -6,7 +6,7 @@ public class PlayerManager : MonoBehaviour
 {
     InputHandler inputHandler;
     Animator anim;
-    CameraHolder cameraHolder;
+    CameraHandler cameraHandler;
     PlayerLocomotion playerLocomotion;
 
     public bool isInteracting;
@@ -23,7 +23,7 @@ public class PlayerManager : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        cameraHolder = CameraHolder.singleton;
+        cameraHandler = FindObjectOfType<CameraHandler>();
         inputHandler = GetComponent<InputHandler>();
         anim = GetComponentInChildren<Animator>();
         playerLocomotion = GetComponent<PlayerLocomotion>();
@@ -47,10 +47,10 @@ public class PlayerManager : MonoBehaviour
     {
         float delta = Time.fixedDeltaTime;
 
-        if (cameraHolder != null)
+        if (cameraHandler != null)
         {
-            cameraHolder.FollwTarget(delta);
-            cameraHolder.HandleCameraRotation(delta, inputHandler.mouseX, inputHandler.mouseY);
+            cameraHandler.FollwTarget(delta);
+            cameraHandler.HandleCameraRotation(delta, inputHandler.mouseX, inputHandler.mouseY);
         }
     }
 
