@@ -10,9 +10,7 @@ public class DamageCollider : MonoBehaviour
 
     private void Awake()
     {
-        Debug.Break();
-
-        damageCollider.GetComponentInChildren<Collider>();
+        damageCollider = GetComponentInChildren<Collider>();
 
         damageCollider.gameObject.SetActive(true);
         damageCollider.isTrigger = true;
@@ -31,11 +29,11 @@ public class DamageCollider : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
-        if(other.tag == "Player")
+        if (other.tag == "Player")
         {
             PlayerStatus playerStatus = other.GetComponent<PlayerStatus>();
-            
-            if(playerStatus != null)
+
+            if (playerStatus != null)
             {
                 playerStatus.TakeDamage(currentWeaponDamage);
             }
@@ -50,6 +48,5 @@ public class DamageCollider : MonoBehaviour
                 enemyStatus.TakeDamage(currentWeaponDamage);
             }
         }
-
     }
 }
