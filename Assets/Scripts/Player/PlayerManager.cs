@@ -9,6 +9,10 @@ public class PlayerManager : MonoBehaviour
     CameraHandler cameraHandler;
     PlayerLocomotion playerLocomotion;
 
+    InteractableUI interactableUI;
+    public GameObject interactableUIGameObject;
+    public GameObject itemInteractableUIGameObject;
+
     public bool isInteracting;
 
     [Header("Player Flags")]
@@ -28,6 +32,7 @@ public class PlayerManager : MonoBehaviour
         inputHandler = GetComponent<InputHandler>();
         anim = GetComponentInChildren<Animator>();
         playerLocomotion = GetComponent<PlayerLocomotion>();
+        interactableUI = FindObjectOfType<InteractableUI>();
     }
 
     // Update is called once per frame
@@ -89,12 +94,26 @@ public class PlayerManager : MonoBehaviour
                 if(interactable != null)
                 {
                     string interactableText = interactable.interactableText;
+                    interactableUI.interactableText.text = interactableText;
+                    interactableUIGameObject.SetActive(true);
 
                     if(inputHandler.a_Input)
                     {
                         hit.collider.GetComponent<Interactable>().Interact(this);
                     }
                 }
+            }
+        }
+        else
+        {
+            if(interactableUIGameObject != null)
+            {
+                interactableUIGameObject.SetActive(false);
+            }
+
+            if(itemInteractableUIGameObject != null && inputHandler.a_Input)
+            {
+                itemInteractableUIGameObject.SetActive(false);
             }
         }
     }

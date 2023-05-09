@@ -1,6 +1,8 @@
 using System.Collections;
 using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class WeaponPickup : Interactable
 {
@@ -26,6 +28,12 @@ public class WeaponPickup : Interactable
         playerLocomotion.rigidbody.velocity = Vector3.zero;
         animatorHandler.PlayerTargetAnimation("Pick Up Item", true);
         playerInventory.weaponsInventory.Add(weapon);
+
+        playerManager.itemInteractableUIGameObject.SetActive(true);
+        playerManager.itemInteractableUIGameObject.GetComponentInChildren<TextMeshProUGUI>().text = weapon.itemName;
+        playerManager.itemInteractableUIGameObject.GetComponentInChildren<Image>().sprite = weapon.itemIcon; 
+        // TODO UI Bind로 고치기
+
         Destroy(gameObject);
 
     }
