@@ -10,7 +10,7 @@ public class DamageCollider : MonoBehaviour
 
     private void Awake()
     {
-        damageCollider = GetComponentInChildren<Collider>();
+        damageCollider = GetComponent<Collider>();
 
         damageCollider.gameObject.SetActive(true);
         damageCollider.isTrigger = true;
