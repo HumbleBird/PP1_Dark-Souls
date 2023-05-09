@@ -12,9 +12,12 @@ public class WeaponSlotManager : MonoBehaviour
 
     Animator animator;
 
+    QuickSlotsUI quickSlotsUI;
+
     private void Awake()
     {
         animator = GetComponent<Animator>();
+        quickSlotsUI = FindObjectOfType<QuickSlotsUI>();
 
         WeaponHolderSlot[] weaponHolderSlots = GetComponentsInChildren<WeaponHolderSlot>();
         foreach (WeaponHolderSlot weaponSlot in weaponHolderSlots)
@@ -64,6 +67,8 @@ public class WeaponSlotManager : MonoBehaviour
             }
             #endregion
         }
+
+        quickSlotsUI.UpdateWeaponQuickSlotUI(isLeft, weaponItem);
     }
 
     #region Handle Weapon's Weapon Collider
