@@ -42,6 +42,8 @@ public class PlayerManager : MonoBehaviour
         playerLocomotion.HandleMovement(delta);
         playerLocomotion.HandleRollingAndSprinting(delta);
         playerLocomotion.HandleFalling(delta, playerLocomotion.moveDirection);
+
+        CheckForInteractableObject();
     }
 
 
@@ -66,10 +68,34 @@ public class PlayerManager : MonoBehaviour
         inputHandler.d_Pad_Down = false;
         inputHandler.d_Pad_Left = false;
         inputHandler.d_Pad_Right = false;
+        inputHandler.a_Input = false;
 
         if(isInAir)
         {
             playerLocomotion.inAirTimer += Time.deltaTime;
+        }
+    }
+
+    public void CheckForInteractableObject()
+    {
+        RaycastHit hit;
+
+        if(Physics.SphereCast(transform.position, 0.3f, transform.forward, out hit, 1f, cameraHandler.ignoreLayers))
+        {
+            if(hit.collider.tag == "Interactable")
+            {
+                Interactable interactable = hit.collider.GetComponent<Interactable>();
+
+                if(interactable != null)
+                {
+                    string interactableText = interactable.interactableText;
+
+                    if(inputHandler.a_Input)
+                    {
+                        hit.collider.GetComponent<Interactable>().Interact(this);
+                    }
+                }
+            }
         }
     }
 }
