@@ -172,6 +172,7 @@ public class InputHandler : MonoBehaviour
             if(inventoryFlag)
             {
                 uiManager.OpenSelectWindow();
+                uiManager.UpdateUI();
             }
             else
             {

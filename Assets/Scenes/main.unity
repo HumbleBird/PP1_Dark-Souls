@@ -1916,6 +1916,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1497464516}
+  - component: {fileID: 1497464517}
   m_Layer: 5
   m_Name: Weapon Inventory Slot
   m_TagString: Untagged
@@ -1944,6 +1945,24 @@ RectTransform:
   m_AnchoredPosition: {x: 350, y: -90}
   m_SizeDelta: {x: 150, y: 150}
   m_Pivot: {x: 0.5, y: 0.5}
+--- !u!114 &1497464517
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1497464515}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: bc9b4340a2791224aaa1f939e296856c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  icon: {fileID: 2091414172}
+--- !u!1 &1559879033 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 2155529861967075025, guid: 19f02cbd5fdad4243b3eda344f9d8651, type: 3}
+  m_PrefabInstance: {fileID: 7196696074991453028}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &1571473686
 GameObject:
   m_ObjectHideFlags: 0
@@ -4468,7 +4487,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1309bb887db4ce444840bec6ec20fa12, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  playerInventory: {fileID: 1132093933468249239}
+  hudWindow: {fileID: 1559879033}
   selectWindow: {fileID: 1571473686}
+  weaponInventorySlotPrefab: {fileID: 252017003}
+  weaponInventorySlotsParent: {fileID: 1497464516}
 --- !u!114 &8673101832296509107 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 4478293785195702623, guid: 19f02cbd5fdad4243b3eda344f9d8651, type: 3}
