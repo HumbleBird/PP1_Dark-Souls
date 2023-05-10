@@ -143,6 +143,60 @@
                     "processors": "",
                     "interactions": "",
                     "initialStateCheck": false
+                },
+                {
+                    "name": "Jump",
+                    "type": "Button",
+                    "id": "6dddb3af-3c62-46a0-a88f-0ae329963af6",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                },
+                {
+                    "name": "X",
+                    "type": "Button",
+                    "id": "ada9dbd5-13fa-467c-a01a-0908c44c31f6",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                },
+                {
+                    "name": "Y",
+                    "type": "Button",
+                    "id": "745ecc8e-ec12-48ad-b652-3605653f6b0e",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                },
+                {
+                    "name": "Start",
+                    "type": "Button",
+                    "id": "56b0c54d-f89f-4186-9b11-d848a2c53e7c",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                },
+                {
+                    "name": "Select",
+                    "type": "Button",
+                    "id": "91270da3-d761-49ec-9964-b5fff43bbb3d",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                },
+                {
+                    "name": "LB",
+                    "type": "Button",
+                    "id": "dbbf1b12-cffe-4f28-9655-9cc92139dc03",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
                 }
             ],
             "bindings": [
@@ -193,7 +247,7 @@
                 {
                     "name": "",
                     "id": "4b49fe0e-2f74-4b60-9a55-22156bc4b7f8",
-                    "path": "<NimbusGamepadHid>/buttonSouth",
+                    "path": "<Gamepad>/buttonSouth",
                     "interactions": "",
                     "processors": "",
                     "groups": "",
@@ -204,11 +258,88 @@
                 {
                     "name": "",
                     "id": "c26614c9-b2ea-4277-8edd-1dc12f0878f7",
-                    "path": "<Keyboard>/f",
+                    "path": "<Mouse>/leftButton",
                     "interactions": "",
                     "processors": "",
                     "groups": "",
                     "action": "A",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "0c903eb2-8e0c-412e-b49d-ee927e84621a",
+                    "path": "<Keyboard>/enter",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "A",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "2bce513c-9851-4f95-84ff-8cbfd9ec8356",
+                    "path": "<Keyboard>/space",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Jump",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "12b907fd-91fa-4773-82b0-ccfd5863944d",
+                    "path": "",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "X",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "9f5038f7-579e-4603-a7eb-1482ba6619d4",
+                    "path": "",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Y",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "536eb2a4-efe2-4f28-a8dc-9bc2969062c2",
+                    "path": "",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Start",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "487b9b89-292e-4b8f-9b69-d1f5e4655e4c",
+                    "path": "",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Select",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "917b6ee1-f3db-4e95-83d8-7f598ac2d0b4",
+                    "path": "",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "LB",
                     "isComposite": false,
                     "isPartOfComposite": false
                 }
