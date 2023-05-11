@@ -137,6 +137,8 @@ public class CameraHandler : MonoBehaviour
     public void HandleLockOn()
     {
         float shortDistance = Mathf.Infinity;
+        float shorttestDistanceOfLeftTarget = Mathf.Infinity;
+        float shorttestDistanceOfRightTarget = Mathf.Infinity;
 
         Collider[] colliders = Physics.OverlapSphere(targetTransform.position, 26);
 
@@ -167,6 +169,25 @@ public class CameraHandler : MonoBehaviour
             {
                 shortDistance = distanceFromTarget;
                 m_trNearestLockOnTarget = m_ListAvailableTarget[k].lockOnTransform;
+            }
+
+            if(inputHandler.lockOnFlag)
+            {
+                Vector3 relativeEnemyPosition = m_trCurrentLockOnTarget.InverseTransformPoint(m_ListAvailableTarget[k].transform.position);
+                var distanceFromLeftTarget = m_trCurrentLockOnTarget.transform.position.x - m_ListAvailableTarget[k].transform.position.x;
+                var distanceFromRightTarget = m_trCurrentLockOnTarget.transform.position.x + m_ListAvailableTarget[k].transform.position.x;
+            
+                if(relativeEnemyPosition.x > 0.00 && distanceFromLeftTarget < shorttestDistanceOfLeftTarget)
+                {
+                    shorttestDistanceOfLeftTarget = distanceFromLeftTarget;
+                    m_trleftLockTarget = m_ListAvailableTarget[k].lockOnTransform;
+                }
+
+                if(relativeEnemyPosition.x < 0.00 && distanceFromRightTarget < shorttestDistanceOfRightTarget)
+                {
+                    shorttestDistanceOfRightTarget = distanceFromRightTarget;
+                    m_trRightLockTarget = m_ListAvailableTarget[k].lockOnTransform;
+                }
             }
         }
     }

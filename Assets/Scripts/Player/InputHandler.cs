@@ -17,6 +17,9 @@ public class InputHandler : MonoBehaviour
     public bool jump_Input;
     public bool inventory_Input;
     public bool lockOnInput;
+    public bool right_Stick_Right_Input;
+    public bool right_Stick_Left_Input;
+
 
     public bool d_Pad_Up;
     public bool d_Pad_Down;
@@ -65,6 +68,8 @@ public class InputHandler : MonoBehaviour
             inputActions.PlayerActions.Jump.performed += i => jump_Input = true;
             inputActions.PlayerActions.Inventory.performed += i => inventory_Input = true;
             inputActions.PlayerActions.LockOn.performed += i => lockOnInput = true;
+            inputActions.PlayerMovement.LockOnTargetRight.performed += i => right_Stick_Right_Input = true;
+            inputActions.PlayerMovement.LockOnTargetLeft.performed += i => right_Stick_Left_Input = true;
         }
 
         inputActions.Enable();
@@ -181,7 +186,6 @@ public class InputHandler : MonoBehaviour
     {
         if (lockOnInput && lockOnFlag == false)
         {
-            cameraHandler.ClearLockOnTargets();
             lockOnInput = false;
             cameraHandler.HandleLockOn();
             if(cameraHandler.m_trNearestLockOnTarget != null)
@@ -195,7 +199,26 @@ public class InputHandler : MonoBehaviour
             lockOnInput = false;
             lockOnFlag = false;
             cameraHandler.ClearLockOnTargets();
+        }
 
+        if(lockOnFlag && right_Stick_Right_Input)
+        {
+            right_Stick_Right_Input = false;
+            cameraHandler.HandleLockOn();
+            if (cameraHandler.m_trleftLockTarget != null)
+            {
+                cameraHandler.m_trCurrentLockOnTarget = cameraHandler.m_trleftLockTarget;
+            }
+        }
+
+        if(lockOnFlag && right_Stick_Left_Input)
+        {
+            right_Stick_Left_Input = false;
+            cameraHandler.HandleLockOn();
+            if (cameraHandler.m_trRightLockTarget != null)
+            {
+                cameraHandler.m_trCurrentLockOnTarget = cameraHandler.m_trRightLockTarget;
+            }
         }
 
     }
