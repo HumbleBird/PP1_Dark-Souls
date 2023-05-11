@@ -18,7 +18,7 @@ public class CameraHandler : MonoBehaviour
 
     public static CameraHandler singleton;
 
-    public float lookSpeed = 0.1f;
+    public float lookSpeed = 0.01f;
     public float follwSpeed = 0.1f;
     public float pivotSpeed = 0.03f;
 

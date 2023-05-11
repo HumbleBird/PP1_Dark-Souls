@@ -3408,7 +3408,7 @@ MonoBehaviour:
   enviromentLayer:
     serializedVersion: 2
     m_Bits: 0
-  lookSpeed: 0.1
+  lookSpeed: 0.01
   follwSpeed: 0.1
   pivotSpeed: 0.03
   minimumPivot: -35
@@ -4134,6 +4134,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 1132093933468249230, guid: ea0690a0c7038e7478981afa1544d333, type: 3}
+      propertyPath: fallingSpeed
+      value: 70
+      objectReference: {fileID: 0}
     - target: {fileID: 1132093933468249238, guid: ea0690a0c7038e7478981afa1544d333, type: 3}
       propertyPath: interactableUIGameObject
       value: 
@@ -4149,6 +4153,10 @@ PrefabInstance:
     - target: {fileID: 7358866862892592442, guid: ea0690a0c7038e7478981afa1544d333, type: 3}
       propertyPath: m_Name
       value: Player
+      objectReference: {fileID: 0}
+    - target: {fileID: 8542079462290585212, guid: ea0690a0c7038e7478981afa1544d333, type: 3}
+      propertyPath: m_Interpolate
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: ea0690a0c7038e7478981afa1544d333, type: 3}

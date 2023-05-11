@@ -37,7 +37,7 @@ public class PlayerLocomotion : MonoBehaviour
     [SerializeField]
     float rotationSpeed = 10;
     [SerializeField]
-    float fallingSpeed = 45;
+    float fallingSpeed = 70;
 
     Vector3 normalVector;
     Vector3 targetPosition;
