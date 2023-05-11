@@ -198,4 +198,20 @@ public class CameraHandler : MonoBehaviour
         m_trNearestLockOnTarget = null;
         m_trCurrentLockOnTarget = null;
     }
+
+    public void SetCameraHeight()
+    {
+        Vector3 velocity = Vector3.zero;
+        Vector3 newLockedPosition = new Vector3(0, m_fLockedPivotPosition);
+        Vector3 newUnLockedPosition = new Vector3(0, m_fUnlockedPivotPosition);
+
+        if(m_trCurrentLockOnTarget != null)
+        {
+            cameraPivotTranform.transform.localPosition = Vector3.SmoothDamp(cameraPivotTranform.transform.localPosition, newLockedPosition, ref velocity, Time.deltaTime);
+        }
+        else
+        {
+            cameraPivotTranform.transform.localPosition = Vector3.SmoothDamp(cameraPivotTranform.transform.localPosition, newUnLockedPosition, ref velocity, Time.deltaTime);
+        }
+    }
 }

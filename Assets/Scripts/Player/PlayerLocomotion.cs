@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class PlayerLocomotion : MonoBehaviour
 {
+    CameraHandler cameraHandler;
     PlayerManager playerManager;
     Transform cameraObject;
     InputHandler inputHandler;
@@ -42,6 +43,11 @@ public class PlayerLocomotion : MonoBehaviour
     Vector3 normalVector;
     Vector3 targetPosition;
 
+    private void Awake()
+    {
+        cameraHandler = FindObjectOfType<CameraHandler>();
+    }
+
     private void Start()
     {
         playerManager = GetComponent<PlayerManager>();
@@ -61,23 +67,63 @@ public class PlayerLocomotion : MonoBehaviour
 
     private void HandleRotation(float delta)
     {
-        Vector3 targetDir = Vector3.zero;
+        if (inputHandler.lockOnFlag)
+        {
+            if (inputHandler.sprintFlag || inputHandler.rollFlag)
+            {
+                Vector3 targetDir = Vector3.zero;
 
-        targetDir = cameraObject.forward * inputHandler.vertical;
-        targetDir += cameraObject.right * inputHandler.horizontal;
+                targetDir = cameraHandler.cameraTransform.forward * inputHandler.vertical;
+                targetDir += cameraHandler.cameraTransform.right * inputHandler.horizontal;
+                targetDir.Normalize();
+                targetDir.y = 0;
 
-        targetDir.Normalize();
-        targetDir.y = 0;
+                if (targetDir == Vector3.zero)
+                    targetDir = transform.forward;
 
-        if (targetDir == Vector3.zero)
-            targetDir = transform.forward;
+                float rs = rotationSpeed;
 
-        float rs = rotationSpeed;
+                Quaternion tr = Quaternion.LookRotation(targetDir);
+                Quaternion targetRotation = Quaternion.Slerp(transform.rotation, tr, rs * Time.deltaTime);
 
-        Quaternion tr = Quaternion.LookRotation(targetDir);
-        Quaternion targetRotation = Quaternion.Slerp(transform.rotation, tr, rs * Time.deltaTime);
+                myTransform.rotation = targetRotation;
+            }
+            else
+            {
+                Vector3 rotationDirection = moveDirection;
 
-        myTransform.rotation = targetRotation;
+                rotationDirection = cameraHandler.m_trCurrentLockOnTarget.position - transform.position;
+                rotationDirection.y = 0;
+                rotationDirection.Normalize();
+
+                float rs = rotationSpeed;
+
+                Quaternion tr = Quaternion.LookRotation(rotationDirection);
+                Quaternion targetRotation = Quaternion.Slerp(transform.rotation, tr, rs * Time.deltaTime);
+
+                myTransform.rotation = targetRotation;
+            }
+        }
+        else
+        {
+            Vector3 targetDir = Vector3.zero;
+
+            targetDir = cameraObject.forward * inputHandler.vertical;
+            targetDir += cameraObject.right * inputHandler.horizontal;
+
+            targetDir.Normalize();
+            targetDir.y = 0;
+
+            if (targetDir == Vector3.zero)
+                targetDir = transform.forward;
+
+            float rs = rotationSpeed;
+
+            Quaternion tr = Quaternion.LookRotation(targetDir);
+            Quaternion targetRotation = Quaternion.Slerp(transform.rotation, tr, rs * Time.deltaTime);
+
+            myTransform.rotation = targetRotation;
+        }
     }
 
     public void HandleMovement(float delta)
@@ -116,12 +162,18 @@ public class PlayerLocomotion : MonoBehaviour
             }
         }
 
-
         Vector3 projecteedVelocity = Vector3.ProjectOnPlane(moveDirection, normalVector);
         rigidbody.velocity = projecteedVelocity;
 
+        if(inputHandler.lockOnFlag && inputHandler.sprintFlag == false)
+        {
+            animatorHandler.UpdateAnimatorValues(inputHandler.moveAmount, inputHandler.horizontal, playerManager.isSprinting);
+        }
+        else
+        {
+            animatorHandler.UpdateAnimatorValues(inputHandler.moveAmount, 0, playerManager.isSprinting);
+        }
 
-        animatorHandler.UpdateAnimatorValues(inputHandler.moveAmount, 0, playerManager.isSprinting);
 
         if (animatorHandler.canRotate)
         {
