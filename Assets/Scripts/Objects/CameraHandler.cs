@@ -6,6 +6,8 @@ public class CameraHandler : MonoBehaviour
 {
     #region Variable
 
+    InputHandler inputHandler;
+
     public Transform targetTransform;
     public Transform cameraTransform;
     public Transform cameraPivotTranform;
@@ -37,9 +39,10 @@ public class CameraHandler : MonoBehaviour
     public float m_fLockedPivotPosition = 2.25f;
     public float m_fUnlockedPivotPosition = 1.65f;
 
-    public float maximunLockOnDistance = 30f;
+    public float maximumLockOnDistance = 30f;
 
-    //public List<Character> m_ListAvailableTarget = new List<Character>();
+    public List<CharacterManager> m_ListAvailableTarget = new List<CharacterManager>();
+        
     public Transform m_trNearestLockOnTarget;
     public Transform m_trCurrentLockOnTarget;
     public Transform m_trleftLockTarget;
@@ -54,6 +57,7 @@ public class CameraHandler : MonoBehaviour
         defaultPosition = cameraTransform.localPosition.z;
         ignoreLayers = ~(1 << 8 | 1 << 9 | 1 << 10);
         targetTransform = FindObjectOfType<PlayerManager>().transform;
+        inputHandler = FindObjectOfType<InputHandler>();
     }
 
     public void FollwTarget(float delta)
@@ -66,58 +70,44 @@ public class CameraHandler : MonoBehaviour
 
     public void HandleCameraRotation(float delta, float mouseXInput, float mouseYInput)
     {
-        lookAngle += (mouseXInput * lookSpeed) / delta;
-        pivotAngle -= (mouseYInput * pivotSpeed) / delta;
-        pivotAngle = Mathf.Clamp(pivotAngle, minimumPivot, maximumPivot);
+        if (inputHandler.lockOnFlag == false && m_trCurrentLockOnTarget == null)
+        {
+            lookAngle += (mouseXInput * lookSpeed) / delta;
+            pivotAngle -= (mouseYInput * pivotSpeed) / delta;
+            pivotAngle = Mathf.Clamp(pivotAngle, minimumPivot, maximumPivot);
 
-        Vector3 rotation = Vector3.zero;
-        rotation.y = lookAngle;
-        Quaternion targetRotation = Quaternion.Euler(rotation);
-        myTranform.rotation = targetRotation;
+            Vector3 rotation = Vector3.zero;
+            rotation.y = lookAngle;
+            Quaternion targetRotation = Quaternion.Euler(rotation);
+            myTranform.rotation = targetRotation;
 
-        rotation = Vector3.zero;
-        rotation.x = pivotAngle;
+            rotation = Vector3.zero;
+            rotation.x = pivotAngle;
 
-        targetRotation = Quaternion.Euler(rotation);
-        cameraPivotTranform.localRotation = targetRotation;
+            targetRotation = Quaternion.Euler(rotation);
+            cameraPivotTranform.localRotation = targetRotation;
+        }
+        else
+        {
+            float velocity = 0;
 
-        //if (Managers.Object.myPlayer.m_bLockOnFlag == false && m_trCurrentLockOnTarget == null)
-        //{
-        //    lookAngle += (mouseXInput * lookSpeed) / delta;
-        //    pivotAngle -= (mouseYInput * pivotSpeed) / delta;
-        //    pivotAngle = Mathf.Clamp(pivotAngle, minimumPivot, maximumPivot);
+            Vector3 dir = m_trCurrentLockOnTarget.position - transform.position;
+            dir.Normalize();
+            dir.y = 0;
 
-        //    Vector3 rotation = Vector3.zero;
-        //    rotation.y = lookAngle;
-        //    Quaternion targetRotation = Quaternion.Euler(rotation);
-        //    myTranform.rotation = targetRotation;
+            Quaternion targetRotation = Quaternion.LookRotation(dir);
+            transform.rotation = targetRotation;
 
-        //    rotation = Vector3.zero;
-        //    rotation.x = pivotAngle;
+            dir = m_trCurrentLockOnTarget.position - cameraPivotTranform.position;
+            dir.Normalize();
 
-        //    targetRotation = Quaternion.Euler(rotation);
-        //    cameraPivotTranform.localRotation = targetRotation;
-        //}
-        //else
-        //{
-        //    float velocity = 0;
+            targetRotation = Quaternion.LookRotation(dir);
+            Vector3 eulerAngle = targetRotation.eulerAngles;
+            eulerAngle.y = 0;
+            cameraPivotTranform.localEulerAngles = eulerAngle;
+        }
 
-        //    Vector3 dir = m_trCurrentLockOnTarget.position - transform.position;
-        //    dir.Normalize();
-        //    dir.y = 0;
 
-        //    Quaternion targetRotation = Quaternion.LookRotation(dir);
-        //    transform.rotation = targetRotation;
-
-        //    dir = m_trCurrentLockOnTarget.position - cameraPivotTranform.position;
-        //    dir.Normalize();
-
-        //    targetRotation = Quaternion.LookRotation(dir);
-        //    Vector3 eulerAngle = targetRotation.eulerAngles;
-        //    eulerAngle.y = 0;
-        //    cameraPivotTranform.localEulerAngles = eulerAngle;
-
-        //}
     }
 
     private void HandleCameraCollision(float delta)
@@ -142,5 +132,49 @@ public class CameraHandler : MonoBehaviour
 
         cameraTransformPosition.z = Mathf.Lerp(cameraTransform.localPosition.z, targetPostion, delta / 0.2f);
         cameraTransform.localPosition = cameraTransformPosition;
+    }
+
+    public void HandleLockOn()
+    {
+        float shortDistance = Mathf.Infinity;
+
+        Collider[] colliders = Physics.OverlapSphere(targetTransform.position, 26);
+
+        for (int i = 0; i < colliders.Length; i++)
+        {
+            CharacterManager character = colliders[i].GetComponent<CharacterManager>();
+
+            if(character != null)
+            {
+                Vector3 lockTargetDirection = character.transform.position - targetTransform.position;
+                float distanceFromTarget = Vector3.Distance(targetTransform.position, character.transform.position);
+                float viewableAngle = Vector3.Angle(lockTargetDirection, cameraTransform.forward);
+
+                if(character.transform.root != targetTransform.root && 
+                    viewableAngle > -50 && viewableAngle < 50
+                     && distanceFromTarget <= maximumLockOnDistance)
+                {
+                    m_ListAvailableTarget.Add(character);
+                }
+            }
+        }
+
+        for (int k = 0; k < m_ListAvailableTarget.Count; k++)
+        {
+            float distanceFromTarget = Vector3.Distance(targetTransform.position, m_ListAvailableTarget[k].transform.position);
+            
+            if(distanceFromTarget < shortDistance)
+            {
+                shortDistance = distanceFromTarget;
+                m_trNearestLockOnTarget = m_ListAvailableTarget[k].lockOnTransform;
+            }
+        }
+    }
+
+    public void ClearLockOnTargets()
+    {
+        m_ListAvailableTarget.Clear();
+        m_trNearestLockOnTarget = null;
+        m_trCurrentLockOnTarget = null;
     }
 }
