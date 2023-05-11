@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.18028378, g: 0.22571412, b: 0.30692285, a: 1}
+  m_IndirectSpecularColor: {r: 0.18028352, g: 0.22571376, b: 0.30692244, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -298,6 +298,11 @@ PrefabInstance:
     m_RemovedComponents:
     - {fileID: 432937795037548510, guid: 653a26822a3e2bd409cfe25bebea931e, type: 3}
   m_SourcePrefab: {fileID: 100100000, guid: 653a26822a3e2bd409cfe25bebea931e, type: 3}
+--- !u!1 &112350480 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 5078675347576001728, guid: 19f02cbd5fdad4243b3eda344f9d8651, type: 3}
+  m_PrefabInstance: {fileID: 7196696074991453028}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &171372843
 GameObject:
   m_ObjectHideFlags: 0
@@ -569,6 +574,11 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 507961017}
   m_Mesh: {fileID: 10202, guid: 0000000000000000e000000000000000, type: 0}
+--- !u!1 &512346361 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 6042761917187208098, guid: 19f02cbd5fdad4243b3eda344f9d8651, type: 3}
+  m_PrefabInstance: {fileID: 7196696074991453028}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &557734386
 GameObject:
   m_ObjectHideFlags: 0
@@ -1472,7 +1482,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1180241459}
   m_Layer: 5
-  m_Name: Inventory Window
+  m_Name: Weapon Inventory Window
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -2429,17 +2439,19 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &2037535534 stripped
+--- !u!114 &2037535537
 MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 5078675347576001730, guid: 19f02cbd5fdad4243b3eda344f9d8651, type: 3}
-  m_PrefabInstance: {fileID: 7196696074991453028}
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
+  m_GameObject: {fileID: 112350480}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: b2d10bd05912c114d916652153f24eac, type: 3}
+  m_Script: {fileID: 11500000, guid: 03b3d29040267d94fa3b1c89f753b71f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  slider: {fileID: 0}
 --- !u!1 &2091414170
 GameObject:
   m_ObjectHideFlags: 0
@@ -2728,8 +2740,8 @@ MonoBehaviour:
   healthLevel: 10
   maxHealth: 0
   currentHealth: 0
-  healthBar: {fileID: 2037535534}
-  staminaBar: {fileID: 8673101832296509107}
+  healthBar: {fileID: 2037535537}
+  staminaBar: {fileID: 8673101832296509110}
   staminaLevel: 10
   maxStamina: 0
   currentStamina: 0
@@ -4468,7 +4480,9 @@ PrefabInstance:
       propertyPath: m_AnchoredPosition.y
       value: 145
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: 5078675347576001730, guid: 19f02cbd5fdad4243b3eda344f9d8651, type: 3}
+    - {fileID: 4478293785195702623, guid: 19f02cbd5fdad4243b3eda344f9d8651, type: 3}
   m_SourcePrefab: {fileID: 100100000, guid: 19f02cbd5fdad4243b3eda344f9d8651, type: 3}
 --- !u!1 &7196696074991453029 stripped
 GameObject:
@@ -4490,16 +4504,19 @@ MonoBehaviour:
   playerInventory: {fileID: 1132093933468249239}
   hudWindow: {fileID: 1559879033}
   selectWindow: {fileID: 1571473686}
+  weaponInventoryWindow: {fileID: 1180241458}
   weaponInventorySlotPrefab: {fileID: 252017003}
   weaponInventorySlotsParent: {fileID: 1497464516}
---- !u!114 &8673101832296509107 stripped
+--- !u!114 &8673101832296509110
 MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 4478293785195702623, guid: 19f02cbd5fdad4243b3eda344f9d8651, type: 3}
-  m_PrefabInstance: {fileID: 7196696074991453028}
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
+  m_GameObject: {fileID: 512346361}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 443d41461b795cd4c9f9a19c8da07b07, type: 3}
+  m_Script: {fileID: 11500000, guid: 72b6c71876e88f54a8f5b244a9fff2e7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  slider: {fileID: 0}

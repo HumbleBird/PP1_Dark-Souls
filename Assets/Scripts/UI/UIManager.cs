@@ -9,6 +9,7 @@ public class UIManager : MonoBehaviour
     [Header("UI Windows")]
     public GameObject hudWindow;
     public GameObject selectWindow;
+    public GameObject weaponInventoryWindow;
 
     [Header("Weapon Inventory")]
     public GameObject weaponInventorySlotPrefab;
@@ -52,5 +53,10 @@ public class UIManager : MonoBehaviour
     public void CloseSelectWindow()
     {
         selectWindow.SetActive(false);
+    }
+
+    public void CloseAllInventoryWindows()
+    {
+        weaponInventoryWindow.SetActive(false);
     }
 }
