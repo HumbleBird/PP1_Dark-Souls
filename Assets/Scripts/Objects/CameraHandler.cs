@@ -7,16 +7,19 @@ public class CameraHandler : MonoBehaviour
     #region Variable
 
     InputHandler inputHandler;
+    PlayerManager playerManager;
 
     public Transform targetTransform;
     public Transform cameraTransform;
     public Transform cameraPivotTranform;
     private Transform myTranform;
-    private Vector3 cameraTransformPosition;
-    public LayerMask ignoreLayers;
 
-    public LayerMask enviromentLayer;
+    private Vector3 cameraTransformPosition;
     private Vector3 cameraFollwVelocity = Vector3.zero;
+
+    public LayerMask ignoreLayers;
+    public LayerMask enviromentLayer;
+
 
     public static CameraHandler singleton;
 
@@ -58,6 +61,12 @@ public class CameraHandler : MonoBehaviour
         ignoreLayers = ~(1 << 8 | 1 << 9 | 1 << 10);
         targetTransform = FindObjectOfType<PlayerManager>().transform;
         inputHandler = FindObjectOfType<InputHandler>();
+        playerManager = FindObjectOfType<PlayerManager>();
+    }
+
+    private void Start()
+    {
+        enviromentLayer = LayerMask.NameToLayer("Enviroment");
     }
 
     public void FollwTarget(float delta)
@@ -151,12 +160,25 @@ public class CameraHandler : MonoBehaviour
                 Vector3 lockTargetDirection = character.transform.position - targetTransform.position;
                 float distanceFromTarget = Vector3.Distance(targetTransform.position, character.transform.position);
                 float viewableAngle = Vector3.Angle(lockTargetDirection, cameraTransform.forward);
+                RaycastHit hit;
 
                 if(character.transform.root != targetTransform.root && 
                     viewableAngle > -50 && viewableAngle < 50
                      && distanceFromTarget <= maximumLockOnDistance)
                 {
-                    m_ListAvailableTarget.Add(character);
+                    if(Physics.Linecast(playerManager.lockOnTransform.position ,character.lockOnTransform.position, out hit))
+                    {
+                        Debug.DrawLine(playerManager.lockOnTransform.position, character.lockOnTransform.position);
+
+                        if(hit.transform.gameObject.layer == enviromentLayer)
+                        {
+
+                        }
+                        else
+                        {
+                            m_ListAvailableTarget.Add(character);
+                        }
+                    }
                 }
             }
         }
