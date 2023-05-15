@@ -6,6 +6,7 @@ public class WeaponSlotManager : MonoBehaviour
 {
     WeaponHolderSlot leftHandSlot;
     WeaponHolderSlot rightHandSlot;
+    WeaponHolderSlot backSlot;
 
     DamageCollider leftHandDamageCollider;
     DamageCollider rightHandDamageCollider;
@@ -37,6 +38,10 @@ public class WeaponSlotManager : MonoBehaviour
             {
                 rightHandSlot = weaponSlot;
             }
+            else if(weaponSlot.isBackSlot)
+            {
+                backSlot = weaponSlot;
+            }
         }
     }
 
@@ -44,6 +49,7 @@ public class WeaponSlotManager : MonoBehaviour
     {
         if (isLeft)
         {
+            leftHandSlot.currentWeapon = weaponItem;
             leftHandSlot.LoadWeaponModel(weaponItem);
             LoadLeftWeaponDamageCollider();
 
@@ -62,6 +68,8 @@ public class WeaponSlotManager : MonoBehaviour
         {
             if(inputHandler.twoHandFlag)
             {
+                backSlot.LoadWeaponModel(leftHandSlot.currentWeapon);
+                leftHandSlot.UnloadWeaponAndDestroy();
                 animator.CrossFade(weaponItem.th_idle, 0.2f);
             }
             else
@@ -69,6 +77,8 @@ public class WeaponSlotManager : MonoBehaviour
                 #region Handle Right Weapon Idle Animation
 
                 animator.CrossFade("Both Anims Empty", 0.2f);
+
+                backSlot.UnloadWeaponAndDestroy();
 
                 if (weaponItem != null)
                 {
@@ -81,6 +91,7 @@ public class WeaponSlotManager : MonoBehaviour
                 #endregion
             }
 
+            rightHandSlot.currentWeapon = weaponItem;
             rightHandSlot.LoadWeaponModel(weaponItem);
             LoadRightWeaponDamageCollider();
         }
