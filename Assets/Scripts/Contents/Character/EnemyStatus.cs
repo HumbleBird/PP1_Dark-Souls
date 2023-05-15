@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 using UnityEngine;
 
 
-public class EnemyStatus : Status
+public class EnemyStatus : CharacterStatus
 {
     Animator animator;
 

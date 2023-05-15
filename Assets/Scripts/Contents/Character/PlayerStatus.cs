@@ -2,14 +2,10 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class PlayerStatus : Status
+public class PlayerStatus : CharacterStatus
 {
     public HealthBar  healthBar;
     public StaminaBar staminaBar;
-
-    public int staminaLevel = 10;
-    public int maxStamina;
-    public int currentStamina;
 
     AnimatorHandler animatorHandler;
 
