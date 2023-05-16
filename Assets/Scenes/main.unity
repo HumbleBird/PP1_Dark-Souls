@@ -1805,6 +1805,18 @@ PrefabInstance:
       propertyPath: stoppingdistance
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 543450653394863791, guid: 7931fdca36f145c48b1a15785735feda, type: 3}
+      propertyPath: enemyAttacks.Array.size
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 543450653394863791, guid: 7931fdca36f145c48b1a15785735feda, type: 3}
+      propertyPath: enemyAttacks.Array.data[0]
+      value: 
+      objectReference: {fileID: 11400000, guid: af61484e425e65c47af47bb5d28da208, type: 2}
+    - target: {fileID: 543450653394863791, guid: 7931fdca36f145c48b1a15785735feda, type: 3}
+      propertyPath: enemyAttacks.Array.data[1]
+      value: 
+      objectReference: {fileID: 11400000, guid: b167c9d607bfa4a4ca47ae4983882dc3, type: 2}
     - target: {fileID: 2865919172130698609, guid: 7931fdca36f145c48b1a15785735feda, type: 3}
       propertyPath: m_Name
       value: SkeletonWarriorUnity
@@ -1859,6 +1871,7 @@ PrefabInstance:
       objectReference: {fileID: 9100000, guid: 13e312810cdb19f42b9a16be8b0855ee, type: 2}
     m_RemovedComponents:
     - {fileID: 1621252139429035999, guid: 7931fdca36f145c48b1a15785735feda, type: 3}
+    - {fileID: 8822048323979015601, guid: 7931fdca36f145c48b1a15785735feda, type: 3}
   m_SourcePrefab: {fileID: 100100000, guid: 7931fdca36f145c48b1a15785735feda, type: 3}
 --- !u!1 &3099782335959837038 stripped
 GameObject:
@@ -1888,7 +1901,7 @@ Animator:
   m_GameObject: {fileID: 3099782335959837038}
   m_Enabled: 1
   m_Avatar: {fileID: 9000000, guid: 8bbf8b7b8b5f1144ba263c0e541f0452, type: 3}
-  m_Controller: {fileID: 22100000, guid: 86e34ed7d7306864ab7db60284fa4cf0, type: 2}
+  m_Controller: {fileID: 9100000, guid: 13e312810cdb19f42b9a16be8b0855ee, type: 2}
   m_CullingMode: 1
   m_UpdateMode: 0
   m_ApplyRootMotion: 1
