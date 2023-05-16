@@ -8,12 +8,15 @@ public class EnemyLocomotionManager : MonoBehaviour
     EnemyManager enemyManager;
     EnemyAnimationManager enemyAnimationManager;
     NavMeshAgent navMeshAgent;
+    public Rigidbody enemyRigidbody;
 
     public CharacterStatus currentTarget;
     public LayerMask detectionLayer;
 
     public float distancefromTarget;
-    public float stoppingdistance = 0.5f;
+    public float stoppingdistance = 1f;
+
+    public float rotationSpeed = 25f;
 
     // Start is called before the first frame update
     private void Awake()
@@ -21,6 +24,13 @@ public class EnemyLocomotionManager : MonoBehaviour
         enemyManager = GetComponent<EnemyManager>();
         enemyAnimationManager = GetComponentInChildren<EnemyAnimationManager>();
         navMeshAgent = GetComponentInChildren<NavMeshAgent>();
+        enemyRigidbody = GetComponent<Rigidbody>();
+    }
+
+    private void Start()
+    {
+        navMeshAgent.enabled = false;
+        enemyRigidbody.isKinematic = false;
     }
 
     public void HandleDetection()
@@ -61,7 +71,13 @@ public class EnemyLocomotionManager : MonoBehaviour
             {
                 enemyAnimationManager.anim.SetFloat("Vertical", 1, 0.1f, Time.deltaTime);
             }
+            else if (distancefromTarget <= stoppingdistance)
+            {
+                enemyAnimationManager.anim.SetFloat("Vertical", 0, 0.1f, Time.deltaTime);
+            }
         }
+
+        HandleRotateTowardTarget();
 
         navMeshAgent.transform.localPosition = Vector3.zero;
         navMeshAgent.transform.localRotation = Quaternion.identity;
@@ -78,16 +94,23 @@ public class EnemyLocomotionManager : MonoBehaviour
 
             if(direction == Vector3.zero)
             {
-                direction = transform.forward;
+                direction = transform.forward; 
             }
 
-            Quaternion targetRa
+            Quaternion targetRotation = Quaternion.LookRotation(direction);
+            transform.rotation = Quaternion.Slerp(transform.rotation, targetRotation, rotationSpeed);
         }
 
         // Rotate with pathfinding (navmesh)
         else
         {
+            Vector3 relativeDirection = transform.InverseTransformDirection(navMeshAgent.desiredVelocity);
+            Vector3 targetVelocity = enemyRigidbody.velocity;
 
+            navMeshAgent.enabled = true;
+            navMeshAgent.SetDestination(currentTarget.transform.position);
+            enemyRigidbody.velocity = targetVelocity;
+            transform.rotation = Quaternion.Slerp(transform.rotation, navMeshAgent.transform.rotation, rotationSpeed / Time.deltaTime);
         }
     }
 }
