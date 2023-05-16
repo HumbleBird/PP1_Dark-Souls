@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.AI;
 
 public class EnemyManager : CharacterManager
 {
@@ -10,8 +11,13 @@ public class EnemyManager : CharacterManager
 
     public State currentState;
     public CharacterStatus currentTarget;
+    public NavMeshAgent navMeshAgent;
 
     public bool isPreformingAction;
+    public float distancefromTarget;
+    public float stoppingdistance = 1f;
+    public float rotationSpeed = 25f;
+    public float maximunAttackRange   = 1.5f;
 
     [Header("A.I Settings")]
     public float detectionRadius = 20;
@@ -25,6 +31,8 @@ public class EnemyManager : CharacterManager
         enemyLocomotionManager = GetComponent<EnemyLocomotionManager>();
         enemyAnimationManager = GetComponentInChildren<EnemyAnimationManager>();
         enemyStatus = GetComponent<EnemyStatus>();
+        navMeshAgent = GetComponentInChildren<NavMeshAgent>();
+        navMeshAgent.enabled = false;
     }
 
     private void Update()
