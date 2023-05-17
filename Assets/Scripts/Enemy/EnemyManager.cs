@@ -12,10 +12,10 @@ public class EnemyManager : CharacterManager
     public State currentState;
     public CharacterStatus currentTarget;
     public NavMeshAgent navMeshAgent;
+    public Rigidbody enemyRigidbody;
 
     public bool isPreformingAction;
     public float distancefromTarget;
-    public float stoppingdistance = 1f;
     public float rotationSpeed = 25f;
     public float maximunAttackRange   = 1.5f;
 
@@ -23,6 +23,7 @@ public class EnemyManager : CharacterManager
     public float detectionRadius = 20;
     public float minimumDetectionAngle = -50;
     public float maximumDetectionAngle = 50;
+    public float viewableAngle;
 
     public float currentRecoveryTime = 0;
 
@@ -30,9 +31,15 @@ public class EnemyManager : CharacterManager
     {
         enemyLocomotionManager = GetComponent<EnemyLocomotionManager>();
         enemyAnimationManager = GetComponentInChildren<EnemyAnimationManager>();
+        enemyRigidbody = GetComponent<Rigidbody>();
         enemyStatus = GetComponent<EnemyStatus>();
         navMeshAgent = GetComponentInChildren<NavMeshAgent>();
         navMeshAgent.enabled = false;
+    }
+
+    private void Start()
+    {
+        enemyRigidbody.isKinematic = false;
     }
 
     private void Update()
@@ -79,77 +86,4 @@ public class EnemyManager : CharacterManager
             }
         }    
     }
-
-    #region Attack
-
-    private void AttackTarget()
-    {
-        //if (isPreformingAction)
-        //    return;
-
-        //if(currentAttack == null)
-        //{
-        //    GetNewAttack();
-        //}
-        //else
-        //{
-        //    isPreformingAction = true;
-        //    currentRecoveryTime = currentAttack.recoveryTime;
-        //    enemyAnimationManager.PlayerTargetAnimation(currentAttack.actionAnimation, true);
-        //    currentAttack = null;
-        //}
-    }
-
-    private void GetNewAttack()
-    {
-        //Vector3 targetDirection = enemyLocomotionManager.currentTarget.transform.position - transform.position;
-        //float viewableAngle = Vector3.Angle(targetDirection, transform.forward);
-        //enemyLocomotionManager.distancefromTarget = Vector3.Distance(enemyLocomotionManager.currentTarget.transform.position, transform.position);
-
-        //int maxScore = 0;
-
-        //for (int i = 0; i < enemyAttacks.Length; i++)
-        //{
-        //    EnemyAttackAction enemyAttackAction = enemyAttacks[i];
-
-        //    if(enemyLocomotionManager.distancefromTarget <= enemyAttackAction.maximumDistanceNeededToAttack
-        //        && enemyLocomotionManager.distancefromTarget > enemyAttackAction.minimumDistanceNeededToAttack)
-        //    {
-        //        if(viewableAngle <= enemyAttackAction.maximumAttackAngle
-        //            && viewableAngle > enemyAttackAction.minimumAttackAngle)
-        //        {
-        //            maxScore += enemyAttackAction.attackScore;
-        //        }
-        //    }
-        //}
-
-        //int randomValue = Random.Range(0, maxScore);
-        //int temporaryScore = 0;
-
-        //for (int i = 0; i < enemyAttacks.Length; i++)
-        //{
-        //    EnemyAttackAction enemyAttackAction = enemyAttacks[i];
-
-        //    if (enemyLocomotionManager.distancefromTarget <= enemyAttackAction.maximumDistanceNeededToAttack
-        //        && enemyLocomotionManager.distancefromTarget > enemyAttackAction.minimumDistanceNeededToAttack)
-        //    {
-        //        if (viewableAngle <= enemyAttackAction.maximumAttackAngle
-        //            && viewableAngle > enemyAttackAction.minimumAttackAngle)
-        //        {
-        //            if (currentAttack != null)
-        //                return;
-
-        //            temporaryScore += enemyAttackAction.attackScore;
-
-        //            if(temporaryScore >= randomValue)
-        //            {
-        //                currentAttack = enemyAttackAction;
-        //            }
-        //        }
-        //    }
-        //}
-
-    }
-
-    #endregion
 }

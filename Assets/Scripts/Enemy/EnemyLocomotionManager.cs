@@ -6,7 +6,6 @@ public class EnemyLocomotionManager : MonoBehaviour
 {
     EnemyManager enemyManager;
     EnemyAnimationManager enemyAnimationManager;
-    public Rigidbody enemyRigidbody;
 
     public LayerMask detectionLayer;
 
@@ -15,12 +14,8 @@ public class EnemyLocomotionManager : MonoBehaviour
     {
         enemyManager = GetComponent<EnemyManager>();
         enemyAnimationManager = GetComponentInChildren<EnemyAnimationManager>();
-        enemyRigidbody = GetComponent<Rigidbody>();
     }
 
-    private void Start()
-    {
-        enemyRigidbody.isKinematic = false;
-    }
+
 
 }
