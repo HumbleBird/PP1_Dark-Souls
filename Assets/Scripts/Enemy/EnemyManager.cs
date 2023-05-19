@@ -15,6 +15,7 @@ public class EnemyManager : CharacterManager
     public Rigidbody enemyRigidbody;
 
     public bool isPreformingAction;
+    public bool isInteracting;
     public float distancefromTarget;
     public float rotationSpeed = 25f;
     public float maximunAttackRange   = 1.5f;
@@ -45,6 +46,8 @@ public class EnemyManager : CharacterManager
     private void Update()
     {
         HandleRecoveryTimer();
+
+        isInteracting = enemyAnimationManager.anim.GetBool("isInteracting");
     }
 
     private void FixedUpdate()
