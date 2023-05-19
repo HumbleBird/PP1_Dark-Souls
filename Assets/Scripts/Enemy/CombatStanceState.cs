@@ -15,13 +15,18 @@ public class CombatStanceState : State
 
     public override State Tick(EnemyManager enemyManager, EnemyStatus enemyStates, EnemyAnimationManager enemyAnimationManager)
     {
-        enemyManager.distancefromTarget = Vector3.Distance(enemyManager.currentTarget.transform.position, enemyManager.transform.position);
+        float distancefromTarget = Vector3.Distance(enemyManager.currentTarget.transform.position, enemyManager.transform.position);
         
-        if(enemyManager.currentRecoveryTime <= 0 && enemyManager.distancefromTarget <= enemyManager.maximunAttackRange)
+        if(enemyManager.isPreformingAction)
+        {
+            enemyAnimationManager.anim.SetFloat("Vertical", 0, 0.1f, Time.deltaTime);
+        }
+
+        if(enemyManager.currentRecoveryTime <= 0 && distancefromTarget <= enemyManager.maximunAttackRange)
         {
             return attackState;
         }
-        else if (enemyManager.distancefromTarget > enemyManager.maximunAttackRange)
+        else if (distancefromTarget > enemyManager.maximunAttackRange)
         {
             return pursueTargetState;
         }

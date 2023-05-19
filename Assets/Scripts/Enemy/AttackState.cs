@@ -18,6 +18,7 @@ public class AttackState : State
     public override State Tick(EnemyManager enemyManager, EnemyStatus enemyStates, EnemyAnimationManager enemyAnimationManager)
     {
         Vector3 targetDirection = enemyManager.currentTarget.transform.position - transform.position;
+        float distanceFromTarget = Vector3.Distance(enemyManager.currentTarget.transform.position, enemyManager.transform.position);
         float viewableAngle = Vector3.Angle(targetDirection, transform.forward);
 
         if (enemyManager.isPreformingAction)
@@ -26,16 +27,16 @@ public class AttackState : State
         if(currentAttack != null)
         {
             // 현재 공격의 최소 사정거리보다 적이 더 가깝다면 새로운 공격을 선택함.
-            if(enemyManager.distancefromTarget < currentAttack.minimumDistanceNeededToAttack)
+            if(distanceFromTarget < currentAttack.minimumDistanceNeededToAttack)
             {
                 return this;
             }
             // 충분히 접근 했다면 공격 수행
-            else if (enemyManager.distancefromTarget < currentAttack.maximumDistanceNeededToAttack)
+            else if (distanceFromTarget < currentAttack.maximumDistanceNeededToAttack)
             {
                 // 적이 시야 각도 안에 있다면 공격
-                if(enemyManager.viewableAngle <= currentAttack.maximumAttackAngle &&
-                   enemyManager.viewableAngle >= currentAttack.minimumAttackAngle)
+                if(viewableAngle <= currentAttack.maximumAttackAngle &&
+                   viewableAngle >= currentAttack.minimumAttackAngle)
                 {
                     if(enemyManager.currentRecoveryTime <= 0 && enemyManager.isPreformingAction == false)
                     {
@@ -64,7 +65,7 @@ public class AttackState : State
     {
         Vector3 targetDirection = enemyManager.currentTarget.transform.position - transform.position;
         float viewableAngle = Vector3.Angle(targetDirection, transform.forward);
-        enemyManager.distancefromTarget = Vector3.Distance(enemyManager.currentTarget.transform.position, transform.position);
+        float distanceFromTarget = Vector3.Distance(enemyManager.currentTarget.transform.position, transform.position);
 
         int maxScore = 0;
 
@@ -72,8 +73,8 @@ public class AttackState : State
         {
             EnemyAttackAction enemyAttackAction = enemyAttacks[i];
 
-            if (enemyManager.distancefromTarget <= enemyAttackAction.maximumDistanceNeededToAttack
-                && enemyManager.distancefromTarget > enemyAttackAction.minimumDistanceNeededToAttack)
+            if (distanceFromTarget <= enemyAttackAction.maximumDistanceNeededToAttack
+                && distanceFromTarget > enemyAttackAction.minimumDistanceNeededToAttack)
             {
                 if (viewableAngle <= enemyAttackAction.maximumAttackAngle
                     && viewableAngle > enemyAttackAction.minimumAttackAngle)
@@ -90,8 +91,8 @@ public class AttackState : State
         {
             EnemyAttackAction enemyAttackAction = enemyAttacks[i];
 
-            if (enemyManager.distancefromTarget <= enemyAttackAction.maximumDistanceNeededToAttack
-                && enemyManager.distancefromTarget > enemyAttackAction.minimumDistanceNeededToAttack)
+            if (distanceFromTarget <= enemyAttackAction.maximumDistanceNeededToAttack
+                && distanceFromTarget > enemyAttackAction.minimumDistanceNeededToAttack)
             {
                 if (viewableAngle <= enemyAttackAction.maximumAttackAngle
                     && viewableAngle > enemyAttackAction.minimumAttackAngle)

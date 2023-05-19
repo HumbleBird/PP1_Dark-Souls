@@ -59,7 +59,7 @@ public class PlayerLocomotion : MonoBehaviour
         animatorHandler.Initialize();
 
         playerManager.isGrounded = true;
-        ignoreForGroundCheck = ~(1 << 8 | 1 << 11);
+        ignoreForGroundCheck = ~(1 << 8 | 1 << 10);
     }
 
     #region Movement
