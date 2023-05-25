@@ -15,6 +15,18 @@ public class EnemyStatus : CharacterStatus
         animator = GetComponent<Animator>();
     }
 
+    void Start()
+    {
+        maxHealth = SetMaxHealthFromHealthLevel();
+        currentHealth = maxHealth;
+    }
+
+    private int SetMaxHealthFromHealthLevel()
+    {
+        maxHealth = healthLevel * 10;
+        return maxHealth;
+    }
+
     public  void TakeDamage(int damage)
     {
         if (isDead)

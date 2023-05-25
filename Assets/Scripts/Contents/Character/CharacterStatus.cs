@@ -12,22 +12,9 @@ public class CharacterStatus : MonoBehaviour
     public float maxStamina;
     public float currentStamina;
 
+    public int focusLevel = 10;
+    public float maxfocusPoint;
+    public float currentFocusPoints;
+
     public bool isDead;
-
-    void Start()
-    {
-        Init();
-    }
-
-    protected virtual void Init()
-    {
-        maxHealth = SetMaxHealthFromHealthLevel();
-        currentHealth = maxHealth;
-    }
-
-    private int SetMaxHealthFromHealthLevel()
-    {
-        maxHealth = healthLevel * 10;
-        return maxHealth;
-    }
 }

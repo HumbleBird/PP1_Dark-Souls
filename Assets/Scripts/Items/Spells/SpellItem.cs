@@ -8,6 +8,10 @@ public class SpellItem : Item
     public GameObject spellCastFX;
     public string spellAnimation;
 
+    [Header("Spell Cost")]
+    public int focusPointCost;
+
+
     [Header("Spell Type")]
     public bool isFaithSpell;
     public bool isMagicSpell;
@@ -25,5 +29,6 @@ public class SpellItem : Item
     public virtual void SuccessfullyCastSpell(AnimatorHandler animatorHandler, PlayerStatus playerStatus)
     {
         Debug.Log("You Successfully cast a spell");
+        playerStatus.DeductFocusPoints(focusPointCost);
     }
 }
