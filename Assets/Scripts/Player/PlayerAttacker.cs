@@ -5,6 +5,7 @@ using UnityEngine;
 public class PlayerAttacker : MonoBehaviour
 {
     AnimatorHandler animatorHandler;
+    PlayerStatus playerStatus;
     PlayerManager playerManager;
     PlayerInventory playerInventory;
     InputHandler inputHandler;
@@ -16,6 +17,7 @@ public class PlayerAttacker : MonoBehaviour
         animatorHandler = GetComponent<AnimatorHandler>();
         weaponSlotManager = GetComponent<WeaponSlotManager>();
 
+        playerStatus = GetComponentInParent<PlayerStatus>();
         inputHandler = GetComponentInParent<InputHandler>();
         playerManager = GetComponentInParent<PlayerManager>();
         playerInventory = GetComponentInParent<PlayerInventory>();
@@ -113,9 +115,16 @@ public class PlayerAttacker : MonoBehaviour
             if(playerInventory.currentSpell != null && playerInventory.currentSpell.isFaithSpell)
             {
                 // CHECK FOR FP
-                // ATTEMPT TO CAST SPELL
+
+
+                playerInventory.currentSpell.AttemptToCastSpell(animatorHandler, playerStatus);
             }
         }
+    }
+
+    private void SuccessfullyCastSpell()
+    {
+        playerInventory.currentSpell.SuccessfullyCastSpell(animatorHandler, playerStatus);
     }
     #endregion
 }

@@ -86,4 +86,16 @@ public class PlayerStatus : CharacterStatus
 
 
     }
+
+    public void HealPlayer(int healAmount)
+    {
+        currentHealth += healAmount;
+
+        if(currentHealth > maxHealth)
+        {
+            currentHealth = maxHealth;
+        }
+
+        healthBar.SetCurrentHealth(currentHealth);
+    }
 }
