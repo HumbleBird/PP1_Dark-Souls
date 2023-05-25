@@ -12,6 +12,8 @@ public class CharacterStatus : MonoBehaviour
     public int maxStamina;
     public int currentStamina;
 
+    public bool isDead;
+
     void Start()
     {
         Init();
@@ -31,6 +33,8 @@ public class CharacterStatus : MonoBehaviour
 
     public virtual void TakeDamage(int damage)
     {
-        currentHealth = currentHealth - damage;
+
+
+
     }
 }

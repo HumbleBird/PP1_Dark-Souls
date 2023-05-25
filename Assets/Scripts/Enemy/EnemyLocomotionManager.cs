@@ -7,6 +7,9 @@ public class EnemyLocomotionManager : MonoBehaviour
     EnemyManager enemyManager;
     EnemyAnimationManager enemyAnimationManager;
 
+    public CapsuleCollider characterCollider;
+    public CapsuleCollider characterCollisionBlockerCollider;
+
     public LayerMask detectionLayer;
 
     // Start is called before the first frame update
@@ -17,5 +20,10 @@ public class EnemyLocomotionManager : MonoBehaviour
     }
 
 
+
+    private void Start()
+    {
+        Physics.IgnoreCollision(characterCollider, characterCollisionBlockerCollider, true);
+    }
 
 }

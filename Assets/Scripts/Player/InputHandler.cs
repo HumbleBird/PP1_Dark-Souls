@@ -41,6 +41,7 @@ public class InputHandler : MonoBehaviour
     PlayerInventory playerInventory;
     PlayerManager playerManager;
     WeaponSlotManager weaponSlotManager;
+    AnimatorHandler animatorHandler;
     UIManager uiManager;
     CameraHandler cameraHandler;
 
@@ -55,6 +56,7 @@ public class InputHandler : MonoBehaviour
         weaponSlotManager = GetComponentInChildren<WeaponSlotManager>();
         uiManager = FindObjectOfType<UIManager>();
         cameraHandler = FindObjectOfType<CameraHandler>();
+        animatorHandler = GetComponentInChildren<AnimatorHandler>();
     }
 
     public void OnEnable()
@@ -146,6 +148,7 @@ public class InputHandler : MonoBehaviour
                 if (playerManager.canDoCombo)
                     return;
 
+                animatorHandler.anim.SetBool("isUsingRightHand", true);
                 playerAttacker.HandleLightAttack(playerInventory.rightWeapon);
             }
         }

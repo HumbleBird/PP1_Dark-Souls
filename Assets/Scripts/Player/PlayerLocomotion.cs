@@ -40,6 +40,9 @@ public class PlayerLocomotion : MonoBehaviour
     [SerializeField]
     float fallingSpeed = 70;
 
+    public CapsuleCollider characterCollider;
+    public CapsuleCollider characterCollisionBlockerCollider;
+
     Vector3 normalVector;
     Vector3 targetPosition;
 
@@ -60,6 +63,7 @@ public class PlayerLocomotion : MonoBehaviour
 
         playerManager.isGrounded = true;
         ignoreForGroundCheck = ~(1 << 8 | 1 << 10);
+        Physics.IgnoreCollision(characterCollider, characterCollisionBlockerCollider, true);
     }
 
     #region Movement

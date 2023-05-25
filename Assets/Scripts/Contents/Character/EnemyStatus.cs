@@ -19,12 +19,18 @@ public class EnemyStatus : CharacterStatus
     {
         base.TakeDamage(damage);
 
+        if (isDead)
+            return;
+
+        currentHealth = currentHealth - damage;
+
         animator.Play("Damage_01");
 
         if (currentHealth <= 0)
         {
             currentHealth = 0;
             animator.Play("Dead_01");
+            isDead = true;
         }
     }
 }

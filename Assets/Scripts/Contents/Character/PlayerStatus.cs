@@ -32,6 +32,11 @@ public class PlayerStatus : CharacterStatus
     {
         base.TakeDamage(damage);
 
+        if (isDead)
+            return;
+
+        currentHealth = currentHealth - damage;
+
         healthBar.SetCurrentHealth(currentHealth);
 
         animatorHandler.PlayerTargetAnimation("Damage_01", true);
@@ -40,6 +45,7 @@ public class PlayerStatus : CharacterStatus
         {
             currentHealth = 0;
             animatorHandler.PlayerTargetAnimation("Dead_01", true);
+            isDead = true;
         }
     }
 
