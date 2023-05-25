@@ -5,15 +5,20 @@ using UnityEngine;
 public class PlayerAttacker : MonoBehaviour
 {
     AnimatorHandler animatorHandler;
+    PlayerManager playerManager;
+    PlayerInventory playerInventory;
     InputHandler inputHandler;
     WeaponSlotManager weaponSlotManager;
     public string lastAttack;
 
     private void Awake()
     {
-        animatorHandler = GetComponentInChildren<AnimatorHandler>();
-        inputHandler = GetComponent<InputHandler>();
-        weaponSlotManager = GetComponentInChildren<WeaponSlotManager>();
+        animatorHandler = GetComponent<AnimatorHandler>();
+        weaponSlotManager = GetComponent<WeaponSlotManager>();
+
+        inputHandler = GetComponentInParent<InputHandler>();
+        playerManager = GetComponentInParent<PlayerManager>();
+        playerInventory = GetComponentInParent<PlayerInventory>();
     }
 
     public void HandleWeaponCombo(WeaponItem weapon)
@@ -62,4 +67,55 @@ public class PlayerAttacker : MonoBehaviour
             lastAttack = weapon.oh_heavy_attack_01;
         }
     }
+
+    #region Input Actions
+    public void HandleRBAction()
+    {
+        if(playerInventory.rightWeapon.isMeleeWeapon)
+        {
+            PerformRBMellAction();
+        }
+        else if (playerInventory.rightWeapon.isSpellCaster || playerInventory.rightWeapon.isFaithCaster  || playerInventory.rightWeapon.isPyroCaster )
+        {
+            PerformRBMagicAction(playerInventory.rightWeapon);
+        }
+
+
+    }
+    #endregion
+
+    #region Attack Actions
+    private void PerformRBMellAction()
+    {
+        if (playerManager.canDoCombo)
+        {
+            inputHandler.comboFlag = true;
+            HandleWeaponCombo(playerInventory.rightWeapon);
+            inputHandler.comboFlag = false;
+        }
+        else
+        {
+            if (playerManager.isInteracting)
+                return;
+
+            if (playerManager.canDoCombo)
+                return;
+
+            animatorHandler.anim.SetBool("isUsingRightHand", true);
+            HandleLightAttack(playerInventory.rightWeapon);
+        }
+    }
+
+    private void PerformRBMagicAction(WeaponItem weapon)
+    {
+        if(weapon.isFaithCaster)
+        {
+            if(playerInventory.currentSpell != null && playerInventory.currentSpell.isFaithSpell)
+            {
+                // CHECK FOR FP
+                // ATTEMPT TO CAST SPELL
+            }
+        }
+    }
+    #endregion
 }
