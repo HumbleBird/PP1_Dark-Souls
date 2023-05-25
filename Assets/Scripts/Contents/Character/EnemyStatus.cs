@@ -15,10 +15,8 @@ public class EnemyStatus : CharacterStatus
         animator = GetComponent<Animator>();
     }
 
-    public override void TakeDamage(int damage)
+    public  void TakeDamage(int damage)
     {
-        base.TakeDamage(damage);
-
         if (isDead)
             return;
 

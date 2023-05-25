@@ -4,13 +4,18 @@ using UnityEngine;
 
 public class PlayerStatus : CharacterStatus
 {
+    PlayerManager playerManager;
+
     public HealthBar  healthBar;
     public StaminaBar staminaBar;
-
     AnimatorHandler animatorHandler;
+
+    public float staminaRegenerationAmount = 1;
+    public float staminaRegenTimer = 0;
 
     private void Awake()
     {
+        playerManager = GetComponent<PlayerManager>();
         healthBar = FindObjectOfType<HealthBar>();
         staminaBar = FindObjectOfType<StaminaBar>();
         animatorHandler = GetComponentInChildren<AnimatorHandler>();
@@ -28,9 +33,10 @@ public class PlayerStatus : CharacterStatus
         currentStamina = maxStamina;
     }
 
-    public override void TakeDamage(int damage)
+    public  void TakeDamage(int damage)
     {
-        base.TakeDamage(damage);
+        if (playerManager.isInvulnerable)
+            return;
 
         if (isDead)
             return;
@@ -49,7 +55,7 @@ public class PlayerStatus : CharacterStatus
         }
     }
 
-    private int SetMaxStaminaFromStaminaLevel()
+    private float SetMaxStaminaFromStaminaLevel()
     {
         maxStamina = staminaLevel * 10;
         return maxStamina;
@@ -59,5 +65,25 @@ public class PlayerStatus : CharacterStatus
     {
         currentStamina -= damage;
         staminaBar.SetCurrentStamina(currentStamina);
+    }
+
+    public void RegenerateStamina()
+    {
+        if(playerManager.isInteracting)
+        {
+            staminaRegenTimer = 0;
+        }
+        else
+        {
+            staminaRegenTimer += Time.deltaTime;
+
+            if (currentStamina < maxStamina && staminaRegenTimer > 1f)
+            {
+                currentStamina += staminaRegenerationAmount * Time.deltaTime;
+                staminaBar.SetCurrentStamina(Mathf.RoundToInt(currentStamina));
+            }
+        }
+
+
     }
 }
