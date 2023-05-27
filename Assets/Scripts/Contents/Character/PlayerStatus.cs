@@ -9,7 +9,7 @@ public class PlayerStatus : CharacterStatus
     public HealthBar  healthBar;
     public StaminaBar staminaBar;
     public FocusPointBar focusPointBar;
-    AnimatorHandler animatorHandler;
+    PlayerAnimatorManager animatorHandler;
 
     public float staminaRegenerationAmount = 1;
     public float staminaRegenTimer = 0;
@@ -20,7 +20,7 @@ public class PlayerStatus : CharacterStatus
         healthBar = FindObjectOfType<HealthBar>();
         staminaBar = FindObjectOfType<StaminaBar>();
         focusPointBar = FindObjectOfType<FocusPointBar>();
-        animatorHandler = GetComponentInChildren<AnimatorHandler>();
+        animatorHandler = GetComponentInChildren<PlayerAnimatorManager>();
     }
 
     void Start()
@@ -41,6 +41,8 @@ public class PlayerStatus : CharacterStatus
         focusPointBar.SetCurrentFocusPoints(currentFocusPoints);
     }
 
+
+
     public  void TakeDamage(int damage)
     {
         if (playerManager.isInvulnerable)
@@ -59,6 +61,17 @@ public class PlayerStatus : CharacterStatus
         {
             currentHealth = 0;
             animatorHandler.PlayerTargetAnimation("Dead_01", true);
+            isDead = true;
+        }
+    }
+
+    public void TakeDamageNoAnimation(int damage)
+    {
+        currentHealth = currentHealth - damage;
+
+        if (currentHealth <= 0)
+        {
+            currentHealth = 0;
             isDead = true;
         }
     }

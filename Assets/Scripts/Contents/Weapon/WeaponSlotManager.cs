@@ -4,14 +4,16 @@ using UnityEngine;
 
 public class WeaponSlotManager : MonoBehaviour
 {
+    PlayerManager playerManager;
+    PlayerInventory playerInventory;
+
     WeaponHolderSlot leftHandSlot;
     WeaponHolderSlot rightHandSlot;
     WeaponHolderSlot backSlot;
 
-    DamageCollider leftHandDamageCollider;
-    DamageCollider rightHandDamageCollider;
+    public DamageCollider leftHandDamageCollider;
+    public DamageCollider rightHandDamageCollider;
 
-    PlayerManager playerManager;
 
     public WeaponItem attackingWeapon;
 
@@ -26,6 +28,9 @@ public class WeaponSlotManager : MonoBehaviour
     {
         animator = GetComponent<Animator>();
         quickSlotsUI = FindObjectOfType<QuickSlotsUI>();
+
+
+        playerInventory = GetComponentInParent<PlayerInventory>();
         playerStatus = GetComponentInParent<PlayerStatus>();
         inputHandler = GetComponentInParent<InputHandler>();
         playerManager = GetComponentInParent<PlayerManager>();
@@ -120,11 +125,13 @@ public class WeaponSlotManager : MonoBehaviour
     private void LoadLeftWeaponDamageCollider()
     {
         leftHandDamageCollider = leftHandSlot.currentWeaponModel.GetComponentInChildren<DamageCollider>();
+        leftHandDamageCollider.currentWeaponDamage = playerInventory.leftWeapon.baseDamage;
     }
 
     private void LoadRightWeaponDamageCollider()
     {
         rightHandDamageCollider = rightHandSlot.currentWeaponModel.GetComponentInChildren<DamageCollider>();
+        rightHandDamageCollider.currentWeaponDamage = playerInventory.rightWeapon.baseDamage;
     }
 
     public void OpenDamageCollider()

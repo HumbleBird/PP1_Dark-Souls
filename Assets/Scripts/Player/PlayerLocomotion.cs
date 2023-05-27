@@ -13,7 +13,7 @@ public class PlayerLocomotion : MonoBehaviour
     [HideInInspector]
     public Transform myTransform;
     [HideInInspector]
-    public AnimatorHandler animatorHandler;
+    public PlayerAnimatorManager animatorHandler;
 
     public new Rigidbody rigidbody;
     public GameObject normalCamera;
@@ -56,7 +56,7 @@ public class PlayerLocomotion : MonoBehaviour
         playerManager = GetComponent<PlayerManager>();
         rigidbody = GetComponent<Rigidbody>();
         inputHandler = GetComponent<InputHandler>();
-        animatorHandler = GetComponentInChildren<AnimatorHandler>();
+        animatorHandler = GetComponentInChildren<PlayerAnimatorManager>();
         cameraObject = Camera.main.transform;
         myTransform = transform;
         animatorHandler.Initialize();

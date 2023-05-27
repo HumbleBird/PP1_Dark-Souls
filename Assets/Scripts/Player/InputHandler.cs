@@ -44,7 +44,7 @@ public class InputHandler : MonoBehaviour
     PlayerInventory playerInventory;
     PlayerManager playerManager;
     WeaponSlotManager weaponSlotManager;
-    AnimatorHandler animatorHandler;
+    PlayerAnimatorManager animatorHandler;
     UIManager uiManager;
     CameraHandler cameraHandler;
 
@@ -59,7 +59,7 @@ public class InputHandler : MonoBehaviour
         weaponSlotManager = GetComponentInChildren<WeaponSlotManager>();
         uiManager = FindObjectOfType<UIManager>();
         cameraHandler = FindObjectOfType<CameraHandler>();
-        animatorHandler = GetComponentInChildren<AnimatorHandler>();
+        animatorHandler = GetComponentInChildren<PlayerAnimatorManager>();
     }
 
     public void OnEnable()

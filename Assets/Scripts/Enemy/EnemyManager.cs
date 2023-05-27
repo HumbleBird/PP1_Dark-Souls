@@ -47,6 +47,7 @@ public class EnemyManager : CharacterManager
         HandleRecoveryTimer();
 
         isInteracting = enemyAnimationManager.anim.GetBool("isInteracting");
+        enemyAnimationManager.anim.SetBool("isDead", enemyStatus.isDead);
     }
 
     private void FixedUpdate()

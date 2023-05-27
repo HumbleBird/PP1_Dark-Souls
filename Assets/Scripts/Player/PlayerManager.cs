@@ -53,6 +53,7 @@ public class PlayerManager : CharacterManager
         isInvulnerable = anim.GetBool("isInvulnerable");
 
         anim.SetBool("isInAir", isInAir);
+        anim.SetBool("isDead", playerStatus.isDead);
 
         inputHandler.TickInput(delta);
         playerLocomotion.HandleRollingAndSprinting(delta);

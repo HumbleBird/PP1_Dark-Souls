@@ -7,7 +7,7 @@ public class HealingSpell : SpellItem
 {
     public int healAmount;
 
-    public override void AttemptToCastSpell(AnimatorHandler animatorHandler, PlayerStatus playerStatus)
+    public override void AttemptToCastSpell(PlayerAnimatorManager animatorHandler, PlayerStatus playerStatus)
     {
         base.AttemptToCastSpell(animatorHandler, playerStatus);
 
@@ -18,7 +18,7 @@ public class HealingSpell : SpellItem
 
     }
 
-    public override void SuccessfullyCastSpell(AnimatorHandler animatorHandler, PlayerStatus playerStatus)
+    public override void SuccessfullyCastSpell(PlayerAnimatorManager animatorHandler, PlayerStatus playerStatus)
     {
         base.SuccessfullyCastSpell(animatorHandler, playerStatus);
 

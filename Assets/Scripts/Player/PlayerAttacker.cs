@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class PlayerAttacker : MonoBehaviour
 {
-    AnimatorHandler animatorHandler;
+    PlayerAnimatorManager animatorHandler;
     PlayerStatus playerStatus;
     PlayerManager playerManager;
     PlayerInventory playerInventory;
@@ -16,7 +16,7 @@ public class PlayerAttacker : MonoBehaviour
 
     private void Awake()
     {
-        animatorHandler = GetComponent<AnimatorHandler>();
+        animatorHandler = GetComponent<PlayerAnimatorManager>();
         weaponSlotManager = GetComponent<WeaponSlotManager>();
 
         playerStatus = GetComponentInParent<PlayerStatus>();
@@ -146,6 +146,7 @@ public class PlayerAttacker : MonoBehaviour
             transform.TransformDirection(Vector3.forward), out hit, 0.5f, backStabLayer))
         {
             CharacterManager enemyCharacterManager = hit.transform.gameObject.GetComponentInParent<CharacterManager>();
+            DamageCollider rightWeapon = weaponSlotManager.rightHandDamageCollider;
 
             if(enemyCharacterManager != null)
             {
@@ -158,6 +159,9 @@ public class PlayerAttacker : MonoBehaviour
                 Quaternion tr = Quaternion.LookRotation(rotationDirection);
                 Quaternion targetRotation = Quaternion.Slerp(playerManager.transform.rotation, tr, 500 * Time.deltaTime);
                 playerManager.transform.rotation = targetRotation;
+
+                int criticalDamage = playerInventory.rightWeapon.criticalDamagemuiltiplier * rightWeapon.currentWeaponDamage;
+                enemyCharacterManager.pendingCriticalDamage = criticalDamage;
 
                 animatorHandler.PlayerTargetAnimation("Back Stab", true);
                 enemyCharacterManager.GetComponentInChildren<AnimatorManager>().PlayerTargetAnimation("Back Stabbed", true);
