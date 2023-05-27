@@ -8,6 +8,7 @@ public class PlayerManager : CharacterManager
     Animator anim;
     CameraHandler cameraHandler;
     PlayerStatus playerStatus;
+    PlayerAnimatorManager playerAnimatorManager;
     PlayerLocomotion playerLocomotion;
 
     InteractableUI interactableUI;
@@ -28,13 +29,10 @@ public class PlayerManager : CharacterManager
     private void Awake()
     {
         backStabCollider = GetComponentInChildren<BackStabCollider>();
-    }
-
-    // Start is called before the first frame update
-    void Start()
-    {
         cameraHandler = FindObjectOfType<CameraHandler>();
         inputHandler = GetComponent<InputHandler>();
+        playerAnimatorManager = GetComponentInChildren<PlayerAnimatorManager>();
+
         playerStatus = GetComponent<PlayerStatus>();
         anim = GetComponentInChildren<Animator>();
         playerLocomotion = GetComponent<PlayerLocomotion>();
@@ -56,6 +54,7 @@ public class PlayerManager : CharacterManager
         anim.SetBool("isDead", playerStatus.isDead);
 
         inputHandler.TickInput(delta);
+        playerAnimatorManager.canRotate = anim.GetBool("canRotate");
         playerLocomotion.HandleRollingAndSprinting(delta);
         playerLocomotion.HandleJumping();
         playerStatus.RegenerateStamina();
@@ -69,8 +68,9 @@ public class PlayerManager : CharacterManager
         float delta = Time.fixedDeltaTime;
 
 
-        playerLocomotion.HandleMovement(delta);
         playerLocomotion.HandleFalling(delta, playerLocomotion.moveDirection);
+        playerLocomotion.HandleMovement(delta);
+        playerLocomotion.HandleRotation(delta);
     }
 
     private void LateUpdate()
