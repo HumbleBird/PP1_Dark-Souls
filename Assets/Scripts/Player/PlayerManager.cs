@@ -27,6 +27,7 @@ public class PlayerManager : CharacterManager
     
     private void Awake()
     {
+        backStabCollider = GetComponentInChildren<BackStabCollider>();
     }
 
     // Start is called before the first frame update
