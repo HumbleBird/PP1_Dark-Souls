@@ -27,7 +27,11 @@ public class PlayerAttacker : MonoBehaviour
 
     public void HandleWeaponCombo(WeaponItem weapon)
     {
-        if(inputHandler.comboFlag)
+
+        if (playerStatus.currentStamina <= 0)
+            return;
+
+        if (inputHandler.comboFlag)
         {
             animatorHandler.anim.SetBool("canDoCombo", false);
             if (lastAttack == weapon.oh_light_attack_01)
@@ -43,6 +47,10 @@ public class PlayerAttacker : MonoBehaviour
 
     public void HandleLightAttack(WeaponItem weapon)
     {
+
+        if (playerStatus.currentStamina <= 0)
+            return;
+
         weaponSlotManager.attackingWeapon = weapon;
 
         if (inputHandler.twoHandFlag)
@@ -59,6 +67,9 @@ public class PlayerAttacker : MonoBehaviour
 
     public void HandleHeavyAttack(WeaponItem weapon)
     {
+        if (playerStatus.currentStamina <= 0)
+            return;
+
         weaponSlotManager.attackingWeapon = weapon;
 
         if (inputHandler.twoHandFlag)
@@ -140,6 +151,10 @@ public class PlayerAttacker : MonoBehaviour
 
     public void AttemptBackStabOrRiposte()
     {
+
+        if (playerStatus.currentStamina <= 0)
+            return;
+
         RaycastHit hit;
 
         if(Physics.Raycast(inputHandler.criticalAttackRayCastStartPoint.position,

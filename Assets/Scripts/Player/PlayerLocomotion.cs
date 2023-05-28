@@ -6,6 +6,7 @@ public class PlayerLocomotion : MonoBehaviour
 {
     CameraHandler cameraHandler;
     PlayerManager playerManager;
+    PlayerStatus playerStatus;
     Transform cameraObject;
     InputHandler inputHandler;
     public Vector3 moveDirection;
@@ -40,6 +41,12 @@ public class PlayerLocomotion : MonoBehaviour
     [SerializeField]
     float fallingSpeed = 70;
 
+    [Header("Stamina Costs")]
+    [SerializeField]
+    int rollStaminaCost = 15;
+    int backstepStaminaCost = 12;
+    int sprintStaminaCost = 1;
+
     public CapsuleCollider characterCollider;
     public CapsuleCollider characterCollisionBlockerCollider;
 
@@ -49,14 +56,17 @@ public class PlayerLocomotion : MonoBehaviour
     private void Awake()
     {
         cameraHandler = FindObjectOfType<CameraHandler>();
+        playerManager = GetComponent<PlayerManager>();
+        playerStatus = GetComponent<PlayerStatus>();
+        rigidbody = GetComponent<Rigidbody>();
+        inputHandler = GetComponent<InputHandler>();
+        animatorHandler = GetComponentInChildren<PlayerAnimatorManager>();
+        
     }
 
     private void Start()
     {
-        playerManager = GetComponent<PlayerManager>();
-        rigidbody = GetComponent<Rigidbody>();
-        inputHandler = GetComponent<InputHandler>();
-        animatorHandler = GetComponentInChildren<PlayerAnimatorManager>();
+
         cameraObject = Camera.main.transform;
         myTransform = transform;
         animatorHandler.Initialize();
@@ -156,6 +166,7 @@ public class PlayerLocomotion : MonoBehaviour
             speed = sprintSpeed;
             playerManager.isSprinting = true;
             moveDirection *= speed;
+            playerStatus.TakeStaminsDamage(sprintStaminaCost);
         }
         else
         {
@@ -192,6 +203,9 @@ public class PlayerLocomotion : MonoBehaviour
         if (animatorHandler.anim.GetBool("isInteracting"))
             return;
 
+        if (playerStatus.currentStamina <= 0)
+            return; 
+
         if (inputHandler.rollFlag)
         {
             moveDirection = cameraObject.forward * inputHandler.vertical;
@@ -203,10 +217,12 @@ public class PlayerLocomotion : MonoBehaviour
                 moveDirection.y = 0;
                 Quaternion rollRotation = Quaternion.LookRotation(moveDirection);
                 myTransform.rotation = rollRotation;
+                playerStatus.TakeStaminsDamage(rollStaminaCost);
             }
             else
             {
                 animatorHandler.PlayerTargetAnimation("BackStep", true);
+                playerStatus.TakeStaminsDamage(backstepStaminaCost);
 
             }
 
@@ -301,7 +317,11 @@ public class PlayerLocomotion : MonoBehaviour
         if (playerManager.isInteracting)
             return;
 
-        if(inputHandler.jump_Input)
+
+        if (playerStatus.currentStamina <= 0)
+            return;
+
+        if (inputHandler.jump_Input)
         {
             if(inputHandler.moveAmount > 0 )
             {
