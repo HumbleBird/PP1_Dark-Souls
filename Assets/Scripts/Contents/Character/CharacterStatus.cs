@@ -16,5 +16,7 @@ public class CharacterStatus : MonoBehaviour
     public float maxfocusPoint;
     public float currentFocusPoints;
 
+    public int soulCount = 0;
+
     public bool isDead;
 }
