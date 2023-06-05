@@ -100,6 +100,8 @@ public class PlayerManager : CharacterManager
         }
     }
 
+    #region Player Interations
+
     public void CheckForInteractableObject()
     {
         RaycastHit hit;
@@ -136,4 +138,13 @@ public class PlayerManager : CharacterManager
             }
         }
     }
+
+    public void OpenChestInteraction(Transform playerStandingHereWhenOpingChest)
+    {
+        playerLocomotion.rigidbody.velocity = Vector3.zero;
+        transform.position = playerStandingHereWhenOpingChest.transform.position;
+        playerAnimatorManager.PlayerTargetAnimation("Open Chest", true);
+    }
+
+    #endregion
 }
