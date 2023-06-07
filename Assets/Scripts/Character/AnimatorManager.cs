@@ -19,4 +19,12 @@ public class AnimatorManager : MonoBehaviour
     {
 
     }
+
+    public virtual void CanRotate()
+    {
+    }
+
+    public virtual void StopRotation()
+    {
+    }
 }

@@ -28,7 +28,7 @@ public class PlayerManager : CharacterManager
     
     private void Awake()
     {
-        backStabCollider = GetComponentInChildren<BackStabCollider>();
+        backStabCollider = GetComponentInChildren<CriticalDamageCollider>();
         cameraHandler = FindObjectOfType<CameraHandler>();
         inputHandler = GetComponent<InputHandler>();
         playerAnimatorManager = GetComponentInChildren<PlayerAnimatorManager>();

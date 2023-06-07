@@ -8,8 +8,11 @@ public class CharacterManager : MonoBehaviour
     public Transform lockOnTransform;
 
     [Header("Combat Colliders")]
-    public BoxCollider backStabBoxCollider;
-    public BackStabCollider backStabCollider;
+    public CriticalDamageCollider backStabCollider;
+    public CriticalDamageCollider riposteCollider;
+
+    [Header("Combat Flaged")]
+    public bool canBeRiposted;
 
     // 애니메이션 이벤트에 맞춰 들어가는 데미지 
     // backstab(뒤잡기) or riposte (패링 데미지?)

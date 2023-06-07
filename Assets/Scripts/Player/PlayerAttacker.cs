@@ -13,6 +13,7 @@ public class PlayerAttacker : MonoBehaviour
     public string lastAttack;
 
     LayerMask backStabLayer = 1<< 12;
+    LayerMask riposteLayer = 1<< 13;
 
     private void Awake()
     {
@@ -47,7 +48,6 @@ public class PlayerAttacker : MonoBehaviour
 
     public void HandleLightAttack(WeaponItem weapon)
     {
-
         if (playerStatus.currentStamina <= 0)
             return;
 
@@ -157,6 +157,7 @@ public class PlayerAttacker : MonoBehaviour
 
         RaycastHit hit;
 
+        // Back Stab
         if(Physics.Raycast(inputHandler.criticalAttackRayCastStartPoint.position,
             transform.TransformDirection(Vector3.forward), out hit, 0.5f, backStabLayer))
         {
@@ -165,7 +166,8 @@ public class PlayerAttacker : MonoBehaviour
 
             if(enemyCharacterManager != null)
             {
-                playerManager.transform.position = enemyCharacterManager.backStabCollider.backStabberStandPoint.position;
+                // 팀 ID 체크 (적 한테만 할 수 있게)
+                playerManager.transform.position = enemyCharacterManager.backStabCollider.criticalDamagerStandPosition.position;
 
                 Vector3 rotationDirection = playerManager.transform.root.eulerAngles;
                 rotationDirection = hit.transform.position - playerManager.transform.position;
@@ -180,6 +182,34 @@ public class PlayerAttacker : MonoBehaviour
 
                 animatorHandler.PlayerTargetAnimation("Back Stab", true);
                 enemyCharacterManager.GetComponentInChildren<AnimatorManager>().PlayerTargetAnimation("Back Stabbed", true);
+            }
+        }
+
+        // Riposte
+        else if (Physics.Raycast(inputHandler.criticalAttackRayCastStartPoint.position,
+            transform.TransformDirection(Vector3.forward), out hit, 0.7f, riposteLayer))
+        {
+            // 팀 ID 체크 (적 한테만 할 수 있게)
+            CharacterManager enemyCharacterManager = hit.transform.gameObject.GetComponentInParent<CharacterManager>();
+            DamageCollider rightWeapon = weaponSlotManager.rightHandDamageCollider;
+
+            if(enemyCharacterManager != null && enemyCharacterManager.canBeRiposted)
+            {
+                playerManager.transform.position = enemyCharacterManager.riposteCollider.criticalDamagerStandPosition.position;
+
+                Vector3 rotationDirection = playerManager.transform.root.eulerAngles;
+                rotationDirection = hit.transform.position - playerManager.transform.position;
+                rotationDirection.y = 0;
+                rotationDirection.Normalize();
+                Quaternion tr = Quaternion.LookRotation(rotationDirection);
+                Quaternion targetRotation = Quaternion.Slerp(playerManager.transform.rotation, tr, 500 * Time.deltaTime);
+                playerManager.transform.rotation = targetRotation;
+
+                int criticalDamage = playerInventory.rightWeapon.criticalDamagemuiltiplier * rightWeapon.currentWeaponDamage;
+                enemyCharacterManager.pendingCriticalDamage = criticalDamage;
+
+                animatorHandler.PlayerTargetAnimation("Riposte", true);
+                enemyCharacterManager.GetComponentInChildren<AnimatorManager>().PlayerTargetAnimation("Riposted", true);
             }
         }
     }
