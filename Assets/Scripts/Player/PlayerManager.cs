@@ -25,7 +25,6 @@ public class PlayerManager : CharacterManager
     public bool isUsingRightHand;
     public bool isUsingLeftHand;
     public bool isInvulnerable;
-    public bool isBlocking;
     
     private void Awake()
     {

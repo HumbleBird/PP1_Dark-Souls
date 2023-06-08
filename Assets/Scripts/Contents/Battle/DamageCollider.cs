@@ -35,13 +35,26 @@ public class DamageCollider : MonoBehaviour
         {
             PlayerStatus playerStatus = other.GetComponent<PlayerStatus>();
             CharacterManager enemyCharacterManager = other.GetComponent<CharacterManager>();
+            BlockingCollider shield = other.GetComponentInChildren<BlockingCollider>();
 
-            if(enemyCharacterManager != null)
+            if (enemyCharacterManager != null)
             {
                 if(enemyCharacterManager.isParrying)
                 {
                     characterManager.GetComponentInChildren<AnimatorManager>().PlayerTargetAnimation("Parried", true);
                     return;
+                }
+                else if (shield && enemyCharacterManager.isBlocking)
+                {
+                    float physicalDamageAfterBlock =
+                        currentWeaponDamage - (currentWeaponDamage * shield.blockingPhysicalDamageAbsorption) / 100;
+
+                    if (playerStatus != null)
+                    {
+                        playerStatus.TakeDamage(Mathf.RoundToInt(physicalDamageAfterBlock), "Block Guard");
+                        return;
+                    }
+
                 }
             }
 

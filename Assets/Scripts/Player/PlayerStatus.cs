@@ -43,7 +43,7 @@ public class PlayerStatus : CharacterStatus
 
 
 
-    public  void TakeDamage(int damage)
+    public  void TakeDamage(int damage, string damageAnimation = "Damage_01")
     {
         if (playerManager.isInvulnerable)
             return;
@@ -55,7 +55,7 @@ public class PlayerStatus : CharacterStatus
 
         healthBar.SetCurrentHealth(currentHealth);
 
-        animatorHandler.PlayerTargetAnimation("Damage_01", true);
+        animatorHandler.PlayerTargetAnimation(damageAnimation, true);
 
         if(currentHealth <= 0 )
         {
