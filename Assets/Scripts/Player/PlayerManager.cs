@@ -25,6 +25,7 @@ public class PlayerManager : CharacterManager
     public bool isUsingRightHand;
     public bool isUsingLeftHand;
     public bool isInvulnerable;
+    public bool isBlocking;
     
     private void Awake()
     {
@@ -50,6 +51,7 @@ public class PlayerManager : CharacterManager
         isUsingLeftHand = anim.GetBool("isUsingLeftHand");
         isInvulnerable = anim.GetBool("isInvulnerable");
 
+        anim.SetBool("isBlocking", isBlocking);
         anim.SetBool("isInAir", isInAir);
         anim.SetBool("isDead", playerStatus.isDead);
 

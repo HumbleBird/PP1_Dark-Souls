@@ -98,6 +98,11 @@ public class PlayerAttacker : MonoBehaviour
 
     }
 
+    public void HandleLBAction()
+    {
+        PerformLBBlockingAction();
+    }
+
     public void HandleLTAction()
     {
         if(playerInventory.leftWeapon.isShieldWeapon)
@@ -177,6 +182,22 @@ public class PlayerAttacker : MonoBehaviour
 
     #endregion
 
+    #region Defense Actions
+
+    private void PerformLBBlockingAction()
+    {
+        if (playerManager.isInteracting)
+            return;
+
+        if (playerManager.isBlocking)
+            return;
+
+        animatorHandler.PlayerTargetAnimation("Block_Start", false, true);
+        playerManager.isBlocking = true;
+
+    }
+
+    #endregion
 
     public void AttemptBackStabOrRiposte()
     {
