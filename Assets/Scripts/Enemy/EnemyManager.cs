@@ -19,6 +19,9 @@ public class EnemyManager : CharacterManager
     public float rotationSpeed = 25f;
     public float maximunAttackRange   = 1.5f;
 
+    [Header("Combat Falgs")]
+    public bool candoCombo;
+
     [Header("A.I Settings")]
     public float detectionRadius = 20;
     public float minimumDetectionAngle = -50;
@@ -44,14 +47,17 @@ public class EnemyManager : CharacterManager
     private void Update()
     {
         HandleRecoveryTimer();
+        HandleStateMachine();
 
         isInteracting = enemyAnimationManager.anim.GetBool("isInteracting");
+        candoCombo = enemyAnimationManager.anim.GetBool("canDoCombo");
         enemyAnimationManager.anim.SetBool("isDead", enemyStatus.isDead);
     }
 
-    private void FixedUpdate()
+    private void LateUpdate()
     {
-        HandleStateMachine();
+        navMeshAgent.transform.localPosition = Vector3.zero;
+        navMeshAgent.transform.localRotation = Quaternion.identity;
     }
 
     private void HandleStateMachine()

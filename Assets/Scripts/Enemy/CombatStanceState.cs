@@ -15,6 +15,9 @@ public class CombatStanceState : State
 
     public override State Tick(EnemyManager enemyManager, EnemyStatus enemyStates, EnemyAnimationManager enemyAnimationManager)
     {
+        if (enemyManager.isInteracting)
+            return this;
+
         float distancefromTarget = Vector3.Distance(enemyManager.currentTarget.transform.position, enemyManager.transform.position);
 
         HandleRotateTowardTarget(enemyManager);

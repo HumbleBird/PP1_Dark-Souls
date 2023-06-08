@@ -85,12 +85,12 @@ public class PlayerAnimatorManager : AnimatorManager
         anim.SetFloat("Horizontal", h, 0.1f, Time.deltaTime);
     }
 
-    public override void CanRotate()
+    public  void CanRotate()
     {
         anim.SetBool("canRotate", true);
     }
 
-    public override void StopRotation()
+    public  void StopRotation()
     {
         anim.SetBool("canRotate", false);
     }
