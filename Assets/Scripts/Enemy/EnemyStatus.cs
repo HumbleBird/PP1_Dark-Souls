@@ -10,6 +10,8 @@ public class EnemyStatus : CharacterStatus
 {
     EnemyAnimationManager enemyAnimationManager;
 
+    public UIEnemyHealthBar enemyHealthBar;
+
     public int soulsAwardedOnDeath = 50;
 
     private void Awake()
@@ -21,6 +23,7 @@ public class EnemyStatus : CharacterStatus
     {
         maxHealth = SetMaxHealthFromHealthLevel();
         currentHealth = maxHealth;
+        enemyHealthBar.SetMaxHealth(maxHealth);
     }
 
     private int SetMaxHealthFromHealthLevel()
@@ -32,6 +35,8 @@ public class EnemyStatus : CharacterStatus
     public void TakeDamageNoAnimation(int damage)
     {
         currentHealth = currentHealth - damage;
+        enemyHealthBar.SetHealth(currentHealth);
+
 
         if (currentHealth <= 0)
         {
@@ -46,6 +51,7 @@ public class EnemyStatus : CharacterStatus
             return;
 
         currentHealth = currentHealth - damage;
+        enemyHealthBar.SetHealth(currentHealth);
 
         enemyAnimationManager.PlayerTargetAnimation("Damage_01", true);
 

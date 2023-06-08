@@ -43,7 +43,7 @@ public class PlayerStatus : CharacterStatus
 
 
 
-    public  void TakeDamage(int damage, string damageAnimation = "Damage_01")
+    public void TakeDamage(int damage, string damageAnimation = "Damage_01")
     {
         if (playerManager.isInvulnerable)
             return;
