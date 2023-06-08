@@ -44,12 +44,13 @@ public class CameraHandler : MonoBehaviour
 
     public float maximumLockOnDistance = 30f;
 
-    public List<CharacterManager> m_ListAvailableTarget = new List<CharacterManager>();
+    public CharacterManager m_trCurrentLockOnTarget;
+
+    List<CharacterManager> m_ListAvailableTarget = new List<CharacterManager>();
         
-    public Transform m_trNearestLockOnTarget;
-    public Transform m_trCurrentLockOnTarget;
-    public Transform m_trleftLockTarget;
-    public Transform m_trRightLockTarget;
+    public CharacterManager m_trNearestLockOnTarget;
+    public CharacterManager m_trleftLockTarget;
+    public CharacterManager m_trRightLockTarget;
 
     #endregion
 
@@ -100,14 +101,14 @@ public class CameraHandler : MonoBehaviour
         {
             float velocity = 0;
 
-            Vector3 dir = m_trCurrentLockOnTarget.position - transform.position;
+            Vector3 dir = m_trCurrentLockOnTarget.transform.position - transform.position;
             dir.Normalize();
             dir.y = 0;
 
             Quaternion targetRotation = Quaternion.LookRotation(dir);
             transform.rotation = targetRotation;
 
-            dir = m_trCurrentLockOnTarget.position - cameraPivotTranform.position;
+            dir = m_trCurrentLockOnTarget.transform.position - cameraPivotTranform.position;
             dir.Normalize();
 
             targetRotation = Quaternion.LookRotation(dir);
@@ -146,7 +147,7 @@ public class CameraHandler : MonoBehaviour
     public void HandleLockOn()
     {
         float shortDistance = Mathf.Infinity;
-        float shorttestDistanceOfLeftTarget = Mathf.Infinity;
+        float shorttestDistanceOfLeftTarget = -Mathf.Infinity;
         float shorttestDistanceOfRightTarget = Mathf.Infinity;
 
         Collider[] colliders = Physics.OverlapSphere(targetTransform.position, 26);
@@ -190,25 +191,30 @@ public class CameraHandler : MonoBehaviour
             if(distanceFromTarget < shortDistance)
             {
                 shortDistance = distanceFromTarget;
-                m_trNearestLockOnTarget = m_ListAvailableTarget[k].lockOnTransform;
+                m_trNearestLockOnTarget = m_ListAvailableTarget[k];
             }
 
             if(inputHandler.lockOnFlag)
             {
-                Vector3 relativeEnemyPosition = m_trCurrentLockOnTarget.InverseTransformPoint(m_ListAvailableTarget[k].transform.position);
-                var distanceFromLeftTarget = m_trCurrentLockOnTarget.transform.position.x - m_ListAvailableTarget[k].transform.position.x;
-                var distanceFromRightTarget = m_trCurrentLockOnTarget.transform.position.x + m_ListAvailableTarget[k].transform.position.x;
-            
-                if(relativeEnemyPosition.x > 0.00 && distanceFromLeftTarget < shorttestDistanceOfLeftTarget)
+                //Vector3 relativeEnemyPosition = m_trCurrentLockOnTarget.transform.InverseTransformPoint(m_ListAvailableTarget[k].transform.position);
+                //var distanceFromLeftTarget = m_trCurrentLockOnTarget.transform.position.x - m_ListAvailableTarget[k].transform.position.x;
+                //var distanceFromRightTarget = m_trCurrentLockOnTarget.transform.position.x + m_ListAvailableTarget[k].transform.position.x;
+                Vector3 relativeEnemyPosition = inputHandler.transform.InverseTransformPoint(m_ListAvailableTarget[k].transform.position);
+                var distanceFromLeftTarget = relativeEnemyPosition.x;
+                var distanceFromRightTarget = relativeEnemyPosition.x;
+
+                if (relativeEnemyPosition.x <= 0.00 && distanceFromLeftTarget > shorttestDistanceOfLeftTarget
+                    && m_ListAvailableTarget[k] != m_trCurrentLockOnTarget)
                 {
                     shorttestDistanceOfLeftTarget = distanceFromLeftTarget;
-                    m_trleftLockTarget = m_ListAvailableTarget[k].lockOnTransform;
+                    m_trleftLockTarget = m_ListAvailableTarget[k];
                 }
 
-                if(relativeEnemyPosition.x < 0.00 && distanceFromRightTarget < shorttestDistanceOfRightTarget)
+                if(relativeEnemyPosition.x >= 0.00 && distanceFromRightTarget < shorttestDistanceOfRightTarget
+                    && m_ListAvailableTarget[k] != m_trCurrentLockOnTarget)
                 {
                     shorttestDistanceOfRightTarget = distanceFromRightTarget;
-                    m_trRightLockTarget = m_ListAvailableTarget[k].lockOnTransform;
+                    m_trRightLockTarget = m_ListAvailableTarget[k];
                 }
             }
         }

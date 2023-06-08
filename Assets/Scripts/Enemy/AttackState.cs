@@ -15,7 +15,7 @@ public class AttackState : State
     public EnemyAttackAction[] enemyAttacks;
     public EnemyAttackAction currentAttack;
 
-    bool isComboing = false;
+    bool willDoComboOnNextAttack = false;
 
     public override State Tick(EnemyManager enemyManager, EnemyStatus enemyStates, EnemyAnimationManager enemyAnimationManager)
     {
@@ -26,10 +26,10 @@ public class AttackState : State
         }
         else if (enemyManager.isInteracting && enemyManager.candoCombo)
         {
-            if (isComboing)
+            if (willDoComboOnNextAttack)
             {
+                willDoComboOnNextAttack = false;
                 enemyAnimationManager.PlayerTargetAnimation(currentAttack.actionAnimation, true);
-                isComboing = false;
             }
         }
 
@@ -64,8 +64,9 @@ public class AttackState : State
                         enemyAnimationManager.anim.SetFloat("Horizontal", 0, 0.1f, Time.deltaTime);
                         enemyAnimationManager.PlayerTargetAnimation(currentAttack.actionAnimation, true);
                         enemyManager.isPreformingAction = true;
+                        RollForComboChance(enemyManager);
 
-                        if(currentAttack.canCombo)
+                        if(currentAttack.canCombo && willDoComboOnNextAttack)
                         {
                             currentAttack = currentAttack.comboAction;
                             return this;
@@ -169,6 +170,16 @@ public class AttackState : State
             enemyManager.navMeshAgent.SetDestination(enemyManager.currentTarget.transform.position);
             enemyManager.enemyRigidbody.velocity = targetVelocity;
             enemyManager.transform.rotation = Quaternion.Slerp(enemyManager.transform.rotation, enemyManager.navMeshAgent.transform.rotation, enemyManager.rotationSpeed / Time.deltaTime);
+        }
+    }
+
+    private void RollForComboChance(EnemyManager enemyManager)
+    {
+        float comboChance = Random.Range(0, 100);
+
+        if(enemyManager.allowAIToPerformCombos && comboChance <= enemyManager.comboLikelyHood)
+        {
+            willDoComboOnNextAttack = true;
         }
     }
 }

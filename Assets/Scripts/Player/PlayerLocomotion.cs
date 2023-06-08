@@ -110,7 +110,7 @@ public class PlayerLocomotion : MonoBehaviour
                 {
                     Vector3 rotationDirection = moveDirection;
 
-                    rotationDirection = cameraHandler.m_trCurrentLockOnTarget.position - transform.position;
+                    rotationDirection = cameraHandler.m_trCurrentLockOnTarget.transform.position - transform.position;
                     rotationDirection.y = 0;
                     rotationDirection.Normalize();
 
