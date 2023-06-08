@@ -317,7 +317,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 240748999}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 0.5, z: 3.5770001}
+  m_LocalPosition: {x: -0.0010000865, y: 0.49899998, z: 4.144}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -943,14 +943,14 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 849953412}
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 1, y: 0.5, z: 3.5770001}
+  m_LocalRotation: {x: 0.0010084719, y: -0.0012655439, z: 0.00006354301, w: 0.99999875}
+  m_LocalPosition: {x: 0.9989999, y: 0.49899998, z: 4.144}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 217110065}
   m_RootOrder: 6
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_LocalEulerAnglesHint: {x: 0.116, y: -0.145, z: 0.007}
 --- !u!65 &849953414
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -1156,7 +1156,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 969462335}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -1, y: 0.5, z: 3.577}
+  m_LocalPosition: {x: -1.001, y: 0.499, z: 4.144}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -2378,6 +2378,46 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 622498212, guid: ea0690a0c7038e7478981afa1544d333, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 0.038
+      objectReference: {fileID: 0}
+    - target: {fileID: 622498212, guid: ea0690a0c7038e7478981afa1544d333, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: -0.049
+      objectReference: {fileID: 0}
+    - target: {fileID: 622498212, guid: ea0690a0c7038e7478981afa1544d333, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0.035
+      objectReference: {fileID: 0}
+    - target: {fileID: 622498212, guid: ea0690a0c7038e7478981afa1544d333, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 0.79144293
+      objectReference: {fileID: 0}
+    - target: {fileID: 622498212, guid: ea0690a0c7038e7478981afa1544d333, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0.11603561
+      objectReference: {fileID: 0}
+    - target: {fileID: 622498212, guid: ea0690a0c7038e7478981afa1544d333, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: -0.60009336
+      objectReference: {fileID: 0}
+    - target: {fileID: 622498212, guid: ea0690a0c7038e7478981afa1544d333, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0.0064718486
+      objectReference: {fileID: 0}
+    - target: {fileID: 622498212, guid: ea0690a0c7038e7478981afa1544d333, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 11.037
+      objectReference: {fileID: 0}
+    - target: {fileID: 622498212, guid: ea0690a0c7038e7478981afa1544d333, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: -75.072
+      objectReference: {fileID: 0}
+    - target: {fileID: 622498212, guid: ea0690a0c7038e7478981afa1544d333, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: -7.553
+      objectReference: {fileID: 0}
     - target: {fileID: 1052889980, guid: ea0690a0c7038e7478981afa1544d333, type: 3}
       propertyPath: criticalDamagerStandPosition
       value: 
@@ -2739,13 +2779,17 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 0}
     - target: {fileID: 1132093933468249239, guid: ea0690a0c7038e7478981afa1544d333, type: 3}
+      propertyPath: weaponsInLeftHandSlots.Array.data[0]
+      value: 
+      objectReference: {fileID: 11400000, guid: 29d9d6db760280a45bcf164a2a748c8c, type: 2}
+    - target: {fileID: 1132093933468249239, guid: ea0690a0c7038e7478981afa1544d333, type: 3}
       propertyPath: weaponsInRightHandSlots.Array.data[0]
       value: 
-      objectReference: {fileID: 11400000, guid: 24a4e7211d2165b4b85c891c62082805, type: 2}
+      objectReference: {fileID: 11400000, guid: 08ef3dc9456ad484d8469464b63ceb4b, type: 2}
     - target: {fileID: 1132093933468249239, guid: ea0690a0c7038e7478981afa1544d333, type: 3}
       propertyPath: weaponsInRightHandSlots.Array.data[1]
       value: 
-      objectReference: {fileID: 11400000, guid: 08ef3dc9456ad484d8469464b63ceb4b, type: 2}
+      objectReference: {fileID: 11400000, guid: 24a4e7211d2165b4b85c891c62082805, type: 2}
     - target: {fileID: 1132093933468249243, guid: ea0690a0c7038e7478981afa1544d333, type: 3}
       propertyPath: healthBar
       value: 
@@ -4038,7 +4082,7 @@ PrefabInstance:
       objectReference: {fileID: 547223782}
     - target: {fileID: 543450653394863791, guid: 7931fdca36f145c48b1a15785735feda, type: 3}
       propertyPath: canBeRiposted
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 543450653394863791, guid: 7931fdca36f145c48b1a15785735feda, type: 3}
       propertyPath: riposteCollider

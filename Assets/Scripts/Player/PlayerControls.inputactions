@@ -189,18 +189,18 @@
                     "initialStateCheck": false
                 },
                 {
-                    "name": "Critical Attack",
+                    "name": "RT",
                     "type": "Button",
-                    "id": "31dc8b6b-6c54-4a4b-abaf-a9ec8b6158f3",
+                    "id": "842b9303-c410-4e9a-9c3a-6102699fd13d",
                     "expectedControlType": "Button",
                     "processors": "",
                     "interactions": "",
                     "initialStateCheck": false
                 },
                 {
-                    "name": "RT",
+                    "name": "Critical Attack",
                     "type": "Button",
-                    "id": "842b9303-c410-4e9a-9c3a-6102699fd13d",
+                    "id": "31dc8b6b-6c54-4a4b-abaf-a9ec8b6158f3",
                     "expectedControlType": "Button",
                     "processors": "",
                     "interactions": "",
@@ -286,6 +286,15 @@
                     "processors": "",
                     "interactions": "",
                     "initialStateCheck": false
+                },
+                {
+                    "name": "LT",
+                    "type": "Button",
+                    "id": "e4fedfe0-3b49-4f49-be93-b4f8d3c1527d",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
                 }
             ],
             "bindings": [
@@ -330,17 +339,6 @@
                     "processors": "",
                     "groups": "",
                     "action": "RB",
-                    "isComposite": false,
-                    "isPartOfComposite": false
-                },
-                {
-                    "name": "",
-                    "id": "09c39954-1518-486d-a658-a40be07f854d",
-                    "path": "<Keyboard>/r",
-                    "interactions": "",
-                    "processors": "",
-                    "groups": "",
-                    "action": "RT",
                     "isComposite": false,
                     "isPartOfComposite": false
                 },
@@ -517,6 +515,39 @@
                     "processors": "",
                     "groups": "",
                     "action": "Critical Attack",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "09c39954-1518-486d-a658-a40be07f854d",
+                    "path": "<Keyboard>/r",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "RT",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "9d8a4c1b-a797-4c7f-acd0-f75980451b43",
+                    "path": "<Gamepad>/leftTrigger",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "LT",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "18603ada-95ff-433c-9e76-85ab01984419",
+                    "path": "<Keyboard>/z",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "LT",
                     "isComposite": false,
                     "isPartOfComposite": false
                 }

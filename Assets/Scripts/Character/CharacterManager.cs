@@ -13,6 +13,8 @@ public class CharacterManager : MonoBehaviour
 
     [Header("Combat Flaged")]
     public bool canBeRiposted;
+    public bool canBeParryied;
+    public bool isParrying;
 
     // 애니메이션 이벤트에 맞춰 들어가는 데미지 
     // backstab(뒤잡기) or riposte (패링 데미지?)

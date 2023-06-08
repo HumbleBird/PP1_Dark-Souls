@@ -78,8 +78,8 @@ public class PlayerAttacker : MonoBehaviour
         }
         else
         {
-            animatorHandler.PlayerTargetAnimation(weapon.oh_heavy_attack_01, true);
-            lastAttack = weapon.oh_heavy_attack_01;
+            //animatorHandler.PlayerTargetAnimation(weapon.oh_heavy_attack_01, true);
+            //lastAttack = weapon.oh_heavy_attack_01;
         }
     }
 
@@ -96,6 +96,18 @@ public class PlayerAttacker : MonoBehaviour
         }
 
 
+    }
+
+    public void HandleLTAction()
+    {
+        if(playerInventory.leftWeapon.isShieldWeapon)
+        {
+            PerformLTWeaponArt(inputHandler.twoHandFlag);
+        }
+        else if (playerInventory.leftWeapon.isMeleeWeapon)
+        {
+
+        }
     }
     #endregion
 
@@ -138,6 +150,23 @@ public class PlayerAttacker : MonoBehaviour
                 else
                     animatorHandler.PlayerTargetAnimation("Shrug", true);
             }
+        }
+    }
+
+    private void PerformLTWeaponArt(bool isTwoHanding)
+    {
+        if (playerManager.isInteracting)
+            return;
+
+        if (isTwoHanding)
+        {
+
+        }
+        else
+        {
+            animatorHandler.PlayerTargetAnimation(playerInventory.leftWeapon.weapon_art, true);
+
+
         }
     }
 

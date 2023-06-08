@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class DamageCollider : MonoBehaviour
 {
+    public CharacterManager characterManager;
     Collider damageCollider;
 
     public int currentWeaponDamage = 25;
@@ -15,6 +16,7 @@ public class DamageCollider : MonoBehaviour
         damageCollider.gameObject.SetActive(true);
         damageCollider.isTrigger = true;
         damageCollider.enabled = false;
+
     }
 
     public void EnableDamageCollider()
@@ -32,6 +34,16 @@ public class DamageCollider : MonoBehaviour
         if (other.tag == "Player")
         {
             PlayerStatus playerStatus = other.GetComponent<PlayerStatus>();
+            CharacterManager enemyCharacterManager = other.GetComponent<CharacterManager>();
+
+            if(enemyCharacterManager != null)
+            {
+                if(enemyCharacterManager.isParrying)
+                {
+                    characterManager.GetComponentInChildren<AnimatorManager>().PlayerTargetAnimation("Parried", true);
+                    return;
+                }
+            }
 
             if (playerStatus != null)
             {
@@ -42,6 +54,16 @@ public class DamageCollider : MonoBehaviour
         if (other.tag == "Enemy")
         {
             EnemyStatus enemyStatus = other.GetComponent<EnemyStatus>();
+            CharacterManager enemyCharacterManager = other.GetComponent<CharacterManager>();
+
+            if (enemyCharacterManager != null)
+            {
+                if (enemyCharacterManager.isParrying)
+                {
+                    characterManager.GetComponentInChildren<AnimatorManager>().PlayerTargetAnimation("Parried", true);
+                    return;
+                }
+            }
 
             if (enemyStatus != null)
             {
