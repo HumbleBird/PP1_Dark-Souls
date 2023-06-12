@@ -7,9 +7,9 @@ public class HealingSpell : SpellItem
 {
     public int healAmount;
 
-    public override void AttemptToCastSpell(PlayerAnimatorManager animatorHandler, PlayerStatus playerStatus)
+    public override void AttemptToCastSpell(PlayerAnimatorManager animatorHandler, PlayerStatus playerStatus, WeaponSlotManager weaponSlotMAnager)
     {
-        base.AttemptToCastSpell(animatorHandler, playerStatus);
+        base.AttemptToCastSpell(animatorHandler, playerStatus, weaponSlotMAnager);
 
         GameObject instantiateWarmUpSpellFX = Instantiate(spellWarmUpFX, animatorHandler.transform);
         animatorHandler.PlayerTargetAnimation(spellAnimation, true);

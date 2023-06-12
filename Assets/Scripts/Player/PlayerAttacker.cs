@@ -152,7 +152,20 @@ public class PlayerAttacker : MonoBehaviour
                 // CHECK FOR FP
                 if (playerStatus.currentFocusPoints >= playerInventory.currentSpell.focusPointCost)
                 {
-                    playerInventory.currentSpell.AttemptToCastSpell(animatorHandler, playerStatus);
+                    playerInventory.currentSpell.AttemptToCastSpell(animatorHandler, playerStatus, weaponSlotManager);
+                }
+                else
+                    animatorHandler.PlayerTargetAnimation("Shrug", true);
+            }
+        }
+        else if (weapon.isPyroCaster)
+        {
+            if (playerInventory.currentSpell != null && playerInventory.currentSpell.isPyroSpell)
+            {
+                // CHECK FOR FP
+                if (playerStatus.currentFocusPoints >= playerInventory.currentSpell.focusPointCost)
+                {
+                    playerInventory.currentSpell.AttemptToCastSpell(animatorHandler, playerStatus, weaponSlotManager);
                 }
                 else
                     animatorHandler.PlayerTargetAnimation("Shrug", true);
@@ -180,6 +193,7 @@ public class PlayerAttacker : MonoBehaviour
     private void SuccessfullyCastSpell()
     {
         playerInventory.currentSpell.SuccessfullyCastSpell(animatorHandler, playerStatus);
+        animatorHandler.anim.SetBool("isFiringSpell", true);
     }
 
     #endregion

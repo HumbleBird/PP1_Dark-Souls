@@ -21,7 +21,7 @@ public class SpellItem : Item
     [TextArea]
     public string spellDescription;
 
-    public virtual void AttemptToCastSpell(PlayerAnimatorManager animatorHandler, PlayerStatus playerStatus)
+    public virtual void AttemptToCastSpell(PlayerAnimatorManager animatorHandler, PlayerStatus playerStatus, WeaponSlotManager weaponSlotMAnager)
     {
         Debug.Log("You Attempt to cast a spell");
     }
