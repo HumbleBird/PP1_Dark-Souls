@@ -18,9 +18,14 @@ public class HealingSpell : SpellItem
 
     }
 
-    public override void SuccessfullyCastSpell(PlayerAnimatorManager animatorHandler, PlayerStatus playerStatus)
+    public override void SuccessfullyCastSpell(
+        PlayerAnimatorManager animatorHandler,
+        PlayerStatus playerStatus,
+        CameraHandler cameraHandler,
+        WeaponSlotManager weaponSlotMAnager
+        )
     {
-        base.SuccessfullyCastSpell(animatorHandler, playerStatus);
+        base.SuccessfullyCastSpell(animatorHandler, playerStatus,  cameraHandler, weaponSlotMAnager);
 
         GameObject instantiateSpellFX = Instantiate(spellCastFX, animatorHandler.transform);
         playerStatus.HealPlayer(healAmount);

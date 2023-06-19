@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class PlayerAttacker : MonoBehaviour
 {
+    CameraHandler cameraHandler;
     PlayerAnimatorManager animatorHandler;
     PlayerEquipmentManager playerEquipmentManager;
     PlayerStatus playerStatus;
@@ -18,6 +19,8 @@ public class PlayerAttacker : MonoBehaviour
 
     private void Awake()
     {
+        cameraHandler = FindObjectOfType<CameraHandler>();
+
         animatorHandler = GetComponent<PlayerAnimatorManager>();
         playerEquipmentManager = GetComponent<PlayerEquipmentManager>();
         weaponSlotManager = GetComponent<WeaponSlotManager>();
@@ -192,7 +195,7 @@ public class PlayerAttacker : MonoBehaviour
 
     private void SuccessfullyCastSpell()
     {
-        playerInventory.currentSpell.SuccessfullyCastSpell(animatorHandler, playerStatus);
+        playerInventory.currentSpell.SuccessfullyCastSpell(animatorHandler, playerStatus, cameraHandler, weaponSlotManager);
         animatorHandler.anim.SetBool("isFiringSpell", true);
     }
 
