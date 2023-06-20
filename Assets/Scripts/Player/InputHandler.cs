@@ -12,6 +12,7 @@ public class InputHandler : MonoBehaviour
 
     public bool b_Input;
     public bool a_Input;
+    public bool x_Input;
     public bool y_Input;
     public bool rb_Input;
     public bool rt_Input;
@@ -45,6 +46,7 @@ public class InputHandler : MonoBehaviour
     PlayerAttacker playerAttacker;
     PlayerInventory playerInventory;
     PlayerManager playerManager;
+    PlayerEffectsManager playerEffectsManager;
     PlayerStatus playerStatus;
     BlockingCollider blockingCollider;
     WeaponSlotManager weaponSlotManager;
@@ -61,6 +63,9 @@ public class InputHandler : MonoBehaviour
         playerInventory = GetComponent<PlayerInventory>();
         playerManager = GetComponent<PlayerManager>();
         playerStatus = GetComponent<PlayerStatus>();
+        playerEffectsManager = GetComponentInChildren<PlayerEffectsManager>();
+
+
         weaponSlotManager = GetComponentInChildren<WeaponSlotManager>();
         blockingCollider = GetComponentInChildren<BlockingCollider>();
         uiManager = FindObjectOfType<UIManager>();
@@ -83,6 +88,7 @@ public class InputHandler : MonoBehaviour
             inputActions.PlayerQuickSlots.DPadRight.performed += i => d_Pad_Right = true;
             inputActions.PlayerQuickSlots.DPadLeft.performed += i => d_Pad_Left = true;
             inputActions.PlayerActions.A.performed += i => a_Input = true;
+            inputActions.PlayerActions.X.performed += i => x_Input = true;
             inputActions.PlayerActions.Roll.performed += i => b_Input = true;
             inputActions.PlayerActions.Roll.canceled += i => b_Input = false;
             inputActions.PlayerActions.Jump.performed += i => jump_Input = true;
@@ -113,6 +119,7 @@ public class InputHandler : MonoBehaviour
         HandleLockOnInput();
         HandleTwoHandInput();
         HandleCriticalAttackInput();
+        HandleUseConsumableInput();
     }
 
     private void HandleMoveInput(float delta)
@@ -297,6 +304,15 @@ public class InputHandler : MonoBehaviour
         {
             critical_Attack_Input = false;
             playerAttacker.AttemptBackStabOrRiposte();
+        }
+    }
+
+    private void HandleUseConsumableInput()
+    {
+        if(x_Input)
+        {
+            x_Input = false;
+            playerInventory.currentConsumable.AttemptToConsumeItem(animatorHandler, weaponSlotManager, playerEffectsManager);
         }
     }
 }

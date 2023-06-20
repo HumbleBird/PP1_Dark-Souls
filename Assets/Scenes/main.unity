@@ -2939,6 +2939,21 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   blockingCollider: {fileID: 1132093933468249228}
+--- !u!114 &1942948049
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1942948037}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 23a2ff4e986aa334cb921a3d3d56881e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  currentParticleFX: {fileID: 0}
+  instantiatedFXModel: {fileID: 0}
+  amountToBeHealed: 0
 --- !u!1 &1984731937
 GameObject:
   m_ObjectHideFlags: 0
@@ -3087,6 +3102,10 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 11400000, guid: c366cbf2bcc1a0144a1e21b313bba1be, type: 2}
     - target: {fileID: 1132093933468249239, guid: ea0690a0c7038e7478981afa1544d333, type: 3}
+      propertyPath: currentConsumable
+      value: 
+      objectReference: {fileID: 11400000, guid: c7963e088a06f74478bd8375ab885623, type: 2}
+    - target: {fileID: 1132093933468249239, guid: ea0690a0c7038e7478981afa1544d333, type: 3}
       propertyPath: weaponsInRightHandSlots.Array.data[0]
       value: 
       objectReference: {fileID: 11400000, guid: 6fa3f31400c3ed444aaf29e2a3ed4e77, type: 2}
@@ -3101,6 +3120,14 @@ PrefabInstance:
     - target: {fileID: 1132093933468249243, guid: ea0690a0c7038e7478981afa1544d333, type: 3}
       propertyPath: staminaLevel
       value: 10
+      objectReference: {fileID: 0}
+    - target: {fileID: 7295757570094153658, guid: ea0690a0c7038e7478981afa1544d333, type: 3}
+      propertyPath: m_Name
+      value: Player Model
+      objectReference: {fileID: 0}
+    - target: {fileID: 7295757570094153658, guid: ea0690a0c7038e7478981afa1544d333, type: 3}
+      propertyPath: m_IsActive
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 7358866862892592442, guid: ea0690a0c7038e7478981afa1544d333, type: 3}
       propertyPath: m_Name

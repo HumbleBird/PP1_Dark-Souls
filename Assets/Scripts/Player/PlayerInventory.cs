@@ -9,6 +9,7 @@ public class PlayerInventory : MonoBehaviour
     public SpellItem currentSpell;
     public WeaponItem rightWeapon;
     public WeaponItem leftWeapon;
+    public ConsumableItem currentConsumable;
 
     public WeaponItem unarmWeapon;
 
