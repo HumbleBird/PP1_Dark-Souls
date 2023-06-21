@@ -1174,6 +1174,37 @@ Transform:
   m_Father: {fileID: 4673983556824852779}
   m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &1737959530069402278
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 8346299843523244399}
+  m_Layer: 9
+  m_Name: Torsos
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &8346299843523244399
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1737959530069402278}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 8522089288447060666}
+  m_RootOrder: 4
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1831401669083789091
 GameObject:
   m_ObjectHideFlags: 0
@@ -1363,6 +1394,7 @@ Transform:
   - {fileID: 6649194285744831581}
   - {fileID: 23328786580462516}
   - {fileID: 329981152}
+  - {fileID: 8346299843523244399}
   m_Father: {fileID: 1039144484892280803}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -2795,7 +2827,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &1124733657809595825
 Transform:
   m_ObjectHideFlags: 0
@@ -2965,7 +2997,8 @@ MonoBehaviour:
   rightWeapon: {fileID: 0}
   leftWeapon: {fileID: 0}
   currentConsumable: {fileID: 11400000, guid: c7963e088a06f74478bd8375ab885623, type: 2}
-  currentHelmetEquipment: {fileID: 11400000, guid: b1eddd515efb68c4ca50eebbe6edb245, type: 2}
+  currentHelmetEquipment: {fileID: 11400000, guid: 04b89841f77ddf14097920dfd17b1888, type: 2}
+  currentTorsoEquipment: {fileID: 0}
   unarmWeapon: {fileID: 11400000, guid: 950c54dd3d5db784f9220334c914a1db, type: 2}
   weaponsInRightHandSlots:
   - {fileID: 11400000, guid: 6fa3f31400c3ed444aaf29e2a3ed4e77, type: 2}

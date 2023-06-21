@@ -27,6 +27,7 @@ public class UIManager : MonoBehaviour
 
     private void Awake()
     {
+        playerInventory = FindObjectOfType<PlayerInventory>();
     }
 
     private void Start()
