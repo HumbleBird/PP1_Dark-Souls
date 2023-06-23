@@ -68,4 +68,15 @@ public class ModelChanger : MonoBehaviour
             }
         }
     }
+
+    public void UnEquipEquipmentsModelByName(string torsoMName)
+    {
+        foreach (GameObject equipment in equipments)
+        {
+            if (equipment.name == torsoMName)
+            {
+                equipment.SetActive(false);
+            }
+        }
+    }
 }

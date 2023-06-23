@@ -48,20 +48,16 @@ public class PlayerStatus : CharacterStatus
         if (playerManager.isInvulnerable)
             return;
 
-        if (isDead)
-            return;
-
-        currentHealth = currentHealth - damage;
+        base.TakeDamage(damage, damageAnimation = "Damage_01");
 
         healthBar.SetCurrentHealth(currentHealth);
-
         animatorHandler.PlayerTargetAnimation(damageAnimation, true);
 
         if(currentHealth <= 0 )
         {
             currentHealth = 0;
-            animatorHandler.PlayerTargetAnimation("Dead_01", true);
             isDead = true;
+            animatorHandler.PlayerTargetAnimation("Dead_01", true);
         }
     }
 

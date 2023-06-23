@@ -47,12 +47,9 @@ public class EnemyStatus : CharacterStatus
 
     public override void TakeDamage(int damage, string damageAnimation = "Damage_01")
     {
-        if (isDead)
-            return;
-
-        currentHealth = currentHealth - damage;
+        base.TakeDamage(damage, damageAnimation = "Damage_01");
+        
         enemyHealthBar.SetHealth(currentHealth);
-
         enemyAnimationManager.PlayerTargetAnimation(damageAnimation, true);
 
         if (currentHealth <= 0)
