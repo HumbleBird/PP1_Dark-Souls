@@ -13,8 +13,10 @@ public class PlayerInventory : MonoBehaviour
     public ConsumableItem currentConsumable;
 
     [Header("Current Equipment")]
-    public HelmetEquipment currentHelmetEquipment;
-    public TorsoEquipment currentTorsoEquipment;
+    public EquipmentItem currentHelmetEquipment;
+    public EquipmentItem currentTorsoEquipment;
+    public EquipmentItem currentLegEquipment;
+    public EquipmentItem currentHandEquipment;
 
     public WeaponItem unarmWeapon;
 

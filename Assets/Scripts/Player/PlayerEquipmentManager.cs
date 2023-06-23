@@ -8,12 +8,10 @@ public class PlayerEquipmentManager : MonoBehaviour
     PlayerInventory playerInventory;
 
     [Header("Equipment Model Changers")]
-    HelemtModelChanger helmetModelChanger;
-    TorsoModelChanger torsoModelChanger;
-
-    [Header("Default Naked Models")]
-    public GameObject nakedHeadMedl;
-    public string nakedTorsoModel;
+    public ModelChanger helmModelChanger;
+    public ModelChanger chestsModelChanger;
+    public ModelChanger gauntletsModelChanger;
+    public ModelChanger leggingsModelChanger;
 
     public BlockingCollider blockingCollider;
 
@@ -21,8 +19,6 @@ public class PlayerEquipmentManager : MonoBehaviour
     {
         inputHandler = GetComponentInParent<InputHandler>();
         playerInventory = GetComponentInParent<PlayerInventory>();
-        helmetModelChanger = GetComponentInChildren<HelemtModelChanger>();
-        torsoModelChanger = GetComponentInChildren<TorsoModelChanger>();
     }
 
     private void Start()
@@ -32,29 +28,24 @@ public class PlayerEquipmentManager : MonoBehaviour
 
     private void EquipAllEquipmentModelsOnStart()
     {
-        helmetModelChanger.UnEquipAllHelmetModels();
         if(playerInventory.currentHelmetEquipment != null)
         {
-            nakedHeadMedl.SetActive(false);
-
-            helmetModelChanger.EquipHelmetModelByName(playerInventory.currentHelmetEquipment.helmetModelName);
-
-        }
-        else
-        {
-            nakedHeadMedl.SetActive(true);
+            helmModelChanger.EquipEquipmentsModelByName(playerInventory.currentHelmetEquipment.itemName);
         }
 
-        torsoModelChanger.UnEquipAllTorsoModels();
-
-        if (playerInventory.currentTorsoEquipment != null)
+        if (playerInventory.currentHelmetEquipment != null)
         {
-            torsoModelChanger.EquipTorsoModelByName(playerInventory.currentTorsoEquipment.torsoModelName);
+            helmModelChanger.EquipEquipmentsModelByName(playerInventory.currentHelmetEquipment.itemName);
         }
-        else
-        {
-            torsoModelChanger.EquipTorsoModelByName(nakedTorsoModel);
 
+        if (playerInventory.currentHelmetEquipment != null)
+        {
+            helmModelChanger.EquipEquipmentsModelByName(playerInventory.currentHelmetEquipment.itemName);
+        }
+
+        if (playerInventory.currentHelmetEquipment != null)
+        {
+            helmModelChanger.EquipEquipmentsModelByName(playerInventory.currentHelmetEquipment.itemName);
         }
     }
 
