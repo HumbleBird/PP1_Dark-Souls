@@ -17,7 +17,7 @@ public class EnemyManager : CharacterManager
     public bool isPreformingAction;
     public bool isInteracting;
     public float rotationSpeed = 25f;
-    public float maximunAttackRange   = 1.5f;
+    public float MaximumAggroRadius   = 1.5f;
 
     [Header("Combat Falgs")]
     public bool candoCombo;
@@ -55,6 +55,7 @@ public class EnemyManager : CharacterManager
         isRotatingWithRootMotion = enemyAnimationManager.anim.GetBool("isRotatingWithRootMotion");
         isInteracting = enemyAnimationManager.anim.GetBool("isInteracting");
         candoCombo = enemyAnimationManager.anim.GetBool("canDoCombo");
+        canRotate = enemyAnimationManager.anim.GetBool("canRotate");
         enemyAnimationManager.anim.SetBool("isDead", enemyStatus.isDead);
     }
 
