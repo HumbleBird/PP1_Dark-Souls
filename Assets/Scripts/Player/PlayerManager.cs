@@ -149,5 +149,16 @@ public class PlayerManager : CharacterManager
         playerAnimatorManager.PlayerTargetAnimation("Open Chest", true);
     }
 
+    public void PassThroughFogWallInteraction(Transform fogWallEnterance)
+    {
+        playerLocomotion.rigidbody.velocity = Vector3.zero;
+
+        //Vector3 rotationDirection = fogWallEnterance.transform.forward;
+        //Quaternion turnRoation = Quaternion.LookRotation(rotationDirection);
+        //transform.rotation = turnRoation;
+
+        playerAnimatorManager.PlayerTargetAnimation("Pass Through Fog", true);
+    }
+
     #endregion
 }

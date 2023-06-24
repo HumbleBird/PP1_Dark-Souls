@@ -143,6 +143,17 @@ public class PlayerAnimatorManager : AnimatorManager
         playerManager.pendingCriticalDamage = 0;
     }
 
+    public void DisableCollision()
+    {
+        playerLocomotion.characterCollider.enabled = false;
+        playerLocomotion.characterCollisionBlockerCollider.enabled = false;
+    }
+
+    public void EnableCollision()
+    {
+        playerLocomotion.characterCollider.enabled = true;
+        playerLocomotion.characterCollisionBlockerCollider.enabled = true;
+    }
 
     public void OnAnimatorMove()
     {
