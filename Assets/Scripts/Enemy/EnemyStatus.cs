@@ -17,13 +17,13 @@ public class EnemyStatus : CharacterStatus
     private void Awake()
     {
         enemyAnimationManager = GetComponentInChildren<EnemyAnimationManager>();
+        currentHealth = maxHealth;
+        enemyHealthBar.SetMaxHealth(maxHealth);
     }
 
     void Start()
     {
         maxHealth = SetMaxHealthFromHealthLevel();
-        currentHealth = maxHealth;
-        enemyHealthBar.SetMaxHealth(maxHealth);
     }
 
     private int SetMaxHealthFromHealthLevel()
