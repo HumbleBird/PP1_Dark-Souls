@@ -20,4 +20,9 @@ public class EnemyBossManager : MonoBehaviour
         bossHealthBar.SetBossName(bossName);
         bossHealthBar.SetBossMaxHealth(enemyStatus.maxHealth);
     }
+
+    public void UpdateBossHealthBar(int currentHealth)
+    {
+        bossHealthBar.SetBossCurrentHealth(currentHealth);
+    }
 }
