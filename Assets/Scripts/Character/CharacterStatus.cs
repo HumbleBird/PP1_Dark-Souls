@@ -18,6 +18,13 @@ public class CharacterStatus : MonoBehaviour
 
     public int soulCount = 0;
 
+    [Header("Poise")]
+    public float totalPoiseDefence; // poise 동안의 총 방어력
+    public float offensivePosieBonus; // 무기로 공격할 때 얻을 수 있는 자세
+    public float armorPoiseBonus; // 장작 동안의 자세 보너스
+    public float totalPoiseResetTime = 15;
+    public float poiseResetTimer = 0;
+
     [Header("Armor Absorption")]
     public float physicalDamageAbsorptionHead;
     public float physicalDamageAbsorptionBody;
@@ -25,6 +32,16 @@ public class CharacterStatus : MonoBehaviour
     public float physicalDamageAbsorptionHands;
 
     public bool isDead;
+
+    protected virtual void Update()
+    {
+        HandlePoiseResetTime();
+    }
+
+    private void Start()
+    {
+        totalPoiseDefence = armorPoiseBonus;
+    }
 
     public virtual void TakeDamage(int physicalDamage, string damageAnimation = "Damage_01")
     {
@@ -51,6 +68,18 @@ public class CharacterStatus : MonoBehaviour
         {
             currentHealth = 0;
             isDead = true;
+        }
+    }
+
+    public virtual void HandlePoiseResetTime()
+    {
+        if(poiseResetTimer > 0)
+        {
+            poiseResetTimer -= Time.deltaTime;
+        }
+        else
+        {
+            totalPoiseDefence = armorPoiseBonus;
         }
     }
 }

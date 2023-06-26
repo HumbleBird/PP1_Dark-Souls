@@ -36,7 +36,7 @@ public class PlayerEquipmentManager : MonoBehaviour
         {
             helmModelChanger.EquipEquipmentsModelByName(playerInventory.currentHelmetEquipment.itemName);
             playerStatus.physicalDamageAbsorptionHead = playerInventory.currentHelmetEquipment.physicalDefense;
-            Debug.Log("Head Absorption is " + playerStatus.physicalDamageAbsorptionHead + "%");
+            //Debug.Log("Head Absorption is " + playerStatus.physicalDamageAbsorptionHead + "%");
         }
         else
         {
@@ -50,7 +50,7 @@ public class PlayerEquipmentManager : MonoBehaviour
         {
             chestsModelChanger.EquipEquipmentsModelByName(playerInventory.currentTorsoEquipment.itemName);
             playerStatus.physicalDamageAbsorptionBody = playerInventory.currentTorsoEquipment.physicalDefense;
-            Debug.Log("Torso Absorption is " + playerStatus.physicalDamageAbsorptionBody + "%");
+            //Debug.Log("Torso Absorption is " + playerStatus.physicalDamageAbsorptionBody + "%");
         }
         else
         {
@@ -64,7 +64,7 @@ public class PlayerEquipmentManager : MonoBehaviour
         {
             leggingsModelChanger.EquipEquipmentsModelByName(playerInventory.currentLegEquipment.itemName);
             playerStatus.physicalDamageAbsorptionLegs = playerInventory.currentLegEquipment.physicalDefense;
-            Debug.Log("Legs Absorption is " + playerStatus.physicalDamageAbsorptionLegs + "%");
+            //Debug.Log("Legs Absorption is " + playerStatus.physicalDamageAbsorptionLegs + "%");
         }
         else
         {
@@ -78,7 +78,7 @@ public class PlayerEquipmentManager : MonoBehaviour
         {
             gauntletsModelChanger.EquipEquipmentsModelByName(playerInventory.currentHandEquipment.itemName);
             playerStatus.physicalDamageAbsorptionHands = playerInventory.currentHandEquipment.physicalDefense;
-            Debug.Log("Hand Absorption is " + playerStatus.physicalDamageAbsorptionHands + "%");
+            //Debug.Log("Hand Absorption is " + playerStatus.physicalDamageAbsorptionHands + "%");
         }
         else
         {

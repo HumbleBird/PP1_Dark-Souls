@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0, g: 0, b: 0, a: 1}
+  m_IndirectSpecularColor: {r: 262.3369, g: 325.0498, b: 430.21924, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -420,7 +420,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 1801724383, guid: 653a26822a3e2bd409cfe25bebea931e, type: 3}
       propertyPath: lookSpeed
-      value: 0.03
+      value: 0.05
       objectReference: {fileID: 0}
     - target: {fileID: 1801724383, guid: 653a26822a3e2bd409cfe25bebea931e, type: 3}
       propertyPath: targetTransform
@@ -4711,7 +4711,7 @@ Transform:
   m_GameObject: {fileID: 1740107195}
   m_LocalRotation: {x: -0, y: 0.7071068, z: -0, w: 0.7071068}
   m_LocalPosition: {x: -19.41, y: 0, z: 2.49}
-  m_LocalScale: {x: 8.831117, y: 15.972001, z: 3}
+  m_LocalScale: {x: 8.831117, y: 15.972001, z: 0.30609}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 1830820465}
@@ -12262,6 +12262,11 @@ MonoBehaviour:
   maxfocusPoint: 0
   currentFocusPoints: 0
   soulCount: 0
+  totalPoiseDefence: 0
+  offensivePosieBonus: 0
+  armorPoiseBonus: 150
+  totalPoiseResetTime: 15
+  poiseResetTimer: 0
   physicalDamageAbsorptionHead: 0
   physicalDamageAbsorptionBody: 0
   physicalDamageAbsorptionLegs: 0
@@ -13696,6 +13701,11 @@ MonoBehaviour:
   maxfocusPoint: 0
   currentFocusPoints: 0
   soulCount: 0
+  totalPoiseDefence: 0
+  offensivePosieBonus: 0
+  armorPoiseBonus: 0
+  totalPoiseResetTime: 15
+  poiseResetTimer: 0
   physicalDamageAbsorptionHead: 0
   physicalDamageAbsorptionBody: 0
   physicalDamageAbsorptionLegs: 0
@@ -13739,7 +13749,6 @@ MonoBehaviour:
   canDoCombo: 0
   isUsingRightHand: 0
   isUsingLeftHand: 0
-  isInvulnerable: 0
 --- !u!114 &5407944597955077821
 MonoBehaviour:
   m_ObjectHideFlags: 0
