@@ -8,6 +8,7 @@ using UnityEngine;
 
 public class EnemyStatus : CharacterStatus
 {
+    EnemyManager enemyManager;
     EnemyAnimationManager enemyAnimationManager;
     EnemyBossManager enemyBossManager;
     public UIEnemyHealthBar enemyHealthBar;
@@ -17,6 +18,7 @@ public class EnemyStatus : CharacterStatus
 
     private void Awake()
     {
+        enemyManager = GetComponent<EnemyManager>();
         enemyAnimationManager = GetComponentInChildren<EnemyAnimationManager>();
         enemyBossManager = GetComponent<EnemyBossManager>();
         maxHealth = SetMaxHealthFromHealthLevel();
@@ -27,7 +29,7 @@ public class EnemyStatus : CharacterStatus
     {
         if(!isBoss)
         {
-               enemyHealthBar.SetMaxHealth(maxHealth);
+             enemyHealthBar.SetMaxHealth(maxHealth);
         }
     }
 
@@ -40,8 +42,17 @@ public class EnemyStatus : CharacterStatus
     public void TakeDamageNoAnimation(int damage)
     {
         currentHealth = currentHealth - damage;
-        enemyHealthBar.SetHealth(currentHealth);
 
+        if(!isBoss)
+        {
+            enemyHealthBar.SetHealth(currentHealth);
+
+        }
+        else if (isBoss && enemyBossManager != null)
+        {
+            enemyBossManager.UpdateBossHealthBar(currentHealth, maxHealth);
+
+        }
 
         if (currentHealth <= 0)
         {
@@ -54,13 +65,14 @@ public class EnemyStatus : CharacterStatus
     {
         base.TakeDamage(damage, damageAnimation = "Damage_01");
 
+
         if (!isBoss)
         {
             enemyHealthBar.SetHealth(currentHealth);
         }
         else if (isBoss && enemyBossManager != null)
         {
-            enemyBossManager.UpdateBossHealthBar(currentHealth);
+            enemyBossManager.UpdateBossHealthBar(currentHealth, maxHealth);
         }
 
 

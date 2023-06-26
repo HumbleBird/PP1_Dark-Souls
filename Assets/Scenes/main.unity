@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 262.3369, g: 325.0498, b: 430.21924, a: 1}
+  m_IndirectSpecularColor: {r: 0, g: 0, b: 0, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -1623,6 +1623,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   bossName: Iudex Gundyr
+  particleFX: {fileID: 4439927720934748643, guid: e25868b7ba17b274e9e920310d166022, type: 3}
 --- !u!114 &666527497
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3327,14 +3328,18 @@ MonoBehaviour:
   m_GameObject: {fileID: 1314393348}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 68b20595699525e42bf8bd9ca225252c, type: 3}
+  m_Script: {fileID: 11500000, guid: f298558148160b34e9bf57c68e90ff9c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   attackState: {fileID: 1515656211}
   enemyAttacks:
   - {fileID: 11400000, guid: af61484e425e65c47af47bb5d28da208, type: 2}
   - {fileID: 11400000, guid: b167c9d607bfa4a4ca47ae4983882dc3, type: 2}
-  pursueTargetState: {fileID: 1661784950}
+  pursueTargetState: {fileID: 0}
+  hasPhaseShifted: 0
+  secondPhaseAttacks:
+  - {fileID: 11400000, guid: 3bda78c0efeb7394491d49f8e7b3502f, type: 2}
+  - {fileID: 11400000, guid: 2d8f4b38dd758744985a8b03cbfeb013, type: 2}
 --- !u!1 &1340048980
 GameObject:
   m_ObjectHideFlags: 0
@@ -6379,6 +6384,7 @@ MonoBehaviour:
   canBeParryied: 0
   isParrying: 0
   isBlocking: 0
+  isInvulnerable: 0
   isRotatingWithRootMotion: 0
   canRotate: 0
   isFiringSpell: 0
@@ -6397,6 +6403,7 @@ MonoBehaviour:
   maximumDetectionAngle: 50
   currentRecoveryTime: 0
   allowAIToPerformCombos: 1
+  isPhaseShifting: 0
   comboLikelyHood: 100
 --- !u!33 &563483792750077213
 MeshFilter:
@@ -9411,7 +9418,7 @@ Animator:
   m_GameObject: {fileID: 2602148441213474259}
   m_Enabled: 1
   m_Avatar: {fileID: 9000000, guid: 8bbf8b7b8b5f1144ba263c0e541f0452, type: 3}
-  m_Controller: {fileID: 9100000, guid: 13e312810cdb19f42b9a16be8b0855ee, type: 2}
+  m_Controller: {fileID: 9100000, guid: 7ec74b30ee1b4544abb71c7f9462fc06, type: 2}
   m_CullingMode: 1
   m_UpdateMode: 0
   m_ApplyRootMotion: 1
@@ -13679,10 +13686,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 30cb461b5e3124146b8e8aa84f952625, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  healthLevel: 10
+  healthLevel: 1200
   maxHealth: 0
   currentHealth: 0
-  staminaLevel: 10
+  staminaLevel: 100
   maxStamina: 0
   currentStamina: 0
   focusLevel: 10
@@ -13718,6 +13725,7 @@ MonoBehaviour:
   canBeParryied: 0
   isParrying: 0
   isBlocking: 0
+  isInvulnerable: 0
   isRotatingWithRootMotion: 0
   canRotate: 0
   isFiringSpell: 0

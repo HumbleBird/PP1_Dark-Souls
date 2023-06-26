@@ -30,6 +30,7 @@ public class EnemyManager : CharacterManager
 
     [Header("A.I Combat Settings")]
     public bool allowAIToPerformCombos;
+    public bool isPhaseShifting;
     public float comboLikelyHood;
 
     private void Awake()
@@ -56,6 +57,8 @@ public class EnemyManager : CharacterManager
         isInteracting = enemyAnimationManager.anim.GetBool("isInteracting");
         candoCombo = enemyAnimationManager.anim.GetBool("canDoCombo");
         canRotate = enemyAnimationManager.anim.GetBool("canRotate");
+        isInvulnerable = enemyAnimationManager.anim.GetBool("isInvulnerable");
+        isPhaseShifting = enemyAnimationManager.anim.GetBool("isPhaseShifting");
         enemyAnimationManager.anim.SetBool("isDead", enemyStatus.isDead);
     }
 
