@@ -7,28 +7,28 @@ public class HealingSpell : SpellItem
 {
     public int healAmount;
 
-    public override void AttemptToCastSpell(PlayerAnimatorManager animatorHandler, PlayerStatus playerStatus, WeaponSlotManager weaponSlotMAnager)
+    public override void AttemptToCastSpell(PlayerAnimatorManager playerAnimatorManager, PlayerStatsManager playerStatsManager, PlayerWeaponSlotManager weaponSlotMAnager)
     {
-        base.AttemptToCastSpell(animatorHandler, playerStatus, weaponSlotMAnager);
+        base.AttemptToCastSpell(playerAnimatorManager, playerStatsManager, weaponSlotMAnager);
 
-        GameObject instantiateWarmUpSpellFX = Instantiate(spellWarmUpFX, animatorHandler.transform);
-        animatorHandler.PlayerTargetAnimation(spellAnimation, true);
+        GameObject instantiateWarmUpSpellFX = Instantiate(spellWarmUpFX, playerAnimatorManager.transform);
+        playerAnimatorManager.PlayerTargetAnimation(spellAnimation, true);
         Debug.Log("Attempting to cast Spell...");
 
 
     }
 
     public override void SuccessfullyCastSpell(
-        PlayerAnimatorManager animatorHandler,
-        PlayerStatus playerStatus,
+        PlayerAnimatorManager playerAnimatorManager,
+        PlayerStatsManager playerStatsManager,
         CameraHandler cameraHandler,
-        WeaponSlotManager weaponSlotMAnager
+        PlayerWeaponSlotManager weaponSlotMAnager
         )
     {
-        base.SuccessfullyCastSpell(animatorHandler, playerStatus,  cameraHandler, weaponSlotMAnager);
+        base.SuccessfullyCastSpell(playerAnimatorManager, playerStatsManager,  cameraHandler, weaponSlotMAnager);
 
-        GameObject instantiateSpellFX = Instantiate(spellCastFX, animatorHandler.transform);
-        playerStatus.HealPlayer(healAmount);
+        GameObject instantiateSpellFX = Instantiate(spellCastFX, playerAnimatorManager.transform);
+        playerStatsManager.HealPlayer(healAmount);
         Debug.Log("Spell cast Successfully");
     }
 }

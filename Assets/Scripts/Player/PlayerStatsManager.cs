@@ -2,25 +2,26 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class PlayerStatus : CharacterStatus
+public class PlayerStatsManager : CharacterStatsManager
 {
     PlayerManager playerManager;
 
     public HealthBar  healthBar;
     public StaminaBar staminaBar;
     public FocusPointBar focusPointBar;
-    PlayerAnimatorManager animatorHandler;
+    PlayerAnimatorManager playerAnimatorManager;
 
     public float staminaRegenerationAmount = 1;
     public float staminaRegenTimer = 0;
 
     private void Awake()
     {
-        playerManager = GetComponent<PlayerManager>();
         healthBar = FindObjectOfType<HealthBar>();
         staminaBar = FindObjectOfType<StaminaBar>();
         focusPointBar = FindObjectOfType<FocusPointBar>();
-        animatorHandler = GetComponentInChildren<PlayerAnimatorManager>();
+
+        playerAnimatorManager = GetComponent<PlayerAnimatorManager>();
+        playerManager = GetComponent<PlayerManager>();
     }
 
     void Start()
@@ -64,13 +65,13 @@ public class PlayerStatus : CharacterStatus
         base.TakeDamage(damage, damageAnimation = "Damage_01");
 
         healthBar.SetCurrentHealth(currentHealth);
-        animatorHandler.PlayerTargetAnimation(damageAnimation, true);
+        playerAnimatorManager.PlayerTargetAnimation(damageAnimation, true);
 
         if(currentHealth <= 0 )
         {
             currentHealth = 0;
             isDead = true;
-            animatorHandler.PlayerTargetAnimation("Dead_01", true);
+            playerAnimatorManager.PlayerTargetAnimation("Dead_01", true);
         }
     }
 

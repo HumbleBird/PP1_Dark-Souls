@@ -10,7 +10,7 @@ public class EnemyManager : CharacterManager
     EnemyStatus enemyStatus;
 
     public State currentState;
-    public CharacterStatus currentTarget;
+    public CharacterStatsManager currentTarget;
     public NavMeshAgent navMeshAgent;
     public Rigidbody enemyRigidbody;
 
@@ -53,13 +53,13 @@ public class EnemyManager : CharacterManager
         HandleRecoveryTimer();
         HandleStateMachine();
 
-        isRotatingWithRootMotion = enemyAnimationManager.anim.GetBool("isRotatingWithRootMotion");
-        isInteracting = enemyAnimationManager.anim.GetBool("isInteracting");
-        candoCombo = enemyAnimationManager.anim.GetBool("canDoCombo");
-        canRotate = enemyAnimationManager.anim.GetBool("canRotate");
-        isInvulnerable = enemyAnimationManager.anim.GetBool("isInvulnerable");
-        isPhaseShifting = enemyAnimationManager.anim.GetBool("isPhaseShifting");
-        enemyAnimationManager.anim.SetBool("isDead", enemyStatus.isDead);
+        isRotatingWithRootMotion = enemyAnimationManager.animator.GetBool("isRotatingWithRootMotion");
+        isInteracting = enemyAnimationManager.animator.GetBool("isInteracting");
+        candoCombo = enemyAnimationManager.animator.GetBool("canDoCombo");
+        canRotate = enemyAnimationManager.animator.GetBool("canRotate");
+        isInvulnerable = enemyAnimationManager.animator.GetBool("isInvulnerable");
+        isPhaseShifting = enemyAnimationManager.animator.GetBool("isPhaseShifting");
+        enemyAnimationManager.animator.SetBool("isDead", enemyStatus.isDead);
     }
 
     private void LateUpdate()

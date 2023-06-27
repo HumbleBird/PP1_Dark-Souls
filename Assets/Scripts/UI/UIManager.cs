@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class UIManager : MonoBehaviour
 {
-    public PlayerInventory playerInventory;
+    public PlayerInventoryManager playerInventoryManager;
     public EquipmentWindowUI equipmentWindowUI;
 
 
@@ -27,13 +27,13 @@ public class UIManager : MonoBehaviour
 
     private void Awake()
     {
-        playerInventory = FindObjectOfType<PlayerInventory>();
+        playerInventoryManager = FindObjectOfType<PlayerInventoryManager>();
     }
 
     private void Start()
     {
         weaponInventorySlots = weaponInventorySlotsParent.GetComponentsInChildren<WeaponInventorySlot>();
-        equipmentWindowUI.LoadWeaponsOnEquipmentScreen(playerInventory);
+        equipmentWindowUI.LoadWeaponsOnEquipmentScreen(playerInventoryManager);
     }
 
     public void UpdateUI()
@@ -42,14 +42,14 @@ public class UIManager : MonoBehaviour
 
         for (int i = 0; i < weaponInventorySlots.Length; i++)
         {
-            if(i < playerInventory.weaponsInventory.Count)
+            if(i < playerInventoryManager.weaponsInventory.Count)
             {
-                if(weaponInventorySlots.Length < playerInventory.weaponsInventory.Count)
+                if(weaponInventorySlots.Length < playerInventoryManager.weaponsInventory.Count)
                 {
                     Instantiate(weaponInventorySlotPrefab, weaponInventorySlotsParent);
                     weaponInventorySlots = weaponInventorySlotsParent.GetComponentsInChildren<WeaponInventorySlot>();
                 }
-                weaponInventorySlots[i].AddItem(playerInventory.weaponsInventory[i]);
+                weaponInventorySlots[i].AddItem(playerInventoryManager.weaponsInventory[i]);
             }
             else
             {

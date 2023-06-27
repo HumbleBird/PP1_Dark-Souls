@@ -20,7 +20,7 @@ public class IdleState : State
 
         for (int i = 0; i < colliders.Length; i++)
         {
-            CharacterStatus characterStatus = colliders[i].transform.GetComponent<CharacterStatus>();
+            CharacterStatsManager characterStatus = colliders[i].transform.GetComponent<CharacterStatsManager>();
 
             if (characterStatus != null)
             {

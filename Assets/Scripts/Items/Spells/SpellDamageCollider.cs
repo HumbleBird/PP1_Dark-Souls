@@ -10,7 +10,7 @@ public class SpellDamageCollider : DamageCollider
 
     bool hasColliede = false;
 
-    CharacterStatus spellTarget;
+    CharacterStatsManager spellTarget;
     Rigidbody rigidBody;
 
     Vector3 impactNormal; //Used to rotate the impact particles
@@ -39,7 +39,7 @@ public class SpellDamageCollider : DamageCollider
 
         if (!hasColliede)
         {
-            spellTarget = collision.transform.GetComponent<CharacterStatus>();
+            spellTarget = collision.transform.GetComponent<CharacterStatsManager>();
 
             // 자꾸 플레이어 손에서 터져서 임시로 넣음
             if (collision.gameObject.tag == "Player")

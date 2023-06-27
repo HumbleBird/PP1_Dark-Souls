@@ -5,19 +5,21 @@ using UnityEngine;
 public class PlayerAnimatorManager : AnimatorManager
 {
     PlayerManager playerManager;
-    PlayerStatus playerStatus;
+    PlayerStatsManager playerStatsManager;
     InputHandler inputHandler;
-    PlayerLocomotion playerLocomotion;
+    PlayerLocomotionManager playerLocomotionManager;
     int vertical;
     int horizontal;
 
     public void Initialize()
     {
-        playerManager = GetComponentInParent<PlayerManager>();
-        playerStatus = GetComponentInParent<PlayerStatus>();
-        anim = GetComponent<Animator>();
-        inputHandler = GetComponentInParent<InputHandler>();
-        playerLocomotion = GetComponentInParent<PlayerLocomotion>();
+        playerManager = GetComponent<PlayerManager>();
+        playerStatsManager = GetComponent<PlayerStatsManager>();
+        inputHandler = GetComponent<InputHandler>();
+        playerLocomotionManager = GetComponent<PlayerLocomotionManager>();
+
+        animator = GetComponentInChildren<Animator>();
+
         vertical = Animator.StringToHash("Vertical");
         horizontal = Animator.StringToHash("Horizontal");
     }
@@ -81,39 +83,39 @@ public class PlayerAnimatorManager : AnimatorManager
             h = horizontalAmount;
         }
 
-        anim.SetFloat("Vertical", v, 0.1f, Time.deltaTime);
-        anim.SetFloat("Horizontal", h, 0.1f, Time.deltaTime);
+        animator.SetFloat("Vertical", v, 0.1f, Time.deltaTime);
+        animator.SetFloat("Horizontal", h, 0.1f, Time.deltaTime);
     }
 
     public  void CanRotate()
     {
-        anim.SetBool("canRotate", true);
+        animator.SetBool("canRotate", true);
     }
 
     public  void StopRotation()
     {
-        anim.SetBool("canRotate", false);
+        animator.SetBool("canRotate", false);
     }
 
     public void EnableCombo()
     {
-        anim.SetBool("canDoCombo", true);
+        animator.SetBool("canDoCombo", true);
     }
 
     public void DisableCombo()
     {
-        anim.SetBool("canDoCombo", false);
+        animator.SetBool("canDoCombo", false);
 
     }
 
     public void EnableIsInvulnerable()
     {
-        anim.SetBool("isInvulnerable", true);
+        animator.SetBool("isInvulnerable", true);
     }
     
     public void DisableIsInvulnerable()
     {
-        anim.SetBool("isInvulnerable", false);
+        animator.SetBool("isInvulnerable", false);
 
     }
 
@@ -139,20 +141,20 @@ public class PlayerAnimatorManager : AnimatorManager
 
     public override void TakeCriticalDamageAnimationEvent()
     {
-        playerStatus.TakeDamageNoAnimation(playerManager.pendingCriticalDamage);
+        playerStatsManager.TakeDamageNoAnimation(playerManager.pendingCriticalDamage);
         playerManager.pendingCriticalDamage = 0;
     }
 
     public void DisableCollision()
     {
-        playerLocomotion.characterCollider.enabled = false;
-        playerLocomotion.characterCollisionBlockerCollider.enabled = false;
+        playerLocomotionManager.characterCollider.enabled = false;
+        playerLocomotionManager.characterCollisionBlockerCollider.enabled = false;
     }
 
     public void EnableCollision()
     {
-        playerLocomotion.characterCollider.enabled = true;
-        playerLocomotion.characterCollisionBlockerCollider.enabled = true;
+        playerLocomotionManager.characterCollider.enabled = true;
+        playerLocomotionManager.characterCollisionBlockerCollider.enabled = true;
     }
 
     public void OnAnimatorMove()
@@ -161,11 +163,11 @@ public class PlayerAnimatorManager : AnimatorManager
             return;
 
         float delta = Time.deltaTime;
-        playerLocomotion.rigidbody.drag = 0;
-        Vector3 deltaPosition = anim.deltaPosition;
+        playerLocomotionManager.rigidbody.drag = 0;
+        Vector3 deltaPosition = animator.deltaPosition;
         deltaPosition.y = 0;
         Vector3 velocity = deltaPosition / delta;
-        playerLocomotion.rigidbody.velocity = velocity;
+        playerLocomotionManager.rigidbody.velocity = velocity;
 
     }
 }

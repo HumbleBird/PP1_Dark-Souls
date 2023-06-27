@@ -5,11 +5,11 @@ using UnityEngine;
 public class PlayerManager : CharacterManager
 {
     InputHandler inputHandler;
-    Animator anim;
+    Animator animator;
     CameraHandler cameraHandler;
-    PlayerStatus playerStatus;
+    PlayerStatsManager playerStatsManager;
     PlayerAnimatorManager playerAnimatorManager;
-    PlayerLocomotion playerLocomotion;
+    PlayerLocomotionManager playerLocomotionManager;
 
     InteractableUI interactableUI;
     public GameObject interactableUIGameObject;
@@ -28,13 +28,16 @@ public class PlayerManager : CharacterManager
     private void Awake()
     {
         backStabCollider = GetComponentInChildren<CriticalDamageCollider>();
-        cameraHandler = FindObjectOfType<CameraHandler>();
-        inputHandler = GetComponent<InputHandler>();
-        playerAnimatorManager = GetComponentInChildren<PlayerAnimatorManager>();
 
-        playerStatus = GetComponent<PlayerStatus>();
-        anim = GetComponentInChildren<Animator>();
-        playerLocomotion = GetComponent<PlayerLocomotion>();
+        cameraHandler = FindObjectOfType<CameraHandler>();
+
+        inputHandler = GetComponent<InputHandler>();
+        playerAnimatorManager = GetComponent<PlayerAnimatorManager>();
+        playerLocomotionManager = GetComponent<PlayerLocomotionManager>();
+        playerStatsManager = GetComponent<PlayerStatsManager>();
+
+        animator = GetComponentInChildren<Animator>();
+
         interactableUI = FindObjectOfType<InteractableUI>();
     }
 
@@ -43,22 +46,22 @@ public class PlayerManager : CharacterManager
     {
         float delta = Time.deltaTime;
 
-        isInteracting = anim.GetBool("isInteracting");
-        canDoCombo = anim.GetBool("canDoCombo");
-        isUsingRightHand = anim.GetBool("isUsingRightHand");
-        isUsingLeftHand = anim.GetBool("isUsingLeftHand");
-        isInvulnerable = anim.GetBool("isInvulnerable");
-        isFiringSpell = anim.GetBool("isFiringSpell");
+        isInteracting = animator.GetBool("isInteracting");
+        canDoCombo = animator.GetBool("canDoCombo");
+        isUsingRightHand = animator.GetBool("isUsingRightHand");
+        isUsingLeftHand = animator.GetBool("isUsingLeftHand");
+        isInvulnerable = animator.GetBool("isInvulnerable");
+        isFiringSpell = animator.GetBool("isFiringSpell");
 
-        anim.SetBool("isBlocking", isBlocking);
-        anim.SetBool("isInAir", isInAir);
-        anim.SetBool("isDead", playerStatus.isDead);
+        animator.SetBool("isBlocking", isBlocking);
+        animator.SetBool("isInAir", isInAir);
+        animator.SetBool("isDead", playerStatsManager.isDead);
 
         inputHandler.TickInput(delta);
-        playerAnimatorManager.canRotate = anim.GetBool("canRotate");
-        playerLocomotion.HandleRollingAndSprinting(delta);
-        playerLocomotion.HandleJumping();
-        playerStatus.RegenerateStamina();
+        playerAnimatorManager.canRotate = animator.GetBool("canRotate");
+        playerLocomotionManager.HandleRollingAndSprinting(delta);
+        playerLocomotionManager.HandleJumping();
+        playerStatsManager.RegenerateStamina();
 
         CheckForInteractableObject();
     }
@@ -69,9 +72,9 @@ public class PlayerManager : CharacterManager
         float delta = Time.fixedDeltaTime;
 
 
-        playerLocomotion.HandleFalling(delta, playerLocomotion.moveDirection);
-        playerLocomotion.HandleMovement(delta);
-        playerLocomotion.HandleRotation(delta);
+        playerLocomotionManager.HandleFalling(delta, playerLocomotionManager.moveDirection);
+        playerLocomotionManager.HandleMovement(delta);
+        playerLocomotionManager.HandleRotation(delta);
     }
 
     private void LateUpdate()
@@ -98,7 +101,7 @@ public class PlayerManager : CharacterManager
 
         if (isInAir)
         {
-            playerLocomotion.inAirTimer += Time.deltaTime;
+            playerLocomotionManager.inAirTimer += Time.deltaTime;
         }
     }
 
@@ -143,14 +146,14 @@ public class PlayerManager : CharacterManager
 
     public void OpenChestInteraction(Transform playerStandingHereWhenOpingChest)
     {
-        playerLocomotion.rigidbody.velocity = Vector3.zero;
+        playerLocomotionManager.rigidbody.velocity = Vector3.zero;
         transform.position = playerStandingHereWhenOpingChest.transform.position;
         playerAnimatorManager.PlayerTargetAnimation("Open Chest", true);
     }
 
     public void PassThroughFogWallInteraction(Transform fogWallEnterance)
     {
-        playerLocomotion.rigidbody.velocity = Vector3.zero;
+        playerLocomotionManager.rigidbody.velocity = Vector3.zero;
 
         //Vector3 rotationDirection = fogWallEnterance.transform.forward;
         //Quaternion turnRoation = Quaternion.LookRotation(rotationDirection);

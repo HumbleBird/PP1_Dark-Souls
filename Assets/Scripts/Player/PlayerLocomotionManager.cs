@@ -2,11 +2,11 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class PlayerLocomotion : MonoBehaviour
+public class PlayerLocomotionManager : MonoBehaviour
 {
     CameraHandler cameraHandler;
     PlayerManager playerManager;
-    PlayerStatus playerStatus;
+    PlayerStatsManager playerStatsManager;
     Transform cameraObject;
     InputHandler inputHandler;
     public Vector3 moveDirection;
@@ -14,10 +14,10 @@ public class PlayerLocomotion : MonoBehaviour
     [HideInInspector]
     public Transform myTransform;
     [HideInInspector]
-    public PlayerAnimatorManager animatorHandler;
+    public PlayerAnimatorManager playerAnimatorManager;
 
     public new Rigidbody rigidbody;
-    public GameObject normalCamera;
+    //public GameObject normalCamera;
 
     [Header("Ground & Air Ditections States")]
     [SerializeField]
@@ -57,10 +57,10 @@ public class PlayerLocomotion : MonoBehaviour
     {
         cameraHandler = FindObjectOfType<CameraHandler>();
         playerManager = GetComponent<PlayerManager>();
-        playerStatus = GetComponent<PlayerStatus>();
+        playerStatsManager = GetComponent<PlayerStatsManager>();
         rigidbody = GetComponent<Rigidbody>();
         inputHandler = GetComponent<InputHandler>();
-        animatorHandler = GetComponentInChildren<PlayerAnimatorManager>();
+        playerAnimatorManager = GetComponent<PlayerAnimatorManager>();
         
     }
 
@@ -69,7 +69,7 @@ public class PlayerLocomotion : MonoBehaviour
 
         cameraObject = Camera.main.transform;
         myTransform = transform;
-        animatorHandler.Initialize();
+        playerAnimatorManager.Initialize();
 
         playerManager.isGrounded = true;
         ignoreForGroundCheck = ~(1 << 8 | 1 << 10);
@@ -82,7 +82,7 @@ public class PlayerLocomotion : MonoBehaviour
     public void HandleRotation(float delta)
     {
 
-        if (animatorHandler.canRotate)
+        if (playerAnimatorManager.canRotate)
         {
 
             if (inputHandler.lockOnFlag)
@@ -166,7 +166,7 @@ public class PlayerLocomotion : MonoBehaviour
             speed = sprintSpeed;
             playerManager.isSprinting = true;
             moveDirection *= speed;
-            playerStatus.TakeStaminsDamage(sprintStaminaCost);
+            playerStatsManager.TakeStaminsDamage(sprintStaminaCost);
         }
         else
         {
@@ -188,11 +188,11 @@ public class PlayerLocomotion : MonoBehaviour
 
         if(inputHandler.lockOnFlag && inputHandler.sprintFlag == false)
         {
-            animatorHandler.UpdateAnimatorValues(inputHandler.moveAmount, inputHandler.horizontal, playerManager.isSprinting);
+            playerAnimatorManager.UpdateAnimatorValues(inputHandler.moveAmount, inputHandler.horizontal, playerManager.isSprinting);
         }
         else
         {
-            animatorHandler.UpdateAnimatorValues(inputHandler.moveAmount, 0, playerManager.isSprinting);
+            playerAnimatorManager.UpdateAnimatorValues(inputHandler.moveAmount, 0, playerManager.isSprinting);
         }
 
 
@@ -200,10 +200,10 @@ public class PlayerLocomotion : MonoBehaviour
 
     public void HandleRollingAndSprinting(float delta)
     {
-        if (animatorHandler.anim.GetBool("isInteracting"))
+        if (playerAnimatorManager.animator.GetBool("isInteracting"))
             return;
 
-        if (playerStatus.currentStamina <= 0)
+        if (playerStatsManager.currentStamina <= 0)
             return; 
 
         if (inputHandler.rollFlag)
@@ -213,16 +213,16 @@ public class PlayerLocomotion : MonoBehaviour
 
             if (inputHandler.moveAmount > 0)
             {
-                animatorHandler.PlayerTargetAnimation("Rolling", true);
+                playerAnimatorManager.PlayerTargetAnimation("Rolling", true);
                 moveDirection.y = 0;
                 Quaternion rollRotation = Quaternion.LookRotation(moveDirection);
                 myTransform.rotation = rollRotation;
-                playerStatus.TakeStaminsDamage(rollStaminaCost);
+                playerStatsManager.TakeStaminsDamage(rollStaminaCost);
             }
             else
             {
-                animatorHandler.PlayerTargetAnimation("BackStep", true);
-                playerStatus.TakeStaminsDamage(backstepStaminaCost);
+                playerAnimatorManager.PlayerTargetAnimation("BackStep", true);
+                playerStatsManager.TakeStaminsDamage(backstepStaminaCost);
 
             }
 
@@ -266,12 +266,12 @@ public class PlayerLocomotion : MonoBehaviour
                 if(inAirTimer > 0.5)
                 {
                     Debug.Log("YOu were in the air for " + inAirTimer);
-                    animatorHandler.PlayerTargetAnimation("Land", true);
+                    playerAnimatorManager.PlayerTargetAnimation("Land", true);
                     inAirTimer = 0;
                 }
                 else
                 {
-                    animatorHandler.PlayerTargetAnimation("Empty", false);
+                    playerAnimatorManager.PlayerTargetAnimation("Empty", false);
                     inAirTimer = 0;
                 }
 
@@ -289,7 +289,7 @@ public class PlayerLocomotion : MonoBehaviour
             {
                 if(playerManager.isInteracting == false)
                 {
-                    animatorHandler.PlayerTargetAnimation("Falling", true);
+                    playerAnimatorManager.PlayerTargetAnimation("Falling", true);
                 }
 
                 Vector3 vel = rigidbody.velocity;
@@ -318,7 +318,7 @@ public class PlayerLocomotion : MonoBehaviour
             return;
 
 
-        if (playerStatus.currentStamina <= 0)
+        if (playerStatsManager.currentStamina <= 0)
             return;
 
         if (inputHandler.jump_Input)
@@ -327,7 +327,7 @@ public class PlayerLocomotion : MonoBehaviour
             {
                 moveDirection = cameraObject.forward * inputHandler.vertical;
                 moveDirection += cameraObject.right * inputHandler.horizontal;
-                animatorHandler.PlayerTargetAnimation("Jump", true);
+                playerAnimatorManager.PlayerTargetAnimation("Jump", true);
                 moveDirection.y = 0;
                 Quaternion jumpRotation = Quaternion.LookRotation(moveDirection);
                 myTransform.rotation = jumpRotation;

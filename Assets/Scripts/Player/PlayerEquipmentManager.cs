@@ -5,8 +5,8 @@ using UnityEngine;
 public class PlayerEquipmentManager : MonoBehaviour
 {
     InputHandler inputHandler;
-    PlayerInventory playerInventory;
-    PlayerStatus playerStatus;
+    PlayerInventoryManager playerInventoryManager;
+    PlayerStatsManager playerStatsManager;
 
     [Header("Equipment Model Changers")]
     public ModelChanger helmModelChanger;
@@ -18,9 +18,9 @@ public class PlayerEquipmentManager : MonoBehaviour
 
     private void Awake()
     {
-        inputHandler = GetComponentInParent<InputHandler>();
-        playerInventory = GetComponentInParent<PlayerInventory>();
-        playerStatus = GetComponentInParent<PlayerStatus>();
+        inputHandler = GetComponent<InputHandler>();
+        playerInventoryManager = GetComponent<PlayerInventoryManager>();
+        playerStatsManager = GetComponent<PlayerStatsManager>();
 
     }
 
@@ -32,59 +32,59 @@ public class PlayerEquipmentManager : MonoBehaviour
     private void EquipAllEquipmentModelsOnStart()
     {
         // Helm
-        if(playerInventory.currentHelmetEquipment != null)
+        if(playerInventoryManager.currentHelmetEquipment != null)
         {
-            helmModelChanger.EquipEquipmentsModelByName(playerInventory.currentHelmetEquipment.itemName);
-            playerStatus.physicalDamageAbsorptionHead = playerInventory.currentHelmetEquipment.physicalDefense;
-            //Debug.Log("Head Absorption is " + playerStatus.physicalDamageAbsorptionHead + "%");
+            helmModelChanger.EquipEquipmentsModelByName(playerInventoryManager.currentHelmetEquipment.itemName);
+            playerStatsManager.physicalDamageAbsorptionHead = playerInventoryManager.currentHelmetEquipment.physicalDefense;
+            //Debug.Log("Head Absorption is " + playerStatsManager.physicalDamageAbsorptionHead + "%");
         }
         else
         {
             //helmModelChanger.EquipEquipmentsModelByName(Naked_Helm);
-            helmModelChanger.UnEquipEquipmentsModelByName(playerInventory.currentHelmetEquipment.itemName);
-            playerStatus.physicalDamageAbsorptionHead = 0;
+            helmModelChanger.UnEquipEquipmentsModelByName(playerInventoryManager.currentHelmetEquipment.itemName);
+            playerStatsManager.physicalDamageAbsorptionHead = 0;
         }
 
         // Torso
-        if (playerInventory.currentTorsoEquipment != null)
+        if (playerInventoryManager.currentTorsoEquipment != null)
         {
-            chestsModelChanger.EquipEquipmentsModelByName(playerInventory.currentTorsoEquipment.itemName);
-            playerStatus.physicalDamageAbsorptionBody = playerInventory.currentTorsoEquipment.physicalDefense;
-            //Debug.Log("Torso Absorption is " + playerStatus.physicalDamageAbsorptionBody + "%");
+            chestsModelChanger.EquipEquipmentsModelByName(playerInventoryManager.currentTorsoEquipment.itemName);
+            playerStatsManager.physicalDamageAbsorptionBody = playerInventoryManager.currentTorsoEquipment.physicalDefense;
+            //Debug.Log("Torso Absorption is " + playerStatsManager.physicalDamageAbsorptionBody + "%");
         }
         else
         {
             //helmModelChanger.EquipEquipmentsModelByName(Naked_Helm);
-            chestsModelChanger.UnEquipEquipmentsModelByName(playerInventory.currentTorsoEquipment.itemName);
-            playerStatus.physicalDamageAbsorptionBody = 0;
+            chestsModelChanger.UnEquipEquipmentsModelByName(playerInventoryManager.currentTorsoEquipment.itemName);
+            playerStatsManager.physicalDamageAbsorptionBody = 0;
         }
 
         // Legs
-        if (playerInventory.currentLegEquipment != null)
+        if (playerInventoryManager.currentLegEquipment != null)
         {
-            leggingsModelChanger.EquipEquipmentsModelByName(playerInventory.currentLegEquipment.itemName);
-            playerStatus.physicalDamageAbsorptionLegs = playerInventory.currentLegEquipment.physicalDefense;
-            //Debug.Log("Legs Absorption is " + playerStatus.physicalDamageAbsorptionLegs + "%");
+            leggingsModelChanger.EquipEquipmentsModelByName(playerInventoryManager.currentLegEquipment.itemName);
+            playerStatsManager.physicalDamageAbsorptionLegs = playerInventoryManager.currentLegEquipment.physicalDefense;
+            //Debug.Log("Legs Absorption is " + playerStatsManager.physicalDamageAbsorptionLegs + "%");
         }
         else
         {
             //helmModelChanger.EquipEquipmentsModelByName(Naked_Helm);
-            leggingsModelChanger.UnEquipEquipmentsModelByName(playerInventory.currentLegEquipment.itemName);
-            playerStatus.physicalDamageAbsorptionLegs = 0;
+            leggingsModelChanger.UnEquipEquipmentsModelByName(playerInventoryManager.currentLegEquipment.itemName);
+            playerStatsManager.physicalDamageAbsorptionLegs = 0;
         }
 
         // Hands
-        if (playerInventory.currentHandEquipment != null)
+        if (playerInventoryManager.currentHandEquipment != null)
         {
-            gauntletsModelChanger.EquipEquipmentsModelByName(playerInventory.currentHandEquipment.itemName);
-            playerStatus.physicalDamageAbsorptionHands = playerInventory.currentHandEquipment.physicalDefense;
-            //Debug.Log("Hand Absorption is " + playerStatus.physicalDamageAbsorptionHands + "%");
+            gauntletsModelChanger.EquipEquipmentsModelByName(playerInventoryManager.currentHandEquipment.itemName);
+            playerStatsManager.physicalDamageAbsorptionHands = playerInventoryManager.currentHandEquipment.physicalDefense;
+            //Debug.Log("Hand Absorption is " + playerStatsManager.physicalDamageAbsorptionHands + "%");
         }
         else
         {
             //helmModelChanger.EquipEquipmentsModelByName(Naked_Helm);
-            gauntletsModelChanger.UnEquipEquipmentsModelByName(playerInventory.currentHandEquipment.itemName);
-            playerStatus.physicalDamageAbsorptionHands = 0;
+            gauntletsModelChanger.UnEquipEquipmentsModelByName(playerInventoryManager.currentHandEquipment.itemName);
+            playerStatsManager.physicalDamageAbsorptionHands = 0;
         }
     }
 
@@ -92,11 +92,11 @@ public class PlayerEquipmentManager : MonoBehaviour
     {
         if(inputHandler.twoHandFlag)
         {
-            blockingCollider.SetColliderDamageAbsorption(playerInventory.rightWeapon);
+            blockingCollider.SetColliderDamageAbsorption(playerInventoryManager.rightWeapon);
         }
         else
         {
-            blockingCollider.SetColliderDamageAbsorption(playerInventory.leftWeapon);
+            blockingCollider.SetColliderDamageAbsorption(playerInventoryManager.leftWeapon);
         }
 
         blockingCollider.EnableBlockingCollider();

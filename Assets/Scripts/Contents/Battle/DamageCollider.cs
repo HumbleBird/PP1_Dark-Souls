@@ -38,7 +38,7 @@ public class DamageCollider : MonoBehaviour
     {
         if (other.tag == "Player")
         {
-            PlayerStatus playerStatus = other.GetComponent<PlayerStatus>();
+            PlayerStatsManager playerStatsManager = other.GetComponent<PlayerStatsManager>();
             CharacterManager enemyCharacterManager = other.GetComponent<CharacterManager>();
             BlockingCollider shield = other.GetComponentInChildren<BlockingCollider>();
 
@@ -54,28 +54,28 @@ public class DamageCollider : MonoBehaviour
                     float physicalDamageAfterBlock =
                         currentWeaponDamage - (currentWeaponDamage * shield.blockingPhysicalDamageAbsorption) / 100;
 
-                    if (playerStatus != null)
+                    if (playerStatsManager != null)
                     {
-                        playerStatus.TakeDamage(Mathf.RoundToInt(physicalDamageAfterBlock), "Block Guard");
+                        playerStatsManager.TakeDamage(Mathf.RoundToInt(physicalDamageAfterBlock), "Block Guard");
                         return;
                     }
 
                 }
             }
 
-            if (playerStatus != null)
+            if (playerStatsManager != null)
             {
-                playerStatus.poiseResetTimer = playerStatus.totalPoiseResetTime;
-                playerStatus.totalPoiseDefence = playerStatus.totalPoiseDefence - poiseBreak;
-                Debug.Log("Player's Poise is currently " + playerStatus.totalPoiseResetTime);
+                playerStatsManager.poiseResetTimer = playerStatsManager.totalPoiseResetTime;
+                playerStatsManager.totalPoiseDefence = playerStatsManager.totalPoiseDefence - poiseBreak;
+                Debug.Log("Player's Poise is currently " + playerStatsManager.totalPoiseResetTime);
 
-                if (playerStatus.totalPoiseDefence > poiseBreak)
+                if (playerStatsManager.totalPoiseDefence > poiseBreak)
                 {
-                    playerStatus.TakeDamageNoAnimation(currentWeaponDamage);
+                    playerStatsManager.TakeDamageNoAnimation(currentWeaponDamage);
                 }
                 else
                 {
-                    playerStatus.TakeDamage(currentWeaponDamage);
+                    playerStatsManager.TakeDamage(currentWeaponDamage);
                 }
             }
         }

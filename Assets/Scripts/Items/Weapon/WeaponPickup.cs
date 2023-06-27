@@ -17,17 +17,17 @@ public class WeaponPickup : Interactable
 
     private void PickUpItem(PlayerManager playerManager)
     {
-        PlayerInventory playerInventory;
-        PlayerLocomotion playerLocomotion;
-        PlayerAnimatorManager animatorHandler;
+        PlayerInventoryManager playerInventoryManager;
+        PlayerLocomotionManager playerLocomotionManager;
+        PlayerAnimatorManager playerAnimatorManager;
 
-        playerInventory = playerManager.GetComponent<PlayerInventory>();
-        playerLocomotion = playerManager.GetComponent<PlayerLocomotion>();
-        animatorHandler = playerManager.GetComponentInChildren<PlayerAnimatorManager>();
+        playerInventoryManager = playerManager.GetComponent<PlayerInventoryManager>();
+        playerLocomotionManager = playerManager.GetComponent<PlayerLocomotionManager>();
+        playerAnimatorManager = playerManager.GetComponentInChildren<PlayerAnimatorManager>();
 
-        playerLocomotion.rigidbody.velocity = Vector3.zero;
-        animatorHandler.PlayerTargetAnimation("Pick Up Item", true);
-        playerInventory.weaponsInventory.Add(weapon);
+        playerLocomotionManager.rigidbody.velocity = Vector3.zero;
+        playerAnimatorManager.PlayerTargetAnimation("Pick Up Item", true);
+        playerInventoryManager.weaponsInventory.Add(weapon);
 
         playerManager.itemInteractableUIGameObject.SetActive(true);
         playerManager.itemInteractableUIGameObject.GetComponentInChildren<TextMeshProUGUI>().text = weapon.itemName;

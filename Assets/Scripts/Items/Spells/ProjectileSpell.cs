@@ -16,26 +16,26 @@ public class ProjectileSpell : SpellItem
     Rigidbody rigidBody;
 
     public override void AttemptToCastSpell(
-        PlayerAnimatorManager animatorHandler, 
-        PlayerStatus playerStatus, 
-        WeaponSlotManager weaponSlotMAnager)
+        PlayerAnimatorManager playerAnimatorManager, 
+        PlayerStatsManager playerStatsManager, 
+        PlayerWeaponSlotManager weaponSlotMAnager)
     {
-        base.AttemptToCastSpell(animatorHandler, playerStatus, weaponSlotMAnager);
+        base.AttemptToCastSpell(playerAnimatorManager, playerStatsManager, weaponSlotMAnager);
 
         GameObject instantiatedWarmUpSellFX = Instantiate(spellWarmUpFX, weaponSlotMAnager.rightHandSlot.transform);
         instantiatedWarmUpSellFX.gameObject.transform.localScale = new Vector3(100, 100, 100);
-        animatorHandler.PlayerTargetAnimation(spellAnimation, true);
+        playerAnimatorManager.PlayerTargetAnimation(spellAnimation, true);
     }
 
     public override void SuccessfullyCastSpell(
-        PlayerAnimatorManager animatorHandler, 
-        PlayerStatus playerStatus, 
+        PlayerAnimatorManager playerAnimatorManager, 
+        PlayerStatsManager playerStatsManager, 
         CameraHandler cameraHandler,
-        WeaponSlotManager weaponSlotManager
+        PlayerWeaponSlotManager playerWeaponSlotManager
         )
     {
-        base.SuccessfullyCastSpell(animatorHandler, playerStatus, cameraHandler, weaponSlotManager);
-        GameObject instantiatedSpellFX = Instantiate(spellCastFX, weaponSlotManager.rightHandSlot.transform.position, cameraHandler.cameraPivotTranform.rotation);
+        base.SuccessfullyCastSpell(playerAnimatorManager, playerStatsManager, cameraHandler, playerWeaponSlotManager);
+        GameObject instantiatedSpellFX = Instantiate(spellCastFX, playerWeaponSlotManager.rightHandSlot.transform.position, cameraHandler.cameraPivotTranform.rotation);
         rigidBody = instantiatedSpellFX.GetComponent<Rigidbody>();
         //spellDamageCollider = instantiatedSpellFX.GetComponent<SpellDamageCollider>();
 
@@ -45,7 +45,7 @@ public class ProjectileSpell : SpellItem
         }
         else
         {
-            instantiatedSpellFX.transform.rotation = Quaternion.Euler(cameraHandler.cameraPivotTranform.eulerAngles.x, playerStatus.transform.eulerAngles.y, 0);
+            instantiatedSpellFX.transform.rotation = Quaternion.Euler(cameraHandler.cameraPivotTranform.eulerAngles.x, playerStatsManager.transform.eulerAngles.y, 0);
         }
 
         rigidBody.AddForce(instantiatedSpellFX.transform.forward * projectileForwardVelocity);

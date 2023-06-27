@@ -8,8 +8,8 @@ public class RotateTowardsTargetState : State
 
     public override State Tick(EnemyManager enemyManager, EnemyStatus enemyStates, EnemyAnimationManager enemyAnimationManager)
     {
-        enemyAnimationManager.anim.SetFloat("Vertical", 0);
-        enemyAnimationManager.anim.SetFloat("Horizontal", 0);
+        enemyAnimationManager.animator.SetFloat("Vertical", 0);
+        enemyAnimationManager.animator.SetFloat("Horizontal", 0);
 
         Vector3 targetDirection = enemyManager.currentTarget.transform.position - enemyManager.transform.position;
         float viewableAngle = Vector3.SignedAngle(targetDirection, enemyManager.transform.forward, Vector3.up);

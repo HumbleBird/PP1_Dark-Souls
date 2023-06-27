@@ -15,25 +15,25 @@ public class EquipmentWindowUI : MonoBehaviour
     {
     }
 
-    public void LoadWeaponsOnEquipmentScreen(PlayerInventory playerInventory)
+    public void LoadWeaponsOnEquipmentScreen(PlayerInventoryManager playerInventoryManager)
     {
         for (int i = 0; i < handEquipmentSlotUI.Length; i++)
         {
             if(handEquipmentSlotUI[i].rightHandSlot01)
             {
-                handEquipmentSlotUI[i].AddItem(playerInventory.weaponsInRightHandSlots[0]);
+                handEquipmentSlotUI[i].AddItem(playerInventoryManager.weaponsInRightHandSlots[0]);
             }
             else if (handEquipmentSlotUI[i].rightHandSlot02)
             {
-                handEquipmentSlotUI[i].AddItem(playerInventory.weaponsInRightHandSlots[1]);
+                handEquipmentSlotUI[i].AddItem(playerInventoryManager.weaponsInRightHandSlots[1]);
             }
             else if (handEquipmentSlotUI[i].leftHandSlot01)
             {
-                handEquipmentSlotUI[i].AddItem(playerInventory.weaponsInLeftHandSlots[0]);
+                handEquipmentSlotUI[i].AddItem(playerInventoryManager.weaponsInLeftHandSlots[0]);
             }
             else
             {
-                handEquipmentSlotUI[i].AddItem(playerInventory.weaponsInLeftHandSlots[1]);
+                handEquipmentSlotUI[i].AddItem(playerInventoryManager.weaponsInLeftHandSlots[1]);
             }
         }   
     }

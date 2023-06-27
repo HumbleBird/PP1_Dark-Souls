@@ -25,13 +25,13 @@ public class PursueTargetState : State
 
         if (enemyManager.isPreformingAction)
         {
-            enemyAnimationManager.anim.SetFloat("Vertical", 0, 0.1f, Time.deltaTime);
+            enemyAnimationManager.animator.SetFloat("Vertical", 0, 0.1f, Time.deltaTime);
             return this;
         }
 
         if (distancefromTarget > enemyManager.MaximumAggroRadius)
         {
-            enemyAnimationManager.anim.SetFloat("Vertical", 1, 0.1f, Time.deltaTime);
+            enemyAnimationManager.animator.SetFloat("Vertical", 1, 0.1f, Time.deltaTime);
         }
 
 

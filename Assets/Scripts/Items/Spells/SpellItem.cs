@@ -21,15 +21,15 @@ public class SpellItem : Item
     [TextArea]
     public string spellDescription;
 
-    public virtual void AttemptToCastSpell(PlayerAnimatorManager animatorHandler, PlayerStatus playerStatus, WeaponSlotManager weaponSlotMAnager)
+    public virtual void AttemptToCastSpell(PlayerAnimatorManager playerAnimatorManager, PlayerStatsManager playerStatsManager, PlayerWeaponSlotManager weaponSlotMAnager)
     {
         Debug.Log("You Attempt to cast a spell");
     }
 
-    public virtual void SuccessfullyCastSpell(PlayerAnimatorManager animatorHandler, PlayerStatus playerStatus, CameraHandler cameraHandler,
-        WeaponSlotManager weaponSlotManager)
+    public virtual void SuccessfullyCastSpell(PlayerAnimatorManager playerAnimatorManager, PlayerStatsManager playerStatsManager, CameraHandler cameraHandler,
+        PlayerWeaponSlotManager playerWeaponSlotManager)
     {
         Debug.Log("You Successfully cast a spell");
-        playerStatus.DeductFocusPoints(focusPointCost);
+        playerStatsManager.DeductFocusPoints(focusPointCost);
     }
 }

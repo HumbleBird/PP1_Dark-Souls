@@ -43,14 +43,14 @@ public class InputHandler : MonoBehaviour
     public Transform criticalAttackRayCastStartPoint;
 
     PlayerControls inputActions;
-    PlayerAttacker playerAttacker;
-    PlayerInventory playerInventory;
+    PlayerCombatManager playerCombatManager;
+    PlayerInventoryManager playerInventoryManager;
     PlayerManager playerManager;
     PlayerEffectsManager playerEffectsManager;
-    PlayerStatus playerStatus;
+    PlayerStatsManager playerStatsManager;
     BlockingCollider blockingCollider;
-    WeaponSlotManager weaponSlotManager;
-    PlayerAnimatorManager animatorHandler;
+    PlayerWeaponSlotManager playerWeaponSlotManager;
+    PlayerAnimatorManager playerAnimatorManager;
     UIManager uiManager;
     CameraHandler cameraHandler;
 
@@ -59,18 +59,18 @@ public class InputHandler : MonoBehaviour
 
     private void Awake()
     {
-        playerAttacker = GetComponentInChildren<PlayerAttacker>();
-        playerInventory = GetComponent<PlayerInventory>();
+        playerCombatManager = GetComponent<PlayerCombatManager>();
+        playerInventoryManager = GetComponent<PlayerInventoryManager>();
         playerManager = GetComponent<PlayerManager>();
-        playerStatus = GetComponent<PlayerStatus>();
-        playerEffectsManager = GetComponentInChildren<PlayerEffectsManager>();
+        playerStatsManager = GetComponent<PlayerStatsManager>();
+        playerEffectsManager = GetComponent<PlayerEffectsManager>();
+        playerAnimatorManager = GetComponent<PlayerAnimatorManager>();
 
 
-        weaponSlotManager = GetComponentInChildren<WeaponSlotManager>();
+        playerWeaponSlotManager = GetComponentInChildren<PlayerWeaponSlotManager>();
         blockingCollider = GetComponentInChildren<BlockingCollider>();
         uiManager = FindObjectOfType<UIManager>();
         cameraHandler = FindObjectOfType<CameraHandler>();
-        animatorHandler = GetComponentInChildren<PlayerAnimatorManager>();
     }
 
     public void OnEnable()
@@ -139,13 +139,13 @@ public class InputHandler : MonoBehaviour
         {
             rollInputTimer += delta;
 
-            if(playerStatus.currentStamina <= 0 )
+            if(playerStatsManager.currentStamina <= 0 )
             {
                 b_Input = false;
                 sprintFlag = false;
             }
 
-            if(moveAmount > 0.5f && playerStatus.currentStamina > 0)
+            if(moveAmount > 0.5f && playerStatsManager.currentStamina > 0)
             {
                 sprintFlag = true;
             }
@@ -168,12 +168,12 @@ public class InputHandler : MonoBehaviour
     {
         if(rb_Input)
         {
-            playerAttacker.HandleRBAction();
+            playerCombatManager.HandleRBAction();
         }
 
         if (rt_Input)
         {
-            playerAttacker.HandleHeavyAttack(playerInventory.rightWeapon);
+            playerCombatManager.HandleHeavyAttack(playerInventoryManager.rightWeapon);
         }
 
         if(lt_Input)
@@ -184,13 +184,13 @@ public class InputHandler : MonoBehaviour
             }
             else
             {
-                playerAttacker.HandleLTAction();
+                playerCombatManager.HandleLTAction();
             }
         }
 
         if (lb_Input)
         {
-            playerAttacker.HandleLBAction();
+            playerCombatManager.HandleLBAction();
         }
         else
         {
@@ -207,11 +207,11 @@ public class InputHandler : MonoBehaviour
     {
         if(d_Pad_Right)
         {
-            playerInventory.ChangeRightWeapon();
+            playerInventoryManager.ChangeRightWeapon();
         }
         else if (d_Pad_Left)
         {
-            playerInventory.ChangeLeftWeapon();
+            playerInventoryManager.ChangeLeftWeapon();
         }
     }
 
@@ -288,12 +288,12 @@ public class InputHandler : MonoBehaviour
 
             if(twoHandFlag)
             {
-                weaponSlotManager.LoadWeaponOnSlot(playerInventory.rightWeapon, false);
+                playerWeaponSlotManager.LoadWeaponOnSlot(playerInventoryManager.rightWeapon, false);
             }
             else
             {
-                weaponSlotManager.LoadWeaponOnSlot(playerInventory.rightWeapon, false);
-                weaponSlotManager.LoadWeaponOnSlot(playerInventory.leftWeapon, true);
+                playerWeaponSlotManager.LoadWeaponOnSlot(playerInventoryManager.rightWeapon, false);
+                playerWeaponSlotManager.LoadWeaponOnSlot(playerInventoryManager.leftWeapon, true);
             }
         }
     }
@@ -303,7 +303,7 @@ public class InputHandler : MonoBehaviour
         if(critical_Attack_Input)
         {
             critical_Attack_Input = false;
-            playerAttacker.AttemptBackStabOrRiposte();
+            playerCombatManager.AttemptBackStabOrRiposte();
         }
     }
 
@@ -312,7 +312,7 @@ public class InputHandler : MonoBehaviour
         if(x_Input)
         {
             x_Input = false;
-            playerInventory.currentConsumable.AttemptToConsumeItem(animatorHandler, weaponSlotManager, playerEffectsManager);
+            playerInventoryManager.currentConsumable.AttemptToConsumeItem(playerAnimatorManager, playerWeaponSlotManager, playerEffectsManager);
         }
     }
 }

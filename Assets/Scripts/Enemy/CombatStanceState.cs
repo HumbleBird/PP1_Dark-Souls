@@ -21,14 +21,14 @@ public class CombatStanceState : State
     public override State Tick(EnemyManager enemyManager, EnemyStatus enemyStates, EnemyAnimationManager enemyAnimationManager)
     {
         float distancefromTarget = Vector3.Distance(enemyManager.currentTarget.transform.position, enemyManager.transform.position);
-        enemyAnimationManager.anim.SetFloat("Vertical", verticalMovementValue, 0.2f, Time.deltaTime);
-        enemyAnimationManager.anim.SetFloat("Horizontal", horizontalMovementValue, 0.2f, Time.deltaTime);
+        enemyAnimationManager.animator.SetFloat("Vertical", verticalMovementValue, 0.2f, Time.deltaTime);
+        enemyAnimationManager.animator.SetFloat("Horizontal", horizontalMovementValue, 0.2f, Time.deltaTime);
         attackState.hasPerformedAttack = false;
 
         if (enemyManager.isInteracting)
         {
-            enemyAnimationManager.anim.SetFloat("Vertical", 0);
-            enemyAnimationManager.anim.SetFloat("Horizontal", 0);
+            enemyAnimationManager.animator.SetFloat("Vertical", 0);
+            enemyAnimationManager.animator.SetFloat("Horizontal", 0);
             return this;
         }
 
