@@ -16,7 +16,7 @@ public class EnemyLocomotionManager : MonoBehaviour
     private void Awake()
     {
         enemyManager = GetComponent<EnemyManager>();
-        enemyAnimationManager = GetComponentInChildren<EnemyAnimationManager>();
+        enemyAnimationManager = GetComponent<EnemyAnimationManager>();
     }
 
 

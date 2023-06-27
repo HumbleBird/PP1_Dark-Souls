@@ -18,7 +18,7 @@ public class AttackState : State
     bool willDoComboOnNextAttack = false;
     public bool hasPerformedAttack = false;
 
-    public override State Tick(EnemyManager enemyManager, EnemyStatus enemyStates, EnemyAnimationManager enemyAnimationManager)
+    public override State Tick(EnemyManager enemyManager, EnemyStatsManager enemyStatsManager, EnemyAnimationManager enemyAnimationManager)
     {
         float distancefromTarget = Vector3.Distance(enemyManager.currentTarget.transform.position, enemyManager.transform.position);
 
@@ -29,7 +29,7 @@ public class AttackState : State
             return pursueTargetState;
         }
 
-        if(willDoComboOnNextAttack && enemyManager.candoCombo)
+        if(willDoComboOnNextAttack && enemyManager.canDoCombo)
         {
             // Attack with combo
             AttackTargetWithCombo(enemyAnimationManager, enemyManager);

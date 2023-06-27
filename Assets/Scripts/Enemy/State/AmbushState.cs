@@ -13,7 +13,7 @@ public class AmbushState : State
 
     public PursueTargetState pursueTargetState;
 
-    public override State Tick(EnemyManager enemyManager, EnemyStatus enemyStates, EnemyAnimationManager enemyAnimationManager)
+    public override State Tick(EnemyManager enemyManager, EnemyStatsManager enemyStatsManager, EnemyAnimationManager enemyAnimationManager)
     {
         if(isSleeping && enemyManager.isInteracting == false)
         {

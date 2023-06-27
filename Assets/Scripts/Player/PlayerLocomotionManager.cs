@@ -69,7 +69,6 @@ public class PlayerLocomotionManager : MonoBehaviour
 
         cameraObject = Camera.main.transform;
         myTransform = transform;
-        playerAnimatorManager.Initialize();
 
         playerManager.isGrounded = true;
         ignoreForGroundCheck = ~(1 << 8 | 1 << 10);

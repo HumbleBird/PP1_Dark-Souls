@@ -11,7 +11,7 @@ public class PursueTargetState : State
     public CombatStanceState combatStanceState;
     public RotateTowardsTargetState rotateTowardsTargetState;
 
-    public override State Tick(EnemyManager enemyManager, EnemyStatus enemyStates, EnemyAnimationManager enemyAnimationManager)
+    public override State Tick(EnemyManager enemyManager, EnemyStatsManager enemyStatsManager, EnemyAnimationManager enemyAnimationManager)
     {
         Vector3 targetDirection = enemyManager.currentTarget.transform.position - enemyManager.transform.position;
         float distancefromTarget = Vector3.Distance(enemyManager.currentTarget.transform.position, enemyManager.transform.position);

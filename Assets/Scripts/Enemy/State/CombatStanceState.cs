@@ -18,7 +18,7 @@ public class CombatStanceState : State
     protected float verticalMovementValue = 0;
     protected float horizontalMovementValue = 0;
 
-    public override State Tick(EnemyManager enemyManager, EnemyStatus enemyStates, EnemyAnimationManager enemyAnimationManager)
+    public override State Tick(EnemyManager enemyManager, EnemyStatsManager enemyStatsManager, EnemyAnimationManager enemyAnimationManager)
     {
         float distancefromTarget = Vector3.Distance(enemyManager.currentTarget.transform.position, enemyManager.transform.position);
         enemyAnimationManager.animator.SetFloat("Vertical", verticalMovementValue, 0.2f, Time.deltaTime);

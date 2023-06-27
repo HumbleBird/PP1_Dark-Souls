@@ -7,7 +7,7 @@ public class EnemyManager : CharacterManager
 {
     EnemyLocomotionManager enemyLocomotionManager;
     EnemyAnimationManager enemyAnimationManager;
-    EnemyStatus enemyStatus;
+    EnemyStatsManager enemyStatsManager;
 
     public State currentState;
     public CharacterStatsManager currentTarget;
@@ -15,12 +15,8 @@ public class EnemyManager : CharacterManager
     public Rigidbody enemyRigidbody;
 
     public bool isPreformingAction;
-    public bool isInteracting;
     public float rotationSpeed = 25f;
     public float MaximumAggroRadius   = 1.5f;
-
-    [Header("Combat Falgs")]
-    public bool candoCombo;
 
     [Header("A.I Settings")]
     public float detectionRadius = 20;
@@ -36,9 +32,10 @@ public class EnemyManager : CharacterManager
     private void Awake()
     {
         enemyLocomotionManager = GetComponent<EnemyLocomotionManager>();
-        enemyAnimationManager = GetComponentInChildren<EnemyAnimationManager>();
+        enemyAnimationManager = GetComponent<EnemyAnimationManager>();
         enemyRigidbody = GetComponent<Rigidbody>();
-        enemyStatus = GetComponent<EnemyStatus>();
+        enemyStatsManager = GetComponent<EnemyStatsManager>();
+
         navMeshAgent = GetComponentInChildren<NavMeshAgent>();
         navMeshAgent.enabled = false;
     }
@@ -55,11 +52,11 @@ public class EnemyManager : CharacterManager
 
         isRotatingWithRootMotion = enemyAnimationManager.animator.GetBool("isRotatingWithRootMotion");
         isInteracting = enemyAnimationManager.animator.GetBool("isInteracting");
-        candoCombo = enemyAnimationManager.animator.GetBool("canDoCombo");
+        canDoCombo = enemyAnimationManager.animator.GetBool("canDoCombo");
         canRotate = enemyAnimationManager.animator.GetBool("canRotate");
         isInvulnerable = enemyAnimationManager.animator.GetBool("isInvulnerable");
         isPhaseShifting = enemyAnimationManager.animator.GetBool("isPhaseShifting");
-        enemyAnimationManager.animator.SetBool("isDead", enemyStatus.isDead);
+        enemyAnimationManager.animator.SetBool("isDead", enemyStatsManager.isDead);
     }
 
     private void LateUpdate()
@@ -72,7 +69,7 @@ public class EnemyManager : CharacterManager
     {
         if(currentState != null)
         {
-            State nextState = currentState.Tick(this, enemyStatus, enemyAnimationManager);
+            State nextState = currentState.Tick(this, enemyStatsManager, enemyAnimationManager);
 
             if(nextState != null)
             {

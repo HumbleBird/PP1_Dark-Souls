@@ -6,21 +6,23 @@ using System.Threading.Tasks;
 using UnityEngine;
 
 
-public class EnemyStatus : CharacterStatsManager
+public class EnemyStatsManager : CharacterStatsManager
 {
     EnemyManager enemyManager;
     EnemyAnimationManager enemyAnimationManager;
     EnemyBossManager enemyBossManager;
     public UIEnemyHealthBar enemyHealthBar;
-    public int soulsAwardedOnDeath = 50;
 
     public bool isBoss;
 
     private void Awake()
     {
         enemyManager = GetComponent<EnemyManager>();
-        enemyAnimationManager = GetComponentInChildren<EnemyAnimationManager>();
+        enemyAnimationManager = GetComponent<EnemyAnimationManager>();
         enemyBossManager = GetComponent<EnemyBossManager>();
+
+        //enemyHealthBar = GetComponentInChildren<UIEnemyHealthBar>();
+
         maxHealth = SetMaxHealthFromHealthLevel();
         currentHealth = maxHealth;
     }
@@ -39,9 +41,9 @@ public class EnemyStatus : CharacterStatsManager
         return maxHealth;
     }
 
-    public void TakeDamageNoAnimation(int damage)
+    public override void TakeDamageNoAnimation(int damage)
     {
-        currentHealth = currentHealth - damage;
+        base.TakeDamageNoAnimation(damage);
 
         if(!isBoss)
         {
@@ -52,12 +54,6 @@ public class EnemyStatus : CharacterStatsManager
         {
             enemyBossManager.UpdateBossHealthBar(currentHealth, maxHealth);
 
-        }
-
-        if (currentHealth <= 0)
-        {
-            currentHealth = 0;
-            isDead = true;
         }
     }
 
