@@ -67,11 +67,11 @@ public class DamageCollider : MonoBehaviour
             {
                 playerStatus.poiseResetTimer = playerStatus.totalPoiseResetTime;
                 playerStatus.totalPoiseDefence = playerStatus.totalPoiseDefence - poiseBreak;
+                Debug.Log("Player's Poise is currently " + playerStatus.totalPoiseResetTime);
 
                 if (playerStatus.totalPoiseDefence > poiseBreak)
                 {
                     playerStatus.TakeDamageNoAnimation(currentWeaponDamage);
-                    Debug.Log("Player Poise is currently " + playerStatus.totalPoiseResetTime);
                 }
                 else
                 {
@@ -98,16 +98,33 @@ public class DamageCollider : MonoBehaviour
             {
                 enemyStatus.poiseResetTimer = enemyStatus.totalPoiseResetTime;
                 enemyStatus.totalPoiseDefence = enemyStatus.totalPoiseDefence - poiseBreak;
+                Debug.Log("Enemy Poise is currently " + enemyStatus.totalPoiseResetTime);
 
-                if(enemyStatus.totalPoiseDefence > poiseBreak)
+                if(enemyStatus.isBoss)
                 {
-                    enemyStatus.TakeDamageNoAnimation(currentWeaponDamage);
-                    Debug.Log("Enemy Poise is currently " + enemyStatus.totalPoiseResetTime);
+                    if (enemyStatus.totalPoiseDefence > poiseBreak)
+                    {
+                        enemyStatus.TakeDamageNoAnimation(currentWeaponDamage);
+                    }
+                    else
+                    {
+                        enemyStatus.TakeDamage(currentWeaponDamage);
+                        enemyStatus.BreakGuard();
+                    }
                 }
                 else
                 {
-                    enemyStatus.TakeDamage(currentWeaponDamage);
+                    if (enemyStatus.totalPoiseDefence > poiseBreak)
+                    {
+                        enemyStatus.TakeDamageNoAnimation(currentWeaponDamage);
+                    }
+                    else
+                    {
+                        enemyStatus.TakeDamage(currentWeaponDamage);
+                    }
                 }
+
+
 
             }
         }

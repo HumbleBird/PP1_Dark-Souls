@@ -156,9 +156,33 @@ public class WeaponSlotManager : MonoBehaviour
 
     public void CloseDamageCollider()
     {
-        rightHandDamageCollider.DisableDamageCollider();
-        leftHandDamageCollider.DisableDamageCollider();
+        if(rightHandDamageCollider != null)
+        {
+            rightHandDamageCollider.DisableDamageCollider();
+        }
+
+        if(leftHandDamageCollider != null)
+        {
+            leftHandDamageCollider.DisableDamageCollider();
+        }
     }
+
+    #endregion
+
+    #region Handle Weapon's Poise Bonus
+
+    public void GrantWeaponAttackingPoiseBonus()
+    {
+        playerStatus.totalPoiseDefence = playerStatus.totalPoiseDefence + attackingWeapon.offensivePoiseBonus;
+    }
+    
+
+    public void ResetWeaponAttackingPoiseBonus()
+    {
+        playerStatus.totalPoiseDefence = playerStatus.armorPoiseBonus;
+    }
+
+
 
     #endregion
 }

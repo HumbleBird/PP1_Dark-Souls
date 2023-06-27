@@ -41,6 +41,19 @@ public class PlayerStatus : CharacterStatus
         focusPointBar.SetCurrentFocusPoints(currentFocusPoints);
     }
 
+    public override void HandlePoiseResetTime()
+    {
+        base.HandlePoiseResetTime();
+
+        if (poiseResetTimer > 0)
+        {
+            poiseResetTimer -= Time.deltaTime;
+        }
+        else if (poiseResetTimer <= 0 && !playerManager.isInteracting)
+        {
+            totalPoiseDefence = armorPoiseBonus;
+        }
+    }
 
 
     public override void TakeDamage(int damage, string damageAnimation = "Damage_01")

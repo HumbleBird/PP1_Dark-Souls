@@ -20,7 +20,7 @@ public class CharacterStatus : MonoBehaviour
 
     [Header("Poise")]
     public float totalPoiseDefence; // poise 동안의 총 방어력
-    public float offensivePosieBonus; // 무기로 공격할 때 얻을 수 있는 자세
+    public float offensivePoiseBonus; // 무기로 공격할 때 얻을 수 있는 자세
     public float armorPoiseBonus; // 장작 동안의 자세 보너스
     public float totalPoiseResetTime = 15;
     public float poiseResetTimer = 0;

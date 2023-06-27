@@ -23,16 +23,15 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 7414486773198955990}
-  m_LocalRotation: {x: 0.03797718, y: 0.7109136, z: 0.6735577, w: 0.19869499}
-  m_LocalPosition: {x: -0.067, y: 0.112, z: 0.014}
+  m_LocalRotation: {x: 0.5119101, y: 0.40412098, z: 0.6352497, w: -0.41363302}
+  m_LocalPosition: {x: -0.004, y: 0.089, z: 0.051}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
-  - {fileID: 2470048880915412237}
   - {fileID: 217386842387704270}
   m_Father: {fileID: 8627169260973090937}
   m_RootOrder: 0
-  m_LocalEulerAnglesHint: {x: -70.491, y: 452.348, z: -285.591}
+  m_LocalEulerAnglesHint: {x: -69.541, y: 424.72, z: -161.351}
 --- !u!1 &7694254933542424885
 GameObject:
   m_ObjectHideFlags: 0
@@ -78,7 +77,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5386285198423928379, guid: 95a2475b781a21b49baad1ccd886f508, type: 3}
       propertyPath: m_RootOrder
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 5386285198423928379, guid: 95a2475b781a21b49baad1ccd886f508, type: 3}
       propertyPath: m_LocalPosition.x
@@ -145,71 +144,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 37e40854892824e46abf4a610ca69ba5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  characterManager: {fileID: 0}
+  enabledDamageColliderOnStartUp: 0
+  poiseBreak: 0
+  offensivePoiseBonus: 0
   currentWeaponDamage: 25
---- !u!1001 &8437111933206451719
-PrefabInstance:
-  m_ObjectHideFlags: 0
-  serializedVersion: 2
-  m_Modification:
-    m_TransformParent: {fileID: 7414486773198955991}
-    m_Modifications:
-    - target: {fileID: 6292026514198930186, guid: 6329cb4d2f57df54cbea540650e5f10d, type: 3}
-      propertyPath: m_RootOrder
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 6292026514198930186, guid: 6329cb4d2f57df54cbea540650e5f10d, type: 3}
-      propertyPath: m_LocalPosition.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 6292026514198930186, guid: 6329cb4d2f57df54cbea540650e5f10d, type: 3}
-      propertyPath: m_LocalPosition.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 6292026514198930186, guid: 6329cb4d2f57df54cbea540650e5f10d, type: 3}
-      propertyPath: m_LocalPosition.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 6292026514198930186, guid: 6329cb4d2f57df54cbea540650e5f10d, type: 3}
-      propertyPath: m_LocalRotation.w
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 6292026514198930186, guid: 6329cb4d2f57df54cbea540650e5f10d, type: 3}
-      propertyPath: m_LocalRotation.x
-      value: -0.000000030042422
-      objectReference: {fileID: 0}
-    - target: {fileID: 6292026514198930186, guid: 6329cb4d2f57df54cbea540650e5f10d, type: 3}
-      propertyPath: m_LocalRotation.y
-      value: 0.0000000064028414
-      objectReference: {fileID: 0}
-    - target: {fileID: 6292026514198930186, guid: 6329cb4d2f57df54cbea540650e5f10d, type: 3}
-      propertyPath: m_LocalRotation.z
-      value: 0.0000000018626447
-      objectReference: {fileID: 0}
-    - target: {fileID: 6292026514198930186, guid: 6329cb4d2f57df54cbea540650e5f10d, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 6292026514198930186, guid: 6329cb4d2f57df54cbea540650e5f10d, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 6292026514198930186, guid: 6329cb4d2f57df54cbea540650e5f10d, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 7624114157456395597, guid: 6329cb4d2f57df54cbea540650e5f10d, type: 3}
-      propertyPath: m_Name
-      value: Katana Blade
-      objectReference: {fileID: 0}
-    - target: {fileID: 7624114157456395597, guid: 6329cb4d2f57df54cbea540650e5f10d, type: 3}
-      propertyPath: m_IsActive
-      value: 0
-      objectReference: {fileID: 0}
-    m_RemovedComponents:
-    - {fileID: 6285288223227127110, guid: 6329cb4d2f57df54cbea540650e5f10d, type: 3}
-  m_SourcePrefab: {fileID: 100100000, guid: 6329cb4d2f57df54cbea540650e5f10d, type: 3}
---- !u!4 &2470048880915412237 stripped
-Transform:
-  m_CorrespondingSourceObject: {fileID: 6292026514198930186, guid: 6329cb4d2f57df54cbea540650e5f10d, type: 3}
-  m_PrefabInstance: {fileID: 8437111933206451719}
-  m_PrefabAsset: {fileID: 0}

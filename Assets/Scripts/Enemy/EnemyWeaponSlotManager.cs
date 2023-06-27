@@ -4,6 +4,8 @@ using UnityEngine;
 
 public class EnemyWeaponSlotManager : MonoBehaviour
 {
+    EnemyStatus enemyStatus;
+
     public WeaponItem rightHandWeapon;
     public WeaponItem leftHandWeapon;
 
@@ -14,6 +16,12 @@ public class EnemyWeaponSlotManager : MonoBehaviour
     DamageCollider rightHandDamageCollider;
 
     private void Awake()
+    {
+        enemyStatus = GetComponentInParent<EnemyStatus>();
+        LoadWeaponHolderSlots();
+    }
+
+    private void LoadWeaponHolderSlots()
     {
         WeaponHolderSlot[] weaponHolderSlots = GetComponentsInChildren<WeaponHolderSlot>();
         foreach (WeaponHolderSlot weaponSlot in weaponHolderSlots)
@@ -105,4 +113,20 @@ public class EnemyWeaponSlotManager : MonoBehaviour
        // anim.SetBool("canDoCombo", false);
 
     }
+
+
+    #region Handle Weapon's Poise Bonus
+
+    public void GrantWeaponAttackingPoiseBonus()
+    {
+        enemyStatus.totalPoiseDefence = enemyStatus.totalPoiseDefence + enemyStatus.offensivePoiseBonus;
+    }
+
+
+    public void ResetWeaponAttackingPoiseBonus()
+    {
+        enemyStatus.totalPoiseDefence = enemyStatus.armorPoiseBonus;
+    }
+
+    #endregion
 }
