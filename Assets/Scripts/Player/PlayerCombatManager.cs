@@ -12,6 +12,8 @@ public class PlayerCombatManager : MonoBehaviour
     PlayerInventoryManager playerInventoryManager;
     InputHandler inputHandler;
     PlayerWeaponSlotManager playerWeaponSlotManager;
+    PlayerEffectsManager playerEffectsManager;
+
     public string lastAttack;
 
     LayerMask backStabLayer = 1<< 12;
@@ -29,6 +31,7 @@ public class PlayerCombatManager : MonoBehaviour
         inputHandler = GetComponent<InputHandler>();
         playerManager = GetComponent<PlayerManager>();
         playerInventoryManager = GetComponent<PlayerInventoryManager>();
+        playerEffectsManager = GetComponent<PlayerEffectsManager>();
     }
 
     public void HandleWeaponCombo(WeaponItem weapon)
@@ -141,6 +144,8 @@ public class PlayerCombatManager : MonoBehaviour
             playerAnimatorManager.animator.SetBool("isUsingRightHand", true);
             HandleLightAttack(playerInventoryManager.rightWeapon);
         }
+
+        playerEffectsManager.PlayWeaponFX(false);
     }
 
     private void PerformRBMagicAction(WeaponItem weapon)

@@ -5,6 +5,8 @@ using UnityEngine;
 public class EnemyAnimationManager : AnimatorManager
 {
     EnemyBossManager enemyBossManager;
+    EnemyEffectsManager enemyEffectsManager;
+
     EnemyManager enemyManager;
 
     protected override  void Awake()
@@ -12,6 +14,7 @@ public class EnemyAnimationManager : AnimatorManager
         base.Awake();
         enemyBossManager = GetComponent<EnemyBossManager>();
         enemyManager = GetComponent<EnemyManager>();
+        enemyEffectsManager = GetComponent<EnemyEffectsManager>();
     }
 
     public void AwardSoulsOnDeath()
@@ -37,6 +40,11 @@ public class EnemyAnimationManager : AnimatorManager
     {
         BossFXTransform bossFXTransform = GetComponentInChildren<BossFXTransform>();
         GameObject phaseFX = Instantiate(enemyBossManager.particleFX, bossFXTransform.transform);
+    }
+
+    public void PlayWeaponTrailFX()
+    {
+        enemyEffectsManager.PlayWeaponFX(false);
     }
 
     private void OnAnimatorMove()

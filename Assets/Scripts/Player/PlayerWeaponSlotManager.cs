@@ -4,20 +4,18 @@ using UnityEngine;
 
 public class PlayerWeaponSlotManager : CharacterWeaponSlotManager
 {
+    QuickSlotsUI quickSlotsUI;
+    InputHandler inputHandler;
+    Animator animator;
+
     PlayerManager playerManager;
     PlayerInventoryManager playerInventoryManager;
     PlayerStatsManager playerStatsManager;
+    PlayerEffectsManager playerEffectsManager;
 
-    Animator animator;
-    QuickSlotsUI quickSlotsUI;
-    InputHandler inputHandler;
 
     [Header("Attacking Weapon")]
     public WeaponItem attackingWeapon;
-
-
-
-
 
     private void Awake()
     {
@@ -26,6 +24,7 @@ public class PlayerWeaponSlotManager : CharacterWeaponSlotManager
         playerStatsManager = GetComponent<PlayerStatsManager>();
         inputHandler = GetComponent<InputHandler>();
         playerManager = GetComponent<PlayerManager>();
+        playerEffectsManager = GetComponent<PlayerEffectsManager>();
 
         quickSlotsUI = FindObjectOfType<QuickSlotsUI>();
 
@@ -131,7 +130,7 @@ public class PlayerWeaponSlotManager : CharacterWeaponSlotManager
     }
     #endregion
 
-    #region Handle Weapon's Weapon Collider
+    #region Handle Weapon's Damage Collider
 
 
     private void LoadLeftWeaponDamageCollider()
@@ -139,6 +138,7 @@ public class PlayerWeaponSlotManager : CharacterWeaponSlotManager
         leftHandDamageCollider = leftHandSlot.currentWeaponModel.GetComponentInChildren<DamageCollider>();
         leftHandDamageCollider.currentWeaponDamage = playerInventoryManager.leftWeapon.baseDamage;
         leftHandDamageCollider.poiseBreak = playerInventoryManager.leftWeapon.poiseBreak;
+        playerEffectsManager.leftWeaponFX = leftHandSlot.currentWeaponModel.GetComponentInChildren<WeaponFX>();
     }
 
     private void LoadRightWeaponDamageCollider()
@@ -146,6 +146,7 @@ public class PlayerWeaponSlotManager : CharacterWeaponSlotManager
         rightHandDamageCollider = rightHandSlot.currentWeaponModel.GetComponentInChildren<DamageCollider>();
         rightHandDamageCollider.currentWeaponDamage = playerInventoryManager.rightWeapon.baseDamage;
         rightHandDamageCollider.poiseBreak = playerInventoryManager.rightWeapon.poiseBreak;
+        playerEffectsManager.rightWeaponFX = rightHandSlot.currentWeaponModel.GetComponentInChildren<WeaponFX>();
     }
 
     public void OpenDamageCollider()

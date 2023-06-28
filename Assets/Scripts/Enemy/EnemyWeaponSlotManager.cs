@@ -5,6 +5,7 @@ using UnityEngine;
 public class EnemyWeaponSlotManager : CharacterWeaponSlotManager
 {
     EnemyStatsManager enemyStatsManager;
+    EnemyEffectsManager enemyEffectsManager;
 
     public WeaponItem rightHandWeapon;
     public WeaponItem leftHandWeapon;
@@ -12,6 +13,7 @@ public class EnemyWeaponSlotManager : CharacterWeaponSlotManager
     private void Awake()
     {
         enemyStatsManager = GetComponent<EnemyStatsManager>();
+        enemyEffectsManager = GetComponent<EnemyEffectsManager>();
         LoadWeaponHolderSlots();
     }
 
@@ -70,11 +72,13 @@ public class EnemyWeaponSlotManager : CharacterWeaponSlotManager
         {
             leftHandDamageCollider = leftHandSlot.currentWeaponModel.GetComponentInChildren<DamageCollider>();
             leftHandDamageCollider.characterManager = GetComponentInParent<CharacterManager>();
+            enemyEffectsManager.leftWeaponFX = leftHandSlot.currentWeaponModel.GetComponentInChildren<WeaponFX>();
         }
         else
         {
             rightHandDamageCollider = rightHandSlot.currentWeaponModel.GetComponentInChildren<DamageCollider>();
             rightHandDamageCollider.characterManager = GetComponentInParent<CharacterManager>();
+            enemyEffectsManager.rightWeaponFX = rightHandSlot.currentWeaponModel.GetComponentInChildren<WeaponFX>();
         }
     }
 

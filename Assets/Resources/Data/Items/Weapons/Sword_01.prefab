@@ -71,6 +71,18 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 7414486773198955991}
     m_Modifications:
+    - target: {fileID: 194326018111207199, guid: 6329cb4d2f57df54cbea540650e5f10d, type: 3}
+      propertyPath: ColorModule.gradient.maxGradient.key0.b
+      value: 0.1767088
+      objectReference: {fileID: 0}
+    - target: {fileID: 194326018111207199, guid: 6329cb4d2f57df54cbea540650e5f10d, type: 3}
+      propertyPath: ColorModule.gradient.maxGradient.key0.g
+      value: 0.1767088
+      objectReference: {fileID: 0}
+    - target: {fileID: 194326018111207199, guid: 6329cb4d2f57df54cbea540650e5f10d, type: 3}
+      propertyPath: ColorModule.gradient.maxGradient.key0.r
+      value: 0.1792453
+      objectReference: {fileID: 0}
     - target: {fileID: 6292026514198930186, guid: 6329cb4d2f57df54cbea540650e5f10d, type: 3}
       propertyPath: m_RootOrder
       value: 0
@@ -119,10 +131,45 @@ PrefabInstance:
       propertyPath: m_Name
       value: Katana Blade
       objectReference: {fileID: 0}
+    - target: {fileID: 7824864785778427683, guid: 6329cb4d2f57df54cbea540650e5f10d, type: 3}
+      propertyPath: normalWeaponTrail.Array.size
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 7824864785778427683, guid: 6329cb4d2f57df54cbea540650e5f10d, type: 3}
+      propertyPath: normalWeaponTrail.Array.data[0]
+      value: 
+      objectReference: {fileID: 8621234261142839576}
+    - target: {fileID: 7824864785778427683, guid: 6329cb4d2f57df54cbea540650e5f10d, type: 3}
+      propertyPath: normalWeaponTrail.Array.data[1]
+      value: 
+      objectReference: {fileID: 3797825381579128222}
+    - target: {fileID: 7824864785778427683, guid: 6329cb4d2f57df54cbea540650e5f10d, type: 3}
+      propertyPath: normalWeaponTrail.Array.data[2]
+      value: 
+      objectReference: {fileID: 1779806333668002154}
+    - target: {fileID: 7824864785778427683, guid: 6329cb4d2f57df54cbea540650e5f10d, type: 3}
+      propertyPath: normalWeaponTrail.Array.data[3]
+      value: 
+      objectReference: {fileID: 1779806333668002154}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 6329cb4d2f57df54cbea540650e5f10d, type: 3}
+--- !u!198 &1779806333668002154 stripped
+ParticleSystem:
+  m_CorrespondingSourceObject: {fileID: 7900862922920779629, guid: 6329cb4d2f57df54cbea540650e5f10d, type: 3}
+  m_PrefabInstance: {fileID: 8437111933206451719}
+  m_PrefabAsset: {fileID: 0}
 --- !u!4 &2470048880915412237 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 6292026514198930186, guid: 6329cb4d2f57df54cbea540650e5f10d, type: 3}
+  m_PrefabInstance: {fileID: 8437111933206451719}
+  m_PrefabAsset: {fileID: 0}
+--- !u!198 &3797825381579128222 stripped
+ParticleSystem:
+  m_CorrespondingSourceObject: {fileID: 4729398126694542233, guid: 6329cb4d2f57df54cbea540650e5f10d, type: 3}
+  m_PrefabInstance: {fileID: 8437111933206451719}
+  m_PrefabAsset: {fileID: 0}
+--- !u!198 &8621234261142839576 stripped
+ParticleSystem:
+  m_CorrespondingSourceObject: {fileID: 194326018111207199, guid: 6329cb4d2f57df54cbea540650e5f10d, type: 3}
   m_PrefabInstance: {fileID: 8437111933206451719}
   m_PrefabAsset: {fileID: 0}

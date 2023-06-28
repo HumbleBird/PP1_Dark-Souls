@@ -57,6 +57,7 @@ public class AttackState : State
     private void AttackTarget(EnemyAnimationManager enemyAnimationManager, EnemyManager enemyManager)
     {
         enemyAnimationManager.PlayerTargetAnimation(currentAttack.actionAnimation, true);
+        enemyAnimationManager.PlayWeaponTrailFX();
         enemyManager.currentRecoveryTime = currentAttack.recoveryTime;
         hasPerformedAttack = true;
     }
@@ -65,6 +66,7 @@ public class AttackState : State
     {
         willDoComboOnNextAttack = false;
         enemyAnimationManager.PlayerTargetAnimation(currentAttack.actionAnimation, true);
+        enemyAnimationManager.PlayWeaponTrailFX();
         enemyManager.currentRecoveryTime = currentAttack.recoveryTime;
         currentAttack = null;
     }
