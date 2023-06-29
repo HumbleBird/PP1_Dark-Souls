@@ -26,7 +26,7 @@ public class PlayerLocomotionManager : MonoBehaviour
     float minimumDistanceNeededToBeginFall = 1f;
     [SerializeField]
     float groundDirectionRayDistance = 0.2f;
-    LayerMask ignoreForGroundCheck;
+    public LayerMask groundLayer;
     public float inAirTimer;
 
     [Header("Movement Stats")]
@@ -71,7 +71,6 @@ public class PlayerLocomotionManager : MonoBehaviour
         myTransform = transform;
 
         playerManager.isGrounded = true;
-        ignoreForGroundCheck = ~(1 << 8 | 1 << 10);
         Physics.IgnoreCollision(characterCollider, characterCollisionBlockerCollider, true);
     }
 
@@ -253,7 +252,7 @@ public class PlayerLocomotionManager : MonoBehaviour
         targetPosition = myTransform.position;
 
         Debug.DrawRay(origin, -Vector3.up * minimumDistanceNeededToBeginFall, Color.red, 0.1f, false);
-        if (Physics.Raycast(origin, -Vector3.up, out hit, minimumDistanceNeededToBeginFall, ignoreForGroundCheck))
+        if (Physics.Raycast(origin, -Vector3.up, out hit, minimumDistanceNeededToBeginFall, groundLayer))
         {
             normalVector = hit.normal;
             Vector3 tp = hit.point;
