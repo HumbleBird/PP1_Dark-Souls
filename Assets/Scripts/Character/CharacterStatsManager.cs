@@ -83,6 +83,17 @@ public class CharacterStatsManager : MonoBehaviour
         }
     }
 
+    public virtual void TakePoisonDamage(int damage)
+    {
+        currentHealth = currentHealth - damage;
+
+        if (currentHealth <= 0)
+        {
+            currentHealth = 0;
+            isDead = true;
+        }
+    }
+
     public virtual void HandlePoiseResetTime()
     {
         if(poiseResetTimer > 0)

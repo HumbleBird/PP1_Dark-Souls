@@ -10,6 +10,7 @@ public class PlayerManager : CharacterManager
     PlayerStatsManager playerStatsManager;
     PlayerAnimatorManager playerAnimatorManager;
     PlayerLocomotionManager playerLocomotionManager;
+    PlayerEffectsManager playerEffectsManager;
 
     InteractableUI interactableUI;
     public GameObject interactableUIGameObject;
@@ -27,6 +28,7 @@ public class PlayerManager : CharacterManager
         playerAnimatorManager = GetComponent<PlayerAnimatorManager>();
         playerLocomotionManager = GetComponent<PlayerLocomotionManager>();
         playerStatsManager = GetComponent<PlayerStatsManager>();
+        playerEffectsManager = GetComponent<PlayerEffectsManager>();
 
         animator = GetComponentInChildren<Animator>();
 
@@ -67,6 +69,7 @@ public class PlayerManager : CharacterManager
         playerLocomotionManager.HandleFalling(delta, playerLocomotionManager.moveDirection);
         playerLocomotionManager.HandleMovement(delta);
         playerLocomotionManager.HandleRotation(delta);
+        playerEffectsManager.HandleAllBuildUpEffects();
     }
 
     private void LateUpdate()
