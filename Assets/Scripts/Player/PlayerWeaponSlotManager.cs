@@ -12,7 +12,7 @@ public class PlayerWeaponSlotManager : CharacterWeaponSlotManager
     PlayerInventoryManager playerInventoryManager;
     PlayerStatsManager playerStatsManager;
     PlayerEffectsManager playerEffectsManager;
-
+    CameraHandler cameraHandler;
 
     [Header("Attacking Weapon")]
     public WeaponItem attackingWeapon;
@@ -27,6 +27,7 @@ public class PlayerWeaponSlotManager : CharacterWeaponSlotManager
         playerEffectsManager = GetComponent<PlayerEffectsManager>();
 
         quickSlotsUI = FindObjectOfType<QuickSlotsUI>();
+        cameraHandler = FindObjectOfType<CameraHandler>();
 
         LoadWeaponHolderSlots();
     }
@@ -116,6 +117,15 @@ public class PlayerWeaponSlotManager : CharacterWeaponSlotManager
             quickSlotsUI.UpdateWeaponQuickSlotUI(isLeft, unarmWeapon);
         }
 
+    }
+
+    public void SucessfullyThrowFireBomb()
+    {
+        Destroy(playerEffectsManager.instantiatedFXModel);
+        BombConsumeableItem fireBombItem = playerInventoryManager.currentConsumable as BombConsumeableItem;
+
+        GameObject activeModelBomb = Instantiate(fireBombItem.liveBombModel, rightHandSlot.transform.position, cameraHandler.cameraPivotTranform.rotation);
+        activeModelBomb.transform.rotation = Quaternion.Euler(cameraHandler.cameraPivotTranform.eulerAngles.x, playerManager.lockOnTransform.eulerAngles.y, 0);
     }
 
     #region Handle Weapon's Stamina Drainage
