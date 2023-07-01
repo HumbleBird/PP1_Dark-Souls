@@ -32,6 +32,11 @@ public class CharacterStatsManager : MonoBehaviour
     public float physicalDamageAbsorptionLegs;
     public float physicalDamageAbsorptionHands;
 
+    public float fireDamageAbsorptionHead;
+    public float fireDamageAbsorptionBody;
+    public float fireDamageAbsorptionLegs;
+    public float fireDamageAbsorptionHands;
+
     public bool isDead;
 
     protected virtual void Update()
@@ -44,7 +49,7 @@ public class CharacterStatsManager : MonoBehaviour
         totalPoiseDefence = armorPoiseBonus;
     }
 
-    public virtual void TakeDamage(int physicalDamage, string damageAnimation = "Damage_01")
+    public virtual void TakeDamage(int physicalDamage, int fireDamage, string damageAnimation = "Damage_01")
     {
         if (isDead)
             return;
@@ -57,13 +62,18 @@ public class CharacterStatsManager : MonoBehaviour
 
         physicalDamage = Mathf.RoundToInt(physicalDamage - (physicalDamage * totalPhysicalDamageAbsorption));
 
-        Debug.Log("Total Damage Absorption is " + totalPhysicalDamageAbsorption + "%");
+        float totalfireDamageAbsorption = 1 -
+            (1 - fireDamageAbsorptionHead / 100) *
+            (1 - fireDamageAbsorptionBody / 100) *
+            (1 - fireDamageAbsorptionLegs / 100) *
+            (1 - fireDamageAbsorptionHands / 100);
 
-        float finalDamage = physicalDamage; // + fire + mage + lightning + dark Damage
+        fireDamage = Mathf.RoundToInt(fireDamage - (fireDamage * totalfireDamageAbsorption));
+
+        float finalDamage = physicalDamage + fireDamage; // + fire + mage + lightning + dark Damage
 
         currentHealth = Mathf.RoundToInt(currentHealth - finalDamage);
 
-        Debug.Log("Total Damage Default is " + finalDamage);
 
         if(currentHealth <= 0)
         {
@@ -72,7 +82,7 @@ public class CharacterStatsManager : MonoBehaviour
         }
     }
 
-    public virtual void TakeDamageNoAnimation(int damage)
+    public virtual void TakeDamageNoAnimation(int damage, int fireDamage)
     {
         currentHealth = currentHealth - damage;
 

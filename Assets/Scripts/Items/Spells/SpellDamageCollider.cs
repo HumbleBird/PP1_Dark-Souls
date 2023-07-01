@@ -47,7 +47,7 @@ public class SpellDamageCollider : DamageCollider
 
             if (spellTarget != null)
             {
-                spellTarget.TakeDamage(currentWeaponDamage);
+                spellTarget.TakeDamage(0, fireDamage);
             }
 
             hasColliede = true;

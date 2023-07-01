@@ -7,8 +7,8 @@ public class PlayerStatsManager : CharacterStatsManager
     PlayerManager playerManager;
 
     public HealthBar  healthBar;
-    public StaminaBar staminaBar;
-    public FocusPointBar focusPointBar;
+    StaminaBar staminaBar;
+    FocusPointBar focusPointBar;
     PlayerAnimatorManager playerAnimatorManager;
 
     public float staminaRegenerationAmount = 1;
@@ -16,12 +16,12 @@ public class PlayerStatsManager : CharacterStatsManager
 
     private void Awake()
     {
-        healthBar = FindObjectOfType<HealthBar>();
+        playerManager = GetComponent<PlayerManager>();
+
         staminaBar = FindObjectOfType<StaminaBar>();
         focusPointBar = FindObjectOfType<FocusPointBar>();
 
         playerAnimatorManager = GetComponent<PlayerAnimatorManager>();
-        playerManager = GetComponent<PlayerManager>();
     }
 
     void Start()
@@ -57,12 +57,12 @@ public class PlayerStatsManager : CharacterStatsManager
     }
 
 
-    public override void TakeDamage(int damage, string damageAnimation = "Damage_01")
+    public override void TakeDamage(int damage, int fireDamage, string damageAnimation = "Damage_01")
     {
         if (playerManager.isInvulnerable)
             return;
 
-        base.TakeDamage(damage, damageAnimation = "Damage_01");
+        base.TakeDamage(damage, fireDamage, damageAnimation = "Damage_01");
 
         healthBar.SetCurrentHealth(currentHealth);
         playerAnimatorManager.PlayerTargetAnimation(damageAnimation, true);
@@ -75,9 +75,9 @@ public class PlayerStatsManager : CharacterStatsManager
         }
     }
 
-    public override void TakeDamageNoAnimation(int damage)
+    public override void TakeDamageNoAnimation(int damage, int fireDamage)
     {
-        base.TakeDamageNoAnimation(damage);
+        base.TakeDamageNoAnimation(damage, fireDamage);
 
         healthBar.SetCurrentHealth(currentHealth);
 

@@ -41,9 +41,9 @@ public class EnemyStatsManager : CharacterStatsManager
         return maxHealth;
     }
 
-    public override void TakeDamageNoAnimation(int damage)
+    public override void TakeDamageNoAnimation(int damage, int fireDamage)
     {
-        base.TakeDamageNoAnimation(damage);
+        base.TakeDamageNoAnimation(damage, fireDamage);
 
         if(!isBoss)
         {
@@ -88,9 +88,9 @@ public class EnemyStatsManager : CharacterStatsManager
         enemyAnimationManager.PlayerTargetAnimation("Break Guard", true);
     }
 
-    public override void TakeDamage(int damage, string damageAnimation = "Damage_01")
+    public override void TakeDamage(int damage, int fireDamage, string damageAnimation = "Damage_01")
     {
-        base.TakeDamage(damage, damageAnimation = "Damage_01");
+        base.TakeDamage(damage, fireDamage, damageAnimation = "Damage_01");
 
 
         if (!isBoss)
