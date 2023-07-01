@@ -24,13 +24,16 @@ public class IdleState : State
 
             if (characterStatus != null)
             {
-                Vector3 TargetDirection = characterStatus.transform.position - transform.position;
-                float viewableAngle = Vector3.Angle(TargetDirection, transform.forward);
-
-                if (viewableAngle > enemyManager.minimumDetectionAngle && viewableAngle < enemyManager.maximumDetectionAngle)
+                if (characterStatus.teamIDNumber != enemyStatsManager.teamIDNumber)
                 {
-                    enemyManager.currentTarget = characterStatus;
-                }   
+                    Vector3 TargetDirection = characterStatus.transform.position - transform.position;
+                    float viewableAngle = Vector3.Angle(TargetDirection, transform.forward);
+
+                    if (viewableAngle > enemyManager.minimumDetectionAngle && viewableAngle < enemyManager.maximumDetectionAngle)
+                    {
+                        enemyManager.currentTarget = characterStatus;
+                    }
+                }
             }
         }
         #endregion

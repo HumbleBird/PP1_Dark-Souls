@@ -31,7 +31,10 @@ public class BombDamageColider : DamageCollider
 
             if(character != null)
             {
-                character.TakeDamage(0, explosionDamage);
+                if(character.teamIDNumber != teamIDNumber)
+                {
+                    character.TakeDamage(0, explosionDamage);
+                }
             }
 
             Destroy(impactPaticles, 5f);
@@ -49,7 +52,10 @@ public class BombDamageColider : DamageCollider
 
             if(character != null)
             {
-                character.TakeDamage(0, explosionSplashDamage);
+                if (character.teamIDNumber != teamIDNumber)
+                {
+                    character.TakeDamage(0, explosionSplashDamage);
+                }
 
             }
         }

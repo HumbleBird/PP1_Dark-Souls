@@ -36,6 +36,8 @@ public class ProjectileSpell : SpellItem
     {
         base.SuccessfullyCastSpell(playerAnimatorManager, playerStatsManager, cameraHandler, playerWeaponSlotManager);
         GameObject instantiatedSpellFX = Instantiate(spellCastFX, playerWeaponSlotManager.rightHandSlot.transform.position, cameraHandler.cameraPivotTranform.rotation);
+        SpellDamageCollider spellDamageCollider = instantiatedSpellFX.GetComponent<SpellDamageCollider>();
+        spellDamageCollider.teamIDNumber = playerStatsManager.teamIDNumber;
         rigidBody = instantiatedSpellFX.GetComponent<Rigidbody>();
         //spellDamageCollider = instantiatedSpellFX.GetComponent<SpellDamageCollider>();
 

@@ -132,6 +132,7 @@ public class PlayerWeaponSlotManager : CharacterWeaponSlotManager
         damageCollider.explosionSplashDamage = fireBombItem.explosiveDamage;
         damageCollider.bombRigidBody.AddForce(activeModelBomb.transform.forward * fireBombItem.forwardVelocity);
         damageCollider.bombRigidBody.AddForce(activeModelBomb.transform.up * fireBombItem.upwardVelocity);
+        damageCollider.teamIDNumber = playerStatsManager.teamIDNumber;
         LoadWeaponOnSlot(playerInventoryManager.rightWeapon, false);
 
     }
@@ -157,8 +158,10 @@ public class PlayerWeaponSlotManager : CharacterWeaponSlotManager
 
         leftHandDamageCollider.physicalDamage = playerInventoryManager.leftWeapon.physicalDamage;
         leftHandDamageCollider.fireDamage = playerInventoryManager.leftWeapon.fireDamage;
-        leftHandDamageCollider.poiseBreak = playerInventoryManager.leftWeapon.poiseBreak;
 
+        leftHandDamageCollider.teamIDNumber = playerStatsManager.teamIDNumber;
+
+        leftHandDamageCollider.poiseBreak = playerInventoryManager.leftWeapon.poiseBreak;
         playerEffectsManager.leftWeaponFX = leftHandSlot.currentWeaponModel.GetComponentInChildren<WeaponFX>();
     }
 
@@ -168,8 +171,10 @@ public class PlayerWeaponSlotManager : CharacterWeaponSlotManager
 
         rightHandDamageCollider.physicalDamage = playerInventoryManager.rightWeapon.physicalDamage;
         rightHandDamageCollider.fireDamage = playerInventoryManager.rightWeapon.fireDamage;
-        rightHandDamageCollider.poiseBreak = playerInventoryManager.rightWeapon.poiseBreak;
 
+        rightHandDamageCollider.teamIDNumber = playerStatsManager.teamIDNumber;
+
+        rightHandDamageCollider.poiseBreak = playerInventoryManager.rightWeapon.poiseBreak;
         playerEffectsManager.rightWeaponFX = rightHandSlot.currentWeaponModel.GetComponentInChildren<WeaponFX>();
     }
 

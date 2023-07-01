@@ -33870,6 +33870,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   playerInventoryManager: {fileID: 0}
   equipmentWindowUI: {fileID: 7196696074519366513}
+  quickSlotsUI: {fileID: 0}
   hudWindow: {fileID: 9094515933411218869}
   selectWindow: {fileID: 7196696073878538866}
   equipmentScreenWindow: {fileID: 7196696075000685573}
@@ -37706,6 +37707,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5fac9d561d0f1ba4cb0371be659e376f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  teamIDNumber: 1
   healthLevel: 10
   maxHealth: 0
   currentHealth: 0
@@ -39626,6 +39628,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 30cb461b5e3124146b8e8aa84f952625, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  teamIDNumber: 0
   healthLevel: 10
   maxHealth: 0
   currentHealth: 0
@@ -39768,7 +39771,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a495dfb517f865944aa946040a518506, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  currentSpell: {fileID: 0}
+  currentSpell: {fileID: 11400000, guid: c366cbf2bcc1a0144a1e21b313bba1be, type: 2}
   rightWeapon: {fileID: 0}
   leftWeapon: {fileID: 0}
   currentConsumable: {fileID: 11400000, guid: cc6fb931e1871e441862ea869f60eb76, type: 2}
@@ -43950,8 +43953,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bf4486f9ece68374db9ccc06ccffdb29, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  leftWeaponIcon: {fileID: 5078675347329206820}
+  currentSpellIcon: {fileID: 5078675347734534045}
+  currentConsumableIcon: {fileID: 7196696074822717956}
   rightWeaponIcon: {fileID: 5078675348056799552}
+  leftWeaponIcon: {fileID: 5078675347329206820}
 --- !u!1 &7196696074161924226
 GameObject:
   m_ObjectHideFlags: 0
@@ -47704,6 +47709,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5fac9d561d0f1ba4cb0371be659e376f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  teamIDNumber: 1
   healthLevel: 100
   maxHealth: 0
   currentHealth: 0

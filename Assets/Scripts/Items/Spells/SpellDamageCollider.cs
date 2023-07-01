@@ -45,7 +45,7 @@ public class SpellDamageCollider : DamageCollider
             if (collision.gameObject.tag == "Player")
                 return;
 
-            if (spellTarget != null)
+            if (spellTarget != null && spellTarget.teamIDNumber != teamIDNumber)
             {
                 spellTarget.TakeDamage(0, fireDamage);
             }

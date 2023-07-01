@@ -6,7 +6,7 @@ public class UIManager : MonoBehaviour
 {
     public PlayerInventoryManager playerInventoryManager;
     public EquipmentWindowUI equipmentWindowUI;
-
+    public QuickSlotsUI quickSlotsUI;
 
     [Header("UI Windows")]
     public GameObject hudWindow;
@@ -28,12 +28,15 @@ public class UIManager : MonoBehaviour
     private void Awake()
     {
         playerInventoryManager = FindObjectOfType<PlayerInventoryManager>();
+        quickSlotsUI = GetComponentInChildren<QuickSlotsUI>();
     }
 
     private void Start()
     {
         weaponInventorySlots = weaponInventorySlotsParent.GetComponentsInChildren<WeaponInventorySlot>();
         equipmentWindowUI.LoadWeaponsOnEquipmentScreen(playerInventoryManager);
+        quickSlotsUI.UpdateCurrentSpellIcon(playerInventoryManager.currentSpell);
+        quickSlotsUI.UpdateCurrentConsumableIcon(playerInventoryManager.currentConsumable);
     }
 
     public void UpdateUI()
