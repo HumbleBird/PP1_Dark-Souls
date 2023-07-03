@@ -1,12 +1,20 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using static Define;
 
 [CreateAssetMenu(menuName = "Items/Weapon Item")]
 public class WeaponItem : Item
 {
     public GameObject modelPrefab;
     public bool isUnarmed;
+
+    [Header("Animator Replacer")]
+    public AnimatorOverrideController weaponController;
+    public string offHandIdleAnimation = "Left_Arm_Idle_01";
+
+    [Header("Weapon Type")]
+    public WeaponType weaponType;
 
     [Header("Damage")]
     public int physicalDamage;
@@ -20,29 +28,8 @@ public class WeaponItem : Item
     [Header("Absorption")]
     public float physicalDamageAbsorption;
 
-    [Header("Idle Animations")]
-    public string right_hand_idle;
-    public string left_hand_idle;
-    public string th_idle;
-
-    [Header("Attack Animatons")]
-    public string oh_light_attack_01;
-    public string oh_light_attack_02;
-    public string th_light_attack_01;
-    public string th_light_attack_02;
-
-    [Header("Weapon Art")]
-    public string weapon_art;
-
     [Header("Stamina Costs")]
     public int baseStamina;
     public float lightAttackMultiplier;
     public float heavyAttackMultiplier;
-
-    [Header("Weapon Type")]
-    public bool isSpellCaster;
-    public bool isFaithCaster;
-    public bool isPyroCaster;
-    public bool isMeleeWeapon;
-    public bool isShieldWeapon;
 }

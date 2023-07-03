@@ -68,8 +68,18 @@ public class Define
 
     public enum WeaponType
     {
+        PyroCaster,
+        FaithCaster,
+        SpellCaster,
+        Unarmed,
+        StraightSwords,
+        Shield,
+    }
+
+    public enum WeaponType2
+    {
         Daggers = 1,
-        StraightSwordsGreatswords = 2,
+        StraightSwords,
         Greatswords,
         UltraGreatswords,
         CurvedSword,

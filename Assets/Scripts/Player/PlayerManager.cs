@@ -47,6 +47,7 @@ public class PlayerManager : CharacterManager
         isInvulnerable = animator.GetBool("isInvulnerable");
         isFiringSpell = animator.GetBool("isFiringSpell");
 
+        animator.SetBool("isTwoHandingWeapon", isTwoHandingWeapon);
         animator.SetBool("isBlocking", isBlocking);
         animator.SetBool("isInAir", isInAir);
         animator.SetBool("isDead", playerStatsManager.isDead);

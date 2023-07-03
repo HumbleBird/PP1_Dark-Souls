@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using static Define;
 
 public class PlayerCombatManager : MonoBehaviour
 {
@@ -13,6 +14,19 @@ public class PlayerCombatManager : MonoBehaviour
     InputHandler inputHandler;
     PlayerWeaponSlotManager playerWeaponSlotManager;
     PlayerEffectsManager playerEffectsManager;
+
+    [Header("Attack Animations")]
+    string oh_light_attack_01 = "OH_Light_Attack_01";
+    string oh_light_attack_02 = "OH_Light_Attack_02";
+    string oh_heavy_attack_01 = "OH_Heavy_Attack_01";
+    string oh_heavy_attack_02 = "OH_Heavy_Attack_02";
+
+    string th_light_attack_01 = "TH_Light_Attack_01";
+    string th_light_attack_02 = "TH_Light_Attack_02";
+    string th_heavy_attack_01 = "TH_Heavy_Attack_01";
+    string th_heavy_attack_02 = "TH_Heavy_Attack_02";
+
+    string weapon_art = "Weapon Art";
 
     public string lastAttack;
 
@@ -43,13 +57,13 @@ public class PlayerCombatManager : MonoBehaviour
         if (inputHandler.comboFlag)
         {
             playerAnimatorManager.animator.SetBool("canDoCombo", false);
-            if (lastAttack == weapon.oh_light_attack_01)
+            if (lastAttack == oh_light_attack_01)
             {
-                playerAnimatorManager.PlayerTargetAnimation(weapon.oh_light_attack_02, true);
+                playerAnimatorManager.PlayerTargetAnimation(oh_light_attack_02, true);
             }
-            else if (lastAttack == weapon.th_light_attack_01)
+            else if (lastAttack == th_light_attack_01)
             {
-                playerAnimatorManager.PlayerTargetAnimation(weapon.th_light_attack_02, true);
+                playerAnimatorManager.PlayerTargetAnimation(th_light_attack_02, true);
             }
         }
     }
@@ -63,13 +77,13 @@ public class PlayerCombatManager : MonoBehaviour
 
         if (inputHandler.twoHandFlag)
         {
-            playerAnimatorManager.PlayerTargetAnimation(weapon.th_light_attack_01, true);
-            lastAttack = weapon.th_light_attack_01;
+            playerAnimatorManager.PlayerTargetAnimation(th_light_attack_01, true);
+            lastAttack = th_light_attack_01;
         }
         else
         {
-            playerAnimatorManager.PlayerTargetAnimation(weapon.oh_light_attack_01, true);
-            lastAttack = weapon.oh_light_attack_01;
+            playerAnimatorManager.PlayerTargetAnimation(oh_light_attack_01, true);
+            lastAttack = oh_light_attack_01;
         }
     }
 
@@ -94,11 +108,14 @@ public class PlayerCombatManager : MonoBehaviour
     #region Input Actions
     public void HandleRBAction()
     {
-        if(playerInventoryManager.rightWeapon.isMeleeWeapon)
+        if(playerInventoryManager.rightWeapon.weaponType == WeaponType.StraightSwords
+            || playerInventoryManager.rightWeapon.weaponType == WeaponType.Unarmed)
         {
             PerformRBMellAction();
         }
-        else if (playerInventoryManager.rightWeapon.isSpellCaster || playerInventoryManager.rightWeapon.isFaithCaster  || playerInventoryManager.rightWeapon.isPyroCaster )
+        else if (playerInventoryManager.rightWeapon.weaponType == WeaponType.SpellCaster 
+            || playerInventoryManager  .rightWeapon.weaponType == WeaponType.FaithCaster  
+            || playerInventoryManager.rightWeapon.weaponType == WeaponType.  PyroCaster )
         {
             PerformRBMagicAction(playerInventoryManager.rightWeapon);
         }
@@ -113,11 +130,11 @@ public class PlayerCombatManager : MonoBehaviour
 
     public void HandleLTAction()
     {
-        if(playerInventoryManager.leftWeapon.isShieldWeapon)
+        if(playerInventoryManager.leftWeapon.weaponType == WeaponType.Shield || playerInventoryManager.rightWeapon.weaponType == WeaponType.Unarmed)
         {
             PerformLTWeaponArt(inputHandler.twoHandFlag);
         }
-        else if (playerInventoryManager.leftWeapon.isMeleeWeapon)
+        else if (playerInventoryManager.leftWeapon.weaponType == WeaponType.StraightSwords)
         {
 
         }
@@ -148,12 +165,27 @@ public class PlayerCombatManager : MonoBehaviour
         playerEffectsManager.PlayWeaponFX(false);
     }
 
+    private void PerformLBBlockingAction()
+    {
+        if (playerManager.isInteracting)
+            return;
+
+        if (playerManager.isBlocking)
+            return;
+
+        playerAnimatorManager.PlayerTargetAnimation("Block Start", false, true);
+        playerEquipmentManager.OpenBlockingCollider();
+        playerManager.isBlocking = true;
+
+    }
+
+
     private void PerformRBMagicAction(WeaponItem weapon)
     {
         if (playerManager.isInteracting)
             return;
 
-        if (weapon.isFaithCaster)
+        if (weapon.weaponType == WeaponType.FaithCaster)
         {
             if(playerInventoryManager.currentSpell != null && playerInventoryManager.currentSpell.isFaithSpell)
             {
@@ -166,7 +198,7 @@ public class PlayerCombatManager : MonoBehaviour
                     playerAnimatorManager.PlayerTargetAnimation("Shrug", true);
             }
         }
-        else if (weapon.isPyroCaster)
+        else if (weapon.weaponType == WeaponType.PyroCaster)
         {
             if (playerInventoryManager.currentSpell != null && playerInventoryManager.currentSpell.isPyroSpell)
             {
@@ -192,7 +224,7 @@ public class PlayerCombatManager : MonoBehaviour
         }
         else
         {
-            playerAnimatorManager.PlayerTargetAnimation(playerInventoryManager.leftWeapon.weapon_art, true);
+            playerAnimatorManager.PlayerTargetAnimation(weapon_art, true);
 
 
         }
@@ -206,23 +238,6 @@ public class PlayerCombatManager : MonoBehaviour
 
     #endregion
 
-    #region Defense Actions
-
-    private void PerformLBBlockingAction()
-    {
-        if (playerManager.isInteracting)
-            return;
-
-        if (playerManager.isBlocking)
-            return;
-
-        playerAnimatorManager.PlayerTargetAnimation("Block Start", false, true);
-        playerEquipmentManager.OpenBlockingCollider();
-        playerManager.isBlocking = true;
-
-    }
-
-    #endregion
 
     public void AttemptBackStabOrRiposte()
     {
