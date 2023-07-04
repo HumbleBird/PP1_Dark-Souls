@@ -1,8 +1,9 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Animations.Rigging;
 
-public class AnimatorManager : MonoBehaviour
+public class CharacterAnimatorManager : MonoBehaviour
 {
     public Animator animator;
     protected CharacterManager characterManager;
@@ -10,11 +11,16 @@ public class AnimatorManager : MonoBehaviour
 
     public bool canRotate;
 
+    protected RigBuilder rigBuilder;
+    public TwoBoneIKConstraint leftHandConstraint;
+    public TwoBoneIKConstraint rightHandConstraint;
+
     protected virtual void Awake()
     {
         animator = GetComponent<Animator>();
         characterManager = GetComponent<CharacterManager>();
         characterStatsManager = GetComponent<CharacterStatsManager>();
+        rigBuilder = GetComponentInChildren<RigBuilder>();
     }
 
     public void PlayerTargetAnimation(string targetAnim, bool isInteracting, bool canRoate = false)
@@ -89,5 +95,34 @@ public class AnimatorManager : MonoBehaviour
     {
         characterStatsManager.TakeDamageNoAnimation(characterManager.pendingCriticalDamage, 0);
         characterManager.pendingCriticalDamage = 0;
+    }
+
+    public virtual void SetHandIKForWeapon(RightHandIKTarget rightHandTarget, LeftHandIKTarget leftHandTarget, bool isTwoHandingWeapon)
+    {
+        if (rightHandConstraint == null || leftHandConstraint == null)
+            return;
+
+        if(isTwoHandingWeapon)
+        {
+            rightHandConstraint.data.target = rightHandTarget.transform;
+            rightHandConstraint.data.targetPositionWeight = 1; // 원한다면 각 무기 별로 할당 가능
+            rightHandConstraint.data.targetRotationWeight = 1;
+
+            leftHandConstraint.data.target = leftHandTarget.transform;
+            leftHandConstraint.data.targetPositionWeight = 1;
+            leftHandConstraint.data.targetRotationWeight = 1;
+        }
+        else
+        {
+            rightHandConstraint.data.target = null;
+            leftHandConstraint.data.target = null;
+        }
+
+        rigBuilder.Build();
+    }
+
+    public virtual void EraseHandIKForWeapon()
+    {
+
     }
 }

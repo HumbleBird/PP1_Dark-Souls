@@ -6,7 +6,6 @@ public class PlayerWeaponSlotManager : CharacterWeaponSlotManager
 {
     QuickSlotsUI quickSlotsUI;
     InputHandler inputHandler;
-    Animator animator;
 
     PlayerManager playerManager;
     PlayerInventoryManager playerInventoryManager;
@@ -15,52 +14,23 @@ public class PlayerWeaponSlotManager : CharacterWeaponSlotManager
     PlayerAnimatorManager playerAnimatorManager;
     CameraHandler cameraHandler;
 
-    [Header("Attacking Weapon")]
-    public WeaponItem attackingWeapon;
 
-    private void Awake()
+    protected override void Awake()
     {
-        animator = GetComponentInChildren<Animator>();
-        playerInventoryManager = GetComponent<PlayerInventoryManager>();
-        playerStatsManager = GetComponent<PlayerStatsManager>();
+        base.Awake();
+        cameraHandler = FindObjectOfType<CameraHandler>();
         inputHandler = GetComponent<InputHandler>();
+
+        playerStatsManager = GetComponent<PlayerStatsManager>();
         playerManager = GetComponent<PlayerManager>();
+        playerInventoryManager = GetComponent<PlayerInventoryManager>();
         playerEffectsManager = GetComponent<PlayerEffectsManager>();
         playerAnimatorManager = GetComponent<PlayerAnimatorManager>();
 
         quickSlotsUI = FindObjectOfType<QuickSlotsUI>();
-        cameraHandler = FindObjectOfType<CameraHandler>();
-
-        LoadWeaponHolderSlots();
     }
 
-    private void LoadWeaponHolderSlots()
-    {
-        WeaponHolderSlot[] weaponHolderSlots = GetComponentsInChildren<WeaponHolderSlot>();
-        foreach (WeaponHolderSlot weaponSlot in weaponHolderSlots)
-        {
-            if (weaponSlot.isLeftHandSlot)
-            {
-                leftHandSlot = weaponSlot;
-            }
-            else if (weaponSlot.isRightHandSlot)
-            {
-                rightHandSlot = weaponSlot;
-            }
-            else if (weaponSlot.isBackSlot)
-            {
-                backSlot = weaponSlot;
-            }
-        }
-    }
-
-    public void LoadBothWeaponsOnSlots()
-    {
-        LoadWeaponOnSlot(playerInventoryManager.rightWeapon, false);
-        LoadWeaponOnSlot(playerInventoryManager.leftWeapon, true);
-    }
-
-    public void LoadWeaponOnSlot(WeaponItem weaponItem, bool isLeft)
+    public override void LoadWeaponOnSlot(WeaponItem weaponItem, bool isLeft)
     {
         if(weaponItem != null)
         {
@@ -139,88 +109,14 @@ public class PlayerWeaponSlotManager : CharacterWeaponSlotManager
 
     }
 
-    #region Handle Weapon's Stamina Drainage
-    public void DrainStaminaLightAttack()
+    public override void DrainStaminaLightAttack()
     {
         playerStatsManager.TakeStaminsDamage(Mathf.RoundToInt(attackingWeapon.baseStamina * attackingWeapon.lightAttackMultiplier));
     }
 
-    public void DrainStaminaHeavyAttack()
+    public override void DrainStaminaHeavyAttack()
     {
         playerStatsManager.TakeStaminsDamage(Mathf.RoundToInt(attackingWeapon.baseStamina * attackingWeapon.heavyAttackMultiplier));
     }
-    #endregion
 
-    #region Handle Weapon's Damage Collider
-
-
-    private void LoadLeftWeaponDamageCollider()
-    {
-        leftHandDamageCollider = leftHandSlot.currentWeaponModel.GetComponentInChildren<DamageCollider>();
-
-        leftHandDamageCollider.physicalDamage = playerInventoryManager.leftWeapon.physicalDamage;
-        leftHandDamageCollider.fireDamage = playerInventoryManager.leftWeapon.fireDamage;
-
-        leftHandDamageCollider.teamIDNumber = playerStatsManager.teamIDNumber;
-
-        leftHandDamageCollider.poiseBreak = playerInventoryManager.leftWeapon.poiseBreak;
-        playerEffectsManager.leftWeaponFX = leftHandSlot.currentWeaponModel.GetComponentInChildren<WeaponFX>();
-    }
-
-    private void LoadRightWeaponDamageCollider()
-    {
-        rightHandDamageCollider = rightHandSlot.currentWeaponModel.GetComponentInChildren<DamageCollider>();
-
-        rightHandDamageCollider.physicalDamage = playerInventoryManager.rightWeapon.physicalDamage;
-        rightHandDamageCollider.fireDamage = playerInventoryManager.rightWeapon.fireDamage;
-
-        rightHandDamageCollider.teamIDNumber = playerStatsManager.teamIDNumber;
-
-        rightHandDamageCollider.poiseBreak = playerInventoryManager.rightWeapon.poiseBreak;
-        playerEffectsManager.rightWeaponFX = rightHandSlot.currentWeaponModel.GetComponentInChildren<WeaponFX>();
-    }
-
-    public void OpenDamageCollider()
-    {
-        if(playerManager.isUsingRightHand)
-        {
-            rightHandDamageCollider.EnableDamageCollider();
-        }
-        else if (playerManager.isUsingLeftHand)
-        {
-            leftHandDamageCollider.EnableDamageCollider();
-        }
-    }
-
-    public void CloseDamageCollider()
-    {
-        if(rightHandDamageCollider != null)
-        {
-            rightHandDamageCollider.DisableDamageCollider();
-        }
-
-        if(leftHandDamageCollider != null)
-        {
-            leftHandDamageCollider.DisableDamageCollider();
-        }
-    }
-
-    #endregion
-
-    #region Handle Weapon's Poise Bonus
-
-    public void GrantWeaponAttackingPoiseBonus()
-    {
-        playerStatsManager.totalPoiseDefence = playerStatsManager.totalPoiseDefence + attackingWeapon.offensivePoiseBonus;
-    }
-    
-
-    public void ResetWeaponAttackingPoiseBonus()
-    {
-        playerStatsManager.totalPoiseDefence = playerStatsManager.armorPoiseBonus;
-    }
-
-
-
-    #endregion
 }

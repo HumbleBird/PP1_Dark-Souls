@@ -271,7 +271,7 @@ public class PlayerCombatManager : MonoBehaviour
                 enemyCharacterManager.pendingCriticalDamage = criticalDamage;
 
                 playerAnimatorManager.PlayerTargetAnimation("Back Stab", true);
-                enemyCharacterManager.GetComponentInChildren<AnimatorManager>().PlayerTargetAnimation("Back Stabbed", true);
+                enemyCharacterManager.GetComponentInChildren<CharacterAnimatorManager>().PlayerTargetAnimation("Back Stabbed", true);
             }
         }
 
@@ -299,7 +299,7 @@ public class PlayerCombatManager : MonoBehaviour
                 enemyCharacterManager.pendingCriticalDamage = criticalDamage;
 
                 playerAnimatorManager.PlayerTargetAnimation("Riposte", true);
-                enemyCharacterManager.GetComponentInChildren<AnimatorManager>().PlayerTargetAnimation("Riposted", true);
+                enemyCharacterManager.GetComponentInChildren<CharacterAnimatorManager>().PlayerTargetAnimation("Riposted", true);
             }
         }
     }

@@ -52,6 +52,8 @@ public class EnemyManager : CharacterManager
         HandleRecoveryTimer();
         HandleStateMachine();
 
+        isUsingLeftHand = enemyAnimationManager.animator.GetBool("isUsingLeftHand");
+        isUsingRightHand = enemyAnimationManager.animator.GetBool("isUsingRightHand");
         isRotatingWithRootMotion = enemyAnimationManager.animator.GetBool("isRotatingWithRootMotion");
         isInteracting = enemyAnimationManager.animator.GetBool("isInteracting");
         canDoCombo = enemyAnimationManager.animator.GetBool("canDoCombo");

@@ -4,6 +4,12 @@ using UnityEngine;
 
 public class ResetAnimatorBool : StateMachineBehaviour
 {
+    public string isUsingRightHand = "isUsingRightHand";
+    public bool isUsingRightHandStatus = false;
+
+    public string isUsingLeftHand = "isUsingLeftHand";
+    public bool isUsingLeftHandStatus = false;
+
     public string isInvulerable = "isInvulerable";
     public bool isInvulerableStatus = false;
 
@@ -26,5 +32,7 @@ public class ResetAnimatorBool : StateMachineBehaviour
         animator.SetBool(isRotatingWithRootMotion, isRotatingWithRootMotionStatus);
         animator.SetBool(canRotateBool, canRotateStatus);
         animator.SetBool(isInvulerable, isInvulerableStatus);
+        animator.SetBool(isUsingRightHand, isUsingRightHandStatus);
+        animator.SetBool(isUsingLeftHand, isUsingLeftHandStatus);
     }
 }
