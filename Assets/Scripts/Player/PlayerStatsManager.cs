@@ -58,12 +58,12 @@ public class PlayerStatsManager : CharacterStatsManager
     }
 
 
-    public override void TakeDamage(int damage, int fireDamage, string damageAnimation = "Damage_01")
+    public override void TakeDamage(int damage, int fireDamage, string damageAnimation)
     {
         if (playerManager.isInvulnerable)
             return;
 
-        base.TakeDamage(damage, fireDamage, damageAnimation = "Damage_01");
+        base.TakeDamage(damage, fireDamage, damageAnimation);
 
         healthBar.SetCurrentHealth(currentHealth);
         playerAnimatorManager.PlayerTargetAnimation(damageAnimation, true);
