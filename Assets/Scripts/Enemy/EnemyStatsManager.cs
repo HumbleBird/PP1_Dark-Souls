@@ -15,13 +15,12 @@ public class EnemyStatsManager : CharacterStatsManager
 
     public bool isBoss;
 
-    private void Awake()
+    protected override void Awake()
     {
+        base.Awake();
         enemyManager = GetComponent<EnemyManager>();
         enemyAnimationManager = GetComponent<EnemyAnimationManager>();
         enemyBossManager = GetComponent<EnemyBossManager>();
-
-        //enemyHealthBar = GetComponentInChildren<UIEnemyHealthBar>();
 
         maxHealth = SetMaxHealthFromHealthLevel();
         currentHealth = maxHealth;

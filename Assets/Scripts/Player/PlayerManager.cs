@@ -16,10 +16,9 @@ public class PlayerManager : CharacterManager
     public GameObject interactableUIGameObject;
     public GameObject itemInteractableUIGameObject;
 
-
-    
-    private void Awake()
+    protected override void Awake()
     {
+        base.Awake();
         backStabCollider = GetComponentInChildren<CriticalDamageCollider>();
 
         cameraHandler = FindObjectOfType<CameraHandler>();
@@ -62,8 +61,10 @@ public class PlayerManager : CharacterManager
     }
 
 
-    private void FixedUpdate() 
+    protected override void FixedUpdate() 
     {
+        base.FixedUpdate();
+
         float delta = Time.fixedDeltaTime;
 
 

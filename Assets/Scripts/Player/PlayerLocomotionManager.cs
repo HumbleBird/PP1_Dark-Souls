@@ -212,6 +212,7 @@ public class PlayerLocomotionManager : MonoBehaviour
             if (inputHandler.moveAmount > 0)
             {
                 playerAnimatorManager.PlayerTargetAnimation("Rolling", true);
+                playerAnimatorManager.EraseHandIKForWeapon();
                 moveDirection.y = 0;
                 Quaternion rollRotation = Quaternion.LookRotation(moveDirection);
                 myTransform.rotation = rollRotation;
@@ -220,6 +221,7 @@ public class PlayerLocomotionManager : MonoBehaviour
             else
             {
                 playerAnimatorManager.PlayerTargetAnimation("BackStep", true);
+                playerAnimatorManager.EraseHandIKForWeapon();
                 playerStatsManager.TakeStaminsDamage(backstepStaminaCost);
 
             }
@@ -326,6 +328,7 @@ public class PlayerLocomotionManager : MonoBehaviour
                 moveDirection = cameraObject.forward * inputHandler.vertical;
                 moveDirection += cameraObject.right * inputHandler.horizontal;
                 playerAnimatorManager.PlayerTargetAnimation("Jump", true);
+                playerAnimatorManager.EraseHandIKForWeapon();
                 moveDirection.y = 0;
                 Quaternion jumpRotation = Quaternion.LookRotation(moveDirection);
                 myTransform.rotation = jumpRotation;

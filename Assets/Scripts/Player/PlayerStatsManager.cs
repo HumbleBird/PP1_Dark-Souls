@@ -14,8 +14,9 @@ public class PlayerStatsManager : CharacterStatsManager
     public float staminaRegenerationAmount = 1;
     public float staminaRegenTimer = 0;
 
-    private void Awake()
+    protected override void Awake()
     {
+        base.Awake();
         playerManager = GetComponent<PlayerManager>();
 
         staminaBar = FindObjectOfType<StaminaBar>();

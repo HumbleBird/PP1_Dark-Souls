@@ -4,6 +4,8 @@ using UnityEngine;
 
 public class CharacterStatsManager : MonoBehaviour
 {
+    CharacterAnimatorManager characterAnimatorManager;
+
     [Header("Team I.D")]
     public int teamIDNumber = 0;
 
@@ -42,6 +44,11 @@ public class CharacterStatsManager : MonoBehaviour
 
     public bool isDead;
 
+    protected virtual void Awake()
+    {
+        characterAnimatorManager = GetComponent<CharacterAnimatorManager>();
+    }
+
     protected virtual void Update()
     {
         HandlePoiseResetTime();
@@ -56,6 +63,8 @@ public class CharacterStatsManager : MonoBehaviour
     {
         if (isDead)
             return;
+
+        characterAnimatorManager.EraseHandIKForWeapon();
 
         float totalPhysicalDamageAbsorption = 1 -
             (1 - physicalDamageAbsorptionHead / 100) *

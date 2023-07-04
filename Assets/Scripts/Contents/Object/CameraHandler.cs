@@ -82,8 +82,8 @@ public class CameraHandler : MonoBehaviour
     {
         if (inputHandler.lockOnFlag == false && m_trCurrentLockOnTarget == null)
         {
-            lookAngle += (mouseXInput * lookSpeed) / delta;
-            pivotAngle -= (mouseYInput * pivotSpeed) / delta;
+            lookAngle += mouseXInput * lookSpeed * delta;
+            pivotAngle -= mouseYInput * pivotSpeed * delta;
             pivotAngle = Mathf.Clamp(pivotAngle, minimumPivot, maximumPivot);
 
             Vector3 rotation = Vector3.zero;
