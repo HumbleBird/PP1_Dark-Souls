@@ -16,22 +16,15 @@ MonoBehaviour:
   itemName: Pyromancy Flame
   modelPrefab: {fileID: 4049393283618938371, guid: 5b3fe82ed3cbfcb448bfcc5457ff250f, type: 3}
   isUnarmed: 0
-  baseDamage: 25
+  weaponController: {fileID: 22100000, guid: 10f21dedf98d2174498bb58bc4091ab7, type: 2}
+  offHandIdleAnimation: Left_Arm_Idle_01
+  weaponType: 0
+  physicalDamage: 0
+  fireDamage: 0
   criticalDamagemuiltiplier: 4
+  poiseBreak: 0
+  offensivePoiseBonus: 0
   physicalDamageAbsorption: 0
-  right_hand_idle: Right_Arm_Idle_01
-  left_hand_idle: Left_Arm _Idle_01
-  th_idle: TH_Idle_01
-  oh_light_attack_01: oh_light_attack_01
-  oh_light_attack_02: oh_light_attack_02
-  th_light_attack_01: TH_Sword_Attack_01
-  th_light_attack_02: TH_Sword_Attack_02
-  weapon_art: 
   baseStamina: 0
   lightAttackMultiplier: 0
   heavyAttackMultiplier: 0
-  isSpellCaster: 0
-  isFaithCaster: 0
-  isPyroCaster: 1
-  isMeleeWeapon: 0
-  isShieldWeapon: 0

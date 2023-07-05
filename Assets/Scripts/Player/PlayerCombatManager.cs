@@ -117,7 +117,7 @@ public class PlayerCombatManager : MonoBehaviour
             || playerInventoryManager  .rightWeapon.weaponType == WeaponType.FaithCaster  
             || playerInventoryManager.rightWeapon.weaponType == WeaponType.  PyroCaster )
         {
-            PerformRBMagicAction(playerInventoryManager.rightWeapon);
+            PerformMagicAction(playerInventoryManager.rightWeapon, false);
         }
 
 
@@ -125,7 +125,29 @@ public class PlayerCombatManager : MonoBehaviour
 
     public void HandleLBAction()
     {
-        PerformLBBlockingAction();
+
+        if(playerManager.isTwoHandingWeapon)
+        {
+            if(playerInventoryManager.rightWeapon.weaponType == WeaponType.Bow)
+            {
+                PerformLBAimingAction();
+            }
+        }
+        else
+        {
+            if (playerInventoryManager.leftWeapon.weaponType == WeaponType.Shield ||
+                playerInventoryManager.leftWeapon.weaponType == WeaponType.StraightSwords)
+            {
+                PerformLBBlockingAction();
+
+            }
+            else if (playerInventoryManager.leftWeapon.weaponType == WeaponType.FaithCaster ||
+                playerInventoryManager.leftWeapon.weaponType == WeaponType.PyroCaster)
+            {
+                PerformMagicAction(playerInventoryManager.leftWeapon, true);
+                playerAnimatorManager.animator.SetBool("isUsingLeftHand", true);
+            }
+        }
     }
 
     public void HandleLTAction()
@@ -179,8 +201,12 @@ public class PlayerCombatManager : MonoBehaviour
 
     }
 
+    private void PerformLBAimingAction()
+    {
+        playerAnimatorManager.animator.SetBool("isAiming", true);
+    }
 
-    private void PerformRBMagicAction(WeaponItem weapon)
+    private void PerformMagicAction(WeaponItem weapon, bool isLeftHaned)
     {
         if (playerManager.isInteracting)
             return;
@@ -192,7 +218,7 @@ public class PlayerCombatManager : MonoBehaviour
                 // CHECK FOR FP
                 if (playerStatsManager.currentFocusPoints >= playerInventoryManager.currentSpell.focusPointCost)
                 {
-                    playerInventoryManager.currentSpell.AttemptToCastSpell(playerAnimatorManager, playerStatsManager, playerWeaponSlotManager);
+                    playerInventoryManager.currentSpell.AttemptToCastSpell(playerAnimatorManager, playerStatsManager, playerWeaponSlotManager, isLeftHaned);
                 }
                 else
                     playerAnimatorManager.PlayerTargetAnimation("Shrug", true);
@@ -205,7 +231,7 @@ public class PlayerCombatManager : MonoBehaviour
                 // CHECK FOR FP
                 if (playerStatsManager.currentFocusPoints >= playerInventoryManager.currentSpell.focusPointCost)
                 {
-                    playerInventoryManager.currentSpell.AttemptToCastSpell(playerAnimatorManager, playerStatsManager, playerWeaponSlotManager);
+                    playerInventoryManager.currentSpell.AttemptToCastSpell(playerAnimatorManager, playerStatsManager, playerWeaponSlotManager, isLeftHaned);
                 }
                 else
                     playerAnimatorManager.PlayerTargetAnimation("Shrug", true);
@@ -232,7 +258,8 @@ public class PlayerCombatManager : MonoBehaviour
 
     private void SuccessfullyCastSpell()
     {
-        playerInventoryManager.currentSpell.SuccessfullyCastSpell(playerAnimatorManager, playerStatsManager, cameraHandler, playerWeaponSlotManager);
+        playerInventoryManager.currentSpell.SuccessfullyCastSpell
+            (playerAnimatorManager, playerStatsManager, cameraHandler, playerWeaponSlotManager, playerManager.isUsingLeftHand);
         playerAnimatorManager.animator.SetBool("isFiringSpell", true);
     }
 

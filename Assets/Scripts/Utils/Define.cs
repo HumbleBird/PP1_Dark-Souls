@@ -74,6 +74,7 @@ public class Define
         Unarmed,
         StraightSwords,
         Shield,
+        Bow
     }
 
     public enum WeaponType2

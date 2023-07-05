@@ -116,6 +116,7 @@ public class InputHandler : MonoBehaviour
 
         HandleMoveInput(delta);
         HandleRollInput(delta);
+        HandleLBInput();
         HandleCombatInput(delta);
         HandleQuickSlotsInput();
         HandleInventoryInput();
@@ -127,11 +128,24 @@ public class InputHandler : MonoBehaviour
 
     private void HandleMoveInput(float delta)
     {
-        horizontal = movementInput.x;
-        vertical = movementInput.y;
-        moveAmount = Mathf.Clamp01(Mathf.Abs(horizontal) + Mathf.Abs(vertical));
-        mouseX = cameraInput.x;
-        mouseY = cameraInput.y;
+        if(playerManager.isAiming)
+        {
+            horizontal = movementInput.x;
+            vertical = movementInput.y;
+            moveAmount = Mathf.Clamp01(Mathf.Abs(horizontal) + Mathf.Abs(vertical) / 2);
+            mouseX = cameraInput.x;
+            mouseY = cameraInput.y;
+        }
+        else
+        {
+            horizontal = movementInput.x;
+            vertical = movementInput.y;
+            moveAmount = Mathf.Clamp01(Mathf.Abs(horizontal) + Mathf.Abs(vertical));
+            mouseX = cameraInput.x;
+            mouseY = cameraInput.y;
+        }
+
+
     }
 
     private void HandleRollInput(float delta)
@@ -190,18 +204,34 @@ public class InputHandler : MonoBehaviour
                 playerCombatManager.HandleLTAction();
             }
         }
+    }
+
+    private void HandleLBInput()
+    {
+        if(playerManager.isInAir ||
+            playerManager.isSprinting ||
+            playerManager.isFiringSpell)
+        {
+            lb_Input = false;
+            return;
+        }
 
         if (lb_Input)
         {
             playerCombatManager.HandleLBAction();
         }
-        else
+        else if (lb_Input == false)
         {
             playerManager.isBlocking = false;
 
-            if(blockingCollider.blockingCollider.enabled)
+            if (blockingCollider.blockingCollider.enabled)
             {
                 blockingCollider.DisableBlockingCollider();
+            }
+
+            if(playerManager.isAiming)
+            {
+                playerAnimatorManager.animator.SetBool("isAiming", false);
             }
         }
     }

@@ -27,11 +27,12 @@ public class CharacterAnimatorManager : MonoBehaviour
 
     }
 
-    public void PlayerTargetAnimation(string targetAnim, bool isInteracting, bool canRoate = false)
+    public void PlayerTargetAnimation(string targetAnim, bool isInteracting, bool canRoate = false, bool mirrorAnim = false)
     {
         animator.applyRootMotion = isInteracting;
         animator.SetBool("canRotate", canRoate);
         animator.SetBool("isInteracting", isInteracting);
+        animator.SetBool("isMirrored", mirrorAnim);
         animator.CrossFade(targetAnim, 0.2f);
     }
 
@@ -103,18 +104,21 @@ public class CharacterAnimatorManager : MonoBehaviour
 
     public virtual void SetHandIKForWeapon(RightHandIKTarget rightHandTarget, LeftHandIKTarget leftHandTarget, bool isTwoHandingWeapon)
     {
-        if (rightHandConstraint == null || leftHandConstraint == null)
-            return;
-
         if(isTwoHandingWeapon)
         {
-            rightHandConstraint.data.target = rightHandTarget.transform;
-            rightHandConstraint.data.targetPositionWeight = 1; // 원한다면 각 무기 별로 할당 가능
-            rightHandConstraint.data.targetRotationWeight = 1;
-
-            leftHandConstraint.data.target = leftHandTarget.transform;
-            leftHandConstraint.data.targetPositionWeight = 1;
-            leftHandConstraint.data.targetRotationWeight = 1;
+            if(rightHandTarget != null)
+            {
+                rightHandConstraint.data.target = rightHandTarget.transform;
+                rightHandConstraint.data.targetPositionWeight = 1; // 원한다면 각 무기 별로 할당 가능
+                rightHandConstraint.data.targetRotationWeight = 1;
+            }
+            
+            if(leftHandTarget != null)
+            {
+                leftHandConstraint.data.target = leftHandTarget.transform;
+                leftHandConstraint.data.targetPositionWeight = 1;
+                leftHandConstraint.data.targetRotationWeight = 1;
+            }
         }
         else
         {

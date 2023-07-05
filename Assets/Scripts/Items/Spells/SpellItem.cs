@@ -21,13 +21,21 @@ public class SpellItem : Item
     [TextArea]
     public string spellDescription;
 
-    public virtual void AttemptToCastSpell(PlayerAnimatorManager playerAnimatorManager, PlayerStatsManager playerStatsManager, PlayerWeaponSlotManager weaponSlotMAnager)
+    public virtual void AttemptToCastSpell(
+        PlayerAnimatorManager playerAnimatorManager, 
+        PlayerStatsManager playerStatsManager, 
+        PlayerWeaponSlotManager weaponSlotMAnager,
+        bool isLeftHaned)
     {
         Debug.Log("You Attempt to cast a spell");
     }
 
-    public virtual void SuccessfullyCastSpell(PlayerAnimatorManager playerAnimatorManager, PlayerStatsManager playerStatsManager, CameraHandler cameraHandler,
-        PlayerWeaponSlotManager playerWeaponSlotManager)
+    public virtual void SuccessfullyCastSpell(
+        PlayerAnimatorManager playerAnimatorManager, 
+        PlayerStatsManager playerStatsManager, 
+        CameraHandler cameraHandler,
+        PlayerWeaponSlotManager playerWeaponSlotManager,
+        bool isLeftHaned)
     {
         Debug.Log("You Successfully cast a spell");
         playerStatsManager.DeductFocusPoints(focusPointCost);
