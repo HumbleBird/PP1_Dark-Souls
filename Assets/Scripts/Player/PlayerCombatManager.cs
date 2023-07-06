@@ -48,6 +48,18 @@ public class PlayerCombatManager : MonoBehaviour
         playerEffectsManager = GetComponent<PlayerEffectsManager>();
     }
 
+    public void HandleHoldRBAction()
+    {
+        if(playerManager.isTwoHandingWeapon)
+        {
+            PerformRBRangedAction();
+        }
+        else
+        {
+
+        }
+    }
+
     public void HandleWeaponCombo(WeaponItem weapon)
     {
 
@@ -161,6 +173,16 @@ public class PlayerCombatManager : MonoBehaviour
 
         }
     }
+
+    private void DrawArrowAction()
+    {
+        playerAnimatorManager.animator.SetBool("isHoldingArrow", true);
+        playerAnimatorManager.PlayerTargetAnimation("Bow_TH_Draw_01", true);
+        GameObject loadedArrow = Instantiate(playerInventoryManager.currentAmmo.loadedItemModel, playerWeaponSlotManager.rightHandSlot.transform);
+        //Animate the bow
+
+        playerEffectsManager.currentRangeFX = loadedArrow;
+    }
     #endregion
 
     #region Attack Actions
@@ -185,6 +207,27 @@ public class PlayerCombatManager : MonoBehaviour
         }
 
         playerEffectsManager.PlayWeaponFX(false);
+    }
+
+    private void PerformRBRangedAction()
+    {
+        if (playerStatsManager.currentStamina <= 0)
+            return;
+
+        playerAnimatorManager.EraseHandIKForWeapon();
+        playerAnimatorManager.animator.SetBool("isUsingRightHand", true);
+
+        if(!playerManager.isHoldingArrow)
+        {
+            if(playerInventoryManager.currentAmmo != null)
+            {
+                DrawArrowAction();
+            }
+            else
+            {
+                playerAnimatorManager.PlayerTargetAnimation("Shrug", true);
+            }
+        }
     }
 
     private void PerformLBBlockingAction()

@@ -51,6 +51,12 @@ public class Define
     #endregion
 
     #region Item
+    public enum AmmoType
+    {
+        Arrow,
+        Bolt
+    }
+
     public enum ConsumableType
     {
         None,

@@ -30644,6 +30644,7 @@ MonoBehaviour:
   isInvulnerable: 0
   isUsingRightHand: 0
   isUsingLeftHand: 0
+  isHoldingArrow: 0
   isTwoHandingWeapon: 0
   isRotatingWithRootMotion: 0
   canRotate: 0
@@ -35404,6 +35405,7 @@ MonoBehaviour:
   isInvulnerable: 0
   isUsingRightHand: 0
   isUsingLeftHand: 0
+  isHoldingArrow: 0
   isTwoHandingWeapon: 0
   isRotatingWithRootMotion: 0
   canRotate: 0
@@ -39295,10 +39297,10 @@ MonoBehaviour:
   x_Input: 0
   y_Input: 0
   rb_Input: 0
+  hold_rb_Input: 0
   rt_Input: 0
   lb_Input: 0
   lt_Input: 0
-  critical_Attack_Input: 0
   jump_Input: 0
   inventory_Input: 0
   lockOnInput: 0
@@ -39313,6 +39315,7 @@ MonoBehaviour:
   sprintFlag: 0
   comboFlag: 0
   lockOnFlag: 0
+  fireFlag: 0
   inventoryFlag: 0
   rollInputTimer: 0
   criticalAttackRayCastStartPoint: {fileID: 4952518795487473037}
@@ -39381,6 +39384,7 @@ MonoBehaviour:
   isInvulnerable: 0
   isUsingRightHand: 0
   isUsingLeftHand: 0
+  isHoldingArrow: 0
   isTwoHandingWeapon: 0
   isRotatingWithRootMotion: 0
   canRotate: 0
@@ -39476,6 +39480,7 @@ MonoBehaviour:
   rightWeapon: {fileID: 0}
   leftWeapon: {fileID: 0}
   currentConsumable: {fileID: 11400000, guid: cc6fb931e1871e441862ea869f60eb76, type: 2}
+  currentAmmo: {fileID: 11400000, guid: 061614e8ff311344782b09816f7fc630, type: 2}
   currentHelmetEquipment: {fileID: 11400000, guid: 52b47bfd727145e439fad8e70cc6d16c, type: 2}
   currentTorsoEquipment: {fileID: 11400000, guid: 3fd4e55e192f5624a94a47e8b9011852, type: 2}
   currentLegEquipment: {fileID: 11400000, guid: a48ab80223a30344ea3d924b8239ff98, type: 2}
@@ -39501,6 +39506,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 23a2ff4e986aa334cb921a3d3d56881e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  currentRangeFX: {fileID: 0}
   bloodSplatterFX: {fileID: 6141063427869561630, guid: 7394c9bad0b44da4aaf6759ca2b78cd8, type: 3}
   rightWeaponFX: {fileID: 0}
   leftWeaponFX: {fileID: 0}
@@ -46349,6 +46355,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ac372a97b89f17b418ca9f33f200132c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  currentRangeFX: {fileID: 0}
   bloodSplatterFX: {fileID: 6141063427869561630, guid: 7394c9bad0b44da4aaf6759ca2b78cd8, type: 3}
   rightWeaponFX: {fileID: 0}
   leftWeaponFX: {fileID: 0}
@@ -47143,6 +47150,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ac372a97b89f17b418ca9f33f200132c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  currentRangeFX: {fileID: 0}
   bloodSplatterFX: {fileID: 6141063427869561630, guid: 7394c9bad0b44da4aaf6759ca2b78cd8, type: 3}
   rightWeaponFX: {fileID: 0}
   leftWeaponFX: {fileID: 0}
@@ -47171,6 +47179,7 @@ MonoBehaviour:
   rightWeapon: {fileID: 11400000, guid: 96a4fefc7750e24459d8e8a5f20f1332, type: 2}
   leftWeapon: {fileID: 0}
   currentConsumable: {fileID: 0}
+  currentAmmo: {fileID: 0}
   currentHelmetEquipment: {fileID: 0}
   currentTorsoEquipment: {fileID: 0}
   currentLegEquipment: {fileID: 0}
