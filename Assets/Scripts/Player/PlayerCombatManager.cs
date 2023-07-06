@@ -179,10 +179,62 @@ public class PlayerCombatManager : MonoBehaviour
         playerAnimatorManager.animator.SetBool("isHoldingArrow", true);
         playerAnimatorManager.PlayerTargetAnimation("Bow_TH_Draw_01", true);
         GameObject loadedArrow = Instantiate(playerInventoryManager.currentAmmo.loadedItemModel, playerWeaponSlotManager.rightHandSlot.transform);
+
         //Animate the bow
+        Animator bowAnimator = playerWeaponSlotManager.rightHandSlot.GetComponentInChildren<Animator>();
+        bowAnimator.SetBool("isDrawn", true);
+        bowAnimator.Play("BowObject_TH_Draw_01");
 
         playerEffectsManager.currentRangeFX = loadedArrow;
     }
+
+    public void FireArrowAction()
+    {
+        // live arrow을 생성할 위치 찾기
+        ArrowInstantiationLocation arrowInstantiationLocation;
+        arrowInstantiationLocation = playerWeaponSlotManager.rightHandSlot.GetComponentInChildren<ArrowInstantiationLocation>();
+
+        // Fire the arrow의 애니메이션 실행
+        Animator bowAnimator = playerWeaponSlotManager.rightHandSlot.GetComponentInChildren<Animator>();
+        bowAnimator.SetBool("isDrawn", false);
+        bowAnimator.Play("BowObject_TH_Fire_01");
+        Destroy(playerEffectsManager.currentRangeFX);
+
+        // reset 플레이어 holding arrow flag
+        playerAnimatorManager.PlayerTargetAnimation("Bow_TH_Fire_01", true);
+        playerAnimatorManager.animator.SetBool("isHoldingArrow", false);
+
+        // live arrow 생성
+        GameObject liveArrow = Instantiate(playerInventoryManager.currentAmmo.liveAmmoModel, arrowInstantiationLocation.transform.position, cameraHandler.cameraPivotTranform.rotation);
+        Rigidbody rigidBody = liveArrow.GetComponentInChildren<Rigidbody>();
+        RangedProjectileDamageCollider damageCollider = liveArrow.GetComponentInChildren<RangedProjectileDamageCollider>();
+
+        // live arrow 속도
+        if(cameraHandler.m_trCurrentLockOnTarget != null)
+        {
+            Quaternion arrowRotation = Quaternion.LookRotation(transform.forward);
+            liveArrow.transform.rotation = arrowRotation;
+        }
+        else
+        {
+            liveArrow.transform.rotation = Quaternion.Euler(cameraHandler.cameraPivotTranform.eulerAngles.x, playerManager.lockOnTransform.eulerAngles.y, 0);
+        }
+
+
+
+        rigidBody.AddForce(liveArrow.transform.forward * playerInventoryManager.currentAmmo.forwardVelocity);
+        rigidBody.AddForce(liveArrow.transform.up * playerInventoryManager.currentAmmo.upwardVelocity);
+        rigidBody.useGravity = playerInventoryManager.currentAmmo.useGravity;
+        rigidBody.mass = playerInventoryManager.currentAmmo.ammoMass;
+        liveArrow.transform.parent = null;
+
+        // damage collider set
+        damageCollider.characterManager = playerManager;
+        damageCollider.ammoItem = playerInventoryManager.currentAmmo;
+        damageCollider.physicalDamage = playerInventoryManager.currentAmmo.physicalDamage;
+    }
+
+
     #endregion
 
     #region Attack Actions

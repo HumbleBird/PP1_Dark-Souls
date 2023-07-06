@@ -20,7 +20,7 @@ public class RangedAmmoItem : Item
     public int currentAmount = 99;
 
     [Header("Ammo Base Damage")]
-    public float physicalDamage = 50;
+    public int physicalDamage = 50;
 
 
     [Header("Item Modles")]

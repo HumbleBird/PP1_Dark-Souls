@@ -140,6 +140,9 @@ public class CharacterWeaponSlotManager : MonoBehaviour
     {
         rightHandDamageCollider = rightHandSlot.currentWeaponModel.GetComponentInChildren<DamageCollider>();
 
+        if (rightHandDamageCollider == null)
+            return;
+
         rightHandDamageCollider.physicalDamage = characterInventoryManager.rightWeapon.physicalDamage;
         rightHandDamageCollider.fireDamage = characterInventoryManager.rightWeapon.fireDamage;
 

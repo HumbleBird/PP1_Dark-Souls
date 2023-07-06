@@ -131,6 +131,7 @@ public class InputHandler : MonoBehaviour
         HandleTwoHandInput();
         HandleUseConsumableInput();
         HandleHoldRBInput();
+        HandleFireBowInput();
     }
 
     private void HandleMoveInput(float delta)
@@ -354,6 +355,18 @@ public class InputHandler : MonoBehaviour
             {
                 hold_rb_Input = false;
                 playerCombatManager.AttemptBackStabOrRiposte();
+            }
+        }
+    }
+
+    private void HandleFireBowInput()
+    {
+        if(fireFlag)
+        {
+            if(playerManager.isHoldingArrow)
+            {
+                fireFlag = false;
+                playerCombatManager.FireArrowAction();
             }
         }
     }
