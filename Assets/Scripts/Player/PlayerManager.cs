@@ -93,8 +93,8 @@ public class PlayerManager : CharacterManager
 
         if (cameraHandler != null)
         {
-            cameraHandler.FollwTarget(delta);
-            cameraHandler.HandleCameraRotation(delta, inputHandler.mouseX, inputHandler.mouseY);
+            cameraHandler.FollowTarget();
+            cameraHandler.HandleCameraRotation();
         }
 
         if (isInAir)

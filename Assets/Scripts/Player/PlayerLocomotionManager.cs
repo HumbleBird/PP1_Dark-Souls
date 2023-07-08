@@ -82,15 +82,58 @@ public class PlayerLocomotionManager : MonoBehaviour
 
         if (playerAnimatorManager.canRotate)
         {
-
-            if (inputHandler.lockOnFlag)
+            if(playerManager.isAiming)
             {
-                if (inputHandler.sprintFlag || inputHandler.rollFlag)
+                Quaternion targetRotation = Quaternion.Euler(0, cameraHandler.cameraTransform.eulerAngles.y, 0);
+                Quaternion playerRotation = Quaternion.Slerp(transform.rotation, targetRotation, rotationSpeed * Time.deltaTime);
+                transform.rotation = playerRotation;
+            }
+            else
+            {
+                if (inputHandler.lockOnFlag)
+                {
+                    if (inputHandler.sprintFlag || inputHandler.rollFlag)
+                    {
+                        Vector3 targetDir = Vector3.zero;
+
+                        targetDir = cameraHandler.cameraTransform.forward * inputHandler.vertical;
+                        targetDir += cameraHandler.cameraTransform.right * inputHandler.horizontal;
+                        targetDir.Normalize();
+                        targetDir.y = 0;
+
+                        if (targetDir == Vector3.zero)
+                            targetDir = transform.forward;
+
+                        float rs = rotationSpeed;
+
+                        Quaternion tr = Quaternion.LookRotation(targetDir);
+                        Quaternion targetRotation = Quaternion.Slerp(transform.rotation, tr, rs * Time.deltaTime);
+
+                        myTransform.rotation = targetRotation;
+                    }
+                    else
+                    {
+                        Vector3 rotationDirection = moveDirection;
+
+                        rotationDirection = cameraHandler.m_trCurrentLockOnTarget.transform.position - transform.position;
+                        rotationDirection.y = 0;
+                        rotationDirection.Normalize();
+
+                        float rs = rotationSpeed;
+
+                        Quaternion tr = Quaternion.LookRotation(rotationDirection);
+                        Quaternion targetRotation = Quaternion.Slerp(transform.rotation, tr, rs * Time.deltaTime);
+
+                        myTransform.rotation = targetRotation;
+                    }
+                }
+                else
                 {
                     Vector3 targetDir = Vector3.zero;
 
-                    targetDir = cameraHandler.cameraTransform.forward * inputHandler.vertical;
-                    targetDir += cameraHandler.cameraTransform.right * inputHandler.horizontal;
+                    targetDir = cameraObject.forward * inputHandler.vertical;
+                    targetDir += cameraObject.right * inputHandler.horizontal;
+
                     targetDir.Normalize();
                     targetDir.y = 0;
 
@@ -100,45 +143,10 @@ public class PlayerLocomotionManager : MonoBehaviour
                     float rs = rotationSpeed;
 
                     Quaternion tr = Quaternion.LookRotation(targetDir);
-                    Quaternion targetRotation = Quaternion.Slerp(transform.rotation, tr, rs * Time.deltaTime);
+                    Quaternion targetRotation = Quaternion.Slerp(transform.rotation, tr, rs * delta);
 
                     myTransform.rotation = targetRotation;
                 }
-                else
-                {
-                    Vector3 rotationDirection = moveDirection;
-
-                    rotationDirection = cameraHandler.m_trCurrentLockOnTarget.transform.position - transform.position;
-                    rotationDirection.y = 0;
-                    rotationDirection.Normalize();
-
-                    float rs = rotationSpeed;
-
-                    Quaternion tr = Quaternion.LookRotation(rotationDirection);
-                    Quaternion targetRotation = Quaternion.Slerp(transform.rotation, tr, rs * Time.deltaTime);
-
-                    myTransform.rotation = targetRotation;
-                }
-            }
-            else
-            {
-                Vector3 targetDir = Vector3.zero;
-
-                targetDir = cameraObject.forward * inputHandler.vertical;
-                targetDir += cameraObject.right * inputHandler.horizontal;
-
-                targetDir.Normalize();
-                targetDir.y = 0;
-
-                if (targetDir == Vector3.zero)
-                    targetDir = transform.forward;
-
-                float rs = rotationSpeed;
-
-                Quaternion tr = Quaternion.LookRotation(targetDir);
-                Quaternion targetRotation = Quaternion.Slerp(transform.rotation, tr, rs * delta);
-
-                myTransform.rotation = targetRotation;
             }
         }
 

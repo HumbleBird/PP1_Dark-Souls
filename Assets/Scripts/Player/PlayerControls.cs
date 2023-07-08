@@ -193,15 +193,6 @@ public partial class @PlayerControls : IInputActionCollection2, IDisposable
             ""id"": ""ce91e68d-ede1-4067-83a0-3d54b75e04ef"",
             ""actions"": [
                 {
-                    ""name"": ""Roll"",
-                    ""type"": ""Button"",
-                    ""id"": ""6f2615c7-2627-4f64-8214-09af9da598b5"",
-                    ""expectedControlType"": ""Button"",
-                    ""processors"": """",
-                    ""interactions"": """",
-                    ""initialStateCheck"": false
-                },
-                {
                     ""name"": ""RB"",
                     ""type"": ""Button"",
                     ""id"": ""8a50b7db-4229-45cf-be8d-2f30c2a3eaa4"",
@@ -229,18 +220,27 @@ public partial class @PlayerControls : IInputActionCollection2, IDisposable
                     ""initialStateCheck"": false
                 },
                 {
-                    ""name"": ""A"",
+                    ""name"": ""LB"",
                     ""type"": ""Button"",
-                    ""id"": ""b0202d35-50b3-4f52-9afd-397453a19b80"",
+                    ""id"": ""dbbf1b12-cffe-4f28-9655-9cc92139dc03"",
                     ""expectedControlType"": ""Button"",
                     ""processors"": """",
                     ""interactions"": """",
                     ""initialStateCheck"": false
                 },
                 {
-                    ""name"": ""Jump"",
+                    ""name"": ""LT"",
                     ""type"": ""Button"",
-                    ""id"": ""6dddb3af-3c62-46a0-a88f-0ae329963af6"",
+                    ""id"": ""e4fedfe0-3b49-4f49-be93-b4f8d3c1527d"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""A"",
+                    ""type"": ""Button"",
+                    ""id"": ""b0202d35-50b3-4f52-9afd-397453a19b80"",
                     ""expectedControlType"": ""Button"",
                     ""processors"": """",
                     ""interactions"": """",
@@ -274,33 +274,6 @@ public partial class @PlayerControls : IInputActionCollection2, IDisposable
                     ""initialStateCheck"": false
                 },
                 {
-                    ""name"": ""Select"",
-                    ""type"": ""Button"",
-                    ""id"": ""91270da3-d761-49ec-9964-b5fff43bbb3d"",
-                    ""expectedControlType"": ""Button"",
-                    ""processors"": """",
-                    ""interactions"": """",
-                    ""initialStateCheck"": false
-                },
-                {
-                    ""name"": ""LB"",
-                    ""type"": ""Button"",
-                    ""id"": ""dbbf1b12-cffe-4f28-9655-9cc92139dc03"",
-                    ""expectedControlType"": ""Button"",
-                    ""processors"": """",
-                    ""interactions"": """",
-                    ""initialStateCheck"": false
-                },
-                {
-                    ""name"": ""Inventory"",
-                    ""type"": ""Button"",
-                    ""id"": ""f17a1343-7a81-4b49-9141-f0c926c3430a"",
-                    ""expectedControlType"": ""Button"",
-                    ""processors"": """",
-                    ""interactions"": """",
-                    ""initialStateCheck"": false
-                },
-                {
                     ""name"": ""LockOn"",
                     ""type"": ""Button"",
                     ""id"": ""57e6b66f-a661-4ce2-a747-448e84133871"",
@@ -310,9 +283,36 @@ public partial class @PlayerControls : IInputActionCollection2, IDisposable
                     ""initialStateCheck"": false
                 },
                 {
-                    ""name"": ""LT"",
+                    ""name"": ""Roll"",
                     ""type"": ""Button"",
-                    ""id"": ""e4fedfe0-3b49-4f49-be93-b4f8d3c1527d"",
+                    ""id"": ""6f2615c7-2627-4f64-8214-09af9da598b5"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""Jump"",
+                    ""type"": ""Button"",
+                    ""id"": ""6dddb3af-3c62-46a0-a88f-0ae329963af6"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""Select"",
+                    ""type"": ""Button"",
+                    ""id"": ""91270da3-d761-49ec-9964-b5fff43bbb3d"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""Inventory"",
+                    ""type"": ""Button"",
+                    ""id"": ""f17a1343-7a81-4b49-9141-f0c926c3430a"",
                     ""expectedControlType"": ""Button"",
                     ""processors"": """",
                     ""interactions"": """",
@@ -344,6 +344,50 @@ public partial class @PlayerControls : IInputActionCollection2, IDisposable
                 },
                 {
                     ""name"": """",
+                    ""id"": ""2bce513c-9851-4f95-84ff-8cbfd9ec8356"",
+                    ""path"": ""<Keyboard>/space"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Jump"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""487b9b89-292e-4b8f-9b69-d1f5e4655e4c"",
+                    ""path"": """",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Select"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""6b433c4a-069c-4aaf-b5d3-2d1c367c7ef2"",
+                    ""path"": ""<Gamepad>/start"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Inventory"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""0c4f9fab-93b4-4043-bf46-3cfc69b4b3bd"",
+                    ""path"": ""<Keyboard>/escape"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Inventory"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
                     ""id"": ""0b8890f4-dc74-4bb0-b4e0-10565209f5bf"",
                     ""path"": ""<Keyboard>/e"",
                     ""interactions"": ""Tap"",
@@ -361,6 +405,83 @@ public partial class @PlayerControls : IInputActionCollection2, IDisposable
                     ""processors"": """",
                     ""groups"": """",
                     ""action"": ""RB"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""09c39954-1518-486d-a658-a40be07f854d"",
+                    ""path"": ""<Keyboard>/r"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""RT"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""917b6ee1-f3db-4e95-83d8-7f598ac2d0b4"",
+                    ""path"": ""<Gamepad>/leftShoulder"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""LB"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""d3e4963b-9974-41bf-9538-1f8c9ac5182e"",
+                    ""path"": ""<Keyboard>/q"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""LB"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""d9a10c46-51be-430d-ba96-fb9b49eb7a66"",
+                    ""path"": ""<Gamepad>/rightStickPress"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""LockOn"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""dc9c0d5f-d024-4be7-aafe-dd0f60a7dc7d"",
+                    ""path"": ""<Keyboard>/f"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""LockOn"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""9d8a4c1b-a797-4c7f-acd0-f75980451b43"",
+                    ""path"": ""<Gamepad>/leftTrigger"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""LT"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""18603ada-95ff-433c-9e76-85ab01984419"",
+                    ""path"": ""<Keyboard>/z"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""LT"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
                 },
@@ -394,17 +515,6 @@ public partial class @PlayerControls : IInputActionCollection2, IDisposable
                     ""processors"": """",
                     ""groups"": """",
                     ""action"": ""A"",
-                    ""isComposite"": false,
-                    ""isPartOfComposite"": false
-                },
-                {
-                    ""name"": """",
-                    ""id"": ""2bce513c-9851-4f95-84ff-8cbfd9ec8356"",
-                    ""path"": ""<Keyboard>/space"",
-                    ""interactions"": """",
-                    ""processors"": """",
-                    ""groups"": """",
-                    ""action"": ""Jump"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
                 },
@@ -460,116 +570,6 @@ public partial class @PlayerControls : IInputActionCollection2, IDisposable
                     ""processors"": """",
                     ""groups"": """",
                     ""action"": ""Start"",
-                    ""isComposite"": false,
-                    ""isPartOfComposite"": false
-                },
-                {
-                    ""name"": """",
-                    ""id"": ""487b9b89-292e-4b8f-9b69-d1f5e4655e4c"",
-                    ""path"": """",
-                    ""interactions"": """",
-                    ""processors"": """",
-                    ""groups"": """",
-                    ""action"": ""Select"",
-                    ""isComposite"": false,
-                    ""isPartOfComposite"": false
-                },
-                {
-                    ""name"": """",
-                    ""id"": ""917b6ee1-f3db-4e95-83d8-7f598ac2d0b4"",
-                    ""path"": ""<Gamepad>/leftShoulder"",
-                    ""interactions"": """",
-                    ""processors"": """",
-                    ""groups"": """",
-                    ""action"": ""LB"",
-                    ""isComposite"": false,
-                    ""isPartOfComposite"": false
-                },
-                {
-                    ""name"": """",
-                    ""id"": ""d3e4963b-9974-41bf-9538-1f8c9ac5182e"",
-                    ""path"": ""<Keyboard>/q"",
-                    ""interactions"": """",
-                    ""processors"": """",
-                    ""groups"": """",
-                    ""action"": ""LB"",
-                    ""isComposite"": false,
-                    ""isPartOfComposite"": false
-                },
-                {
-                    ""name"": """",
-                    ""id"": ""6b433c4a-069c-4aaf-b5d3-2d1c367c7ef2"",
-                    ""path"": ""<Gamepad>/start"",
-                    ""interactions"": """",
-                    ""processors"": """",
-                    ""groups"": """",
-                    ""action"": ""Inventory"",
-                    ""isComposite"": false,
-                    ""isPartOfComposite"": false
-                },
-                {
-                    ""name"": """",
-                    ""id"": ""0c4f9fab-93b4-4043-bf46-3cfc69b4b3bd"",
-                    ""path"": ""<Keyboard>/escape"",
-                    ""interactions"": """",
-                    ""processors"": """",
-                    ""groups"": """",
-                    ""action"": ""Inventory"",
-                    ""isComposite"": false,
-                    ""isPartOfComposite"": false
-                },
-                {
-                    ""name"": """",
-                    ""id"": ""d9a10c46-51be-430d-ba96-fb9b49eb7a66"",
-                    ""path"": ""<Gamepad>/rightStickPress"",
-                    ""interactions"": """",
-                    ""processors"": """",
-                    ""groups"": """",
-                    ""action"": ""LockOn"",
-                    ""isComposite"": false,
-                    ""isPartOfComposite"": false
-                },
-                {
-                    ""name"": """",
-                    ""id"": ""dc9c0d5f-d024-4be7-aafe-dd0f60a7dc7d"",
-                    ""path"": ""<Keyboard>/f"",
-                    ""interactions"": """",
-                    ""processors"": """",
-                    ""groups"": """",
-                    ""action"": ""LockOn"",
-                    ""isComposite"": false,
-                    ""isPartOfComposite"": false
-                },
-                {
-                    ""name"": """",
-                    ""id"": ""09c39954-1518-486d-a658-a40be07f854d"",
-                    ""path"": ""<Keyboard>/r"",
-                    ""interactions"": """",
-                    ""processors"": """",
-                    ""groups"": """",
-                    ""action"": ""RT"",
-                    ""isComposite"": false,
-                    ""isPartOfComposite"": false
-                },
-                {
-                    ""name"": """",
-                    ""id"": ""9d8a4c1b-a797-4c7f-acd0-f75980451b43"",
-                    ""path"": ""<Gamepad>/leftTrigger"",
-                    ""interactions"": """",
-                    ""processors"": """",
-                    ""groups"": """",
-                    ""action"": ""LT"",
-                    ""isComposite"": false,
-                    ""isPartOfComposite"": false
-                },
-                {
-                    ""name"": """",
-                    ""id"": ""18603ada-95ff-433c-9e76-85ab01984419"",
-                    ""path"": ""<Keyboard>/z"",
-                    ""interactions"": """",
-                    ""processors"": """",
-                    ""groups"": """",
-                    ""action"": ""LT"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
                 },
@@ -740,20 +740,20 @@ public partial class @PlayerControls : IInputActionCollection2, IDisposable
         m_PlayerMovement_LockOnTargetRight = m_PlayerMovement.FindAction("Lock On Target Right", throwIfNotFound: true);
         // PlayerActions
         m_PlayerActions = asset.FindActionMap("PlayerActions", throwIfNotFound: true);
-        m_PlayerActions_Roll = m_PlayerActions.FindAction("Roll", throwIfNotFound: true);
         m_PlayerActions_RB = m_PlayerActions.FindAction("RB", throwIfNotFound: true);
         m_PlayerActions_HoldRB = m_PlayerActions.FindAction("Hold RB", throwIfNotFound: true);
         m_PlayerActions_RT = m_PlayerActions.FindAction("RT", throwIfNotFound: true);
+        m_PlayerActions_LB = m_PlayerActions.FindAction("LB", throwIfNotFound: true);
+        m_PlayerActions_LT = m_PlayerActions.FindAction("LT", throwIfNotFound: true);
         m_PlayerActions_A = m_PlayerActions.FindAction("A", throwIfNotFound: true);
-        m_PlayerActions_Jump = m_PlayerActions.FindAction("Jump", throwIfNotFound: true);
         m_PlayerActions_X = m_PlayerActions.FindAction("X", throwIfNotFound: true);
         m_PlayerActions_Y = m_PlayerActions.FindAction("Y", throwIfNotFound: true);
         m_PlayerActions_Start = m_PlayerActions.FindAction("Start", throwIfNotFound: true);
-        m_PlayerActions_Select = m_PlayerActions.FindAction("Select", throwIfNotFound: true);
-        m_PlayerActions_LB = m_PlayerActions.FindAction("LB", throwIfNotFound: true);
-        m_PlayerActions_Inventory = m_PlayerActions.FindAction("Inventory", throwIfNotFound: true);
         m_PlayerActions_LockOn = m_PlayerActions.FindAction("LockOn", throwIfNotFound: true);
-        m_PlayerActions_LT = m_PlayerActions.FindAction("LT", throwIfNotFound: true);
+        m_PlayerActions_Roll = m_PlayerActions.FindAction("Roll", throwIfNotFound: true);
+        m_PlayerActions_Jump = m_PlayerActions.FindAction("Jump", throwIfNotFound: true);
+        m_PlayerActions_Select = m_PlayerActions.FindAction("Select", throwIfNotFound: true);
+        m_PlayerActions_Inventory = m_PlayerActions.FindAction("Inventory", throwIfNotFound: true);
         // PlayerQuickSlots
         m_PlayerQuickSlots = asset.FindActionMap("PlayerQuickSlots", throwIfNotFound: true);
         m_PlayerQuickSlots_DPadUp = m_PlayerQuickSlots.FindAction("D-Pad Up", throwIfNotFound: true);
@@ -876,38 +876,38 @@ public partial class @PlayerControls : IInputActionCollection2, IDisposable
     // PlayerActions
     private readonly InputActionMap m_PlayerActions;
     private IPlayerActionsActions m_PlayerActionsActionsCallbackInterface;
-    private readonly InputAction m_PlayerActions_Roll;
     private readonly InputAction m_PlayerActions_RB;
     private readonly InputAction m_PlayerActions_HoldRB;
     private readonly InputAction m_PlayerActions_RT;
+    private readonly InputAction m_PlayerActions_LB;
+    private readonly InputAction m_PlayerActions_LT;
     private readonly InputAction m_PlayerActions_A;
-    private readonly InputAction m_PlayerActions_Jump;
     private readonly InputAction m_PlayerActions_X;
     private readonly InputAction m_PlayerActions_Y;
     private readonly InputAction m_PlayerActions_Start;
-    private readonly InputAction m_PlayerActions_Select;
-    private readonly InputAction m_PlayerActions_LB;
-    private readonly InputAction m_PlayerActions_Inventory;
     private readonly InputAction m_PlayerActions_LockOn;
-    private readonly InputAction m_PlayerActions_LT;
+    private readonly InputAction m_PlayerActions_Roll;
+    private readonly InputAction m_PlayerActions_Jump;
+    private readonly InputAction m_PlayerActions_Select;
+    private readonly InputAction m_PlayerActions_Inventory;
     public struct PlayerActionsActions
     {
         private @PlayerControls m_Wrapper;
         public PlayerActionsActions(@PlayerControls wrapper) { m_Wrapper = wrapper; }
-        public InputAction @Roll => m_Wrapper.m_PlayerActions_Roll;
         public InputAction @RB => m_Wrapper.m_PlayerActions_RB;
         public InputAction @HoldRB => m_Wrapper.m_PlayerActions_HoldRB;
         public InputAction @RT => m_Wrapper.m_PlayerActions_RT;
+        public InputAction @LB => m_Wrapper.m_PlayerActions_LB;
+        public InputAction @LT => m_Wrapper.m_PlayerActions_LT;
         public InputAction @A => m_Wrapper.m_PlayerActions_A;
-        public InputAction @Jump => m_Wrapper.m_PlayerActions_Jump;
         public InputAction @X => m_Wrapper.m_PlayerActions_X;
         public InputAction @Y => m_Wrapper.m_PlayerActions_Y;
         public InputAction @Start => m_Wrapper.m_PlayerActions_Start;
-        public InputAction @Select => m_Wrapper.m_PlayerActions_Select;
-        public InputAction @LB => m_Wrapper.m_PlayerActions_LB;
-        public InputAction @Inventory => m_Wrapper.m_PlayerActions_Inventory;
         public InputAction @LockOn => m_Wrapper.m_PlayerActions_LockOn;
-        public InputAction @LT => m_Wrapper.m_PlayerActions_LT;
+        public InputAction @Roll => m_Wrapper.m_PlayerActions_Roll;
+        public InputAction @Jump => m_Wrapper.m_PlayerActions_Jump;
+        public InputAction @Select => m_Wrapper.m_PlayerActions_Select;
+        public InputAction @Inventory => m_Wrapper.m_PlayerActions_Inventory;
         public InputActionMap Get() { return m_Wrapper.m_PlayerActions; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
@@ -917,9 +917,6 @@ public partial class @PlayerControls : IInputActionCollection2, IDisposable
         {
             if (m_Wrapper.m_PlayerActionsActionsCallbackInterface != null)
             {
-                @Roll.started -= m_Wrapper.m_PlayerActionsActionsCallbackInterface.OnRoll;
-                @Roll.performed -= m_Wrapper.m_PlayerActionsActionsCallbackInterface.OnRoll;
-                @Roll.canceled -= m_Wrapper.m_PlayerActionsActionsCallbackInterface.OnRoll;
                 @RB.started -= m_Wrapper.m_PlayerActionsActionsCallbackInterface.OnRB;
                 @RB.performed -= m_Wrapper.m_PlayerActionsActionsCallbackInterface.OnRB;
                 @RB.canceled -= m_Wrapper.m_PlayerActionsActionsCallbackInterface.OnRB;
@@ -929,12 +926,15 @@ public partial class @PlayerControls : IInputActionCollection2, IDisposable
                 @RT.started -= m_Wrapper.m_PlayerActionsActionsCallbackInterface.OnRT;
                 @RT.performed -= m_Wrapper.m_PlayerActionsActionsCallbackInterface.OnRT;
                 @RT.canceled -= m_Wrapper.m_PlayerActionsActionsCallbackInterface.OnRT;
+                @LB.started -= m_Wrapper.m_PlayerActionsActionsCallbackInterface.OnLB;
+                @LB.performed -= m_Wrapper.m_PlayerActionsActionsCallbackInterface.OnLB;
+                @LB.canceled -= m_Wrapper.m_PlayerActionsActionsCallbackInterface.OnLB;
+                @LT.started -= m_Wrapper.m_PlayerActionsActionsCallbackInterface.OnLT;
+                @LT.performed -= m_Wrapper.m_PlayerActionsActionsCallbackInterface.OnLT;
+                @LT.canceled -= m_Wrapper.m_PlayerActionsActionsCallbackInterface.OnLT;
                 @A.started -= m_Wrapper.m_PlayerActionsActionsCallbackInterface.OnA;
                 @A.performed -= m_Wrapper.m_PlayerActionsActionsCallbackInterface.OnA;
                 @A.canceled -= m_Wrapper.m_PlayerActionsActionsCallbackInterface.OnA;
-                @Jump.started -= m_Wrapper.m_PlayerActionsActionsCallbackInterface.OnJump;
-                @Jump.performed -= m_Wrapper.m_PlayerActionsActionsCallbackInterface.OnJump;
-                @Jump.canceled -= m_Wrapper.m_PlayerActionsActionsCallbackInterface.OnJump;
                 @X.started -= m_Wrapper.m_PlayerActionsActionsCallbackInterface.OnX;
                 @X.performed -= m_Wrapper.m_PlayerActionsActionsCallbackInterface.OnX;
                 @X.canceled -= m_Wrapper.m_PlayerActionsActionsCallbackInterface.OnX;
@@ -944,28 +944,25 @@ public partial class @PlayerControls : IInputActionCollection2, IDisposable
                 @Start.started -= m_Wrapper.m_PlayerActionsActionsCallbackInterface.OnStart;
                 @Start.performed -= m_Wrapper.m_PlayerActionsActionsCallbackInterface.OnStart;
                 @Start.canceled -= m_Wrapper.m_PlayerActionsActionsCallbackInterface.OnStart;
-                @Select.started -= m_Wrapper.m_PlayerActionsActionsCallbackInterface.OnSelect;
-                @Select.performed -= m_Wrapper.m_PlayerActionsActionsCallbackInterface.OnSelect;
-                @Select.canceled -= m_Wrapper.m_PlayerActionsActionsCallbackInterface.OnSelect;
-                @LB.started -= m_Wrapper.m_PlayerActionsActionsCallbackInterface.OnLB;
-                @LB.performed -= m_Wrapper.m_PlayerActionsActionsCallbackInterface.OnLB;
-                @LB.canceled -= m_Wrapper.m_PlayerActionsActionsCallbackInterface.OnLB;
-                @Inventory.started -= m_Wrapper.m_PlayerActionsActionsCallbackInterface.OnInventory;
-                @Inventory.performed -= m_Wrapper.m_PlayerActionsActionsCallbackInterface.OnInventory;
-                @Inventory.canceled -= m_Wrapper.m_PlayerActionsActionsCallbackInterface.OnInventory;
                 @LockOn.started -= m_Wrapper.m_PlayerActionsActionsCallbackInterface.OnLockOn;
                 @LockOn.performed -= m_Wrapper.m_PlayerActionsActionsCallbackInterface.OnLockOn;
                 @LockOn.canceled -= m_Wrapper.m_PlayerActionsActionsCallbackInterface.OnLockOn;
-                @LT.started -= m_Wrapper.m_PlayerActionsActionsCallbackInterface.OnLT;
-                @LT.performed -= m_Wrapper.m_PlayerActionsActionsCallbackInterface.OnLT;
-                @LT.canceled -= m_Wrapper.m_PlayerActionsActionsCallbackInterface.OnLT;
+                @Roll.started -= m_Wrapper.m_PlayerActionsActionsCallbackInterface.OnRoll;
+                @Roll.performed -= m_Wrapper.m_PlayerActionsActionsCallbackInterface.OnRoll;
+                @Roll.canceled -= m_Wrapper.m_PlayerActionsActionsCallbackInterface.OnRoll;
+                @Jump.started -= m_Wrapper.m_PlayerActionsActionsCallbackInterface.OnJump;
+                @Jump.performed -= m_Wrapper.m_PlayerActionsActionsCallbackInterface.OnJump;
+                @Jump.canceled -= m_Wrapper.m_PlayerActionsActionsCallbackInterface.OnJump;
+                @Select.started -= m_Wrapper.m_PlayerActionsActionsCallbackInterface.OnSelect;
+                @Select.performed -= m_Wrapper.m_PlayerActionsActionsCallbackInterface.OnSelect;
+                @Select.canceled -= m_Wrapper.m_PlayerActionsActionsCallbackInterface.OnSelect;
+                @Inventory.started -= m_Wrapper.m_PlayerActionsActionsCallbackInterface.OnInventory;
+                @Inventory.performed -= m_Wrapper.m_PlayerActionsActionsCallbackInterface.OnInventory;
+                @Inventory.canceled -= m_Wrapper.m_PlayerActionsActionsCallbackInterface.OnInventory;
             }
             m_Wrapper.m_PlayerActionsActionsCallbackInterface = instance;
             if (instance != null)
             {
-                @Roll.started += instance.OnRoll;
-                @Roll.performed += instance.OnRoll;
-                @Roll.canceled += instance.OnRoll;
                 @RB.started += instance.OnRB;
                 @RB.performed += instance.OnRB;
                 @RB.canceled += instance.OnRB;
@@ -975,12 +972,15 @@ public partial class @PlayerControls : IInputActionCollection2, IDisposable
                 @RT.started += instance.OnRT;
                 @RT.performed += instance.OnRT;
                 @RT.canceled += instance.OnRT;
+                @LB.started += instance.OnLB;
+                @LB.performed += instance.OnLB;
+                @LB.canceled += instance.OnLB;
+                @LT.started += instance.OnLT;
+                @LT.performed += instance.OnLT;
+                @LT.canceled += instance.OnLT;
                 @A.started += instance.OnA;
                 @A.performed += instance.OnA;
                 @A.canceled += instance.OnA;
-                @Jump.started += instance.OnJump;
-                @Jump.performed += instance.OnJump;
-                @Jump.canceled += instance.OnJump;
                 @X.started += instance.OnX;
                 @X.performed += instance.OnX;
                 @X.canceled += instance.OnX;
@@ -990,21 +990,21 @@ public partial class @PlayerControls : IInputActionCollection2, IDisposable
                 @Start.started += instance.OnStart;
                 @Start.performed += instance.OnStart;
                 @Start.canceled += instance.OnStart;
-                @Select.started += instance.OnSelect;
-                @Select.performed += instance.OnSelect;
-                @Select.canceled += instance.OnSelect;
-                @LB.started += instance.OnLB;
-                @LB.performed += instance.OnLB;
-                @LB.canceled += instance.OnLB;
-                @Inventory.started += instance.OnInventory;
-                @Inventory.performed += instance.OnInventory;
-                @Inventory.canceled += instance.OnInventory;
                 @LockOn.started += instance.OnLockOn;
                 @LockOn.performed += instance.OnLockOn;
                 @LockOn.canceled += instance.OnLockOn;
-                @LT.started += instance.OnLT;
-                @LT.performed += instance.OnLT;
-                @LT.canceled += instance.OnLT;
+                @Roll.started += instance.OnRoll;
+                @Roll.performed += instance.OnRoll;
+                @Roll.canceled += instance.OnRoll;
+                @Jump.started += instance.OnJump;
+                @Jump.performed += instance.OnJump;
+                @Jump.canceled += instance.OnJump;
+                @Select.started += instance.OnSelect;
+                @Select.performed += instance.OnSelect;
+                @Select.canceled += instance.OnSelect;
+                @Inventory.started += instance.OnInventory;
+                @Inventory.performed += instance.OnInventory;
+                @Inventory.canceled += instance.OnInventory;
             }
         }
     }
@@ -1075,20 +1075,20 @@ public partial class @PlayerControls : IInputActionCollection2, IDisposable
     }
     public interface IPlayerActionsActions
     {
-        void OnRoll(InputAction.CallbackContext context);
         void OnRB(InputAction.CallbackContext context);
         void OnHoldRB(InputAction.CallbackContext context);
         void OnRT(InputAction.CallbackContext context);
+        void OnLB(InputAction.CallbackContext context);
+        void OnLT(InputAction.CallbackContext context);
         void OnA(InputAction.CallbackContext context);
-        void OnJump(InputAction.CallbackContext context);
         void OnX(InputAction.CallbackContext context);
         void OnY(InputAction.CallbackContext context);
         void OnStart(InputAction.CallbackContext context);
-        void OnSelect(InputAction.CallbackContext context);
-        void OnLB(InputAction.CallbackContext context);
-        void OnInventory(InputAction.CallbackContext context);
         void OnLockOn(InputAction.CallbackContext context);
-        void OnLT(InputAction.CallbackContext context);
+        void OnRoll(InputAction.CallbackContext context);
+        void OnJump(InputAction.CallbackContext context);
+        void OnSelect(InputAction.CallbackContext context);
+        void OnInventory(InputAction.CallbackContext context);
     }
     public interface IPlayerQuickSlotsActions
     {

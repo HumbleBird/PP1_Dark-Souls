@@ -162,27 +162,29 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   targetTransform: {fileID: 0}
+  targetTransformWhileAiming: {fileID: 0}
   cameraTransform: {fileID: 432937794974771007}
   cameraPivotTranform: {fileID: 432937793104254638}
   ignoreLayers:
     serializedVersion: 2
-    m_Bits: 0
+    m_Bits: 513
   enviromentLayer:
     serializedVersion: 2
-    m_Bits: 0
-  lookSpeed: 0.01
-  follwSpeed: 0.1
-  pivotSpeed: 0.03
-  minimumPivot: -35
-  maximumPivot: 35
+    m_Bits: 1
+  leftAndRightLookSpeed: 250
+  leftAndRightAimingLookSpeed: 25
+  follwSpeed: 50
+  unAndDownLookSpeed: 250
+  unAndDownAimingLookSpeed: 25
+  minimumLockUpAngle: -35
+  maximumLockUpAngle: 35
   cameraSphereRadius: 0.2
   cameraCollisionOffSet: 0.2
   minimumCollisionOffSet: 0.2
   m_fLockedPivotPosition: 2.25
   m_fUnlockedPivotPosition: 1.65
   maximumLockOnDistance: 30
-  m_ListAvailableTarget: []
-  m_trNearestLockOnTarget: {fileID: 0}
   m_trCurrentLockOnTarget: {fileID: 0}
+  m_trNearestLockOnTarget: {fileID: 0}
   m_trleftLockTarget: {fileID: 0}
   m_trRightLockTarget: {fileID: 0}
