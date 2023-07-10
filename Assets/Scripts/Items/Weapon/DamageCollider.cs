@@ -136,8 +136,6 @@ public class DamageCollider : MonoBehaviour
 
     protected virtual void ChooseWhichDirectionDamageCameFrom(float direction)
     {
-        Debug.Log(direction);
-
         if(direction >= 145 && direction <= 180)
         {
             currentDamageAnimation = "Damage_Forward_01";

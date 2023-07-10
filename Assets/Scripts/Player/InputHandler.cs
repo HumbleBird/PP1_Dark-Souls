@@ -140,7 +140,13 @@ public class InputHandler : MonoBehaviour
         {
             horizontal = movementInput.x;
             vertical = movementInput.y;
-            moveAmount = Mathf.Clamp01(Mathf.Abs(horizontal) + Mathf.Abs(vertical) / 2);
+            moveAmount = Mathf.Clamp01(Mathf.Abs(horizontal) + Mathf.Abs(vertical));
+
+            if(moveAmount > 0.5f)
+            {
+                moveAmount = 0.5f;
+            }
+
             mouseX = cameraInput.x;
             mouseY = cameraInput.y;
         }
@@ -234,6 +240,7 @@ public class InputHandler : MonoBehaviour
             {
                 playerManager.isAiming = false;
                 uiManager.crossHair.SetActive(false);
+                cameraHandler.ResetAimCameraRotations();
             }
 
             if (blockingCollider.blockingCollider.enabled)

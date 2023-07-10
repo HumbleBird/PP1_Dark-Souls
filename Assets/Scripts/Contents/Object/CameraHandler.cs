@@ -172,6 +172,11 @@ public class CameraHandler : MonoBehaviour
         cameraTransform.localRotation = targetRotationX;
     }
 
+    public void ResetAimCameraRotations()
+    {
+        cameraTransform.localRotation = Quaternion.Euler(0, 0, 0);
+    }
+
     // Handle Collision
     private void HandleCameraCollision()
     {
