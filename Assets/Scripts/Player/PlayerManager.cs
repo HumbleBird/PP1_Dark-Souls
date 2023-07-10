@@ -4,13 +4,16 @@ using UnityEngine;
 
 public class PlayerManager : CharacterManager
 {
-    InputHandler inputHandler;
+    public InputHandler inputHandler;
     Animator animator;
     CameraHandler cameraHandler;
-    PlayerStatsManager playerStatsManager;
-    PlayerAnimatorManager playerAnimatorManager;
-    PlayerLocomotionManager playerLocomotionManager;
-    PlayerEffectsManager playerEffectsManager;
+    public PlayerStatsManager playerStatsManager;
+    public PlayerWeaponSlotManager playerWeaponSlotManager;
+    public PlayerCombatManager playerCombatManager;
+    public PlayerInventoryManager playerInventoryManager;
+    public PlayerAnimatorManager playerAnimatorManager;
+    public PlayerLocomotionManager playerLocomotionManager;
+    public PlayerEffectsManager playerEffectsManager;
 
     InteractableUI interactableUI;
     public GameObject interactableUIGameObject;
@@ -26,7 +29,10 @@ public class PlayerManager : CharacterManager
         inputHandler = GetComponent<InputHandler>();
         playerAnimatorManager = GetComponent<PlayerAnimatorManager>();
         playerLocomotionManager = GetComponent<PlayerLocomotionManager>();
+        playerWeaponSlotManager = GetComponent<PlayerWeaponSlotManager>();
+        playerCombatManager = GetComponent<PlayerCombatManager>();
         playerStatsManager = GetComponent<PlayerStatsManager>();
+        playerInventoryManager = GetComponent<PlayerInventoryManager>();
         playerEffectsManager = GetComponent<PlayerEffectsManager>();
 
         animator = GetComponentInChildren<Animator>();

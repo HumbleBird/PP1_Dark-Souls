@@ -16,21 +16,21 @@ public class PlayerCombatManager : MonoBehaviour
     PlayerEffectsManager playerEffectsManager;
 
     [Header("Attack Animations")]
-    string oh_light_attack_01 = "OH_Light_Attack_01";
-    string oh_light_attack_02 = "OH_Light_Attack_02";
-    string oh_heavy_attack_01 = "OH_Heavy_Attack_01";
-    string oh_heavy_attack_02 = "OH_Heavy_Attack_02";
-    string oh_running_attack_01 = "OH_Running_Attack_01";
-    string oh_jumping_attack_01 = "OH_Jumping_Attack_01";
+    public string oh_light_attack_01 = "OH_Light_Attack_01";
+    public string oh_light_attack_02 = "OH_Light_Attack_02";
+    public string oh_heavy_attack_01 = "OH_Heavy_Attack_01";
+    public string oh_heavy_attack_02 = "OH_Heavy_Attack_02";
+    public string oh_running_attack_01 = "OH_Running_Attack_01";
+    public string oh_jumping_attack_01 = "OH_Jumping_Attack_01";
 
-    string th_light_attack_01 = "TH_Light_Attack_01";
-    string th_light_attack_02 = "TH_Light_Attack_02";
-    string th_heavy_attack_01 = "TH_Heavy_Attack_01";
-    string th_heavy_attack_02 = "TH_Heavy_Attack_02";
-    string th_running_attack_01 = "TH_Running_Attack_01";
-    string th_jumping_attack_01 = "TH_Jumping_Attack_01";
+    public string th_light_attack_01 = "TH_Light_Attack_01";
+    public string th_light_attack_02 = "TH_Light_Attack_02";
+    public string th_heavy_attack_01 = "TH_Heavy_Attack_01";
+    public string th_heavy_attack_02 = "TH_Heavy_Attack_02";
+    public string th_running_attack_01 = "TH_Running_Attack_01";
+    public string th_jumping_attack_01 = "TH_Jumping_Attack_01";
 
-    string weapon_art = "Weapon Art";
+    public string weapon_art = "Weapon Art";
 
     public string lastAttack;
 
@@ -83,44 +83,8 @@ public class PlayerCombatManager : MonoBehaviour
             }
         }
     }
-    private void HandleLightWeaponCombo(WeaponItem weapon)
-    {
 
-        if (playerStatsManager.currentStamina <= 0)
-            return;
 
-        if (inputHandler.comboFlag)
-        {
-            playerAnimatorManager.animator.SetBool("canDoCombo", false);
-            if (lastAttack == oh_light_attack_01)
-            {
-                playerAnimatorManager.PlayerTargetAnimation(oh_light_attack_02, true);
-            }
-            else if (lastAttack == th_light_attack_01)
-            {
-                playerAnimatorManager.PlayerTargetAnimation(th_light_attack_02, true);
-            }
-        }
-    }
-
-    private void HandleLightAttack(WeaponItem weapon)
-    {
-        if (playerStatsManager.currentStamina <= 0)
-            return;
-
-        playerWeaponSlotManager.attackingWeapon = weapon;
-
-        if (inputHandler.twoHandFlag)
-        {
-            playerAnimatorManager.PlayerTargetAnimation(th_light_attack_01, true);
-            lastAttack = th_light_attack_01;
-        }
-        else
-        {
-            playerAnimatorManager.PlayerTargetAnimation(oh_light_attack_01, true);
-            lastAttack = oh_light_attack_01;
-        }
-    }
 
     private void HandleJumpingAttack(WeaponItem weapon)
     {
@@ -183,17 +147,7 @@ public class PlayerCombatManager : MonoBehaviour
     #region Input Actions
     public void HandleRBAction()
     {
-        if(playerInventoryManager.rightWeapon.weaponType == WeaponType.StraightSwords
-            || playerInventoryManager.rightWeapon.weaponType == WeaponType.Unarmed)
-        {
-            PerformRBMellAction();
-        }
-        else if (playerInventoryManager.rightWeapon.weaponType == WeaponType.SpellCaster 
-            || playerInventoryManager  .rightWeapon.weaponType == WeaponType.FaithCaster  
-            || playerInventoryManager.rightWeapon.weaponType == WeaponType.  PyroCaster )
-        {
             PerformMagicAction(playerInventoryManager.rightWeapon, false);
-        }
     }
 
     public void HandleRTAction()
@@ -335,39 +289,6 @@ public class PlayerCombatManager : MonoBehaviour
     #endregion
 
     #region Attack Actions
-    private void PerformRBMellAction()
-    {
-        playerAnimatorManager.animator.SetBool("isUsingRightHand", true);
-
-        // 만약 running attack을 수행할 수 있다면 할지 안 할지 결정 가능
-        if (playerManager.isSprinting)
-        {
-            HandleRunningAttack(playerInventoryManager.rightWeapon);
-            return;
-        }
-
-        // 콤보
-        if (playerManager.canDoCombo)
-        {
-            inputHandler.comboFlag = true;
-            HandleLightWeaponCombo(playerInventoryManager.rightWeapon);
-            inputHandler.comboFlag = false;
-        }
-
-        // 콤보 말고 정해진 공격 (1타)
-        else
-        {
-            if (playerManager.isInteracting)
-                return;
-
-            if (playerManager.canDoCombo)
-                return;
-
-            HandleLightAttack(playerInventoryManager.rightWeapon);
-        }
-
-        playerEffectsManager.PlayWeaponFX(false);
-    }
 
     private void PerformRTMellAction()
     {

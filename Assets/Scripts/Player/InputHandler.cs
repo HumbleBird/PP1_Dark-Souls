@@ -199,7 +199,7 @@ public class InputHandler : MonoBehaviour
     {
         if(rb_Input)
         {
-            playerCombatManager.HandleRBAction();
+            playerInventoryManager.rightWeapon.tap_RB_Action.PerformAction(playerManager);
         }
 
         if (rt_Input)
