@@ -11,6 +11,7 @@ public class PlayerManager : CharacterManager
     public PlayerWeaponSlotManager playerWeaponSlotManager;
     public PlayerCombatManager playerCombatManager;
     public PlayerInventoryManager playerInventoryManager;
+    public PlayerEquipmentManager playerEquipmentManager;
     public PlayerAnimatorManager playerAnimatorManager;
     public PlayerLocomotionManager playerLocomotionManager;
     public PlayerEffectsManager playerEffectsManager;
@@ -33,6 +34,7 @@ public class PlayerManager : CharacterManager
         playerCombatManager = GetComponent<PlayerCombatManager>();
         playerStatsManager = GetComponent<PlayerStatsManager>();
         playerInventoryManager = GetComponent<PlayerInventoryManager>();
+        playerEquipmentManager = GetComponent<PlayerEquipmentManager>();
         playerEffectsManager = GetComponent<PlayerEffectsManager>();
 
         animator = GetComponentInChildren<Animator>();
@@ -47,8 +49,6 @@ public class PlayerManager : CharacterManager
 
         isInteracting = animator.GetBool("isInteracting");
         canDoCombo = animator.GetBool("canDoCombo");
-        isUsingRightHand = animator.GetBool("isUsingRightHand");
-        isUsingLeftHand = animator.GetBool("isUsingLeftHand");
         isInvulnerable = animator.GetBool("isInvulnerable");
         isFiringSpell = animator.GetBool("isFiringSpell");
         isHoldingArrow = animator.GetBool("isHoldingArrow");

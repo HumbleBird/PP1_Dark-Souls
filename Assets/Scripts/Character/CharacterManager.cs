@@ -55,5 +55,20 @@ public class CharacterManager : MonoBehaviour
     {
         characterAnimatorManager.CheckHandIKWeight(characterWeaponSlotManager.rightHandIKTarget, characterWeaponSlotManager.leftHandIKTarget, isTwoHandingWeapon);
     }
+
+    public virtual void UpdateWhichHandCharacterIsUsing(bool usingRightHand)
+    {
+        if (usingRightHand)
+        {
+            isUsingRightHand = true;
+            isUsingLeftHand = false;
+        }
+        else
+        {
+            isUsingRightHand = false;
+            isUsingLeftHand = true;
+
+        }
+    }
 }
  

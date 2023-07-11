@@ -121,20 +121,29 @@ public class InputHandler : MonoBehaviour
         if (playerStatsManager.isDead)
             return;
 
-        HandleMoveInput(delta);
-        HandleRollInput(delta);
-        HandleLBInput();
-        HandleCombatInput(delta);
+        HandleMoveInput();
+        HandleRollInput();
+
+        HandleHoldRBInput();
+        HandleFireBowInput();
+
+        HandleHoldLBInput();
+        HandleTapRBInput();
+        HandleTapRTInput();
+       // HandleTapLBInput();
+        HandleTapLTInput();
+
+
         HandleQuickSlotsInput();
         HandleInventoryInput();
+
         HandleLockOnInput();
         HandleTwoHandInput();
         HandleUseConsumableInput();
-        HandleHoldRBInput();
-        HandleFireBowInput();
+
     }
 
-    private void HandleMoveInput(float delta)
+    private void HandleMoveInput()
     {
         if(playerManager.isHoldingArrow)
         {
@@ -162,13 +171,13 @@ public class InputHandler : MonoBehaviour
 
     }
 
-    private void HandleRollInput(float delta)
+    private void HandleRollInput()
     {
 
 
         if (b_Input)
         {
-            rollInputTimer += delta;
+            rollInputTimer += Time.deltaTime;
 
             if(playerStatsManager.currentStamina <= 0 )
             {
@@ -195,32 +204,55 @@ public class InputHandler : MonoBehaviour
         }
     }
 
-    private void HandleCombatInput(float delta)
+    private void HandleTapRBInput()
     {
         if(rb_Input)
         {
+            playerManager.UpdateWhichHandCharacterIsUsing(true);
+            playerInventoryManager.currentItemBeingUsed = playerInventoryManager.rightWeapon;
             playerInventoryManager.rightWeapon.tap_RB_Action.PerformAction(playerManager);
         }
+    }
 
+    private void HandleTapRTInput()
+    {
         if (rt_Input)
         {
-            playerCombatManager.HandleRTAction();
+            playerManager.UpdateWhichHandCharacterIsUsing(true);
+            playerInventoryManager.currentItemBeingUsed = playerInventoryManager.rightWeapon;
+            playerInventoryManager.rightWeapon.tap_RT_Action.PerformAction(playerManager);
         }
+    }
 
-        if(lt_Input)
+    private void HandleTapLBInput()
+    {
+        if (lb_Input)
         {
-            if(twoHandFlag)
+            playerManager.UpdateWhichHandCharacterIsUsing(true);
+            playerInventoryManager.rightWeapon.tap_LB_Action.PerformAction(playerManager);
+        }
+    }
+
+    private void HandleTapLTInput()
+    {
+        if (lt_Input)
+        {
+            if(playerManager.isTwoHandingWeapon)
             {
-                // if two handing handle weapon art
+                playerManager.UpdateWhichHandCharacterIsUsing(true);
+                playerInventoryManager.currentItemBeingUsed = playerInventoryManager.rightWeapon;
+                playerInventoryManager.rightWeapon.tap_LT_Action.PerformAction(playerManager);
             }
             else
             {
-                playerCombatManager.HandleLTAction();
+                playerManager.UpdateWhichHandCharacterIsUsing(false);
+                 playerInventoryManager.currentItemBeingUsed = playerInventoryManager.leftWeapon;
+                playerInventoryManager.leftWeapon.tap_LT_Action.PerformAction(playerManager);
             }
         }
     }
 
-    private void HandleLBInput()
+    private void HandleHoldLBInput()
     {
         if(playerManager.isInAir ||
             playerManager.isSprinting ||
@@ -232,7 +264,19 @@ public class InputHandler : MonoBehaviour
 
         if (lb_Input)
         {
-            playerCombatManager.HandleLBAction();
+            if (playerManager.isTwoHandingWeapon)
+            {
+                playerManager.UpdateWhichHandCharacterIsUsing(true);
+                playerInventoryManager.currentItemBeingUsed = playerInventoryManager.rightWeapon;
+                playerInventoryManager.rightWeapon.hold_LB_Action.PerformAction(playerManager);
+            }
+            else
+            {
+                playerManager.UpdateWhichHandCharacterIsUsing(false);
+                playerInventoryManager.currentItemBeingUsed = playerInventoryManager.leftWeapon;
+                playerInventoryManager.leftWeapon.hold_LB_Action.PerformAction(playerManager);
+            }
+
         }
         else if (lb_Input == false)
         {

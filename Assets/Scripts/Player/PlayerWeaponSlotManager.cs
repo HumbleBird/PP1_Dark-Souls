@@ -109,14 +109,4 @@ public class PlayerWeaponSlotManager : CharacterWeaponSlotManager
 
     }
 
-    public override void DrainStaminaLightAttack()
-    {
-        playerStatsManager.TakeStaminsDamage(Mathf.RoundToInt(attackingWeapon.baseStamina * attackingWeapon.lightAttackMultiplier));
-    }
-
-    public override void DrainStaminaHeavyAttack()
-    {
-        playerStatsManager.TakeStaminsDamage(Mathf.RoundToInt(attackingWeapon.baseStamina * attackingWeapon.heavyAttackMultiplier));
-    }
-
 }

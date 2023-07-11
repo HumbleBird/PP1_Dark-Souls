@@ -7,6 +7,9 @@ public class CharacterInventoryManager : MonoBehaviour
 {
     protected CharacterWeaponSlotManager characterWeaponSlotManager;
 
+    [Header("Current Item Begin Used")]
+    public Item currentItemBeingUsed;
+
     [Header("Quick Slot Items")]
     public SpellItem currentSpell;
     public WeaponItem rightWeapon;

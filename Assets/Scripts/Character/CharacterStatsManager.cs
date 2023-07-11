@@ -127,4 +127,10 @@ public class CharacterStatsManager : MonoBehaviour
             totalPoiseDefence = armorPoiseBonus;
         }
     }
+
+
+    public void DrainStaminaBasedOnAttackType()
+    {
+
+    }
 }
