@@ -79,6 +79,7 @@ public class Define
         SpellCaster,
         Unarmed,
         StraightSwords,
+        SmallShield,
         Shield,
         Bow
     }

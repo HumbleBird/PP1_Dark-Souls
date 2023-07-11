@@ -77,7 +77,7 @@ public class PlayerLocomotionManager : MonoBehaviour
     #region Movement
 
 
-    public void HandleRotation(float delta)
+    public void HandleRotation()
     {
 
         if (playerAnimatorManager.canRotate)
@@ -143,7 +143,7 @@ public class PlayerLocomotionManager : MonoBehaviour
                     float rs = rotationSpeed;
 
                     Quaternion tr = Quaternion.LookRotation(targetDir);
-                    Quaternion targetRotation = Quaternion.Slerp(transform.rotation, tr, rs * delta);
+                    Quaternion targetRotation = Quaternion.Slerp(transform.rotation, tr, rs * Time.deltaTime);
 
                     myTransform.rotation = targetRotation;
                 }
@@ -152,7 +152,7 @@ public class PlayerLocomotionManager : MonoBehaviour
 
     }
 
-    public void HandleMovement(float delta)
+    public void HandleMovement()
     {
         if (inputHandler.rollFlag)
             return;
@@ -204,7 +204,7 @@ public class PlayerLocomotionManager : MonoBehaviour
 
     }
 
-    public void HandleRollingAndSprinting(float delta)
+    public void HandleRollingAndSprinting()
     {
         if (playerAnimatorManager.animator.GetBool("isInteracting"))
             return;
@@ -214,6 +214,8 @@ public class PlayerLocomotionManager : MonoBehaviour
 
         if (inputHandler.rollFlag)
         {
+            inputHandler.rollFlag = false;
+
             moveDirection = cameraObject.forward * inputHandler.vertical;
             moveDirection += cameraObject.right * inputHandler.horizontal;
 
@@ -237,7 +239,7 @@ public class PlayerLocomotionManager : MonoBehaviour
         }
     }
 
-    public void HandleFalling(float delta, Vector3 moveDirection)
+    public void HandleFalling(Vector3 moveDirection)
     {
         playerManager.isGrounded = false;
         RaycastHit hit;

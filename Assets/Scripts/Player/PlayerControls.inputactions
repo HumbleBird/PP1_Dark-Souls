@@ -207,6 +207,15 @@
                     "initialStateCheck": false
                 },
                 {
+                    "name": "TabLB",
+                    "type": "Button",
+                    "id": "a26c85e9-064f-4915-a65d-6f282024c022",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                },
+                {
                     "name": "LT",
                     "type": "Button",
                     "id": "e4fedfe0-3b49-4f49-be93-b4f8d3c1527d",
@@ -570,6 +579,28 @@
                     "processors": "",
                     "groups": "",
                     "action": "Hold RB",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "7ee872a7-622f-4f75-b3dc-c1140908005f",
+                    "path": "<Gamepad>/leftShoulder",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "TabLB",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "5cd1dfa0-2a85-41ec-8da6-771b8b8603e8",
+                    "path": "<Keyboard>/q",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "TabLB",
                     "isComposite": false,
                     "isPartOfComposite": false
                 }

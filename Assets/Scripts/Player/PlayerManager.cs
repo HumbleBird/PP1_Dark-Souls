@@ -6,7 +6,7 @@ public class PlayerManager : CharacterManager
 {
     public InputHandler inputHandler;
     Animator animator;
-    CameraHandler cameraHandler;
+    public CameraHandler cameraHandler;
     public PlayerStatsManager playerStatsManager;
     public PlayerWeaponSlotManager playerWeaponSlotManager;
     public PlayerCombatManager playerCombatManager;
@@ -60,7 +60,7 @@ public class PlayerManager : CharacterManager
 
         inputHandler.TickInput(delta);
         playerAnimatorManager.canRotate = animator.GetBool("canRotate");
-        playerLocomotionManager.HandleRollingAndSprinting(delta);
+        playerLocomotionManager.HandleRollingAndSprinting();
         playerLocomotionManager.HandleJumping();
         playerStatsManager.RegenerateStamina();
 
@@ -71,31 +71,20 @@ public class PlayerManager : CharacterManager
     protected override void FixedUpdate() 
     {
         base.FixedUpdate();
-
-        float delta = Time.fixedDeltaTime;
-
-
-        playerLocomotionManager.HandleFalling(delta, playerLocomotionManager.moveDirection);
-        playerLocomotionManager.HandleMovement(delta);
-        playerLocomotionManager.HandleRotation(delta);
+        playerLocomotionManager.HandleFalling(playerLocomotionManager.moveDirection);
+        playerLocomotionManager.HandleMovement();
+        playerLocomotionManager.HandleRotation();
         playerEffectsManager.HandleAllBuildUpEffects();
     }
 
     private void LateUpdate()
     {
-        inputHandler.rollFlag = false;
-        inputHandler.rb_Input = false;
-        inputHandler.rt_Input = false;
-        inputHandler.lt_Input = false;
         inputHandler.d_Pad_Up = false;
         inputHandler.d_Pad_Down = false;
         inputHandler.d_Pad_Left = false;
         inputHandler.d_Pad_Right = false;
         inputHandler.a_Input = false;
-        inputHandler.jump_Input = false;
         inputHandler.inventory_Input = false;
-
-        float delta = Time.deltaTime;
 
         if (cameraHandler != null)
         {
