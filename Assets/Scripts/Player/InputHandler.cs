@@ -59,7 +59,7 @@ public class InputHandler : MonoBehaviour
     BlockingCollider blockingCollider;
     PlayerWeaponSlotManager playerWeaponSlotManager;
     PlayerAnimatorManager playerAnimatorManager;
-    public UIManager uiManager;
+    public GameUIManager uiManager;
     CameraHandler cameraHandler;
 
     Vector2 movementInput;
@@ -77,7 +77,7 @@ public class InputHandler : MonoBehaviour
 
         playerWeaponSlotManager = GetComponentInChildren<PlayerWeaponSlotManager>();
         blockingCollider = GetComponentInChildren<BlockingCollider>();
-        uiManager = FindObjectOfType<UIManager>();
+        uiManager = FindObjectOfType<GameUIManager>();
         cameraHandler = FindObjectOfType<CameraHandler>();
     }
 

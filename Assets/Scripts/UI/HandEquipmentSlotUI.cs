@@ -5,7 +5,7 @@ using UnityEngine.UI;
 
 public class HandEquipmentSlotUI : MonoBehaviour
 {
-    UIManager uiManager;
+    GameUIManager uiManager;
 
     public Image icon;
     WeaponItem weapon;
@@ -17,7 +17,7 @@ public class HandEquipmentSlotUI : MonoBehaviour
 
     private void Awake()
     {
-        uiManager = FindObjectOfType<UIManager>();
+        uiManager = FindObjectOfType<GameUIManager>();
     }
 
     public void AddItem(WeaponItem newWeapon)

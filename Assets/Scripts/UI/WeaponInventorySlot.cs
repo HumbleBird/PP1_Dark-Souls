@@ -7,7 +7,7 @@ public class WeaponInventorySlot : MonoBehaviour
 {
     PlayerInventoryManager playerInventoryManager;
     PlayerWeaponSlotManager playerWeaponSlotManager;
-    UIManager uiManager;
+    GameUIManager uiManager;
 
     public Image icon;
     WeaponItem item;
@@ -16,7 +16,7 @@ public class WeaponInventorySlot : MonoBehaviour
     {
         playerInventoryManager = FindObjectOfType<PlayerInventoryManager>();
         playerWeaponSlotManager = FindObjectOfType<PlayerWeaponSlotManager>();
-        uiManager = FindObjectOfType<UIManager>();
+        uiManager = FindObjectOfType<GameUIManager>();
     }
 
     public void AddItem(WeaponItem newItem)
