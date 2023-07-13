@@ -4169,6 +4169,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c7d093c2ea189264d9bd3edcebe83ff7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  playerStatsManager: {fileID: 5407944597955077809}
 --- !u!1001 &262707863
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -7050,6 +7051,7 @@ GameObject:
   - component: {fileID: 443680491}
   - component: {fileID: 443680493}
   - component: {fileID: 443680492}
+  - component: {fileID: 443680494}
   m_Layer: 5
   m_Name: 'Faith Level:'
   m_TagString: Untagged
@@ -7179,6 +7181,19 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 443680490}
   m_CullTransparentMesh: 1
+--- !u!114 &443680494
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 443680490}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 667d6c95020d9d642b95d09013637ce2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  statSlider: {fileID: 0}
 --- !u!1 &447878615
 GameObject:
   m_ObjectHideFlags: 0
@@ -8603,6 +8618,7 @@ GameObject:
   - component: {fileID: 516306682}
   - component: {fileID: 516306684}
   - component: {fileID: 516306683}
+  - component: {fileID: 516306685}
   m_Layer: 5
   m_Name: Stamina Level
   m_TagString: Untagged
@@ -8732,6 +8748,19 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 516306681}
   m_CullTransparentMesh: 1
+--- !u!114 &516306685
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 516306681}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 667d6c95020d9d642b95d09013637ce2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  statSlider: {fileID: 0}
 --- !u!4 &518348622 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 2306971372810489363, guid: b4f1e5d6ff988614790c420bc2ca79ef, type: 3}
@@ -15069,7 +15098,7 @@ MonoBehaviour:
     m_SelectedTrigger: Selected
     m_DisabledTrigger: Disabled
   m_Interactable: 1
-  m_TargetGraphic: {fileID: 1374645459}
+  m_TargetGraphic: {fileID: 158061782}
   m_FillRect: {fileID: 630368045}
   m_HandleRect: {fileID: 2002459185}
   m_Direction: 0
@@ -17444,7 +17473,7 @@ MonoBehaviour:
     m_SelectedTrigger: Selected
     m_DisabledTrigger: Disabled
   m_Interactable: 1
-  m_TargetGraphic: {fileID: 1374645459}
+  m_TargetGraphic: {fileID: 2142336058}
   m_FillRect: {fileID: 2114383002}
   m_HandleRect: {fileID: 863371119}
   m_Direction: 0
@@ -18786,7 +18815,7 @@ MonoBehaviour:
     m_SelectedTrigger: Selected
     m_DisabledTrigger: Disabled
   m_Interactable: 1
-  m_TargetGraphic: {fileID: 1374645459}
+  m_TargetGraphic: {fileID: 1835881271}
   m_FillRect: {fileID: 1487995551}
   m_HandleRect: {fileID: 999522267}
   m_Direction: 0
@@ -20016,6 +20045,7 @@ GameObject:
   - component: {fileID: 1153301271}
   - component: {fileID: 1153301273}
   - component: {fileID: 1153301272}
+  - component: {fileID: 1153301274}
   m_Layer: 5
   m_Name: Health Level
   m_TagString: Untagged
@@ -20145,6 +20175,19 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1153301270}
   m_CullTransparentMesh: 1
+--- !u!114 &1153301274
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1153301270}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 667d6c95020d9d642b95d09013637ce2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  statSlider: {fileID: 0}
 --- !u!1001 &1154232957
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -20263,6 +20306,7 @@ GameObject:
   - component: {fileID: 1159493270}
   - component: {fileID: 1159493272}
   - component: {fileID: 1159493271}
+  - component: {fileID: 1159493273}
   m_Layer: 5
   m_Name: 'Dexterity Level:'
   m_TagString: Untagged
@@ -20392,6 +20436,19 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1159493269}
   m_CullTransparentMesh: 1
+--- !u!114 &1159493273
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1159493269}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 667d6c95020d9d642b95d09013637ce2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  statSlider: {fileID: 0}
 --- !u!1 &1159894662
 GameObject:
   m_ObjectHideFlags: 0
@@ -20793,7 +20850,19 @@ MonoBehaviour:
   m_Value: 0
   m_OnValueChanged:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 261821704}
+        m_TargetAssemblyTypeName: UI_LevelUp, Assembly-CSharp
+        m_MethodName: UpdateHealthLevelSlider
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!1001 &1194990177
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -24761,6 +24830,7 @@ GameObject:
   - component: {fileID: 1427558095}
   - component: {fileID: 1427558097}
   - component: {fileID: 1427558096}
+  - component: {fileID: 1427558098}
   m_Layer: 5
   m_Name: 'Focus Level:'
   m_TagString: Untagged
@@ -24890,6 +24960,19 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1427558094}
   m_CullTransparentMesh: 1
+--- !u!114 &1427558098
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1427558094}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 667d6c95020d9d642b95d09013637ce2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  statSlider: {fileID: 0}
 --- !u!1 &1430014914
 GameObject:
   m_ObjectHideFlags: 0
@@ -24970,7 +25053,7 @@ MonoBehaviour:
     m_SelectedTrigger: Selected
     m_DisabledTrigger: Disabled
   m_Interactable: 1
-  m_TargetGraphic: {fileID: 1374645459}
+  m_TargetGraphic: {fileID: 1302721430}
   m_FillRect: {fileID: 97959119}
   m_HandleRect: {fileID: 44525740}
   m_Direction: 0
@@ -25651,6 +25734,7 @@ GameObject:
   - component: {fileID: 1472383813}
   - component: {fileID: 1472383815}
   - component: {fileID: 1472383814}
+  - component: {fileID: 1472383816}
   m_Layer: 5
   m_Name: Strength Level
   m_TagString: Untagged
@@ -25780,6 +25864,19 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1472383812}
   m_CullTransparentMesh: 1
+--- !u!114 &1472383816
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1472383812}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 667d6c95020d9d642b95d09013637ce2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  statSlider: {fileID: 0}
 --- !u!1 &1482796935
 GameObject:
   m_ObjectHideFlags: 0
@@ -26472,6 +26569,7 @@ GameObject:
   - component: {fileID: 1527788126}
   - component: {fileID: 1527788128}
   - component: {fileID: 1527788127}
+  - component: {fileID: 1527788129}
   m_Layer: 5
   m_Name: 'Intelligence Level:'
   m_TagString: Untagged
@@ -26601,6 +26699,19 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1527788125}
   m_CullTransparentMesh: 1
+--- !u!114 &1527788129
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1527788125}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 667d6c95020d9d642b95d09013637ce2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  statSlider: {fileID: 0}
 --- !u!1 &1528207560
 GameObject:
   m_ObjectHideFlags: 0
@@ -30371,7 +30482,7 @@ MonoBehaviour:
     m_SelectedTrigger: Selected
     m_DisabledTrigger: Disabled
   m_Interactable: 1
-  m_TargetGraphic: {fileID: 1374645459}
+  m_TargetGraphic: {fileID: 1977890287}
   m_FillRect: {fileID: 2125318807}
   m_HandleRect: {fileID: 1921674429}
   m_Direction: 0
@@ -32491,7 +32602,7 @@ MonoBehaviour:
     m_SelectedTrigger: Selected
     m_DisabledTrigger: Disabled
   m_Interactable: 1
-  m_TargetGraphic: {fileID: 1374645459}
+  m_TargetGraphic: {fileID: 1440478793}
   m_FillRect: {fileID: 1808193886}
   m_HandleRect: {fileID: 1705764852}
   m_Direction: 0
@@ -33511,7 +33622,7 @@ MonoBehaviour:
     m_SelectedTrigger: Selected
     m_DisabledTrigger: Disabled
   m_Interactable: 1
-  m_TargetGraphic: {fileID: 1374645459}
+  m_TargetGraphic: {fileID: 1888834268}
   m_FillRect: {fileID: 566663252}
   m_HandleRect: {fileID: 1873352549}
   m_Direction: 0
@@ -37740,6 +37851,7 @@ GameObject:
   - component: {fileID: 2105645700}
   - component: {fileID: 2105645702}
   - component: {fileID: 2105645701}
+  - component: {fileID: 2105645703}
   m_Layer: 5
   m_Name: 'HealthPoise Level:'
   m_TagString: Untagged
@@ -37869,6 +37981,19 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2105645699}
   m_CullTransparentMesh: 1
+--- !u!114 &2105645703
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2105645699}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 667d6c95020d9d642b95d09013637ce2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  statSlider: {fileID: 0}
 --- !u!1001 &2110117162
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -46771,6 +46896,7 @@ MonoBehaviour:
   currentFocusPoints: 0
   soulCount: 0
   soulsAwardedOnDeath: 50
+  playerLvel: 1
   healthLevel: 10
   staminaLevel: 10
   focusLevel: 10
@@ -48559,8 +48685,9 @@ MonoBehaviour:
   currentFocusPoints: 0
   soulCount: 0
   soulsAwardedOnDeath: 50
+  playerLvel: 1
   healthLevel: 10
-  staminaLevel: 100
+  staminaLevel: 10
   focusLevel: 10
   poiseLevel: 10
   strengthLevel: 10
@@ -56312,6 +56439,7 @@ MonoBehaviour:
   currentFocusPoints: 0
   soulCount: 0
   soulsAwardedOnDeath: 50
+  playerLvel: 1
   healthLevel: 100
   staminaLevel: 10
   focusLevel: 10
