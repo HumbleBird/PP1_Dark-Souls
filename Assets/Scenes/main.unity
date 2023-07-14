@@ -4169,6 +4169,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c7d093c2ea189264d9bd3edcebe83ff7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _init: 0
 --- !u!1001 &262707863
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -20016,6 +20017,7 @@ GameObject:
   - component: {fileID: 1153301271}
   - component: {fileID: 1153301273}
   - component: {fileID: 1153301272}
+  - component: {fileID: 1153301274}
   m_Layer: 5
   m_Name: Health Level
   m_TagString: Untagged
@@ -20145,6 +20147,19 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1153301270}
   m_CullTransparentMesh: 1
+--- !u!114 &1153301274
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1153301270}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2f929fb38b388a9418c2dda07bc35cac, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  statSlider: {fileID: 0}
 --- !u!1001 &1154232957
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -46771,6 +46786,7 @@ MonoBehaviour:
   currentFocusPoints: 0
   soulCount: 0
   soulsAwardedOnDeath: 50
+  playerLvel: 1
   healthLevel: 10
   staminaLevel: 10
   focusLevel: 10
@@ -48559,6 +48575,7 @@ MonoBehaviour:
   currentFocusPoints: 0
   soulCount: 0
   soulsAwardedOnDeath: 50
+  playerLvel: 1
   healthLevel: 10
   staminaLevel: 100
   focusLevel: 10
@@ -52486,7 +52503,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 27f87fbc3cc798e4089f4cec2cd8a338, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  uiManager: {fileID: 0}
   icon: {fileID: 7196696074482224651}
+  weapon: {fileID: 0}
   rightHandSlot01: 1
   rightHandSlot02: 0
   leftHandSlot01: 0
@@ -53155,7 +53174,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 7196696074519366519}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 32a551ffd9802e844be690091dbf0a2e, type: 3}
+  m_Script: {fileID: 11500000, guid: 38104c8d3c906414691a9fd07a312895, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   rightHandSlot01Selected: 0
@@ -53367,7 +53386,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 27f87fbc3cc798e4089f4cec2cd8a338, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  uiManager: {fileID: 0}
   icon: {fileID: 7196696074325620039}
+  weapon: {fileID: 0}
   rightHandSlot01: 0
   rightHandSlot02: 0
   leftHandSlot01: 0
@@ -53848,7 +53869,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 27f87fbc3cc798e4089f4cec2cd8a338, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  uiManager: {fileID: 0}
   icon: {fileID: 7196696074902114355}
+  weapon: {fileID: 0}
   rightHandSlot01: 0
   rightHandSlot02: 1
   leftHandSlot01: 0
@@ -55295,7 +55318,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 27f87fbc3cc798e4089f4cec2cd8a338, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  uiManager: {fileID: 0}
   icon: {fileID: 7196696075425856602}
+  weapon: {fileID: 0}
   rightHandSlot01: 0
   rightHandSlot02: 0
   leftHandSlot01: 1
@@ -56312,6 +56337,7 @@ MonoBehaviour:
   currentFocusPoints: 0
   soulCount: 0
   soulsAwardedOnDeath: 50
+  playerLvel: 1
   healthLevel: 100
   staminaLevel: 10
   focusLevel: 10

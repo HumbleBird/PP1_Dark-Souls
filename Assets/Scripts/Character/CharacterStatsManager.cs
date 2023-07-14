@@ -21,7 +21,10 @@ public class CharacterStatsManager : MonoBehaviour
     public int soulCount = 0;
     public int soulsAwardedOnDeath = 50;
 
-    [Header("LEVLELS")]
+    [Header("CHARACTER LEVEL")]
+    public int playerLvel = 1;
+
+    [Header("STAT LEVLELS")]
     public int healthLevel = 10; 
     public int staminaLevel = 10; // = Endurance
     public int focusLevel = 10; // = Attunement
