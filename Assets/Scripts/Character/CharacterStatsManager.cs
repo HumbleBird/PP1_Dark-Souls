@@ -21,18 +21,15 @@ public class CharacterStatsManager : MonoBehaviour
     public int soulCount = 0;
     public int soulsAwardedOnDeath = 50;
 
-    [Header("CHARACTER LEVEL")]
-    public int playerLvel = 1;
-
-    [Header("STAT LEVLELS")]
-    public int healthLevel       = 10; 
-    public int staminaLevel     = 10; // = Endurance
-    public int focusLevel        = 10; // = Attunement
-    public int poiseLevel        = 10;
-    public int strengthLevel        = 10;
-    public int dexterityLevel    = 10;
+    [Header("LEVLELS")]
+    public int healthLevel = 10; 
+    public int staminaLevel = 10; // = Endurance
+    public int focusLevel = 10; // = Attunement
+    public int poiseLevel = 10;
+    public int strengthLevel = 10;
+    public int dexterityLevel = 10;
     public int intelligenceLevel = 10;
-    public int faithLevel           = 10;
+    public int faithLevel = 10;
 
 
     [Header("Poise")]
