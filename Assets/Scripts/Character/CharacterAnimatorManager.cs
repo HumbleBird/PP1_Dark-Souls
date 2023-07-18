@@ -5,11 +5,7 @@ using UnityEngine.Animations.Rigging;
 
 public class CharacterAnimatorManager : MonoBehaviour
 {
-    public Animator animator;
-    protected CharacterManager characterManager;
-    protected CharacterStatsManager characterStatsManager;
-
-    public bool canRotate;
+    protected CharacterManager character;
 
     protected RigBuilder rigBuilder;
     public TwoBoneIKConstraint leftHandConstraint;
@@ -19,87 +15,83 @@ public class CharacterAnimatorManager : MonoBehaviour
 
     protected virtual void Awake()
     {
-        animator = GetComponent<Animator>();
-        characterManager = GetComponent<CharacterManager>();
-        characterStatsManager = GetComponent<CharacterStatsManager>();
+        character = GetComponent<CharacterManager>();
         rigBuilder = GetComponentInChildren<RigBuilder>();
-
-
     }
 
     public void PlayerTargetAnimation(string targetAnim, bool isInteracting, bool canRoate = false, bool mirrorAnim = false)
     {
-        animator.applyRootMotion = isInteracting;
-        animator.SetBool("canRotate", canRoate);
-        animator.SetBool("isInteracting", isInteracting);
-        animator.SetBool("isMirrored", mirrorAnim);
-        animator.CrossFade(targetAnim, 0.2f);
+        character.animator.applyRootMotion = isInteracting;
+        character.animator.SetBool("canRotate", canRoate);
+        character.animator.SetBool("isInteracting", isInteracting);
+        character.animator.SetBool("isMirrored", mirrorAnim);
+        character.animator.CrossFade(targetAnim, 0.2f);
     }
 
     public void PlayerTargetAnimationWithRootRotation(string targetAnim, bool isInteracting)
     {
-        animator.applyRootMotion = isInteracting;
-        animator.SetBool("isRotatingWithRootMotion", true);
-        animator.SetBool("isInteracting", isInteracting);
-        animator.CrossFade(targetAnim, 0.2f);
+        character.animator.applyRootMotion = isInteracting;
+        character.animator.SetBool("isRotatingWithRootMotion", true);
+        character.animator.SetBool("isInteracting", isInteracting);
+        character.animator.CrossFade(targetAnim, 0.2f);
     }
 
     public virtual void CanRotate()
     {
-        animator.SetBool("canRotate", true);
+        character.animator.SetBool("canRotate", true);
     }
 
     public virtual void StopRotation()
     {
-        animator.SetBool("canRotate", false);
+        character.animator.SetBool("canRotate", false);
     }
 
     public virtual void EnableCombo()
     {
-        animator.SetBool("canDoCombo", true);
+        character.animator.SetBool("canDoCombo", true);
     }
 
     public virtual void DisableCombo()
     {
-        animator.SetBool("canDoCombo", false);
+        character.animator.SetBool("canDoCombo", false);
 
     }
 
     public virtual void EnableIsInvulnerable()
     {
-        animator.SetBool("isInvulnerable", true);
+        character.animator.SetBool("isInvulnerable", true);
     }
 
     public virtual void DisableIsInvulnerable()
     {
-        animator.SetBool("isInvulnerable", false);
+        character.animator.SetBool("isInvulnerable", false);
 
     }
 
     public void EnableIsParrying()
     {
-        characterManager.isParrying = true;
+        character.isParrying = true;
     }
 
     public void DisableIsParrying()
     {
-        characterManager.isParrying = false;
+        character.isParrying = false;
     }
 
     public void EnableCanBeRiposted()
     {
-        characterManager.canBeRiposted = true;
+        character.canBeRiposted = true;
     }
 
     public void DisableCanBeRiposted()
     {
-        characterManager.canBeRiposted = false;
+        character.canBeRiposted = false;
     }
 
     public virtual void TakeCriticalDamageAnimationEvent()
     {
-        characterStatsManager.TakeDamageNoAnimation(characterManager.pendingCriticalDamage, 0);
-        characterManager.pendingCriticalDamage = 0;
+        character.characterStatsManager.TakeDamageNoAnimation(character.pendingCriticalDamage, 0);
+        character.pendingCriticalDamage = 0;
     }
 
     public virtual void SetHandIKForWeapon(RightHandIKTarget rightHandTarget, LeftHandIKTarget leftHandTarget, bool isTwoHandingWeapon)
@@ -131,7 +123,7 @@ public class CharacterAnimatorManager : MonoBehaviour
 
     public virtual void CheckHandIKWeight(RightHandIKTarget rightHandIK, LeftHandIKTarget leftHandIK, bool isTwoHandingWeapon)
     {
-        if (characterManager.isInteracting)
+        if (character.isInteracting)
             return;
 
         if(handIKWeightReset)

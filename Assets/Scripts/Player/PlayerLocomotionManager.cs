@@ -4,20 +4,10 @@ using UnityEngine;
 
 public class PlayerLocomotionManager : MonoBehaviour
 {
-    CameraHandler cameraHandler;
-    PlayerManager playerManager;
-    PlayerStatsManager playerStatsManager;
-    Transform cameraObject;
-    InputHandler inputHandler;
+    PlayerManager player;
+
     public Vector3 moveDirection;
-
-    [HideInInspector]
-    public Transform myTransform;
-    [HideInInspector]
-    public PlayerAnimatorManager playerAnimatorManager;
-
     public new Rigidbody rigidbody;
-    //public GameObject normalCamera;
 
     [Header("Ground & Air Ditections States")]
     [SerializeField]
@@ -47,30 +37,22 @@ public class PlayerLocomotionManager : MonoBehaviour
     int backstepStaminaCost = 12;
     int sprintStaminaCost = 1;
 
-    public CapsuleCollider characterCollider;
-    public CapsuleCollider characterCollisionBlockerCollider;
-
     Vector3 normalVector;
     Vector3 targetPosition;
 
+    public CapsuleCollider characterCollider;
+    public CapsuleCollider characterCollisionBlockerCollider;
+
     private void Awake()
     {
-        cameraHandler = FindObjectOfType<CameraHandler>();
-        playerManager = GetComponent<PlayerManager>();
-        playerStatsManager = GetComponent<PlayerStatsManager>();
+        player = GetComponent<PlayerManager>();
         rigidbody = GetComponent<Rigidbody>();
-        inputHandler = GetComponent<InputHandler>();
-        playerAnimatorManager = GetComponent<PlayerAnimatorManager>();
         
     }
 
     private void Start()
     {
-
-        cameraObject = Camera.main.transform;
-        myTransform = transform;
-
-        playerManager.isGrounded = true;
+        player.isGrounded = true;
         Physics.IgnoreCollision(characterCollider, characterCollisionBlockerCollider, true);
     }
 
@@ -80,24 +62,24 @@ public class PlayerLocomotionManager : MonoBehaviour
     public void HandleRotation()
     {
 
-        if (playerAnimatorManager.canRotate)
+        if (player.canRotate)
         {
-            if(playerManager.isAiming)
+            if(player.isAiming)
             {
-                Quaternion targetRotation = Quaternion.Euler(0, cameraHandler.cameraTransform.eulerAngles.y, 0);
+                Quaternion targetRotation = Quaternion.Euler(0, player.cameraHandler.cameraTransform.eulerAngles.y, 0);
                 Quaternion playerRotation = Quaternion.Slerp(transform.rotation, targetRotation, rotationSpeed * Time.deltaTime);
                 transform.rotation = playerRotation;
             }
             else
             {
-                if (inputHandler.lockOnFlag)
+                if (player.inputHandler.lockOnFlag)
                 {
-                    if (inputHandler.sprintFlag || inputHandler.rollFlag)
+                    if (player.inputHandler.sprintFlag || player.inputHandler.rollFlag)
                     {
                         Vector3 targetDir = Vector3.zero;
 
-                        targetDir = cameraHandler.cameraTransform.forward * inputHandler.vertical;
-                        targetDir += cameraHandler.cameraTransform.right * inputHandler.horizontal;
+                        targetDir = player.cameraHandler.cameraTransform.forward * player.inputHandler.vertical;
+                        targetDir += player.cameraHandler.cameraTransform.right * player.inputHandler.horizontal;
                         targetDir.Normalize();
                         targetDir.y = 0;
 
@@ -109,13 +91,13 @@ public class PlayerLocomotionManager : MonoBehaviour
                         Quaternion tr = Quaternion.LookRotation(targetDir);
                         Quaternion targetRotation = Quaternion.Slerp(transform.rotation, tr, rs * Time.deltaTime);
 
-                        myTransform.rotation = targetRotation;
+                        transform.rotation = targetRotation;
                     }
                     else
                     {
                         Vector3 rotationDirection = moveDirection;
 
-                        rotationDirection = cameraHandler.m_trCurrentLockOnTarget.transform.position - transform.position;
+                        rotationDirection = player.cameraHandler.m_trCurrentLockOnTarget.transform.position - transform.position;
                         rotationDirection.y = 0;
                         rotationDirection.Normalize();
 
@@ -124,15 +106,15 @@ public class PlayerLocomotionManager : MonoBehaviour
                         Quaternion tr = Quaternion.LookRotation(rotationDirection);
                         Quaternion targetRotation = Quaternion.Slerp(transform.rotation, tr, rs * Time.deltaTime);
 
-                        myTransform.rotation = targetRotation;
+                        transform.rotation = targetRotation;
                     }
                 }
                 else
                 {
                     Vector3 targetDir = Vector3.zero;
 
-                    targetDir = cameraObject.forward * inputHandler.vertical;
-                    targetDir += cameraObject.right * inputHandler.horizontal;
+                    targetDir = player.cameraHandler.cameraObject.transform.forward * player.inputHandler.vertical;
+                    targetDir += player.cameraHandler.cameraObject.transform.right * player.inputHandler.horizontal;
 
                     targetDir.Normalize();
                     targetDir.y = 0;
@@ -145,7 +127,7 @@ public class PlayerLocomotionManager : MonoBehaviour
                     Quaternion tr = Quaternion.LookRotation(targetDir);
                     Quaternion targetRotation = Quaternion.Slerp(transform.rotation, tr, rs * Time.deltaTime);
 
-                    myTransform.rotation = targetRotation;
+                    transform.rotation = targetRotation;
                 }
             }
         }
@@ -154,37 +136,37 @@ public class PlayerLocomotionManager : MonoBehaviour
 
     public void HandleMovement()
     {
-        if (inputHandler.rollFlag)
+        if (player.inputHandler.rollFlag)
             return;
 
-        if (playerManager.isInteracting)
+        if (player.isInteracting)
             return;
 
-        moveDirection = cameraObject.forward * inputHandler.vertical;
-        moveDirection += cameraObject.right * inputHandler.horizontal;
+        moveDirection = player.cameraHandler.cameraObject.transform.forward * player.inputHandler.vertical;
+        moveDirection += player.cameraHandler.cameraObject.transform.right * player.inputHandler.horizontal;
         moveDirection.Normalize();
         moveDirection.y = 0;
 
         float speed = movementSpeed;
 
-        if (inputHandler.sprintFlag && inputHandler.moveAmount > 0.5)
+        if (player.inputHandler.sprintFlag && player.inputHandler.moveAmount > 0.5)
         {
             speed = sprintSpeed;
-            playerManager.isSprinting = true;
+            player.isSprinting = true;
             moveDirection *= speed;
-            playerStatsManager.TakeStaminsDamage(sprintStaminaCost);
+            player.playerStatsManager.TakeStaminsDamage(sprintStaminaCost);
         }
         else
         {
-            if(inputHandler.moveAmount <= 0.5)
+            if(player.inputHandler.moveAmount <= 0.5)
             {
                 moveDirection *= walkingSpeed;
-                playerManager.isSprinting = false;
+                player.isSprinting = false;
             }
             else
             {
                 moveDirection *= speed;
-                playerManager.isSprinting = false;
+                player.isSprinting = false;
 
             }
         }
@@ -192,13 +174,13 @@ public class PlayerLocomotionManager : MonoBehaviour
         Vector3 projecteedVelocity = Vector3.ProjectOnPlane(moveDirection, normalVector);
         rigidbody.velocity = projecteedVelocity;
 
-        if(inputHandler.lockOnFlag && inputHandler.sprintFlag == false)
+        if(player.inputHandler.lockOnFlag && player.inputHandler.sprintFlag == false)
         {
-            playerAnimatorManager.UpdateAnimatorValues(inputHandler.moveAmount, inputHandler.horizontal, playerManager.isSprinting);
+            player.playerAnimatorManager.UpdateAnimatorValues(player.inputHandler.moveAmount, player.inputHandler.horizontal, player.isSprinting);
         }
         else
         {
-            playerAnimatorManager.UpdateAnimatorValues(inputHandler.moveAmount, 0, playerManager.isSprinting);
+            player.playerAnimatorManager.UpdateAnimatorValues(player.inputHandler.moveAmount, 0, player.isSprinting);
         }
 
 
@@ -206,33 +188,33 @@ public class PlayerLocomotionManager : MonoBehaviour
 
     public void HandleRollingAndSprinting()
     {
-        if (playerAnimatorManager.animator.GetBool("isInteracting"))
+        if (player.animator.GetBool("isInteracting"))
             return;
 
-        if (playerStatsManager.currentStamina <= 0)
+        if (player.playerStatsManager.currentStamina <= 0)
             return; 
 
-        if (inputHandler.rollFlag)
+        if (player.inputHandler.rollFlag)
         {
-            inputHandler.rollFlag = false;
+            player.inputHandler.rollFlag = false;
 
-            moveDirection = cameraObject.forward * inputHandler.vertical;
-            moveDirection += cameraObject.right * inputHandler.horizontal;
+            moveDirection = player.cameraHandler.cameraObject.transform.forward * player.inputHandler.vertical;
+            moveDirection += player.cameraHandler.cameraObject.transform.right * player.inputHandler.horizontal;
 
-            if (inputHandler.moveAmount > 0)
+            if (player.inputHandler.moveAmount > 0)
             {
-                playerAnimatorManager.PlayerTargetAnimation("Rolling", true);
-                playerAnimatorManager.EraseHandIKForWeapon();
+                player.playerAnimatorManager.PlayerTargetAnimation("Rolling", true);
+                player.playerAnimatorManager.EraseHandIKForWeapon();
                 moveDirection.y = 0;
                 Quaternion rollRotation = Quaternion.LookRotation(moveDirection);
-                myTransform.rotation = rollRotation;
-                playerStatsManager.TakeStaminsDamage(rollStaminaCost);
+                transform.rotation = rollRotation;
+                player.playerStatsManager.TakeStaminsDamage(rollStaminaCost);
             }
             else
             {
-                playerAnimatorManager.PlayerTargetAnimation("BackStep", true);
-                playerAnimatorManager.EraseHandIKForWeapon();
-                playerStatsManager.TakeStaminsDamage(backstepStaminaCost);
+                player.playerAnimatorManager.PlayerTargetAnimation("BackStep", true);
+                player.playerAnimatorManager.EraseHandIKForWeapon();
+                player.playerStatsManager.TakeStaminsDamage(backstepStaminaCost);
 
             }
 
@@ -241,17 +223,17 @@ public class PlayerLocomotionManager : MonoBehaviour
 
     public void HandleFalling(Vector3 moveDirection)
     {
-        playerManager.isGrounded = false;
+        player.isGrounded = false;
         RaycastHit hit;
-        Vector3 origin = myTransform.position;
+        Vector3 origin = transform.position;
         origin.y += groundDetectionRayStartPoint;
 
-        if (Physics.Raycast(origin, myTransform.forward, out hit, 0.4f))
+        if (Physics.Raycast(origin, transform.forward, out hit, 0.4f))
         {
             moveDirection = Vector3.zero;
         }
 
-        if (playerManager.isInAir)
+        if (player.isInAir)
         {
             rigidbody.AddForce(-Vector3.up * fallingSpeed);
             rigidbody.AddForce(moveDirection * fallingSpeed / 10f);
@@ -261,87 +243,87 @@ public class PlayerLocomotionManager : MonoBehaviour
         dir.Normalize();
         origin = origin + dir * groundDirectionRayDistance;
 
-        targetPosition = myTransform.position;
+        targetPosition = transform.position;
 
         Debug.DrawRay(origin, -Vector3.up * minimumDistanceNeededToBeginFall, Color.red, 0.1f, false);
         if (Physics.Raycast(origin, -Vector3.up, out hit, minimumDistanceNeededToBeginFall, groundLayer))
         {
             normalVector = hit.normal;
             Vector3 tp = hit.point;
-            playerManager.isGrounded = true;
+            player.isGrounded = true;
             targetPosition.y = tp.y;
 
-            if (playerManager.isInAir)
+            if (player.isInAir)
             {
                 if(inAirTimer > 0.5)
                 {
                     Debug.Log("YOu were in the air for " + inAirTimer);
-                    playerAnimatorManager.PlayerTargetAnimation("Land", true);
+                    player.playerAnimatorManager.PlayerTargetAnimation("Land", true);
                     inAirTimer = 0;
                 }
                 else
                 {
-                    playerAnimatorManager.PlayerTargetAnimation("Empty", false);
+                    player.playerAnimatorManager.PlayerTargetAnimation("Empty", false);
                     inAirTimer = 0;
                 }
 
-                playerManager.isInAir = false;
+                player.isInAir = false;
             }
         }
         else
         {
-            if(playerManager.isGrounded)
+            if(player.isGrounded)
             {
-                playerManager.isGrounded = false;
+                player.isGrounded = false;
             }
 
-            if(playerManager.isInAir == false)
+            if(player.isInAir == false)
             {
-                if(playerManager.isInteracting == false)
+                if(player.isInteracting == false)
                 {
-                    playerAnimatorManager.PlayerTargetAnimation("Falling", true);
+                    player.playerAnimatorManager.PlayerTargetAnimation("Falling", true);
                 }
 
                 Vector3 vel = rigidbody.velocity;
                 vel.Normalize();
                 rigidbody.velocity = vel * (movementSpeed / 2);
-                playerManager.isInAir = true;
+                player.isInAir = true;
             }
         }
 
         //if(playerManager.isGrounded)
         {
-            if (playerManager.isInteracting || inputHandler.moveAmount > 0)
+            if (player.isInteracting || player.inputHandler.moveAmount > 0)
             {
-                myTransform.position = Vector3.Lerp(myTransform.position, targetPosition, Time.deltaTime);
+                transform.position = Vector3.Lerp(transform.position, targetPosition, Time.deltaTime);
             }
             else
             {
-                myTransform.position = targetPosition;
+                transform.position = targetPosition;
             }
         }
     }
 
     public void HandleJumping()
     {
-        if (playerManager.isInteracting)
+        if (player.isInteracting)
             return;
 
 
-        if (playerStatsManager.currentStamina <= 0)
+        if (player.playerStatsManager.currentStamina <= 0)
             return;
 
-        if (inputHandler.jump_Input)
+        if (player.inputHandler.jump_Input)
         {
-            if(inputHandler.moveAmount > 0 )
+            if(player.inputHandler.moveAmount > 0 )
             {
-                moveDirection = cameraObject.forward * inputHandler.vertical;
-                moveDirection += cameraObject.right * inputHandler.horizontal;
-                playerAnimatorManager.PlayerTargetAnimation("Jump", true);
-                playerAnimatorManager.EraseHandIKForWeapon();
+                moveDirection = player.cameraHandler.cameraObject.transform.forward * player.inputHandler.vertical;
+                moveDirection += player.cameraHandler.cameraObject.transform.right * player.inputHandler.horizontal;
+                player.playerAnimatorManager.PlayerTargetAnimation("Jump", true);
+                player.playerAnimatorManager.EraseHandIKForWeapon();
                 moveDirection.y = 0;
                 Quaternion jumpRotation = Quaternion.LookRotation(moveDirection);
-                myTransform.rotation = jumpRotation;
+                transform.rotation = jumpRotation;
             }
         }
     }

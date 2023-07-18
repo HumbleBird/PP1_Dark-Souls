@@ -18,21 +18,21 @@ public class CombatStanceState : State
     protected float verticalMovementValue = 0;
     protected float horizontalMovementValue = 0;
 
-    public override State Tick(EnemyManager enemyManager, EnemyStatsManager enemyStatsManager, EnemyAnimationManager enemyAnimationManager)
+    public override State Tick(EnemyManager enemy)
     {
-        float distancefromTarget = Vector3.Distance(enemyManager.currentTarget.transform.position, enemyManager.transform.position);
-        enemyAnimationManager.animator.SetFloat("Vertical", verticalMovementValue, 0.2f, Time.deltaTime);
-        enemyAnimationManager.animator.SetFloat("Horizontal", horizontalMovementValue, 0.2f, Time.deltaTime);
+        float distancefromTarget = Vector3.Distance(enemy.currentTarget.transform.position, enemy.transform.position);
+        enemy.animator.SetFloat("Vertical", verticalMovementValue, 0.2f, Time.deltaTime);
+        enemy.animator.SetFloat("Horizontal", horizontalMovementValue, 0.2f, Time.deltaTime);
         attackState.hasPerformedAttack = false;
 
-        if (enemyManager.isInteracting)
+        if (enemy.isInteracting)
         {
-            enemyAnimationManager.animator.SetFloat("Vertical", 0);
-            enemyAnimationManager.animator.SetFloat("Horizontal", 0);
+            enemy.animator.SetFloat("Vertical", 0);
+            enemy.animator.SetFloat("Horizontal", 0);
             return this;
         }
 
-        if (distancefromTarget > enemyManager.MaximumAggroRadius)
+        if (distancefromTarget > enemy.MaximumAggroRadius)
         {
             return pursueTargetState;
         }
@@ -40,19 +40,19 @@ public class CombatStanceState : State
         if(!randomDestinationSet)
         {
             randomDestinationSet = true;
-            DecideCirclingAction(enemyAnimationManager);
+            DecideCirclingAction(enemy.enemyAnimationManager);
         }
 
-        HandleRotateTowardTarget(enemyManager);
+        HandleRotateTowardTarget(enemy);
 
-        if(enemyManager.currentRecoveryTime <= 0 && attackState.currentAttack != null)
+        if(enemy.currentRecoveryTime <= 0 && attackState.currentAttack != null)
         {
             randomDestinationSet = false;
             return attackState;
         }
         else
         {
-            GetNewAttack(enemyManager);
+            GetNewAttack(enemy);
         }
 
         return this;

@@ -19,7 +19,7 @@ public class FireArrowAction : ItemAction
 
         // reset 플레이어 holding arrow flag
         player.playerAnimatorManager.PlayerTargetAnimation("Bow_TH_Fire_01", true);
-        player.playerAnimatorManager.animator.SetBool("isHoldingArrow", false);
+        player.animator.SetBool("isHoldingArrow", false);
 
         // live arrow 생성
         GameObject liveArrow = Instantiate(player.playerInventoryManager.currentAmmo.liveAmmoModel, arrowInstantiationLocation.transform.position, player.cameraHandler.cameraPivotTranform.rotation);

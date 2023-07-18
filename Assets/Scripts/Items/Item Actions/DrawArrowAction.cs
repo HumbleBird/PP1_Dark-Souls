@@ -16,7 +16,7 @@ public class DrawArrowAction : ItemAction
 
 
         //Animator Player
-        player.playerAnimatorManager.animator.SetBool("isHoldingArrow", true);
+        player.animator.SetBool("isHoldingArrow", true);
         player.playerAnimatorManager.PlayerTargetAnimation("Bow_TH_Draw_01", true);
 
         // Instantiate Arrow

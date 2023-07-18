@@ -4,8 +4,7 @@ using UnityEngine;
 
 public class EnemyLocomotionManager : MonoBehaviour
 {
-    EnemyManager enemyManager;
-    EnemyAnimationManager enemyAnimationManager;
+    EnemyManager enemy;
 
     public CapsuleCollider characterCollider;
     public CapsuleCollider characterCollisionBlockerCollider;
@@ -15,8 +14,7 @@ public class EnemyLocomotionManager : MonoBehaviour
     // Start is called before the first frame update
     private void Awake()
     {
-        enemyManager = GetComponent<EnemyManager>();
-        enemyAnimationManager = GetComponent<EnemyAnimationManager>();
+        enemy = GetComponent<EnemyManager>();
     }
 
 

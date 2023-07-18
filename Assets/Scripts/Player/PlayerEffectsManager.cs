@@ -4,8 +4,8 @@ using UnityEngine;
 
 public class PlayerEffectsManager : CharacterEffectsManager
 {
-    PlayerStatsManager playerStatsManager;
-    PlayerWeaponSlotManager playerWeaponSlotManager;
+    PlayerManager player;
+
 
     PoisonBuildUpBar poisonBuildUpBar;
     PoisonAmountBar poisonAmountBar;
@@ -18,8 +18,7 @@ public class PlayerEffectsManager : CharacterEffectsManager
     {
         base.Awake();
 
-        playerStatsManager = GetComponent<PlayerStatsManager>();
-        playerWeaponSlotManager = GetComponent<PlayerWeaponSlotManager>();
+        player = GetComponent<PlayerManager>();
 
         poisonBuildUpBar = FindObjectOfType<PoisonBuildUpBar>();
         poisonAmountBar = FindObjectOfType<PoisonAmountBar>();
@@ -27,13 +26,13 @@ public class PlayerEffectsManager : CharacterEffectsManager
 
     public void HealPlayerFromEffect()
     {
-        playerStatsManager.HealPlayer(amountToBeHealed);
+        player.playerStatsManager.HealPlayer(amountToBeHealed);
         if(currentParticleFX != null)
         {
-            GameObject healParticles = Instantiate(currentParticleFX, playerStatsManager.transform);
+            GameObject healParticles = Instantiate(currentParticleFX, player.playerStatsManager.transform);
         }
         Destroy(instantiatedFXModel.gameObject);
-        playerWeaponSlotManager.LoadBothWeaponsOnSlots();
+        player.playerWeaponSlotManager.LoadBothWeaponsOnSlots();
     }
 
     protected override void HandleIsPoisonedEffect()

@@ -4,12 +4,16 @@ using UnityEngine;
 
 public class PlayerManager : CharacterManager
 {
-    Animator animator;
-
+    [Header("Input")]
     public InputHandler inputHandler;
-    public CameraHandler cameraHandler;
-    public GameUIManager gameUIManager;
 
+    [Header("Camera")]
+    public CameraHandler cameraHandler;
+
+    [Header("UI")]
+    public GameUIManager uiManager;
+
+    [Header("Player")]
     public PlayerStatsManager playerStatsManager;
     public PlayerWeaponSlotManager playerWeaponSlotManager;
     public PlayerCombatManager playerCombatManager;
@@ -19,6 +23,10 @@ public class PlayerManager : CharacterManager
     public PlayerLocomotionManager playerLocomotionManager;
     public PlayerEffectsManager playerEffectsManager;
 
+    [Header("Colliders")]
+    public BlockingCollider blockingCollider;
+
+    [Header("Interactables")]
     InteractableUI interactableUI;
     public GameObject interactableUIGameObject;
     public GameObject itemInteractableUIGameObject;
@@ -26,12 +34,17 @@ public class PlayerManager : CharacterManager
     protected override void Awake()
     {
         base.Awake();
-        backStabCollider = GetComponentInChildren<CriticalDamageCollider>();
 
         cameraHandler = FindObjectOfType<CameraHandler>();
-        gameUIManager = FindObjectOfType<GameUIManager>();
+        uiManager = FindObjectOfType<GameUIManager>();
+        interactableUI = FindObjectOfType<InteractableUI>();
 
+        backStabCollider = GetComponentInChildren<CriticalDamageCollider>();
+        blockingCollider = GetComponentInChildren<BlockingCollider>();
+
+        animator = GetComponentInChildren<Animator>();
         inputHandler = GetComponent<InputHandler>();
+
         playerAnimatorManager = GetComponent<PlayerAnimatorManager>();
         playerLocomotionManager = GetComponent<PlayerLocomotionManager>();
         playerWeaponSlotManager = GetComponent<PlayerWeaponSlotManager>();
@@ -41,9 +54,7 @@ public class PlayerManager : CharacterManager
         playerEquipmentManager = GetComponent<PlayerEquipmentManager>();
         playerEffectsManager = GetComponent<PlayerEffectsManager>();
 
-        animator = GetComponentInChildren<Animator>();
 
-        interactableUI = FindObjectOfType<InteractableUI>();
     }
 
     // Update is called once per frame
@@ -53,6 +64,7 @@ public class PlayerManager : CharacterManager
 
         isInteracting = animator.GetBool("isInteracting");
         canDoCombo = animator.GetBool("canDoCombo");
+        canRotate = animator.GetBool("canRotate");
         isInvulnerable = animator.GetBool("isInvulnerable");
         isFiringSpell = animator.GetBool("isFiringSpell");
         isHoldingArrow = animator.GetBool("isHoldingArrow");
@@ -60,10 +72,9 @@ public class PlayerManager : CharacterManager
         animator.SetBool("isTwoHandingWeapon", isTwoHandingWeapon);
         animator.SetBool("isBlocking", isBlocking);
         animator.SetBool("isInAir", isInAir);
-        animator.SetBool("isDead", playerStatsManager.isDead);
+        animator.SetBool("isDead", isDead);
 
         inputHandler.TickInput(delta);
-        playerAnimatorManager.canRotate = animator.GetBool("canRotate");
         playerLocomotionManager.HandleRollingAndSprinting();
         playerLocomotionManager.HandleJumping();
         playerStatsManager.RegenerateStamina();

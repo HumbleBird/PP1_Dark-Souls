@@ -13,16 +13,16 @@ public class AmbushState : State
 
     public PursueTargetState pursueTargetState;
 
-    public override State Tick(EnemyManager enemyManager, EnemyStatsManager enemyStatsManager, EnemyAnimationManager enemyAnimationManager)
+    public override State Tick(EnemyManager enemy)
     {
-        if(isSleeping && enemyManager.isInteracting == false)
+        if(isSleeping && enemy.isInteracting == false)
         {
-            enemyAnimationManager.PlayerTargetAnimation(sleepAnimation, true);
+            enemy.enemyAnimationManager.PlayerTargetAnimation(sleepAnimation, true);
         }
 
         #region Handle Target Detection
 
-        Collider[] colliders = Physics.OverlapSphere(enemyManager.transform.position, detectionRadius, detectionLayer);
+        Collider[] colliders = Physics.OverlapSphere(enemy.transform.position, detectionRadius, detectionLayer);
 
         for (int i = 0; i < colliders.Length; i++)
         {
@@ -30,15 +30,15 @@ public class AmbushState : State
 
             if(characterStatus != null)
             {
-                Vector3 targetDirection = characterStatus.transform.position - enemyManager.transform.position;
-                float viewableAngle = Vector3.Angle(targetDirection, enemyManager.transform.forward);
+                Vector3 targetDirection = characterStatus.transform.position - enemy.transform.position;
+                float viewableAngle = Vector3.Angle(targetDirection, enemy.transform.forward);
 
-                if(viewableAngle > enemyManager.minimumDetectionAngle
-                    && viewableAngle < enemyManager.maximumDetectionAngle)
+                if(viewableAngle > enemy.minimumDetectionAngle
+                    && viewableAngle < enemy.maximumDetectionAngle)
                 {
-                    enemyManager.currentTarget = characterStatus;
+                    enemy.currentTarget = characterStatus;
                     isSleeping = false;
-                    enemyAnimationManager.PlayerTargetAnimation(wakeAnimation, true);
+                    enemy.enemyAnimationManager.PlayerTargetAnimation(wakeAnimation, true);
                 }
             }
         }
@@ -46,7 +46,7 @@ public class AmbushState : State
         #endregion
 
         #region Handle State Change
-        if (enemyManager.currentTarget != null)
+        if (enemy.currentTarget != null)
         {
             return pursueTargetState;
         }

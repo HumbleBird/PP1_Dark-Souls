@@ -5,10 +5,12 @@ using UnityEngine.AI;
 
 public class EnemyManager : CharacterManager
 {
-    EnemyLocomotionManager enemyLocomotionManager;
-    EnemyAnimationManager enemyAnimationManager;
-    EnemyStatsManager enemyStatsManager;
-    EnemyEffectsManager enemyEffectsManager;
+
+    public EnemyBossManager enemyBossManager;
+    public EnemyLocomotionManager enemyLocomotionManager;
+    public EnemyAnimationManager enemyAnimationManager;
+    public EnemyStatsManager enemyStatsManager;
+    public EnemyEffectsManager enemyEffectsManager;
 
     public State currentState;
     public CharacterStatsManager currentTarget;
@@ -34,6 +36,7 @@ public class EnemyManager : CharacterManager
     {
         base.Awake();
         enemyLocomotionManager = GetComponent<EnemyLocomotionManager>();
+        enemyBossManager = GetComponent<EnemyBossManager>();
         enemyAnimationManager = GetComponent<EnemyAnimationManager>();
         enemyRigidbody = GetComponent<Rigidbody>();
         enemyStatsManager = GetComponent<EnemyStatsManager>();
@@ -53,13 +56,13 @@ public class EnemyManager : CharacterManager
         HandleRecoveryTimer();
         HandleStateMachine();
 
-        isRotatingWithRootMotion = enemyAnimationManager.animator.GetBool("isRotatingWithRootMotion");
-        isInteracting = enemyAnimationManager.animator.GetBool("isInteracting");
-        canDoCombo = enemyAnimationManager.animator.GetBool("canDoCombo");
-        canRotate = enemyAnimationManager.animator.GetBool("canRotate");
-        isInvulnerable = enemyAnimationManager.animator.GetBool("isInvulnerable");
-        isPhaseShifting = enemyAnimationManager.animator.GetBool("isPhaseShifting");
-        enemyAnimationManager.animator.SetBool("isDead", enemyStatsManager.isDead);
+        isRotatingWithRootMotion = animator.GetBool("isRotatingWithRootMotion");
+        isInteracting = animator.GetBool("isInteracting");
+        canDoCombo = animator.GetBool("canDoCombo");
+        canRotate = animator.GetBool("canRotate");
+        isInvulnerable = animator.GetBool("isInvulnerable");
+        isPhaseShifting = animator.GetBool("isPhaseShifting");
+        animator.SetBool("isDead", isDead);
     }
 
     protected override void FixedUpdate()
@@ -79,7 +82,7 @@ public class EnemyManager : CharacterManager
     {
         if(currentState != null)
         {
-            State nextState = currentState.Tick(this, enemyStatsManager, enemyAnimationManager);
+            State nextState = currentState.Tick(this);
 
             if(nextState != null)
             {

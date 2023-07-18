@@ -4,8 +4,12 @@ using UnityEngine;
 
 public class CharacterManager : MonoBehaviour
 {
-    CharacterAnimatorManager characterAnimatorManager;
-    CharacterWeaponSlotManager characterWeaponSlotManager;
+    public Animator animator;
+    public CharacterAnimatorManager characterAnimatorManager;
+    public CharacterWeaponSlotManager characterWeaponSlotManager;
+    public CharacterStatsManager characterStatsManager;
+    public CharacterInventoryManager characterInventoryManager;
+    public CharacterEffectsManager characterEffectsManager;
 
     [Header("Lock On Tranform")]
     public Transform lockOnTransform;
@@ -16,6 +20,9 @@ public class CharacterManager : MonoBehaviour
 
     [Header("IsInteraction")]
     public bool isInteracting;
+
+    [Header("Status")]
+    public bool isDead;
 
 
     [Header("Combat Flaged")]
@@ -47,8 +54,12 @@ public class CharacterManager : MonoBehaviour
 
     protected virtual void Awake()
     {
+        animator = GetComponent<Animator>();
         characterAnimatorManager = GetComponent<CharacterAnimatorManager>();
         characterWeaponSlotManager = GetComponent<CharacterWeaponSlotManager>();
+        characterStatsManager = GetComponent<CharacterStatsManager>();
+        characterInventoryManager = GetComponent<CharacterInventoryManager>();
+        characterEffectsManager = GetComponent<CharacterEffectsManager>();
     }
 
     protected virtual void FixedUpdate()

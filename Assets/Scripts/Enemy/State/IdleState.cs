@@ -13,10 +13,10 @@ public class IdleState : State
     public LayerMask detectionLayer;
 
 
-    public override State Tick(EnemyManager enemyManager, EnemyStatsManager enemyStatsManager, EnemyAnimationManager enemyAnimationManager)
+    public override State Tick(EnemyManager enemy)
     {
         #region Handle Enemy Target Detection
-        Collider[] colliders = Physics.OverlapSphere(transform.position, enemyManager.detectionRadius, detectionLayer);
+        Collider[] colliders = Physics.OverlapSphere(transform.position, enemy.detectionRadius, detectionLayer);
 
         for (int i = 0; i < colliders.Length; i++)
         {
@@ -24,14 +24,14 @@ public class IdleState : State
 
             if (characterStatus != null)
             {
-                if (characterStatus.teamIDNumber != enemyStatsManager.teamIDNumber)
+                if (characterStatus.teamIDNumber != enemy.enemyStatsManager.teamIDNumber)
                 {
                     Vector3 TargetDirection = characterStatus.transform.position - transform.position;
                     float viewableAngle = Vector3.Angle(TargetDirection, transform.forward);
 
-                    if (viewableAngle > enemyManager.minimumDetectionAngle && viewableAngle < enemyManager.maximumDetectionAngle)
+                    if (viewableAngle > enemy.minimumDetectionAngle && viewableAngle < enemy.maximumDetectionAngle)
                     {
-                        enemyManager.currentTarget = characterStatus;
+                        enemy.currentTarget = characterStatus;
                     }
                 }
             }
@@ -39,7 +39,7 @@ public class IdleState : State
         #endregion
 
         #region Handle Switching To Next State
-        if (enemyManager.currentTarget != null)
+        if (enemy.currentTarget != null)
         {
             return pursueTargetState;
         }

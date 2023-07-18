@@ -6,6 +6,6 @@ public class LevelUpInteractable : Interactable
 {
     public override void Interact(PlayerManager playermanager)
     {
-        playermanager.gameUIManager.levelUpWindow.SetActive(true); 
+        playermanager.uiManager.levelUpWindow.SetActive(true); 
     }
 }

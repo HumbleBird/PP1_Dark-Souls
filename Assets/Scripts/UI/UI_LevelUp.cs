@@ -168,7 +168,7 @@ public class UI_LevelUp : MonoBehaviour
         playerManager.playerStatsManager.maxfocusPoint = playerManager.playerStatsManager.SetMaxfocusPointsFromStaminaLevel();
 
         playerManager.playerStatsManager.currentSoulCount -= soulsRequiredToLevelUp;
-        playerManager.gameUIManager.soulCount.text = playerManager.playerStatsManager.currentSoulCount.ToString();
+        playerManager.uiManager.soulCount.text = playerManager.playerStatsManager.currentSoulCount.ToString();
 
         gameObject.SetActive(false);
     }
