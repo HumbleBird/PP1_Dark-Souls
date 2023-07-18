@@ -4,9 +4,12 @@ using UnityEngine;
 
 public class PlayerManager : CharacterManager
 {
-    public InputHandler inputHandler;
     Animator animator;
+
+    public InputHandler inputHandler;
     public CameraHandler cameraHandler;
+    public GameUIManager gameUIManager;
+
     public PlayerStatsManager playerStatsManager;
     public PlayerWeaponSlotManager playerWeaponSlotManager;
     public PlayerCombatManager playerCombatManager;
@@ -26,6 +29,7 @@ public class PlayerManager : CharacterManager
         backStabCollider = GetComponentInChildren<CriticalDamageCollider>();
 
         cameraHandler = FindObjectOfType<CameraHandler>();
+        gameUIManager = FindObjectOfType<GameUIManager>();
 
         inputHandler = GetComponent<InputHandler>();
         playerAnimatorManager = GetComponent<PlayerAnimatorManager>();

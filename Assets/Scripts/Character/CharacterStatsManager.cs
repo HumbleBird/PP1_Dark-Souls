@@ -18,10 +18,13 @@ public class CharacterStatsManager : MonoBehaviour
     public float maxfocusPoint;
     public float currentFocusPoints;
 
-    public int soulCount = 0;
+    public int currentSoulCount = 0;
     public int soulsAwardedOnDeath = 50;
 
-    [Header("LEVLELS")]
+    [Header("CHARACTER LEVEL")]
+    public int playerLevel;
+
+    [Header("STAT LEVLELS")]
     public int healthLevel = 10; 
     public int staminaLevel = 10; // = Endurance
     public int focusLevel = 10; // = Attunement
@@ -140,5 +143,23 @@ public class CharacterStatsManager : MonoBehaviour
     public void DrainStaminaBasedOnAttackType()
     {
 
+    }
+
+    public int SetMaxHealthFromHealthLevel()
+    {
+        maxHealth = healthLevel * 10;
+        return maxHealth;
+    }
+
+    public float SetMaxStaminaFromStaminaLevel()
+    {
+        maxStamina = staminaLevel * 10;
+        return maxStamina;
+    }
+
+    public float SetMaxfocusPointsFromStaminaLevel()
+    {
+        maxfocusPoint = focusLevel * 10;
+        return maxfocusPoint;
     }
 }

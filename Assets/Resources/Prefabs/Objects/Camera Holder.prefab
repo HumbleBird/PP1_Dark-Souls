@@ -164,6 +164,7 @@ MonoBehaviour:
   targetTransform: {fileID: 0}
   targetTransformWhileAiming: {fileID: 0}
   cameraTransform: {fileID: 432937794974771007}
+  cameraObject: {fileID: 0}
   cameraPivotTranform: {fileID: 432937793104254638}
   ignoreLayers:
     serializedVersion: 2
@@ -172,10 +173,10 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 1
   leftAndRightLookSpeed: 250
-  leftAndRightAimingLookSpeed: 25
+  leftAndRightAimingLookSpeed: 100
   follwSpeed: 50
   unAndDownLookSpeed: 250
-  unAndDownAimingLookSpeed: 25
+  unAndDownAimingLookSpeed: 100
   minimumLockUpAngle: -35
   maximumLockUpAngle: 35
   cameraSphereRadius: 0.2

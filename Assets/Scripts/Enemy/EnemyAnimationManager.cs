@@ -30,7 +30,7 @@ public class EnemyAnimationManager : CharacterAnimatorManager
 
             if (soulCountBar != null)
             {
-                soulCountBar.SetSoulCountText(playerstatus.soulCount);
+                soulCountBar.SetSoulCountText(playerstatus.currentSoulCount);
             }
         }
 
