@@ -26,6 +26,9 @@ public class GameUIManager : MonoBehaviour
     public bool leftHandSlot01Selected;
     public bool leftHandSlot02Selected;
     public bool headEquipmentSlotSelected;
+    public bool bodyEquipmentSlotSelected;
+    public bool legEquipmentSlotSelected;
+    public bool handEquipmentSlotSelected;
 
     [Header("Weapon Inventory")]
     public GameObject weaponInventorySlotPrefab;
@@ -37,6 +40,21 @@ public class GameUIManager : MonoBehaviour
     public Transform headEquipmentInventorySlotsParent;
     HeadEquipmentInventorySlot[] headEquipmentInventorySlots;
 
+    [Header("Body Equipment Inventory")]
+    public GameObject bodyEquipmentInventorySlotPrefab;
+    public Transform bodyEquipmentInventorySlotsParent;
+    BodyEquipmentInventorySlot[] bodyEquipmentInventorySlots;
+
+    [Header("Leg Equipment Inventory")]
+    public GameObject legEquipmentInventorySlotPrefab;
+    public Transform legEquipmentInventorySlotsParent;
+    LegEquipmentInventorySlot[] legEquipmentInventorySlots;
+
+    [Header("Hand Equipment Inventory")]
+    public GameObject handEquipmentInventorySlotPrefab;
+    public Transform handEquipmentInventorySlotsParent;
+    HandEquipmentInventorySlot[] handEquipmentInventorySlots;
+
     private void Awake()
     {
         player = FindObjectOfType<PlayerManager>();
@@ -44,6 +62,9 @@ public class GameUIManager : MonoBehaviour
 
         weaponInventorySlots = weaponInventorySlotsParent.GetComponentsInChildren<WeaponInventorySlot>();
         headEquipmentInventorySlots = headEquipmentInventorySlotsParent.GetComponentsInChildren<HeadEquipmentInventorySlot>();
+        bodyEquipmentInventorySlots = headEquipmentInventorySlotsParent.GetComponentsInChildren<BodyEquipmentInventorySlot>();
+        legEquipmentInventorySlots = headEquipmentInventorySlotsParent.GetComponentsInChildren< LegEquipmentInventorySlot>();
+        handEquipmentInventorySlots = headEquipmentInventorySlotsParent.GetComponentsInChildren<HandEquipmentInventorySlot>();
     }
 
     private void Start()
@@ -70,9 +91,9 @@ public class GameUIManager : MonoBehaviour
         // Weapon Inventory Slots
         for (int i = 0; i < weaponInventorySlots.Length; i++)
         {
-            if(i < player.playerInventoryManager.weaponsInventory.Count)
+            if (i < player.playerInventoryManager.weaponsInventory.Count)
             {
-                if(weaponInventorySlots.Length < player.playerInventoryManager.weaponsInventory.Count)
+                if (weaponInventorySlots.Length < player.playerInventoryManager.weaponsInventory.Count)
                 {
                     Instantiate(weaponInventorySlotPrefab, weaponInventorySlotsParent);
                     weaponInventorySlots = weaponInventorySlotsParent.GetComponentsInChildren<WeaponInventorySlot>();
@@ -102,6 +123,62 @@ public class GameUIManager : MonoBehaviour
                 headEquipmentInventorySlots[i].ClearInventorySlot();
             }
         }
+
+        // Body Equipment Inventory Slot
+        for (int i = 0; i < bodyEquipmentInventorySlots.Length; i++)
+        {
+            if (i < player.playerInventoryManager.bodyEquipmentInventory.Count)
+            {
+                if (bodyEquipmentInventorySlots.Length < player.playerInventoryManager.bodyEquipmentInventory.Count)
+                {
+                    Instantiate(bodyEquipmentInventorySlotPrefab, bodyEquipmentInventorySlotsParent);
+                    bodyEquipmentInventorySlots = bodyEquipmentInventorySlotsParent.GetComponentsInChildren<BodyEquipmentInventorySlot>();
+                }
+                bodyEquipmentInventorySlots[i].AddItem(player.playerInventoryManager.bodyEquipmentInventory[i]);
+            }
+            else
+            {
+                bodyEquipmentInventorySlots[i].ClearInventorySlot();
+            }
+        }
+
+        // Leg Equipment Inventory Slot
+        for (int i = 0; i < legEquipmentInventorySlots.Length; i++)
+        {
+            if (i < player.playerInventoryManager.legEquipmentInventory.Count)
+            {
+                if (legEquipmentInventorySlots.Length < player.playerInventoryManager.legEquipmentInventory.Count)
+                {
+                    Instantiate(legEquipmentInventorySlotPrefab, legEquipmentInventorySlotsParent);
+                    legEquipmentInventorySlots = legEquipmentInventorySlotsParent.GetComponentsInChildren<LegEquipmentInventorySlot>();
+                }
+                legEquipmentInventorySlots[i].AddItem(player.playerInventoryManager.legEquipmentInventory[i]);
+            }
+            else
+            {
+                legEquipmentInventorySlots[i].ClearInventorySlot();
+            }
+        }
+
+        // Hand Equipment Inventory Slot
+        for (int i = 0; i < handEquipmentInventorySlots.Length; i++)
+        {
+            if (i < player.playerInventoryManager.handEquipmentInventory.Count)
+            {
+                if (handEquipmentInventorySlots.Length < player.playerInventoryManager.handEquipmentInventory.Count)
+                {
+                    Instantiate(handEquipmentInventorySlotPrefab, handEquipmentInventorySlotsParent);
+                    handEquipmentInventorySlots = handEquipmentInventorySlotsParent.GetComponentsInChildren<HandEquipmentInventorySlot>();
+                }
+                handEquipmentInventorySlots[i].AddItem(player.playerInventoryManager.handEquipmentInventory[i]);
+            }
+            else
+            {
+                handEquipmentInventorySlots[i].ClearInventorySlot();
+            }
+        }
+
+
     }
 
     public void OpenSelectWindow()
@@ -127,6 +204,10 @@ public class GameUIManager : MonoBehaviour
         rightHandSlot02Selected = false;
         leftHandSlot01Selected  = false;
         leftHandSlot02Selected = false;
+
         headEquipmentSlotSelected = false;
+        bodyEquipmentSlotSelected = false;
+        legEquipmentSlotSelected = false;
+        handEquipmentSlotSelected = false;
     }
 }

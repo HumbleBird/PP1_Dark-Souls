@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class HeadEquipmentSlotUI : MonoBehaviour
+public class LegEquipmentSlotUI : MonoBehaviour
 {
     protected GameUIManager uiManager;
 
@@ -19,7 +19,7 @@ public class HeadEquipmentSlotUI : MonoBehaviour
     {
         if (newEquipmentItem != null)
         {
-            equipmentItem = newEquipmentItem; 
+            equipmentItem = newEquipmentItem;
             icon.sprite = equipmentItem.itemIcon;
             icon.enabled = true;
             gameObject.SetActive(true);
@@ -35,7 +35,7 @@ public class HeadEquipmentSlotUI : MonoBehaviour
 
     public void SelectThisSlot()
     {
-        uiManager.headEquipmentSlotSelected = true;
+        uiManager.legEquipmentSlotSelected = true;
 
     }
 }

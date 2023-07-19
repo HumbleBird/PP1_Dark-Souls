@@ -5,9 +5,10 @@ using UnityEngine;
 public class EquipmentWindowUI : MonoBehaviour
 {
     public WeaponEquipmentSlotUI[] weaponEquipmentSlotsUI;
-    public EquipmentSlotUI headEquipmentSlotUI;
-
-
+    public HeadEquipmentSlotUI headEquipmentSlotUI;
+    public BodyEquipmentSlotUI bodyEquipmentSlotUI;
+    public LegEquipmentSlotUI legEquipmentSlotUI;
+    public HandEquipmentSlotUI handEquipmentSlotUI;
 
     public void LoadWeaponsOnEquipmentScreen(PlayerInventoryManager playerInventoryManager)
     {
@@ -34,6 +35,7 @@ public class EquipmentWindowUI : MonoBehaviour
 
     public void LoadArmorOnEquipmentScreen(PlayerInventoryManager playerInventoryManager)
     {
+        // Head
         if(playerInventoryManager.currentHelmetEquipment != null)
         {
             headEquipmentSlotUI.AddItem(playerInventoryManager.currentHelmetEquipment);
@@ -41,6 +43,36 @@ public class EquipmentWindowUI : MonoBehaviour
         else
         {
             headEquipmentSlotUI.ClearItem();
+        }
+
+        // Body
+        if(playerInventoryManager.currentTorsoEquipment != null)
+        {
+            bodyEquipmentSlotUI.AddItem(playerInventoryManager.currentTorsoEquipment);
+        }
+        else
+        {
+            bodyEquipmentSlotUI.ClearItem();
+        }
+
+        // Leg
+        if(playerInventoryManager.currentLegEquipment != null)
+        {
+            legEquipmentSlotUI.AddItem(playerInventoryManager.currentLegEquipment);
+        }
+        else
+        {
+            legEquipmentSlotUI.ClearItem();
+        }
+
+        // Hand
+        if(playerInventoryManager.currentHandEquipment != null)
+        {
+            handEquipmentSlotUI.AddItem(playerInventoryManager.currentHandEquipment);
+        }
+        else
+        {
+            handEquipmentSlotUI.ClearItem();
         }
     }
 

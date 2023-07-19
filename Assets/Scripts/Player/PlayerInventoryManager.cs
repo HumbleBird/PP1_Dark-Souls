@@ -6,6 +6,9 @@ public class PlayerInventoryManager : CharacterInventoryManager
 {
     public List<WeaponItem> weaponsInventory;
     public List<EquipmentItem> headEquipmentInventory;
+    public List<EquipmentItem> bodyEquipmentInventory;
+    public List<EquipmentItem> legEquipmentInventory;
+    public List<EquipmentItem> handEquipmentInventory;
 
     public void ChangeRightWeapon()
     {
