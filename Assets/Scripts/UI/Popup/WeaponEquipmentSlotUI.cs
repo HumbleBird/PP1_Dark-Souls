@@ -3,42 +3,14 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class HandEquipmentSlotUI : MonoBehaviour
+public class WeaponEquipmentSlotUI : EquipmentSlotUI
 {
-    GameUIManager uiManager;
-
-    public Image icon;
-    WeaponItem weapon;
-
     public bool rightHandSlot01;
     public bool rightHandSlot02;
     public bool leftHandSlot01;
     public bool leftHandSlot02;
 
-    private void Awake()
-    {
-        uiManager = FindObjectOfType<GameUIManager>();
-    }
-
-    public void AddItem(WeaponItem newWeapon)
-    {
-        if(newWeapon != null)
-        {
-            weapon = newWeapon;
-            icon.sprite = weapon.itemIcon;
-            icon.enabled = true;
-            gameObject.SetActive(true);
-        }
-    }
-
-    public void ClearItem()
-    {
-        weapon = null;
-        icon.sprite = null;
-        icon.enabled = false;
-    }
-
-    public void SelectThisSlot()
+    public override void SelectThisSlot()
     {
         if(rightHandSlot01)
         {

@@ -23,7 +23,7 @@ public class PlayerEquipmentManager : MonoBehaviour
         EquipAllEquipmentModelsOnStart();
     }
 
-    private void EquipAllEquipmentModelsOnStart()
+    public void EquipAllEquipmentModelsOnStart()
     {
         // Helm
         if(player.playerInventoryManager.currentHelmetEquipment != null)

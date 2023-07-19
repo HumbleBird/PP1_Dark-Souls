@@ -1599,7 +1599,6 @@ MonoBehaviour:
   fireDamageAbsorptionBody: 0
   fireDamageAbsorptionLegs: 0
   fireDamageAbsorptionHands: 0
-  isDead: 0
   enemyHealthBar: {fileID: 6023940400140223346}
   isBoss: 0
 --- !u!114 &543450653394863791
@@ -1614,10 +1613,17 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d1d967534180ba64b8d73ec62959a70b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  animator: {fileID: 0}
+  characterAnimatorManager: {fileID: 0}
+  characterWeaponSlotManager: {fileID: 0}
+  characterStatsManager: {fileID: 0}
+  characterInventoryManager: {fileID: 0}
+  characterEffectsManager: {fileID: 0}
   lockOnTransform: {fileID: 1911804233}
   backStabCollider: {fileID: 6023940401257246910}
   riposteCollider: {fileID: 6023940399542957901}
   isInteracting: 0
+  isDead: 0
   canBeRiposted: 0
   canDoCombo: 0
   canBeParryied: 0
@@ -1636,6 +1642,11 @@ MonoBehaviour:
   isGrounded: 0
   isFiringSpell: 0
   pendingCriticalDamage: 0
+  enemyBossManager: {fileID: 0}
+  enemyLocomotionManager: {fileID: 0}
+  enemyAnimationManager: {fileID: 0}
+  enemyStatsManager: {fileID: 0}
+  enemyEffectsManager: {fileID: 0}
   currentState: {fileID: 8691373872075752939}
   currentTarget: {fileID: 0}
   navMeshAgent: {fileID: 0}
@@ -1679,8 +1690,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d5432e070c64931429d872683463af05, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  animator: {fileID: 0}
-  canRotate: 0
   leftHandConstraint: {fileID: 6023940401388849126}
   rightHandConstraint: {fileID: 6023940401358902435}
 --- !u!114 &4060319920074247682
@@ -3358,7 +3367,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 6023940400140223348}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 4de1b83d2d1aecb4694bf87391bfb2bb, type: 3}
+  m_Script: {fileID: 11500000, guid: 8eedca5fd377bd94ba34f576b18fd2b3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
 --- !u!1 &6023940400141081715

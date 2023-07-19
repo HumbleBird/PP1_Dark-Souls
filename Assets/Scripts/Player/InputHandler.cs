@@ -361,6 +361,11 @@ public class InputHandler : MonoBehaviour
 
     private void HandleInventoryInput()
     {
+        if(inventoryFlag)
+        {
+            player.uiManager.UpdateUI();
+        }
+
         if(inventory_Input)
         {
             inventoryFlag = !inventoryFlag;
