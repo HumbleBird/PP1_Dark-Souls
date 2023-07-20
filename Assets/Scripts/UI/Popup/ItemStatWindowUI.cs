@@ -9,6 +9,15 @@ public class ItemStatWindowUI : MonoBehaviour
     public TextMeshProUGUI itemNameText;
     public Image itemIconImage;
 
+    [Header("Equipment Stats Windows")]
+    public GameObject weaponsStats;
+
+    [Header("Weapon Stats")]
+    public TextMeshProUGUI physicalDamageText;
+    public TextMeshProUGUI magicDamageText;
+    public TextMeshProUGUI physicalAbsorptionText;
+    public TextMeshProUGUI magicAbsorptionText;
+
     public void UpdateWeaponItemStats(WeaponItem weapon)
     {
         if(weapon != null)
@@ -35,12 +44,18 @@ public class ItemStatWindowUI : MonoBehaviour
                 itemIconImage.enabled = false;
                 itemIconImage.sprite = null;
             }
+
+            physicalDamageText.text = weapon.physicalDamage.ToString();
+            physicalAbsorptionText.text = weapon.physicalDamageAbsorption.ToString();
+
+            weaponsStats.SetActive(true);
         }
         else
         {
             itemNameText.text = "";
             itemIconImage.gameObject.SetActive(false);
             itemIconImage.sprite = null;
+            weaponsStats.SetActive(false);
         }
     }
 }
