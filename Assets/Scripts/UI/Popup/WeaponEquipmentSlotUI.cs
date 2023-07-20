@@ -40,6 +40,8 @@ public class WeaponEquipmentSlotUI : EquipmentSlotUI
 
     public  void SelectThisSlot()
     {
+        uiManager.ResetAllSelectedSlots();
+
         if(rightHandSlot01)
         {
             uiManager.rightHandSlot01Selected = true;
@@ -59,5 +61,7 @@ public class WeaponEquipmentSlotUI : EquipmentSlotUI
             uiManager.leftHandSlot02Selected = true;
 
         }
+
+        uiManager.itemStatWindowUI.UpdateWeaponItemStats(equipmentItem);
     }
 }

@@ -6,6 +6,7 @@ using TMPro;
 public class GameUIManager : MonoBehaviour
 {
     public PlayerManager player;
+    public ItemStatWindowUI itemStatWindowUI;
     public EquipmentWindowUI equipmentWindowUI;
     public QuickSlotsUI quickSlotsUI;
 
@@ -18,6 +19,7 @@ public class GameUIManager : MonoBehaviour
     public GameObject selectWindow;
     public GameObject equipmentScreenWindow;
     public GameObject weaponInventoryWindow;
+    public GameObject itemStatsWindow;
     public GameObject levelUpWindow;
 
     [Header("Equipment Window Slot Selected")]
@@ -196,6 +198,7 @@ public class GameUIManager : MonoBehaviour
         ResetAllSelectedSlots();
         weaponInventoryWindow.SetActive(false);
         equipmentScreenWindow.SetActive(false);
+        itemStatsWindow.SetActive(false);
     }
 
     public void ResetAllSelectedSlots()
