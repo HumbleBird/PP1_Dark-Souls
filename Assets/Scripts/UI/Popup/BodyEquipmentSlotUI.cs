@@ -36,6 +36,7 @@ public class BodyEquipmentSlotUI : MonoBehaviour
     public void SelectThisSlot()
     {
         uiManager.bodyEquipmentSlotSelected = true;
+        uiManager.itemStatWindowUI.UpdateArmorItemStats((EquipmentItem)equipmentItem);
 
     }
 }

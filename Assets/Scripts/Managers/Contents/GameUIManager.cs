@@ -7,6 +7,7 @@ public class GameUIManager : MonoBehaviour
 {
     public PlayerManager player;
     public ItemStatWindowUI itemStatWindowUI;
+
     public EquipmentWindowUI equipmentWindowUI;
     public QuickSlotsUI quickSlotsUI;
 
