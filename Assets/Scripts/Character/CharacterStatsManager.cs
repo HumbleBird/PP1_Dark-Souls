@@ -69,7 +69,7 @@ public class CharacterStatsManager : MonoBehaviour
         totalPoiseDefence = armorPoiseBonus;
     }
 
-    public virtual void TakeDamage(int physicalDamage, int fireDamage, string damageAnimation)
+    public virtual void TakeDamage(int physicalDamage, int fireDamage, string damageAnimation, CharacterManager enemyCharacterDamageingMe)
     {
         if (character.isDead)
             return;
@@ -93,6 +93,11 @@ public class CharacterStatsManager : MonoBehaviour
         fireDamage = Mathf.RoundToInt(fireDamage - (fireDamage * totalfireDamageAbsorption));
 
         float finalDamage = physicalDamage + fireDamage; // + fire + mage + lightning + dark Damage
+
+        if(enemyCharacterDamageingMe.isPerformingFullyChargedAttack)
+        {
+            finalDamage *= 2;
+        }
 
         currentHealth = Mathf.RoundToInt(currentHealth - finalDamage);
 
