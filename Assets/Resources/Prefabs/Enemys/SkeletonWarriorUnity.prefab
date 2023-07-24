@@ -1478,6 +1478,8 @@ GameObject:
   - component: {fileID: 4060319920074247682}
   - component: {fileID: 4060319920074247695}
   - component: {fileID: 4060319920074247694}
+  - component: {fileID: 543450653394863794}
+  - component: {fileID: 543450653394863793}
   m_Layer: 9
   m_Name: SkeletonWarriorUnity
   m_TagString: Character
@@ -1619,6 +1621,8 @@ MonoBehaviour:
   characterStatsManager: {fileID: 0}
   characterInventoryManager: {fileID: 0}
   characterEffectsManager: {fileID: 0}
+  characterSoundFXManager: {fileID: 0}
+  characterCombatManager: {fileID: 0}
   lockOnTransform: {fileID: 1911804233}
   backStabCollider: {fileID: 6023940401257246910}
   riposteCollider: {fileID: 6023940399542957901}
@@ -1635,6 +1639,7 @@ MonoBehaviour:
   isHoldingArrow: 0
   isAiming: 0
   isTwoHandingWeapon: 0
+  isPerformingFullyChargedAttack: 0
   isRotatingWithRootMotion: 0
   canRotate: 0
   isSprinting: 0
@@ -1768,6 +1773,120 @@ MonoBehaviour:
   - {fileID: 0}
   currentRightWeaponIndex: -1
   currentLeftWeaponIndex: -1
+--- !u!82 &543450653394863794
+AudioSource:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2865919172130698609}
+  m_Enabled: 1
+  serializedVersion: 4
+  OutputAudioMixerGroup: {fileID: 0}
+  m_audioClip: {fileID: 0}
+  m_PlayOnAwake: 1
+  m_Volume: 1
+  m_Pitch: 1
+  Loop: 0
+  Mute: 0
+  Spatialize: 0
+  SpatializePostEffects: 0
+  Priority: 128
+  DopplerLevel: 1
+  MinDistance: 1
+  MaxDistance: 500
+  Pan2D: 0
+  rolloffMode: 0
+  BypassEffects: 0
+  BypassListenerEffects: 0
+  BypassReverbZones: 0
+  rolloffCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    - serializedVersion: 3
+      time: 1
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  panLevelCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  spreadCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  reverbZoneMixCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+--- !u!114 &543450653394863793
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2865919172130698609}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 282dd00098d843143a08dc23c8bc9873, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  takingDamageSounds:
+  - {fileID: 8300000, guid: b3493d7eded307a4db7c59c5315ef31c, type: 3}
+  - {fileID: 8300000, guid: 3a067f379f6291d40819215698bdc9a8, type: 3}
+  - {fileID: 8300000, guid: be235f8d4a2c1634a9ffad5a9ef0a7d5, type: 3}
+  - {fileID: 8300000, guid: 8955b56d1a87945479ae70ef02ea3354, type: 3}
+  - {fileID: 8300000, guid: 31affb79c7969ae4992dec318113263b, type: 3}
 --- !u!1 &2897709951959934308
 GameObject:
   m_ObjectHideFlags: 0

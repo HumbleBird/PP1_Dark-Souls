@@ -20,7 +20,6 @@ public class RangedProjectileDamageCollider : DamageCollider
             CharacterStatsManager enemyStats = other.GetComponent<CharacterStatsManager>();
             CharacterManager enemyManager = other.GetComponent<CharacterManager>();
             CharacterEffectsManager enemyEffects = other.GetComponent<CharacterEffectsManager>();
-            BlockingCollider shield = other.GetComponentInChildren<BlockingCollider>();
 
             if (enemyManager != null)
             {
@@ -29,7 +28,7 @@ public class RangedProjectileDamageCollider : DamageCollider
 
                 CheckForParry(enemyManager);
 
-                CheckForBlock(enemyManager, enemyStats, shield);
+                CheckForBlock(enemyManager);
             }
 
             if (enemyStats != null)

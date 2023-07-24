@@ -154,7 +154,7 @@ public class CharacterWeaponSlotManager : MonoBehaviour
 
     public virtual void OpenDamageCollider()
     {
-        character.characterSoundFXManager.PlayRandomWeaponWhoosh();
+        //character.characterSoundFXManager.PlayRandomWeaponWhoosh();
 
         if (character.isUsingRightHand)
         {

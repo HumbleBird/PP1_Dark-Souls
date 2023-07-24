@@ -82,24 +82,4 @@ public class PlayerEquipmentManager : MonoBehaviour
         }
     }
 
-    public void OpenBlockingCollider()
-    {
-        if(player.inputHandler.twoHandFlag)
-        {
-            player.blockingCollider.SetColliderDamageAbsorption(player.playerInventoryManager.rightWeapon);
-        }
-        else
-        {
-            player.blockingCollider.SetColliderDamageAbsorption(player.playerInventoryManager.leftWeapon);
-        }
-
-        player.blockingCollider.EnableBlockingCollider();
-    }
-
-    public void CloseBlockingCollider()
-    {
-        player.blockingCollider.DisableBlockingCollider();
-    }
-
-
 }

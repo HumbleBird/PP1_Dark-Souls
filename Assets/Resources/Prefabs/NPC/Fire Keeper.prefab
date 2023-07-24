@@ -7656,6 +7656,7 @@ GameObject:
   - component: {fileID: 6614985080794630429}
   - component: {fileID: 1679932175761100773}
   - component: {fileID: 6914851356492276704}
+  - component: {fileID: 7102537453787420554}
   m_Layer: 0
   m_Name: Fire Keeper
   m_TagString: Interactable
@@ -7670,7 +7671,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 7475345606260082509}
-  m_LocalRotation: {x: -0, y: -0.99926114, z: -0, w: -0.038433574}
+  m_LocalRotation: {x: -0, y: -0.9992613, z: 0, w: -0.038431242}
   m_LocalPosition: {x: -3.26, y: 0, z: 2.98}
   m_LocalScale: {x: 0.3, y: 0.3, z: 0.3}
   m_ConstrainProportionsScale: 0
@@ -7707,8 +7708,22 @@ Rigidbody:
   m_UseGravity: 1
   m_IsKinematic: 0
   m_Interpolate: 0
-  m_Constraints: 0
+  m_Constraints: 126
   m_CollisionDetection: 0
+--- !u!114 &7102537453787420554
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7475345606260082509}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3ff0a54ad45d193488c71b1dee4d7fc7, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  radius: 1.1
+  interactableText: Level Up
 --- !u!1 &7493381191558591032
 GameObject:
   m_ObjectHideFlags: 0

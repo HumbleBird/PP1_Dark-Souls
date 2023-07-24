@@ -54,7 +54,7 @@ public class ItemStatWindowUI : MonoBehaviour
             }
 
             physicalDamageText.text = weapon.physicalDamage.ToString();
-            physicalAbsorptionText.text = weapon.physicalDamageAbsorption.ToString();
+            physicalAbsorptionText.text = weapon.physicalBlockingDamageAbsorption.ToString();
 
             weaponsStats.SetActive(true);
         }

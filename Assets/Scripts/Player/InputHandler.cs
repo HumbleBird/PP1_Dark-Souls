@@ -25,7 +25,7 @@ public class InputHandler : MonoBehaviour
     public bool tab_rt_Input;
     public bool hold_rt_Input;
 
-    public bool lb_Input;
+    public bool hold_lb_Input;
     public bool tap_lb_Input;
     public bool tab_lt_Input;
 
@@ -81,8 +81,8 @@ public class InputHandler : MonoBehaviour
             inputActions.PlayerActions.HoldRT.canceled += i => hold_rt_Input = false;
 
             inputActions.PlayerActions.TabLB.performed += i => tap_lb_Input = true;
-            inputActions.PlayerActions.LB.performed += i => lb_Input = true;
-            inputActions.PlayerActions.LB.canceled += i => lb_Input = false;
+            inputActions.PlayerActions.LB.performed += i => hold_lb_Input = true;
+            inputActions.PlayerActions.LB.canceled += i => hold_lb_Input = false;
             inputActions.PlayerActions.LT.performed += i => tab_lt_Input = true;
 
             inputActions.PlayerQuickSlots.DPadRight.performed += i => d_Pad_Right = true;
@@ -305,11 +305,11 @@ public class InputHandler : MonoBehaviour
             player.isSprinting ||
             player.isFiringSpell)
         {
-            lb_Input = false;
+            hold_lb_Input = false;
             return;
         }
 
-        if (lb_Input)
+        if (hold_lb_Input)
         {
             if (player.isTwoHandingWeapon)
             {
@@ -331,7 +331,7 @@ public class InputHandler : MonoBehaviour
             }
 
         }
-        else if (lb_Input == false)
+        else if (hold_lb_Input == false)
         {
             if (player.isAiming)
             {
@@ -340,10 +340,9 @@ public class InputHandler : MonoBehaviour
                 player.cameraHandler.ResetAimCameraRotations();
             }
 
-            if (player.blockingCollider.blockingCollider.enabled)
+            if (player.isBlocking)
             {
                 player.isBlocking = false;
-                player.blockingCollider.DisableBlockingCollider();
             }
         }
     }

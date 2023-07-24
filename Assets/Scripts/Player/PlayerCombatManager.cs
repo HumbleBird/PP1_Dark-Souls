@@ -35,8 +35,10 @@ public class PlayerCombatManager : CharacterCombatManager
     LayerMask backStabLayer = 1<< 12;
     LayerMask riposteLayer = 1<< 13;
 
-    private void Awake()
+    protected override void Awake()
     {
+        base.Awake();
+
         player = GetComponent<PlayerManager>();
 
     }

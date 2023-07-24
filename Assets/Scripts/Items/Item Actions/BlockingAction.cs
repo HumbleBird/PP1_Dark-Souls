@@ -13,8 +13,8 @@ public class BlockingAction : ItemAction
         if (player.isBlocking)
             return;
 
-        player.playerAnimatorManager.PlayerTargetAnimation("Block Start", false, true);
-        player.playerEquipmentManager.OpenBlockingCollider();
+        player.playerCombatManager.SetBlockingAbsorptionsFromBlockingWeapon();
+
         player.isBlocking = true;
     }
 
