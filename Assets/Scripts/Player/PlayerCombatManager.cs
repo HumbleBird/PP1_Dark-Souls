@@ -3,9 +3,11 @@ using System.Collections.Generic;
 using UnityEngine;
 using static Define;
 
-public class PlayerCombatManager : MonoBehaviour
+public class PlayerCombatManager : CharacterCombatManager
 {
     PlayerManager player;
+
+
 
     [Header("Attack Animations")]
     public string oh_light_attack_01 = "OH_Light_Attack_01";

@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using static Define;
 
 [CreateAssetMenu(menuName = "Item Actions/Heavy Attack Action")]
 public class HeavyAttackAction : ItemAction
@@ -40,6 +41,8 @@ public class HeavyAttackAction : ItemAction
 
             HandleHeavyAttack(player);
         }
+
+        player.playerCombatManager.currentAttackType = AttackType.heavy ;
 
     }
 

@@ -36,7 +36,7 @@ public class Define
         Skeleton,
         Jombi,
         Mummy, // 미라
-        
+
     }
     #endregion
 
@@ -135,6 +135,16 @@ public class Define
         Ring,
         Item
     }
+    #endregion
+
+    #region Battle
+
+    public enum AttackType
+    {
+        light,
+        heavy
+    }
+
     #endregion
 
     #region Action

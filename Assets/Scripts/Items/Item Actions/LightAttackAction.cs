@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using static Define;
 
 [CreateAssetMenu(menuName = "Item Actions/Light Attack Action")]
 public class LightAttackAction : ItemAction
@@ -41,6 +42,7 @@ public class LightAttackAction : ItemAction
             HandleLightAttack( player);
         }
 
+        player.playerCombatManager.currentAttackType = AttackType.light;
     }
 
     private void HandleLightAttack(PlayerManager player)

@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using static Define;
 
 public class DamageCollider : MonoBehaviour
 {
@@ -84,17 +85,9 @@ public class DamageCollider : MonoBehaviour
                 Vector3 contactPoint = other.gameObject.GetComponent<Collider>().ClosestPointOnBounds(transform.position);
                 float directionHitFrom = Vector3.SignedAngle(characterManager.transform.forward, enemyManager.transform.forward, Vector3.up);
                 ChooseWhichDirectionDamageCameFrom(directionHitFrom);
-
                 enemyEffects.PlayBloodSplatterFX(contactPoint);
 
-                if (enemyStats.totalPoiseDefence > poiseBreak)
-                {
-                    enemyStats.TakeDamageNoAnimation(physicalDamage, 0);
-                }
-                else
-                {
-                    enemyStats.TakeDamage(physicalDamage, 0, currentDamageAnimation, characterManager);
-                }
+                DealDamage(enemyStats);
             }
         }
 
@@ -108,6 +101,8 @@ public class DamageCollider : MonoBehaviour
             }
         }
     }
+
+
 
     protected virtual void CheckForParry(CharacterManager enemyManager)
     {
@@ -131,6 +126,49 @@ public class DamageCollider : MonoBehaviour
                 shieldHasBeenHit = true;
             }
 
+        }
+    }
+
+    protected virtual void DealDamage(CharacterStatsManager enemyStats)
+    {
+        float finalPhysicalDamage = physicalDamage;
+
+        // Right Weapon Modifire
+        if(characterManager.isUsingRightHand)
+        {
+            if(characterManager.characterCombatManager.currentAttackType == AttackType.light)
+            {
+                finalPhysicalDamage = finalPhysicalDamage * characterManager.characterInventoryManager.rightWeapon.lightAttackMultiplier;
+            }
+            else if (characterManager.characterCombatManager.currentAttackType == AttackType.heavy)
+            {
+                finalPhysicalDamage = finalPhysicalDamage * characterManager.characterInventoryManager.rightWeapon.heavyAttackMultiplier;
+            }
+        }
+
+        // Left Weapon Modifire
+        else if (characterManager.isUsingLeftHand)
+        {
+            if (characterManager.characterCombatManager.currentAttackType == AttackType.light)
+            {
+                finalPhysicalDamage = finalPhysicalDamage * characterManager.characterInventoryManager.leftWeapon.lightAttackMultiplier;
+
+            }
+            else if (characterManager.characterCombatManager.currentAttackType == AttackType.heavy)
+            {
+                finalPhysicalDamage = finalPhysicalDamage * characterManager.characterInventoryManager.leftWeapon.heavyAttackMultiplier;
+
+            }
+        }
+
+        // Deal modifired Damage
+        if (enemyStats.totalPoiseDefence > poiseBreak)
+        {
+            enemyStats.TakeDamageNoAnimation(Mathf.RoundToInt(finalPhysicalDamage), 0);
+        }
+        else
+        {
+            enemyStats.TakeDamage(Mathf.RoundToInt(finalPhysicalDamage), 0, currentDamageAnimation, characterManager);
         }
     }
 

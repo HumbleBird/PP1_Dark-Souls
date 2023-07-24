@@ -19,6 +19,10 @@ public class WeaponItem : Item
     [Header("Damage")]
     public int physicalDamage;
     public int fireDamage;
+
+    [Header("Damage Modifiers")]
+    public float lightAttackDamageModifier;
+    public float heavyAttackDaamgeModifier;
     public int criticalDamagemuiltiplier = 4;
 
     [Header("Poise")]
