@@ -146,9 +146,9 @@ public class CharacterStatsManager : MonoBehaviour
     }
 
 
-    public void DrainStaminaBasedOnAttackType()
+    public virtual void DeductStamina(float staminaToDeduct)
     {
-
+        currentStamina -= staminaToDeduct;
     }
 
     public int SetMaxHealthFromHealthLevel()

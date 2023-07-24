@@ -7,8 +7,6 @@ public class PlayerCombatManager : CharacterCombatManager
 {
     PlayerManager player;
 
-
-
     [Header("Attack Animations")]
     public string oh_light_attack_01 = "OH_Light_Attack_01";
     public string oh_light_attack_02 = "OH_Light_Attack_02";
@@ -111,6 +109,32 @@ public class PlayerCombatManager : CharacterCombatManager
 
                 player.playerAnimatorManager.PlayerTargetAnimation("Riposte", true);
                 enemyCharacterManager.GetComponentInChildren<CharacterAnimatorManager>().PlayerTargetAnimation("Riposted", true);
+            }
+        }
+    }
+
+    public override void DrainStaminaBasedOnAttack()
+    {
+        if(player.isUsingRightHand)
+        {
+            if(currentAttackType == AttackType.light)
+            {
+                player.playerStatsManager.DeductStamina(player.playerInventoryManager.rightWeapon.baseStaminaCost * player.playerInventoryManager.rightWeapon.lightAttackStaminaMultiplier);
+            }
+            else if (currentAttackType == AttackType.heavy)
+            {
+                player.playerStatsManager.DeductStamina(player.playerInventoryManager.rightWeapon.baseStaminaCost * player.playerInventoryManager.rightWeapon.heavyAttackStaminaMultiplier);
+            }
+        }
+        else if (player.isUsingLeftHand)
+        {
+            if (currentAttackType == AttackType.light)
+            {
+                player.playerStatsManager.DeductStamina(player.playerInventoryManager.leftWeapon.baseStaminaCost * player.playerInventoryManager.leftWeapon.lightAttackStaminaMultiplier);
+            }
+            else if (currentAttackType == AttackType.heavy)
+            {
+                player.playerStatsManager.DeductStamina(player.playerInventoryManager.leftWeapon.baseStaminaCost * player.playerInventoryManager.leftWeapon.heavyAttackStaminaMultiplier);
             }
         }
     }

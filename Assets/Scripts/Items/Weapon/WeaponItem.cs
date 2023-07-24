@@ -33,9 +33,9 @@ public class WeaponItem : Item
     public float physicalDamageAbsorption;
 
     [Header("Stamina Costs")]
-    public int baseStamina;
-    public float lightAttackMultiplier;
-    public float heavyAttackMultiplier;
+    public int baseStaminaCost;
+    public float lightAttackStaminaMultiplier;
+    public float heavyAttackStaminaMultiplier;
 
     [Header("Item Actions")]
     public ItemAction oh_tap_RB_Action;

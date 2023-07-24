@@ -138,11 +138,11 @@ public class DamageCollider : MonoBehaviour
         {
             if(characterManager.characterCombatManager.currentAttackType == AttackType.light)
             {
-                finalPhysicalDamage = finalPhysicalDamage * characterManager.characterInventoryManager.rightWeapon.lightAttackMultiplier;
+                finalPhysicalDamage = finalPhysicalDamage * characterManager.characterInventoryManager.rightWeapon.lightAttackStaminaMultiplier;
             }
             else if (characterManager.characterCombatManager.currentAttackType == AttackType.heavy)
             {
-                finalPhysicalDamage = finalPhysicalDamage * characterManager.characterInventoryManager.rightWeapon.heavyAttackMultiplier;
+                finalPhysicalDamage = finalPhysicalDamage * characterManager.characterInventoryManager.rightWeapon.heavyAttackStaminaMultiplier;
             }
         }
 
@@ -151,12 +151,12 @@ public class DamageCollider : MonoBehaviour
         {
             if (characterManager.characterCombatManager.currentAttackType == AttackType.light)
             {
-                finalPhysicalDamage = finalPhysicalDamage * characterManager.characterInventoryManager.leftWeapon.lightAttackMultiplier;
+                finalPhysicalDamage = finalPhysicalDamage * characterManager.characterInventoryManager.leftWeapon.lightAttackStaminaMultiplier;
 
             }
             else if (characterManager.characterCombatManager.currentAttackType == AttackType.heavy)
             {
-                finalPhysicalDamage = finalPhysicalDamage * characterManager.characterInventoryManager.leftWeapon.heavyAttackMultiplier;
+                finalPhysicalDamage = finalPhysicalDamage * characterManager.characterInventoryManager.leftWeapon.heavyAttackStaminaMultiplier;
 
             }
         }

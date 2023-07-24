@@ -99,13 +99,13 @@ public class PlayerStatsManager : CharacterStatsManager
         }
     }
 
-
-
-    public void TakeStaminsDamage(int damage)
+    public override void DeductStamina(float staminaToDeduct)
     {
-        currentStamina -= damage;
-        staminaBar.SetCurrentStamina(currentStamina);
+        base.DeductStamina(staminaToDeduct);
+        staminaBar.SetCurrentStamina(Mathf.RoundToInt(currentStamina));
     }
+
+
 
     public void RegenerateStamina()
     {

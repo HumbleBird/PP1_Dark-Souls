@@ -154,7 +154,7 @@ public class PlayerLocomotionManager : MonoBehaviour
             speed = sprintSpeed;
             player.isSprinting = true;
             moveDirection *= speed;
-            player.playerStatsManager.TakeStaminsDamage(sprintStaminaCost);
+            player.playerStatsManager.DeductStamina(sprintStaminaCost);
         }
         else
         {
@@ -208,13 +208,13 @@ public class PlayerLocomotionManager : MonoBehaviour
                 moveDirection.y = 0;
                 Quaternion rollRotation = Quaternion.LookRotation(moveDirection);
                 transform.rotation = rollRotation;
-                player.playerStatsManager.TakeStaminsDamage(rollStaminaCost);
+                player.playerStatsManager.DeductStamina(rollStaminaCost);
             }
             else
             {
                 player.playerAnimatorManager.PlayerTargetAnimation("BackStep", true);
                 player.playerAnimatorManager.EraseHandIKForWeapon();
-                player.playerStatsManager.TakeStaminsDamage(backstepStaminaCost);
+                player.playerStatsManager.DeductStamina(backstepStaminaCost);
 
             }
 
@@ -315,7 +315,9 @@ public class PlayerLocomotionManager : MonoBehaviour
 
         if (player.inputHandler.jump_Input)
         {
-            if(player.inputHandler.moveAmount > 0 )
+            player.inputHandler.jump_Input = false;
+
+            if(player.inputHandler.moveAmount > 0)
             {
                 moveDirection = player.cameraHandler.cameraObject.transform.forward * player.inputHandler.vertical;
                 moveDirection += player.cameraHandler.cameraObject.transform.right * player.inputHandler.horizontal;
