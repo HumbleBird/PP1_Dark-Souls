@@ -21,7 +21,7 @@ public class PlayerWeaponSlotManager : CharacterWeaponSlotManager
                 leftHandSlot.currentWeapon = weaponItem;
                 leftHandSlot.LoadWeaponModel(weaponItem);
                 LoadLeftWeaponDamageCollider();
-                player.playerAnimatorManager.PlayerTargetAnimation(weaponItem.offHandIdleAnimation, false, true);
+                //player.playerAnimatorManager.PlayerTargetAnimation(weaponItem.offHandIdleAnimation, false, true);
             }
             else
             {
@@ -56,7 +56,7 @@ public class PlayerWeaponSlotManager : CharacterWeaponSlotManager
                 leftHandSlot.currentWeapon = unarmWeapon;
                 leftHandSlot.LoadWeaponModel(unarmWeapon);
                 LoadLeftWeaponDamageCollider();
-                player.playerAnimatorManager.PlayerTargetAnimation(weaponItem.offHandIdleAnimation, false, true);
+                //player.playerAnimatorManager.PlayerTargetAnimation(weaponItem.offHandIdleAnimation, false, true);
             }
             else
             {

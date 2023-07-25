@@ -11,6 +11,7 @@ public class PlayerStatsManager : CharacterStatsManager
     public FocusPointBar focusPointBar;
 
     public float staminaRegenerationAmount = 1;
+    public float staminaRegenerationAmountWhilstBlocking = 0.1f;
     public float staminaRegenTimer = 0;
 
     protected override void Awake()
@@ -119,8 +120,17 @@ public class PlayerStatsManager : CharacterStatsManager
 
             if (currentStamina < maxStamina && staminaRegenTimer > 1f)
             {
-                currentStamina += staminaRegenerationAmount * Time.deltaTime;
+                if(player.isBlocking)
+                {
+                    currentStamina += staminaRegenerationAmountWhilstBlocking * Time.deltaTime;
+                }
+                else
+                {
+                    currentStamina += staminaRegenerationAmount * Time.deltaTime;
+                }
+
                 staminaBar.SetCurrentStamina(Mathf.RoundToInt(currentStamina));
+
             }
         }
 

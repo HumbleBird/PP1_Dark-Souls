@@ -11,7 +11,7 @@ public class WeaponItem : Item
 
     [Header("Animator Replacer")]
     public AnimatorOverrideController weaponController;
-    public string offHandIdleAnimation = "Left_Arm_Idle_01";
+    //public string offHandIdleAnimation = "Left_Arm_Idle_01";
 
     [Header("Weapon Type")]
     public WeaponType weaponType;

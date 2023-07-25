@@ -32,7 +32,7 @@ public class AttackState : State
         if(willDoComboOnNextAttack && enemy.canDoCombo)
         {
             // Attack with combo
-            AttackTargetWithCombo(enemy.enemyAnimationManager, enemy);
+            AttackTargetWithCombo(enemy);
 
             // set cool down time
         }
@@ -40,7 +40,7 @@ public class AttackState : State
         if (!hasPerformedAttack)
         {
             //Attack
-            AttackTarget(enemy.enemyAnimationManager, enemy);
+            AttackTarget(enemy);
 
             // Roll for a combo change
             RollForComboChance(enemy);
@@ -54,24 +54,24 @@ public class AttackState : State
         return rotateTowardsTargetState;
     }
 
-    private void AttackTarget(EnemyAnimationManager enemyAnimationManager, EnemyManager enemyManager)
+    private void AttackTarget(EnemyManager enemy)
     {
-        enemyManager.animator.SetBool("isUsingRightHand", currentAttack.isRightHandedAction);
-        enemyManager.animator.SetBool("isUsingLeftHand", !currentAttack.isRightHandedAction);
-        enemyAnimationManager.PlayerTargetAnimation(currentAttack.actionAnimation, true);
-        enemyAnimationManager.PlayWeaponTrailFX();
-        enemyManager.currentRecoveryTime = currentAttack.recoveryTime;
+        enemy.isUsingRightHand = currentAttack.isRightHandedAction;
+        enemy.isUsingLeftHand = !currentAttack.isRightHandedAction;
+        enemy.enemyAnimationManager.PlayerTargetAnimation(currentAttack.actionAnimation, true);
+        enemy.enemyAnimationManager.PlayWeaponTrailFX();
+        enemy.currentRecoveryTime = currentAttack.recoveryTime;
         hasPerformedAttack = true;
     }
 
-    private void AttackTargetWithCombo(EnemyAnimationManager enemyAnimationManager, EnemyManager enemyManager)
+    private void AttackTargetWithCombo(EnemyManager enemy)
     {
-        enemyManager.animator.SetBool("isUsingRightHand", currentAttack.isRightHandedAction);
-        enemyManager.animator.SetBool("isUsingLeftHand", !currentAttack.isRightHandedAction);
+        enemy.isUsingRightHand = currentAttack.isRightHandedAction;
+        enemy.isUsingLeftHand = !currentAttack.isRightHandedAction;
         willDoComboOnNextAttack = false;
-        enemyAnimationManager.PlayerTargetAnimation(currentAttack.actionAnimation, true);
-        enemyAnimationManager.PlayWeaponTrailFX();
-        enemyManager.currentRecoveryTime = currentAttack.recoveryTime;
+        enemy.enemyAnimationManager.PlayerTargetAnimation(currentAttack.actionAnimation, true);
+        enemy.enemyAnimationManager.PlayWeaponTrailFX();
+        enemy.currentRecoveryTime = currentAttack.recoveryTime;
         currentAttack = null;
     }
 

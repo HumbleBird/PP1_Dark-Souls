@@ -20,7 +20,6 @@ public class CombatStanceState : State
 
     public override State Tick(EnemyManager enemy)
     {
-        float distancefromTarget = Vector3.Distance(enemy.currentTarget.transform.position, enemy.transform.position);
         enemy.animator.SetFloat("Vertical", verticalMovementValue, 0.2f, Time.deltaTime);
         enemy.animator.SetFloat("Horizontal", horizontalMovementValue, 0.2f, Time.deltaTime);
         attackState.hasPerformedAttack = false;
@@ -32,7 +31,7 @@ public class CombatStanceState : State
             return this;
         }
 
-        if (distancefromTarget > enemy.MaximumAggroRadius)
+        if (enemy.distancefromTarget > enemy.MaximumAggroRadius)
         {
             return pursueTargetState;
         }
@@ -110,23 +109,19 @@ public class CombatStanceState : State
         }
     }
 
-    protected virtual void GetNewAttack(EnemyManager enemyManager)
+    protected virtual void GetNewAttack(EnemyManager enemy)
     {
-        Vector3 targetDirection = enemyManager.currentTarget.transform.position - transform.position;
-        float viewableAngle = Vector3.Angle(targetDirection, transform.forward);
-        float distanceFromTarget = Vector3.Distance(enemyManager.currentTarget.transform.position, transform.position);
-
         int maxScore = 0;
 
         for (int i = 0; i < enemyAttacks.Length; i++)
         {
             EnemyAttackAction enemyAttackAction = enemyAttacks[i];
 
-            if (distanceFromTarget <= enemyAttackAction.maximumDistanceNeededToAttack
-                && distanceFromTarget > enemyAttackAction.minimumDistanceNeededToAttack)
+            if (enemy.distancefromTarget <= enemyAttackAction.maximumDistanceNeededToAttack
+                && enemy.distancefromTarget > enemyAttackAction.minimumDistanceNeededToAttack)
             {
-                if (viewableAngle <= enemyAttackAction.maximumAttackAngle
-                    && viewableAngle > enemyAttackAction.minimumAttackAngle)
+                if (enemy.viewableAngle <= enemyAttackAction.maximumAttackAngle
+                    && enemy.viewableAngle > enemyAttackAction.minimumAttackAngle)
                 {
                     maxScore += enemyAttackAction.attackScore;
                 }
@@ -140,11 +135,11 @@ public class CombatStanceState : State
         {
             EnemyAttackAction enemyAttackAction = enemyAttacks[i];
 
-            if (distanceFromTarget <= enemyAttackAction.maximumDistanceNeededToAttack
-                && distanceFromTarget > enemyAttackAction.minimumDistanceNeededToAttack)
+            if (enemy.distancefromTarget <= enemyAttackAction.maximumDistanceNeededToAttack
+                && enemy.distancefromTarget > enemyAttackAction.minimumDistanceNeededToAttack)
             {
-                if (viewableAngle <= enemyAttackAction.maximumAttackAngle
-                    && viewableAngle > enemyAttackAction.minimumAttackAngle)
+                if (enemy.viewableAngle <= enemyAttackAction.maximumAttackAngle
+                    && enemy.viewableAngle > enemyAttackAction.minimumAttackAngle)
                 {
                     if (attackState.currentAttack != null)
                         return;

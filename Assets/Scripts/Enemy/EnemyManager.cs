@@ -32,6 +32,11 @@ public class EnemyManager : CharacterManager
     public bool isPhaseShifting;
     public float comboLikelyHood;
 
+    [Header("A.I Target Information")]
+    public float distancefromTarget;
+    public Vector3 targetDirection;
+    public float viewableAngle;
+
     protected override void Awake()
     {
         base.Awake();
@@ -63,6 +68,13 @@ public class EnemyManager : CharacterManager
         isInvulnerable = animator.GetBool("isInvulnerable");
         isPhaseShifting = animator.GetBool("isPhaseShifting");
         animator.SetBool("isDead", isDead);
+
+        if(currentTarget != null)
+        {
+            distancefromTarget = Vector3.Distance(currentTarget.transform.position, transform.position);
+            targetDirection = currentTarget.transform.position - transform.position;
+            viewableAngle = Vector3.Angle(targetDirection, transform.forward);
+        }
     }
 
     protected override void FixedUpdate()

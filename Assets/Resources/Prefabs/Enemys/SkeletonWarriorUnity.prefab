@@ -1480,6 +1480,7 @@ GameObject:
   - component: {fileID: 4060319920074247694}
   - component: {fileID: 543450653394863794}
   - component: {fileID: 543450653394863793}
+  - component: {fileID: 543450653394863805}
   m_Layer: 9
   m_Name: SkeletonWarriorUnity
   m_TagString: Character
@@ -1601,6 +1602,9 @@ MonoBehaviour:
   fireDamageAbsorptionBody: 0
   fireDamageAbsorptionLegs: 0
   fireDamageAbsorptionHands: 0
+  blockingPhysicalDamageAbsorption: 0
+  blockingFireDamageAbsorption: 0
+  blockingStabilityRating: 0
   enemyHealthBar: {fileID: 6023940400140223346}
   isBoss: 0
 --- !u!114 &543450653394863791
@@ -1887,6 +1891,19 @@ MonoBehaviour:
   - {fileID: 8300000, guid: be235f8d4a2c1634a9ffad5a9ef0a7d5, type: 3}
   - {fileID: 8300000, guid: 8955b56d1a87945479ae70ef02ea3354, type: 3}
   - {fileID: 8300000, guid: 31affb79c7969ae4992dec318113263b, type: 3}
+--- !u!114 &543450653394863805
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2865919172130698609}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 11ca87c5e9f9e474592a8da8b63fe008, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  currentAttackType: 0
 --- !u!1 &2897709951959934308
 GameObject:
   m_ObjectHideFlags: 0

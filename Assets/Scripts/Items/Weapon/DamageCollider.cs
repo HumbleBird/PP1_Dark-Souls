@@ -128,7 +128,7 @@ public class DamageCollider : MonoBehaviour
             float physicalDamageAfterBlock = physicalDamage - (physicalDamage * enemyShield.blockingPhysicalDamageAbsorption) / 100;
             float fireDamageAfterBlock = fireDamage - (fireDamage * enemyShield.blockingFireDamageAbsorption) / 100;
 
-            enemyManager.characterCombatManager.AttemptBlock(this, physicalDamageAfterBlock, fireDamageAfterBlock, "Block_01");
+            enemyManager.characterCombatManager.AttemptBlock(this, physicalDamage, fireDamage, "Block_01");
             enemyShield.TakeDamageAfterBlock(Mathf.RoundToInt(physicalDamageAfterBlock), Mathf.RoundToInt(fireDamageAfterBlock), characterManager);
 
         }
