@@ -216,4 +216,15 @@ public class CharacterStatsManager : MonoBehaviour
         maxfocusPoint = focusLevel * 10;
         return maxfocusPoint;
     }
+
+    public virtual void HealCharacter(int healAmount)
+    {
+        currentHealth += healAmount;
+
+        if (currentHealth > maxHealth)
+        {
+            currentHealth = maxHealth;
+        }
+    }
+
 }

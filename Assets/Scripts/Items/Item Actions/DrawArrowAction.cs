@@ -5,26 +5,26 @@ using UnityEngine;
 [CreateAssetMenu(menuName = "Item Actions/Draw Arrow Action")]
 public class DrawArrowAction : ItemAction
 {
-    public override void PerformAction(PlayerManager player)
+    public override void PerformAction(CharacterManager character)
     {
-        if (player.isInteracting)
+        if (character.isInteracting)
             return;
 
-        if (player.isHoldingArrow)
+        if (character.isHoldingArrow)
             return;
 
 
 
         //Animator Player
-        player.animator.SetBool("isHoldingArrow", true);
-        player.playerAnimatorManager.PlayerTargetAnimation("Bow_TH_Draw_01", true);
+        character.animator.SetBool("isHoldingArrow", true);
+        character.characterAnimatorManager.PlayerTargetAnimation("Bow_TH_Draw_01", true);
 
         // Instantiate Arrow
-        GameObject loadedArrow = Instantiate(player.playerInventoryManager.currentAmmo.loadedItemModel, player.playerWeaponSlotManager.rightHandSlot.transform);
-        player.playerEffectsManager.currentRangeFX = loadedArrow;
+        GameObject loadedArrow = Instantiate(character.characterInventoryManager.currentAmmo.loadedItemModel, character.characterWeaponSlotManager.rightHandSlot.transform);
+        character.characterEffectsManager.currentRangeFX = loadedArrow;
 
         //Animate the bow
-        Animator bowAnimator = player.playerWeaponSlotManager.rightHandSlot.GetComponentInChildren<Animator>();
+        Animator bowAnimator = character.characterWeaponSlotManager.rightHandSlot.GetComponentInChildren<Animator>();
         bowAnimator.SetBool("isDrawn", true);
         bowAnimator.Play("BowObject_TH_Draw_01");
 

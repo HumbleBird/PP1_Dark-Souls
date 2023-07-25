@@ -7,6 +7,9 @@ public class CharacterCombatManager : MonoBehaviour
 {
     CharacterManager character;
 
+    LayerMask backStabLayer = 1 << 12;
+    LayerMask riposteLayer = 1 << 13;
+
     [Header("Attack Type")]
     public AttackType currentAttackType;
 
@@ -34,6 +37,7 @@ public class CharacterCombatManager : MonoBehaviour
     public string weapon_art = "Weapon Art";
 
     public string lastAttack;
+
 
 
     protected virtual void Awake()
@@ -79,6 +83,77 @@ public class CharacterCombatManager : MonoBehaviour
         else
         {
             character.characterAnimatorManager.PlayerTargetAnimation(blockAnimation, true);
+        }
+    }
+
+    private void SuccessfullyCastSpell()
+    {
+        character.characterInventoryManager.currentSpell.SuccessfullyCastSpell(character);
+        character.animator.SetBool("isFiringSpell", true);
+    }
+
+    public void AttemptBackStabOrRiposte()
+    {
+
+        if (character.characterStatsManager.currentStamina <= 0)
+            return;
+
+        RaycastHit hit;
+
+        // Back Stab
+        if (Physics.Raycast(character.criticalAttackRayCastStartPoint.position,
+            transform.TransformDirection(Vector3.forward), out hit, 0.5f, backStabLayer))
+        {
+            CharacterManager enemyCharacterManager = hit.transform.gameObject.GetComponentInParent<CharacterManager>();
+            DamageCollider rightWeapon = character.characterWeaponSlotManager.rightHandDamageCollider;
+
+            if (enemyCharacterManager != null)
+            {
+                // 팀 ID 체크 (적 한테만 할 수 있게)
+                character.transform.position = enemyCharacterManager.backStabCollider.criticalDamagerStandPosition.position;
+
+                Vector3 rotationDirection = character.transform.root.eulerAngles;
+                rotationDirection = hit.transform.position - character.transform.position;
+                rotationDirection.y = 0;
+                rotationDirection.Normalize();
+                Quaternion tr = Quaternion.LookRotation(rotationDirection);
+                Quaternion targetRotation = Quaternion.Slerp(character.transform.rotation, tr, 500 * Time.deltaTime);
+                character.transform.rotation = targetRotation;
+
+                int criticalDamage = character.characterInventoryManager.rightWeapon.criticalDamagemuiltiplier * rightWeapon.physicalDamage;
+                enemyCharacterManager.pendingCriticalDamage = criticalDamage;
+
+                character.characterAnimatorManager.PlayerTargetAnimation("Back Stab", true);
+                enemyCharacterManager.GetComponentInChildren<CharacterAnimatorManager>().PlayerTargetAnimation("Back Stabbed", true);
+            }
+        }
+
+        // Riposte
+        else if (Physics.Raycast(character.criticalAttackRayCastStartPoint.position,
+            transform.TransformDirection(Vector3.forward), out hit, 0.7f, riposteLayer))
+        {
+            // 팀 ID 체크 (적 한테만 할 수 있게)
+            CharacterManager enemyCharacterManager = hit.transform.gameObject.GetComponentInParent<CharacterManager>();
+            DamageCollider rightWeapon = character.characterWeaponSlotManager.rightHandDamageCollider;
+
+            if (enemyCharacterManager != null && enemyCharacterManager.canBeRiposted)
+            {
+                character.transform.position = enemyCharacterManager.riposteCollider.criticalDamagerStandPosition.position;
+
+                Vector3 rotationDirection = character.transform.root.eulerAngles;
+                rotationDirection = hit.transform.position - character.transform.position;
+                rotationDirection.y = 0;
+                rotationDirection.Normalize();
+                Quaternion tr = Quaternion.LookRotation(rotationDirection);
+                Quaternion targetRotation = Quaternion.Slerp(character.transform.rotation, tr, 500 * Time.deltaTime);
+                character.transform.rotation = targetRotation;
+
+                int criticalDamage = character.characterInventoryManager.rightWeapon.criticalDamagemuiltiplier * rightWeapon.physicalDamage;
+                enemyCharacterManager.pendingCriticalDamage = criticalDamage;
+
+                character.characterAnimatorManager.PlayerTargetAnimation("Riposte", true);
+                enemyCharacterManager.GetComponentInChildren<CharacterAnimatorManager>().PlayerTargetAnimation("Riposted", true);
+            }
         }
     }
 }

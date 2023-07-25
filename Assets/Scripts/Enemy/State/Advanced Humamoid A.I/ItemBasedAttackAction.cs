@@ -23,7 +23,7 @@ public class ItemBasedAttackAction : MonoBehaviour
     public float maximumDistanceNeededToAttack = 3;
     public float minimumDistanceNeededToAttack = 0;
 
-    public void PerformAttackaCtion(EnemyManager enemy)
+    public void PerformAttackAction(EnemyManager enemy)
     {
         if(isRightHandedAction)
         {

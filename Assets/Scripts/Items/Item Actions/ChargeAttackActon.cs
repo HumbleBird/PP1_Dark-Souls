@@ -5,107 +5,106 @@ using UnityEngine;
 [CreateAssetMenu(menuName = "Item Actions/Charge Attack Action")]
 public class ChargeAttackActon : ItemAction
 {
-    public override void PerformAction(CharacterManager player)
+    public override void PerformAction(CharacterManager character)
     {
-        if (player.playerStatsManager.currentStamina <= 0)
+        if (character.characterStatsManager.currentStamina <= 0)
             return;
 
 
-        player.playerAnimatorManager.EraseHandIKForWeapon();
-        player.playerEffectsManager.PlayWeaponFX(false);
+        character.characterAnimatorManager.EraseHandIKForWeapon();
+        character.characterEffectsManager.PlayWeaponFX(false);
 
 
         // 콤보
-        if (player.canDoCombo)
+        if (character.canDoCombo)
         {
-            player.inputHandler.comboFlag = true;
-            HandleChargeWeaponCombo(player);
-            player.inputHandler.comboFlag = false;
+            HandleChargeWeaponCombo(character);
+            character.canDoCombo = false;
         }
 
         // 콤보 말고 정해진 공격 (1타)
         else
         {
-            if (player.isInteracting)
+            if (character.isInteracting)
                 return;
 
-            if (player.canDoCombo)
+            if (character.canDoCombo)
                 return;
 
-            HandleChargeAttack(player);
+            HandleChargeAttack(character);
         }
 
     }
 
-    private void HandleChargeAttack(PlayerManager player)
+    private void HandleChargeAttack(CharacterManager character)
     {
-        if (player.isUsingLeftHand)
+        if (character.isUsingLeftHand)
         {
-            player.playerAnimatorManager.PlayerTargetAnimation(player.playerCombatManager.oh_charge_attack_01, true, false, true);
-            player.playerCombatManager.lastAttack = player.playerCombatManager.oh_charge_attack_01;
+            character.characterAnimatorManager.PlayerTargetAnimation(character.characterCombatManager.oh_charge_attack_01, true, false, true);
+            character.characterCombatManager.lastAttack = character.characterCombatManager.oh_charge_attack_01;
         }
-        else if (player.isUsingRightHand)
+        else if (character.isUsingRightHand)
         {
-            if (player.inputHandler.twoHandFlag)
+            if (character.isTwoHandingWeapon)
             {
-                player.playerAnimatorManager.PlayerTargetAnimation(player.playerCombatManager.th_charge_attack_01, true);
-                player.playerCombatManager.lastAttack = player.playerCombatManager.th_charge_attack_01;
+                character.characterAnimatorManager.PlayerTargetAnimation(character.characterCombatManager.th_charge_attack_01, true);
+                character.characterCombatManager.lastAttack = character.characterCombatManager.th_charge_attack_01;
             }
             else
             {
-                player.playerAnimatorManager.PlayerTargetAnimation(player.playerCombatManager.oh_charge_attack_01, true);
-                player.playerCombatManager.lastAttack = player.playerCombatManager.oh_charge_attack_01;
+                character.characterAnimatorManager.PlayerTargetAnimation(character.characterCombatManager.oh_charge_attack_01, true);
+                character.characterCombatManager.lastAttack = character.characterCombatManager.oh_charge_attack_01;
             }
         }
     }
 
 
-    private void HandleChargeWeaponCombo(PlayerManager player)
+    private void HandleChargeWeaponCombo(CharacterManager character)
     {
-        if (player.inputHandler.comboFlag)
+        if (character.canDoCombo)
         {
-            player.animator.SetBool("canDoCombo", false);
+            character.animator.SetBool("canDoCombo", false);
 
-            if (player.isUsingLeftHand)
+            if (character.isUsingLeftHand)
             {
-                if (player.playerCombatManager.lastAttack == player.playerCombatManager.oh_charge_attack_01)
+                if (character.characterCombatManager.lastAttack == character.characterCombatManager.oh_charge_attack_01)
                 {
-                    player.playerAnimatorManager.PlayerTargetAnimation(player.playerCombatManager.oh_charge_attack_02, true, false, true);
-                    player.playerCombatManager.lastAttack = player.playerCombatManager.oh_charge_attack_02;
+                    character.characterAnimatorManager.PlayerTargetAnimation(character.characterCombatManager.oh_charge_attack_02, true, false, true);
+                    character.characterCombatManager.lastAttack = character.characterCombatManager.oh_charge_attack_02;
                 }
                 else
                 {
-                    player.playerAnimatorManager.PlayerTargetAnimation(player.playerCombatManager.oh_charge_attack_01, true, false, true);
-                    player.playerCombatManager.lastAttack = player.playerCombatManager.oh_charge_attack_01;
+                    character.characterAnimatorManager.PlayerTargetAnimation(character.characterCombatManager.oh_charge_attack_01, true, false, true);
+                    character.characterCombatManager.lastAttack = character.characterCombatManager.oh_charge_attack_01;
                 }
             }
 
-            else if (player.isUsingRightHand)
+            else if (character.isUsingRightHand)
             {
-                if (player.isTwoHandingWeapon)
+                if (character.isTwoHandingWeapon)
                 {
-                    if (player.playerCombatManager.lastAttack == player.playerCombatManager.th_charge_attack_01)
+                    if (character.characterCombatManager.lastAttack == character.characterCombatManager.th_charge_attack_01)
                     {
-                        player.playerAnimatorManager.PlayerTargetAnimation(player.playerCombatManager.th_charge_attack_02, true);
-                        player.playerCombatManager.lastAttack = player.playerCombatManager.th_charge_attack_02;
+                        character.characterAnimatorManager.PlayerTargetAnimation(character.characterCombatManager.th_charge_attack_02, true);
+                        character.characterCombatManager.lastAttack = character.characterCombatManager.th_charge_attack_02;
                     }
                     else
                     {
-                        player.playerAnimatorManager.PlayerTargetAnimation(player.playerCombatManager.th_charge_attack_01, true);
-                        player.playerCombatManager.lastAttack = player.playerCombatManager.th_charge_attack_01;
+                        character.characterAnimatorManager.PlayerTargetAnimation(character.characterCombatManager.th_charge_attack_01, true);
+                        character.characterCombatManager.lastAttack = character.characterCombatManager.th_charge_attack_01;
                     }
                 }
                 else
                 {
-                    if (player.playerCombatManager.lastAttack == player.playerCombatManager.oh_charge_attack_01)
+                    if (character.characterCombatManager.lastAttack == character.characterCombatManager.oh_charge_attack_01)
                     {
-                        player.playerAnimatorManager.PlayerTargetAnimation(player.playerCombatManager.oh_charge_attack_02, true);
-                        player.playerCombatManager.lastAttack = player.playerCombatManager.oh_charge_attack_02;
+                        character.characterAnimatorManager.PlayerTargetAnimation(character.characterCombatManager.oh_charge_attack_02, true);
+                        character.characterCombatManager.lastAttack = character.characterCombatManager.oh_charge_attack_02;
                     }
                     else
                     {
-                        player.playerAnimatorManager.PlayerTargetAnimation(player.playerCombatManager.oh_charge_attack_01, true);
-                        player.playerCombatManager.lastAttack = player.playerCombatManager.oh_charge_attack_01;
+                        character.characterAnimatorManager.PlayerTargetAnimation(character.characterCombatManager.oh_charge_attack_01, true);
+                        character.characterCombatManager.lastAttack = character.characterCombatManager.oh_charge_attack_01;
                     }
                 }
             }

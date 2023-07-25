@@ -26,7 +26,7 @@ public class PlayerEffectsManager : CharacterEffectsManager
 
     public void HealPlayerFromEffect()
     {
-        player.playerStatsManager.HealPlayer(amountToBeHealed);
+        player.playerStatsManager.HealCharacter(amountToBeHealed);
         if(currentParticleFX != null)
         {
             GameObject healParticles = Instantiate(currentParticleFX, player.playerStatsManager.transform);

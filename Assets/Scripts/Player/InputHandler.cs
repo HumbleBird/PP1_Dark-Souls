@@ -52,7 +52,6 @@ public class InputHandler : MonoBehaviour
 
     public float rollInputTimer;
 
-    public Transform criticalAttackRayCastStartPoint;
 
 
 

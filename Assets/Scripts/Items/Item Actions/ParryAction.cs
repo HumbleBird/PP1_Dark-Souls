@@ -6,22 +6,22 @@ using static Define;
 [CreateAssetMenu(menuName = "Item Actions/Parry Action")]
 public class ParryAction : ItemAction
 {
-    public override void PerformAction(PlayerManager player)
+    public override void PerformAction(CharacterManager character)
     {
-        if (player.isInteracting)
+        if (character.isInteracting)
             return;
 
-        player.playerAnimatorManager.EraseHandIKForWeapon();
+        character.characterAnimatorManager.EraseHandIKForWeapon();
 
-        WeaponItem parryingWeapon = player.playerInventoryManager.currentItemBeingUsed as WeaponItem;
+        WeaponItem parryingWeapon = character.characterInventoryManager.currentItemBeingUsed as WeaponItem;
 
         if(parryingWeapon.weaponType == WeaponType.SmallShield)
         {
-            player.playerAnimatorManager.PlayerTargetAnimation("Parry_01", true);
+            character.characterAnimatorManager.PlayerTargetAnimation("Parry_01", true);
         }
         else if (parryingWeapon.weaponType == WeaponType.Shield)
         {
-            player.playerAnimatorManager.PlayerTargetAnimation("Parry_01", true);
+            character.characterAnimatorManager.PlayerTargetAnimation("Parry_01", true);
         }
     }
 }

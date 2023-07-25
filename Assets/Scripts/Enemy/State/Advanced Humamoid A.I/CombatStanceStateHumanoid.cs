@@ -5,9 +5,9 @@ using static Define;
 
 public class CombatStanceStateHumanoid : State
 {
-    public AttackState attackState;
+    public AttackStateHumanoid attackState;
     public ItemBasedAttackAction[] enemyAttacks;
-    public PursueTargetState pursueTargetState;
+    public PursueTargetStateHumanoid pursueTargetState;
 
     protected bool randomDestinationSet = true;
     protected float verticalMovementValue = 0;
@@ -170,7 +170,7 @@ public class CombatStanceStateHumanoid : State
 
         for (int i = 0; i < enemyAttacks.Length; i++)
         {
-            EnemyAttackAction enemyAttackAction = enemyAttacks[i];
+            ItemBasedAttackAction enemyAttackAction = enemyAttacks[i];
 
             if (enemy.distancefromTarget <= enemyAttackAction.maximumDistanceNeededToAttack
                 && enemy.distancefromTarget > enemyAttackAction.minimumDistanceNeededToAttack)
@@ -188,7 +188,7 @@ public class CombatStanceStateHumanoid : State
 
         for (int i = 0; i < enemyAttacks.Length; i++)
         {
-            EnemyAttackAction enemyAttackAction = enemyAttacks[i];
+            ItemBasedAttackAction enemyAttackAction = enemyAttacks[i];
 
             if (enemy.distancefromTarget <= enemyAttackAction.maximumDistanceNeededToAttack
                 && enemy.distancefromTarget > enemyAttackAction.minimumDistanceNeededToAttack)

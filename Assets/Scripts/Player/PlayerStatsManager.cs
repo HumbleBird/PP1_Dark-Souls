@@ -137,14 +137,9 @@ public class PlayerStatsManager : CharacterStatsManager
 
     }
 
-    public void HealPlayer(int healAmount)
+    public override void HealCharacter(int healAmount)
     {
-        currentHealth += healAmount;
-
-        if(currentHealth > maxHealth)
-        {
-            currentHealth = maxHealth;
-        }
+        base.HealCharacter(healAmount);
 
         healthBar.SetCurrentHealth(currentHealth);
     }
