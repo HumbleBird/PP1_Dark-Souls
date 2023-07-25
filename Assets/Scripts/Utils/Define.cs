@@ -145,6 +145,13 @@ public class Define
         Archer
     }
 
+    public enum AIAttackActionType
+    { 
+        meleeAttackAction,
+        magicAttackACtion,
+        rangedAttackaCtion,
+    }
+
 
     public enum AttackType
     {

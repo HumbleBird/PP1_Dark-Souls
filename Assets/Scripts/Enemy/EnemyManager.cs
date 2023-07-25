@@ -28,6 +28,14 @@ public class EnemyManager : CharacterManager
     public float maximumDetectionAngle = 50;
     public float currentRecoveryTime = 0;
 
+    [Header("ADVANCED A.I SETTING")]
+    public bool allowAIToPerformBlock;
+    public int blockLikelyHood = 50; // 0~100% 중의 확률. 100%면 매 순간 Block을, 0%면 block 하지 않음.
+    public bool allowAIToPerformDodge;
+    public int dodgeLikelyHood = 50;
+    public bool allowAIToPerformParry;
+    public int ParryLikelyHood = 50;
+
     [Header("A.I Combat Settings")]
     public bool allowAIToPerformCombos;
     public bool isPhaseShifting;

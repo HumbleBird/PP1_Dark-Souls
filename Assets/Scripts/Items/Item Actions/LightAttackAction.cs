@@ -6,137 +6,135 @@ using static Define;
 [CreateAssetMenu(menuName = "Item Actions/Light Attack Action")]
 public class LightAttackAction : ItemAction
 {
-    public override void PerformAction(PlayerManager player)
+    public override void PerformAction(CharacterManager character)
     {
-        if (player.playerStatsManager.currentStamina <= 0)
+        if (character.characterStatsManager.currentStamina <= 0)
             return;
 
 
-        player.playerAnimatorManager.EraseHandIKForWeapon();
-        player.playerEffectsManager.PlayWeaponFX(false);
+        character.characterAnimatorManager.EraseHandIKForWeapon();
+        character.characterEffectsManager.PlayWeaponFX(false);
 
         // 만약 running attack을 수행할 수 있다면 할지 안 할지 결정 가능
-        if (player.isSprinting)
+        if (character.isSprinting)
         {
-            HandleRunningAttack(player);
+            HandleRunningAttack(character);
             return;
         }
 
         // 콤보
-        if (player.canDoCombo)
+        if (character.canDoCombo)
         {
-            player.inputHandler.comboFlag = true;
-            HandleLightWeaponCombo(player);
-            player.inputHandler.comboFlag = false;
+            HandleLightWeaponCombo(character);
         }
 
         // 콤보 말고 정해진 공격 (1타)
         else
         {
-            if (player.isInteracting)
+            if (character.isInteracting)
                 return;
 
-            if (player.canDoCombo)
+            if (character.canDoCombo)
                 return;
 
-            HandleLightAttack( player);
+            HandleLightAttack( character);
         }
 
-        player.playerCombatManager.currentAttackType = AttackType.light;
+        character.characterCombatManager.currentAttackType = AttackType.light;
     }
 
-    private void HandleLightAttack(PlayerManager player)
+    private void HandleLightAttack(CharacterManager character)
     {
-        if (player.isUsingLeftHand)
+        if (character.isUsingLeftHand)
         {
-            player.playerAnimatorManager.PlayerTargetAnimation(player.playerCombatManager.oh_light_attack_01, true, false, true);
-            player.playerCombatManager.lastAttack = player.playerCombatManager.oh_light_attack_01;
+            character.characterAnimatorManager.PlayerTargetAnimation(character.characterCombatManager.oh_light_attack_01, true, false, true);
+            character.characterCombatManager.lastAttack = character.characterCombatManager.oh_light_attack_01;
         }
-        else if (player.isUsingRightHand)
+        else if (character.isUsingRightHand)
         {
-            if (player.inputHandler.twoHandFlag)
+            if (character.isTwoHandingWeapon)
             {
-                player.playerAnimatorManager.PlayerTargetAnimation(player.playerCombatManager.th_light_attack_01, true);
-                player.playerCombatManager.lastAttack = player.playerCombatManager.th_light_attack_01;
+                character.characterAnimatorManager.PlayerTargetAnimation(character.characterCombatManager.th_light_attack_01, true);
+                character.characterCombatManager.lastAttack = character.characterCombatManager.th_light_attack_01;
             }
             else
             {
-                player.playerAnimatorManager.PlayerTargetAnimation(player.playerCombatManager.oh_light_attack_01, true);
-                player.playerCombatManager.lastAttack = player.playerCombatManager.oh_light_attack_01;
+                character.characterAnimatorManager.PlayerTargetAnimation(character.characterCombatManager.oh_light_attack_01, true);
+                character.characterCombatManager.lastAttack = character.characterCombatManager.oh_light_attack_01;
             }
         }
     }
 
-    private void HandleRunningAttack(PlayerManager player)
+    private void HandleRunningAttack(CharacterManager character)
     {
-        if (player.isUsingLeftHand)
+        if (character.isUsingLeftHand)
         {
-            player.playerAnimatorManager.PlayerTargetAnimation(player.playerCombatManager.oh_running_attack_01, true, false, true);
-            player.playerCombatManager.lastAttack = player.playerCombatManager.oh_running_attack_01;
+            character.characterAnimatorManager.PlayerTargetAnimation(character.characterCombatManager.oh_running_attack_01, true, false, true);
+            character.characterCombatManager.lastAttack = character.characterCombatManager.oh_running_attack_01;
         }
-        else if (player.isUsingRightHand)
+        else if (character.isUsingRightHand)
         {
-            if (player.inputHandler.twoHandFlag)
+            if (character.isTwoHandingWeapon)
             {
-                player.playerAnimatorManager.PlayerTargetAnimation(player.playerCombatManager.th_running_attack_01, true);
-                player.playerCombatManager.lastAttack = player.playerCombatManager.th_running_attack_01;
+                character.characterAnimatorManager.PlayerTargetAnimation(character.characterCombatManager.th_running_attack_01, true);
+                character.characterCombatManager.lastAttack = character.characterCombatManager.th_running_attack_01;
             }
             else
             {
-                player.playerAnimatorManager.PlayerTargetAnimation(player.playerCombatManager.oh_running_attack_01, true);
-                player.playerCombatManager.lastAttack = player.playerCombatManager.oh_running_attack_01;
+                character.characterAnimatorManager.PlayerTargetAnimation(character.characterCombatManager.oh_running_attack_01, true);
+                character.characterCombatManager.lastAttack = character.characterCombatManager.oh_running_attack_01;
             }
         }
 
 
     }
 
-    private void HandleLightWeaponCombo(PlayerManager player)
+    private void HandleLightWeaponCombo(CharacterManager character)
     {
-        if (player.inputHandler.comboFlag)
+        if (character.canDoCombo)
         {
-            player.animator.SetBool("canDoCombo", false);
+            character.animator.SetBool("canDoCombo", false);
 
-            if (player.isUsingLeftHand)
+            if (character.isUsingLeftHand)
             {
-                if (player.playerCombatManager.lastAttack == player.playerCombatManager.oh_light_attack_01)
+                if (character.characterCombatManager.lastAttack == character.characterCombatManager.oh_light_attack_01)
                 {
-                    player.playerAnimatorManager.PlayerTargetAnimation(player.playerCombatManager.oh_light_attack_02, true, false, true);
-                    player.playerCombatManager.lastAttack = player.playerCombatManager.oh_light_attack_02;
+                    character.characterAnimatorManager.PlayerTargetAnimation(character.characterCombatManager.oh_light_attack_02, true, false, true);
+                    character.characterCombatManager.lastAttack = character.characterCombatManager.oh_light_attack_02;
                 }
                 else
                 {
-                    player.playerAnimatorManager.PlayerTargetAnimation(player.playerCombatManager.oh_light_attack_01, true, false, true);
-                    player.playerCombatManager.lastAttack = player.playerCombatManager.oh_light_attack_01;
+                    character.characterAnimatorManager.PlayerTargetAnimation(character.characterCombatManager.oh_light_attack_01, true, false, true);
+                    character.characterCombatManager.lastAttack = character.characterCombatManager.oh_light_attack_01;
                 }
             }
 
-            else if (player.isUsingRightHand)
+            else if (character.isUsingRightHand)
             {
-                if (player.isTwoHandingWeapon)
+                if (character.isTwoHandingWeapon)
                 {
-                    if (player.playerCombatManager.lastAttack == player.playerCombatManager.th_light_attack_01)
+                    if (character.characterCombatManager.lastAttack == character.characterCombatManager.th_light_attack_01)
                     {
-                        player.playerAnimatorManager.PlayerTargetAnimation(player.playerCombatManager.th_light_attack_02, true);
-                        player.playerCombatManager.lastAttack = player.playerCombatManager.th_light_attack_02;
+                        character.characterAnimatorManager.PlayerTargetAnimation(character.characterCombatManager.th_light_attack_02, true);
+                        character.characterCombatManager.lastAttack = character.characterCombatManager.th_light_attack_02;
                     }
                     else
                     {
-                        player.playerAnimatorManager.PlayerTargetAnimation(player.playerCombatManager.th_light_attack_01, true);
-                        player.playerCombatManager.lastAttack = player.playerCombatManager.th_light_attack_01;
+                        character.characterAnimatorManager.PlayerTargetAnimation(character.characterCombatManager.th_light_attack_01, true);
+                        character.characterCombatManager.lastAttack = character.characterCombatManager.th_light_attack_01;
                     }
                 }
                 else
                 {
-                    if (player.playerCombatManager.lastAttack == player.playerCombatManager.oh_light_attack_01)
+                    if (character.characterCombatManager.lastAttack == character.characterCombatManager.oh_light_attack_01)
                     {
-                        player.playerAnimatorManager.PlayerTargetAnimation(player.playerCombatManager.oh_light_attack_02, true);
-                        player.playerCombatManager.lastAttack = player.playerCombatManager.oh_light_attack_02;
+                        character.characterAnimatorManager.PlayerTargetAnimation(character.characterCombatManager.oh_light_attack_02, true);
+                        character.characterCombatManager.lastAttack = character.characterCombatManager.oh_light_attack_02;
                     }
                     else
                     {
-                        player.playerAnimatorManager.PlayerTargetAnimation(player.playerCombatManager.oh_light_attack_01, true);
-                        player.playerCombatManager.lastAttack = player.playerCombatManager.oh_light_attack_01;
+                        character.characterAnimatorManager.PlayerTargetAnimation(character.characterCombatManager.oh_light_attack_01, true);
+                        character.characterCombatManager.lastAttack = character.characterCombatManager.oh_light_attack_01;
                     }
                 }
             }

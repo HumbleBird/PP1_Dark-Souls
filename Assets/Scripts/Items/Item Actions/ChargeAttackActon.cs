@@ -5,7 +5,7 @@ using UnityEngine;
 [CreateAssetMenu(menuName = "Item Actions/Charge Attack Action")]
 public class ChargeAttackActon : ItemAction
 {
-    public override void PerformAction(PlayerManager player)
+    public override void PerformAction(CharacterManager player)
     {
         if (player.playerStatsManager.currentStamina <= 0)
             return;

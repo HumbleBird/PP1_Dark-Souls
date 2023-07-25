@@ -6,12 +6,17 @@ using static Define;
 public class CombatStanceStateHumanoid : State
 {
     public AttackState attackState;
-    public EnemyAttackAction[] enemyAttacks;
+    public ItemBasedAttackAction[] enemyAttacks;
     public PursueTargetState pursueTargetState;
 
     protected bool randomDestinationSet = true;
     protected float verticalMovementValue = 0;
     protected float horizontalMovementValue = 0;
+
+    [Header("State Flags")]
+    bool willPerformBlock = false;
+    bool willPerformDodge = false;
+    bool willPerformParry = false;
 
     public override State Tick(EnemyManager enemy)
     {
@@ -34,24 +39,56 @@ public class CombatStanceStateHumanoid : State
     {
         enemy.animator.SetFloat("Vertical", verticalMovementValue, 0.2f, Time.deltaTime);
         enemy.animator.SetFloat("Horizontal", horizontalMovementValue, 0.2f, Time.deltaTime);
-        attackState.hasPerformedAttack = false;
 
-        if (enemy.isInteracting)
+        // AI가 추락중이거나 어떤 action을 취하는 중이라면 모든 움직임을 멈춤
+        if (enemy.isInteracting || !enemy.isGrounded)
         {
             enemy.animator.SetFloat("Vertical", 0);
             enemy.animator.SetFloat("Horizontal", 0);
             return this;
         }
 
+        // A.I로부터 목표물이 너무 멀리 떨어져 있다면 다시 pursue 모드로
         if (enemy.distancefromTarget > enemy.MaximumAggroRadius)
         {
             return pursueTargetState;
         }
 
+        // 플레이어를 기준으로 원으로 돌면서 랜덤 공격 방식 획득
         if (!randomDestinationSet)
         {
             randomDestinationSet = true;
             DecideCirclingAction(enemy.enemyAnimationManager);
+        }
+
+        if(enemy.allowAIToPerformBlock)
+        {
+            RollForBlockChance(enemy);
+        }
+
+        if(enemy.allowAIToPerformDodge)
+        {
+            RollForDodgeChance(enemy);
+        }
+
+        if(enemy.allowAIToPerformParry)
+        {
+            RollForParryChance(enemy);
+        }
+
+        if (willPerformBlock)
+        {
+
+        }
+
+        if (willPerformDodge)
+        {
+
+        }
+
+        if (willPerformParry)
+        {
+
         }
 
         HandleRotateTowardTarget(enemy);
@@ -171,5 +208,55 @@ public class CombatStanceStateHumanoid : State
                 }
             }
         }
+    }
+
+    // AI Rolls
+    private void RollForBlockChance(EnemyManager enemy)
+    {
+        int Chance = Random.Range(0, 100);
+
+        if(Chance <= enemy.blockLikelyHood)
+        {
+            willPerformBlock = true;
+        }
+        else
+        {
+            willPerformBlock = false;
+        }
+    }
+
+    private void RollForDodgeChance(EnemyManager enemy)
+    {
+        int Chance = Random.Range(0, 100);
+
+        if (Chance <= enemy.dodgeLikelyHood)
+        {
+            willPerformDodge = true;
+        }
+        else
+        {
+            willPerformDodge = false;
+        }
+    }
+
+    private void RollForParryChance(EnemyManager enemy)
+    {
+        int Chance = Random.Range(0, 100);
+
+        if (Chance <= enemy.ParryLikelyHood)
+        {
+            willPerformParry = true;
+        }
+        else
+        {
+            willPerformParry = false;
+        }
+    }
+    // combatstance에서 빠져나가면 실행함
+    private void ResetStateFlags()
+    {
+        willPerformBlock = false;
+        willPerformDodge = false;
+        willPerformParry = false;
     }
 }

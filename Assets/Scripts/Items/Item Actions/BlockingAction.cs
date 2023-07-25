@@ -5,7 +5,7 @@ using UnityEngine;
 [CreateAssetMenu(menuName = "Item Actions/Blocking Action")]
 public class BlockingAction : ItemAction
 {
-    public override void PerformAction(PlayerManager player)
+    public override void PerformAction(CharacterManager player)
     {
         if (player.isInteracting)
             return;
