@@ -139,6 +139,13 @@ public class Define
 
     #region Battle
 
+    public enum AICombatStyle
+    { 
+        swordAndShield,
+        Archer
+    }
+
+
     public enum AttackType
     {
         light,

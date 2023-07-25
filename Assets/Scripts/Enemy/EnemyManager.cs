@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.AI;
+using static Define;
 
 public class EnemyManager : CharacterManager
 {
@@ -13,7 +14,7 @@ public class EnemyManager : CharacterManager
     public EnemyEffectsManager enemyEffectsManager;
 
     public State currentState;
-    public CharacterStatsManager currentTarget;
+    public CharacterManager currentTarget;
     public NavMeshAgent navMeshAgent;
     public Rigidbody enemyRigidbody;
 
@@ -31,6 +32,7 @@ public class EnemyManager : CharacterManager
     public bool allowAIToPerformCombos;
     public bool isPhaseShifting;
     public float comboLikelyHood;
+    public AICombatStyle combatStyle;
 
     [Header("A.I Target Information")]
     public float distancefromTarget;

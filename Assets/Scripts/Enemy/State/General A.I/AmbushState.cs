@@ -26,17 +26,17 @@ public class AmbushState : State
 
         for (int i = 0; i < colliders.Length; i++)
         {
-            CharacterStatsManager characterStatus = colliders[i].transform.GetComponent<CharacterStatsManager>();
+            CharacterManager character = colliders[i].transform.GetComponent<CharacterManager>();
 
-            if(characterStatus != null)
+            if(character != null)
             {
-                Vector3 targetDirection = characterStatus.transform.position - enemy.transform.position;
+                Vector3 targetDirection = character.transform.position - enemy.transform.position;
                 float viewableAngle = Vector3.Angle(targetDirection, enemy.transform.forward);
 
                 if(viewableAngle > enemy.minimumDetectionAngle
                     && viewableAngle < enemy.maximumDetectionAngle)
                 {
-                    enemy.currentTarget = characterStatus;
+                    enemy.currentTarget = character;
                     isSleeping = false;
                     enemy.enemyAnimationManager.PlayerTargetAnimation(wakeAnimation, true);
                 }

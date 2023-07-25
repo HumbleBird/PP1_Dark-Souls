@@ -9,7 +9,6 @@ using UnityEngine;
 public class PursueTargetState : State
 {
     public CombatStanceState combatStanceState;
-    public RotateTowardsTargetState rotateTowardsTargetState;
 
     public override State Tick(EnemyManager enemy)
     {
