@@ -17,11 +17,11 @@ public class ParryAction : ItemAction
 
         if(parryingWeapon.weaponType == WeaponType.SmallShield)
         {
-            character.characterAnimatorManager.PlayerTargetAnimation("Parry_01", true);
+            character.characterAnimatorManager.PlayTargetAnimation("Parry_01", true);
         }
         else if (parryingWeapon.weaponType == WeaponType.Shield)
         {
-            character.characterAnimatorManager.PlayerTargetAnimation("Parry_01", true);
+            character.characterAnimatorManager.PlayTargetAnimation("Parry_01", true);
         }
     }
 }

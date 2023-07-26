@@ -32,12 +32,6 @@ public class EnemyStatsManager : CharacterStatsManager
         }
     }
 
-    private int SetMaxHealthFromHealthLevel()
-    {
-        maxHealth = healthLevel * 10;
-        return maxHealth;
-    }
-
     public override void TakeDamageNoAnimation(int damage, int fireDamage)
     {
         base.TakeDamageNoAnimation(damage, fireDamage);
@@ -76,13 +70,13 @@ public class EnemyStatsManager : CharacterStatsManager
         {
             currentHealth = 0;
             enemy.isDead = true;
-            enemy.enemyAnimationManager.PlayerTargetAnimation("Dead_01", true);
+            enemy.enemyAnimationManager.PlayTargetAnimation("Dead_01", true);
         }
     }
 
     public void BreakGuard()
     {
-        enemy.enemyAnimationManager.PlayerTargetAnimation("Break Guard", true);
+        enemy.enemyAnimationManager.PlayTargetAnimation("Break Guard", true);
     }
 
     public override void TakeDamage(int damage, int fireDamage, string damageAnimation, CharacterManager enemyCharacterDamageingMe)
@@ -100,7 +94,7 @@ public class EnemyStatsManager : CharacterStatsManager
         }
 
 
-        enemy.enemyAnimationManager.PlayerTargetAnimation(damageAnimation, true);
+        enemy.enemyAnimationManager.PlayTargetAnimation(damageAnimation, true);
 
         if (currentHealth <= 0)
         {
@@ -111,7 +105,7 @@ public class EnemyStatsManager : CharacterStatsManager
     private void HandleDeath()
     {
         currentHealth = 0;
-        enemy.enemyAnimationManager.PlayerTargetAnimation("Dead_01", true);
+        enemy.enemyAnimationManager.PlayTargetAnimation("Dead_01", true);
         enemy.isDead = true;
     }
 }

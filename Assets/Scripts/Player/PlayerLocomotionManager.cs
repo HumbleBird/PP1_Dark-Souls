@@ -203,7 +203,7 @@ public class PlayerLocomotionManager : MonoBehaviour
 
             if (player.inputHandler.moveAmount > 0)
             {
-                player.playerAnimatorManager.PlayerTargetAnimation("Roll_01", true);
+                player.playerAnimatorManager.PlayTargetAnimation("Roll_01", true);
                 player.playerAnimatorManager.EraseHandIKForWeapon();
                 moveDirection.y = 0;
                 Quaternion rollRotation = Quaternion.LookRotation(moveDirection);
@@ -212,7 +212,7 @@ public class PlayerLocomotionManager : MonoBehaviour
             }
             else
             {
-                player.playerAnimatorManager.PlayerTargetAnimation("BackStep", true);
+                player.playerAnimatorManager.PlayTargetAnimation("BackStep", true);
                 player.playerAnimatorManager.EraseHandIKForWeapon();
                 player.playerStatsManager.DeductStamina(backstepStaminaCost);
 
@@ -258,12 +258,12 @@ public class PlayerLocomotionManager : MonoBehaviour
                 if(inAirTimer > 0.5)
                 {
                     Debug.Log("YOu were in the air for " + inAirTimer);
-                    player.playerAnimatorManager.PlayerTargetAnimation("Land", true);
+                    player.playerAnimatorManager.PlayTargetAnimation("Land", true);
                     inAirTimer = 0;
                 }
                 else
                 {
-                    player.playerAnimatorManager.PlayerTargetAnimation("Empty", false);
+                    player.playerAnimatorManager.PlayTargetAnimation("Empty", false);
                     inAirTimer = 0;
                 }
 
@@ -281,7 +281,7 @@ public class PlayerLocomotionManager : MonoBehaviour
             {
                 if(player.isInteracting == false)
                 {
-                    player.playerAnimatorManager.PlayerTargetAnimation("Falling", true);
+                    player.playerAnimatorManager.PlayTargetAnimation("Falling", true);
                 }
 
                 Vector3 vel = rigidbody.velocity;
@@ -321,7 +321,7 @@ public class PlayerLocomotionManager : MonoBehaviour
             {
                 moveDirection = player.cameraHandler.cameraObject.transform.forward * player.inputHandler.vertical;
                 moveDirection += player.cameraHandler.cameraObject.transform.right * player.inputHandler.horizontal;
-                player.playerAnimatorManager.PlayerTargetAnimation("Jump", true);
+                player.playerAnimatorManager.PlayTargetAnimation("Jump", true);
                 player.playerAnimatorManager.EraseHandIKForWeapon();
                 moveDirection.y = 0;
                 Quaternion jumpRotation = Quaternion.LookRotation(moveDirection);

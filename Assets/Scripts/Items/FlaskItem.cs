@@ -23,7 +23,7 @@ public class FlaskItem : ConsumableItem
         base.AttemptToConsumeItem(playerAnimatorManager, playerWeaponSlotManager, playerEffectsManager);
         playerEffectsManager.currentParticleFX = recoveryFX;
         playerEffectsManager.amountToBeHealed = healthRecoverAmount;
-        playerEffectsManager.instantiatedFXModel = flask;
+        playerEffectsManager.instantiatedFXModel2 = flask;
         playerWeaponSlotManager.rightHandSlot.UnloadWeapon();
     }
 

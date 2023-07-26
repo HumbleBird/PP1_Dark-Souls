@@ -11,7 +11,7 @@ public class PlayerEffectsManager : CharacterEffectsManager
     PoisonAmountBar poisonAmountBar;
 
     public GameObject currentParticleFX;
-    public GameObject instantiatedFXModel;
+    public GameObject instantiatedFXModel2;
     public int amountToBeHealed;
 
     protected override void Awake()
@@ -31,7 +31,7 @@ public class PlayerEffectsManager : CharacterEffectsManager
         {
             GameObject healParticles = Instantiate(currentParticleFX, player.playerStatsManager.transform);
         }
-        Destroy(instantiatedFXModel.gameObject);
+        Destroy(instantiatedFXModel2.gameObject);
         player.playerWeaponSlotManager.LoadBothWeaponsOnSlots();
     }
 

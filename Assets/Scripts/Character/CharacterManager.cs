@@ -19,9 +19,6 @@ public class CharacterManager : MonoBehaviour
     [Header("Ray Casts")]
     public Transform criticalAttackRayCastStartPoint;
 
-    [Header("Combat Colliders")]
-    public CriticalDamageCollider backStabCollider;
-    public CriticalDamageCollider riposteCollider;
 
     [Header("IsInteraction")]
     public bool isInteracting;
@@ -44,6 +41,10 @@ public class CharacterManager : MonoBehaviour
     public bool isTwoHandingWeapon;
     public bool isPerformingFullyChargedAttack;
     public bool isAttacking;
+    public bool isBeingBackstabbed;
+    public bool isBeingRiposted;
+    public bool isPerformingBackstab;
+    public bool isPerformingRipost;
 
     [Header("Movement Flags")]
     public bool isRotatingWithRootMotion;
@@ -74,6 +75,19 @@ public class CharacterManager : MonoBehaviour
     protected virtual void FixedUpdate()
     {
         characterAnimatorManager.CheckHandIKWeight(characterWeaponSlotManager.rightHandIKTarget, characterWeaponSlotManager.leftHandIKTarget, isTwoHandingWeapon);
+    }
+
+    protected virtual void Update()
+    {
+        isInteracting = animator.GetBool("isInteracting");
+        canDoCombo = animator.GetBool("canDoCombo");
+        canRotate = animator.GetBool("canRotate");
+        isHoldingArrow = animator.GetBool("isHoldingArrow");
+        isInvulnerable = animator.GetBool("isInvulnerable");
+
+        animator.SetBool("isTwoHandingWeapon", isTwoHandingWeapon);
+        animator.SetBool("isBlocking", isBlocking);
+        animator.SetBool("isDead", isDead);
     }
 
     public virtual void UpdateWhichHandCharacterIsUsing(bool usingRightHand)

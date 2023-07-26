@@ -367,7 +367,7 @@ public class CombatStanceStateHumanoid : State
                 {
                     hasPerformedDodge = true;
                     enemy.transform.rotation = targetDodgeDirection;
-                    enemy.characterAnimatorManager.PlayerTargetAnimation("Roll_01", true);
+                    enemy.characterAnimatorManager.PlayTargetAnimation("Roll_01", true);
                 }
             }
         }

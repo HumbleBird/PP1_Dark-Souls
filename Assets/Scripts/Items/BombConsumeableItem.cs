@@ -22,13 +22,13 @@ public class BombConsumeableItem : ConsumableItem
         if(currentItemAmount > 0 )
         {
             playerWeaponSlotManager.rightHandSlot.UnloadWeapon();
-            playerAnimatorManager.PlayerTargetAnimation(consumeAnimation, true);
+            playerAnimatorManager.PlayTargetAnimation(consumeAnimation, true);
             GameObject bombModel = Instantiate(itemModel, playerWeaponSlotManager.rightHandSlot.transform.position, Quaternion.identity, playerWeaponSlotManager.rightHandSlot.transform);
-            playerEffectsManager.instantiatedFXModel = bombModel;
+            playerEffectsManager.instantiatedFXModel2 = bombModel;
         }
         else
         {
-            playerAnimatorManager.PlayerTargetAnimation("Shrug", true);
+            playerAnimatorManager.PlayTargetAnimation("Shrug", true);
         }
     }
 }

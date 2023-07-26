@@ -82,14 +82,16 @@ public class AttackStateHumanoid : State
 
     private State ProcessArcherCombatSyle(EnemyManager enemy)
     {
-        Debug.Log("Attack");
-
         RotateTowardsTargetWhilstAttacking(enemy);
 
         if (enemy.isInteracting)
             return this;
-        
-        Debug.Log("Attack 2");
+
+        if(enemy.isHoldingArrow == false)
+        {
+            ResetStateFlags();
+            return combatStanceState;
+        }
 
         if (enemy.currentTarget.isDead)
         {
@@ -98,22 +100,16 @@ public class AttackStateHumanoid : State
             return this;
         }
 
-        Debug.Log("Attack 3");
-
         if (enemy.distancefromTarget > enemy.MaximumAggroRadius)
         {
             ResetStateFlags();
             return pursueTargetState;
         }
 
-        Debug.Log("Attack 4");
-
         if (!hasPerformedAttack && enemy.isHoldingArrow)
         {
             FireAmmo(enemy);
         }
-
-        Debug.Log("Attack 5");
 
         ResetStateFlags();
         return rotateTowardsTargetState;

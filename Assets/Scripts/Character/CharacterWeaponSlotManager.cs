@@ -72,7 +72,7 @@ public class CharacterWeaponSlotManager : MonoBehaviour
                 {
                     backSlot.LoadWeaponModel(leftHandSlot.currentWeapon);
                     leftHandSlot.UnloadWeaponAndDestroy();
-                    character.characterAnimatorManager.PlayerTargetAnimation("Left Arm Empty", false, true);
+                    character.characterAnimatorManager.PlayTargetAnimation("Left Arm Empty", false, true);
                 }
                 else
                 {

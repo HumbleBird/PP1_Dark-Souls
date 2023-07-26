@@ -58,7 +58,7 @@ public class AttackState : State
     {
         enemy.isUsingRightHand = currentAttack.isRightHandedAction;
         enemy.isUsingLeftHand = !currentAttack.isRightHandedAction;
-        enemy.enemyAnimationManager.PlayerTargetAnimation(currentAttack.actionAnimation, true);
+        enemy.enemyAnimationManager.PlayTargetAnimation(currentAttack.actionAnimation, true);
         enemy.enemyAnimationManager.PlayWeaponTrailFX();
         enemy.currentRecoveryTime = currentAttack.recoveryTime;
         hasPerformedAttack = true;
@@ -69,7 +69,7 @@ public class AttackState : State
         enemy.isUsingRightHand = currentAttack.isRightHandedAction;
         enemy.isUsingLeftHand = !currentAttack.isRightHandedAction;
         willDoComboOnNextAttack = false;
-        enemy.enemyAnimationManager.PlayerTargetAnimation(currentAttack.actionAnimation, true);
+        enemy.enemyAnimationManager.PlayTargetAnimation(currentAttack.actionAnimation, true);
         enemy.enemyAnimationManager.PlayWeaponTrailFX();
         enemy.currentRecoveryTime = currentAttack.recoveryTime;
         currentAttack = null;

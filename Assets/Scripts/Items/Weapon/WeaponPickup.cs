@@ -26,7 +26,7 @@ public class WeaponPickup : Interactable
         playerAnimatorManager = playerManager.GetComponentInChildren<PlayerAnimatorManager>();
 
         playerLocomotionManager.rigidbody.velocity = Vector3.zero;
-        playerAnimatorManager.PlayerTargetAnimation("Pick Up Item", true);
+        playerAnimatorManager.PlayTargetAnimation("Pick Up Item", true);
         playerInventoryManager.weaponsInventory.Add(weapon);
 
         playerManager.itemInteractableUIGameObject.SetActive(true);

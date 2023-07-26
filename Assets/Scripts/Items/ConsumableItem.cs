@@ -19,11 +19,11 @@ public class ConsumableItem : Item
     {
         if(currentItemAmount > 0)
         {
-            playerAnimatorManager.PlayerTargetAnimation(consumeAnimation, isInteracting, true);
+            playerAnimatorManager.PlayTargetAnimation(consumeAnimation, isInteracting, true);
         }
         else
         {
-            playerAnimatorManager.PlayerTargetAnimation("Shrug", true);
+            playerAnimatorManager.PlayTargetAnimation("Shrug", true);
         }
     }
 }

@@ -17,10 +17,10 @@ public class FireArrowAction : ItemAction
         Animator bowAnimator = character.characterWeaponSlotManager.rightHandSlot.GetComponentInChildren<Animator>();
         bowAnimator.SetBool("isDrawn", false);
         bowAnimator.Play("BowObject_TH_Fire_01");
-        Destroy(character.characterEffectsManager.currentRangeFX);
+        Destroy(character.characterEffectsManager.instantiatedFXModel);
 
         // reset 플레이어 holding arrow flag
-        character.characterAnimatorManager.PlayerTargetAnimation("Bow_TH_Fire_01", true);
+        character.characterAnimatorManager.PlayTargetAnimation("Bow_TH_Fire_01", true);
         character.animator.SetBool("isHoldingArrow", false);
 
         // Fire the Arrow as a player character

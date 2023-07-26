@@ -23,13 +23,13 @@ public class ProjectileSpell : SpellItem
         {
             GameObject instantiatedWarmUpSellFX = Instantiate(spellWarmUpFX, character.characterWeaponSlotManager.leftHandSlot.transform);
             instantiatedWarmUpSellFX.gameObject.transform.localScale = new Vector3(100, 100, 100);
-            character.characterAnimatorManager.PlayerTargetAnimation(spellAnimation, true, false, character.isUsingLeftHand);
+            character.characterAnimatorManager.PlayTargetAnimation(spellAnimation, true, false, character.isUsingLeftHand);
         }
         else
         {
             GameObject instantiatedWarmUpSellFX = Instantiate(spellWarmUpFX, character.characterWeaponSlotManager.rightHandSlot.transform);
             instantiatedWarmUpSellFX.gameObject.transform.localScale = new Vector3(100, 100, 100);
-            character.characterAnimatorManager.PlayerTargetAnimation(spellAnimation, true, false, character.isUsingLeftHand);
+            character.characterAnimatorManager.PlayTargetAnimation(spellAnimation, true, false, character.isUsingLeftHand);
         }
 
     }

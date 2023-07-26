@@ -16,7 +16,7 @@ public class ClumpConsumableItem : ConsumableItem
         base.AttemptToConsumeItem(playerAnimatorManager, playerWeaponSlotManager, playerEffectsManager);
         GameObject clump = Instantiate(itemModel, playerWeaponSlotManager.rightHandSlot.transform);
         playerEffectsManager.currentParticleFX = clumpConsumeFX;
-        playerEffectsManager.instantiatedFXModel = clump;
+        playerEffectsManager.instantiatedFXModel2 = clump;
 
         if(curePoison)
         {

@@ -7,7 +7,7 @@ public class CharacterEffectsManager : MonoBehaviour
     CharacterManager character;
 
     [Header("Current Range FX")]
-    public GameObject currentRangeFX;
+    public GameObject instantiatedFXModel;
 
     [Header("Damage FX")]
     public GameObject bloodSplatterFX;
@@ -112,6 +112,34 @@ public class CharacterEffectsManager : MonoBehaviour
                 poisonAmount = defaultPoisonAmount;
                 Destroy(currentPoisonParticleFX);
             }
+        }
+    }
+
+    public virtual void InterruptEffect()
+    {
+        // 파괴 가능한 effect model(drking estus, having arrow drawn ) 등
+        if(instantiatedFXModel != null)
+        {
+            Destroy(instantiatedFXModel);
+        } 
+        
+        // 화살을 날리고 현재 무기에 있는 loaded arrow를 삭제했다면
+        if(character.isHoldingArrow)
+        {
+            character.animator.SetBool("isHoldingArrow", false);
+            Animator rangedWeaponAnimator = character.characterWeaponSlotManager.rightHandSlot.currentWeaponModel.GetComponentInChildren<Animator>();
+
+            if(rangedWeaponAnimator != null)
+            {
+                rangedWeaponAnimator.SetBool("isDrawn", false);
+                rangedWeaponAnimator.Play("Bow_TH_Fire_01");
+            }
+        }
+
+        // 현재 땡기는 애니메이션 멈추기
+        if(character.isAiming)
+        {
+            character.animator.SetBool("isAiming", false);
         }
     }
 }

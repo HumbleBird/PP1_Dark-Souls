@@ -43,7 +43,7 @@ public class BonfireInteractable : Interactable
         }
         else
         {
-            playermanager.playerAnimatorManager.PlayerTargetAnimation("Bonfire_Activate", true);
+            playermanager.playerAnimatorManager.PlayTargetAnimation("Bonfire_Activate", true);
             playermanager.uiManager.ActivateBonfirePopup();
             hasBeenActivated = true;
             interactableText = "Rest";

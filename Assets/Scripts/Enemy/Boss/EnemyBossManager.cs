@@ -44,7 +44,7 @@ public class EnemyBossManager : MonoBehaviour
     {
         enemy.animator.SetBool("isInvulnerable", true);
         enemy.animator.SetBool("isPhaseShifting", true);
-        enemy.enemyAnimationManager.PlayerTargetAnimation("Phase Shift", true);
+        enemy.enemyAnimationManager.PlayTargetAnimation("Phase Shift", true);
         bossCombatStanceState.hasPhaseShifted = true;
     }
 }

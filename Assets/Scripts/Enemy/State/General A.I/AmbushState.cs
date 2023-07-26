@@ -17,7 +17,7 @@ public class AmbushState : State
     {
         if(isSleeping && enemy.isInteracting == false)
         {
-            enemy.enemyAnimationManager.PlayerTargetAnimation(sleepAnimation, true);
+            enemy.enemyAnimationManager.PlayTargetAnimation(sleepAnimation, true);
         }
 
         #region Handle Target Detection
@@ -38,7 +38,7 @@ public class AmbushState : State
                 {
                     enemy.currentTarget = character;
                     isSleeping = false;
-                    enemy.enemyAnimationManager.PlayerTargetAnimation(wakeAnimation, true);
+                    enemy.enemyAnimationManager.PlayTargetAnimation(wakeAnimation, true);
                 }
             }
         }

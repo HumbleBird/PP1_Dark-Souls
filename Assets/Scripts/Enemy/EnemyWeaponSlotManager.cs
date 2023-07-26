@@ -17,22 +17,4 @@ public class EnemyWeaponSlotManager : CharacterWeaponSlotManager
     {
         character.characterStatsManager.totalPoiseDefence = character.characterStatsManager.armorPoiseBonus;
     }
-
-    //TEMP
-
-    //public override void OpenDamageCollider()
-    //{
-    //    //character.characterSoundFXManager.PlayRandomWeaponWhoosh();
-
-    //    character.isUsingRightHand = true;
-
-    //    if (character.isUsingRightHand)
-    //    {
-    //        rightHandDamageCollider.EnableDamageCollider();
-    //    }
-    //    else if (character.isUsingLeftHand)
-    //    {
-    //        leftHandDamageCollider.EnableDamageCollider();
-    //    }
-    //}
 }

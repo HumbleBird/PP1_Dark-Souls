@@ -64,13 +64,13 @@ public class PlayerStatsManager : CharacterStatsManager
         base.TakeDamage(damage, fireDamage, damageAnimation, enemyCharacterDamageingMe);
 
         healthBar.SetCurrentHealth(currentHealth);
-        player.playerAnimatorManager.PlayerTargetAnimation(damageAnimation, true);
+        player.playerAnimatorManager.PlayTargetAnimation(damageAnimation, true);
 
         if(currentHealth <= 0 )
         {
             currentHealth = 0;
             player.isDead = true;
-            player.playerAnimatorManager.PlayerTargetAnimation("Dead_01", true);
+            player.playerAnimatorManager.PlayTargetAnimation("Dead_01", true);
         }
     }
 
@@ -96,7 +96,7 @@ public class PlayerStatsManager : CharacterStatsManager
         {
             currentHealth = 0;
             player.isDead = true;
-            player.playerAnimatorManager.PlayerTargetAnimation("Dead_01", true);
+            player.playerAnimatorManager.PlayTargetAnimation("Dead_01", true);
         }
     }
 

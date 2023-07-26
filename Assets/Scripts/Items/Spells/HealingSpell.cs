@@ -12,7 +12,7 @@ public class HealingSpell : SpellItem
         base.AttemptToCastSpell(character);
 
         GameObject instantiateWarmUpSpellFX = Instantiate(spellWarmUpFX, character.characterAnimatorManager.transform);
-        character.characterAnimatorManager.PlayerTargetAnimation(spellAnimation, true, false, character.isUsingLeftHand);
+        character.characterAnimatorManager.PlayTargetAnimation(spellAnimation, true, false, character.isUsingLeftHand);
         Debug.Log("Attempting to cast Spell...");
 
 

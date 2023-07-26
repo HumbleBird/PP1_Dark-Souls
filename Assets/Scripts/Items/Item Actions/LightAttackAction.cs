@@ -48,19 +48,19 @@ public class LightAttackAction : ItemAction
     {
         if (character.isUsingLeftHand)
         {
-            character.characterAnimatorManager.PlayerTargetAnimation(character.characterCombatManager.oh_light_attack_01, true, false, true);
+            character.characterAnimatorManager.PlayTargetAnimation(character.characterCombatManager.oh_light_attack_01, true, false, true);
             character.characterCombatManager.lastAttack = character.characterCombatManager.oh_light_attack_01;
         }
         else if (character.isUsingRightHand)
         {
             if (character.isTwoHandingWeapon)
             {
-                character.characterAnimatorManager.PlayerTargetAnimation(character.characterCombatManager.th_light_attack_01, true);
+                character.characterAnimatorManager.PlayTargetAnimation(character.characterCombatManager.th_light_attack_01, true);
                 character.characterCombatManager.lastAttack = character.characterCombatManager.th_light_attack_01;
             }
             else
             {
-                character.characterAnimatorManager.PlayerTargetAnimation(character.characterCombatManager.oh_light_attack_01, true);
+                character.characterAnimatorManager.PlayTargetAnimation(character.characterCombatManager.oh_light_attack_01, true);
                 character.characterCombatManager.lastAttack = character.characterCombatManager.oh_light_attack_01;
             }
         }
@@ -70,19 +70,19 @@ public class LightAttackAction : ItemAction
     {
         if (character.isUsingLeftHand)
         {
-            character.characterAnimatorManager.PlayerTargetAnimation(character.characterCombatManager.oh_running_attack_01, true, false, true);
+            character.characterAnimatorManager.PlayTargetAnimation(character.characterCombatManager.oh_running_attack_01, true, false, true);
             character.characterCombatManager.lastAttack = character.characterCombatManager.oh_running_attack_01;
         }
         else if (character.isUsingRightHand)
         {
             if (character.isTwoHandingWeapon)
             {
-                character.characterAnimatorManager.PlayerTargetAnimation(character.characterCombatManager.th_running_attack_01, true);
+                character.characterAnimatorManager.PlayTargetAnimation(character.characterCombatManager.th_running_attack_01, true);
                 character.characterCombatManager.lastAttack = character.characterCombatManager.th_running_attack_01;
             }
             else
             {
-                character.characterAnimatorManager.PlayerTargetAnimation(character.characterCombatManager.oh_running_attack_01, true);
+                character.characterAnimatorManager.PlayTargetAnimation(character.characterCombatManager.oh_running_attack_01, true);
                 character.characterCombatManager.lastAttack = character.characterCombatManager.oh_running_attack_01;
             }
         }
@@ -100,12 +100,12 @@ public class LightAttackAction : ItemAction
             {
                 if (character.characterCombatManager.lastAttack == character.characterCombatManager.oh_light_attack_01)
                 {
-                    character.characterAnimatorManager.PlayerTargetAnimation(character.characterCombatManager.oh_light_attack_02, true, false, true);
+                    character.characterAnimatorManager.PlayTargetAnimation(character.characterCombatManager.oh_light_attack_02, true, false, true);
                     character.characterCombatManager.lastAttack = character.characterCombatManager.oh_light_attack_02;
                 }
                 else
                 {
-                    character.characterAnimatorManager.PlayerTargetAnimation(character.characterCombatManager.oh_light_attack_01, true, false, true);
+                    character.characterAnimatorManager.PlayTargetAnimation(character.characterCombatManager.oh_light_attack_01, true, false, true);
                     character.characterCombatManager.lastAttack = character.characterCombatManager.oh_light_attack_01;
                 }
             }
@@ -116,12 +116,12 @@ public class LightAttackAction : ItemAction
                 {
                     if (character.characterCombatManager.lastAttack == character.characterCombatManager.th_light_attack_01)
                     {
-                        character.characterAnimatorManager.PlayerTargetAnimation(character.characterCombatManager.th_light_attack_02, true);
+                        character.characterAnimatorManager.PlayTargetAnimation(character.characterCombatManager.th_light_attack_02, true);
                         character.characterCombatManager.lastAttack = character.characterCombatManager.th_light_attack_02;
                     }
                     else
                     {
-                        character.characterAnimatorManager.PlayerTargetAnimation(character.characterCombatManager.th_light_attack_01, true);
+                        character.characterAnimatorManager.PlayTargetAnimation(character.characterCombatManager.th_light_attack_01, true);
                         character.characterCombatManager.lastAttack = character.characterCombatManager.th_light_attack_01;
                     }
                 }
@@ -129,12 +129,12 @@ public class LightAttackAction : ItemAction
                 {
                     if (character.characterCombatManager.lastAttack == character.characterCombatManager.oh_light_attack_01)
                     {
-                        character.characterAnimatorManager.PlayerTargetAnimation(character.characterCombatManager.oh_light_attack_02, true);
+                        character.characterAnimatorManager.PlayTargetAnimation(character.characterCombatManager.oh_light_attack_02, true);
                         character.characterCombatManager.lastAttack = character.characterCombatManager.oh_light_attack_02;
                     }
                     else
                     {
-                        character.characterAnimatorManager.PlayerTargetAnimation(character.characterCombatManager.oh_light_attack_01, true);
+                        character.characterAnimatorManager.PlayTargetAnimation(character.characterCombatManager.oh_light_attack_01, true);
                         character.characterCombatManager.lastAttack = character.characterCombatManager.oh_light_attack_01;
                     }
                 }

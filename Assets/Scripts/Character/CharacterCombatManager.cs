@@ -7,8 +7,11 @@ public class CharacterCombatManager : MonoBehaviour
 {
     CharacterManager character;
 
-    LayerMask backStabLayer = 1 << 12;
-    LayerMask riposteLayer = 1 << 13;
+    [Header("Combat Trasnforms")]
+    public Transform backstabReceiverTransform;
+
+    public LayerMask characterLayer;
+    public float criticalAttackRange = 0.7f;
 
     [Header("Attack Type")]
     public AttackType currentAttackType;
@@ -35,7 +38,7 @@ public class CharacterCombatManager : MonoBehaviour
     public string th_charge_attack_02 = "TH_Charging_Attack_Charge_02";
 
     public string weapon_art = "Weapon Art";
-
+    public int pendingCriticalDamage;
     public string lastAttack;
 
 
@@ -78,11 +81,11 @@ public class CharacterCombatManager : MonoBehaviour
         if(character.characterStatsManager.currentStamina <= 0 )
         {
             character.isBlocking = false;
-            character.characterAnimatorManager.PlayerTargetAnimation("Guard_Break_01", true);
+            character.characterAnimatorManager.PlayTargetAnimation("Guard_Break_01", true);
         }
         else
         {
-            character.characterAnimatorManager.PlayerTargetAnimation(blockAnimation, true);
+            character.characterAnimatorManager.PlayTargetAnimation(blockAnimation, true);
         }
     }
 
@@ -94,66 +97,99 @@ public class CharacterCombatManager : MonoBehaviour
 
     public void AttemptBackStabOrRiposte()
     {
+        if (character.isInteracting)
+            return;
 
         if (character.characterStatsManager.currentStamina <= 0)
             return;
 
         RaycastHit hit;
 
-        // Back Stab
-        if (Physics.Raycast(character.criticalAttackRayCastStartPoint.position,
-            transform.TransformDirection(Vector3.forward), out hit, 0.5f, backStabLayer))
+        if(Physics.Raycast(character.criticalAttackRayCastStartPoint.transform.position, character.transform.TransformDirection(Vector3.forward),
+            out hit, criticalAttackRange, characterLayer))
         {
-            CharacterManager enemyCharacterManager = hit.transform.gameObject.GetComponentInParent<CharacterManager>();
-            DamageCollider rightWeapon = character.characterWeaponSlotManager.rightHandDamageCollider;
+            CharacterManager enemyCharacter = hit.transform.GetComponent<CharacterManager>();
+            Vector3 directionFromChracterToEnemy = transform.position - enemyCharacter.transform.position;
+            float dotValue = Vector3.Dot(directionFromChracterToEnemy, enemyCharacter.transform.forward);
 
-            if (enemyCharacterManager != null)
+            Debug.Log("Current Dot value is " + dotValue);
+
+            if(enemyCharacter.canBeRiposted)
             {
-                // 팀 ID 체크 (적 한테만 할 수 있게)
-                character.transform.position = enemyCharacterManager.backStabCollider.criticalDamagerStandPosition.position;
+                // Attempt Ripsote
+                if(dotValue <= 1.2f && dotValue >= 0.6f)
+                {
 
-                Vector3 rotationDirection = character.transform.root.eulerAngles;
-                rotationDirection = hit.transform.position - character.transform.position;
-                rotationDirection.y = 0;
-                rotationDirection.Normalize();
-                Quaternion tr = Quaternion.LookRotation(rotationDirection);
-                Quaternion targetRotation = Quaternion.Slerp(character.transform.rotation, tr, 500 * Time.deltaTime);
-                character.transform.rotation = targetRotation;
+                }
+            }    
 
-                int criticalDamage = character.characterInventoryManager.rightWeapon.criticalDamagemuiltiplier * rightWeapon.physicalDamage;
-                enemyCharacterManager.pendingCriticalDamage = criticalDamage;
-
-                character.characterAnimatorManager.PlayerTargetAnimation("Back Stab", true);
-                enemyCharacterManager.GetComponentInChildren<CharacterAnimatorManager>().PlayerTargetAnimation("Back Stabbed", true);
-            }
-        }
-
-        // Riposte
-        else if (Physics.Raycast(character.criticalAttackRayCastStartPoint.position,
-            transform.TransformDirection(Vector3.forward), out hit, 0.7f, riposteLayer))
-        {
-            // 팀 ID 체크 (적 한테만 할 수 있게)
-            CharacterManager enemyCharacterManager = hit.transform.gameObject.GetComponentInParent<CharacterManager>();
-            DamageCollider rightWeapon = character.characterWeaponSlotManager.rightHandDamageCollider;
-
-            if (enemyCharacterManager != null && enemyCharacterManager.canBeRiposted)
+            // Attempt backstab
+            if(dotValue >= -0.7 && dotValue <= -0.6f)
             {
-                character.transform.position = enemyCharacterManager.riposteCollider.criticalDamagerStandPosition.position;
-
-                Vector3 rotationDirection = character.transform.root.eulerAngles;
-                rotationDirection = hit.transform.position - character.transform.position;
-                rotationDirection.y = 0;
-                rotationDirection.Normalize();
-                Quaternion tr = Quaternion.LookRotation(rotationDirection);
-                Quaternion targetRotation = Quaternion.Slerp(character.transform.rotation, tr, 500 * Time.deltaTime);
-                character.transform.rotation = targetRotation;
-
-                int criticalDamage = character.characterInventoryManager.rightWeapon.criticalDamagemuiltiplier * rightWeapon.physicalDamage;
-                enemyCharacterManager.pendingCriticalDamage = criticalDamage;
-
-                character.characterAnimatorManager.PlayerTargetAnimation("Riposte", true);
-                enemyCharacterManager.GetComponentInChildren<CharacterAnimatorManager>().PlayerTargetAnimation("Riposted", true);
+                AttemptBackStab(hit);
             }
         }
     }
+
+    IEnumerator ForceMoveCharacterToEnemyBackStabPosition (CharacterManager characterPerformingBackStab)
+    {
+        for (float timer = 0.05f; timer < 0.5f; timer = timer + 0.05f)
+        {
+            Quaternion backstabRotation = Quaternion.LookRotation(characterPerformingBackStab.transform.forward); 
+            transform.rotation = Quaternion.Slerp(transform.rotation, backstabRotation, 1);
+            transform.parent = characterPerformingBackStab.characterCombatManager.backstabReceiverTransform;
+            transform.localPosition = characterPerformingBackStab.characterCombatManager.backstabReceiverTransform.localPosition;
+            transform.parent = null;
+            Debug.Log("Running corountine");
+            yield return new WaitForSeconds(0.05f);
+        }
+
+    }
+
+    public void GetBackStabbed (CharacterManager characterPerformingBackStab)
+    {
+        //PLAY SOUND FX
+        character.isBeingBackstabbed = true;
+
+        StartCoroutine(ForceMoveCharacterToEnemyBackStabPosition(characterPerformingBackStab));
+
+        //FORCE LOCK POSITION
+        character.characterAnimatorManager.PlayTargetAnimation("Back_Stabbed_01", true);
+    }
+
+    private void AttemptBackStab(RaycastHit hit)
+    {
+        CharacterManager enemycharacter = hit.transform.GetComponent<CharacterManager>();
+
+        if(enemycharacter != null)
+        {
+            if(!enemycharacter.isBeingBackstabbed || !enemycharacter.isBeingRiposted)
+            {
+                //We make it so the enemy cannot be damaged whilst being critically damaged EnableIsInvulnerable();
+                character.isPerformingBackstab = true;
+                character.characterAnimatorManager.EraseHandIKForWeapon();
+                
+                character.characterAnimatorManager.PlayTargetAnimation("Back_Stab_01", true);
+
+                float criticalDamage = (character.characterInventoryManager.rightWeapon.criticalDamagemuiltiplier *
+                    (character.characterInventoryManager.rightWeapon.physicalDamage +
+                    character.characterInventoryManager.rightWeapon.fireDamage));
+
+                int roundedCriticalDamage = Mathf.RoundToInt(criticalDamage);
+                enemycharacter.characterCombatManager.pendingCriticalDamage = roundedCriticalDamage;
+                enemycharacter.characterCombatManager.GetBackStabbed(character);
+            }
+        }
+    }
+
+    private void EnableIsInvulnerable()
+    {
+        character.animator.SetBool("isInvulnerable", true);
+    }
+
+    private void ApplyPendingDamage()
+    {
+        character.characterStatsManager.TakeDamageNoAnimation(pendingCriticalDamage, 0);
+    }
+
 }

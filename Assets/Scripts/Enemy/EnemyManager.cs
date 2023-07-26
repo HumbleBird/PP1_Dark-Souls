@@ -70,23 +70,17 @@ public class EnemyManager : CharacterManager
         enemyRigidbody.isKinematic = false;
     }
 
-    private void Update()
+    protected override void Update()
     {
         HandleRecoveryTimer();
         HandleStateMachine();
 
+        base.Update();
+
         isRotatingWithRootMotion = animator.GetBool("isRotatingWithRootMotion");
-        isInteracting = animator.GetBool("isInteracting");
-        canDoCombo = animator.GetBool("canDoCombo");
-        canRotate = animator.GetBool("canRotate");
-        isInvulnerable = animator.GetBool("isInvulnerable");
-        isHoldingArrow = animator.GetBool("isHoldingArrow");
+
         isPhaseShifting = animator.GetBool("isPhaseShifting");
 
-
-        animator.SetBool("isDead", isDead);
-        animator.SetBool("isBlocking", isBlocking);
-        animator.SetBool("isTwoHandingWeapon", isTwoHandingWeapon);
 
         if (currentTarget != null)
         {

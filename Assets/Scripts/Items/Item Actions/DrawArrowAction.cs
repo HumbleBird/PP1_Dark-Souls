@@ -17,11 +17,11 @@ public class DrawArrowAction : ItemAction
 
         //Animator Player
         character.animator.SetBool("isHoldingArrow", true);
-        character.characterAnimatorManager.PlayerTargetAnimation("Bow_TH_Draw_01", true);
+        character.characterAnimatorManager.PlayTargetAnimation("Bow_TH_Draw_01", true);
 
         // Instantiate Arrow
         GameObject loadedArrow = Instantiate(character.characterInventoryManager.currentAmmo.loadedItemModel, character.characterWeaponSlotManager.rightHandSlot.transform);
-        character.characterEffectsManager.currentRangeFX = loadedArrow;
+        character.characterEffectsManager.instantiatedFXModel = loadedArrow;
 
         //Animate the bow
         Animator bowAnimator = character.characterWeaponSlotManager.rightHandSlot.GetComponentInChildren<Animator>();

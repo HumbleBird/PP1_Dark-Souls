@@ -19,7 +19,7 @@ public class PyromancySpellAction : ItemAction
                 character.characterInventoryManager.currentSpell.AttemptToCastSpell(character);
             }
             else
-                character.characterAnimatorManager.PlayerTargetAnimation("Shrug", true);
+                character.characterAnimatorManager.PlayTargetAnimation("Shrug", true);
         }
     }
 }

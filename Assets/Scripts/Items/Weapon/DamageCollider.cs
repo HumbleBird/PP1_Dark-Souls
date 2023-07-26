@@ -89,6 +89,7 @@ public class DamageCollider : MonoBehaviour
                 float directionHitFrom = Vector3.SignedAngle(characterManager.transform.forward, enemyManager.transform.forward, Vector3.up);
                 ChooseWhichDirectionDamageCameFrom(directionHitFrom);
                 enemyEffects.PlayBloodSplatterFX(contactPoint);
+                enemyEffects.InterruptEffect();
 
                 DealDamage(enemyStats);
             }
@@ -111,7 +112,7 @@ public class DamageCollider : MonoBehaviour
     {
         if (enemyManager.isParrying)
         {
-            characterManager.GetComponentInChildren<CharacterAnimatorManager>().PlayerTargetAnimation("Parried", true);
+            characterManager.GetComponentInChildren<CharacterAnimatorManager>().PlayTargetAnimation("Parried", true);
             hasBeenParried = true;
         }
     }

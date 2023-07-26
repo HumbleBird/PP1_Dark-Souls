@@ -37,7 +37,6 @@ public class PlayerManager : CharacterManager
         uiManager = FindObjectOfType<GameUIManager>();
         interactableUI = FindObjectOfType<InteractableUI>();
 
-        backStabCollider = GetComponentInChildren<CriticalDamageCollider>();
 
         animator = GetComponentInChildren<Animator>();
         inputHandler = GetComponent<InputHandler>();
@@ -55,22 +54,14 @@ public class PlayerManager : CharacterManager
     }
 
     // Update is called once per frame
-    void Update()
+    protected override void Update()
     {
-        float delta = Time.deltaTime;
+        base.Update();
 
-        isInteracting = animator.GetBool("isInteracting");
-        canDoCombo = animator.GetBool("canDoCombo");
-        canRotate = animator.GetBool("canRotate");
-        isInvulnerable = animator.GetBool("isInvulnerable");
         isFiringSpell = animator.GetBool("isFiringSpell");
-        isHoldingArrow = animator.GetBool("isHoldingArrow");
         isPerformingFullyChargedAttack = animator.GetBool("isPerformingFullyChargedAttack");
 
-        animator.SetBool("isTwoHandingWeapon", isTwoHandingWeapon);
-        animator.SetBool("isBlocking", isBlocking);
         animator.SetBool("isInAir", isInAir);
-        animator.SetBool("isDead", isDead);
 
         inputHandler.TickInput();
         playerLocomotionManager.HandleRollingAndSprinting();
@@ -154,7 +145,7 @@ public class PlayerManager : CharacterManager
     {
         playerLocomotionManager.rigidbody.velocity = Vector3.zero;
         transform.position = playerStandingHereWhenOpingChest.transform.position;
-        playerAnimatorManager.PlayerTargetAnimation("Open Chest", true);
+        playerAnimatorManager.PlayTargetAnimation("Open Chest", true);
     }
 
     public void PassThroughFogWallInteraction(Transform fogWallEnterance)
@@ -165,7 +156,7 @@ public class PlayerManager : CharacterManager
         //Quaternion turnRoation = Quaternion.LookRotation(rotationDirection);
         //transform.rotation = turnRoation;
 
-        playerAnimatorManager.PlayerTargetAnimation("Pass Through Fog", true);
+        playerAnimatorManager.PlayTargetAnimation("Pass Through Fog", true);
     }
 
     #endregion

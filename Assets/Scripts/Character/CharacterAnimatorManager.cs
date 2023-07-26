@@ -19,7 +19,7 @@ public class CharacterAnimatorManager : MonoBehaviour
         rigBuilder = GetComponentInChildren<RigBuilder>();
     }
 
-    public void PlayerTargetAnimation(string targetAnim, bool isInteracting, bool canRoate = false, bool mirrorAnim = false)
+    public void PlayTargetAnimation(string targetAnim, bool isInteracting, bool canRoate = false, bool mirrorAnim = false)
     {
         character.animator.applyRootMotion = isInteracting;
         character.animator.SetBool("canRotate", canRoate);

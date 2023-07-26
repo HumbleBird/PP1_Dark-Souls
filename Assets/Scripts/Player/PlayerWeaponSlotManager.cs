@@ -29,7 +29,7 @@ public class PlayerWeaponSlotManager : CharacterWeaponSlotManager
                 {
                     backSlot.LoadWeaponModel(leftHandSlot.currentWeapon);
                     leftHandSlot.UnloadWeaponAndDestroy();
-                    player.playerAnimatorManager.PlayerTargetAnimation("Left Arm Empty", false, true);
+                    player.playerAnimatorManager.PlayTargetAnimation("Left Arm Empty", false, true);
                 }
                 else
                 {
@@ -75,7 +75,7 @@ public class PlayerWeaponSlotManager : CharacterWeaponSlotManager
 
     public void SucessfullyThrowFireBomb()
     {
-        Destroy(player.playerEffectsManager.instantiatedFXModel);
+        Destroy(player.playerEffectsManager.instantiatedFXModel2);
         BombConsumeableItem fireBombItem = player.playerInventoryManager.currentConsumable as BombConsumeableItem;
 
         GameObject activeModelBomb = Instantiate(fireBombItem.liveBombModel, rightHandSlot.transform.position, player.cameraHandler.cameraPivotTranform.rotation);
