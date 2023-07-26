@@ -17,22 +17,35 @@ MonoBehaviour:
   modelPrefab: {fileID: 7694254933542424885, guid: e7468f845fa35214b808b838155390e0, type: 3}
   isUnarmed: 0
   weaponController: {fileID: 22100000, guid: 22d5de4468c37da489e7bcf2fba8efb0, type: 2}
-  offHandIdleAnimation: Left_Arm_Idle_01
   weaponType: 6
   physicalDamage: 25
   fireDamage: 0
+  lightAttackDamageModifier: 0
+  heavyAttackDaamgeModifier: 0
   criticalDamagemuiltiplier: 4
+  guardBreakModifier: 1
   poiseBreak: 25
   offensivePoiseBonus: 0
-  physicalDamageAbsorption: 0
-  baseStamina: 20
-  lightAttackMultiplier: 1
-  heavyAttackMultiplier: 2
-  tap_RB_Action: {fileID: 11400000, guid: 787f7096a0a7d174a8ba2bffb0122f9e, type: 2}
-  hold_RB_Action: {fileID: 11400000, guid: 639765a0d658eae46971baea9dcbb3dc, type: 2}
-  tap_RT_Action: {fileID: 0}
-  hold_RT_Action: {fileID: 0}
-  tap_LB_Action: {fileID: 0}
-  hold_LB_Action: {fileID: 11400000, guid: 0f25974ff900cc64096def5c7366e927, type: 2}
-  tap_LT_Action: {fileID: 0}
-  hold_LT_Action: {fileID: 0}
+  physicalBlockingDamageAbsorption: 0
+  fireBlockingDamageAbsorption: 0
+  stability: 67
+  baseStaminaCost: 0
+  lightAttackStaminaMultiplier: 0
+  heavyAttackStaminaMultiplier: 0
+  oh_tap_RB_Action: {fileID: 0}
+  oh_hold_RB_Action: {fileID: 0}
+  oh_tap_RT_Action: {fileID: 0}
+  oh_hold_RT_Action: {fileID: 0}
+  oh_tap_LB_Action: {fileID: 0}
+  oh_hold_LB_Action: {fileID: 0}
+  oh_tap_LT_Action: {fileID: 0}
+  oh_hold_LT_Action: {fileID: 0}
+  th_tap_RB_Action: {fileID: 11400000, guid: 787f7096a0a7d174a8ba2bffb0122f9e, type: 2}
+  th_hold_RB_Action: {fileID: 11400000, guid: 639765a0d658eae46971baea9dcbb3dc, type: 2}
+  th_tap_RT_Action: {fileID: 0}
+  th_hold_RT_Action: {fileID: 0}
+  th_tap_LB_Action: {fileID: 0}
+  th_hold_LB_Action: {fileID: 11400000, guid: 0f25974ff900cc64096def5c7366e927, type: 2}
+  th_tap_LT_Action: {fileID: 0}
+  th_hold_LT_Action: {fileID: 0}
+  weaponWhooshes: []

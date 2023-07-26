@@ -20,8 +20,16 @@ public class CombatStanceStateHumanoid : State
 
     bool hasPerformedDodge = false;
     bool hasRandomDodgeDirection = false;
+    bool hasAmmoLoaded = false;
 
     Quaternion targetDodgeDirection;
+
+
+    private void Awake()
+    {
+        pursueTargetState = GetComponent<PursueTargetStateHumanoid>();
+        attackState = GetComponent<AttackStateHumanoid>();
+    }
 
     public override State Tick(EnemyManager enemy)
     {
@@ -32,7 +40,6 @@ public class CombatStanceStateHumanoid : State
         else if (enemy.combatStyle == AICombatStyle.Archer)
         {
             return ProcessArcherCombatSyle(enemy);
-
         }
         else
         {
@@ -113,6 +120,56 @@ public class CombatStanceStateHumanoid : State
 
     private State ProcessArcherCombatSyle(EnemyManager enemy)
     {
+        enemy.animator.SetFloat("Vertical", verticalMovementValue, 0.2f, Time.deltaTime);
+        enemy.animator.SetFloat("Horizontal", horizontalMovementValue, 0.2f, Time.deltaTime);
+
+        // AI가 추락중이거나 어떤 action을 취하는 중이라면 모든 움직임을 멈춤
+        if (enemy.isInteracting || !enemy.isGrounded)
+        {
+            enemy.animator.SetFloat("Vertical", 0);
+            enemy.animator.SetFloat("Horizontal", 0);
+            return this;
+        }
+
+        // A.I로부터 목표물이 너무 멀리 떨어져 있다면 다시 pursue 모드로
+        if (enemy.distancefromTarget > enemy.MaximumAggroRadius)
+        {
+            ResetStateFlags();
+            return pursueTargetState;
+        }
+
+        // 플레이어를 기준으로 원으로 돌면서 랜덤 공격 방식 획득
+        if (!randomDestinationSet)
+        {
+            randomDestinationSet = true;
+            DecideCirclingAction(enemy.enemyAnimationManager);
+        }
+
+        if (enemy.allowAIToPerformDodge)
+        {
+            RollForDodgeChance(enemy);
+        }
+
+        if (willPerformDodge && enemy.isAttacking)
+        {
+            Dodge(enemy);
+        }
+
+        HandleRotateTowardTarget(enemy);
+
+        if(!hasAmmoLoaded)
+        {
+            DrawArrow(enemy);
+            AimAtTargetBeforeFiring(enemy);
+        }
+
+        if (enemy.currentRecoveryTime <= 0 && hasAmmoLoaded)
+        {
+            ResetStateFlags();
+            return attackState;
+        }
+
+
         return this;
 
     }
@@ -262,6 +319,7 @@ public class CombatStanceStateHumanoid : State
     {
         hasRandomDodgeDirection = false;
         hasPerformedDodge = false;
+        hasAmmoLoaded = false;
 
         randomDestinationSet = false;
         
@@ -313,5 +371,26 @@ public class CombatStanceStateHumanoid : State
                 }
             }
         }
+    }
+
+    private void DrawArrow(EnemyManager enemy)
+    {
+        if(!enemy.isTwoHandingWeapon)
+        {
+            enemy.isTwoHandingWeapon = true;
+            enemy.characterWeaponSlotManager.LoadBothWeaponsOnSlots();
+        }
+        else
+        {
+            hasAmmoLoaded = true;
+            enemy.characterInventoryManager.currentItemBeingUsed = enemy.characterInventoryManager.rightWeapon;
+            enemy.characterInventoryManager.rightWeapon.th_hold_RB_Action.PerformAction(enemy);
+        }
+    }
+
+    private void AimAtTargetBeforeFiring(EnemyManager enemy)
+    {
+        float timeUntileAmmoIsShortAtTarget = Random.Range(enemy.minimumTimeToAimAtTarget, enemy.maximumTimeToAimAtTarget);
+        enemy.currentRecoveryTime = timeUntileAmmoIsShortAtTarget;
     }
 }

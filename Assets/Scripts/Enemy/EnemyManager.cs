@@ -42,6 +42,10 @@ public class EnemyManager : CharacterManager
     public float comboLikelyHood;
     public AICombatStyle combatStyle;
 
+    [Header("A.I Archery Setting")]
+    public float minimumTimeToAimAtTarget = 3;
+    public float maximumTimeToAimAtTarget = 6;
+
     [Header("A.I Target Information")]
     public float distancefromTarget;
     public Vector3 targetDirection;
@@ -76,11 +80,15 @@ public class EnemyManager : CharacterManager
         canDoCombo = animator.GetBool("canDoCombo");
         canRotate = animator.GetBool("canRotate");
         isInvulnerable = animator.GetBool("isInvulnerable");
+        isHoldingArrow = animator.GetBool("isHoldingArrow");
         isPhaseShifting = animator.GetBool("isPhaseShifting");
+
+
         animator.SetBool("isDead", isDead);
         animator.SetBool("isBlocking", isBlocking);
+        animator.SetBool("isTwoHandingWeapon", isTwoHandingWeapon);
 
-        if(currentTarget != null)
+        if (currentTarget != null)
         {
             distancefromTarget = Vector3.Distance(currentTarget.transform.position, transform.position);
             targetDirection = currentTarget.transform.position - transform.position;

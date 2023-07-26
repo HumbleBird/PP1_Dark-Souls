@@ -6,6 +6,12 @@ public class PursueTargetStateHumanoid : State
 {
     public CombatStanceStateHumanoid combatStanceState;
 
+
+    private void Awake()
+    {
+        combatStanceState = GetComponent<CombatStanceStateHumanoid>();
+    }
+
     public override State Tick(EnemyManager enemy)
     {
 

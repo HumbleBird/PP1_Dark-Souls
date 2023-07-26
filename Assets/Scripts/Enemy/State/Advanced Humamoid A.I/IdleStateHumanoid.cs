@@ -6,6 +6,11 @@ public class IdleStateHumanoid : State
 {
     public PursueTargetStateHumanoid pursueTargetState;
 
+    private void Awake()
+    {
+        pursueTargetState = GetComponent<PursueTargetStateHumanoid>();
+    }
+
     public LayerMask detectionLayer;
     public LayerMask layerThatBlockLineOfSight;
 

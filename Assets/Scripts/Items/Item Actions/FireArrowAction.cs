@@ -75,7 +75,35 @@ public class FireArrowAction : ItemAction
 
         else
         {
+            EnemyManager enemy = character as EnemyManager;
 
+            // live arrow 생성
+            GameObject liveArrow = Instantiate
+                (character.characterInventoryManager.currentAmmo.liveAmmoModel, 
+                arrowInstantiationLocation.transform.position, 
+                Quaternion.identity);
+            Rigidbody rigidBody = liveArrow.GetComponentInChildren<Rigidbody>();
+            RangedProjectileDamageCollider damageCollider = liveArrow.GetComponentInChildren<RangedProjectileDamageCollider>();
+
+            // live arrow 속도
+            if (enemy.currentTarget != null)
+            {
+                Quaternion arrowRotation = Quaternion.LookRotation
+                    (enemy.currentTarget.lockOnTransform.position - liveArrow.gameObject.transform.position);
+                liveArrow.transform.rotation = arrowRotation;
+            }
+
+            rigidBody.AddForce(liveArrow.transform.forward * enemy.characterInventoryManager.currentAmmo.forwardVelocity);
+            rigidBody.AddForce(liveArrow.transform.up * enemy.characterInventoryManager.currentAmmo.upwardVelocity);
+            rigidBody.useGravity = enemy.characterInventoryManager.currentAmmo.useGravity;
+            rigidBody.mass = enemy.characterInventoryManager.currentAmmo.ammoMass;
+            liveArrow.transform.parent = null;
+
+            // damage collider set
+            damageCollider.characterManager = enemy;
+            damageCollider.ammoItem = enemy.characterInventoryManager.currentAmmo;
+            damageCollider.physicalDamage = enemy.characterInventoryManager.currentAmmo.physicalDamage;
+            damageCollider.teamIDNumber = enemy.characterStatsManager.teamIDNumber;
         }
 
         

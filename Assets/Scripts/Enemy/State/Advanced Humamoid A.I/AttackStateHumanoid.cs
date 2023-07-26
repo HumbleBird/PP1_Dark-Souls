@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using static Define;
 
 // 스코어 점수에 따른 공격들 중 하나 선택
 // 선택한 공격이 각도, 거리 상의 문제가 있다면 새롭게 다시 선택
@@ -13,23 +14,47 @@ public class AttackStateHumanoid : State
     public RotateTowardsTargetStateHumanoid rotateTowardsTargetState;
     public CombatStanceStateHumanoid combatStanceState;
     public PursueTargetStateHumanoid pursueTargetState;
+    //public EatPantState eatPantState;
     public ItemBasedAttackAction currentAttack;
 
     bool willDoComboOnNextAttack = false;
     public bool hasPerformedAttack = false;
 
+    private void Awake()
+    {
+        //eatPantState = FindObjectOfType<EatPantState>();
+        rotateTowardsTargetState = GetComponent<RotateTowardsTargetStateHumanoid>();
+        combatStanceState = GetComponent<CombatStanceStateHumanoid>();
+        pursueTargetState = GetComponent<PursueTargetStateHumanoid>();
+    }
+
     public override State Tick(EnemyManager enemy)
     {
-        float distancefromTarget = Vector3.Distance(enemy.currentTarget.transform.position, enemy.transform.position);
+        if (enemy.combatStyle == AICombatStyle.swordAndShield)
+        {
+            return ProcessSwordAndShieldCombatStyle(enemy);
+        }
+        else if (enemy.combatStyle == AICombatStyle.Archer)
+        {
+            return ProcessArcherCombatSyle(enemy);
+        }
+        else
+        {
+            return this;
+        }
+    }
+
+    private State ProcessSwordAndShieldCombatStyle(EnemyManager enemy)
+    {
 
         RotateTowardsTargetWhilstAttacking(enemy);
 
-        if (distancefromTarget > enemy.MaximumAggroRadius)
+        if (enemy.distancefromTarget > enemy.MaximumAggroRadius)
         {
             return pursueTargetState;
         }
 
-        if(willDoComboOnNextAttack && enemy.canDoCombo)
+        if (willDoComboOnNextAttack && enemy.canDoCombo)
         {
             // Attack with combo
             AttackTargetWithCombo(enemy);
@@ -46,13 +71,53 @@ public class AttackStateHumanoid : State
             RollForComboChance(enemy);
         }
 
-        if(willDoComboOnNextAttack && hasPerformedAttack)
+        if (willDoComboOnNextAttack && hasPerformedAttack)
         {
             return this; // goes back up to perform the combo
         }
 
         ResetStateFlags();
         return rotateTowardsTargetState;
+    }
+
+    private State ProcessArcherCombatSyle(EnemyManager enemy)
+    {
+        Debug.Log("Attack");
+
+        RotateTowardsTargetWhilstAttacking(enemy);
+
+        if (enemy.isInteracting)
+            return this;
+        
+        Debug.Log("Attack 2");
+
+        if (enemy.currentTarget.isDead)
+        {
+            ResetStateFlags();
+            enemy.currentTarget = null;
+            return this;
+        }
+
+        Debug.Log("Attack 3");
+
+        if (enemy.distancefromTarget > enemy.MaximumAggroRadius)
+        {
+            ResetStateFlags();
+            return pursueTargetState;
+        }
+
+        Debug.Log("Attack 4");
+
+        if (!hasPerformedAttack && enemy.isHoldingArrow)
+        {
+            FireAmmo(enemy);
+        }
+
+        Debug.Log("Attack 5");
+
+        ResetStateFlags();
+        return rotateTowardsTargetState;
+
     }
 
     private void AttackTarget(EnemyManager enemy)
@@ -113,5 +178,15 @@ public class AttackStateHumanoid : State
     {
         willDoComboOnNextAttack = false;
         hasPerformedAttack = false;
+    }
+
+    private void FireAmmo(EnemyManager enemy)
+    {
+        if(enemy.isHoldingArrow)
+        {
+            hasPerformedAttack = true;
+            enemy.characterInventoryManager.currentItemBeingUsed = enemy.characterInventoryManager.rightWeapon;
+            enemy.characterInventoryManager.rightWeapon.th_tap_RB_Action.PerformAction(enemy);
+        }
     }
 }
