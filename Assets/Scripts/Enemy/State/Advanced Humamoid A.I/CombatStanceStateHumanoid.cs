@@ -18,6 +18,11 @@ public class CombatStanceStateHumanoid : State
     bool willPerformDodge = false;
     bool willPerformParry = false;
 
+    bool hasPerformedDodge = false;
+    bool hasRandomDodgeDirection = false;
+
+    Quaternion targetDodgeDirection;
+
     public override State Tick(EnemyManager enemy)
     {
         if(enemy.combatStyle == AICombatStyle.swordAndShield)
@@ -78,12 +83,12 @@ public class CombatStanceStateHumanoid : State
 
         if (willPerformBlock)
         {
-
+            BlockUsingOffHand(enemy);
         }
 
-        if (willPerformDodge)
+        if (willPerformDodge && enemy.isAttacking)
         {
-
+            Dodge(enemy);
         }
 
         if (willPerformParry)
@@ -95,7 +100,7 @@ public class CombatStanceStateHumanoid : State
 
         if (enemy.currentRecoveryTime <= 0 && attackState.currentAttack != null)
         {
-            randomDestinationSet = false;
+            ResetStateFlags();
             return attackState;
         }
         else
@@ -255,8 +260,58 @@ public class CombatStanceStateHumanoid : State
     // combatstance에서 빠져나가면 실행함
     private void ResetStateFlags()
     {
+        hasRandomDodgeDirection = false;
+        hasPerformedDodge = false;
+
+        randomDestinationSet = false;
+        
         willPerformBlock = false;
         willPerformDodge = false;
         willPerformParry = false;
+    }
+
+    private void BlockUsingOffHand(EnemyManager enemy)
+    {
+        if(enemy.isBlocking == false)
+        {
+            if(enemy.allowAIToPerformBlock)
+            {
+                enemy.isBlocking = true;
+                enemy.characterInventoryManager.currentItemBeingUsed = enemy.characterInventoryManager.leftWeapon;
+                enemy.characterCombatManager.SetBlockingAbsorptionsFromBlockingWeapon();
+            }
+        }
+    }
+
+    private void Dodge(EnemyManager enemy)
+    {
+        if(!hasPerformedDodge)
+        {
+            if(!hasRandomDodgeDirection)
+            {
+                float randomDodgeDirection;
+
+                hasRandomDodgeDirection = true;
+                randomDodgeDirection = Random.Range(0, 360);
+                targetDodgeDirection = Quaternion.Euler(enemy.transform.eulerAngles.x, randomDodgeDirection, enemy.transform.eulerAngles.z);
+            }
+
+            if(enemy.transform.rotation != targetDodgeDirection)
+            {
+                Quaternion targetRotation = Quaternion.Slerp(enemy.transform.rotation, targetDodgeDirection, 1f);
+                enemy.transform.rotation = targetRotation;
+
+                float targetYRotation = targetDodgeDirection.eulerAngles.y;
+                float currentYRotation = enemy.transform.eulerAngles.y;
+                float rotationDifference = Mathf.Abs(targetYRotation - currentYRotation);
+
+                if(rotationDifference <= 5)
+                {
+                    hasPerformedDodge = true;
+                    enemy.transform.rotation = targetDodgeDirection;
+                    enemy.characterAnimatorManager.PlayerTargetAnimation("Roll_01", true);
+                }
+            }
+        }
     }
 }

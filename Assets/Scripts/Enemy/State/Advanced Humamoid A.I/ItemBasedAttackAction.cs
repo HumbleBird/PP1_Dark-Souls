@@ -3,7 +3,8 @@ using System.Collections.Generic;
 using UnityEngine;
 using static Define;
 
-public class ItemBasedAttackAction : MonoBehaviour
+[CreateAssetMenu(menuName = "A.I/Humanoid Actions/Item Based Attack Action")]
+public class ItemBasedAttackAction : ScriptableObject
 {
     [Header("Attack Type")]
     public AIAttackActionType actionAttackType = AIAttackActionType.meleeAttackAction;
@@ -78,11 +79,11 @@ public class ItemBasedAttackAction : MonoBehaviour
         {
             if (attackType == AttackType.light)
             {
-                enemy.characterInventoryManager.rightWeapon.th_tap_RB_Action.PerformAction(enemy);
+                enemy.characterInventoryManager.rightWeapon.oh_tap_RB_Action.PerformAction(enemy);
             }
             else if (attackType == AttackType.heavy)
             {
-                enemy.characterInventoryManager.rightWeapon.th_tap_RT_Action.PerformAction(enemy);
+                enemy.characterInventoryManager.rightWeapon.oh_tap_RT_Action.PerformAction(enemy);
             }
         }
     }

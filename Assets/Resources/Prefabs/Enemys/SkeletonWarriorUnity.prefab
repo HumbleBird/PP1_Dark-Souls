@@ -181,7 +181,10 @@ MonoBehaviour:
   pursueTargetState: {fileID: 8691373870602173100}
   detectionLayer:
     serializedVersion: 2
-    m_Bits: 2048
+    m_Bits: 2560
+  layerThatBlockLineOfSight:
+    serializedVersion: 2
+    m_Bits: 1
 --- !u!1 &1313439841
 GameObject:
   m_ObjectHideFlags: 0
@@ -441,7 +444,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   combatStanceState: {fileID: 8691373871184372956}
-  rotateTowardsTargetState: {fileID: 6023940400613857571}
 --- !u!1 &271012023523103440
 GameObject:
   m_ObjectHideFlags: 0
@@ -1628,6 +1630,7 @@ MonoBehaviour:
   characterSoundFXManager: {fileID: 0}
   characterCombatManager: {fileID: 0}
   lockOnTransform: {fileID: 1911804233}
+  criticalAttackRayCastStartPoint: {fileID: 0}
   backStabCollider: {fileID: 6023940401257246910}
   riposteCollider: {fileID: 6023940399542957901}
   isInteracting: 0
@@ -1667,9 +1670,19 @@ MonoBehaviour:
   minimumDetectionAngle: -50
   maximumDetectionAngle: 50
   currentRecoveryTime: 0
+  allowAIToPerformBlock: 0
+  blockLikelyHood: 50
+  allowAIToPerformDodge: 0
+  dodgeLikelyHood: 50
+  allowAIToPerformParry: 0
+  ParryLikelyHood: 50
   allowAIToPerformCombos: 1
   isPhaseShifting: 0
   comboLikelyHood: 100
+  combatStyle: 0
+  distancefromTarget: 0
+  targetDirection: {x: 0, y: 0, z: 0}
+  viewableAngle: 0
 --- !u!114 &543450653394863788
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1904,6 +1917,24 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   currentAttackType: 0
+  oh_light_attack_01: OH_Light_Attack_01
+  oh_light_attack_02: OH_Light_Attack_02
+  oh_heavy_attack_01: OH_Heavy_Attack_01
+  oh_heavy_attack_02: OH_Heavy_Attack_02
+  oh_running_attack_01: OH_Running_Attack_01
+  oh_jumping_attack_01: OH_Jumping_Attack_01
+  oh_charge_attack_01: OH_Charging_Attack_Charge_01
+  oh_charge_attack_02: OH_Charging_Attack_Charge_02
+  th_light_attack_01: TH_Light_Attack_01
+  th_light_attack_02: TH_Light_Attack_02
+  th_heavy_attack_01: TH_Heavy_Attack_01
+  th_heavy_attack_02: TH_Heavy_Attack_02
+  th_running_attack_01: TH_Running_Attack_01
+  th_jumping_attack_01: TH_Jumping_Attack_01
+  th_charge_attack_01: TH_Charging_Attack_Charge_01
+  th_charge_attack_02: TH_Charging_Attack_Charge_02
+  weapon_art: Weapon Art
+  lastAttack: 
 --- !u!1 &2897709951959934308
 GameObject:
   m_ObjectHideFlags: 0

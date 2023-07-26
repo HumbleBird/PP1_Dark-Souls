@@ -203,7 +203,7 @@ public class PlayerLocomotionManager : MonoBehaviour
 
             if (player.inputHandler.moveAmount > 0)
             {
-                player.playerAnimatorManager.PlayerTargetAnimation("Rolling", true);
+                player.playerAnimatorManager.PlayerTargetAnimation("Roll_01", true);
                 player.playerAnimatorManager.EraseHandIKForWeapon();
                 moveDirection.y = 0;
                 Quaternion rollRotation = Quaternion.LookRotation(moveDirection);

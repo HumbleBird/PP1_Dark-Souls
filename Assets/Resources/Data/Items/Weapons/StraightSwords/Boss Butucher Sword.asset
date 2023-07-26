@@ -17,22 +17,24 @@ MonoBehaviour:
   modelPrefab: {fileID: 7694254933542424885, guid: 410de10278cf72842af407a2abc76282, type: 3}
   isUnarmed: 0
   weaponController: {fileID: 22100000, guid: 10f21dedf98d2174498bb58bc4091ab7, type: 2}
-  offHandIdleAnimation: Left_Arm_Idle_01
   weaponType: 4
   physicalDamage: 20
   fireDamage: 0
   lightAttackDamageModifier: 1
   heavyAttackDaamgeModifier: 2
   criticalDamagemuiltiplier: 4
+  guardBreakModifier: 1
   poiseBreak: 1
   offensivePoiseBonus: 1
-  physicalDamageAbsorption: 1
+  physicalBlockingDamageAbsorption: 0
+  fireBlockingDamageAbsorption: 0
+  stability: 67
   baseStaminaCost: 1
   lightAttackStaminaMultiplier: 1
   heavyAttackStaminaMultiplier: 1
-  oh_tap_RB_Action: {fileID: 0}
+  oh_tap_RB_Action: {fileID: 11400000, guid: abe37ab07ff660740a9771befa258c1d, type: 2}
   oh_hold_RB_Action: {fileID: 0}
-  oh_tap_RT_Action: {fileID: 0}
+  oh_tap_RT_Action: {fileID: 11400000, guid: 93b86fe8370f15c42afb30ab58dbd765, type: 2}
   oh_hold_RT_Action: {fileID: 0}
   oh_tap_LB_Action: {fileID: 0}
   oh_hold_LB_Action: {fileID: 0}

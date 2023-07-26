@@ -10,9 +10,9 @@ using UnityEngine;
 
 public class AttackStateHumanoid : State
 {
-    public RotateTowardsTargetState rotateTowardsTargetState;
-    public CombatStanceState combatStanceState;
-    public PursueTargetState pursueTargetState;
+    public RotateTowardsTargetStateHumanoid rotateTowardsTargetState;
+    public CombatStanceStateHumanoid combatStanceState;
+    public PursueTargetStateHumanoid pursueTargetState;
     public ItemBasedAttackAction currentAttack;
 
     bool willDoComboOnNextAttack = false;
@@ -51,6 +51,7 @@ public class AttackStateHumanoid : State
             return this; // goes back up to perform the combo
         }
 
+        ResetStateFlags();
         return rotateTowardsTargetState;
     }
 
@@ -106,5 +107,11 @@ public class AttackStateHumanoid : State
             }
 
         }
+    }
+
+    private void ResetStateFlags()
+    {
+        willDoComboOnNextAttack = false;
+        hasPerformedAttack = false;
     }
 }

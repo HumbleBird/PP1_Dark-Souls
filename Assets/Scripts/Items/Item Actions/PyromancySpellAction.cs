@@ -15,6 +15,7 @@ public class PyromancySpellAction : ItemAction
             // CHECK FOR FP
             if (character.characterStatsManager.currentFocusPoints >= character.characterInventoryManager.currentSpell.focusPointCost)
             {
+                character.isAttacking = true;
                 character.characterInventoryManager.currentSpell.AttemptToCastSpell(character);
             }
             else

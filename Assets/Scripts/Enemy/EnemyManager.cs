@@ -78,6 +78,7 @@ public class EnemyManager : CharacterManager
         isInvulnerable = animator.GetBool("isInvulnerable");
         isPhaseShifting = animator.GetBool("isPhaseShifting");
         animator.SetBool("isDead", isDead);
+        animator.SetBool("isBlocking", isBlocking);
 
         if(currentTarget != null)
         {
