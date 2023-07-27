@@ -20,6 +20,7 @@ public class CombatStanceStateHumanoid : State
 
     bool hasPerformedDodge = false;
     bool hasRandomDodgeDirection = false;
+    bool hasPerformedParry = false;
     bool hasAmmoLoaded = false;
 
     Quaternion targetDodgeDirection;
@@ -73,7 +74,16 @@ public class CombatStanceStateHumanoid : State
             DecideCirclingAction(enemy.enemyAnimationManager);
         }
 
-        if(enemy.allowAIToPerformBlock)
+        if (enemy.allowAIToPerformParry)
+        {
+            if (enemy.currentTarget.canBeRiposted)
+            {
+                CheckForRipsote(enemy);
+                return this;
+            }
+        }
+
+        if (enemy.allowAIToPerformBlock)
         {
             RollForBlockChance(enemy);
         }
@@ -88,6 +98,15 @@ public class CombatStanceStateHumanoid : State
             RollForParryChance(enemy);
         }
 
+        if(enemy.currentTarget.isAttacking)
+        {
+            if(willPerformParry && !hasPerformedParry)
+            {
+                ParryCurrentTarget(enemy);
+                return this;
+            }
+        }
+
         if (willPerformBlock)
         {
             BlockUsingOffHand(enemy);
@@ -96,11 +115,6 @@ public class CombatStanceStateHumanoid : State
         if (willPerformDodge && enemy.isAttacking)
         {
             Dodge(enemy);
-        }
-
-        if (willPerformParry)
-        {
-
         }
 
         HandleRotateTowardTarget(enemy);
@@ -319,6 +333,7 @@ public class CombatStanceStateHumanoid : State
     {
         hasRandomDodgeDirection = false;
         hasPerformedDodge = false;
+        hasPerformedParry = false;
         hasAmmoLoaded = false;
 
         randomDestinationSet = false;
@@ -392,5 +407,45 @@ public class CombatStanceStateHumanoid : State
     {
         float timeUntileAmmoIsShortAtTarget = Random.Range(enemy.minimumTimeToAimAtTarget, enemy.maximumTimeToAimAtTarget);
         enemy.currentRecoveryTime = timeUntileAmmoIsShortAtTarget;
+    }
+
+                
+    private void ParryCurrentTarget(EnemyManager enemy)
+    {
+        if(enemy.currentTarget.canBeParryied)
+        {
+            if(enemy.distancefromTarget <= 2)
+            {
+                hasPerformedParry = true;
+                enemy.isParrying = true;
+                enemy.enemyAnimationManager.PlayTargetAnimation("Parry_01", true);
+            }
+        }
+    }
+
+    private void CheckForRipsote(EnemyManager enemy)
+    {
+        if (enemy.isInteracting)
+        {
+            enemy.animator.SetFloat("Horizontal", 0, 0.2f, Time.deltaTime);
+            enemy.animator.SetFloat("Vertical", 0, 0.2f, Time.deltaTime);
+            return;
+        }
+        if (enemy.distancefromTarget >= 1.0)
+        {
+            HandleRotateTowardTarget(enemy);
+            enemy.animator.SetFloat("Horizontal", 0, 0.2f, Time.deltaTime);
+            enemy.animator.SetFloat("Vertical", 1, 0.2f, Time.deltaTime);
+        }
+        else
+        {
+            enemy.isBlocking = false;
+
+            if(!enemy.isInteracting && !enemy.currentTarget.isBeingRiposted && !enemy.currentTarget.isBeingBackstabbed)
+            {
+                enemy.enemyRigidbody.velocity = Vector3.zero;
+                enemy.animator.SetFloat("Vertical", 0);
+            }
+        }
     }
 }

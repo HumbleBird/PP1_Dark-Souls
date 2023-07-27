@@ -33,6 +33,8 @@ public class ResetAnimatorBool : StateMachineBehaviour
         character.isBeingRiposted = false;
         character.isPerformingBackstab = false;
         character.isPerformingRipost = false;
+        character.canBeParryied = false;
+        character.canBeRiposted = false;
 
         animator.SetBool(isInteractingBool, isInteractingStatus);
         animator.SetBool(isFiringSpellBool, isFiringSpellStatus);
