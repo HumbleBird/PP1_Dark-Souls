@@ -11,26 +11,26 @@ public class ClumpConsumableItem : ConsumableItem
     [Header("Cure FX")]
     public bool curePoison;
 
-    public override void AttemptToConsumeItem(PlayerAnimatorManager playerAnimatorManager, PlayerWeaponSlotManager playerWeaponSlotManager, PlayerEffectsManager playerEffectsManager)
+    public override void AttemptToConsumeItem(PlayerManager player)
     {
-        base.AttemptToConsumeItem(playerAnimatorManager, playerWeaponSlotManager, playerEffectsManager);
-        GameObject clump = Instantiate(itemModel, playerWeaponSlotManager.rightHandSlot.transform);
-        playerEffectsManager.currentParticleFX = clumpConsumeFX;
-        playerEffectsManager.instantiatedFXModel2 = clump;
+        base.AttemptToConsumeItem(player);
+        GameObject clump = Instantiate(itemModel, player.playerWeaponSlotManager.rightHandSlot.transform);
+        player.playerEffectsManager.currentParticleFX = clumpConsumeFX;
+        player.playerEffectsManager.instantiatedFXModel2 = clump;
 
         if(curePoison)
         {
-            playerEffectsManager.poisonBuildup = 0;
-            playerEffectsManager.poisonAmount = playerEffectsManager.defaultPoisonAmount;
-            playerEffectsManager.isPoisoned = false;
+            player.playerEffectsManager.poisonBuildup = 0;
+            player.playerEffectsManager.poisonAmount = player.playerEffectsManager.defaultPoisonAmount;
+            player.playerEffectsManager.isPoisoned = false;
 
-            if(playerEffectsManager.currentPoisonParticleFX != null)
+            if(player.playerEffectsManager.currentPoisonParticleFX != null)
             {
-                Destroy(playerEffectsManager.currentPoisonParticleFX);
+                Destroy(player.playerEffectsManager.currentPoisonParticleFX);
             }
         }
 
 
-        playerWeaponSlotManager.rightHandSlot.UnloadWeapon();
+        player.playerWeaponSlotManager.rightHandSlot.UnloadWeapon();
     }
 }

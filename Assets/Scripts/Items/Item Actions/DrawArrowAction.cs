@@ -13,8 +13,6 @@ public class DrawArrowAction : ItemAction
         if (character.isHoldingArrow)
             return;
 
-
-
         //Animator Player
         character.animator.SetBool("isHoldingArrow", true);
         character.characterAnimatorManager.PlayTargetAnimation("Bow_TH_Draw_01", true);

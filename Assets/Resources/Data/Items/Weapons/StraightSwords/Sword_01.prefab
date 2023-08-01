@@ -160,6 +160,14 @@ PrefabInstance:
     m_TransformParent: {fileID: 7414486773198955991}
     m_Modifications:
     - target: {fileID: 194326018111207199, guid: 6329cb4d2f57df54cbea540650e5f10d, type: 3}
+      propertyPath: looping
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 194326018111207199, guid: 6329cb4d2f57df54cbea540650e5f10d, type: 3}
+      propertyPath: playOnAwake
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 194326018111207199, guid: 6329cb4d2f57df54cbea540650e5f10d, type: 3}
       propertyPath: ColorModule.gradient.maxGradient.key0.b
       value: 0.1767088
       objectReference: {fileID: 0}
@@ -170,6 +178,14 @@ PrefabInstance:
     - target: {fileID: 194326018111207199, guid: 6329cb4d2f57df54cbea540650e5f10d, type: 3}
       propertyPath: ColorModule.gradient.maxGradient.key0.r
       value: 0.1792453
+      objectReference: {fileID: 0}
+    - target: {fileID: 4729398126694542233, guid: 6329cb4d2f57df54cbea540650e5f10d, type: 3}
+      propertyPath: looping
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4729398126694542233, guid: 6329cb4d2f57df54cbea540650e5f10d, type: 3}
+      propertyPath: playOnAwake
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 6292026514198930186, guid: 6329cb4d2f57df54cbea540650e5f10d, type: 3}
       propertyPath: m_RootOrder
@@ -219,6 +235,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Katana Blade
       objectReference: {fileID: 0}
+    - target: {fileID: 7624114157456395597, guid: 6329cb4d2f57df54cbea540650e5f10d, type: 3}
+      propertyPath: m_Layer
+      value: 13
+      objectReference: {fileID: 0}
     - target: {fileID: 7824864785778427683, guid: 6329cb4d2f57df54cbea540650e5f10d, type: 3}
       propertyPath: normalWeaponTrail.Array.size
       value: 3
@@ -239,6 +259,14 @@ PrefabInstance:
       propertyPath: normalWeaponTrail.Array.data[3]
       value: 
       objectReference: {fileID: 1779806333668002154}
+    - target: {fileID: 7900862922920779629, guid: 6329cb4d2f57df54cbea540650e5f10d, type: 3}
+      propertyPath: looping
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7900862922920779629, guid: 6329cb4d2f57df54cbea540650e5f10d, type: 3}
+      propertyPath: playOnAwake
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 6329cb4d2f57df54cbea540650e5f10d, type: 3}
 --- !u!4 &74639715918622271 stripped
@@ -261,6 +289,25 @@ ParticleSystem:
   m_CorrespondingSourceObject: {fileID: 4729398126694542233, guid: 6329cb4d2f57df54cbea540650e5f10d, type: 3}
   m_PrefabInstance: {fileID: 8437111933206451719}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &7978774228058434889 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 1994224349637000014, guid: 6329cb4d2f57df54cbea540650e5f10d, type: 3}
+  m_PrefabInstance: {fileID: 8437111933206451719}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &6247025239076437027
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7978774228058434889}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1151b01b1be378d4f958c120e7593721, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  eWeaponTrail: 0
+  normalWeaponTrail: []
 --- !u!198 &8621234261142839576 stripped
 ParticleSystem:
   m_CorrespondingSourceObject: {fileID: 194326018111207199, guid: 6329cb4d2f57df54cbea540650e5f10d, type: 3}

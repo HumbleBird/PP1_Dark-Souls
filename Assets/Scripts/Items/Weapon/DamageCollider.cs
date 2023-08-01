@@ -31,39 +31,47 @@ public class DamageCollider : MonoBehaviour
     protected bool hasBeenParried;
     public string currentDamageAnimation;
 
+    private List<CharacterManager> charactersDamageDuringThisCalculation = new List<CharacterManager>();
+
     protected virtual void Awake()
     {
         damageCollider = GetComponent<Collider>();
         damageCollider.gameObject.SetActive(true);
         damageCollider.isTrigger = true;
         damageCollider.enabled = enabledDamageColliderOnStartUp;
-
+        characterManager = GetComponentInParent<CharacterManager>();
     }
 
     public void EnableDamageCollider()
     {
+        charactersDamageDuringThisCalculation = new List<CharacterManager>();
         damageCollider.enabled = true;
     }
 
     public void DisableDamageCollider()
     {
+        if(charactersDamageDuringThisCalculation.Count > 0)
+            charactersDamageDuringThisCalculation.Clear();
         damageCollider.enabled = false;
     }
 
     protected virtual void OnTriggerEnter(Collider other)
     {
-        if (other.tag == "Character")
+        if (other.gameObject.layer == LayerMask.NameToLayer("Damageable Character"))
         {
             shieldHasBeenHit = false;
             hasBeenParried = false;
 
-            CharacterStatsManager enemyStats = other.GetComponent<CharacterStatsManager>();
-            CharacterManager enemyManager = other.GetComponent<CharacterManager>();
-            CharacterEffectsManager enemyEffects = other.GetComponent<CharacterEffectsManager>();
+            CharacterManager enemyManager = other.GetComponentInParent<CharacterManager>();
 
             if (enemyManager != null)
             {
-                if (enemyStats.teamIDNumber == teamIDNumber)
+                if (charactersDamageDuringThisCalculation.Contains(enemyManager))
+                    return;
+
+                charactersDamageDuringThisCalculation.Add(enemyManager);
+
+                if (enemyManager.characterStatsManager.teamIDNumber == teamIDNumber)
                     return;
 
                 CheckForParry(enemyManager);
@@ -71,9 +79,9 @@ public class DamageCollider : MonoBehaviour
                 CheckForBlock(enemyManager);
             }
 
-            if (enemyStats != null)
+            if (enemyManager.characterStatsManager != null)
             {
-                if (enemyStats.teamIDNumber == teamIDNumber)
+                if (enemyManager.characterStatsManager.teamIDNumber == teamIDNumber)
                     return;
 
                 if (hasBeenParried)
@@ -82,16 +90,16 @@ public class DamageCollider : MonoBehaviour
                 if (shieldHasBeenHit)
                     return;
 
-                enemyStats.poiseResetTimer = enemyStats.totalPoiseResetTime;
-                enemyStats.totalPoiseDefence = enemyStats.totalPoiseDefence - poiseBreak;
+                enemyManager.characterStatsManager.poiseResetTimer = enemyManager.characterStatsManager.totalPoiseResetTime;
+                enemyManager.characterStatsManager.totalPoiseDefence = enemyManager.characterStatsManager.totalPoiseDefence - poiseBreak;
 
                 Vector3 contactPoint = other.gameObject.GetComponent<Collider>().ClosestPointOnBounds(transform.position);
                 float directionHitFrom = Vector3.SignedAngle(characterManager.transform.forward, enemyManager.transform.forward, Vector3.up);
                 ChooseWhichDirectionDamageCameFrom(directionHitFrom);
-                enemyEffects.PlayBloodSplatterFX(contactPoint);
-                enemyEffects.InterruptEffect();
+                enemyManager.characterEffectsManager.PlayBloodSplatterFX(contactPoint);
+                enemyManager.characterEffectsManager.InterruptEffect();
 
-                DealDamage(enemyStats);
+                DealDamage(enemyManager.characterStatsManager);
             }
         }
 

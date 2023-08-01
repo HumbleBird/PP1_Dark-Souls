@@ -179,16 +179,6 @@ public class CharacterWeaponSlotManager : MonoBehaviour
         }
     }
 
-    public virtual void DrainStaminaLightAttack()
-    {
-        character.characterCombatManager.DrainStaminaBasedOnAttack();
-    }
-
-    public virtual void DrainStaminaHeavyAttack()
-    {
-        character.characterCombatManager.DrainStaminaBasedOnAttack();
-    }
-
     public virtual void GrantWeaponAttackingPoiseBonus()
     {
         WeaponItem currentWeaponBeingUsed = character.characterInventoryManager.currentItemBeingUsed as WeaponItem;

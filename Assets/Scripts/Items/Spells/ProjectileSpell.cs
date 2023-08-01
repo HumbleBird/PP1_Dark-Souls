@@ -48,6 +48,7 @@ public class ProjectileSpell : SpellItem
                 GameObject instantiatedSpellFX = Instantiate(spellCastFX, player.playerWeaponSlotManager.leftHandSlot.transform.position, player.cameraHandler.cameraPivotTranform.rotation);
                 SpellDamageCollider spellDamageCollider = instantiatedSpellFX.GetComponent<SpellDamageCollider>();
                 spellDamageCollider.teamIDNumber = player.playerStatsManager.teamIDNumber;
+                spellDamageCollider.characterManager = character;
                 rigidBody = instantiatedSpellFX.GetComponent<Rigidbody>();
 
                 if (player.cameraHandler.m_trCurrentLockOnTarget != null)
@@ -71,6 +72,7 @@ public class ProjectileSpell : SpellItem
                 GameObject instantiatedSpellFX = Instantiate(spellCastFX, player.playerWeaponSlotManager.rightHandSlot.transform.position, player.cameraHandler.cameraPivotTranform.rotation);
                 SpellDamageCollider spellDamageCollider = instantiatedSpellFX.GetComponent<SpellDamageCollider>();
                 spellDamageCollider.teamIDNumber = player.playerStatsManager.teamIDNumber;
+                spellDamageCollider.characterManager = character;
                 rigidBody = instantiatedSpellFX.GetComponent<Rigidbody>();
 
                 if (player.cameraHandler.m_trCurrentLockOnTarget != null)

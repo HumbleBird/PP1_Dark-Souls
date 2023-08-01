@@ -21,7 +21,7 @@ public class BombDamageColider : DamageCollider
 
     private void OnCollisionEnter(Collision collision)
     {
-        if(!hasCollided)
+        if(!hasCollided && collision.gameObject != characterManager.gameObject)
         {
             hasCollided = true;
             impactPaticles = Instantiate(impactPaticles, transform.position, Quaternion.identity);

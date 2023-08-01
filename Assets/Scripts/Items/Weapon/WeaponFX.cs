@@ -1,22 +1,28 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using static Define;
 
 public class WeaponFX : MonoBehaviour
 {
     [Header("Weapon FX")]
-    public ParticleSystem[] normalWeaponTrail;
+    public WeaponTrail[] m_WeaponTrails;
 
-    public void PlayWeaponFX()
+    private void Awake()
     {
-        for (int i = 0; i < normalWeaponTrail.Length; i++)
-        {
-            normalWeaponTrail[i].Stop();
+        m_WeaponTrails = GetComponentsInChildren<WeaponTrail>();
+    }
 
-            if (normalWeaponTrail[i].isStopped)
+    public void PlayWeaponFX(eWeaponTrail eWeaponTrail = eWeaponTrail.Normal)
+    {
+        for (int i = 0; i < m_WeaponTrails.Length; i++)
+        {
+            if (m_WeaponTrails[i].eWeaponTrail == eWeaponTrail)
             {
-                normalWeaponTrail[i].Play();
+                m_WeaponTrails[i].PlayWeaponTrail();
+                return;
             }
+
         }
     }
 }

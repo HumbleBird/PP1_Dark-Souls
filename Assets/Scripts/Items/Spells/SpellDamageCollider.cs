@@ -15,9 +15,12 @@ public class SpellDamageCollider : DamageCollider
 
     Vector3 impactNormal; //Used to rotate the impact particles
 
-    private void Awake()
+    protected override void Awake()
     {
+        base.Awake();
+
         rigidBody = GetComponent<Rigidbody>();
+        damageCollider.isTrigger = false;
     }
 
     // Start is called before the first frame update
@@ -35,20 +38,16 @@ public class SpellDamageCollider : DamageCollider
 
     private void OnCollisionEnter(Collision collision)
     {
-        Debug.Log("COLLIDED");
-
         if (!hasColliede)
         {
             spellTarget = collision.transform.GetComponent<CharacterStatsManager>();
-
-            // 자꾸 플레이어 손에서 터져서 임시로 넣음
-            if (collision.gameObject.tag == "Player")
-                return;
 
             if (spellTarget != null && spellTarget.teamIDNumber != teamIDNumber)
             {
                 spellTarget.TakeDamage(0, fireDamage, currentDamageAnimation, characterManager);
             }
+            else
+                return;
 
             hasColliede = true;
             impactParticles = Instantiate(impactParticles, transform.position, Quaternion.FromToRotation(Vector3.up, impactNormal));

@@ -10,7 +10,7 @@ public class PyromancySpellAction : ItemAction
         if (character.isInteracting)
             return;
 
-        if (character.characterInventoryManager.currentSpell != null && character.characterInventoryManager.currentSpell.isFaithSpell)
+        if (character.characterInventoryManager.currentSpell != null && character.characterInventoryManager.currentSpell.isPyroSpell)
         {
             // CHECK FOR FP
             if (character.characterStatsManager.currentFocusPoints >= character.characterInventoryManager.currentSpell.focusPointCost)

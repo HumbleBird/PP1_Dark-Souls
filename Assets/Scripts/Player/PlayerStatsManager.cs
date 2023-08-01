@@ -33,7 +33,7 @@ public class PlayerStatsManager : CharacterStatsManager
         maxStamina = SetMaxStaminaFromStaminaLevel();
         currentStamina = maxStamina;
         staminaBar.SetMaxStamina(maxStamina);
-        staminaBar.SetCurrentStamina(currentHealth);
+        staminaBar.SetCurrentStamina(currentStamina);
 
         maxfocusPoint = SetMaxfocusPointsFromStaminaLevel();
         currentFocusPoints = maxfocusPoint;

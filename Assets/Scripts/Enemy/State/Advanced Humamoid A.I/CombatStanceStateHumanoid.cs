@@ -9,7 +9,7 @@ public class CombatStanceStateHumanoid : State
     public ItemBasedAttackAction[] enemyAttacks;
     public PursueTargetStateHumanoid pursueTargetState;
 
-    protected bool randomDestinationSet = true;
+    protected bool randomDestinationSet = false;
     protected float verticalMovementValue = 0;
     protected float horizontalMovementValue = 0;
 

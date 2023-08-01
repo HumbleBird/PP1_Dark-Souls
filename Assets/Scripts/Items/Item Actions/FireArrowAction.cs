@@ -39,7 +39,6 @@ public class FireArrowAction : ItemAction
                 if (Physics.Raycast(ray, out hitPoint, 100.0f))
                 {
                     liveArrow.transform.LookAt(hitPoint.point);
-                    Debug.Log(hitPoint.transform.name);
                 }
                 else
                 {

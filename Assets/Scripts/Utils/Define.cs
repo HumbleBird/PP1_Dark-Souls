@@ -51,6 +51,12 @@ public class Define
     #endregion
 
     #region Item
+    public enum eWeaponTrail
+    {
+        Normal,
+        Fire
+    }
+
     public enum AmmoType
     {
         Arrow,

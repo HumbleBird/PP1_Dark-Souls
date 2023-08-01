@@ -80,18 +80,14 @@ public class RangedProjectileDamageCollider : DamageCollider
             GameObject penetratedArrow = Instantiate(ammoItem.penetratedModel, contactPoint, Quaternion.Euler(0, 0, 0));
 
             penetratedProjectile = penetratedArrow;
-            penetratedArrow.transform.parent = other.transform;
-
+            //penetratedArrow.transform.parent = other.transform;
             
-            penetratedArrow.transform.rotation = Quaternion.LookRotation(gameObject.transform.forward);
+            penetratedArrow.transform.localRotation = Quaternion.LookRotation(gameObject.transform.forward);
 
-            //penetratedArrow.transform.LookAt(gameObject.transform.forward);
+            //Vector3 childScale = penetratedArrow.transform.localScale;
+            //Vector3 parentScale = other.transform.localScale;
 
-            Vector3 childScale = penetratedArrow.transform.localScale;
-            Vector3 parentScale = other.transform.localScale;
-
-            penetratedArrow.transform.localScale = new Vector3(childScale.x / parentScale.x, childScale.y / parentScale.y, childScale.z / parentScale.z);
-
+            //penetratedArrow.transform.localScale = new Vector3(childScale.x / parentScale.x, childScale.y / parentScale.y, childScale.z / parentScale.z);
         }
 
         Destroy(transform.root.gameObject);

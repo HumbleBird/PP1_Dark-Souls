@@ -78,7 +78,10 @@ public class PlayerWeaponSlotManager : CharacterWeaponSlotManager
         Destroy(player.playerEffectsManager.instantiatedFXModel2);
         BombConsumeableItem fireBombItem = player.playerInventoryManager.currentConsumable as BombConsumeableItem;
 
+
+
         GameObject activeModelBomb = Instantiate(fireBombItem.liveBombModel, rightHandSlot.transform.position, player.cameraHandler.cameraPivotTranform.rotation);
+        activeModelBomb.GetComponentInChildren<BombDamageColider>().characterManager = player;
         activeModelBomb.transform.rotation = Quaternion.Euler(player.cameraHandler.cameraPivotTranform.eulerAngles.x, player.lockOnTransform.eulerAngles.y, 0);
         BombDamageColider damageCollider = activeModelBomb.GetComponentInChildren<BombDamageColider>();
 
@@ -89,6 +92,13 @@ public class PlayerWeaponSlotManager : CharacterWeaponSlotManager
         damageCollider.teamIDNumber = player.playerStatsManager.teamIDNumber;
         LoadWeaponOnSlot(player.playerInventoryManager.rightWeapon, false);
 
+    }
+
+    public override void OpenDamageCollider()
+    {
+        base.OpenDamageCollider();
+
+        player.playerCombatManager.DrainStaminaBasedOnAttack();
     }
 
 }

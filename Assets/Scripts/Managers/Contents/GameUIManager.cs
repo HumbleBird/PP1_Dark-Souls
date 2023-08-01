@@ -69,9 +69,9 @@ public class GameUIManager : MonoBehaviour
 
         weaponInventorySlots = weaponInventorySlotsParent.GetComponentsInChildren<WeaponInventorySlot>();
         headEquipmentInventorySlots = headEquipmentInventorySlotsParent.GetComponentsInChildren<HeadEquipmentInventorySlot>();
-        bodyEquipmentInventorySlots = headEquipmentInventorySlotsParent.GetComponentsInChildren<BodyEquipmentInventorySlot>();
-        legEquipmentInventorySlots = headEquipmentInventorySlotsParent.GetComponentsInChildren< LegEquipmentInventorySlot>();
-        handEquipmentInventorySlots = headEquipmentInventorySlotsParent.GetComponentsInChildren<HandEquipmentInventorySlot>();
+        bodyEquipmentInventorySlots = bodyEquipmentInventorySlotsParent.GetComponentsInChildren<BodyEquipmentInventorySlot>();
+        legEquipmentInventorySlots = legEquipmentInventorySlotsParent.GetComponentsInChildren< LegEquipmentInventorySlot>();
+        handEquipmentInventorySlots = handEquipmentInventorySlotsParent.GetComponentsInChildren<HandEquipmentInventorySlot>();
     }
 
     private void Start()
