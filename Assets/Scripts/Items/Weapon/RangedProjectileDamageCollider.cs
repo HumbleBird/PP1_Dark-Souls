@@ -5,66 +5,67 @@ using UnityEngine;
 public class RangedProjectileDamageCollider : DamageCollider
 {
     public RangedAmmoItem ammoItem;
-    protected bool hasAlreadyPenetratedASurface;
-    protected GameObject penetratedProjectile;
-    public LayerMask shootAbleLayers;
+    protected bool hasAlreadyPenetratedSurface;
 
-    protected override void OnTriggerEnter(Collider other)
+    Rigidbody arrowRigidbody;
+    CapsuleCollider arrowCapsuleCollider;
+
+    protected override void Awake()
     {
+        damageCollider = GetComponent<Collider>();
+        damageCollider.gameObject.SetActive(true);
+        damageCollider.enabled = true;
 
-        if (other.tag == "Character")
+        characterManager = GetComponentInParent<CharacterManager>();
+
+        arrowCapsuleCollider = GetComponent<CapsuleCollider>();
+        arrowRigidbody = GetComponent<Rigidbody>();
+    }
+
+    private void OnCollisionEnter(Collision collision)
+    {
+        shieldHasBeenHit = false;
+        hasBeenParried = false;
+
+        CharacterManager enemyManager = collision.gameObject.GetComponentInParent<CharacterManager>();
+
+        if (enemyManager != null)
         {
-            shieldHasBeenHit = false;
-            hasBeenParried = false;
+            if (enemyManager.characterStatsManager.teamIDNumber == teamIDNumber)
+                return;
 
-            CharacterStatsManager enemyStats = other.GetComponent<CharacterStatsManager>();
-            CharacterManager enemyManager = other.GetComponent<CharacterManager>();
-            CharacterEffectsManager enemyEffects = other.GetComponent<CharacterEffectsManager>();
+            CheckForParry(enemyManager);
 
-            if (enemyManager != null)
+            CheckForBlock(enemyManager);
+
+            if (hasBeenParried)
+                return;
+
+            if (shieldHasBeenHit)
+                return;
+
+            enemyManager.characterStatsManager.poiseResetTimer = enemyManager.characterStatsManager.totalPoiseResetTime;
+            enemyManager.characterStatsManager.totalPoiseDefence = enemyManager.characterStatsManager.totalPoiseDefence - poiseBreak;
+
+            Vector3 contactPoint = collision.gameObject.GetComponent<Collider>().ClosestPointOnBounds(transform.position);
+            float directionHitFrom = Vector3.SignedAngle(characterManager.transform.forward, enemyManager.transform.forward, Vector3.up);
+            ChooseWhichDirectionDamageCameFrom(directionHitFrom);
+
+            enemyManager.characterEffectsManager.PlayBloodSplatterFX(contactPoint);
+
+            if (enemyManager.characterStatsManager.totalPoiseDefence > poiseBreak)
             {
-                if (enemyStats.teamIDNumber == teamIDNumber)
-                    return;
-
-                CheckForParry(enemyManager);
-
-                CheckForBlock(enemyManager);
+                enemyManager.characterStatsManager.TakeDamageNoAnimation(physicalDamage, fireDamage);
             }
-
-            if (enemyStats != null)
+            else
             {
-                if (enemyStats.teamIDNumber == teamIDNumber)
-                    return;
-
-                if (hasBeenParried)
-                    return;
-
-                if (shieldHasBeenHit)
-                    return;
-
-                enemyStats.poiseResetTimer = enemyStats.totalPoiseResetTime;
-                enemyStats.totalPoiseDefence = enemyStats.totalPoiseDefence - poiseBreak;
-
-                Vector3 contactPoint = other.gameObject.GetComponent<Collider>().ClosestPointOnBounds(transform.position);
-                float directionHitFrom = Vector3.SignedAngle(characterManager.transform.forward, enemyManager.transform.forward, Vector3.up);
-                ChooseWhichDirectionDamageCameFrom(directionHitFrom);
-
-                enemyEffects.PlayBloodSplatterFX(contactPoint);
-
-                if (enemyStats.totalPoiseDefence > poiseBreak)
-                {
-                    enemyStats.TakeDamageNoAnimation(physicalDamage, fireDamage);
-                }
-                else
-                {
-                    enemyStats.TakeDamage(physicalDamage, 0, currentDamageAnimation, characterManager);
-                }
+                enemyManager.characterStatsManager.TakeDamage(physicalDamage, 0, currentDamageAnimation, characterManager);
             }
         }
 
-        if (other.tag == "illusionary Wall")
+        if (collision.gameObject.tag == "illusionary Wall")
         {
-            IllusionaryWall illusionaryWall = other.GetComponent<IllusionaryWall>();
+            IllusionaryWall illusionaryWall = collision.gameObject.GetComponent<IllusionaryWall>();
 
             if (illusionaryWall != null)
             {
@@ -72,24 +73,25 @@ public class RangedProjectileDamageCollider : DamageCollider
             }
         }
 
-        if(!hasAlreadyPenetratedASurface && penetratedProjectile == null)
+        if(!hasAlreadyPenetratedSurface)
         {
-            hasAlreadyPenetratedASurface = true;
+            hasAlreadyPenetratedSurface = true;
+            arrowRigidbody.isKinematic = true;
+            arrowCapsuleCollider.enabled = false;
 
-            Vector3 contactPoint = other.gameObject.GetComponent<Collider>().ClosestPointOnBounds(transform.position);
-            GameObject penetratedArrow = Instantiate(ammoItem.penetratedModel, contactPoint, Quaternion.Euler(0, 0, 0));
-
-            penetratedProjectile = penetratedArrow;
-            //penetratedArrow.transform.parent = other.transform;
-            
-            penetratedArrow.transform.localRotation = Quaternion.LookRotation(gameObject.transform.forward);
-
-            //Vector3 childScale = penetratedArrow.transform.localScale;
-            //Vector3 parentScale = other.transform.localScale;
-
-            //penetratedArrow.transform.localScale = new Vector3(childScale.x / parentScale.x, childScale.y / parentScale.y, childScale.z / parentScale.z);
+            gameObject.transform.position = collision.GetContact(0).point;
+            gameObject.transform.rotation = Quaternion.LookRotation(transform.forward);
+            //gameObject.transform.parent = collision.collider.transform;
         }
 
-        Destroy(transform.root.gameObject);
+        //Destroy(transform.root.gameObject);
+    }
+
+    private void FixedUpdate()
+    {
+        if(arrowRigidbody.velocity != Vector3.zero)
+        {
+            arrowRigidbody.rotation = Quaternion.LookRotation(arrowRigidbody.velocity);
+        }
     }
 }

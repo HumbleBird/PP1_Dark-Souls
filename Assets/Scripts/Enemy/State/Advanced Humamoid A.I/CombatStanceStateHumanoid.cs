@@ -50,8 +50,7 @@ public class CombatStanceStateHumanoid : State
 
     private State ProcessSwordAndShieldCombatStyle(EnemyManager enemy)
     {
-        enemy.animator.SetFloat("Vertical", verticalMovementValue, 0.2f, Time.deltaTime);
-        enemy.animator.SetFloat("Horizontal", horizontalMovementValue, 0.2f, Time.deltaTime);
+
 
         // AI가 추락중이거나 어떤 action을 취하는 중이라면 모든 움직임을 멈춤
         if (enemy.isInteracting || !enemy.isGrounded)
@@ -60,6 +59,7 @@ public class CombatStanceStateHumanoid : State
             enemy.animator.SetFloat("Horizontal", 0);
             return this;
         }
+
 
         // A.I로부터 목표물이 너무 멀리 떨어져 있다면 다시 pursue 모드로
         if (enemy.distancefromTarget > enemy.MaximumAggroRadius)
@@ -129,13 +129,14 @@ public class CombatStanceStateHumanoid : State
             GetNewAttack(enemy);
         }
 
+        HandleMovement(enemy);
+
         return this;
     }
 
     private State ProcessArcherCombatSyle(EnemyManager enemy)
     {
-        enemy.animator.SetFloat("Vertical", verticalMovementValue, 0.2f, Time.deltaTime);
-        enemy.animator.SetFloat("Horizontal", horizontalMovementValue, 0.2f, Time.deltaTime);
+
 
         // AI가 추락중이거나 어떤 action을 취하는 중이라면 모든 움직임을 멈춤
         if (enemy.isInteracting || !enemy.isGrounded)
@@ -144,6 +145,8 @@ public class CombatStanceStateHumanoid : State
             enemy.animator.SetFloat("Horizontal", 0);
             return this;
         }
+
+
 
         // A.I로부터 목표물이 너무 멀리 떨어져 있다면 다시 pursue 모드로
         if (enemy.distancefromTarget > enemy.MaximumAggroRadius)
@@ -181,6 +184,17 @@ public class CombatStanceStateHumanoid : State
         {
             ResetStateFlags();
             return attackState;
+        }  
+
+        if(enemy.isStationaryArcher)
+        {
+            enemy.animator.SetFloat("Vertical", 0, 0.2f, Time.deltaTime);
+            enemy.animator.SetFloat("Horizontal", 0, 0.2f, Time.deltaTime);
+        }
+        else
+        {
+            HandleMovement(enemy);
+
         }
 
 
@@ -221,10 +235,10 @@ public class CombatStanceStateHumanoid : State
 
     protected void DecideCirclingAction(EnemyAnimationManager enemyAnimationManager)
     {
-        WalkAroundTarget(enemyAnimationManager);
+        WalkAroundTarget();
     }
 
-    protected void WalkAroundTarget(EnemyAnimationManager enemyAnimationManager)
+    protected void WalkAroundTarget()
     {
         verticalMovementValue = 0.5f;
 
@@ -446,6 +460,20 @@ public class CombatStanceStateHumanoid : State
                 enemy.enemyRigidbody.velocity = Vector3.zero;
                 enemy.animator.SetFloat("Vertical", 0);
             }
+        }
+    }
+
+    private void HandleMovement(EnemyManager enemy)
+    {
+        if(enemy.distancefromTarget <= enemy.stoppingDistance)
+        {
+            enemy.animator.SetFloat("Vertical", 0, 0.2f, Time.deltaTime);
+            enemy.animator.SetFloat("Horizontal", horizontalMovementValue, 0.2f, Time.deltaTime);
+        }
+        else
+        {
+            enemy.animator.SetFloat("Vertical", verticalMovementValue, 0.2f, Time.deltaTime);
+            enemy.animator.SetFloat("Horizontal", horizontalMovementValue, 0.2f, Time.deltaTime);
         }
     }
 }

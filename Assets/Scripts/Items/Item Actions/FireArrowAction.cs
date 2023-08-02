@@ -28,8 +28,8 @@ public class FireArrowAction : ItemAction
         {
             // live arrow 생성
             GameObject liveArrow = Instantiate(character.characterInventoryManager.currentAmmo.liveAmmoModel, arrowInstantiationLocation.transform.position, player.cameraHandler.cameraPivotTranform.rotation);
-            Rigidbody rigidBody = liveArrow.GetComponentInChildren<Rigidbody>();
-            RangedProjectileDamageCollider damageCollider = liveArrow.GetComponentInChildren<RangedProjectileDamageCollider>();
+            Rigidbody rigidBody = liveArrow.GetComponent<Rigidbody>();
+            RangedProjectileDamageCollider damageCollider = liveArrow.GetComponent<RangedProjectileDamageCollider>();
 
             if (player.isAiming)
             {
@@ -81,8 +81,8 @@ public class FireArrowAction : ItemAction
                 (character.characterInventoryManager.currentAmmo.liveAmmoModel, 
                 arrowInstantiationLocation.transform.position, 
                 Quaternion.identity);
-            Rigidbody rigidBody = liveArrow.GetComponentInChildren<Rigidbody>();
-            RangedProjectileDamageCollider damageCollider = liveArrow.GetComponentInChildren<RangedProjectileDamageCollider>();
+            Rigidbody rigidBody = liveArrow.GetComponent<Rigidbody>();
+            RangedProjectileDamageCollider damageCollider = liveArrow.GetComponent<RangedProjectileDamageCollider>();
 
             // live arrow 속도
             if (enemy.currentTarget != null)

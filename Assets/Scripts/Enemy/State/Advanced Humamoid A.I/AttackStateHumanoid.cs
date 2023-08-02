@@ -73,6 +73,10 @@ public class AttackStateHumanoid : State
 
         if (willDoComboOnNextAttack && hasPerformedAttack)
         {
+            // TEMP
+            hasPerformedAttack = false;
+
+
             return this; // goes back up to perform the combo
         }
 

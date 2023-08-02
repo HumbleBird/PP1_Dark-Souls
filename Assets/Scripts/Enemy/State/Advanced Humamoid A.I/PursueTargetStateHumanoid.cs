@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using static Define;
 
 public class PursueTargetStateHumanoid : State
 {
@@ -14,9 +15,23 @@ public class PursueTargetStateHumanoid : State
 
     public override State Tick(EnemyManager enemy)
     {
+        if (enemy.combatStyle == AICombatStyle.swordAndShield)
+        {
+            return ProcessSwordAndShieldCombatStyle(enemy);
+        }
+        else if (enemy.combatStyle == AICombatStyle.Archer)
+        {
+            return ProcessArcherCombatSyle(enemy);
+        }
+        else
+        {
+            return this;
+        }
+    }
 
+    private State ProcessSwordAndShieldCombatStyle(EnemyManager enemy) 
+    {
         HandleRotateTowardTarget(enemy);
-
 
         if (enemy.isInteracting)
             return this;
@@ -32,7 +47,37 @@ public class PursueTargetStateHumanoid : State
             enemy.animator.SetFloat("Vertical", 1, 0.1f, Time.deltaTime);
         }
 
+        if (enemy.distancefromTarget <= enemy.MaximumAggroRadius)
+        {
+            return combatStanceState;
+        }
+        else
+        {
+            return this;
+        }
+    }
 
+    private State ProcessArcherCombatSyle(EnemyManager enemy) 
+    {
+        HandleRotateTowardTarget(enemy);
+
+        if (enemy.isInteracting)
+            return this;
+
+        if (enemy.isPreformingAction)
+        {
+            enemy.animator.SetFloat("Vertical", 0, 0.1f, Time.deltaTime);
+            return this;
+        }
+
+        if (enemy.distancefromTarget > enemy.MaximumAggroRadius)
+        {
+            if(!enemy.isStationaryArcher)
+            {
+                enemy.animator.SetFloat("Vertical", 1, 0.1f, Time.deltaTime);
+
+            }
+        }
 
         if (enemy.distancefromTarget <= enemy.MaximumAggroRadius)
         {
@@ -41,9 +86,7 @@ public class PursueTargetStateHumanoid : State
         else
         {
             return this;
-
         }
-
     }
 
     private void HandleRotateTowardTarget(EnemyManager enemyManager)
