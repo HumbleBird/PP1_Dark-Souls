@@ -28,7 +28,7 @@ public class AttackStateHumanoid : State
         pursueTargetState = GetComponent<PursueTargetStateHumanoid>();
     }
 
-    public override State Tick(EnemyManager enemy)
+    public override State Tick(AICharacterManager enemy)
     {
         if (enemy.combatStyle == AICombatStyle.swordAndShield)
         {
@@ -44,7 +44,7 @@ public class AttackStateHumanoid : State
         }
     }
 
-    private State ProcessSwordAndShieldCombatStyle(EnemyManager enemy)
+    private State ProcessSwordAndShieldCombatStyle(AICharacterManager enemy)
     {
 
         RotateTowardsTargetWhilstAttacking(enemy);
@@ -84,7 +84,7 @@ public class AttackStateHumanoid : State
         return rotateTowardsTargetState;
     }
 
-    private State ProcessArcherCombatSyle(EnemyManager enemy)
+    private State ProcessArcherCombatSyle(AICharacterManager enemy)
     {
         RotateTowardsTargetWhilstAttacking(enemy);
 
@@ -120,14 +120,14 @@ public class AttackStateHumanoid : State
 
     }
 
-    private void AttackTarget(EnemyManager enemy)
+    private void AttackTarget(AICharacterManager enemy)
     {
         currentAttack.PerformAttackAction(enemy);
         enemy.currentRecoveryTime = currentAttack.recoveryTime;
         hasPerformedAttack = true;
     }
 
-    private void AttackTargetWithCombo(EnemyManager enemy)
+    private void AttackTargetWithCombo(AICharacterManager enemy)
     {
         currentAttack.PerformAttackAction(enemy);
         willDoComboOnNextAttack = false;
@@ -136,7 +136,7 @@ public class AttackStateHumanoid : State
     }
 
 
-    private void RotateTowardsTargetWhilstAttacking(EnemyManager enemyManager)
+    private void RotateTowardsTargetWhilstAttacking(AICharacterManager enemyManager)
     {
         // Rotate manually
         if (enemyManager.canRotate && enemyManager.isInteracting)
@@ -155,7 +155,7 @@ public class AttackStateHumanoid : State
         }
     }
 
-    private void RollForComboChance(EnemyManager enemyManager)
+    private void RollForComboChance(AICharacterManager enemyManager)
     {
         float comboChance = Random.Range(0, 100);
 
@@ -180,7 +180,7 @@ public class AttackStateHumanoid : State
         hasPerformedAttack = false;
     }
 
-    private void FireAmmo(EnemyManager enemy)
+    private void FireAmmo(AICharacterManager enemy)
     {
         if(enemy.isHoldingArrow)
         {

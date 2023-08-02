@@ -13,11 +13,11 @@ public class AmbushState : State
 
     public PursueTargetState pursueTargetState;
 
-    public override State Tick(EnemyManager enemy)
+    public override State Tick(AICharacterManager enemy)
     {
         if(isSleeping && enemy.isInteracting == false)
         {
-            enemy.enemyAnimationManager.PlayTargetAnimation(sleepAnimation, true);
+            enemy.aiCharacterAnimationManager.PlayTargetAnimation(sleepAnimation, true);
         }
 
         #region Handle Target Detection
@@ -38,7 +38,7 @@ public class AmbushState : State
                 {
                     enemy.currentTarget = character;
                     isSleeping = false;
-                    enemy.enemyAnimationManager.PlayTargetAnimation(wakeAnimation, true);
+                    enemy.aiCharacterAnimationManager.PlayTargetAnimation(wakeAnimation, true);
                 }
             }
         }

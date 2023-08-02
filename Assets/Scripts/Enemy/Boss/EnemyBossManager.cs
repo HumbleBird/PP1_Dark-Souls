@@ -6,7 +6,7 @@ public class EnemyBossManager : MonoBehaviour
 {
     public string bossName;
 
-    EnemyManager enemy;
+    AICharacterManager enemy;
     UIBossHealthBar bossHealthBar;
 
     BossCombatStanceState bossCombatStanceState;
@@ -18,7 +18,7 @@ public class EnemyBossManager : MonoBehaviour
     {
         bossHealthBar = FindObjectOfType<UIBossHealthBar>();
 
-        enemy = GetComponent<EnemyManager>();
+        enemy = GetComponent<AICharacterManager>();
 
         bossCombatStanceState = GetComponentInChildren<BossCombatStanceState>();
     }
@@ -26,7 +26,7 @@ public class EnemyBossManager : MonoBehaviour
     private void Start()
     {
         bossHealthBar.SetBossName(bossName);
-        bossHealthBar.SetBossMaxHealth(enemy.enemyStatsManager.maxHealth);
+        bossHealthBar.SetBossMaxHealth(enemy.aiCharacterStatsManager.maxHealth);
     }
 
     public void UpdateBossHealthBar(int currentHealth, int maxHealth)
@@ -44,7 +44,7 @@ public class EnemyBossManager : MonoBehaviour
     {
         enemy.animator.SetBool("isInvulnerable", true);
         enemy.animator.SetBool("isPhaseShifting", true);
-        enemy.enemyAnimationManager.PlayTargetAnimation("Phase Shift", true);
+        enemy.aiCharacterAnimationManager.PlayTargetAnimation("Phase Shift", true);
         bossCombatStanceState.hasPhaseShifted = true;
     }
 }

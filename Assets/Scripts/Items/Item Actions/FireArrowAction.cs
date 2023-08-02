@@ -74,7 +74,7 @@ public class FireArrowAction : ItemAction
 
         else
         {
-            EnemyManager enemy = character as EnemyManager;
+            AICharacterManager enemy = character as AICharacterManager;
 
             // live arrow »ý¼º
             GameObject liveArrow = Instantiate

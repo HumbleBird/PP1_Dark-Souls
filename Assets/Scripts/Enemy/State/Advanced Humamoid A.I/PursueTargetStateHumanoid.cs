@@ -13,7 +13,7 @@ public class PursueTargetStateHumanoid : State
         combatStanceState = GetComponent<CombatStanceStateHumanoid>();
     }
 
-    public override State Tick(EnemyManager enemy)
+    public override State Tick(AICharacterManager enemy)
     {
         if (enemy.combatStyle == AICombatStyle.swordAndShield)
         {
@@ -29,7 +29,7 @@ public class PursueTargetStateHumanoid : State
         }
     }
 
-    private State ProcessSwordAndShieldCombatStyle(EnemyManager enemy) 
+    private State ProcessSwordAndShieldCombatStyle(AICharacterManager enemy) 
     {
         HandleRotateTowardTarget(enemy);
 
@@ -57,7 +57,7 @@ public class PursueTargetStateHumanoid : State
         }
     }
 
-    private State ProcessArcherCombatSyle(EnemyManager enemy) 
+    private State ProcessArcherCombatSyle(AICharacterManager enemy) 
     {
         HandleRotateTowardTarget(enemy);
 
@@ -89,7 +89,7 @@ public class PursueTargetStateHumanoid : State
         }
     }
 
-    private void HandleRotateTowardTarget(EnemyManager enemyManager)
+    private void HandleRotateTowardTarget(AICharacterManager enemyManager)
     {
         // Rotate manually
         if (enemyManager.isPreformingAction)
@@ -111,11 +111,11 @@ public class PursueTargetStateHumanoid : State
         else
         {
             Vector3 relativeDirection = transform.InverseTransformDirection(enemyManager.navMeshAgent.desiredVelocity);
-            Vector3 targetVelocity = enemyManager.enemyRigidbody.velocity;
+            Vector3 targetVelocity = enemyManager.aiCharacterRigidbody.velocity;
 
             enemyManager.navMeshAgent.enabled = true;
             enemyManager.navMeshAgent.SetDestination(enemyManager.currentTarget.transform.position);
-            enemyManager.enemyRigidbody.velocity = targetVelocity;
+            enemyManager.aiCharacterRigidbody.velocity = targetVelocity;
             enemyManager.transform.rotation = Quaternion.Slerp(enemyManager.transform.rotation, enemyManager.navMeshAgent.transform.rotation, enemyManager.rotationSpeed / Time.deltaTime);
         }
     }

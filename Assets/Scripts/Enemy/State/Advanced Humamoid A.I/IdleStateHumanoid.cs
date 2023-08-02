@@ -14,7 +14,7 @@ public class IdleStateHumanoid : State
     public LayerMask detectionLayer;
     public LayerMask layerThatBlockLineOfSight;
 
-    public override State Tick(EnemyManager aiCharacter)
+    public override State Tick(AICharacterManager aiCharacter)
     {
         // detection radius 반경 내의 적을 탐색
         Collider[] colliders = Physics.OverlapSphere(transform.position, aiCharacter.detectionRadius, detectionLayer);
@@ -26,7 +26,7 @@ public class IdleStateHumanoid : State
             // 적을 찾아 냈다면 같은 팀인지 아닌지를 판별 후 다음 스텝으로
             if (targetCharacter != null)
             {
-                if (targetCharacter.characterStatsManager.teamIDNumber != aiCharacter.enemyStatsManager.teamIDNumber)
+                if (targetCharacter.characterStatsManager.teamIDNumber != aiCharacter.aiCharacterStatsManager.teamIDNumber)
                 {
                     Vector3 TargetDirection = targetCharacter.transform.position - transform.position;
                     float viewableAngle = Vector3.Angle(TargetDirection, transform.forward);

@@ -81,7 +81,7 @@ public class RangedProjectileDamageCollider : DamageCollider
 
             gameObject.transform.position = collision.GetContact(0).point;
             gameObject.transform.rotation = Quaternion.LookRotation(transform.forward);
-            //gameObject.transform.parent = collision.collider.transform;
+            gameObject.transform.parent = collision.collider.transform;
         }
 
         //Destroy(transform.root.gameObject);

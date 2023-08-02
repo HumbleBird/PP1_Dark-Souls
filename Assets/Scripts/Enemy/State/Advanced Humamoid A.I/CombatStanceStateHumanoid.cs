@@ -32,7 +32,7 @@ public class CombatStanceStateHumanoid : State
         attackState = GetComponent<AttackStateHumanoid>();
     }
 
-    public override State Tick(EnemyManager enemy)
+    public override State Tick(AICharacterManager enemy)
     {
         if(enemy.combatStyle == AICombatStyle.swordAndShield)
         {
@@ -48,7 +48,7 @@ public class CombatStanceStateHumanoid : State
         }
     }
 
-    private State ProcessSwordAndShieldCombatStyle(EnemyManager enemy)
+    private State ProcessSwordAndShieldCombatStyle(AICharacterManager enemy)
     {
 
 
@@ -71,7 +71,7 @@ public class CombatStanceStateHumanoid : State
         if (!randomDestinationSet)
         {
             randomDestinationSet = true;
-            DecideCirclingAction(enemy.enemyAnimationManager);
+            DecideCirclingAction(enemy.aiCharacterAnimationManager);
         }
 
         if (enemy.allowAIToPerformParry)
@@ -134,7 +134,7 @@ public class CombatStanceStateHumanoid : State
         return this;
     }
 
-    private State ProcessArcherCombatSyle(EnemyManager enemy)
+    private State ProcessArcherCombatSyle(AICharacterManager enemy)
     {
 
 
@@ -159,7 +159,7 @@ public class CombatStanceStateHumanoid : State
         if (!randomDestinationSet)
         {
             randomDestinationSet = true;
-            DecideCirclingAction(enemy.enemyAnimationManager);
+            DecideCirclingAction(enemy.aiCharacterAnimationManager);
         }
 
         if (enemy.allowAIToPerformDodge)
@@ -202,7 +202,7 @@ public class CombatStanceStateHumanoid : State
 
     }
 
-    protected void HandleRotateTowardTarget(EnemyManager enemyManager)
+    protected void HandleRotateTowardTarget(AICharacterManager enemyManager)
     {
         // Rotate manually
         if (enemyManager.isPreformingAction)
@@ -224,16 +224,16 @@ public class CombatStanceStateHumanoid : State
         else
         {
             Vector3 relativeDirection = transform.InverseTransformDirection(enemyManager.navMeshAgent.desiredVelocity);
-            Vector3 targetVelocity = enemyManager.enemyRigidbody.velocity;
+            Vector3 targetVelocity = enemyManager.aiCharacterRigidbody.velocity;
 
             enemyManager.navMeshAgent.enabled = true;
             enemyManager.navMeshAgent.SetDestination(enemyManager.currentTarget.transform.position);
-            enemyManager.enemyRigidbody.velocity = targetVelocity;
+            enemyManager.aiCharacterRigidbody.velocity = targetVelocity;
             enemyManager.transform.rotation = Quaternion.Slerp(enemyManager.transform.rotation, enemyManager.navMeshAgent.transform.rotation, enemyManager.rotationSpeed / Time.deltaTime);
         }
     }
 
-    protected void DecideCirclingAction(EnemyAnimationManager enemyAnimationManager)
+    protected void DecideCirclingAction(AICharacterAnimationManager enemyAnimationManager)
     {
         WalkAroundTarget();
     }
@@ -254,7 +254,7 @@ public class CombatStanceStateHumanoid : State
         }
     }
 
-    protected virtual void GetNewAttack(EnemyManager enemy)
+    protected virtual void GetNewAttack(AICharacterManager enemy)
     {
         int maxScore = 0;
 
@@ -301,7 +301,7 @@ public class CombatStanceStateHumanoid : State
     }
 
     // AI Rolls
-    private void RollForBlockChance(EnemyManager enemy)
+    private void RollForBlockChance(AICharacterManager enemy)
     {
         int Chance = Random.Range(0, 100);
 
@@ -315,7 +315,7 @@ public class CombatStanceStateHumanoid : State
         }
     }
 
-    private void RollForDodgeChance(EnemyManager enemy)
+    private void RollForDodgeChance(AICharacterManager enemy)
     {
         int Chance = Random.Range(0, 100);
 
@@ -329,7 +329,7 @@ public class CombatStanceStateHumanoid : State
         }
     }
 
-    private void RollForParryChance(EnemyManager enemy)
+    private void RollForParryChance(AICharacterManager enemy)
     {
         int Chance = Random.Range(0, 100);
 
@@ -357,7 +357,7 @@ public class CombatStanceStateHumanoid : State
         willPerformParry = false;
     }
 
-    private void BlockUsingOffHand(EnemyManager enemy)
+    private void BlockUsingOffHand(AICharacterManager enemy)
     {
         if(enemy.isBlocking == false)
         {
@@ -370,7 +370,7 @@ public class CombatStanceStateHumanoid : State
         }
     }
 
-    private void Dodge(EnemyManager enemy)
+    private void Dodge(AICharacterManager enemy)
     {
         if(!hasPerformedDodge)
         {
@@ -402,7 +402,7 @@ public class CombatStanceStateHumanoid : State
         }
     }
 
-    private void DrawArrow(EnemyManager enemy)
+    private void DrawArrow(AICharacterManager enemy)
     {
         if(!enemy.isTwoHandingWeapon)
         {
@@ -417,14 +417,14 @@ public class CombatStanceStateHumanoid : State
         }
     }
 
-    private void AimAtTargetBeforeFiring(EnemyManager enemy)
+    private void AimAtTargetBeforeFiring(AICharacterManager enemy)
     {
         float timeUntileAmmoIsShortAtTarget = Random.Range(enemy.minimumTimeToAimAtTarget, enemy.maximumTimeToAimAtTarget);
         enemy.currentRecoveryTime = timeUntileAmmoIsShortAtTarget;
     }
 
                 
-    private void ParryCurrentTarget(EnemyManager enemy)
+    private void ParryCurrentTarget(AICharacterManager enemy)
     {
         if(enemy.currentTarget.canBeParryied)
         {
@@ -432,12 +432,12 @@ public class CombatStanceStateHumanoid : State
             {
                 hasPerformedParry = true;
                 enemy.isParrying = true;
-                enemy.enemyAnimationManager.PlayTargetAnimation("Parry_01", true);
+                enemy.aiCharacterAnimationManager.PlayTargetAnimation("Parry_01", true);
             }
         }
     }
 
-    private void CheckForRipsote(EnemyManager enemy)
+    private void CheckForRipsote(AICharacterManager enemy)
     {
         if (enemy.isInteracting)
         {
@@ -457,13 +457,13 @@ public class CombatStanceStateHumanoid : State
 
             if(!enemy.isInteracting && !enemy.currentTarget.isBeingRiposted && !enemy.currentTarget.isBeingBackstabbed)
             {
-                enemy.enemyRigidbody.velocity = Vector3.zero;
+                enemy.aiCharacterRigidbody.velocity = Vector3.zero;
                 enemy.animator.SetFloat("Vertical", 0);
             }
         }
     }
 
-    private void HandleMovement(EnemyManager enemy)
+    private void HandleMovement(AICharacterManager enemy)
     {
         if(enemy.distancefromTarget <= enemy.stoppingDistance)
         {

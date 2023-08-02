@@ -4,19 +4,18 @@ using UnityEngine;
 using UnityEngine.AI;
 using static Define;
 
-public class EnemyManager : CharacterManager
+public class AICharacterManager : CharacterManager
 {
-
-    public EnemyBossManager enemyBossManager;
-    public EnemyLocomotionManager enemyLocomotionManager;
-    public EnemyAnimationManager enemyAnimationManager;
-    public EnemyStatsManager enemyStatsManager;
-    public EnemyEffectsManager enemyEffectsManager;
+    public EnemyBossManager aiCharacterBossManager;
+    public AICharacterLocomotionManager aiCharacterLocomotionManager;
+    public AICharacterAnimationManager aiCharacterAnimationManager;
+    public AICharacterStatsManager   aiCharacterStatsManager;
+    public AICharacterEffectsManager aiCharacterEffectsManager;
 
     public State currentState;
     public CharacterManager currentTarget;
     public NavMeshAgent navMeshAgent;
-    public Rigidbody enemyRigidbody;
+    public Rigidbody aiCharacterRigidbody;
 
     public bool isPreformingAction;
     public float rotationSpeed = 25f;
@@ -48,6 +47,13 @@ public class EnemyManager : CharacterManager
     public float minimumTimeToAimAtTarget = 3;
     public float maximumTimeToAimAtTarget = 6;
 
+    [Header("A.I Companion Settings")]
+    public float maxDistanceFromCompanion;          // 플레이어와 떨어질 수 있는 최대 거리
+    public float minimumDistanceFromCompanion;      // 플레이어와 떨어질 수 있는 최소 거리
+    public float returnDistanceFromCompanion = 2;   // 플레이어가 동료에게 너무 가깝게 접근할 때 동료가  떨어지는 거리
+    public float distanceFromCompanion;
+    public CharacterManager companion;
+
     [Header("A.I Target Information")]
     public float distancefromTarget;
     public Vector3 targetDirection;
@@ -56,12 +62,12 @@ public class EnemyManager : CharacterManager
     protected override void Awake()
     {
         base.Awake();
-        enemyLocomotionManager = GetComponent<EnemyLocomotionManager>();
-        enemyBossManager = GetComponent<EnemyBossManager>();
-        enemyAnimationManager = GetComponent<EnemyAnimationManager>();
-        enemyRigidbody = GetComponent<Rigidbody>();
-        enemyStatsManager = GetComponent<EnemyStatsManager>();
-        enemyEffectsManager = GetComponent<EnemyEffectsManager>();
+        aiCharacterLocomotionManager = GetComponent<AICharacterLocomotionManager>();
+        aiCharacterBossManager = GetComponent<EnemyBossManager>();
+        aiCharacterAnimationManager = GetComponent<AICharacterAnimationManager>();
+        aiCharacterRigidbody = GetComponent<Rigidbody>();
+        aiCharacterStatsManager = GetComponent<AICharacterStatsManager>();
+        aiCharacterEffectsManager = GetComponent<AICharacterEffectsManager>();
 
         navMeshAgent = GetComponentInChildren<NavMeshAgent>();
         navMeshAgent.enabled = false;
@@ -69,7 +75,7 @@ public class EnemyManager : CharacterManager
 
     private void Start()
     {
-        enemyRigidbody.isKinematic = false;
+        aiCharacterRigidbody.isKinematic = false;
     }
 
     protected override void Update()
@@ -90,13 +96,18 @@ public class EnemyManager : CharacterManager
             targetDirection = currentTarget.transform.position - transform.position;
             viewableAngle = Vector3.Angle(targetDirection, transform.forward);
         }
+
+        if (companion != null)
+        {
+            distanceFromCompanion = Vector3.Distance(companion.transform.position, transform.position);
+        }
     }
 
     protected override void FixedUpdate()
     {
         base.FixedUpdate();
 
-        enemyEffectsManager.HandleAllBuildUpEffects();
+        aiCharacterEffectsManager.HandleAllBuildUpEffects();
     }
 
     private void LateUpdate()

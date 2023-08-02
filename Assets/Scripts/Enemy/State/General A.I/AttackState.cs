@@ -13,12 +13,12 @@ public class AttackState : State
     public RotateTowardsTargetState rotateTowardsTargetState;
     public CombatStanceState combatStanceState;
     public PursueTargetState pursueTargetState;
-    public EnemyAttackAction currentAttack;
+    public AICharacterAttackAction currentAttack;
 
     bool willDoComboOnNextAttack = false;
     public bool hasPerformedAttack = false;
 
-    public override State Tick(EnemyManager enemy)
+    public override State Tick(AICharacterManager enemy)
     {
         float distancefromTarget = Vector3.Distance(enemy.currentTarget.transform.position, enemy.transform.position);
 
@@ -54,29 +54,29 @@ public class AttackState : State
         return rotateTowardsTargetState;
     }
 
-    private void AttackTarget(EnemyManager enemy)
+    private void AttackTarget(AICharacterManager enemy)
     {
         enemy.isUsingRightHand = currentAttack.isRightHandedAction;
         enemy.isUsingLeftHand = !currentAttack.isRightHandedAction;
-        enemy.enemyAnimationManager.PlayTargetAnimation(currentAttack.actionAnimation, true);
-        enemy.enemyAnimationManager.PlayWeaponTrailFX();
+        enemy.aiCharacterAnimationManager.PlayTargetAnimation(currentAttack.actionAnimation, true);
+        enemy.aiCharacterAnimationManager.PlayWeaponTrailFX();
         enemy.currentRecoveryTime = currentAttack.recoveryTime;
         hasPerformedAttack = true;
     }
 
-    private void AttackTargetWithCombo(EnemyManager enemy)
+    private void AttackTargetWithCombo(AICharacterManager enemy)
     {
         enemy.isUsingRightHand = currentAttack.isRightHandedAction;
         enemy.isUsingLeftHand = !currentAttack.isRightHandedAction;
         willDoComboOnNextAttack = false;
-        enemy.enemyAnimationManager.PlayTargetAnimation(currentAttack.actionAnimation, true);
-        enemy.enemyAnimationManager.PlayWeaponTrailFX();
+        enemy.aiCharacterAnimationManager.PlayTargetAnimation(currentAttack.actionAnimation, true);
+        enemy.aiCharacterAnimationManager.PlayWeaponTrailFX();
         enemy.currentRecoveryTime = currentAttack.recoveryTime;
         currentAttack = null;
     }
 
 
-    private void RotateTowardsTargetWhilstAttacking(EnemyManager enemyManager)
+    private void RotateTowardsTargetWhilstAttacking(AICharacterManager enemyManager)
     {
         // Rotate manually
         if (enemyManager.canRotate && enemyManager.isInteracting)
@@ -95,7 +95,7 @@ public class AttackState : State
         }
     }
 
-    private void RollForComboChance(EnemyManager enemyManager)
+    private void RollForComboChance(AICharacterManager enemyManager)
     {
         float comboChance = Random.Range(0, 100);
 

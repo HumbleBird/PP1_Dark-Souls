@@ -2,14 +2,14 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class EnemyAnimationManager : CharacterAnimatorManager
+public class AICharacterAnimationManager : CharacterAnimatorManager
 {
-    EnemyManager enemy;
+    AICharacterManager aiCharacter;
 
     protected override  void Awake()
     {
         base.Awake();
-        enemy = GetComponent<EnemyManager>();
+        aiCharacter = GetComponent<AICharacterManager>();
     }
 
     public void AwardSoulsOnDeath()
@@ -34,26 +34,26 @@ public class EnemyAnimationManager : CharacterAnimatorManager
     public void InstantiateBossParticleFX()
     {
         BossFXTransform bossFXTransform = GetComponentInChildren<BossFXTransform>();
-        GameObject phaseFX = Instantiate(enemy.enemyBossManager.particleFX, bossFXTransform.transform);
+        GameObject phaseFX = Instantiate(aiCharacter.aiCharacterBossManager.particleFX, bossFXTransform.transform);
     }
 
     public void PlayWeaponTrailFX()
     {
-        enemy.enemyEffectsManager.PlayWeaponFX(false);
+        aiCharacter.aiCharacterEffectsManager.PlayWeaponFX(false);
     }
 
     private void OnAnimatorMove()
     {
         float delta = Time.deltaTime;
-        enemy.enemyRigidbody.drag = 0;
-        Vector3 deltaPosition = enemy.animator.deltaPosition;
+        aiCharacter.aiCharacterRigidbody.drag = 0;
+        Vector3 deltaPosition = aiCharacter.animator.deltaPosition;
         deltaPosition.y = 0;
         Vector3 velocity = deltaPosition / delta;
-        enemy.enemyRigidbody.velocity = velocity;
+        aiCharacter.aiCharacterRigidbody.velocity = velocity;
 
-        if(enemy.isRotatingWithRootMotion)
+        if(aiCharacter.isRotatingWithRootMotion)
         {
-            enemy.transform.rotation *= enemy.animator.deltaRotation;
+            aiCharacter.transform.rotation *= aiCharacter.animator.deltaRotation;
         }
     }
 }

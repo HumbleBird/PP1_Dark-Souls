@@ -2,9 +2,9 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class EnemyLocomotionManager : MonoBehaviour
+public class AICharacterLocomotionManager : MonoBehaviour
 {
-    EnemyManager enemy;
+    AICharacterManager aiCharacter;
 
     public CapsuleCollider characterCollider;
     public CapsuleCollider characterCollisionBlockerCollider;
@@ -14,7 +14,7 @@ public class EnemyLocomotionManager : MonoBehaviour
     // Start is called before the first frame update
     private void Awake()
     {
-        enemy = GetComponent<EnemyManager>();
+        aiCharacter = GetComponent<AICharacterManager>();
     }
 
 

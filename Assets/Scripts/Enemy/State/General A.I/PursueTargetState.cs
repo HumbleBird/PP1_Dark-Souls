@@ -10,7 +10,7 @@ public class PursueTargetState : State
 {
     public CombatStanceState combatStanceState;
 
-    public override State Tick(EnemyManager enemy)
+    public override State Tick(AICharacterManager enemy)
     {
 
         HandleRotateTowardTarget(enemy);
@@ -44,7 +44,7 @@ public class PursueTargetState : State
 
     }
 
-    private void HandleRotateTowardTarget(EnemyManager enemyManager)
+    private void HandleRotateTowardTarget(AICharacterManager enemyManager)
     {
         // Rotate manually
         if (enemyManager.isPreformingAction)
@@ -66,11 +66,11 @@ public class PursueTargetState : State
         else
         {
             Vector3 relativeDirection = transform.InverseTransformDirection(enemyManager.navMeshAgent.desiredVelocity);
-            Vector3 targetVelocity = enemyManager.enemyRigidbody.velocity;
+            Vector3 targetVelocity = enemyManager.aiCharacterRigidbody.velocity;
 
             enemyManager.navMeshAgent.enabled = true;
             enemyManager.navMeshAgent.SetDestination(enemyManager.currentTarget.transform.position);
-            enemyManager.enemyRigidbody.velocity = targetVelocity;
+            enemyManager.aiCharacterRigidbody.velocity = targetVelocity;
             enemyManager.transform.rotation = Quaternion.Slerp(enemyManager.transform.rotation, enemyManager.navMeshAgent.transform.rotation, enemyManager.rotationSpeed / Time.deltaTime);
         }
     }

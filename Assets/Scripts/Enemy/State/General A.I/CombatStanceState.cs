@@ -11,14 +11,14 @@ using UnityEngine;
 public class CombatStanceState : State
 {
     public AttackState attackState;
-    public EnemyAttackAction[] enemyAttacks;
+    public AICharacterAttackAction[] enemyAttacks;
     public PursueTargetState pursueTargetState;
 
     protected bool randomDestinationSet = true;
     protected float verticalMovementValue = 0;
     protected float horizontalMovementValue = 0;
 
-    public override State Tick(EnemyManager enemy)
+    public override State Tick(AICharacterManager enemy)
     {
         enemy.animator.SetFloat("Vertical", verticalMovementValue, 0.2f, Time.deltaTime);
         enemy.animator.SetFloat("Horizontal", horizontalMovementValue, 0.2f, Time.deltaTime);
@@ -39,7 +39,7 @@ public class CombatStanceState : State
         if(!randomDestinationSet)
         {
             randomDestinationSet = true;
-            DecideCirclingAction(enemy.enemyAnimationManager);
+            DecideCirclingAction(enemy.aiCharacterAnimationManager);
         }
 
         HandleRotateTowardTarget(enemy);
@@ -57,7 +57,7 @@ public class CombatStanceState : State
         return this;
     }
 
-    protected void HandleRotateTowardTarget(EnemyManager enemyManager)
+    protected void HandleRotateTowardTarget(AICharacterManager enemyManager)
     {
         // Rotate manually
         if (enemyManager.isPreformingAction)
@@ -79,21 +79,21 @@ public class CombatStanceState : State
         else
         {
             Vector3 relativeDirection = transform.InverseTransformDirection(enemyManager.navMeshAgent.desiredVelocity);
-            Vector3 targetVelocity = enemyManager.enemyRigidbody.velocity;
+            Vector3 targetVelocity = enemyManager.aiCharacterRigidbody.velocity;
 
             enemyManager.navMeshAgent.enabled = true;
             enemyManager.navMeshAgent.SetDestination(enemyManager.currentTarget.transform.position);
-            enemyManager.enemyRigidbody.velocity = targetVelocity;
+            enemyManager.aiCharacterRigidbody.velocity = targetVelocity;
             enemyManager.transform.rotation = Quaternion.Slerp(enemyManager.transform.rotation, enemyManager.navMeshAgent.transform.rotation, enemyManager.rotationSpeed / Time.deltaTime);
         }
     }
 
-    protected void DecideCirclingAction(EnemyAnimationManager enemyAnimationManager)
+    protected void DecideCirclingAction(AICharacterAnimationManager enemyAnimationManager)
     {
         WalkAroundTarget(enemyAnimationManager);
     }
 
-    protected void WalkAroundTarget(EnemyAnimationManager enemyAnimationManager)
+    protected void WalkAroundTarget(AICharacterAnimationManager enemyAnimationManager)
     {
         verticalMovementValue = 0.5f;
 
@@ -112,13 +112,13 @@ public class CombatStanceState : State
 
     }
 
-    protected virtual void GetNewAttack(EnemyManager enemy)
+    protected virtual void GetNewAttack(AICharacterManager enemy)
     {
         int maxScore = 0;
 
         for (int i = 0; i < enemyAttacks.Length; i++)
         {
-            EnemyAttackAction enemyAttackAction = enemyAttacks[i];
+            AICharacterAttackAction enemyAttackAction = enemyAttacks[i];
 
             if (enemy.distancefromTarget <= enemyAttackAction.maximumDistanceNeededToAttack
                 && enemy.distancefromTarget > enemyAttackAction.minimumDistanceNeededToAttack)
@@ -136,7 +136,7 @@ public class CombatStanceState : State
 
         for (int i = 0; i < enemyAttacks.Length; i++)
         {
-            EnemyAttackAction enemyAttackAction = enemyAttacks[i];
+            AICharacterAttackAction enemyAttackAction = enemyAttacks[i];
 
             if (enemy.distancefromTarget <= enemyAttackAction.maximumDistanceNeededToAttack
                 && enemy.distancefromTarget > enemyAttackAction.minimumDistanceNeededToAttack)
