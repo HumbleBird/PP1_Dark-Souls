@@ -66,6 +66,8 @@ public class DamageCollider : MonoBehaviour
 
             if (enemyManager != null)
             {
+                AICharacterManager aiCharacter = enemyManager as AICharacterManager;
+
                 if (charactersDamageDuringThisCalculation.Contains(enemyManager))
                     return;
 
@@ -77,10 +79,7 @@ public class DamageCollider : MonoBehaviour
                 CheckForParry(enemyManager);
 
                 CheckForBlock(enemyManager);
-            }
 
-            if (enemyManager.characterStatsManager != null)
-            {
                 if (enemyManager.characterStatsManager.teamIDNumber == teamIDNumber)
                     return;
 
@@ -93,13 +92,22 @@ public class DamageCollider : MonoBehaviour
                 enemyManager.characterStatsManager.poiseResetTimer = enemyManager.characterStatsManager.totalPoiseResetTime;
                 enemyManager.characterStatsManager.totalPoiseDefence = enemyManager.characterStatsManager.totalPoiseDefence - poiseBreak;
 
+                // 무기 콜라이더가 어디 부분에서 처음 부딪치는지 탐지
                 Vector3 contactPoint = other.gameObject.GetComponent<Collider>().ClosestPointOnBounds(transform.position);
                 float directionHitFrom = Vector3.SignedAngle(characterManager.transform.forward, enemyManager.transform.forward, Vector3.up);
                 ChooseWhichDirectionDamageCameFrom(directionHitFrom);
                 enemyManager.characterEffectsManager.PlayBloodSplatterFX(contactPoint);
                 enemyManager.characterEffectsManager.InterruptEffect();
 
+                // 딜 계산
                 DealDamage(enemyManager.characterStatsManager);
+
+                if(aiCharacter != null)
+                {
+                    // 타겟이 A.I라면, ai가 새로운 타겟은 리서치. 새 타겟을 공격
+                    Debug.Log(characterManager.gameObject.name);
+                    aiCharacter.currentTarget = characterManager;
+                }
             }
         }
 

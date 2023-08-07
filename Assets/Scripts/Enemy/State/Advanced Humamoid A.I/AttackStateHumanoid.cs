@@ -11,32 +11,30 @@ using static Define;
 
 public class AttackStateHumanoid : State
 {
-    public RotateTowardsTargetStateHumanoid rotateTowardsTargetState;
-    public CombatStanceStateHumanoid combatStanceState;
-    public PursueTargetStateHumanoid pursueTargetState;
-    //public EatPantState eatPantState;
+    RotateTowardsTargetStateHumanoid rotateTowardsTargetState;
+    CombatStanceStateHumanoid combatStanceState;
+    PursueTargetStateHumanoid pursueTargetState;
     public ItemBasedAttackAction currentAttack;
 
-    bool willDoComboOnNextAttack = false;
+    public bool willDoComboOnNextAttack = false;
     public bool hasPerformedAttack = false;
 
     private void Awake()
     {
-        //eatPantState = FindObjectOfType<EatPantState>();
         rotateTowardsTargetState = GetComponent<RotateTowardsTargetStateHumanoid>();
         combatStanceState = GetComponent<CombatStanceStateHumanoid>();
         pursueTargetState = GetComponent<PursueTargetStateHumanoid>();
     }
 
-    public override State Tick(AICharacterManager enemy)
+    public override State Tick(AICharacterManager aiCharacter)
     {
-        if (enemy.combatStyle == AICombatStyle.swordAndShield)
+        if (aiCharacter.combatStyle == AICombatStyle.swordAndShield)
         {
-            return ProcessSwordAndShieldCombatStyle(enemy);
+            return ProcessSwordAndShieldCombatStyle(aiCharacter);
         }
-        else if (enemy.combatStyle == AICombatStyle.Archer)
+        else if (aiCharacter.combatStyle == AICombatStyle.Archer)
         {
-            return ProcessArcherCombatSyle(enemy);
+            return ProcessArcherCombatSyle(aiCharacter);
         }
         else
         {
@@ -44,20 +42,20 @@ public class AttackStateHumanoid : State
         }
     }
 
-    private State ProcessSwordAndShieldCombatStyle(AICharacterManager enemy)
+    private State ProcessSwordAndShieldCombatStyle(AICharacterManager aiCharacter)
     {
 
-        RotateTowardsTargetWhilstAttacking(enemy);
+        RotateTowardsTargetWhilstAttacking(aiCharacter);
 
-        if (enemy.distancefromTarget > enemy.MaximumAggroRadius)
+        if (aiCharacter.distancefromTarget > aiCharacter.MaximumAggroRadius)
         {
             return pursueTargetState;
         }
 
-        if (willDoComboOnNextAttack && enemy.canDoCombo)
+        if (willDoComboOnNextAttack && aiCharacter.canDoCombo)
         {
             // Attack with combo
-            AttackTargetWithCombo(enemy);
+            AttackTargetWithCombo(aiCharacter);
 
             // set cool down time
         }
@@ -65,18 +63,14 @@ public class AttackStateHumanoid : State
         if (!hasPerformedAttack)
         {
             //Attack
-            AttackTarget(enemy);
+            AttackTarget(aiCharacter);
 
             // Roll for a combo change
-            RollForComboChance(enemy);
+            RollForComboChance(aiCharacter);
         }
 
         if (willDoComboOnNextAttack && hasPerformedAttack)
         {
-            // TEMP
-            hasPerformedAttack = false;
-
-
             return this; // goes back up to perform the combo
         }
 
@@ -84,35 +78,36 @@ public class AttackStateHumanoid : State
         return rotateTowardsTargetState;
     }
 
-    private State ProcessArcherCombatSyle(AICharacterManager enemy)
+    private State ProcessArcherCombatSyle(AICharacterManager aiCharacter)
     {
-        RotateTowardsTargetWhilstAttacking(enemy);
+        RotateTowardsTargetWhilstAttacking(aiCharacter);
 
-        if (enemy.isInteracting)
+        if (aiCharacter.isInteracting)
             return this;
 
-        if(enemy.isHoldingArrow == false)
+        if(aiCharacter.isHoldingArrow == false)
         {
             ResetStateFlags();
             return combatStanceState;
         }
 
-        if (enemy.currentTarget.isDead)
+        if (aiCharacter.currentTarget.isDead)
         {
             ResetStateFlags();
-            enemy.currentTarget = null;
+            aiCharacter.currentTarget = null;
             return this;
         }
 
-        if (enemy.distancefromTarget > enemy.MaximumAggroRadius)
+        if (aiCharacter.distancefromTarget > aiCharacter.MaximumAggroRadius)
         {
             ResetStateFlags();
             return pursueTargetState;
         }
 
-        if (!hasPerformedAttack && enemy.isHoldingArrow)
+        if (!hasPerformedAttack)// && aiCharacter.isHoldingArrow)
         {
-            FireAmmo(enemy);
+            FireAmmo(aiCharacter);
+            return this;
         }
 
         ResetStateFlags();
@@ -120,28 +115,28 @@ public class AttackStateHumanoid : State
 
     }
 
-    private void AttackTarget(AICharacterManager enemy)
+    private void AttackTarget(AICharacterManager aiCharacter)
     {
-        currentAttack.PerformAttackAction(enemy);
-        enemy.currentRecoveryTime = currentAttack.recoveryTime;
+        currentAttack.PerformAttackAction(aiCharacter);
+        aiCharacter.currentRecoveryTime = currentAttack.recoveryTime;
         hasPerformedAttack = true;
     }
 
-    private void AttackTargetWithCombo(AICharacterManager enemy)
+    private void AttackTargetWithCombo(AICharacterManager aiCharacter)
     {
-        currentAttack.PerformAttackAction(enemy);
+        currentAttack.PerformAttackAction(aiCharacter);
         willDoComboOnNextAttack = false;
-        enemy.currentRecoveryTime = currentAttack.recoveryTime;
+        aiCharacter.currentRecoveryTime = currentAttack.recoveryTime;
         currentAttack = null;
     }
 
 
-    private void RotateTowardsTargetWhilstAttacking(AICharacterManager enemyManager)
+    private void RotateTowardsTargetWhilstAttacking(AICharacterManager aiCharacter)
     {
         // Rotate manually
-        if (enemyManager.canRotate && enemyManager.isInteracting)
+        if (aiCharacter.canRotate && aiCharacter.isInteracting)
         {
-            Vector3 direction = enemyManager.currentTarget.transform.position - transform.position;
+            Vector3 direction = aiCharacter.currentTarget.transform.position - transform.position;
             direction.y = 0;
             direction.Normalize();
 
@@ -151,15 +146,15 @@ public class AttackStateHumanoid : State
             }
 
             Quaternion targetRotation = Quaternion.LookRotation(direction);
-            enemyManager.transform.rotation = Quaternion.Slerp(transform.rotation, targetRotation, enemyManager.rotationSpeed / Time.deltaTime);
+            aiCharacter.transform.rotation = Quaternion.Slerp(transform.rotation, targetRotation, aiCharacter.rotationSpeed / Time.deltaTime);
         }
     }
 
-    private void RollForComboChance(AICharacterManager enemyManager)
+    private void RollForComboChance(AICharacterManager aiCharacter)
     {
         float comboChance = Random.Range(0, 100);
 
-        if(enemyManager.allowAIToPerformCombos && comboChance <= enemyManager.comboLikelyHood)
+        if(aiCharacter.allowAIToPerformCombos && comboChance <= aiCharacter.comboLikelyHood)
         {
             if(currentAttack.actionCanCombo)
             {
@@ -180,13 +175,13 @@ public class AttackStateHumanoid : State
         hasPerformedAttack = false;
     }
 
-    private void FireAmmo(AICharacterManager enemy)
+    private void FireAmmo(AICharacterManager aiCharacter)
     {
-        if(enemy.isHoldingArrow)
+        if(aiCharacter.isHoldingArrow)
         {
             hasPerformedAttack = true;
-            enemy.characterInventoryManager.currentItemBeingUsed = enemy.characterInventoryManager.rightWeapon;
-            enemy.characterInventoryManager.rightWeapon.th_tap_RB_Action.PerformAction(enemy);
+            aiCharacter.characterInventoryManager.currentItemBeingUsed = aiCharacter.characterInventoryManager.rightWeapon;
+            aiCharacter.characterInventoryManager.rightWeapon.th_tap_RB_Action.PerformAction(aiCharacter);
         }
     }
 }

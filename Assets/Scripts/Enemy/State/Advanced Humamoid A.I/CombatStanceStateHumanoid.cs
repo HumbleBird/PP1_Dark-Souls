@@ -5,9 +5,9 @@ using static Define;
 
 public class CombatStanceStateHumanoid : State
 {
-    public AttackStateHumanoid attackState;
+    PursueTargetStateHumanoid pursueTargetState;
     public ItemBasedAttackAction[] enemyAttacks;
-    public PursueTargetStateHumanoid pursueTargetState;
+    AttackStateHumanoid attackState;
 
     protected bool randomDestinationSet = false;
     protected float verticalMovementValue = 0;
@@ -28,19 +28,20 @@ public class CombatStanceStateHumanoid : State
 
     private void Awake()
     {
-        pursueTargetState = GetComponent<PursueTargetStateHumanoid>();
         attackState = GetComponent<AttackStateHumanoid>();
+        pursueTargetState = GetComponent<PursueTargetStateHumanoid>();
     }
 
-    public override State Tick(AICharacterManager enemy)
+    public override State Tick(AICharacterManager aiCharacter)
     {
-        if(enemy.combatStyle == AICombatStyle.swordAndShield)
+        
+        if (aiCharacter.combatStyle == AICombatStyle.swordAndShield)
         {
-            return ProcessSwordAndShieldCombatStyle(enemy);
+            return ProcessSwordAndShieldCombatStyle(aiCharacter);
         }
-        else if (enemy.combatStyle == AICombatStyle.Archer)
+        else if (aiCharacter.combatStyle == AICombatStyle.Archer)
         {
-            return ProcessArcherCombatSyle(enemy);
+            return ProcessArcherCombatSyle(aiCharacter);
         }
         else
         {
@@ -48,21 +49,21 @@ public class CombatStanceStateHumanoid : State
         }
     }
 
-    private State ProcessSwordAndShieldCombatStyle(AICharacterManager enemy)
+    private State ProcessSwordAndShieldCombatStyle(AICharacterManager aiCharacter)
     {
 
 
         // AI가 추락중이거나 어떤 action을 취하는 중이라면 모든 움직임을 멈춤
-        if (enemy.isInteracting || !enemy.isGrounded)
+        if (aiCharacter.isInteracting || !aiCharacter.isGrounded)
         {
-            enemy.animator.SetFloat("Vertical", 0);
-            enemy.animator.SetFloat("Horizontal", 0);
+            aiCharacter.animator.SetFloat("Vertical", 0);
+            aiCharacter.animator.SetFloat("Horizontal", 0);
             return this;
         }
 
 
         // A.I로부터 목표물이 너무 멀리 떨어져 있다면 다시 pursue 모드로
-        if (enemy.distancefromTarget > enemy.MaximumAggroRadius)
+        if (aiCharacter.distancefromTarget > aiCharacter.MaximumAggroRadius)
         {
             return pursueTargetState;
         }
@@ -71,85 +72,85 @@ public class CombatStanceStateHumanoid : State
         if (!randomDestinationSet)
         {
             randomDestinationSet = true;
-            DecideCirclingAction(enemy.aiCharacterAnimationManager);
+            DecideCirclingAction(aiCharacter.aiCharacterAnimationManager);
         }
 
-        if (enemy.allowAIToPerformParry)
+        if (aiCharacter.allowAIToPerformParry)
         {
-            if (enemy.currentTarget.canBeRiposted)
+            if (aiCharacter.currentTarget.canBeRiposted)
             {
-                CheckForRipsote(enemy);
+                CheckForRipsote(aiCharacter);
                 return this;
             }
         }
 
-        if (enemy.allowAIToPerformBlock)
+        if (aiCharacter.allowAIToPerformBlock)
         {
-            RollForBlockChance(enemy);
+            RollForBlockChance(aiCharacter);
         }
 
-        if(enemy.allowAIToPerformDodge)
+        if(aiCharacter.allowAIToPerformDodge)
         {
-            RollForDodgeChance(enemy);
+            RollForDodgeChance(aiCharacter);
         }
 
-        if(enemy.allowAIToPerformParry)
+        if(aiCharacter.allowAIToPerformParry)
         {
-            RollForParryChance(enemy);
+            RollForParryChance(aiCharacter);
         }
 
-        if(enemy.currentTarget.isAttacking)
+        if(aiCharacter.currentTarget.isAttacking)
         {
             if(willPerformParry && !hasPerformedParry)
             {
-                ParryCurrentTarget(enemy);
+                ParryCurrentTarget(aiCharacter);
                 return this;
             }
         }
 
         if (willPerformBlock)
         {
-            BlockUsingOffHand(enemy);
+            BlockUsingOffHand(aiCharacter);
         }
 
-        if (willPerformDodge && enemy.isAttacking)
+        if (willPerformDodge && aiCharacter.currentTarget.isAttacking)
         {
-            Dodge(enemy);
+            Dodge(aiCharacter);
         }
 
-        HandleRotateTowardTarget(enemy);
+        HandleRotateTowardTarget(aiCharacter);
 
-        if (enemy.currentRecoveryTime <= 0 && attackState.currentAttack != null)
+        if (aiCharacter.currentRecoveryTime <= 0 && attackState.currentAttack != null)
         {
             ResetStateFlags();
             return attackState;
         }
         else
         {
-            GetNewAttack(enemy);
+            GetNewAttack(aiCharacter);
         }
 
-        HandleMovement(enemy);
+        HandleMovement(aiCharacter);
 
         return this;
     }
 
-    private State ProcessArcherCombatSyle(AICharacterManager enemy)
+    private State ProcessArcherCombatSyle(AICharacterManager aiCharacter)
     {
 
 
         // AI가 추락중이거나 어떤 action을 취하는 중이라면 모든 움직임을 멈춤
-        if (enemy.isInteracting || !enemy.isGrounded)
+        if (aiCharacter.isInteracting || !aiCharacter.isGrounded)
         {
-            enemy.animator.SetFloat("Vertical", 0);
-            enemy.animator.SetFloat("Horizontal", 0);
+            aiCharacter.animator.SetFloat("Vertical", 0);
+            aiCharacter.animator.SetFloat("Horizontal", 0);
             return this;
         }
 
 
 
         // A.I로부터 목표물이 너무 멀리 떨어져 있다면 다시 pursue 모드로
-        if (enemy.distancefromTarget > enemy.MaximumAggroRadius)
+        if (aiCharacter.distancefromTarget > aiCharacter.MaximumAggroRadius)
         {
             ResetStateFlags();
             return pursueTargetState;
@@ -159,41 +160,41 @@ public class CombatStanceStateHumanoid : State
         if (!randomDestinationSet)
         {
             randomDestinationSet = true;
-            DecideCirclingAction(enemy.aiCharacterAnimationManager);
+            DecideCirclingAction(aiCharacter.aiCharacterAnimationManager);
         }
 
-        if (enemy.allowAIToPerformDodge)
+        if (aiCharacter.allowAIToPerformDodge)
         {
-            RollForDodgeChance(enemy);
+            RollForDodgeChance(aiCharacter);
         }
 
-        if (willPerformDodge && enemy.isAttacking)
+        if (willPerformDodge && aiCharacter.currentTarget.isAttacking)
         {
-            Dodge(enemy);
+            Dodge(aiCharacter);
         }
 
-        HandleRotateTowardTarget(enemy);
+        HandleRotateTowardTarget(aiCharacter);
 
         if(!hasAmmoLoaded)
         {
-            DrawArrow(enemy);
-            AimAtTargetBeforeFiring(enemy);
+            DrawArrow(aiCharacter);
+            AimAtTargetBeforeFiring(aiCharacter);
         }
 
-        if (enemy.currentRecoveryTime <= 0 && hasAmmoLoaded)
+        if (aiCharacter.currentRecoveryTime <= 0 && hasAmmoLoaded)
         {
             ResetStateFlags();
             return attackState;
         }  
 
-        if(enemy.isStationaryArcher)
+        if(aiCharacter.isStationaryArcher)
         {
-            enemy.animator.SetFloat("Vertical", 0, 0.2f, Time.deltaTime);
-            enemy.animator.SetFloat("Horizontal", 0, 0.2f, Time.deltaTime);
+            aiCharacter.animator.SetFloat("Vertical", 0, 0.2f, Time.deltaTime);
+            aiCharacter.animator.SetFloat("Horizontal", 0, 0.2f, Time.deltaTime);
         }
         else
         {
-            HandleMovement(enemy);
+            HandleMovement(aiCharacter);
 
         }
 
@@ -242,7 +243,7 @@ public class CombatStanceStateHumanoid : State
     {
         verticalMovementValue = 0.5f;
 
-        horizontalMovementValue = Random.Range(0, 1);
+        horizontalMovementValue = Random.Range(-1, 2);
 
         if (horizontalMovementValue <= 1 && horizontalMovementValue > 0)
         {
@@ -254,7 +255,7 @@ public class CombatStanceStateHumanoid : State
         }
     }
 
-    protected virtual void GetNewAttack(AICharacterManager enemy)
+    protected virtual void GetNewAttack(AICharacterManager aiCharacter)
     {
         int maxScore = 0;
 
@@ -262,11 +263,11 @@ public class CombatStanceStateHumanoid : State
         {
             ItemBasedAttackAction enemyAttackAction = enemyAttacks[i];
 
-            if (enemy.distancefromTarget <= enemyAttackAction.maximumDistanceNeededToAttack
-                && enemy.distancefromTarget > enemyAttackAction.minimumDistanceNeededToAttack)
+            if (aiCharacter.distancefromTarget <= enemyAttackAction.maximumDistanceNeededToAttack
+                && aiCharacter.distancefromTarget >= enemyAttackAction.minimumDistanceNeededToAttack)
             {
-                if (enemy.viewableAngle <= enemyAttackAction.maximumAttackAngle
-                    && enemy.viewableAngle > enemyAttackAction.minimumAttackAngle)
+                if (aiCharacter.viewableAngle <= enemyAttackAction.maximumAttackAngle
+                    && aiCharacter.viewableAngle >= enemyAttackAction.minimumAttackAngle)
                 {
                     maxScore += enemyAttackAction.attackScore;
                 }
@@ -280,18 +281,18 @@ public class CombatStanceStateHumanoid : State
         {
             ItemBasedAttackAction enemyAttackAction = enemyAttacks[i];
 
-            if (enemy.distancefromTarget <= enemyAttackAction.maximumDistanceNeededToAttack
-                && enemy.distancefromTarget > enemyAttackAction.minimumDistanceNeededToAttack)
+            if (aiCharacter.distancefromTarget <= enemyAttackAction.maximumDistanceNeededToAttack
+                && aiCharacter.distancefromTarget >= enemyAttackAction.minimumDistanceNeededToAttack)
             {
-                if (enemy.viewableAngle <= enemyAttackAction.maximumAttackAngle
-                    && enemy.viewableAngle > enemyAttackAction.minimumAttackAngle)
+                if (aiCharacter.viewableAngle <= enemyAttackAction.maximumAttackAngle
+                    && aiCharacter.viewableAngle >= enemyAttackAction.minimumAttackAngle)
                 {
                     if (attackState.currentAttack != null)
                         return;
 
                     temporaryScore += enemyAttackAction.attackScore;
 
-                    if (temporaryScore >= randomValue)
+                    if (temporaryScore > randomValue)
                     {
                         attackState.currentAttack = enemyAttackAction;
                     }
@@ -301,11 +302,11 @@ public class CombatStanceStateHumanoid : State
     }
 
     // AI Rolls
-    private void RollForBlockChance(AICharacterManager enemy)
+    private void RollForBlockChance(AICharacterManager aiCharacter)
     {
         int Chance = Random.Range(0, 100);
 
-        if(Chance <= enemy.blockLikelyHood)
+        if(Chance <= aiCharacter.blockLikelyHood)
         {
             willPerformBlock = true;
         }
@@ -315,11 +316,11 @@ public class CombatStanceStateHumanoid : State
         }
     }
 
-    private void RollForDodgeChance(AICharacterManager enemy)
+    private void RollForDodgeChance(AICharacterManager aiCharacter)
     {
         int Chance = Random.Range(0, 100);
 
-        if (Chance <= enemy.dodgeLikelyHood)
+        if (Chance <= aiCharacter.dodgeLikelyHood)
         {
             willPerformDodge = true;
         }
@@ -329,11 +330,11 @@ public class CombatStanceStateHumanoid : State
         }
     }
 
-    private void RollForParryChance(AICharacterManager enemy)
+    private void RollForParryChance(AICharacterManager aiCharacter)
     {
         int Chance = Random.Range(0, 100);
 
-        if (Chance <= enemy.ParryLikelyHood)
+        if (Chance <= aiCharacter.ParryLikelyHood)
         {
             willPerformParry = true;
         }
@@ -357,20 +358,20 @@ public class CombatStanceStateHumanoid : State
         willPerformParry = false;
     }
 
-    private void BlockUsingOffHand(AICharacterManager enemy)
+    private void BlockUsingOffHand(AICharacterManager aiCharacter)
     {
-        if(enemy.isBlocking == false)
+        if(aiCharacter.isBlocking == false)
         {
-            if(enemy.allowAIToPerformBlock)
+            if(aiCharacter.allowAIToPerformBlock)
             {
-                enemy.isBlocking = true;
-                enemy.characterInventoryManager.currentItemBeingUsed = enemy.characterInventoryManager.leftWeapon;
-                enemy.characterCombatManager.SetBlockingAbsorptionsFromBlockingWeapon();
+                aiCharacter.isBlocking = true;
+                aiCharacter.characterInventoryManager.currentItemBeingUsed = aiCharacter.characterInventoryManager.leftWeapon;
+                aiCharacter.characterCombatManager.SetBlockingAbsorptionsFromBlockingWeapon();
             }
         }
     }
 
-    private void Dodge(AICharacterManager enemy)
+    private void Dodge(AICharacterManager aiCharacter)
     {
         if(!hasPerformedDodge)
         {
@@ -380,100 +381,101 @@ public class CombatStanceStateHumanoid : State
 
                 hasRandomDodgeDirection = true;
                 randomDodgeDirection = Random.Range(0, 360);
-                targetDodgeDirection = Quaternion.Euler(enemy.transform.eulerAngles.x, randomDodgeDirection, enemy.transform.eulerAngles.z);
+                targetDodgeDirection = Quaternion.Euler(aiCharacter.transform.eulerAngles.x, randomDodgeDirection, aiCharacter.transform.eulerAngles.z);
             }
 
-            if(enemy.transform.rotation != targetDodgeDirection)
+            if(aiCharacter.transform.rotation != targetDodgeDirection)
             {
-                Quaternion targetRotation = Quaternion.Slerp(enemy.transform.rotation, targetDodgeDirection, 1f);
-                enemy.transform.rotation = targetRotation;
+                Quaternion targetRotation = Quaternion.Slerp(aiCharacter.transform.rotation, targetDodgeDirection, 1f);
+                aiCharacter.transform.rotation = targetRotation;
 
                 float targetYRotation = targetDodgeDirection.eulerAngles.y;
-                float currentYRotation = enemy.transform.eulerAngles.y;
+                float currentYRotation = aiCharacter.transform.eulerAngles.y;
                 float rotationDifference = Mathf.Abs(targetYRotation - currentYRotation);
 
                 if(rotationDifference <= 5)
                 {
                     hasPerformedDodge = true;
-                    enemy.transform.rotation = targetDodgeDirection;
-                    enemy.characterAnimatorManager.PlayTargetAnimation("Roll_01", true);
+                    aiCharacter.transform.rotation = targetDodgeDirection;
+                    aiCharacter.characterAnimatorManager.PlayTargetAnimation("Roll_01", true);
                 }
             }
         }
     }
 
-    private void DrawArrow(AICharacterManager enemy)
+    private void DrawArrow(AICharacterManager aiCharacter)
     {
-        if(!enemy.isTwoHandingWeapon)
+        if(!aiCharacter.isTwoHandingWeapon)
         {
-            enemy.isTwoHandingWeapon = true;
-            enemy.characterWeaponSlotManager.LoadBothWeaponsOnSlots();
+            aiCharacter.isTwoHandingWeapon = true;
+            aiCharacter.characterWeaponSlotManager.LoadBothWeaponsOnSlots();
         }
         else
         {
             hasAmmoLoaded = true;
-            enemy.characterInventoryManager.currentItemBeingUsed = enemy.characterInventoryManager.rightWeapon;
-            enemy.characterInventoryManager.rightWeapon.th_hold_RB_Action.PerformAction(enemy);
+            aiCharacter.characterInventoryManager.currentItemBeingUsed = aiCharacter.characterInventoryManager.rightWeapon;
+            aiCharacter.characterInventoryManager.rightWeapon.th_hold_RB_Action.PerformAction(aiCharacter);
         }
     }
 
-    private void AimAtTargetBeforeFiring(AICharacterManager enemy)
+    private void AimAtTargetBeforeFiring(AICharacterManager aiCharacter)
     {
-        float timeUntileAmmoIsShortAtTarget = Random.Range(enemy.minimumTimeToAimAtTarget, enemy.maximumTimeToAimAtTarget);
-        enemy.currentRecoveryTime = timeUntileAmmoIsShortAtTarget;
+        float timeUntileAmmoIsShortAtTarget = Random.Range(aiCharacter.minimumTimeToAimAtTarget, aiCharacter.maximumTimeToAimAtTarget);
+        aiCharacter.currentRecoveryTime = timeUntileAmmoIsShortAtTarget;
     }
 
                 
-    private void ParryCurrentTarget(AICharacterManager enemy)
+    private void ParryCurrentTarget(AICharacterManager aiCharacter)
     {
-        if(enemy.currentTarget.canBeParryied)
+        if(aiCharacter.currentTarget.canBeParryied)
         {
-            if(enemy.distancefromTarget <= 2)
+            if(aiCharacter.distancefromTarget <= 2)
             {
                 hasPerformedParry = true;
-                enemy.isParrying = true;
-                enemy.aiCharacterAnimationManager.PlayTargetAnimation("Parry_01", true);
+                aiCharacter.isParrying = true;
+                aiCharacter.aiCharacterAnimationManager.PlayTargetAnimation("Parry_01", true);
             }
         }
     }
 
-    private void CheckForRipsote(AICharacterManager enemy)
+    private void CheckForRipsote(AICharacterManager aiCharacter)
     {
-        if (enemy.isInteracting)
+        if (aiCharacter.isInteracting)
         {
-            enemy.animator.SetFloat("Horizontal", 0, 0.2f, Time.deltaTime);
-            enemy.animator.SetFloat("Vertical", 0, 0.2f, Time.deltaTime);
+            aiCharacter.animator.SetFloat("Horizontal", 0, 0.2f, Time.deltaTime);
+            aiCharacter.animator.SetFloat("Vertical", 0, 0.2f, Time.deltaTime);
             return;
         }
-        if (enemy.distancefromTarget >= 1.0)
+        if (aiCharacter.distancefromTarget >= 1.0)
         {
-            HandleRotateTowardTarget(enemy);
-            enemy.animator.SetFloat("Horizontal", 0, 0.2f, Time.deltaTime);
-            enemy.animator.SetFloat("Vertical", 1, 0.2f, Time.deltaTime);
+            HandleRotateTowardTarget(aiCharacter);
+            aiCharacter.animator.SetFloat("Horizontal", 0, 0.2f, Time.deltaTime);
+            aiCharacter.animator.SetFloat("Vertical", 1, 0.2f, Time.deltaTime);
         }
         else
         {
-            enemy.isBlocking = false;
+            aiCharacter.isBlocking = false;
 
-            if(!enemy.isInteracting && !enemy.currentTarget.isBeingRiposted && !enemy.currentTarget.isBeingBackstabbed)
+            if(!aiCharacter.isInteracting && !aiCharacter.currentTarget.isBeingRiposted && !aiCharacter.currentTarget.isBeingBackstabbed)
             {
-                enemy.aiCharacterRigidbody.velocity = Vector3.zero;
-                enemy.animator.SetFloat("Vertical", 0);
+                aiCharacter.aiCharacterRigidbody.velocity = Vector3.zero;
+                aiCharacter.animator.SetFloat("Vertical", 0);
+                aiCharacter.characterCombatManager.AttemptBackStabOrRiposte();
             }
         }
     }
 
-    private void HandleMovement(AICharacterManager enemy)
+    private void HandleMovement(AICharacterManager aiCharacter)
     {
-        if(enemy.distancefromTarget <= enemy.stoppingDistance)
+        if(aiCharacter.distancefromTarget <= aiCharacter.stoppingDistance)
         {
-            enemy.animator.SetFloat("Vertical", 0, 0.2f, Time.deltaTime);
-            enemy.animator.SetFloat("Horizontal", horizontalMovementValue, 0.2f, Time.deltaTime);
+            aiCharacter.animator.SetFloat("Vertical", 0, 0.2f, Time.deltaTime);
+            aiCharacter.animator.SetFloat("Horizontal", horizontalMovementValue, 0.2f, Time.deltaTime);
         }
         else
         {
-            enemy.animator.SetFloat("Vertical", verticalMovementValue, 0.2f, Time.deltaTime);
-            enemy.animator.SetFloat("Horizontal", horizontalMovementValue, 0.2f, Time.deltaTime);
+            aiCharacter.animator.SetFloat("Vertical", verticalMovementValue, 0.2f, Time.deltaTime);
+            aiCharacter.animator.SetFloat("Horizontal", horizontalMovementValue, 0.2f, Time.deltaTime);
         }
     }
 }

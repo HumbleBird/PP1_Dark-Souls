@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class RotateTowardsTargetStateHumanoid : State
 {
-    public CombatStanceStateHumanoid combatStanceState;
+    CombatStanceStateHumanoid combatStanceState;
 
 
     private void Awake()

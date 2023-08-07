@@ -19,6 +19,7 @@ public class AICharacterStatsManager : CharacterStatsManager
     {
         base.Awake();
         aiCharacter = GetComponent<AICharacterManager>();
+        aiCharacterHealthBar = GetComponentInChildren<UIEnemyHealthBar>();
 
         maxHealth = SetMaxHealthFromHealthLevel();
         currentHealth = maxHealth;
