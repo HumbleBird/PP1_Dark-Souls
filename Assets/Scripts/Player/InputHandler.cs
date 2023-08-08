@@ -52,8 +52,10 @@ public class InputHandler : MonoBehaviour
 
     public float rollInputTimer;
 
-
-
+    public bool input_Has_Been_Qued;
+    public float current_Qued_Input_Timer;
+    public float default_Qued_Input_Time;
+    public bool qued_RB_Input;
 
     Vector2 movementInput;
     Vector2 cameraInput;
@@ -100,6 +102,7 @@ public class InputHandler : MonoBehaviour
             inputActions.PlayerMovement.LockOnTargetLeft.performed += i => right_Stick_Left_Input = true;
             inputActions.PlayerActions.Y.performed += i => y_Input = true;
 
+            inputActions.PlayerActions.QuedRB.performed += i => QueInput(ref qued_RB_Input);
         }
 
         inputActions.Enable();
@@ -134,7 +137,7 @@ public class InputHandler : MonoBehaviour
         HandleLockOnInput();
         HandleTwoHandInput();
         HandleUseConsumableInput();
-
+        HandleQuedInput();
     }
 
     private void HandleMoveInput()
@@ -346,7 +349,6 @@ public class InputHandler : MonoBehaviour
         }
     }
 
-
     private void HandleTapLTInput()
     {
         if (tab_lt_Input)
@@ -373,7 +375,6 @@ public class InputHandler : MonoBehaviour
             }
         }
     }
-
 
     private void HandleQuickSlotsInput()
     {
@@ -479,8 +480,6 @@ public class InputHandler : MonoBehaviour
         }
     }
 
-
-
     private void HandleUseConsumableInput()
     {
         if(x_Input)
@@ -490,5 +489,49 @@ public class InputHandler : MonoBehaviour
         }
     }
 
+    private void QueInput(ref bool quedInput)
+    {
+        // 모든 Queue Input Disable
+        // Qued_LB_Input = false;
+        // Qued_LT_Input = false;
+
+        // 눌린 키 대로 Enabled
+        // intereting이라면, input que 가능, 반대의 상황에서는queing이 필요치 않음
+
+        if(player.isInteracting)
+        {
+            quedInput = true;
+            current_Qued_Input_Timer = default_Qued_Input_Time;
+            input_Has_Been_Qued = true;
+        }
+    }
+
+    private void HandleQuedInput()
+    {
+        if(input_Has_Been_Qued)
+        {
+            if(current_Qued_Input_Timer > 0)
+            {
+                current_Qued_Input_Timer -= Time.deltaTime;
+                ProcessQuedInput();
+            }
+            else
+            {
+                input_Has_Been_Qued = false;
+                current_Qued_Input_Timer = 0;
+            }
+        }
+    }
+
+    private void ProcessQuedInput()
+    {
+        if(qued_RB_Input)
+        {
+            tab_rb_Input = true;
+        }
+
+        // if Qued Lb Input => Tap LB Input = true;
+        // if Qued LT Input => Tap LT Input = true;
+    }
 }
 
