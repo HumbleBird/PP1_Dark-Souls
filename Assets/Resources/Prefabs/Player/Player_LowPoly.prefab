@@ -3764,6 +3764,10 @@ MonoBehaviour:
   fireFlag: 0
   inventoryFlag: 0
   rollInputTimer: 0
+  input_Has_Been_Qued: 0
+  current_Qued_Input_Timer: 0
+  default_Qued_Input_Time: 0.35
+  qued_RB_Input: 0
 --- !u!114 &5959672593656190881
 MonoBehaviour:
   m_ObjectHideFlags: 0

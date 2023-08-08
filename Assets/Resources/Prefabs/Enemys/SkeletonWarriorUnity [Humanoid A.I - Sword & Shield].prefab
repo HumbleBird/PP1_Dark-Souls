@@ -233,7 +233,7 @@ MonoBehaviour:
   aiCharacterAnimationManager: {fileID: 0}
   aiCharacterStatsManager: {fileID: 0}
   aiCharacterEffectsManager: {fileID: 0}
-  currentState: {fileID: 0}
+  currentState: {fileID: 8288120463608235088}
   currentTarget: {fileID: 0}
   navMeshAgent: {fileID: 0}
   aiCharacterRigidbody: {fileID: 0}
@@ -1336,6 +1336,7 @@ GameObject:
   - component: {fileID: 6964544047262297833}
   - component: {fileID: 7281357820069170963}
   - component: {fileID: 3709987265609884514}
+  - component: {fileID: 5390646107799257769}
   m_Layer: 9
   m_Name: Character States
   m_TagString: Untagged
@@ -1376,7 +1377,7 @@ MonoBehaviour:
     m_Bits: 512
   layerThatBlockLineOfSight:
     serializedVersion: 2
-    m_Bits: 0
+    m_Bits: 1
 --- !u!114 &1704231182792059136
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1402,7 +1403,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 75c56b57a60221e46bb18864956be1cd, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  combatStanceState: {fileID: 0}
 --- !u!114 &7281357820069170963
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1415,11 +1415,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b085a220eeebd3547ae8926f28adb5a1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  attackState: {fileID: 0}
   enemyAttacks:
   - {fileID: 11400000, guid: e06403bcaa9235f45868b49b28b6f237, type: 2}
   - {fileID: 11400000, guid: ce2a941ed40441948a6697e7b52f83a0, type: 2}
-  pursueTargetState: {fileID: 0}
 --- !u!114 &3709987265609884514
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1432,11 +1430,42 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0ee89c34c8537f14589ab5398ef8d535, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  rotateTowardsTargetState: {fileID: 0}
-  combatStanceState: {fileID: 0}
-  pursueTargetState: {fileID: 0}
   currentAttack: {fileID: 0}
+  willDoComboOnNextAttack: 0
   hasPerformedAttack: 0
+--- !u!114 &5390646107799257769
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2333416980389517677}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d0f49d72f8052a54e9a7df53ec378cbc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  pursueTargetState: {fileID: 0}
+  detectionLayer:
+    serializedVersion: 2
+    m_Bits: 512
+  layerThatBlockLineOfSight:
+    serializedVersion: 2
+    m_Bits: 1
+  patrolComplete: 0
+  repeatPatrol: 0
+  endOfPatrolRestTime: 0
+  endOfPatrolTimer: 0
+  patrolDestinationIndex: 0
+  hasPatrolDestination: 0
+  currentPatrolDestination: {fileID: 0}
+  distanceFromCurrentPatrolPoint: 0
+  listOfPatrolDestinations:
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
 --- !u!1 &2333416980449746720
 GameObject:
   m_ObjectHideFlags: 0
