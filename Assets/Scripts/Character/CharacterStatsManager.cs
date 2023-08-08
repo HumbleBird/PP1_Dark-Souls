@@ -6,6 +6,9 @@ public class CharacterStatsManager : MonoBehaviour
 {
     CharacterManager character;
 
+    [Header("Name")]
+    public string characterName;
+
     [Header("Team I.D")]
     public int teamIDNumber = 0;
 
