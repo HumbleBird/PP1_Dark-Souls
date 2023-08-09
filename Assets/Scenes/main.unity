@@ -1491,6 +1491,18 @@ PrefabInstance:
       propertyPath: m_Name
       value: Player_LowPoly
       objectReference: {fileID: 0}
+    - target: {fileID: 5951744985032775299, guid: 66999116d4cc97c4e92280d42d4736d6, type: 3}
+      propertyPath: staticCharacterEffects.Array.size
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 5951744985032775299, guid: 66999116d4cc97c4e92280d42d4736d6, type: 3}
+      propertyPath: staticCharacterEffects.Array.data[0]
+      value: 
+      objectReference: {fileID: 11400000, guid: 1b7768e7f73c0794c9e366271da75aa0, type: 2}
+    - target: {fileID: 5951744985032775299, guid: 66999116d4cc97c4e92280d42d4736d6, type: 3}
+      propertyPath: staticCharacterEffects.Array.data[1]
+      value: 
+      objectReference: {fileID: 11400000, guid: a662e3a6ff4f68a42a5738ed17e537b7, type: 2}
     - target: {fileID: 5951744985032775302, guid: 66999116d4cc97c4e92280d42d4736d6, type: 3}
       propertyPath: m_RootOrder
       value: 0
@@ -2877,6 +2889,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ac372a97b89f17b418ca9f33f200132c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  staticCharacterEffects: []
   instantiatedFXModel: {fileID: 0}
   bloodSplatterFX: {fileID: 6141063427869561630, guid: 7394c9bad0b44da4aaf6759ca2b78cd8, type: 3}
   rightWeaponFX: {fileID: 0}
@@ -4283,6 +4296,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ac372a97b89f17b418ca9f33f200132c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  staticCharacterEffects: []
   instantiatedFXModel: {fileID: 0}
   bloodSplatterFX: {fileID: 6141063427869561630, guid: 7394c9bad0b44da4aaf6759ca2b78cd8, type: 3}
   rightWeaponFX: {fileID: 0}
@@ -11104,6 +11118,10 @@ MonoBehaviour:
   blockingPhysicalDamageAbsorption: 0
   blockingFireDamageAbsorption: 0
   blockingStabilityRating: 0
+  physicalDamagePercentageModifier: 100
+  fireDamagePercentageModifier: 100
+  physicalAbsorptionPercentageModifier: 0
+  fireAbsorptionPercentageModifier: 0
   aiCharacterHealthBar: {fileID: 8356608886486778443}
   isBoss: 0
 --- !u!114 &6964544047694514567
@@ -12575,6 +12593,10 @@ MonoBehaviour:
   blockingPhysicalDamageAbsorption: 0
   blockingFireDamageAbsorption: 0
   blockingStabilityRating: 0
+  physicalDamagePercentageModifier: 100
+  fireDamagePercentageModifier: 100
+  physicalAbsorptionPercentageModifier: 0
+  fireAbsorptionPercentageModifier: 0
   aiCharacterHealthBar: {fileID: 901756199}
   isBoss: 0
 --- !u!1 &8148565689072224395

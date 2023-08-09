@@ -6,13 +6,17 @@ public class PlayerEffectsManager : CharacterEffectsManager
 {
     PlayerManager player;
 
-
     PoisonBuildUpBar poisonBuildUpBar;
     PoisonAmountBar poisonAmountBar;
 
     public GameObject currentParticleFX;
     public GameObject instantiatedFXModel2;
     public int amountToBeHealed;
+
+    // Instance Effect (Taking Damage, Add Build Up, ect)
+    // Static Effects (Ring Effect, Armor Effet ect)
+    // Timed/Status Effect (Poison Build Up, curse, Toxic ect)
+
 
     protected override void Awake()
     {

@@ -141,9 +141,17 @@ public class Define
         Ring,
         Item
     }
+
+
     #endregion
 
     #region Battle
+
+    public enum Damagetype
+    {
+        Physical,
+        Fire
+    }
 
     public enum AICombatStyle
     { 
@@ -246,6 +254,8 @@ public class Define
     #endregion
 
     #region Other
+    
+
 
     public enum OpenWhat
     {

@@ -6,6 +6,9 @@ public class CharacterEffectsManager : MonoBehaviour
 {
     CharacterManager character;
 
+    [Header("Static Effects")]
+    [SerializeField] List<StaticCharacterEffect> staticCharacterEffects;
+
     [Header("Current Range FX")]
     public GameObject instantiatedFXModel;
 
@@ -31,6 +34,81 @@ public class CharacterEffectsManager : MonoBehaviour
     protected virtual void Awake()
     {
         character = GetComponent<CharacterManager>();
+    }
+
+    protected virtual void Start()
+    {
+        foreach (var effect in staticCharacterEffects)
+        {
+            effect.AddStaticEffect(character);
+        }
+    }
+
+    public  void AddStaticEffect(StaticCharacterEffect effect)
+    {
+        // 해당 효과가 리스트에 있는지 체크
+
+        StaticCharacterEffect staticEffect;
+
+        for (int i = staticCharacterEffects.Count - 1; i > -1 ; i--)
+        {
+            if(staticCharacterEffects[i] != null)
+            {
+                if(staticCharacterEffects[i].effectID == effect.effectID)
+                {
+                    staticEffect = staticCharacterEffects[i];
+
+                    // 캐릭터로부터 actual 이펙트 삭제
+                    staticEffect.RemoveStaticEffect(character);
+
+                    // 그런 다음 활성 효과 목록에서 효과를 제거합니다
+                    staticCharacterEffects.Remove(staticEffect);
+                }
+            }
+        }
+
+        // 이펙트를 이펙트 리스트에 집어 넣기
+        staticCharacterEffects.Add(effect);
+
+        // 캐릭터에 actual effect를 추가
+        effect.AddStaticEffect(character);
+
+        // 빈 것이 있는지 체크
+        for (int i = staticCharacterEffects.Count - 1; i > -1; i--)
+        {
+            if (staticCharacterEffects[i] == null)
+            {
+                staticCharacterEffects.RemoveAt(i);
+            }
+        }
+
+
+    }
+
+    public  void RemoveStaticEffect(int effectID)
+    {
+        StaticCharacterEffect staticEffect;
+
+        for (int i = staticCharacterEffects.Count - 1; i > -1; i--)
+        {
+            if (staticCharacterEffects[i] != null)
+            {
+                if (staticCharacterEffects[i].effectID == effectID)
+                {
+                    staticEffect = staticCharacterEffects[i];
+                    staticEffect.RemoveStaticEffect(character);
+                    staticCharacterEffects.Remove(staticEffect);
+                }
+            }
+        }
+
+        for (int i = staticCharacterEffects.Count - 1; i > -1; i--)
+        {
+            if (staticCharacterEffects[i] == null)
+            {
+                staticCharacterEffects.RemoveAt(i);
+            }
+        }
     }
 
     public virtual void PlayWeaponFX(bool isLeft)
