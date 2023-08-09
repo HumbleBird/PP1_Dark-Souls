@@ -61,6 +61,15 @@ public class CharacterStatsManager : MonoBehaviour
     public float blockingFireDamageAbsorption;
     public float blockingStabilityRating;
 
+    // 이 플레이어가 처리한 모든 피해는 이 금액에 의해 수정됩니다
+    [Header("Damage Type Modifiers")]
+    public float physicalDamagePercentageModifier = 100;
+    public float fireDamagePercentageModifier = 100;
+
+    [Header("Damage Absorption Modifiers")]
+    public float physicalAbsorptionPercentageModifier = 0;
+    public float fireAbsorptionPercentageModifier = 0;
+
 
     protected virtual void Awake()
     {
@@ -82,6 +91,10 @@ public class CharacterStatsManager : MonoBehaviour
         if (character.isDead)
             return;
 
+        // Damage defense 계산 전, 공격 데미지 수치 체크
+        physicalDamage = Mathf.RoundToInt(physicalDamage * (enemyCharacterDamageingMe.characterStatsManager.physicalDamagePercentageModifier / 100));
+        fireDamage = Mathf.RoundToInt(fireDamage * (enemyCharacterDamageingMe.characterStatsManager.fireDamagePercentageModifier / 100));
+
         character.characterAnimatorManager.EraseHandIKForWeapon();
 
         float totalPhysicalDamageAbsorption = 1 -
@@ -100,12 +113,20 @@ public class CharacterStatsManager : MonoBehaviour
 
         fireDamage = Mathf.RoundToInt(fireDamage - (fireDamage * totalfireDamageAbsorption));
 
+        physicalDamage = physicalDamage - Mathf.RoundToInt(physicalDamage * (physicalAbsorptionPercentageModifier / 100));
+        fireDamage = fireDamage - Mathf.RoundToInt(fireDamage * (fireAbsorptionPercentageModifier / 100));
+
         float finalDamage = physicalDamage + fireDamage; // + fire + mage + lightning + dark Damage
 
         if(enemyCharacterDamageingMe.isPerformingFullyChargedAttack)
         {
             finalDamage *= 2;
         }
+
+
+
+        Debug.Log("Final Damage: " + finalDamage);
+
 
         currentHealth = Mathf.RoundToInt(currentHealth - finalDamage);
 
@@ -124,6 +145,10 @@ public class CharacterStatsManager : MonoBehaviour
         if (character.isDead)
             return;
 
+        // Damage defense 계산 전, 공격 데미지 수치 체크
+        physicalDamage = Mathf.RoundToInt(physicalDamage * (enemyCharacterDamageingMe.characterStatsManager.physicalDamagePercentageModifier / 100));
+        fireDamage = Mathf.RoundToInt(fireDamage * (enemyCharacterDamageingMe.characterStatsManager.fireDamagePercentageModifier / 100));
+
         character.characterAnimatorManager.EraseHandIKForWeapon();
 
         float totalPhysicalDamageAbsorption = 1 -
@@ -142,12 +167,17 @@ public class CharacterStatsManager : MonoBehaviour
 
         fireDamage = Mathf.RoundToInt(fireDamage - (fireDamage * totalfireDamageAbsorption));
 
+        physicalDamage = physicalDamage - Mathf.RoundToInt(physicalDamage * (physicalAbsorptionPercentageModifier / 100));
+        fireDamage = fireDamage - Mathf.RoundToInt(fireDamage * (fireAbsorptionPercentageModifier / 100));
+
         float finalDamage = physicalDamage + fireDamage; // + fire + mage + lightning + dark Damage
 
         if (enemyCharacterDamageingMe.isPerformingFullyChargedAttack)
         {
             finalDamage *= 2;
         }
+
+        Debug.Log("Final Damage: " + finalDamage);
 
         currentHealth = Mathf.RoundToInt(currentHealth - finalDamage);
 

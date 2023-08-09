@@ -105,7 +105,6 @@ public class DamageCollider : MonoBehaviour
                 if(aiCharacter != null)
                 {
                     // 타겟이 A.I라면, ai가 새로운 타겟은 리서치. 새 타겟을 공격
-                    Debug.Log(characterManager.gameObject.name);
                     aiCharacter.currentTarget = characterManager;
                 }
             }
