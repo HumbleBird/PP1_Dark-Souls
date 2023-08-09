@@ -11,7 +11,7 @@ public class AICharacterStatsManager : CharacterStatsManager
     AICharacterManager aiCharacter;
 
 
-    public UIEnemyHealthBar aiCharacterHealthBar;
+    public UIAICharacterHealthBar aiCharacterHealthBar;
 
     public bool isBoss;
 
@@ -19,7 +19,7 @@ public class AICharacterStatsManager : CharacterStatsManager
     {
         base.Awake();
         aiCharacter = GetComponent<AICharacterManager>();
-        aiCharacterHealthBar = GetComponentInChildren<UIEnemyHealthBar>();
+        aiCharacterHealthBar = GetComponentInChildren<UIAICharacterHealthBar>();
 
         maxHealth = SetMaxHealthFromHealthLevel();
         currentHealth = maxHealth;
