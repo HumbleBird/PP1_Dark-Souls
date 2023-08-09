@@ -553,6 +553,11 @@ Transform:
   m_Father: {fileID: 545597433}
   m_RootOrder: 5
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &411907253 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 7196696075585942195, guid: 19f02cbd5fdad4243b3eda344f9d8651, type: 3}
+  m_PrefabInstance: {fileID: 2884808510481573105}
+  m_PrefabAsset: {fileID: 0}
 --- !u!224 &524409970 stripped
 RectTransform:
   m_CorrespondingSourceObject: {fileID: 131946772780341206, guid: cbca368fdddc91c4eb9a15eba902ac53, type: 3}
@@ -1534,6 +1539,10 @@ PrefabInstance:
       propertyPath: interactableUIGameObject
       value: 
       objectReference: {fileID: 5019529932514723644}
+    - target: {fileID: 5959672593656190881, guid: 66999116d4cc97c4e92280d42d4736d6, type: 3}
+      propertyPath: itemInteractableUIGameObject
+      value: 
+      objectReference: {fileID: 411907253}
     - target: {fileID: 5959672593656190892, guid: 66999116d4cc97c4e92280d42d4736d6, type: 3}
       propertyPath: healthBar
       value: 
@@ -8436,6 +8445,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 4608407009140598018, guid: c80f95a783d9cc54290d3eb76f214215, type: 3}
+      propertyPath: itemPickUpID
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 4749904871830157132, guid: c80f95a783d9cc54290d3eb76f214215, type: 3}
       propertyPath: m_RootOrder
       value: 1

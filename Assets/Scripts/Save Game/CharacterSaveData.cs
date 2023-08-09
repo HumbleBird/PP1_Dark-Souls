@@ -23,4 +23,12 @@ public class CharacterSaveData
     public float xPosition;
     public float yPosition;
     public float zPosition;
+
+    [Header("Items Looted From World")]
+    public SerializebleDictionary<int, bool> itemsInWorld; // int는 ID, bool은 loot 여부
+
+    public CharacterSaveData()
+    {
+        itemsInWorld = new SerializebleDictionary<int, bool>();
+    }
 }
