@@ -50,7 +50,7 @@ public class PlayerManager : CharacterManager
         playerEquipmentManager = GetComponent<PlayerEquipmentManager>();
         playerEffectsManager = GetComponent<PlayerEffectsManager>();
 
-
+        WorldSaveGameManager.instance.player = this;
     }
 
     // Update is called once per frame
@@ -72,7 +72,7 @@ public class PlayerManager : CharacterManager
     }
 
 
-    protected override void FixedUpdate() 
+    protected override void FixedUpdate()
     {
         base.FixedUpdate();
         playerLocomotionManager.HandleFalling(playerLocomotionManager.moveDirection);
@@ -108,19 +108,19 @@ public class PlayerManager : CharacterManager
     {
         RaycastHit hit;
 
-        if(Physics.SphereCast(transform.position, 0.3f, transform.forward, out hit, 1f, cameraHandler.ignoreLayers))
+        if (Physics.SphereCast(transform.position, 0.3f, transform.forward, out hit, 1f, cameraHandler.ignoreLayers))
         {
-            if(hit.collider.tag == "Interactable")
+            if (hit.collider.tag == "Interactable")
             {
                 Interactable interactable = hit.collider.GetComponent<Interactable>();
 
-                if(interactable != null)
+                if (interactable != null)
                 {
                     string interactableText = interactable.interactableText;
                     interactableUI.interactableText.text = interactableText;
                     interactableUIGameObject.SetActive(true);
 
-                    if(inputHandler.a_Input)
+                    if (inputHandler.a_Input)
                     {
                         hit.collider.GetComponent<Interactable>().Interact(this);
                     }
@@ -129,12 +129,12 @@ public class PlayerManager : CharacterManager
         }
         else
         {
-            if(interactableUIGameObject != null)
+            if (interactableUIGameObject != null)
             {
                 interactableUIGameObject.SetActive(false);
             }
 
-            if(itemInteractableUIGameObject != null && inputHandler.a_Input)
+            if (itemInteractableUIGameObject != null && inputHandler.a_Input)
             {
                 itemInteractableUIGameObject.SetActive(false);
             }
@@ -161,13 +161,21 @@ public class PlayerManager : CharacterManager
 
     #endregion
 
-    public void  SaveCharacterdataToCurrentSaveData(ref CharacterSaveData currentCharacterSaveData)
+    public void SaveCharacterdataToCurrentSaveData(ref CharacterSaveData currentCharacterSaveData)
     {
-        currentCharacterSaveData.characterName = playerStatsManager.characterName;
+        currentCharacterSaveData.characterName  = playerStatsManager.characterName;
         currentCharacterSaveData.characterLevel = playerStatsManager.playerLevel;
 
-        currentCharacterSaveData.xPosition = transform.position.x;
-        currentCharacterSaveData.yPosition = transform.position.y;
-        currentCharacterSaveData.zPosition = transform.position.z;
+        currentCharacterSaveData.xPosition      = transform.position.x;
+        currentCharacterSaveData.yPosition      = transform.position.y;
+        currentCharacterSaveData.zPosition      = transform.position.z;
     }
+
+    public void LoadCharacterDataFromCurrentCharacterSaveData(ref CharacterSaveData currentCharacterSaveData)
+    {
+        playerStatsManager.characterName  =     currentCharacterSaveData.characterName ;
+        playerStatsManager.playerLevel = currentCharacterSaveData.characterLevel;
+
+        transform.position = new Vector3(currentCharacterSaveData.xPosition, currentCharacterSaveData.yPosition, currentCharacterSaveData.zPosition);
+    }       
 }

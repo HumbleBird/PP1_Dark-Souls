@@ -26,6 +26,9 @@ public class SaveGameDataWriter
                         saveDataToLoad = reder.ReadToEnd();
                     }
                 }
+
+                // Deserialize Data
+                loadedSaveData = JsonUtility.FromJson<CharacterSaveData>(saveDataToLoad);
             }
             catch(Exception e)
             {
@@ -83,3 +86,5 @@ public class SaveGameDataWriter
         }
     }
 }
+
+
