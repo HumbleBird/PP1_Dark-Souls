@@ -19,7 +19,7 @@ public class PlayerInventoryManager : CharacterInventoryManager
             if (currentRightWeaponIndex == index && weaponsInRightHandSlots[index] != null)
             {
                 rightWeapon = weaponsInRightHandSlots[currentRightWeaponIndex];
-                characterWeaponSlotManager.LoadWeaponOnSlot(weaponsInRightHandSlots[currentRightWeaponIndex], false);
+                character.characterWeaponSlotManager.LoadWeaponOnSlot(weaponsInRightHandSlots[currentRightWeaponIndex], false);
                 break;
             }
             else if (currentRightWeaponIndex == index && weaponsInRightHandSlots[index] == null)
@@ -31,8 +31,8 @@ public class PlayerInventoryManager : CharacterInventoryManager
         if(currentRightWeaponIndex > weaponsInRightHandSlots.Length - 1)
         {
             currentRightWeaponIndex = -1;
-            rightWeapon = characterWeaponSlotManager.unarmWeapon;
-            characterWeaponSlotManager.LoadWeaponOnSlot(characterWeaponSlotManager.unarmWeapon, false);
+            rightWeapon = character.characterWeaponSlotManager.unarmWeapon;
+            character.characterWeaponSlotManager.LoadWeaponOnSlot(character.characterWeaponSlotManager.unarmWeapon, false);
 
         }
     }
@@ -46,7 +46,7 @@ public class PlayerInventoryManager : CharacterInventoryManager
             if (currentLeftWeaponIndex == index && weaponsInLeftHandSlots[index] != null)
             {
                 leftWeapon = weaponsInLeftHandSlots[currentLeftWeaponIndex];
-                characterWeaponSlotManager.LoadWeaponOnSlot(weaponsInLeftHandSlots[currentLeftWeaponIndex], true);
+                character.characterWeaponSlotManager.LoadWeaponOnSlot(weaponsInLeftHandSlots[currentLeftWeaponIndex], true);
                 break;
             }
             else if (currentLeftWeaponIndex == index && weaponsInLeftHandSlots[index] == null)
@@ -58,8 +58,8 @@ public class PlayerInventoryManager : CharacterInventoryManager
         if (currentLeftWeaponIndex > weaponsInLeftHandSlots.Length - 1)
         {
             currentLeftWeaponIndex = -1;
-            leftWeapon = characterWeaponSlotManager.unarmWeapon;
-            characterWeaponSlotManager.LoadWeaponOnSlot(characterWeaponSlotManager.unarmWeapon, true);
+            leftWeapon = character.characterWeaponSlotManager.unarmWeapon;
+            character.characterWeaponSlotManager.LoadWeaponOnSlot(character.characterWeaponSlotManager.unarmWeapon, true);
         }
     }
 }

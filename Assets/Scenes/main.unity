@@ -1491,6 +1491,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Player_LowPoly
       objectReference: {fileID: 0}
+    - target: {fileID: 5951744985032775296, guid: 66999116d4cc97c4e92280d42d4736d6, type: 3}
+      propertyPath: ringSlot01
+      value: 
+      objectReference: {fileID: 11400000, guid: 80e4c0cd2bd972d4dba3828826b36b35, type: 2}
     - target: {fileID: 5951744985032775299, guid: 66999116d4cc97c4e92280d42d4736d6, type: 3}
       propertyPath: staticCharacterEffects.Array.size
       value: 2
@@ -1498,11 +1502,11 @@ PrefabInstance:
     - target: {fileID: 5951744985032775299, guid: 66999116d4cc97c4e92280d42d4736d6, type: 3}
       propertyPath: staticCharacterEffects.Array.data[0]
       value: 
-      objectReference: {fileID: 11400000, guid: 1b7768e7f73c0794c9e366271da75aa0, type: 2}
+      objectReference: {fileID: 11400000, guid: a662e3a6ff4f68a42a5738ed17e537b7, type: 2}
     - target: {fileID: 5951744985032775299, guid: 66999116d4cc97c4e92280d42d4736d6, type: 3}
       propertyPath: staticCharacterEffects.Array.data[1]
       value: 
-      objectReference: {fileID: 11400000, guid: a662e3a6ff4f68a42a5738ed17e537b7, type: 2}
+      objectReference: {fileID: 11400000, guid: 1b7768e7f73c0794c9e366271da75aa0, type: 2}
     - target: {fileID: 5951744985032775302, guid: 66999116d4cc97c4e92280d42d4736d6, type: 3}
       propertyPath: m_RootOrder
       value: 0
@@ -2334,6 +2338,10 @@ MonoBehaviour:
   currentTorsoEquipment: {fileID: 0}
   currentLegEquipment: {fileID: 0}
   currentHandEquipment: {fileID: 0}
+  ringSlot01: {fileID: 0}
+  ringSlot02: {fileID: 0}
+  ringSlot03: {fileID: 0}
+  ringSlot04: {fileID: 0}
   weaponsInRightHandSlots:
   - {fileID: 11400000, guid: 96a4fefc7750e24459d8e8a5f20f1332, type: 2}
   - {fileID: 0}
@@ -4332,6 +4340,10 @@ MonoBehaviour:
   currentTorsoEquipment: {fileID: 0}
   currentLegEquipment: {fileID: 0}
   currentHandEquipment: {fileID: 0}
+  ringSlot01: {fileID: 0}
+  ringSlot02: {fileID: 0}
+  ringSlot03: {fileID: 0}
+  ringSlot04: {fileID: 0}
   weaponsInRightHandSlots:
   - {fileID: 11400000, guid: 96a4fefc7750e24459d8e8a5f20f1332, type: 2}
   - {fileID: 0}
