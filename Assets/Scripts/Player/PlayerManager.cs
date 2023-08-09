@@ -169,6 +169,46 @@ public class PlayerManager : CharacterManager
         currentCharacterSaveData.xPosition      = transform.position.x;
         currentCharacterSaveData.yPosition      = transform.position.y;
         currentCharacterSaveData.zPosition      = transform.position.z;
+
+        currentCharacterSaveData.currentRightHandWeaponID = playerInventoryManager.rightWeapon.itemID;
+        currentCharacterSaveData.currentLeftHandWeaponID  = playerInventoryManager.leftWeapon.itemID ;
+
+        if(playerInventoryManager.currentHelmetEquipment != null)
+        {
+            currentCharacterSaveData.currentHeadGearItemID     = playerInventoryManager.currentHelmetEquipment.itemID;
+        }
+        else
+        {
+            currentCharacterSaveData.currentHeadGearItemID = -1;
+        }
+
+        if(playerInventoryManager.currentTorsoEquipment != null)
+        {
+            currentCharacterSaveData.currentChestGearItemID = playerInventoryManager.currentTorsoEquipment.itemID;
+        }
+        else
+        {
+            currentCharacterSaveData.currentChestGearItemID = -1;
+        }
+
+        if(playerInventoryManager.currentLegEquipment != null)
+        {
+            currentCharacterSaveData.currentLegGearItemID = playerInventoryManager.currentLegEquipment.itemID;
+        }
+        else
+        {
+            currentCharacterSaveData.currentLegGearItemID = -1;
+        }
+
+        if(playerInventoryManager.currentHandEquipment != null)
+        {
+            currentCharacterSaveData.currentHandGearItemID = playerInventoryManager.currentHandEquipment.itemID;
+        }
+        else
+        {
+            currentCharacterSaveData.currentHandGearItemID = -1;
+        }
+
     }
 
     public void LoadCharacterDataFromCurrentCharacterSaveData(ref CharacterSaveData currentCharacterSaveData)
@@ -177,5 +217,39 @@ public class PlayerManager : CharacterManager
         playerStatsManager.playerLevel = currentCharacterSaveData.characterLevel;
 
         transform.position = new Vector3(currentCharacterSaveData.xPosition, currentCharacterSaveData.yPosition, currentCharacterSaveData.zPosition);
+
+        playerInventoryManager.rightWeapon = WorldItemDataBase.Instance.GetWeaponItemByID(currentCharacterSaveData.currentRightHandWeaponID);
+        playerInventoryManager.leftWeapon = WorldItemDataBase.Instance.GetWeaponItemByID(currentCharacterSaveData.currentLeftHandWeaponID);
+        playerWeaponSlotManager.LoadBothWeaponsOnSlots();
+
+        EquipmentItem headEquipment = WorldItemDataBase.Instance.GetEquipmentItemByID(currentCharacterSaveData.currentHeadGearItemID);
+
+        if(headEquipment != null)
+        {
+            playerInventoryManager.currentHelmetEquipment = headEquipment;
+        }
+
+        EquipmentItem bpduEquipment = WorldItemDataBase.Instance.GetEquipmentItemByID(currentCharacterSaveData.currentChestGearItemID);
+
+        if(bpduEquipment != null)
+        {
+            playerInventoryManager.currentTorsoEquipment = bpduEquipment;
+        }
+
+        EquipmentItem legEquipment = WorldItemDataBase.Instance.GetEquipmentItemByID(currentCharacterSaveData.currentLegGearItemID);
+
+        if(legEquipment != null)
+        {
+            playerInventoryManager.currentLegEquipment = legEquipment;
+        }
+
+        EquipmentItem handEquipment = WorldItemDataBase.Instance.GetEquipmentItemByID(currentCharacterSaveData.currentHandGearItemID);
+
+        if(handEquipment != null)
+        {
+            playerInventoryManager.currentHandEquipment = handEquipment;
+        }
+
+        playerEquipmentManager.EquipAllEquipmentModelsOnStart();
     }       
 }
