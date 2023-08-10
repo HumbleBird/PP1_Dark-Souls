@@ -147,6 +147,12 @@ public class Define
 
     #region Battle
 
+    public enum BuffClass
+    {
+        Physical,
+        Fire
+    }
+
     public enum Damagetype
     {
         Physical,
