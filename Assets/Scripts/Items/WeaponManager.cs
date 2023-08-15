@@ -10,8 +10,8 @@ public class WeaponManager : MonoBehaviour
     [SerializeField] GameObject fireBuffFX;
 
     [Header("Trail FX")]
-    [SerializeField] ParticleSystem defaultTrailFX;
-    [SerializeField] ParticleSystem fireTrailFX;
+    [SerializeField] WeaponTrail defaultTrailFX;
+    [SerializeField] WeaponTrail fireTrailFX;
 
     private bool weaponIsBuffed;
     private BuffClass weaponBuffClass;
@@ -23,6 +23,8 @@ public class WeaponManager : MonoBehaviour
     {
         damageCollider = GetComponentInChildren<MeleeWeaponDamageCollider>();
         audioSource = gameObject.AddComponent<AudioSource>();
+        audioSource.playOnAwake = false;
+        audioSource.loop = false;
     }
 
     public void BuffWeapon(BuffClass buffClass, float physicalBuffDamage, float fireBuffDamage, float poiseBuffDamage)
@@ -71,13 +73,13 @@ public class WeaponManager : MonoBehaviour
                 case BuffClass.Physical:
                     if (defaultTrailFX == null)
                         return;
-                    defaultTrailFX.Play();
+                    defaultTrailFX.PlayWeaponTrail();
                     break;
                 // 무기가 fire buffd 상태라면, fire trail을 플레이
                 case BuffClass.Fire:
                     if (fireTrailFX == null)
                         return;
-                    fireTrailFX.Play();
+                    fireTrailFX.PlayWeaponTrail();
                     break;
                 default:
                     break;

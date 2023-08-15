@@ -1285,6 +1285,18 @@ PrefabInstance:
       propertyPath: ringSlot01
       value: 
       objectReference: {fileID: 11400000, guid: 80e4c0cd2bd972d4dba3828826b36b35, type: 2}
+    - target: {fileID: 5951744985032775296, guid: 66999116d4cc97c4e92280d42d4736d6, type: 3}
+      propertyPath: rightWeapon
+      value: 
+      objectReference: {fileID: 11400000, guid: 48e75f5a988fd65469bab7cd58a33b5c, type: 2}
+    - target: {fileID: 5951744985032775296, guid: 66999116d4cc97c4e92280d42d4736d6, type: 3}
+      propertyPath: currentConsumable
+      value: 
+      objectReference: {fileID: 11400000, guid: 1614219e8d659ea4ca5ab8011ad5a67b, type: 2}
+    - target: {fileID: 5951744985032775296, guid: 66999116d4cc97c4e92280d42d4736d6, type: 3}
+      propertyPath: weaponsInRightHandSlots.Array.data[0]
+      value: 
+      objectReference: {fileID: 11400000, guid: 48e75f5a988fd65469bab7cd58a33b5c, type: 2}
     - target: {fileID: 5951744985032775299, guid: 66999116d4cc97c4e92280d42d4736d6, type: 3}
       propertyPath: staticCharacterEffects.Array.size
       value: 2
@@ -2934,6 +2946,7 @@ MonoBehaviour:
   bloodSplatterFX: {fileID: 6141063427869561630, guid: 7394c9bad0b44da4aaf6759ca2b78cd8, type: 3}
   rightWeaponFX: {fileID: 0}
   leftWeaponFX: {fileID: 0}
+  rightWeaponBuffEffect: {fileID: 0}
   defaultPoisonParticleFX: {fileID: 0}
   currentPoisonParticleFX: {fileID: 0}
   buildUpTransform: {fileID: 0}
@@ -3958,7 +3971,7 @@ PrefabInstance:
     - target: {fileID: 2661852137874631156, guid: 89391359c0a73bb4f9170d7eb9f25fda, type: 3}
       propertyPath: weaponItems.Array.data[1]
       value: 
-      objectReference: {fileID: 11400000, guid: 08ef3dc9456ad484d8469464b63ceb4b, type: 2}
+      objectReference: {fileID: 11400000, guid: 48e75f5a988fd65469bab7cd58a33b5c, type: 2}
     - target: {fileID: 2661852137874631156, guid: 89391359c0a73bb4f9170d7eb9f25fda, type: 3}
       propertyPath: weaponItems.Array.data[2]
       value: 
@@ -4341,6 +4354,7 @@ MonoBehaviour:
   bloodSplatterFX: {fileID: 6141063427869561630, guid: 7394c9bad0b44da4aaf6759ca2b78cd8, type: 3}
   rightWeaponFX: {fileID: 0}
   leftWeaponFX: {fileID: 0}
+  rightWeaponBuffEffect: {fileID: 0}
   defaultPoisonParticleFX: {fileID: 0}
   currentPoisonParticleFX: {fileID: 0}
   buildUpTransform: {fileID: 0}
@@ -11721,6 +11735,7 @@ MonoBehaviour:
   bloodSplatterFX: {fileID: 6141063427869561630, guid: 7394c9bad0b44da4aaf6759ca2b78cd8, type: 3}
   rightWeaponFX: {fileID: 0}
   leftWeaponFX: {fileID: 0}
+  rightWeaponBuffEffect: {fileID: 0}
   defaultPoisonParticleFX: {fileID: 0}
   currentPoisonParticleFX: {fileID: 0}
   buildUpTransform: {fileID: 0}

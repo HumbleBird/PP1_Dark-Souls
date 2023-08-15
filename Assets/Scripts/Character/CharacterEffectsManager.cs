@@ -16,8 +16,11 @@ public class CharacterEffectsManager : MonoBehaviour
     public GameObject bloodSplatterFX;
 
     [Header("Weapon FX")]
-    public WeaponFX rightWeaponFX;
-    public WeaponFX leftWeaponFX;
+    public WeaponManager rightWeaponManager;
+    public WeaponManager leftWeaponManager;
+
+    [Header("Right Weapon Buff")]
+    public WeaponBuffEffect rightWeaponBuffEffect;
 
     [Header("Poison")]
     public GameObject defaultPoisonParticleFX;
@@ -41,6 +44,14 @@ public class CharacterEffectsManager : MonoBehaviour
         foreach (var effect in staticCharacterEffects)
         {
             effect.AddStaticEffect(character);
+        }
+    }
+
+    public void ProcessWeaponBuffs()
+    {
+        if(rightWeaponBuffEffect != null)
+        {
+            rightWeaponBuffEffect.ProcessEffect(character);
         }
     }
 
@@ -115,16 +126,16 @@ public class CharacterEffectsManager : MonoBehaviour
     {
         if(isLeft == false)
         {
-            if(rightWeaponFX != null)
+            if(rightWeaponManager != null)
             {
-                rightWeaponFX.PlayWeaponFX();
+                rightWeaponManager.PlayWeaponTrailFX();
             }
         }
         else
         {
-            if (leftWeaponFX != null)
+            if (leftWeaponManager != null)
             {
-                leftWeaponFX.PlayWeaponFX();
+                leftWeaponManager.PlayWeaponTrailFX();
             }
         }
     }

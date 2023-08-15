@@ -26,4 +26,14 @@ public class ConsumableItem : Item
             player.playerAnimatorManager.PlayTargetAnimation("Shrug", true);
         }
     }
+
+    public virtual void SucessToConsumeItem(PlayerManager player)
+    {
+        currentItemAmount -= 1;
+    }
+
+    public virtual bool CanUseThisItem(PlayerManager player)
+    {
+        return true;
+    }
 }

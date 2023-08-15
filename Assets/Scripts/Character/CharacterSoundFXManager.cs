@@ -72,4 +72,9 @@ public class CharacterSoundFXManager : MonoBehaviour
             audioSource.PlayOneShot(character.characterInventoryManager.leftWeapon.weaponWhooshes[randomValue], 0.4f);
         }
     }
+
+    public virtual void PlaySoundFX(AudioClip soundFX)
+    {
+        audioSource.PlayOneShot(soundFX);
+    }
 }

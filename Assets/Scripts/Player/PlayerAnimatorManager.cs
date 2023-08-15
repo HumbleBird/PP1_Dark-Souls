@@ -83,9 +83,6 @@ public class PlayerAnimatorManager : CharacterAnimatorManager
         player.animator.SetFloat("Horizontal", h, 0.1f, Time.deltaTime);
     }
 
-
-
-
     public void DisableCollision()
     {
         player.playerLocomotionManager.characterCollider.enabled = false;
@@ -96,6 +93,14 @@ public class PlayerAnimatorManager : CharacterAnimatorManager
     {
         player.playerLocomotionManager.characterCollider.enabled = true;
         player.playerLocomotionManager.characterCollisionBlockerCollider.enabled = true;
+    }
+
+    public virtual void SucessFullyUseCurrentConsumable()
+    {
+        if (character.characterInventoryManager.currentConsumable != null)
+        {
+            character.characterInventoryManager.currentConsumable.SucessToConsumeItem(player);
+        }
     }
 
     public void OnAnimatorMove()
