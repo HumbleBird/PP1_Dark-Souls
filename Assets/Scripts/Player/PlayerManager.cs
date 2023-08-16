@@ -53,6 +53,11 @@ public class PlayerManager : CharacterManager
         WorldSaveGameManager.instance.player = this;
     }
 
+    protected override void Start()
+    {
+        base.Start();
+    }
+
     // Update is called once per frame
     protected override void Update()
     {
@@ -78,7 +83,6 @@ public class PlayerManager : CharacterManager
         playerLocomotionManager.HandleFalling(playerLocomotionManager.moveDirection);
         playerLocomotionManager.HandleMovement();
         playerLocomotionManager.HandleRotation();
-        playerEffectsManager.HandleAllBuildUpEffects();
     }
 
     private void LateUpdate()

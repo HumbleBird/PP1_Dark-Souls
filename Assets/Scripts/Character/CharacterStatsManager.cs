@@ -56,6 +56,9 @@ public class CharacterStatsManager : MonoBehaviour
     public float fireDamageAbsorptionLegs;
     public float fireDamageAbsorptionHands;
 
+    [Header("Resistance")]
+    public float poisonResistance;
+
     [Header("Blocking Absorptions")]
     public float blockingPhysicalDamageAbsorption;
     public float blockingFireDamageAbsorption;
@@ -70,6 +73,10 @@ public class CharacterStatsManager : MonoBehaviour
     public float physicalAbsorptionPercentageModifier = 0;
     public float fireAbsorptionPercentageModifier = 0;
 
+    [Header("Poison")]
+    public bool isPoisoned;
+    public float poisonBuildup = 0; // 독 수치 100에 도달한 후 플레이어를 중독시키는 시간 경과에 따른 빌드업
+    public float poisonAmount = 100; // 플레이어가 무독화되기 전에 처리해야 하는 독의 양
 
     protected virtual void Awake()
     {

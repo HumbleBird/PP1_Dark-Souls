@@ -39,34 +39,5 @@ public class PlayerEffectsManager : CharacterEffectsManager
         player.playerWeaponSlotManager.LoadBothWeaponsOnSlots();
     }
 
-    protected override void HandleIsPoisonedEffect()
-    {
-        if(poisonBuildup <= 0)
-        {
-            poisonBuildUpBar.gameObject.SetActive(false);
-        }
-        else
-        {
-            poisonBuildUpBar.gameObject.SetActive(true);
-        }
 
-        base.HandleIsPoisonedEffect();
-        poisonBuildUpBar.SetPoisonBuildUpAmount(Mathf.RoundToInt(poisonBuildup));
-    }
-
-    protected override void HandlePoisonBuildUp()
-    {
-        if (isPoisoned == false)
-        {
-            poisonAmountBar.gameObject.SetActive(false);
-        }
-        else
-        {
-            poisonAmountBar.gameObject.SetActive(true);
-        }
-
-        base.HandlePoisonBuildUp();
-        poisonAmountBar.SetPoisonAmount(Mathf.RoundToInt(poisonAmount));
-
-    }
 }

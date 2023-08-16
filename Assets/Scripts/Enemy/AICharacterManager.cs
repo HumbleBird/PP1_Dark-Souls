@@ -73,8 +73,9 @@ public class AICharacterManager : CharacterManager
         navMeshAgent.enabled = false;
     }
 
-    private void Start()
+    protected override void Start()
     {
+        base.Start();
         aiCharacterRigidbody.isKinematic = false;
     }
 
@@ -107,7 +108,6 @@ public class AICharacterManager : CharacterManager
     {
         base.FixedUpdate();
 
-        aiCharacterEffectsManager.HandleAllBuildUpEffects();
     }
 
     private void LateUpdate()

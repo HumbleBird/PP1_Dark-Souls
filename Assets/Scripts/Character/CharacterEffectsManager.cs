@@ -9,6 +9,10 @@ public class CharacterEffectsManager : MonoBehaviour
     [Header("Static Effects")]
     [SerializeField] List<StaticCharacterEffect> staticCharacterEffects;
 
+    [Header("Timed Effects")]
+    public List<CharacterEffect> timedEffects;
+    [SerializeField] float effectTickTimer = 0;
+
     [Header("Current Range FX")]
     public GameObject instantiatedFXModel;
 
@@ -26,13 +30,6 @@ public class CharacterEffectsManager : MonoBehaviour
     public GameObject defaultPoisonParticleFX;
     public GameObject currentPoisonParticleFX;
     public Transform buildUpTransform; // 이 위치에 build up particle을 소환
-    public bool isPoisoned;
-    public float poisonBuildup = 0; // 독 수치 100에 도달한 후 플레이어를 중독시키는 시간 경과에 따른 빌드업
-    public float poisonAmount = 100; // 플레이어가 무독화되기 전에 처리해야 하는 독의 양
-    public float defaultPoisonAmount = 100; // 중독되기까지의 독 수치 기본 값
-    public float poisonTimer = 2; // 독 피해 사이의 시간 간격
-    public int poisonDamage = 1;
-    float timer;
 
     protected virtual void Awake()
     {
@@ -44,6 +41,22 @@ public class CharacterEffectsManager : MonoBehaviour
         foreach (var effect in staticCharacterEffects)
         {
             effect.AddStaticEffect(character);
+        }
+    }
+
+    public virtual void ProcessAllTimedEffects()
+    {
+        effectTickTimer += Time.deltaTime;
+
+        if(effectTickTimer >= 1)
+        {
+            effectTickTimer = 0;
+            ProcessWeaponBuffs();
+
+            for (int i = timedEffects.Count - 1; i > -1 ; i--)
+            {
+                timedEffects[i].ProcessEffect(character);
+            }
         }
     }
 
@@ -145,64 +158,7 @@ public class CharacterEffectsManager : MonoBehaviour
         GameObject blood = Instantiate(bloodSplatterFX, bloodSplatterLocation, Quaternion.identity);
     }
 
-    public virtual void HandleAllBuildUpEffects()
-    {
-        if (character.isDead)
-            return;
 
-        HandlePoisonBuildUp();
-        HandleIsPoisonedEffect();
-    }
-
-    protected virtual void HandlePoisonBuildUp()
-    {
-        if (isPoisoned)
-            return;
-
-        if(poisonBuildup > 0 && poisonBuildup < 100)
-        {
-            poisonBuildup = poisonBuildup - 1 * Time.deltaTime;
-        }
-        else if (poisonBuildup >= 100)
-        {
-            isPoisoned = true;
-            poisonBuildup = 0;
-
-            if(buildUpTransform != null)
-            {
-                currentPoisonParticleFX = Instantiate(defaultPoisonParticleFX, buildUpTransform.transform);
-            }
-            else
-            {
-                currentPoisonParticleFX = Instantiate(defaultPoisonParticleFX, character.transform);
-            }
-        }
-    }
-
-    protected virtual void HandleIsPoisonedEffect()
-    {
-        if(isPoisoned)
-        {
-            if(poisonAmount > 0 )
-            {
-                timer += Time.deltaTime;
-
-                if(timer >= poisonTimer)
-                {
-                    character.characterStatsManager.TakePoisonDamage(poisonDamage);
-                    timer = 0;
-                }
-
-                poisonAmount = poisonAmount - 1 * Time.deltaTime;
-            }
-            else
-            {
-                isPoisoned = false;
-                poisonAmount = defaultPoisonAmount;
-                Destroy(currentPoisonParticleFX);
-            }
-        }
-    }
 
     public virtual void InterruptEffect()
     {

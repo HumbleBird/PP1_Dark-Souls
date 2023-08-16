@@ -72,6 +72,11 @@ public class CharacterManager : MonoBehaviour
         characterCombatManager = GetComponent<CharacterCombatManager>();
     }
 
+    protected virtual void Start()
+    {
+
+    }
+
     protected virtual void FixedUpdate()
     {
         characterAnimatorManager.CheckHandIKWeight(characterWeaponSlotManager.rightHandIKTarget, characterWeaponSlotManager.leftHandIKTarget, isTwoHandingWeapon);
@@ -88,6 +93,8 @@ public class CharacterManager : MonoBehaviour
         animator.SetBool("isTwoHandingWeapon", isTwoHandingWeapon);
         animator.SetBool("isBlocking", isBlocking);
         animator.SetBool("isDead", isDead);
+
+        characterEffectsManager.ProcessAllTimedEffects();
     }
 
     public virtual void UpdateWhichHandCharacterIsUsing(bool usingRightHand)
