@@ -18,5 +18,10 @@ public class PoisonBuildUpBar : MonoBehaviour
     public void SetPoisonBuildUpAmount(int currentPoisonBuildUp)
     {
         slider.value = currentPoisonBuildUp;
+
+        if(currentPoisonBuildUp <= 0)
+        {
+            gameObject.SetActive(false);
+        }
     }
 }

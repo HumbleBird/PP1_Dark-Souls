@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using static Define;
 
 public class CharacterEffectsManager : MonoBehaviour
 {
@@ -12,6 +13,9 @@ public class CharacterEffectsManager : MonoBehaviour
     [Header("Timed Effects")]
     public List<CharacterEffect> timedEffects;
     [SerializeField] float effectTickTimer = 0;
+
+    [Header("Timed Effect Visual FX")]
+    public List<GameObject> timedEffectParticles;
 
     [Header("Current Range FX")]
     public GameObject instantiatedFXModel;
@@ -27,8 +31,6 @@ public class CharacterEffectsManager : MonoBehaviour
     public WeaponBuffEffect rightWeaponBuffEffect;
 
     [Header("Poison")]
-    public GameObject defaultPoisonParticleFX;
-    public GameObject currentPoisonParticleFX;
     public Transform buildUpTransform; // 이 위치에 build up particle을 소환
 
     protected virtual void Awake()
@@ -53,10 +55,14 @@ public class CharacterEffectsManager : MonoBehaviour
             effectTickTimer = 0;
             ProcessWeaponBuffs();
 
+            // PROCESS ALL ACTIVE EFFECT OVER GAME TIME
             for (int i = timedEffects.Count - 1; i > -1 ; i--)
             {
                 timedEffects[i].ProcessEffect(character);
             }
+
+            // DECAYS BUILD UP EFFECT OVER GAME TIME
+            ProcessBuildUpDecay();
         }
     }
 
@@ -158,8 +164,6 @@ public class CharacterEffectsManager : MonoBehaviour
         GameObject blood = Instantiate(bloodSplatterFX, bloodSplatterLocation, Quaternion.identity);
     }
 
-
-
     public virtual void InterruptEffect()
     {
         // 파괴 가능한 effect model(drking estus, having arrow drawn ) 등
@@ -185,6 +189,32 @@ public class CharacterEffectsManager : MonoBehaviour
         if(character.isAiming)
         {
             character.animator.SetBool("isAiming", false);
+        }
+    }
+
+    protected virtual void ProcessBuildUpDecay()
+    {
+        if(character.characterStatsManager.poisonBuildup > 0)
+        {
+            character.characterStatsManager.poisonBuildup -= 1;
+        }
+    }
+
+    public virtual void AddTimedEffectParticle(GameObject effect)
+    {
+        GameObject effectGameObject = Instantiate(effect, buildUpTransform);
+        timedEffectParticles.Add(effectGameObject);
+    }
+
+    public virtual void RemoveTimedEffectParticle(EffectParticleType effectType)
+    {
+        for (int i = timedEffectParticles.Count - 1; i > -1 ; i--)
+        {
+            if(timedEffectParticles[i].GetComponent<EffectParticle>().effectType == effectType)
+            {
+                Destroy(timedEffectParticles[i]);
+                timedEffectParticles.RemoveAt(i);
+            }
         }
     }
 }

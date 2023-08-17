@@ -23,9 +23,9 @@ public class ClumpConsumableItem : ConsumableItem
             player.playerStatsManager.poisonBuildup = 0;
             player.playerStatsManager.isPoisoned = false;
 
-            if(player.playerEffectsManager.currentPoisonParticleFX != null)
+            if(player.playerEffectsManager.currentParticleFX != null)
             {
-                Destroy(player.playerEffectsManager.currentPoisonParticleFX);
+                Destroy(player.playerEffectsManager.currentParticleFX);
             }
         }
 

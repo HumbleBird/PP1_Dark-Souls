@@ -548,6 +548,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 986199630}
+  - component: {fileID: 986199631}
   m_Layer: 0
   m_Name: World Effect Manager
   m_TagString: Untagged
@@ -570,6 +571,22 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 10
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &986199631
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 986199629}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4f55bcfc59712ba419393bb8b6949709, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  poisonBuildUpEffect: {fileID: 11400000, guid: 4bb4f35cfdd5cfa4ca47f0e4b4a1f108, type: 2}
+  poisonedEffect: {fileID: 11400000, guid: 58d760ea74058e84eb1760441f2906ac, type: 2}
+  poisonFX: {fileID: 6957708415220849820, guid: a826c218bda133e47bb59e856fc8f073, type: 3}
+  poisonSFX: {fileID: 8300000, guid: 899a663cb6355ca4d8d3ec6960d70a8b, type: 3}
 --- !u!1 &1024567631
 GameObject:
   m_ObjectHideFlags: 0
@@ -2975,13 +2992,12 @@ MonoBehaviour:
   staticCharacterEffects: []
   timedEffects: []
   effectTickTimer: 0
+  timedEffectParticles: []
   instantiatedFXModel: {fileID: 0}
   bloodSplatterFX: {fileID: 6141063427869561630, guid: 7394c9bad0b44da4aaf6759ca2b78cd8, type: 3}
   rightWeaponManager: {fileID: 0}
   leftWeaponManager: {fileID: 0}
   rightWeaponBuffEffect: {fileID: 0}
-  defaultPoisonParticleFX: {fileID: 0}
-  currentPoisonParticleFX: {fileID: 0}
   buildUpTransform: {fileID: 0}
 --- !u!1 &677284888384037346
 GameObject:
@@ -4379,13 +4395,12 @@ MonoBehaviour:
   staticCharacterEffects: []
   timedEffects: []
   effectTickTimer: 0
+  timedEffectParticles: []
   instantiatedFXModel: {fileID: 0}
   bloodSplatterFX: {fileID: 6141063427869561630, guid: 7394c9bad0b44da4aaf6759ca2b78cd8, type: 3}
   rightWeaponManager: {fileID: 0}
   leftWeaponManager: {fileID: 0}
   rightWeaponBuffEffect: {fileID: 0}
-  defaultPoisonParticleFX: {fileID: 0}
-  currentPoisonParticleFX: {fileID: 0}
   buildUpTransform: {fileID: 0}
 --- !u!114 &1745374744030908215
 MonoBehaviour:
@@ -11764,13 +11779,12 @@ MonoBehaviour:
   staticCharacterEffects: []
   timedEffects: []
   effectTickTimer: 0
+  timedEffectParticles: []
   instantiatedFXModel: {fileID: 0}
   bloodSplatterFX: {fileID: 6141063427869561630, guid: 7394c9bad0b44da4aaf6759ca2b78cd8, type: 3}
   rightWeaponManager: {fileID: 0}
   leftWeaponManager: {fileID: 0}
   rightWeaponBuffEffect: {fileID: 0}
-  defaultPoisonParticleFX: {fileID: 0}
-  currentPoisonParticleFX: {fileID: 0}
   buildUpTransform: {fileID: 0}
 --- !u!114 &7120129171972859227
 MonoBehaviour:

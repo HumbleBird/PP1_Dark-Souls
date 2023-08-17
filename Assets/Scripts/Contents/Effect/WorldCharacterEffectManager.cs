@@ -6,8 +6,11 @@ public class WorldCharacterEffectManager : MonoBehaviour
 {
     public static WorldCharacterEffectManager instance;
 
-    public PoisonBuildEffect poisonBuildUpEffect;
+    [Header("POISON")]
+    public PoisonBuildUpEffect poisonBuildUpEffect;
     public PoisonedEffect poisonedEffect;
+    public GameObject poisonFX;
+    public AudioClip poisonSFX;
 
     private void Awake()
     {

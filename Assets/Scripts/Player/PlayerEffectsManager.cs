@@ -7,7 +7,7 @@ public class PlayerEffectsManager : CharacterEffectsManager
     PlayerManager player;
 
     PoisonBuildUpBar poisonBuildUpBar;
-    PoisonAmountBar poisonAmountBar;
+    public PoisonAmountBar poisonAmountBar;
 
     public GameObject currentParticleFX;
     public GameObject instantiatedFXModel2;
@@ -39,5 +39,14 @@ public class PlayerEffectsManager : CharacterEffectsManager
         player.playerWeaponSlotManager.LoadBothWeaponsOnSlots();
     }
 
+    protected override void ProcessBuildUpDecay()
+    {
+        if(player.characterStatsManager.poisonBuildup >= 0)
+        {
+            player.characterStatsManager.poisonBuildup -= 1;
 
+            poisonBuildUpBar.gameObject.SetActive(true);
+            poisonBuildUpBar.SetPoisonBuildUpAmount(Mathf.RoundToInt(player.characterStatsManager.poisonBuildup));
+        }
+    }
 }

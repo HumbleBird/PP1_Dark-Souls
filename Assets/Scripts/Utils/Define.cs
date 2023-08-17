@@ -147,6 +147,11 @@ public class Define
 
     #region Battle
 
+    public enum EffectParticleType
+    {
+        Poison
+    }
+
     public enum BuffClass
     {
         Physical,

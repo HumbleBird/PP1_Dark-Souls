@@ -17,6 +17,16 @@ public class PoisonAmountBar : MonoBehaviour
 
     public void SetPoisonAmount(int poisonAmount)
     {
+        if(poisonAmount > 0)
+        {
+            gameObject.SetActive(true);
+
+        }
+        else
+        {
+            gameObject.SetActive(false);
+
+        }
         slider.value = poisonAmount;
     }
 }
