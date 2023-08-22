@@ -36,6 +36,9 @@ public class ResetAnimatorBool : StateMachineBehaviour
         character.canBeParryied = false;
         character.canBeRiposted = false;
 
+        // 데미지 애니메이션 이후,Reset previous poise damage  to 0
+        character.characterCombatManager.previousPoiseDamageTaken = 0;
+
         animator.SetBool(isInteractingBool, isInteractingStatus);
         animator.SetBool(isFiringSpellBool, isFiringSpellStatus);
         animator.SetBool(isRotatingWithRootMotion, isRotatingWithRootMotionStatus);

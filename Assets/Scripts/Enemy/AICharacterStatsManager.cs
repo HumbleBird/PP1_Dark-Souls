@@ -80,28 +80,6 @@ public class AICharacterStatsManager : CharacterStatsManager
         aiCharacter.aiCharacterAnimationManager.PlayTargetAnimation("Break Guard", true);
     }
 
-    public override void TakeDamage(int damage, int fireDamage, string damageAnimation, CharacterManager enemyCharacterDamageingMe)
-    {
-        base.TakeDamage(damage, fireDamage, damageAnimation,  enemyCharacterDamageingMe);
-
-
-        if (!isBoss)
-        {
-            aiCharacterHealthBar.SetHealth(currentHealth);
-        }
-        else if (isBoss && aiCharacter.aiCharacterBossManager != null)
-        {
-            aiCharacter.aiCharacterBossManager.UpdateBossHealthBar(currentHealth, maxHealth);
-        }
-
-
-        aiCharacter.aiCharacterAnimationManager.PlayTargetAnimation(damageAnimation, true);
-
-        if (currentHealth <= 0)
-        {
-            HandleDeath();
-        }
-    }
 
     private void HandleDeath()
     {

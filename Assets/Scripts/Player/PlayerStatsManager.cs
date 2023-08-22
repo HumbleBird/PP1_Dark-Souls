@@ -56,24 +56,6 @@ public class PlayerStatsManager : CharacterStatsManager
     }
 
 
-    public override void TakeDamage(int damage, int fireDamage, string damageAnimation, CharacterManager enemyCharacterDamageingMe)
-    {
-        if (player.isInvulnerable)
-            return;
-
-        base.TakeDamage(damage, fireDamage, damageAnimation, enemyCharacterDamageingMe);
-
-        healthBar.SetCurrentHealth(currentHealth);
-        player.playerAnimatorManager.PlayTargetAnimation(damageAnimation, true);
-
-        if(currentHealth <= 0 )
-        {
-            currentHealth = 0;
-            player.isDead = true;
-            player.playerAnimatorManager.PlayTargetAnimation("Dead_01", true);
-        }
-    }
-
     public override void TakeDamageNoAnimation(int damage, int fireDamage)
     {
         base.TakeDamageNoAnimation(damage, fireDamage);

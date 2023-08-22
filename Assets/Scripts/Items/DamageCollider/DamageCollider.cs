@@ -95,7 +95,7 @@ public class DamageCollider : MonoBehaviour
                 // 무기 콜라이더가 어디 부분에서 처음 부딪치는지 탐지
                 Vector3 contactPoint = other.gameObject.GetComponent<Collider>().ClosestPointOnBounds(transform.position);
                 float directionHitFrom = Vector3.SignedAngle(characterManager.transform.forward, enemyManager.transform.forward, Vector3.up);
-                ChooseWhichDirectionDamageCameFrom(directionHitFrom);
+                //ChooseWhichDirectionDamageCameFrom(directionHitFrom);
                 enemyManager.characterEffectsManager.PlayBloodSplatterFX(contactPoint);
                 enemyManager.characterEffectsManager.InterruptEffect();
 
@@ -189,31 +189,8 @@ public class DamageCollider : MonoBehaviour
         }
         else
         {
-            enemyStats.TakeDamage(Mathf.RoundToInt(finalPhysicalDamage), 0, currentDamageAnimation, characterManager);
+            //enemyStats.TakeDamage(Mathf.RoundToInt(finalPhysicalDamage), 0, currentDamageAnimation, characterManager);
         }
     }
 
-    protected virtual void ChooseWhichDirectionDamageCameFrom(float direction)
-    {
-        if(direction >= 145 && direction <= 180)
-        {
-            currentDamageAnimation = "Damage_Forward_01";
-        }
-        else if (direction <= -145 && direction >= -180)
-        {
-            currentDamageAnimation = "Damage_Forward_01";
-        }
-        else if (direction >= -45 && direction <= 45)
-        {
-            currentDamageAnimation = "Damage_Back_01";
-        }
-        else if (direction >= -144 && direction <= -45)
-        {
-            currentDamageAnimation = "Damage_Left_01";
-        }
-        else if (direction >= 45 && direction <= 144)
-        {
-            currentDamageAnimation = "Damage_Right_01";
-        }
-    }
 }

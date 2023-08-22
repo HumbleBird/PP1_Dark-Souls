@@ -93,60 +93,6 @@ public class CharacterStatsManager : MonoBehaviour
         totalPoiseDefence = armorPoiseBonus;
     }
 
-    public virtual void TakeDamage(int physicalDamage, int fireDamage, string damageAnimation, CharacterManager enemyCharacterDamageingMe)
-    {
-        if (character.isDead)
-            return;
-
-        // Damage defense 계산 전, 공격 데미지 수치 체크
-        physicalDamage = Mathf.RoundToInt(physicalDamage * (enemyCharacterDamageingMe.characterStatsManager.physicalDamagePercentageModifier / 100));
-        fireDamage = Mathf.RoundToInt(fireDamage * (enemyCharacterDamageingMe.characterStatsManager.fireDamagePercentageModifier / 100));
-
-        character.characterAnimatorManager.EraseHandIKForWeapon();
-
-        float totalPhysicalDamageAbsorption = 1 -
-            (1 - physicalDamageAbsorptionHead / 100) *
-            (1 - physicalDamageAbsorptionBody / 100) *
-            (1 - physicalDamageAbsorptionLegs / 100) *
-            (1 - physicalDamageAbsorptionHands / 100);
-
-        physicalDamage = Mathf.RoundToInt(physicalDamage - (physicalDamage * totalPhysicalDamageAbsorption));
-
-        float totalfireDamageAbsorption = 1 -
-            (1 - fireDamageAbsorptionHead / 100) *
-            (1 - fireDamageAbsorptionBody / 100) *
-            (1 - fireDamageAbsorptionLegs / 100) *
-            (1 - fireDamageAbsorptionHands / 100);
-
-        fireDamage = Mathf.RoundToInt(fireDamage - (fireDamage * totalfireDamageAbsorption));
-
-        physicalDamage = physicalDamage - Mathf.RoundToInt(physicalDamage * (physicalAbsorptionPercentageModifier / 100));
-        fireDamage = fireDamage - Mathf.RoundToInt(fireDamage * (fireAbsorptionPercentageModifier / 100));
-
-        float finalDamage = physicalDamage + fireDamage; // + fire + mage + lightning + dark Damage
-
-        if(enemyCharacterDamageingMe.isPerformingFullyChargedAttack)
-        {
-            finalDamage *= 2;
-        }
-
-
-
-        Debug.Log("Final Damage: " + finalDamage);
-
-
-        currentHealth = Mathf.RoundToInt(currentHealth - finalDamage);
-
-
-        if(currentHealth <= 0)
-        {
-            currentHealth = 0;
-            character.isDead = true;
-        }
-
-        //character.characterSoundFXManager.PlayRandomDamageSoundFX();
-    }
-
     public virtual void TakeDamageAfterBlock(int physicalDamage, int fireDamage, CharacterManager enemyCharacterDamageingMe)
     {
         if (character.isDead)
