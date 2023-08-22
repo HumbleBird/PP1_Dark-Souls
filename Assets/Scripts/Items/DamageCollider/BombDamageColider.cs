@@ -27,13 +27,21 @@ public class BombDamageColider : DamageCollider
             impactPaticles = Instantiate(impactPaticles, transform.position, Quaternion.identity);
             Explode();
 
-            CharacterStatsManager character = collision.transform.GetComponent<CharacterStatsManager>();
+            CharacterManager character = collision.transform.GetComponent<CharacterManager>();
 
             if(character != null)
             {
-                if(character.teamIDNumber != teamIDNumber)
+                if(character.characterStatsManager.teamIDNumber != teamIDNumber)
                 {
-                    //character.TakeDamage(0, explosionDamage, currentDamageAnimation, characterManager);
+
+                    TakeDamageEffect takeDamageEffect = Instantiate(WorldCharacterEffectManager.instance.takeDamageEffect);
+                    takeDamageEffect.physicalDamage = physicalDamage;
+                    takeDamageEffect.fireDamage = fireDamage;
+                    takeDamageEffect.poiseDamage = poiseDamage;
+                    takeDamageEffect.contactPoint = contactPoint;
+                    takeDamageEffect.angleHitFrom = angleHitFrom;
+                    character.characterEffectsManager.ProcessEffectInstantly(takeDamageEffect);
+
                 }
             }
 

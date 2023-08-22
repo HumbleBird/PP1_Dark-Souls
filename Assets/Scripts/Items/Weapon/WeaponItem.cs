@@ -64,4 +64,7 @@ public class WeaponItem : Item
 
     [Header("SOUND FX")]
     public AudioClip[] weaponWhooshes;
+    public AudioClip[] blockingNoises;
+
+
 }

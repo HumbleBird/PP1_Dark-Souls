@@ -7,21 +7,12 @@ public class PlayerCombatManager : CharacterCombatManager
 {
     PlayerManager player;
 
-
-
     protected override void Awake()
     {
         base.Awake();
 
         player = GetComponent<PlayerManager>();
 
-    }
-
-
-    public override void AttemptBlock(DamageCollider attackingWeapon, float physicalDamage, float fireDamage, string blockAnimation)
-    {
-        base.AttemptBlock(attackingWeapon, physicalDamage, fireDamage, blockAnimation);
-        player.playerStatsManager.staminaBar.SetCurrentStamina(Mathf.RoundToInt(player.playerStatsManager.currentStamina));
     }
 
     public override void DrainStaminaBasedOnAttack()

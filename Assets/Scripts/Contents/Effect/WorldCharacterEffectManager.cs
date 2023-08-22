@@ -6,6 +6,10 @@ public class WorldCharacterEffectManager : MonoBehaviour
 {
     public static WorldCharacterEffectManager instance;
 
+    [Header("DAMAGE")]
+    public TakeDamageEffect takeDamageEffect;
+    public TakeBlockedDamageEffect takeBlockedDamageEffect;
+
     [Header("POISON")]
     public PoisonBuildUpEffect poisonBuildUpEffect;
     public PoisonedEffect poisonedEffect;

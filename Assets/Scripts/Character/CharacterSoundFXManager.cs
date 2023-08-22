@@ -77,4 +77,11 @@ public class CharacterSoundFXManager : MonoBehaviour
     {
         audioSource.PlayOneShot(soundFX);
     }
+
+    public virtual void PlayRandomSoundFXFromArray(AudioClip[] soundArray)
+    {
+        int index = Random.Range(0, soundArray.Length);
+
+        PlaySoundFX(soundArray[index]);
+    }
 }

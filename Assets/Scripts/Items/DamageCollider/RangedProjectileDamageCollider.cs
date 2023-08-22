@@ -45,22 +45,19 @@ public class RangedProjectileDamageCollider : DamageCollider
                 return;
 
             enemyManager.characterStatsManager.poiseResetTimer = enemyManager.characterStatsManager.totalPoiseResetTime;
-            enemyManager.characterStatsManager.totalPoiseDefence = enemyManager.characterStatsManager.totalPoiseDefence - poiseBreak;
+            enemyManager.characterStatsManager.totalPoiseDefence = enemyManager.characterStatsManager.totalPoiseDefence - poiseDamage;
 
-            Vector3 contactPoint = collision.gameObject.GetComponent<Collider>().ClosestPointOnBounds(transform.position);
-            float directionHitFrom = Vector3.SignedAngle(characterManager.transform.forward, enemyManager.transform.forward, Vector3.up);
-            //ChooseWhichDirectionDamageCameFrom(directionHitFrom);
+            contactPoint = collision.gameObject.GetComponent<Collider>().ClosestPointOnBounds(transform.position);
+            angleHitFrom = Vector3.SignedAngle(characterManager.transform.forward, enemyManager.transform.forward, Vector3.up);
 
-            enemyManager.characterEffectsManager.PlayBloodSplatterFX(contactPoint);
+            TakeDamageEffect takeDamageEffect = Instantiate(WorldCharacterEffectManager.instance.takeDamageEffect);
+            takeDamageEffect.physicalDamage = physicalDamage;
+            takeDamageEffect.fireDamage = fireDamage;
+            takeDamageEffect.poiseDamage = poiseDamage;
+            takeDamageEffect.contactPoint = contactPoint;
+            takeDamageEffect.angleHitFrom = angleHitFrom;
+            enemyManager.characterEffectsManager.ProcessEffectInstantly(takeDamageEffect);
 
-            if (enemyManager.characterStatsManager.totalPoiseDefence > poiseBreak)
-            {
-                enemyManager.characterStatsManager.TakeDamageNoAnimation(physicalDamage, fireDamage);
-            }
-            else
-            {
-                //enemyManager.characterStatsManager.TakeDamage(physicalDamage, 0, currentDamageAnimation, characterManager);
-            }
         }
 
         if (collision.gameObject.tag == "illusionary Wall")

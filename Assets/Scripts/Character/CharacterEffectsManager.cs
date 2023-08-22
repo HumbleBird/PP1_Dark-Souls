@@ -46,6 +46,12 @@ public class CharacterEffectsManager : MonoBehaviour
         }
     }
 
+    public virtual void ProcessEffectInstantly(CharacterEffect effect)
+    {
+        effect.ProcessEffect(character);
+    }
+
+
     public virtual void ProcessAllTimedEffects()
     {
         effectTickTimer += Time.deltaTime;
@@ -65,6 +71,7 @@ public class CharacterEffectsManager : MonoBehaviour
             ProcessBuildUpDecay();
         }
     }
+
 
     public void ProcessWeaponBuffs()
     {

@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+[CreateAssetMenu(menuName = "Character Effects/Take Damage")]
 public class TakeDamageEffect : CharacterEffect
 {
     [Header("Character Causing Damage")]
@@ -13,7 +14,7 @@ public class TakeDamageEffect : CharacterEffect
 
     [Header("Poise")]
     public float poiseDamage = 0;
-    public bool poiseBroken = false;
+    public bool poiseIsBroken = false;
 
     [Header("Animation")]
     public bool playDamageAnimation = true;
@@ -48,7 +49,7 @@ public class TakeDamageEffect : CharacterEffect
         PlayDamageAnimation(character);
 
         // 사운드
-        PlayDamageSoundFX(character);
+        //PlayDamageSoundFX(character);
 
         // 피 효과
         PlayBloodSplatter(character);
@@ -59,9 +60,12 @@ public class TakeDamageEffect : CharacterEffect
 
     private void CalculateDamage(CharacterManager  character)
     {
-        // Damage defense 계산 전, 공격 데미지 수치 체크
-        physicalDamage = Mathf.RoundToInt(physicalDamage * (characterCausingDamage.characterStatsManager.physicalDamagePercentageModifier / 100));
-        fireDamage = Mathf.RoundToInt(fireDamage * (characterCausingDamage.characterStatsManager.fireDamagePercentageModifier / 100));
+        if(characterCausingDamage != null)
+        {
+            // Damage defense 계산 전, 공격 데미지 수치 체크
+            physicalDamage = Mathf.RoundToInt(physicalDamage * (characterCausingDamage.characterStatsManager.physicalDamagePercentageModifier / 100));
+            fireDamage = Mathf.RoundToInt(fireDamage * (characterCausingDamage.characterStatsManager.fireDamagePercentageModifier / 100));
+        }
 
         character.characterAnimatorManager.EraseHandIKForWeapon();
 
@@ -88,6 +92,11 @@ public class TakeDamageEffect : CharacterEffect
 
         Debug.Log("Final Damage: " + finalDamage);
         character.characterStatsManager.currentHealth = Mathf.RoundToInt(character.characterStatsManager.currentHealth - finalDamage);
+
+        if(character.characterStatsManager.totalPoiseDefence < poiseDamage)
+        {
+            poiseIsBroken = true;
+        }
 
         if (character.characterStatsManager.currentHealth <= 0)
         {
@@ -266,7 +275,7 @@ public class TakeDamageEffect : CharacterEffect
         }
 
         // 캐릭터 poise broken이 되지 않았다면, 데미지 애니메이션을 재생하지 않는다
-        if(!poiseBroken)
+        if(!poiseIsBroken)
         {
             return;
         }
@@ -289,7 +298,6 @@ public class TakeDamageEffect : CharacterEffect
     private void AssignNewAITarget(CharacterManager character)
     {
         AICharacterManager aiCharacter = character as AICharacterManager;
-
 
         if(aiCharacter != null && characterCausingDamage != null)
         {

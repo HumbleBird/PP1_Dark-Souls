@@ -10,7 +10,7 @@ public class SpellDamageCollider : DamageCollider
 
     bool hasColliede = false;
 
-    CharacterStatsManager spellTarget;
+    CharacterManager spellTarget;
     Rigidbody rigidBody;
 
     Vector3 impactNormal; //Used to rotate the impact particles
@@ -40,11 +40,18 @@ public class SpellDamageCollider : DamageCollider
     {
         if (!hasColliede)
         {
-            spellTarget = collision.transform.GetComponent<CharacterStatsManager>();
+            spellTarget = collision.transform.GetComponent<CharacterManager>();
 
-            if (spellTarget != null && spellTarget.teamIDNumber != teamIDNumber)
+            if (spellTarget != null && spellTarget.characterStatsManager.teamIDNumber != teamIDNumber)
             {
-                //spellTarget.TakeDamage(0, fireDamage, currentDamageAnimation, characterManager);
+
+                TakeDamageEffect takeDamageEffect = Instantiate(WorldCharacterEffectManager.instance.takeDamageEffect);
+                takeDamageEffect.physicalDamage = physicalDamage;
+                takeDamageEffect.fireDamage = fireDamage;
+                takeDamageEffect.poiseDamage = poiseDamage;
+                takeDamageEffect.contactPoint = contactPoint;
+                takeDamageEffect.angleHitFrom = angleHitFrom;
+                spellTarget.characterEffectsManager.ProcessEffectInstantly(takeDamageEffect);
             }
             else
                 return;
