@@ -63,15 +63,13 @@ public class PlayerManager : CharacterManager
     {
         base.Update();
 
-        isFiringSpell = animator.GetBool("isFiringSpell");
-        isPerformingFullyChargedAttack = animator.GetBool("isPerformingFullyChargedAttack");
-
-        animator.SetBool("isInAir", isInAir);
-
         inputHandler.TickInput();
         playerLocomotionManager.HandleRollingAndSprinting();
         playerLocomotionManager.HandleJumping();
         playerStatsManager.RegenerateStamina();
+
+        playerLocomotionManager.HandleGroundedMovement();
+        playerLocomotionManager.HandleRotation();
 
         CheckForInteractableObject();
     }
@@ -80,9 +78,6 @@ public class PlayerManager : CharacterManager
     protected override void FixedUpdate()
     {
         base.FixedUpdate();
-        playerLocomotionManager.HandleFalling(playerLocomotionManager.moveDirection);
-        playerLocomotionManager.HandleMovement();
-        playerLocomotionManager.HandleRotation();
     }
 
     private void LateUpdate()
@@ -147,14 +142,14 @@ public class PlayerManager : CharacterManager
 
     public void OpenChestInteraction(Transform playerStandingHereWhenOpingChest)
     {
-        playerLocomotionManager.rigidbody.velocity = Vector3.zero;
+        playerLocomotionManager.GetComponent<Rigidbody>().velocity = Vector3.zero;
         transform.position = playerStandingHereWhenOpingChest.transform.position;
         playerAnimatorManager.PlayTargetAnimation("Open Chest", true);
     }
 
     public void PassThroughFogWallInteraction(Transform fogWallEnterance)
     {
-        playerLocomotionManager.rigidbody.velocity = Vector3.zero;
+        playerLocomotionManager.GetComponent<Rigidbody>().velocity = Vector3.zero;
 
         //Vector3 rotationDirection = fogWallEnterance.transform.forward;
         //Quaternion turnRoation = Quaternion.LookRotation(rotationDirection);

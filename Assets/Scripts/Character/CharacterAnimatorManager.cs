@@ -245,4 +245,14 @@ public class CharacterAnimatorManager : MonoBehaviour
             leftHandConstraint.data.targetRotationWeight = 0;
         }
     }
+
+    public virtual void OnAnimatorMove()
+    {
+        if (character.isInteracting == false)
+            return;
+
+        Vector3 velocity = character.animator.deltaPosition;
+        character.characterController.Move(velocity);
+        character.transform.rotation *= character.animator.deltaRotation;
+    }
 }

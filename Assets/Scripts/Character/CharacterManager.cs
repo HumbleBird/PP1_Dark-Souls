@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class CharacterManager : MonoBehaviour
 {
+    public CharacterController characterController;
     public Animator animator;
     public CharacterAnimatorManager characterAnimatorManager;
     public CharacterWeaponSlotManager characterWeaponSlotManager;
@@ -62,6 +63,7 @@ public class CharacterManager : MonoBehaviour
 
     protected virtual void Awake()
     {
+        characterController = GetComponent<CharacterController>();
         animator = GetComponent<Animator>();
         characterAnimatorManager = GetComponent<CharacterAnimatorManager>();
         characterWeaponSlotManager = GetComponent<CharacterWeaponSlotManager>();
@@ -89,10 +91,13 @@ public class CharacterManager : MonoBehaviour
         canRotate = animator.GetBool("canRotate");
         isHoldingArrow = animator.GetBool("isHoldingArrow");
         isInvulnerable = animator.GetBool("isInvulnerable");
+        isFiringSpell = animator.GetBool("isFiringSpell");
+        isPerformingFullyChargedAttack = animator.GetBool("isPerformingFullyChargedAttack");
 
         animator.SetBool("isTwoHandingWeapon", isTwoHandingWeapon);
         animator.SetBool("isBlocking", isBlocking);
         animator.SetBool("isDead", isDead);
+        animator.SetBool("isInAir", isInAir);
 
         characterEffectsManager.ProcessAllTimedEffects();
     }

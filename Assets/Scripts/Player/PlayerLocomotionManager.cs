@@ -2,22 +2,9 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class PlayerLocomotionManager : MonoBehaviour
+public class PlayerLocomotionManager : CharacterLocomotionManager
 {
     PlayerManager player;
-
-    public Vector3 moveDirection;
-    public new Rigidbody rigidbody;
-
-    [Header("Ground & Air Ditections States")]
-    [SerializeField]
-    float groundDetectionRayStartPoint = 0.5f;
-    [SerializeField]
-    float minimumDistanceNeededToBeginFall = 1f;
-    [SerializeField]
-    float groundDirectionRayDistance = 0.2f;
-    public LayerMask groundLayer;
-    public float inAirTimer;
 
     [Header("Movement Stats")]
     [SerializeField]
@@ -37,23 +24,18 @@ public class PlayerLocomotionManager : MonoBehaviour
     int backstepStaminaCost = 12;
     int sprintStaminaCost = 1;
 
-    Vector3 normalVector;
-    Vector3 targetPosition;
-
-    public CapsuleCollider characterCollider;
-    public CapsuleCollider characterCollisionBlockerCollider;
-
-    private void Awake()
+    protected override void Awake()
     {
+        base.Awake();
+
         player = GetComponent<PlayerManager>();
-        rigidbody = GetComponent<Rigidbody>();
         
     }
 
-    private void Start()
+    protected override void Start()
     {
+        base.Start();
         player.isGrounded = true;
-        Physics.IgnoreCollision(characterCollider, characterCollisionBlockerCollider, true);
     }
 
     #region Movement
@@ -134,7 +116,7 @@ public class PlayerLocomotionManager : MonoBehaviour
 
     }
 
-    public void HandleMovement()
+    public void HandleGroundedMovement()
     {
         if (player.inputHandler.rollFlag)
             return;
@@ -142,37 +124,26 @@ public class PlayerLocomotionManager : MonoBehaviour
         if (player.isInteracting)
             return;
 
-        moveDirection = player.cameraHandler.cameraObject.transform.forward * player.inputHandler.vertical;
-        moveDirection += player.cameraHandler.cameraObject.transform.right * player.inputHandler.horizontal;
+        moveDirection = player.cameraHandler.transform.forward * player.inputHandler.vertical;
+        moveDirection = moveDirection + player.cameraHandler.transform.right * player.inputHandler.horizontal;
         moveDirection.Normalize();
         moveDirection.y = 0;
 
-        float speed = movementSpeed;
-
-        if (player.inputHandler.sprintFlag && player.inputHandler.moveAmount > 0.5)
+        if(player.isSprinting)
         {
-            speed = sprintSpeed;
-            player.isSprinting = true;
-            moveDirection *= speed;
-            player.playerStatsManager.DeductStamina(sprintStaminaCost);
+            player.characterController.Move(moveDirection * sprintSpeed * Time.deltaTime);
         }
         else
         {
-            if(player.inputHandler.moveAmount <= 0.5)
+            if(player.inputHandler.moveAmount > 0.5f)
             {
-                moveDirection *= walkingSpeed;
-                player.isSprinting = false;
+                player.characterController.Move(moveDirection * movementSpeed * Time.deltaTime);
             }
-            else
+            else if (player.inputHandler.moveAmount <= 0.5f)
             {
-                moveDirection *= speed;
-                player.isSprinting = false;
-
+                player.characterController.Move(moveDirection * walkingSpeed * Time.deltaTime);
             }
         }
-
-        Vector3 projecteedVelocity = Vector3.ProjectOnPlane(moveDirection, normalVector);
-        rigidbody.velocity = projecteedVelocity;
 
         if(player.inputHandler.lockOnFlag && player.inputHandler.sprintFlag == false)
         {
@@ -218,89 +189,6 @@ public class PlayerLocomotionManager : MonoBehaviour
 
             }
 
-        }
-    }
-
-    public void HandleFalling(Vector3 moveDirection)
-    {
-        player.isGrounded = false;
-        RaycastHit hit;
-        Vector3 origin = transform.position;
-        origin.y += groundDetectionRayStartPoint;
-
-        if (Physics.Raycast(origin, transform.forward, out hit, 0.4f))
-        {
-            moveDirection = Vector3.zero;
-        }
-
-        if (player.isInAir)
-        {
-            rigidbody.AddForce(-Vector3.up * fallingSpeed);
-            rigidbody.AddForce(moveDirection * fallingSpeed / 10f);
-        }
-
-        Vector3 dir = moveDirection;
-        dir.Normalize();
-        origin = origin + dir * groundDirectionRayDistance;
-
-        targetPosition = transform.position;
-
-        Debug.DrawRay(origin, -Vector3.up * minimumDistanceNeededToBeginFall, Color.red, 0.1f, false);
-        if (Physics.Raycast(origin, -Vector3.up, out hit, minimumDistanceNeededToBeginFall, groundLayer))
-        {
-            normalVector = hit.normal;
-            Vector3 tp = hit.point;
-            player.isGrounded = true;
-            targetPosition.y = tp.y;
-
-            if (player.isInAir)
-            {
-                if(inAirTimer > 0.5)
-                {
-                    Debug.Log("YOu were in the air for " + inAirTimer);
-                    player.playerAnimatorManager.PlayTargetAnimation("Land", true);
-                    inAirTimer = 0;
-                }
-                else
-                {
-                    player.playerAnimatorManager.PlayTargetAnimation("Empty", false);
-                    inAirTimer = 0;
-                }
-
-                player.isInAir = false;
-            }
-        }
-        else
-        {
-            if(player.isGrounded)
-            {
-                player.isGrounded = false;
-            }
-
-            if(player.isInAir == false)
-            {
-                if(player.isInteracting == false)
-                {
-                    player.playerAnimatorManager.PlayTargetAnimation("Falling", true);
-                }
-
-                Vector3 vel = rigidbody.velocity;
-                vel.Normalize();
-                rigidbody.velocity = vel * (movementSpeed / 2);
-                player.isInAir = true;
-            }
-        }
-
-        //if(playerManager.isGrounded)
-        {
-            if (player.isInteracting || player.inputHandler.moveAmount > 0)
-            {
-                transform.position = Vector3.Lerp(transform.position, targetPosition, Time.deltaTime);
-            }
-            else
-            {
-                transform.position = targetPosition;
-            }
         }
     }
 

@@ -3662,6 +3662,7 @@ GameObject:
   - component: {fileID: 5951744985032775358}
   - component: {fileID: 5413672925893994409}
   - component: {fileID: 5413672925893994410}
+  - component: {fileID: 7817863243567736809}
   m_Layer: 9
   m_Name: Player_LowPoly
   m_TagString: Character
@@ -3841,6 +3842,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 30cb461b5e3124146b8e8aa84f952625, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  characterName: Nightmare
   teamIDNumber: 0
   maxHealth: 0
   currentHealth: 0
@@ -3850,7 +3852,7 @@ MonoBehaviour:
   currentFocusPoints: 0
   currentSoulCount: 8500
   soulsAwardedOnDeath: 50
-  playerLevel: 1
+  playerLevel: 13
   healthLevel: 10
   staminaLevel: 50
   focusLevel: 10
@@ -3872,9 +3874,17 @@ MonoBehaviour:
   fireDamageAbsorptionBody: 0
   fireDamageAbsorptionLegs: 0
   fireDamageAbsorptionHands: 0
+  poisonResistance: 0
   blockingPhysicalDamageAbsorption: 0
   blockingFireDamageAbsorption: 0
   blockingStabilityRating: 0
+  physicalDamagePercentageModifier: 100
+  fireDamagePercentageModifier: 100
+  physicalAbsorptionPercentageModifier: 0
+  fireAbsorptionPercentageModifier: 0
+  isPoisoned: 0
+  poisonBuildup: 0
+  poisonAmount: 100
   healthBar: {fileID: 0}
   staminaBar: {fileID: 0}
   focusPointBar: {fileID: 0}
@@ -3914,6 +3924,42 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   leftHandConstraint: {fileID: 1853761556884639150}
   rightHandConstraint: {fileID: 1853761555343951265}
+  Damage_Forward_Medium_01: Damage_Forward_Medium_01
+  Damage_Forward_Medium_02: Damage_Forward_Medium_02
+  Damage_Back_Medium_01: Damage_Back_Medium_01
+  Damage_Back_Medium_02: Damage_Back_Medium_02
+  Damage_Left_Medium_01: Damage_Left_Medium_01
+  Damage_Left_Medium_02: Damage_Left_Medium_02
+  Damage_Right_Medium_01: Damage_Right_Medium_01
+  Damage_Right_Medium_02: Damage_Right_Medium_02
+  Damage_Forward_Heavy_01: Damage_Forward_Heavy_01
+  Damage_Forward_Heavy_02: Damage_Forward_Heavy_02
+  Damage_Back_Heavy_01: Damage_Back_Heavy_01
+  Damage_Back_Heavy_02: Damage_Back_Heavy_02
+  Damage_Left_Heavy_01: Damage_Left_Heavy_01
+  Damage_Left_Heavy_02: Damage_Left_Heavy_02
+  Damage_Right_Heavy_01: Damage_Right_Heavy_01
+  Damage_Right_Heavy_02: Damage_Right_Heavy_02
+  Damage_Forward_Colssal_01: Damage_Forward_Colssal_01
+  Damage_Forward_Colssal_02: Damage_Forward_Colssal_02
+  Damage_Back_Colssal_01: Damage_Back_Colssal_01
+  Damage_Back_Colssal_02: Damage_Back_Colssal_02
+  Damage_Left_Colssal_01: Damage_Left_Colssal_01
+  Damage_Left_Colssal_02: Damage_Left_Colssal_02
+  Damage_Right_Colssal_01: Damage_Right_Colssal_01
+  Damage_Right_Colssal_02: Damage_Right_Colssal_02
+  Damage_Animation_Medium_Forward: []
+  Damage_Animation_Medium_Back: []
+  Damage_Animation_Medium_Left: []
+  Damage_Animation_Medium_Right: []
+  Damage_Animation_Heavy_Forward: []
+  Damage_Animation_Heavy_Back: []
+  Damage_Animation_Heavy_Left: []
+  Damage_Animation_Heavy_Right: []
+  Damage_Animation_Colssal_Forward: []
+  Damage_Animation_Colssal_Back: []
+  Damage_Animation_Colssal_Left: []
+  Damage_Animation_Colssal_Right: []
 --- !u!114 &5951744985032775357
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3932,6 +3978,7 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 512
   criticalAttackRange: 0.7
+  previousPoiseDamageTaken: 0
   currentAttackType: 0
   oh_light_attack_01: OH_Light_Attack_01
   oh_light_attack_02: OH_Light_Attack_02
@@ -3980,19 +4027,19 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 23a2ff4e986aa334cb921a3d3d56881e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  staticCharacterEffects:
+  - {fileID: 11400000, guid: a662e3a6ff4f68a42a5738ed17e537b7, type: 2}
+  - {fileID: 11400000, guid: 1b7768e7f73c0794c9e366271da75aa0, type: 2}
+  timedEffects: []
+  effectTickTimer: 0
+  timedEffectParticles: []
   instantiatedFXModel: {fileID: 0}
   bloodSplatterFX: {fileID: 6141063427869561630, guid: 7394c9bad0b44da4aaf6759ca2b78cd8, type: 3}
-  rightWeaponFX: {fileID: 0}
-  leftWeaponFX: {fileID: 0}
-  defaultPoisonParticleFX: {fileID: 6957708415220849820, guid: a826c218bda133e47bb59e856fc8f073, type: 3}
-  currentPoisonParticleFX: {fileID: 0}
+  rightWeaponManager: {fileID: 0}
+  leftWeaponManager: {fileID: 0}
+  rightWeaponBuffEffect: {fileID: 0}
   buildUpTransform: {fileID: 6702204840506506598}
-  isPoisoned: 0
-  poisonBuildup: 0
-  poisonAmount: 100
-  defaultPoisonAmount: 100
-  poisonTimer: 2
-  poisonDamage: 1
+  poisonAmountBar: {fileID: 0}
   currentParticleFX: {fileID: 0}
   instantiatedFXModel2: {fileID: 0}
   amountToBeHealed: 0
@@ -4010,16 +4057,20 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   currentItemBeingUsed: {fileID: 0}
   currentSpell: {fileID: 11400000, guid: c366cbf2bcc1a0144a1e21b313bba1be, type: 2}
-  rightWeapon: {fileID: 11400000, guid: 08ef3dc9456ad484d8469464b63ceb4b, type: 2}
+  rightWeapon: {fileID: 11400000, guid: 48e75f5a988fd65469bab7cd58a33b5c, type: 2}
   leftWeapon: {fileID: 11400000, guid: 29d9d6db760280a45bcf164a2a748c8c, type: 2}
-  currentConsumable: {fileID: 11400000, guid: cc6fb931e1871e441862ea869f60eb76, type: 2}
+  currentConsumable: {fileID: 11400000, guid: 1614219e8d659ea4ca5ab8011ad5a67b, type: 2}
   currentAmmo: {fileID: 11400000, guid: 061614e8ff311344782b09816f7fc630, type: 2}
   currentHelmetEquipment: {fileID: 11400000, guid: 52b47bfd727145e439fad8e70cc6d16c, type: 2}
   currentTorsoEquipment: {fileID: 11400000, guid: 3fd4e55e192f5624a94a47e8b9011852, type: 2}
   currentLegEquipment: {fileID: 11400000, guid: a48ab80223a30344ea3d924b8239ff98, type: 2}
   currentHandEquipment: {fileID: 11400000, guid: d88d4254126297a43ba8485b1c3ff445, type: 2}
+  ringSlot01: {fileID: 11400000, guid: 80e4c0cd2bd972d4dba3828826b36b35, type: 2}
+  ringSlot02: {fileID: 0}
+  ringSlot03: {fileID: 0}
+  ringSlot04: {fileID: 0}
   weaponsInRightHandSlots:
-  - {fileID: 11400000, guid: 08ef3dc9456ad484d8469464b63ceb4b, type: 2}
+  - {fileID: 11400000, guid: 48e75f5a988fd65469bab7cd58a33b5c, type: 2}
   - {fileID: 11400000, guid: 6fa3f31400c3ed444aaf29e2a3ed4e77, type: 2}
   - {fileID: 0}
   weaponsInLeftHandSlots:
@@ -4200,6 +4251,24 @@ MonoBehaviour:
   - {fileID: 8300000, guid: be235f8d4a2c1634a9ffad5a9ef0a7d5, type: 3}
   - {fileID: 8300000, guid: 8955b56d1a87945479ae70ef02ea3354, type: 3}
   - {fileID: 8300000, guid: 31affb79c7969ae4992dec318113263b, type: 3}
+--- !u!143 &7817863243567736809
+CharacterController:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4259545045103203853}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Height: 2
+  m_Radius: 0.5
+  m_SlopeLimit: 45
+  m_StepOffset: 0.3
+  m_SkinWidth: 0.08
+  m_MinMoveDistance: 0.001
+  m_Center: {x: 0, y: 0, z: 0}
 --- !u!1 &4278227996475204264
 GameObject:
   m_ObjectHideFlags: 0

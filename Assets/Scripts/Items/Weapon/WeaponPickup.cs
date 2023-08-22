@@ -24,7 +24,7 @@ public class WeaponPickup : Interactable
     {
         base.Start();
 
-        // ¼¼ÀÌºê µ¥ÀÌÅÍ¿¡ ÀÌ ¾ÆÀÌÅÛ Á¤º¸°¡ ¾ø´Ù¸é, ¾ÆÁ÷ ÁÝÁö ¾ÊÀº °Í. not lootÀ¸·Î ÀúÀå
+        // ï¿½ï¿½ï¿½Ìºï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½Í¿ï¿½ ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½Ù¸ï¿½, ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½. not lootï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½
         if (!WorldSaveGameManager.instance.currentCharacterSaveData.itemsInWorld.ContainsKey(itemPickUpID))
         {
             WorldSaveGameManager.instance.currentCharacterSaveData.itemsInWorld.Add(itemPickUpID, false);
@@ -42,7 +42,7 @@ public class WeaponPickup : Interactable
     {
         base.Interact(playermanager);
 
-        // ÇÃ·¹ÀÌ¾î°¡ ÁÖ¿üÀ¸´Ï ´Ù½Ã ½ºÆùÇÒ ÇÊ¿ä°¡ ¾ø´Ù°í Character Data¿¡ °øÁöÇÏ±â
+        // ï¿½Ã·ï¿½ï¿½Ì¾î°¡ ï¿½Ö¿ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½Ù½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½Ê¿ä°¡ ï¿½ï¿½ï¿½Ù°ï¿½ Character Dataï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½Ï±ï¿½
         if (WorldSaveGameManager.instance.currentCharacterSaveData.itemsInWorld.ContainsKey(itemPickUpID))
         {
             WorldSaveGameManager.instance.currentCharacterSaveData.itemsInWorld.Remove(itemPickUpID);
@@ -52,7 +52,7 @@ public class WeaponPickup : Interactable
 
         hasBeenLooted = true;
 
-        // ÀÎº¥Åä¸®¿¡ Áý¾î³Ö±â
+        // ï¿½Îºï¿½ï¿½ä¸®ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½Ö±ï¿½
         PickUpItem(playermanager);
 
 
@@ -70,14 +70,14 @@ public class WeaponPickup : Interactable
         playerLocomotionManager = playerManager.GetComponent<PlayerLocomotionManager>();
         playerAnimatorManager = playerManager.GetComponentInChildren<PlayerAnimatorManager>();
 
-        playerLocomotionManager.rigidbody.velocity = Vector3.zero;
+        playerLocomotionManager.GetComponent<Rigidbody>().velocity = Vector3.zero;
         playerAnimatorManager.PlayTargetAnimation("Pick Up Item", true);
         playerInventoryManager.weaponsInventory.Add(weapon);
 
         playerManager.itemInteractableUIGameObject.SetActive(true);
         playerManager.itemInteractableUIGameObject.GetComponentInChildren<TextMeshProUGUI>().text = weapon.itemName;
         playerManager.itemInteractableUIGameObject.GetComponentInChildren<Image>().sprite = weapon.itemIcon; 
-        // TODO UI Bind·Î °íÄ¡±â
+        // TODO UI Bindï¿½ï¿½ ï¿½ï¿½Ä¡ï¿½ï¿½
 
         Destroy(gameObject);
 
