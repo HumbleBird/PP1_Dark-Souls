@@ -26,7 +26,8 @@ public class CameraHandler : MonoBehaviour
 
     public float leftAndRightLookSpeed = 250f;
     public float leftAndRightAimingLookSpeed = 25f;
-    public float follwSpeed = 1f;
+    public float groundedFollowSpeed = 1f;
+    public float aerialFollowSpeed = 1f; // 아래를 빠르게 플레이어를 쫓아 찍음
     public float unAndDownLookSpeed = 250f;
     public float unAndDownAimingLookSpeed = 25f;
 
@@ -78,14 +79,24 @@ public class CameraHandler : MonoBehaviour
     {
         if(playerManager.isAiming)
         {
-            Vector3 targetPositoin = Vector3.SmoothDamp(transform.position, targetTransformWhileAiming.position, ref cameraFollwVelocity, Time.deltaTime * follwSpeed);
+            Vector3 targetPositoin = Vector3.SmoothDamp(transform.position, targetTransformWhileAiming.position, ref cameraFollwVelocity, Time.deltaTime * groundedFollowSpeed);
             transform.position = targetPositoin;
 
         }
         else
         {
-            Vector3 targetPositoin = Vector3.SmoothDamp(transform.position, targetTransform.position, ref cameraFollwVelocity, Time.deltaTime * follwSpeed);
-            transform.position = targetPositoin;
+            if (playerManager.isGrounded)
+            {
+                Vector3 targetPositoin = Vector3.SmoothDamp(transform.position, targetTransform.position, ref cameraFollwVelocity, Time.deltaTime * groundedFollowSpeed);
+                transform.position = targetPositoin;
+            }
+            else
+            {
+                Vector3 targetPositoin = Vector3.SmoothDamp(transform.position, targetTransform.position, ref cameraFollwVelocity, Time.deltaTime * aerialFollowSpeed);
+                transform.position = targetPositoin;
+            }
+
+
 
         }
 

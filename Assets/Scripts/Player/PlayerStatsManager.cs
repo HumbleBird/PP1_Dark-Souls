@@ -14,6 +14,9 @@ public class PlayerStatsManager : CharacterStatsManager
     public float staminaRegenerationAmountWhilstBlocking = 0.1f;
     public float staminaRegenTimer = 0;
 
+    public float spritingTimer = 0;
+
+
     protected override void Awake()
     {
         base.Awake();
@@ -88,11 +91,29 @@ public class PlayerStatsManager : CharacterStatsManager
         staminaBar.SetCurrentStamina(Mathf.RoundToInt(currentStamina));
     }
 
+    public  void DeductSprintingStamina(float staminaToDeduct)
+    {
+        if(player.isSprinting)
+        {
+            spritingTimer += Time.deltaTime;
 
+            if(spritingTimer > 0.1f)
+            {
+                spritingTimer = 0;
+                currentStamina -= staminaToDeduct;
+                staminaBar.SetCurrentStamina(Mathf.RoundToInt(currentStamina));
+            }
+        }
+        else
+        {
+            spritingTimer = 0;
+        }
+    }
 
     public void RegenerateStamina()
     {
-        if(player.isInteracting)
+        // 액션 중이거나 달릴 때 GENERATE STAMINA  하지 않음
+        if (player.isInteracting || player.isSprinting)
         {
             staminaRegenTimer = 0;
         }

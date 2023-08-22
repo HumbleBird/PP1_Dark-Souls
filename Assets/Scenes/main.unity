@@ -139,6 +139,22 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 0}
     - target: {fileID: 1801724383, guid: 653a26822a3e2bd409cfe25bebea931e, type: 3}
+      propertyPath: aerialFollowSpeed
+      value: 10
+      objectReference: {fileID: 0}
+    - target: {fileID: 1801724383, guid: 653a26822a3e2bd409cfe25bebea931e, type: 3}
+      propertyPath: groundedFollowSpeed
+      value: 30
+      objectReference: {fileID: 0}
+    - target: {fileID: 1801724383, guid: 653a26822a3e2bd409cfe25bebea931e, type: 3}
+      propertyPath: ignoreLayers.m_Bits
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1801724383, guid: 653a26822a3e2bd409cfe25bebea931e, type: 3}
+      propertyPath: enviromentLayer.m_Bits
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1801724383, guid: 653a26822a3e2bd409cfe25bebea931e, type: 3}
       propertyPath: targetTransformWhileAiming
       value: 
       objectReference: {fileID: 0}
@@ -13324,7 +13340,6 @@ MonoBehaviour:
   d_Pad_Right: 0
   rollFlag: 0
   twoHandFlag: 0
-  sprintFlag: 0
   comboFlag: 0
   lockOnFlag: 0
   fireFlag: 0

@@ -56,7 +56,7 @@ public class PlayerLocomotionManager : CharacterLocomotionManager
             {
                 if (player.inputHandler.lockOnFlag)
                 {
-                    if (player.inputHandler.sprintFlag || player.inputHandler.rollFlag)
+                    if (player.isSprinting|| player.inputHandler.rollFlag)
                     {
                         Vector3 targetDir = Vector3.zero;
 
@@ -129,9 +129,10 @@ public class PlayerLocomotionManager : CharacterLocomotionManager
         moveDirection.Normalize();
         moveDirection.y = 0;
 
-        if(player.isSprinting)
+        if(player.isSprinting && player.inputHandler.moveAmount > 0.5f)
         {
             player.characterController.Move(moveDirection * sprintSpeed * Time.deltaTime);
+            player.playerStatsManager.DeductSprintingStamina(sprintStaminaCost);
         }
         else
         {
@@ -145,7 +146,7 @@ public class PlayerLocomotionManager : CharacterLocomotionManager
             }
         }
 
-        if(player.inputHandler.lockOnFlag && player.inputHandler.sprintFlag == false)
+        if(player.inputHandler.lockOnFlag && player.isSprinting == false)
         {
             player.playerAnimatorManager.UpdateAnimatorValues(player.inputHandler.moveAmount, player.inputHandler.horizontal, player.isSprinting);
         }

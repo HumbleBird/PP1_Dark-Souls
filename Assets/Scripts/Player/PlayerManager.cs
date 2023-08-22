@@ -94,11 +94,6 @@ public class PlayerManager : CharacterManager
             cameraHandler.FollowTarget();
             cameraHandler.HandleCameraRotation();
         }
-
-        if (isInAir)
-        {
-            playerLocomotionManager.inAirTimer += Time.deltaTime;
-        }
     }
 
     #region Player Interations

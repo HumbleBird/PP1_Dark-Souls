@@ -51,7 +51,6 @@ public class CharacterManager : MonoBehaviour
     public bool isRotatingWithRootMotion;
     public bool canRotate;
     public bool isSprinting;
-    public bool isInAir;
     public bool isGrounded;
 
     [Header("Spells")]
@@ -97,7 +96,6 @@ public class CharacterManager : MonoBehaviour
         animator.SetBool("isTwoHandingWeapon", isTwoHandingWeapon);
         animator.SetBool("isBlocking", isBlocking);
         animator.SetBool("isDead", isDead);
-        animator.SetBool("isInAir", isInAir);
 
         characterEffectsManager.ProcessAllTimedEffects();
     }
