@@ -2375,7 +2375,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &3487662551812223565
 Transform:
   m_ObjectHideFlags: 0
@@ -2383,7 +2383,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 3487662551812223566}
-  m_LocalRotation: {x: -0, y: -0.99999994, z: -0, w: -0.000436988}
+  m_LocalRotation: {x: -0, y: -0.99999994, z: 0, w: -0.00043630067}
   m_LocalPosition: {x: 0.64, y: 2.488, z: 11.96}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
@@ -2463,6 +2463,9 @@ MonoBehaviour:
   dexterityLevel: 10
   intelligenceLevel: 10
   faithLevel: 10
+  currentEquipLoad: 0
+  maxEquipLoad: 0
+  encumbranceLevel: 0
   totalPoiseDefence: 0
   offensivePoiseBonus: 0
   armorPoiseBonus: 0
@@ -2517,6 +2520,7 @@ MonoBehaviour:
   canBeRiposted: 1
   canDoCombo: 0
   canBeParryied: 0
+  canRoll: 1
   isParrying: 0
   isBlocking: 0
   isInvulnerable: 0
@@ -2534,7 +2538,6 @@ MonoBehaviour:
   isRotatingWithRootMotion: 0
   canRotate: 0
   isSprinting: 0
-  isInAir: 0
   isGrounded: 1
   isFiringSpell: 0
   pendingCriticalDamage: 0
@@ -2878,9 +2881,6 @@ MonoBehaviour:
   fallStartYVelocity: -7
   gravityForce: -25
   groundCheckSphereRadius: 1
-  detectionLayer:
-    serializedVersion: 2
-    m_Bits: 0
 --- !u!143 &588308184874017117
 CharacterController:
   m_ObjectHideFlags: 0
@@ -4688,11 +4688,11 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 846451887900096783, guid: 102c63e3edacede4880e1d2a75264afc, type: 3}
       propertyPath: m_AnchorMax.x
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 846451887900096783, guid: 102c63e3edacede4880e1d2a75264afc, type: 3}
       propertyPath: m_AnchorMax.y
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 3845377971049994544, guid: 102c63e3edacede4880e1d2a75264afc, type: 3}
       propertyPath: m_PresetInfoIsWorld
@@ -4704,11 +4704,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4838794099908278527, guid: 102c63e3edacede4880e1d2a75264afc, type: 3}
       propertyPath: m_AnchorMax.x
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 4838794099908278527, guid: 102c63e3edacede4880e1d2a75264afc, type: 3}
       propertyPath: m_AnchorMax.y
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 4838794100110262074, guid: 102c63e3edacede4880e1d2a75264afc, type: 3}
       propertyPath: m_Pivot.x

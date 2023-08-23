@@ -168,13 +168,14 @@ MonoBehaviour:
   cameraPivotTranform: {fileID: 432937793104254638}
   ignoreLayers:
     serializedVersion: 2
-    m_Bits: 513
+    m_Bits: 0
   enviromentLayer:
     serializedVersion: 2
-    m_Bits: 1
+    m_Bits: 0
   leftAndRightLookSpeed: 250
   leftAndRightAimingLookSpeed: 100
-  follwSpeed: 50
+  groundedFollowSpeed: 30
+  aerialFollowSpeed: 10
   unAndDownLookSpeed: 250
   unAndDownAimingLookSpeed: 100
   minimumLockUpAngle: -35

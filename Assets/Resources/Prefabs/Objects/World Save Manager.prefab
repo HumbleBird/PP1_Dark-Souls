@@ -48,8 +48,18 @@ MonoBehaviour:
   currentCharacterSaveData:
     characterName: 
     characterLevel: 0
+    currentRightHandWeaponID: 0
+    currentLeftHandWeaponID: 0
+    currentHeadGearItemID: 0
+    currentChestGearItemID: 0
+    currentLegGearItemID: 0
+    currentHandGearItemID: 0
     xPosition: 0
     yPosition: 0
     zPosition: 0
+    itemsInWorld:
+      keys: 
+      values: 
+  fileName: SaveGameFile
   saveGame: 0
   loadGame: 0
