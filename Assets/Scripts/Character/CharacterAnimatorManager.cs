@@ -95,13 +95,14 @@ public class CharacterAnimatorManager : MonoBehaviour
         Damage_Animation_Colssal_Right  .Add(Damage_Right_Colssal_02);
     }
 
-    public void PlayTargetAnimation(string targetAnim, bool isInteracting, bool canRoate = false, bool mirrorAnim = false)
+    public void PlayTargetAnimation(string targetAnim, bool isInteracting, bool canRoate = false, bool mirrorAnim = false, bool canRoll = false)
     {
         character.animator.applyRootMotion = isInteracting;
         character.animator.SetBool("canRotate", canRoate);
         character.animator.SetBool("isInteracting", isInteracting);
         character.animator.SetBool("isMirrored", mirrorAnim);
         character.animator.CrossFade(targetAnim, 0.2f);
+        character.canRoll = canRoll;
     }
 
     public void PlayerTargetAnimationWithRootRotation(string targetAnim, bool isInteracting)
@@ -138,6 +139,11 @@ public class CharacterAnimatorManager : MonoBehaviour
     {
         character.animator.SetBool("canDoCombo", false);
 
+    }
+
+    public virtual void EnableCanRoll()
+    {
+        character.canRoll = true;
     }
 
     public virtual void EnableIsInvulnerable()

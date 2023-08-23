@@ -27,11 +27,11 @@ public class CharacterManager : MonoBehaviour
     [Header("Status")]
     public bool isDead;
 
-
     [Header("Combat Flaged")]
     public bool canBeRiposted;
     public bool canDoCombo;
     public bool canBeParryied;
+    public bool canRoll = true;
     public bool isParrying;
     public bool isBlocking;
     public bool isInvulnerable;

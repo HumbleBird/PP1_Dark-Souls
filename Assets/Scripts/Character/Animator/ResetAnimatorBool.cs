@@ -35,6 +35,7 @@ public class ResetAnimatorBool : StateMachineBehaviour
         character.isPerformingRipost = false;
         character.canBeParryied = false;
         character.canBeRiposted = false;
+        character.canRoll = true;
 
         // 데미지 애니메이션 이후,Reset previous poise damage  to 0
         character.characterCombatManager.previousPoiseDamageTaken = 0;
