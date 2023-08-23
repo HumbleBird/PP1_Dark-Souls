@@ -141,7 +141,7 @@ public class InputHandler : MonoBehaviour
 
     private void HandleMoveInput()
     {
-        if(player.isHoldingArrow)
+        if(player.isHoldingArrow || player.playerStatsManager.encumbranceLevel == EncumbranceLevel.Overloaded)
         {
             horizontal = movementInput.x;
             vertical = movementInput.y;

@@ -26,8 +26,10 @@ public class PlayerStatsManager : CharacterStatsManager
         focusPointBar = FindObjectOfType<FocusPointBar>();
     }
 
-    void Start()
+    protected override void Start()
     {
+        base.Start();
+
         maxHealth = SetMaxHealthFromHealthLevel();
         currentHealth = maxHealth;
         healthBar.SetMaxHealth(maxHealth);

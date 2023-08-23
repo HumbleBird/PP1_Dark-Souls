@@ -9931,13 +9931,13 @@ GameObject:
   - component: {fileID: 5951744985524311750}
   - component: {fileID: 5959672592271333368}
   - component: {fileID: 5959672592271333345}
-  - component: {fileID: 5959672592271333356}
   - component: {fileID: 5951744985524311807}
   - component: {fileID: 5951744985524311804}
   - component: {fileID: 5951744985524311805}
   - component: {fileID: 5951744985524311746}
   - component: {fileID: 5951744985524311747}
   - component: {fileID: 5951744985524311744}
+  - component: {fileID: 5959672592271333356}
   - component: {fileID: 5951744985524311745}
   - component: {fileID: 5951744985524311806}
   - component: {fileID: 5413672925179635689}
@@ -13223,7 +13223,6 @@ MonoBehaviour:
   isRotatingWithRootMotion: 0
   canRotate: 0
   isSprinting: 0
-  isInAir: 0
   isGrounded: 0
   isFiringSpell: 0
   pendingCriticalDamage: 0
@@ -13271,6 +13270,9 @@ MonoBehaviour:
   dexterityLevel: 10
   intelligenceLevel: 10
   faithLevel: 10
+  currentEquipLoad: 0
+  maxEquipLoad: 0
+  encumbranceLevel: 0
   totalPoiseDefence: 0
   offensivePoiseBonus: 0
   armorPoiseBonus: 0
@@ -13301,6 +13303,7 @@ MonoBehaviour:
   staminaRegenerationAmount: 1
   staminaRegenerationAmountWhilstBlocking: 0.1
   staminaRegenTimer: 0
+  spritingTimer: 0
 --- !u!114 &5959672592271333368
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -14300,7 +14303,6 @@ MonoBehaviour:
   isRotatingWithRootMotion: 0
   canRotate: 0
   isSprinting: 0
-  isInAir: 0
   isGrounded: 1
   isFiringSpell: 0
   pendingCriticalDamage: 0
@@ -17631,6 +17633,9 @@ MonoBehaviour:
   dexterityLevel: 10
   intelligenceLevel: 10
   faithLevel: 10
+  currentEquipLoad: 0
+  maxEquipLoad: 0
+  encumbranceLevel: 0
   totalPoiseDefence: 0
   offensivePoiseBonus: 0
   armorPoiseBonus: 0

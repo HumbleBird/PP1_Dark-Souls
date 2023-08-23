@@ -147,6 +147,14 @@ public class Define
 
     #region Battle
 
+    public enum EncumbranceLevel
+    {
+        Light,
+        Medium,
+        Heavy,
+        Overloaded
+    }
+
     public enum EffectParticleType
     {
         Poison

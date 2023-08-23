@@ -244,6 +244,6 @@ public class PlayerManager : CharacterManager
             playerInventoryManager.currentHandEquipment = handEquipment;
         }
 
-        playerEquipmentManager.EquipAllEquipmentModelsOnStart();
+        playerEquipmentManager.EquipAllArmor();
     }       
 }

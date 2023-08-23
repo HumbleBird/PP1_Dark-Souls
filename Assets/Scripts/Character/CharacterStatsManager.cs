@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using static Define;
 
 public class CharacterStatsManager : MonoBehaviour
 {
@@ -37,6 +38,10 @@ public class CharacterStatsManager : MonoBehaviour
     public int intelligenceLevel = 10;
     public int faithLevel = 10;
 
+    [Header("Equip Load")]
+    public float currentEquipLoad = 0;
+    public float maxEquipLoad = 0;
+    public EncumbranceLevel encumbranceLevel;
 
     [Header("Poise")]
     public float totalPoiseDefence; // poise 동안의 총 방어력
@@ -88,9 +93,10 @@ public class CharacterStatsManager : MonoBehaviour
         HandlePoiseResetTime();
     }
 
-    private void Start()
+    protected virtual void Start()
     {
         totalPoiseDefence = armorPoiseBonus;
+        //CalculateAndSetMaxEquipload();
     }
 
 
@@ -150,6 +156,51 @@ public class CharacterStatsManager : MonoBehaviour
     {
         maxfocusPoint = focusLevel * 10;
         return maxfocusPoint;
+    }
+
+    public void CalculateAndSetMaxEquipload()
+    {
+        float totalEquipLoad = 40;
+
+        for (int i = 0; i < staminaLevel; i++)
+        {
+            if(i < 25)
+            {
+                totalEquipLoad += 1.2f;
+            }
+            if(i >= 25 && i <= 50)
+            {
+                totalEquipLoad += 1.4f;
+
+            }
+            if (i > 50)
+            {
+                totalEquipLoad += 1f;
+
+            }
+        }
+
+        maxEquipLoad = totalEquipLoad;
+    }
+
+    public void CaculateAndSetCurrentEquipLoad(float equipLoad)
+    {
+        currentEquipLoad = equipLoad;
+
+        encumbranceLevel = EncumbranceLevel.Light;
+
+        if(currentEquipLoad > (maxEquipLoad * 0.3f))
+        {
+            encumbranceLevel = EncumbranceLevel.Medium;
+        }
+        if(currentEquipLoad > (maxEquipLoad * 0.7f))
+        {
+            encumbranceLevel = EncumbranceLevel.Heavy;
+        }
+        if(currentEquipLoad > (maxEquipLoad))
+        {
+            encumbranceLevel = EncumbranceLevel.Overloaded;
+        }
     }
 
     public virtual void HealCharacter(int healAmount)

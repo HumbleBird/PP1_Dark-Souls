@@ -25,8 +25,9 @@ public class AICharacterStatsManager : CharacterStatsManager
         currentHealth = maxHealth;
     }
 
-    void Start()
+    protected override void Start()
     {
+        base.Start();
         if(!isBoss)
         {
              aiCharacterHealthBar.SetMaxHealth(maxHealth);

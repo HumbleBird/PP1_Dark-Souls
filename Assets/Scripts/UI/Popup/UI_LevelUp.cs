@@ -170,6 +170,8 @@ public class UI_LevelUp : MonoBehaviour
         playerManager.playerStatsManager.currentSoulCount -= soulsRequiredToLevelUp;
         playerManager.uiManager.soulCount.text = playerManager.playerStatsManager.currentSoulCount.ToString();
 
+        playerManager.playerStatsManager.CalculateAndSetMaxEquipload();
+
         gameObject.SetActive(false);
     }
 

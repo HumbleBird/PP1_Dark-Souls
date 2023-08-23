@@ -175,7 +175,24 @@ public class PlayerLocomotionManager : CharacterLocomotionManager
 
             if (player.inputHandler.moveAmount > 0)
             {
-                player.playerAnimatorManager.PlayTargetAnimation("Roll_01", true);
+                switch (player.playerStatsManager.encumbranceLevel)
+                {
+                    case Define.EncumbranceLevel.Light:
+                        player.playerAnimatorManager.PlayTargetAnimation("Roll_01", true);
+                        break;
+                    case Define.EncumbranceLevel.Medium:
+                        player.playerAnimatorManager.PlayTargetAnimation("Roll_01", true);
+                        break;
+                    case Define.EncumbranceLevel.Heavy:
+                        player.playerAnimatorManager.PlayTargetAnimation("Heavy_Roll_01", true);
+                        break;
+                    case Define.EncumbranceLevel.Overloaded:
+                        player.playerAnimatorManager.PlayTargetAnimation("Heavy_Roll_01", true);
+                        break;
+                    default:
+                        break;
+                }
+
                 player.playerAnimatorManager.EraseHandIKForWeapon();
                 moveDirection.y = 0;
                 Quaternion rollRotation = Quaternion.LookRotation(moveDirection);
@@ -184,7 +201,24 @@ public class PlayerLocomotionManager : CharacterLocomotionManager
             }
             else
             {
-                player.playerAnimatorManager.PlayTargetAnimation("BackStep", true);
+                switch (player.playerStatsManager.encumbranceLevel)
+                {
+                    case Define.EncumbranceLevel.Light:
+                        player.playerAnimatorManager.PlayTargetAnimation("BackStep_01", true);
+                        break;
+                    case Define.EncumbranceLevel.Medium:
+                        player.playerAnimatorManager.PlayTargetAnimation("BackStep_01", true);
+                        break;
+                    case Define.EncumbranceLevel.Heavy:
+                        player.playerAnimatorManager.PlayTargetAnimation("Heavy_BackStep_01", true);
+                        break;
+                    case Define.EncumbranceLevel.Overloaded:
+                        player.playerAnimatorManager.PlayTargetAnimation("Heavy_BackStep_01", true);
+                        break;
+                    default:
+                        break;
+                }
+
                 player.playerAnimatorManager.EraseHandIKForWeapon();
                 player.playerStatsManager.DeductStamina(backstepStaminaCost);
 
