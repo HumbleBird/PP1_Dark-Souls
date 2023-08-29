@@ -44,7 +44,6 @@ GameObject:
   - component: {fileID: 1745374744655652951}
   - component: {fileID: 6964015734069106174}
   - component: {fileID: 2876479769587392760}
-  - component: {fileID: 1745374744655652950}
   - component: {fileID: 1745374744655652949}
   - component: {fileID: 1745374744655652952}
   - component: {fileID: 1745374744655652953}
@@ -54,6 +53,7 @@ GameObject:
   - component: {fileID: 4931143318749734354}
   - component: {fileID: 2876479769587392764}
   - component: {fileID: 4154233088085897571}
+  - component: {fileID: 932223684082790144}
   m_Layer: 9
   m_Name: SkeletonWarriorUnity [Humanoid A.I - Sword & Shield]
   m_TagString: Character
@@ -248,56 +248,6 @@ MonoBehaviour:
   distancefromTarget: 0
   targetDirection: {x: 0, y: 0, z: 0}
   viewableAngle: 0
---- !u!114 &1745374744655652950
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 550631217754559270}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d5432e070c64931429d872683463af05, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  leftHandConstraint: {fileID: 8356608885812666801}
-  rightHandConstraint: {fileID: 8356608885754934004}
-  Damage_Forward_Medium_01: Damage_Forward_Medium_01
-  Damage_Forward_Medium_02: Damage_Forward_Medium_02
-  Damage_Back_Medium_01: Damage_Back_Medium_01
-  Damage_Back_Medium_02: Damage_Back_Medium_02
-  Damage_Left_Medium_01: Damage_Left_Medium_01
-  Damage_Left_Medium_02: Damage_Left_Medium_02
-  Damage_Right_Medium_01: Damage_Right_Medium_01
-  Damage_Right_Medium_02: Damage_Right_Medium_02
-  Damage_Forward_Heavy_01: Damage_Forward_Heavy_01
-  Damage_Forward_Heavy_02: Damage_Forward_Heavy_02
-  Damage_Back_Heavy_01: Damage_Back_Heavy_01
-  Damage_Back_Heavy_02: Damage_Back_Heavy_02
-  Damage_Left_Heavy_01: Damage_Left_Heavy_01
-  Damage_Left_Heavy_02: Damage_Left_Heavy_02
-  Damage_Right_Heavy_01: Damage_Right_Heavy_01
-  Damage_Right_Heavy_02: Damage_Right_Heavy_02
-  Damage_Forward_Colssal_01: Damage_Forward_Colssal_01
-  Damage_Forward_Colssal_02: Damage_Forward_Colssal_02
-  Damage_Back_Colssal_01: Damage_Back_Colssal_01
-  Damage_Back_Colssal_02: Damage_Back_Colssal_02
-  Damage_Left_Colssal_01: Damage_Left_Colssal_01
-  Damage_Left_Colssal_02: Damage_Left_Colssal_02
-  Damage_Right_Colssal_01: Damage_Right_Colssal_01
-  Damage_Right_Colssal_02: Damage_Right_Colssal_02
-  Damage_Animation_Medium_Forward: []
-  Damage_Animation_Medium_Back: []
-  Damage_Animation_Medium_Left: []
-  Damage_Animation_Medium_Right: []
-  Damage_Animation_Heavy_Forward: []
-  Damage_Animation_Heavy_Back: []
-  Damage_Animation_Heavy_Left: []
-  Damage_Animation_Heavy_Right: []
-  Damage_Animation_Colssal_Forward: []
-  Damage_Animation_Colssal_Back: []
-  Damage_Animation_Colssal_Left: []
-  Damage_Animation_Colssal_Right: []
 --- !u!114 &1745374744655652949
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -584,6 +534,56 @@ CharacterController:
   m_SkinWidth: 0.08
   m_MinMoveDistance: 0.001
   m_Center: {x: 0, y: 1, z: 0}
+--- !u!114 &932223684082790144
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 550631217754559270}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d5432e070c64931429d872683463af05, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  leftHandConstraint: {fileID: 8356608885812666801}
+  rightHandConstraint: {fileID: 8356608885754934004}
+  Damage_Forward_Medium_01: Damage_Forward_01
+  Damage_Forward_Medium_02: Damage_Forward_01
+  Damage_Back_Medium_01: Damage_Back_01
+  Damage_Back_Medium_02: Damage_Back_01
+  Damage_Left_Medium_01: Damage_Left_01
+  Damage_Left_Medium_02: Damage_Left_01
+  Damage_Right_Medium_01: Damage_Right_01
+  Damage_Right_Medium_02: Damage_Right_01
+  Damage_Forward_Heavy_01: Damage_Forward_01
+  Damage_Forward_Heavy_02: Damage_Forward_01
+  Damage_Back_Heavy_01: Damage_Back_01
+  Damage_Back_Heavy_02: Damage_Back_01
+  Damage_Left_Heavy_01: Damage_Left_01
+  Damage_Left_Heavy_02: Damage_Left_01
+  Damage_Right_Heavy_01: Damage_Right_01
+  Damage_Right_Heavy_02: Damage_Right_01
+  Damage_Forward_Colssal_01: Damage_Forward_01
+  Damage_Forward_Colssal_02: Damage_Forward_01
+  Damage_Back_Colssal_01: Damage_Back_01
+  Damage_Back_Colssal_02: Damage_Back_01
+  Damage_Left_Colssal_01: Damage_Left_01
+  Damage_Left_Colssal_02: Damage_Left_01
+  Damage_Right_Colssal_01: Damage_Right_01
+  Damage_Right_Colssal_02: Damage_Right_01
+  Damage_Animation_Medium_Forward: []
+  Damage_Animation_Medium_Back: []
+  Damage_Animation_Medium_Left: []
+  Damage_Animation_Medium_Right: []
+  Damage_Animation_Heavy_Forward: []
+  Damage_Animation_Heavy_Back: []
+  Damage_Animation_Heavy_Left: []
+  Damage_Animation_Heavy_Right: []
+  Damage_Animation_Colssal_Forward: []
+  Damage_Animation_Colssal_Back: []
+  Damage_Animation_Colssal_Left: []
+  Damage_Animation_Colssal_Right: []
 --- !u!1 &571194364184620015
 GameObject:
   m_ObjectHideFlags: 0

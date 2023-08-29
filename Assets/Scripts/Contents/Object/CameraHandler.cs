@@ -95,13 +95,9 @@ public class CameraHandler : MonoBehaviour
                 Vector3 targetPositoin = Vector3.SmoothDamp(transform.position, targetTransform.position, ref cameraFollwVelocity, Time.deltaTime * aerialFollowSpeed);
                 transform.position = targetPositoin;
             }
-
-
-
         }
 
         HandleCameraCollision();
-
     }
 
     // Rotate the  Camera

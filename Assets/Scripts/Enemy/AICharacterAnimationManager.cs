@@ -12,7 +12,7 @@ public class AICharacterAnimationManager : CharacterAnimatorManager
         aiCharacter = GetComponent<AICharacterManager>();
     }
 
-    public void AwardSoulsOnDeath()
+    public override void AwardSoulsOnDeath()
     {
 
         PlayerStatsManager playerstatus = FindObjectOfType<PlayerStatsManager>();
@@ -28,7 +28,6 @@ public class AICharacterAnimationManager : CharacterAnimatorManager
                 soulCountBar.SetSoulCountText(playerstatus.currentSoulCount);
             }
         }
-
     }
 
     public void InstantiateBossParticleFX()

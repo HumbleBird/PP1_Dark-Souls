@@ -19,6 +19,9 @@ public class LightAttackAction : ItemAction
         // 만약 running attack을 수행할 수 있다면 할지 안 할지 결정 가능
         if (character.isSprinting)
         {
+            if (character.isInteracting)
+                return;
+
             HandleRunningAttack(character);
             return;
         }

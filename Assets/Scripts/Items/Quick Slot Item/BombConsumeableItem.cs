@@ -26,6 +26,9 @@ public class BombConsumeableItem : ConsumableItem
             GameObject bombModel = Instantiate(itemModel, player.playerWeaponSlotManager.rightHandSlot.transform.position, Quaternion.identity, player.playerWeaponSlotManager.rightHandSlot.transform);
             bombModel.GetComponentInChildren<BombDamageColider>().characterManager = player;
             player.playerEffectsManager.instantiatedFXModel2 = bombModel;
+
+            Rigidbody rigidBody = bombModel.GetComponentInChildren<Rigidbody>();
+            rigidBody.constraints = RigidbodyConstraints.FreezeAll;
         }
         else
         {

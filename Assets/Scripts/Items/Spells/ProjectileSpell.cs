@@ -64,6 +64,7 @@ public class ProjectileSpell : SpellItem
                 rigidBody.AddForce(instantiatedSpellFX.transform.up * projectileUpwardVelocity);
                 rigidBody.useGravity = isEffectedByGravity;
                 rigidBody.mass = projectileMass;
+                rigidBody.constraints = RigidbodyConstraints.None;
                 instantiatedSpellFX.transform.parent = null;
 
             }
@@ -88,10 +89,9 @@ public class ProjectileSpell : SpellItem
                 rigidBody.AddForce(instantiatedSpellFX.transform.up * projectileUpwardVelocity);
                 rigidBody.useGravity = isEffectedByGravity;
                 rigidBody.mass = projectileMass;
+                rigidBody.constraints = RigidbodyConstraints.None;
                 instantiatedSpellFX.transform.parent = null;
             }
-
-            //spellDamageCollider = instantiatedSpellFX.GetComponent<SpellDamageCollider>();
         }
 
         // A.I

@@ -275,7 +275,6 @@ public class Define
     #region Other
     
 
-
     public enum OpenWhat
     {
         None,

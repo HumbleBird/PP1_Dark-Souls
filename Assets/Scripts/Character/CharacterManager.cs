@@ -114,5 +114,6 @@ public class CharacterManager : MonoBehaviour
 
         }
     }
+
 }
  

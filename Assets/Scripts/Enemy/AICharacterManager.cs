@@ -71,6 +71,8 @@ public class AICharacterManager : CharacterManager
 
         navMeshAgent = GetComponentInChildren<NavMeshAgent>();
         navMeshAgent.enabled = false;
+
+        currentState = GetComponentInChildren<IdleStateHumanoid>();
     }
 
     protected override void Start()

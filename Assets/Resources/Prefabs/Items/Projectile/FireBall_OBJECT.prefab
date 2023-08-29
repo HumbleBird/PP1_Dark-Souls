@@ -4948,7 +4948,7 @@ Rigidbody:
   m_UseGravity: 1
   m_IsKinematic: 0
   m_Interpolate: 0
-  m_Constraints: 0
+  m_Constraints: 112
   m_CollisionDetection: 0
 --- !u!114 &4739123896991362582
 MonoBehaviour:
@@ -4965,10 +4965,10 @@ MonoBehaviour:
   characterManager: {fileID: 0}
   enabledDamageColliderOnStartUp: 1
   teamIDNumber: 0
-  poiseBreak: 0
+  poiseDamage: 0
   offensivePoiseBonus: 0
   physicalDamage: 0
-  fireDamage: 0
+  fireDamage: 25
   magicDamage: 0
   lightningDamage: 0
   darkDamage: 0

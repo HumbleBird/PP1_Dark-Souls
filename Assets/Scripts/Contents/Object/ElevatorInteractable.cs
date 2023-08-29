@@ -49,11 +49,11 @@ public class ElevatorInteractable : Interactable
 
         if(transform.position == destinationHigh)
         {
-            StartCoroutine(MoveElevator(destinationLow, 1));
+            StartCoroutine(MoveElevator(destinationLow, 2));
         }
         if (transform.position == destinationLow)
         {
-            StartCoroutine(MoveElevator(destinationHigh, 1));
+            StartCoroutine(MoveElevator(destinationHigh, 2));
         }
     }
 

@@ -77,12 +77,12 @@ public class PlayerWeaponSlotManager : CharacterWeaponSlotManager
     {
         Destroy(player.playerEffectsManager.instantiatedFXModel2);
         BombConsumeableItem fireBombItem = player.playerInventoryManager.currentConsumable as BombConsumeableItem;
-
-
-
         GameObject activeModelBomb = Instantiate(fireBombItem.liveBombModel, rightHandSlot.transform.position, player.cameraHandler.cameraPivotTranform.rotation);
         activeModelBomb.GetComponentInChildren<BombDamageColider>().characterManager = player;
         activeModelBomb.transform.rotation = Quaternion.Euler(player.cameraHandler.cameraPivotTranform.eulerAngles.x, player.lockOnTransform.eulerAngles.y, 0);
+        Rigidbody rigidBody = activeModelBomb.GetComponentInChildren<Rigidbody>();
+        rigidBody.constraints = RigidbodyConstraints.None;
+
         BombDamageColider damageCollider = activeModelBomb.GetComponentInChildren<BombDamageColider>();
 
         damageCollider.explosionDamage = fireBombItem.baseDamage;

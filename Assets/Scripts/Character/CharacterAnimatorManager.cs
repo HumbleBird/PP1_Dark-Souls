@@ -12,35 +12,41 @@ public class CharacterAnimatorManager : MonoBehaviour
     public TwoBoneIKConstraint rightHandConstraint;
 
     [Header("DAMAGE ANIMATIONS")]
-    [HideInInspector] public string Damage_Forward_Medium_01 = "Damage_Forward_Medium_01";
-    [HideInInspector] public string Damage_Forward_Medium_02 = "Damage_Forward_Medium_02";
-
-    [HideInInspector] public string Damage_Back_Medium_01 = "Damage_Back_Medium_01";
-    [HideInInspector] public string Damage_Back_Medium_02 = "Damage_Back_Medium_02";
-
-    [HideInInspector] public string Damage_Left_Medium_01 = "Damage_Left_Medium_01";
-    [HideInInspector] public string Damage_Left_Medium_02 = "Damage_Left_Medium_02";
-
-    [HideInInspector] public string Damage_Right_Medium_01 = "Damage_Right_Medium_01";
-    [HideInInspector] public string Damage_Right_Medium_02 = "Damage_Right_Medium_02";
-
-    [HideInInspector] public string Damage_Forward_Heavy_01     = "Damage_Forward_Heavy_01";
-    [HideInInspector] public string Damage_Forward_Heavy_02     = "Damage_Forward_Heavy_02";
-    [HideInInspector] public string Damage_Back_Heavy_01        = "Damage_Back_Heavy_01";
-    [HideInInspector] public string Damage_Back_Heavy_02        = "Damage_Back_Heavy_02";
-    [HideInInspector] public string Damage_Left_Heavy_01        = "Damage_Left_Heavy_01";
-    [HideInInspector] public string Damage_Left_Heavy_02        = "Damage_Left_Heavy_02";
-    [HideInInspector] public string Damage_Right_Heavy_01       = "Damage_Right_Heavy_01";
-    [HideInInspector] public string Damage_Right_Heavy_02       = "Damage_Right_Heavy_02";
-
-    [HideInInspector] public string Damage_Forward_Colssal_01    = "Damage_Forward_Colssal_01";
-    [HideInInspector] public string Damage_Forward_Colssal_02    = "Damage_Forward_Colssal_02";
-    [HideInInspector] public string Damage_Back_Colssal_01       = "Damage_Back_Colssal_01";
-    [HideInInspector] public string Damage_Back_Colssal_02       = "Damage_Back_Colssal_02";
-    [HideInInspector] public string Damage_Left_Colssal_01       = "Damage_Left_Colssal_01";
-    [HideInInspector] public string Damage_Left_Colssal_02       = "Damage_Left_Colssal_02";
-    [HideInInspector] public string Damage_Right_Colssal_01      = "Damage_Right_Colssal_01";
-    [HideInInspector] public string Damage_Right_Colssal_02      = "Damage_Right_Colssal_02";
+    [HideInInspector] public string Damage_Forward_Medium_01    ="Damage_Forward_01"; //= "Damage_Forward_Medium_01";
+    [HideInInspector] public string Damage_Forward_Medium_02    = "Damage_Forward_01"; //= "Damage_Forward_Medium_02";
+                                                             
+    [HideInInspector] public string Damage_Back_Medium_01       ="Damage_Back_01"; //= "Damage_Back_Medium_01";
+    [HideInInspector] public string Damage_Back_Medium_02       = "Damage_Back_01"; //= "Damage_Back_Medium_02";
+                                                               
+    [HideInInspector] public string Damage_Left_Medium_01       ="Damage_Left_01"; //= "Damage_Left_Medium_01";
+    [HideInInspector] public string Damage_Left_Medium_02       = "Damage_Left_01"; //= "Damage_Left_Medium_02";
+                                                              
+    [HideInInspector] public string Damage_Right_Medium_01      ="Damage_Right_01"; //= "Damage_Right_Medium_01";
+    [HideInInspector] public string Damage_Right_Medium_02      = "Damage_Right_01"; //= "Damage_Right_Medium_02";
+                                                               
+    [HideInInspector] public string Damage_Forward_Heavy_01     ="Damage_Forward_01"; //= "Damage_Forward_Heavy_01";
+    [HideInInspector] public string Damage_Forward_Heavy_02     = "Damage_Forward_01"; //= "Damage_Forward_Heavy_02";
+                                                              
+    [HideInInspector] public string Damage_Back_Heavy_01        ="Damage_Back_01"; //= "Damage_Back_Heavy_01";
+    [HideInInspector] public string Damage_Back_Heavy_02        = "Damage_Back_01"; //= "Damage_Back_Heavy_02";
+                                                               
+    [HideInInspector] public string Damage_Left_Heavy_01        ="Damage_Left_01"; //= "Damage_Left_Heavy_01";
+    [HideInInspector] public string Damage_Left_Heavy_02        = "Damage_Left_01"; //= "Damage_Left_Heavy_02";
+                                                               
+    [HideInInspector] public string Damage_Right_Heavy_01       ="Damage_Right_01"; //= "Damage_Right_Heavy_01";
+    [HideInInspector] public string Damage_Right_Heavy_02       = "Damage_Right_01"; //= "Damage_Right_Heavy_02";
+                                                              
+    [HideInInspector] public string Damage_Forward_Colssal_01   ="Damage_Forward_01"; //= "Damage_Forward_Colssal_01";
+    [HideInInspector] public string Damage_Forward_Colssal_02   = "Damage_Forward_01"; //= "Damage_Forward_Colssal_02";
+                                                              
+    [HideInInspector] public string Damage_Back_Colssal_01      ="Damage_Back_01"; //= "Damage_Back_Colssal_01";
+    [HideInInspector] public string Damage_Back_Colssal_02      = "Damage_Back_01"; //= "Damage_Back_Colssal_02";
+                                                              
+    [HideInInspector] public string Damage_Left_Colssal_01      ="Damage_Left_01"; //= "Damage_Left_Colssal_01";
+    [HideInInspector] public string Damage_Left_Colssal_02      = "Damage_Left_01"; //= "Damage_Left_Colssal_02";
+                                                               
+    [HideInInspector] public string Damage_Right_Colssal_01     ="Damage_Right_01"; //= "Damage_Right_Colssal_01";
+    [HideInInspector] public string Damage_Right_Colssal_02     = "Damage_Right_01"; //= "Damage_Right_Colssal_02";
 
     [HideInInspector] public List<string> Damage_Animation_Medium_Forward       = new List<string>();
     [HideInInspector] public List<string> Damage_Animation_Medium_Back      = new List<string>();
@@ -260,5 +266,10 @@ public class CharacterAnimatorManager : MonoBehaviour
         Vector3 velocity = character.animator.deltaPosition;
         character.characterController.Move(velocity);
         character.transform.rotation *= character.animator.deltaRotation;
+    }
+
+    public virtual void AwardSoulsOnDeath()
+    {
+
     }
 }

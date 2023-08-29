@@ -12,6 +12,12 @@ public class PlayerEquipmentManager : MonoBehaviour
     public ModelChanger gauntletsModelChanger;
     public ModelChanger leggingsModelChanger;
 
+    [Header("Naked Armor Equipment")]
+    public EquipmentItem Naked_HelmetEquipment;
+    public EquipmentItem Naked_TorsoEquipment;
+    public EquipmentItem Naked_LegEquipment;
+    public EquipmentItem Naked_HandEquipment;
+
     private void Awake()
     {
         player = GetComponent<PlayerManager>();
@@ -48,8 +54,8 @@ public class PlayerEquipmentManager : MonoBehaviour
         }
         else
         {
-            //helmModelChanger.EquipEquipmentsModelByName(Naked_Helm);
-            helmModelChanger.UnEquipEquipmentsModelByName(player.playerInventoryManager.currentHelmetEquipment.itemName);
+            helmModelChanger.EquipEquipmentsModelByName(Naked_HelmetEquipment.itemName);
+            //helmModelChanger.UnEquipEquipmentsModelByName(player.playerInventoryManager.currentHelmetEquipment.itemName);
             player.playerStatsManager.physicalDamageAbsorptionHead = 0;
         }
 
@@ -64,8 +70,8 @@ public class PlayerEquipmentManager : MonoBehaviour
         }
         else
         {
-            //helmModelChanger.EquipEquipmentsModelByName(Naked_Helm);
-            chestsModelChanger.UnEquipEquipmentsModelByName(player.playerInventoryManager.currentTorsoEquipment.itemName);
+            chestsModelChanger.EquipEquipmentsModelByName(Naked_TorsoEquipment.itemName);
+            //chestsModelChanger.UnEquipEquipmentsModelByName(player.playerInventoryManager.currentTorsoEquipment.itemName);
             player.playerStatsManager.physicalDamageAbsorptionBody = 0;
         }
 
@@ -80,8 +86,8 @@ public class PlayerEquipmentManager : MonoBehaviour
         }
         else
         {
-            //helmModelChanger.EquipEquipmentsModelByName(Naked_Helm);
-            leggingsModelChanger.UnEquipEquipmentsModelByName(player.playerInventoryManager.currentLegEquipment.itemName);
+            leggingsModelChanger.EquipEquipmentsModelByName(Naked_LegEquipment.itemName);
+            //leggingsModelChanger.UnEquipEquipmentsModelByName(player.playerInventoryManager.currentLegEquipment.itemName);
             player.playerStatsManager.physicalDamageAbsorptionLegs = 0;
         }
 
@@ -96,8 +102,8 @@ public class PlayerEquipmentManager : MonoBehaviour
         }
         else
         {
-            //helmModelChanger.EquipEquipmentsModelByName(Naked_Helm);
-            gauntletsModelChanger.UnEquipEquipmentsModelByName(player.playerInventoryManager.currentHandEquipment.itemName);
+            gauntletsModelChanger.EquipEquipmentsModelByName(Naked_HandEquipment.itemName);
+            //gauntletsModelChanger.UnEquipEquipmentsModelByName(player.playerInventoryManager.currentHandEquipment.itemName);
             player.playerStatsManager.physicalDamageAbsorptionHands = 0;
         }
 

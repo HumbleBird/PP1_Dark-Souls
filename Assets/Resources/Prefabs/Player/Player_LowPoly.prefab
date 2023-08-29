@@ -1,5 +1,129 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
+--- !u!1 &233972268
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 233972269}
+  m_Layer: 9
+  m_Name: Naked_Torso
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &233972269
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 233972268}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 1853761554975383340}
+  m_RootOrder: 1
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &1285417874
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1285417875}
+  m_Layer: 9
+  m_Name: Naked_Leg
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1285417875
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1285417874}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 1853761556471583958}
+  m_RootOrder: 1
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &1574748517
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1574748518}
+  m_Layer: 9
+  m_Name: Naked_Helm
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1574748518
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1574748517}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 8941253583862667953}
+  m_RootOrder: 3
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &1997730091
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1997730092}
+  m_Layer: 9
+  m_Name: Naked_Hand
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1997730092
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1997730091}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 6112433085939435295}
+  m_RootOrder: 1
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &34944869308788683
 GameObject:
   m_ObjectHideFlags: 0
@@ -1523,6 +1647,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 4139209662123016572}
+  - {fileID: 233972269}
   m_Father: {fileID: 3250821146090757429}
   m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -1754,6 +1879,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 2676568851846842889}
+  - {fileID: 1285417875}
   m_Father: {fileID: 6824190808103279328}
   m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -2017,6 +2143,7 @@ Transform:
   - {fileID: 1265641933721659514}
   - {fileID: 1366536699961709368}
   - {fileID: 787751682898335732}
+  - {fileID: 1574748518}
   m_Father: {fileID: 5731249292206924202}
   m_RootOrder: 8
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -3338,6 +3465,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 4527708844923810680}
+  - {fileID: 1997730092}
   m_Father: {fileID: 3250821146090757429}
   m_RootOrder: 5
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -4523,6 +4651,10 @@ MonoBehaviour:
   chestsModelChanger: {fileID: 0}
   gauntletsModelChanger: {fileID: 0}
   leggingsModelChanger: {fileID: 0}
+  Naked_HelmetEquipment: {fileID: 11400000, guid: 8eb317b25af45d2498b7db712465a24b, type: 2}
+  Naked_TorsoEquipment: {fileID: 11400000, guid: 2cf022a44c0c75c4d81f4804639beeef, type: 2}
+  Naked_LegEquipment: {fileID: 11400000, guid: f98e935e2857ce846ade7b13ea0eee98, type: 2}
+  Naked_HandEquipment: {fileID: 11400000, guid: fca93fda999c5164eb2f795d5da5264a, type: 2}
 --- !u!114 &5951744985032775299
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -4569,10 +4701,10 @@ MonoBehaviour:
   leftWeapon: {fileID: 11400000, guid: 29d9d6db760280a45bcf164a2a748c8c, type: 2}
   currentConsumable: {fileID: 11400000, guid: 1614219e8d659ea4ca5ab8011ad5a67b, type: 2}
   currentAmmo: {fileID: 11400000, guid: 061614e8ff311344782b09816f7fc630, type: 2}
-  currentHelmetEquipment: {fileID: 11400000, guid: 52b47bfd727145e439fad8e70cc6d16c, type: 2}
-  currentTorsoEquipment: {fileID: 11400000, guid: 3fd4e55e192f5624a94a47e8b9011852, type: 2}
-  currentLegEquipment: {fileID: 11400000, guid: a48ab80223a30344ea3d924b8239ff98, type: 2}
-  currentHandEquipment: {fileID: 11400000, guid: d88d4254126297a43ba8485b1c3ff445, type: 2}
+  currentHelmetEquipment: {fileID: 0}
+  currentTorsoEquipment: {fileID: 0}
+  currentLegEquipment: {fileID: 0}
+  currentHandEquipment: {fileID: 0}
   ringSlot01: {fileID: 11400000, guid: 80e4c0cd2bd972d4dba3828826b36b35, type: 2}
   ringSlot02: {fileID: 0}
   ringSlot03: {fileID: 0}

@@ -56,6 +56,8 @@ public class TakeDamageEffect : CharacterEffect
 
         // character가 A.I라면, 공격한 캐릭터를 새로운 타겟으로 설정
         AssignNewAITarget(character);
+
+        // character가 
     }
 
     private void CalculateDamage(CharacterManager  character)
@@ -90,8 +92,14 @@ public class TakeDamageEffect : CharacterEffect
 
         float finalDamage = physicalDamage + fireDamage; // + fire + mage + lightning + dark Damage
 
-        Debug.Log("Final Damage: " + finalDamage);
         character.characterStatsManager.currentHealth = Mathf.RoundToInt(character.characterStatsManager.currentHealth - finalDamage);
+
+        // character가 Player라면 UI 갱신
+        PlayerManager player = character.GetComponentInParent<PlayerManager>();
+        if(player != null)
+        {
+            player.playerStatsManager.healthBar.SetCurrentHealth(character.characterStatsManager.currentHealth);
+        }
 
         if(character.characterStatsManager.totalPoiseDefence < poiseDamage)
         {
