@@ -4,13 +4,7 @@ using UnityEngine;
 
 public class Util
 {
-    public enum EquipmentArmorParts
-    {
-        Helm,
-        Chest,
-        Gauntlet,
-        Legging,
-    }
+
 
     public static T GetOrAddComponent<T>(GameObject go) where T : UnityEngine.Component
     {

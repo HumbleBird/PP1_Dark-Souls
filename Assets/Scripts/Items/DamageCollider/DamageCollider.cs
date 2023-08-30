@@ -142,7 +142,7 @@ public class DamageCollider : MonoBehaviour
         {
             shieldHasBeenHit = true;
 
-            TakeBlockedDamageEffect takeBlockedDamage = Instantiate(WorldCharacterEffectManager.instance.takeBlockedDamageEffect);
+            TakeBlockedDamageEffect takeBlockedDamage = new TakeBlockedDamageEffect();// Instantiate(Managers.WorldEffect.takeBlockedDamageEffect);
             takeBlockedDamage.physicalDamage = physicalDamage;
             takeBlockedDamage.fireDamage = fireDamage;
             takeBlockedDamage.poiseDamage = poiseDamage;
@@ -184,7 +184,7 @@ public class DamageCollider : MonoBehaviour
             }
         }
 
-        TakeDamageEffect takeDamageEffect = Instantiate(WorldCharacterEffectManager.instance.takeDamageEffect);
+        TakeDamageEffect takeDamageEffect = new TakeDamageEffect();//Instantiate(Managers.WorldEffect.takeDamageEffect);
         takeDamageEffect.physicalDamage = physicalDamage;
         takeDamageEffect.fireDamage = fireDamage;
         takeDamageEffect.poiseDamage = poiseDamage;

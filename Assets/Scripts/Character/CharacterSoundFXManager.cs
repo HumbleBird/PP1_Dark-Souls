@@ -4,84 +4,54 @@ using UnityEngine;
 
 public class CharacterSoundFXManager : MonoBehaviour
 {
-    CharacterManager character;
-    AudioSource audioSource;
+    int tempcount = 0;
 
     [Header("Taking Damage Sounds")]
     public AudioClip[] takingDamageSounds;
-    private List<AudioClip> potentialDamageSounds;
     private AudioClip lastDamagesoundPlayed;
 
     [Header("Taking Damage Sounds")]
-    private List<AudioClip> potentialWeaponWhooshes;
     private AudioClip lastWeaponWhooshes;
 
-    protected virtual void Awake()
+    public void PlayRandomDamageSound()
     {
-        audioSource = GetComponent<AudioSource>();
-        character = GetComponent<CharacterManager>();
-    }
+        int index = Random.Range(0, takingDamageSounds.Length);
+        AudioClip playSound = takingDamageSounds[index];
 
-    public virtual void PlayRandomDamageSoundFX()
-    {
-        potentialWeaponWhooshes = new List<AudioClip>();
-
-        foreach (var damageSound in takingDamageSounds)
+        if(playSound != lastDamagesoundPlayed)
         {
-            if(damageSound != lastDamagesoundPlayed)
-            {
-                potentialDamageSounds.Add(damageSound);
-            }
+            Managers.Sound.Play(playSound);
+            tempcount = 0;
+            return;
         }
 
-        int randomValue = Random.Range(0, potentialDamageSounds.Count);
-        lastDamagesoundPlayed = takingDamageSounds[randomValue];
-        audioSource.PlayOneShot(takingDamageSounds[randomValue], 0.4f);
-    }
-
-    public virtual void PlayRandomWeaponWhoosh()
-    {
-        potentialWeaponWhooshes = new List<AudioClip>();
-
-        if (character.isUsingRightHand)
+        while (true)
         {
-            foreach (var whooshSound in character.characterInventoryManager.rightWeapon.weaponWhooshes)
-            {
-                if (whooshSound != lastWeaponWhooshes)
-                {
-                    potentialWeaponWhooshes.Add(whooshSound);
-                }
-            }
-
-            int randomValue = Random.Range(0, potentialWeaponWhooshes.Count);
-            lastWeaponWhooshes = character.characterInventoryManager.rightWeapon.weaponWhooshes[randomValue];
-            audioSource.PlayOneShot(character.characterInventoryManager.rightWeapon.weaponWhooshes[randomValue], 0.4f);
-        }
-        else
-        {
-            foreach (var whooshSound in character.characterInventoryManager.leftWeapon.weaponWhooshes)
-            {
-                if (whooshSound != lastWeaponWhooshes)
-                {
-                    potentialWeaponWhooshes.Add(whooshSound);
-                }
-            }
-
-            int randomValue = Random.Range(0, potentialWeaponWhooshes.Count - 1);
-            lastWeaponWhooshes = character.characterInventoryManager.leftWeapon.weaponWhooshes[randomValue];
-            audioSource.PlayOneShot(character.characterInventoryManager.leftWeapon.weaponWhooshes[randomValue], 0.4f);
+            PlayRandomDamageSound();
+            tempcount++;
+            if (tempcount > 5)
+                Debug.Log("clip이 없는지 확인 바람");
         }
     }
 
-    public virtual void PlaySoundFX(AudioClip soundFX)
+    public void PlayRandomWeaponWhoosh(AudioClip[] potentialWeaponWhooshes)
     {
-        audioSource.PlayOneShot(soundFX);
-    }
+        int index = Random.Range(0, potentialWeaponWhooshes.Length);
+        AudioClip playSound = potentialWeaponWhooshes[index];
 
-    public virtual void PlayRandomSoundFXFromArray(AudioClip[] soundArray)
-    {
-        int index = Random.Range(0, soundArray.Length);
+        if (playSound != lastDamagesoundPlayed)
+        {
+            Managers.Sound.Play(playSound);
+            tempcount = 0;
+            return;
+        }
 
-        PlaySoundFX(soundArray[index]);
+        while (true)
+        {
+            PlayRandomDamageSound();
+            tempcount++;
+            if (tempcount > 5)
+                Debug.Log("clip이 없는지 확인 바람");
+        }
     }
 }

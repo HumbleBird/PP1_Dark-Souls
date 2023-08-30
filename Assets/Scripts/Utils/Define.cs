@@ -69,13 +69,12 @@ public class Define
         Consumable
     }
 
-    public enum ArmorType
+    public enum EquipmentArmorParts
     {
-        None = 0,
-        Helmet = 1,
-        Armor = 2,
-        Pant = 3,
-        Gloves = 4,
+        Helm,
+        Chest,
+        Gauntlet,
+        Legging,
     }
 
     public enum WeaponType
@@ -273,7 +272,6 @@ public class Define
     #endregion
 
     #region Other
-    
 
     public enum OpenWhat
     {

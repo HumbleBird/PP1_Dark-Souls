@@ -3,25 +3,13 @@ using System.Collections.Generic;
 using UnityEngine;
 using System.Linq;
 
-public class WorldItemDataBase : MonoBehaviour
+public class WorldItemDataBase
 {
-    public static WorldItemDataBase Instance;
 
     // 나중에 dic으로 관리
     public List<WeaponItem> weaponItems = new List<WeaponItem>();
     public List<EquipmentItem> equipmentItems = new List<EquipmentItem>();
 
-    private void Awake()
-    {
-        if(Instance == null)
-        {
-            Instance = this;
-        }
-        else
-        {
-            Destroy(gameObject);
-        }
-    }
 
     public WeaponItem GetWeaponItemByID(int weaponID)
     {

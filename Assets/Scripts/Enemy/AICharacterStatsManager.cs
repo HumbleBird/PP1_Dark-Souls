@@ -10,7 +10,6 @@ public class AICharacterStatsManager : CharacterStatsManager
 {
     AICharacterManager aiCharacter;
 
-
     public UIAICharacterHealthBar aiCharacterHealthBar;
 
     public bool isBoss;
@@ -19,10 +18,11 @@ public class AICharacterStatsManager : CharacterStatsManager
     {
         base.Awake();
         aiCharacter = GetComponent<AICharacterManager>();
-        aiCharacterHealthBar = GetComponentInChildren<UIAICharacterHealthBar>();
+        aiCharacterHealthBar = Managers.UI.MakeWorldSpaceUI<UIAICharacterHealthBar>(transform);
 
         maxHealth = SetMaxHealthFromHealthLevel();
         currentHealth = maxHealth;
+
     }
 
     protected override void Start()
@@ -87,5 +87,12 @@ public class AICharacterStatsManager : CharacterStatsManager
         currentHealth = 0;
         aiCharacter.aiCharacterAnimationManager.PlayTargetAnimation("Dead_01", true);
         aiCharacter.isDead = true;
+    }
+
+    public override void UpdateUI()
+    {
+        base.UpdateUI();
+
+        aiCharacterHealthBar.SetHealth(currentHealth);
     }
 }

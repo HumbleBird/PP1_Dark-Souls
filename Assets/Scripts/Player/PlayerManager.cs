@@ -50,7 +50,8 @@ public class PlayerManager : CharacterManager
         playerEquipmentManager = GetComponent<PlayerEquipmentManager>();
         playerEffectsManager = GetComponent<PlayerEffectsManager>();
 
-        WorldSaveGameManager.instance.player = this;
+        Managers.Object.m_MyPlayer = this;
+        Managers.Object.Add(1, gameObject);
     }
 
     protected override void Start()
@@ -212,32 +213,32 @@ public class PlayerManager : CharacterManager
 
         transform.position = new Vector3(currentCharacterSaveData.xPosition, currentCharacterSaveData.yPosition, currentCharacterSaveData.zPosition);
 
-        playerInventoryManager.rightWeapon = WorldItemDataBase.Instance.GetWeaponItemByID(currentCharacterSaveData.currentRightHandWeaponID);
-        playerInventoryManager.leftWeapon = WorldItemDataBase.Instance.GetWeaponItemByID(currentCharacterSaveData.currentLeftHandWeaponID);
+        playerInventoryManager.rightWeapon = Managers.ItemData.GetWeaponItemByID(currentCharacterSaveData.currentRightHandWeaponID);
+        playerInventoryManager.leftWeapon = Managers.ItemData.GetWeaponItemByID(currentCharacterSaveData.currentLeftHandWeaponID);
         playerWeaponSlotManager.LoadBothWeaponsOnSlots();
 
-        EquipmentItem headEquipment = WorldItemDataBase.Instance.GetEquipmentItemByID(currentCharacterSaveData.currentHeadGearItemID);
+        EquipmentItem headEquipment = Managers.ItemData.GetEquipmentItemByID(currentCharacterSaveData.currentHeadGearItemID);
 
         if(headEquipment != null)
         {
             playerInventoryManager.currentHelmetEquipment = headEquipment;
         }
 
-        EquipmentItem bpduEquipment = WorldItemDataBase.Instance.GetEquipmentItemByID(currentCharacterSaveData.currentChestGearItemID);
+        EquipmentItem bpduEquipment = Managers.ItemData.GetEquipmentItemByID(currentCharacterSaveData.currentChestGearItemID);
 
         if(bpduEquipment != null)
         {
             playerInventoryManager.currentTorsoEquipment = bpduEquipment;
         }
 
-        EquipmentItem legEquipment = WorldItemDataBase.Instance.GetEquipmentItemByID(currentCharacterSaveData.currentLegGearItemID);
+        EquipmentItem legEquipment = Managers.ItemData.GetEquipmentItemByID(currentCharacterSaveData.currentLegGearItemID);
 
         if(legEquipment != null)
         {
             playerInventoryManager.currentLegEquipment = legEquipment;
         }
 
-        EquipmentItem handEquipment = WorldItemDataBase.Instance.GetEquipmentItemByID(currentCharacterSaveData.currentHandGearItemID);
+        EquipmentItem handEquipment = Managers.ItemData.GetEquipmentItemByID(currentCharacterSaveData.currentHandGearItemID);
 
         if(handEquipment != null)
         {

@@ -4,7 +4,7 @@ using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class UIAICharacterHealthBar : MonoBehaviour
+public class UIAICharacterHealthBar : UI_Base
 {
     public Slider slider;
     private float timeUntilBarIsHidden = 0;
@@ -13,11 +13,24 @@ public class UIAICharacterHealthBar : MonoBehaviour
     [SerializeField] TextMeshProUGUI damageText;
     [SerializeField] int currentDamageTaken;
 
-    private void Awake()
+    public override bool Init()
     {
+        if (base.Init() == false)
+            return false;
+
         slider = GetComponentInChildren<Slider>();
         yelloBar = GetComponentInChildren<UIEnemyYellowBar>();
+
+        return true;
     }
+
+    public void Start()
+    {
+        transform.localPosition = Vector3.zero;
+
+
+    }
+
 
     private void OnEnable()
     {

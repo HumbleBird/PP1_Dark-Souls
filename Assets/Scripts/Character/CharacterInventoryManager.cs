@@ -18,6 +18,8 @@ public class CharacterInventoryManager : MonoBehaviour
     public RangedAmmoItem currentAmmo;
 
     [Header("Current Equipment")]
+    public EquipmentItem[] currentArmorEquipments = new EquipmentItem[4];
+
     public EquipmentItem currentHelmetEquipment;
     public EquipmentItem currentTorsoEquipment;
     public EquipmentItem currentLegEquipment;

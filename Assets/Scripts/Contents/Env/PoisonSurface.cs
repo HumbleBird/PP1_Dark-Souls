@@ -35,7 +35,8 @@ public class PoisonSurface: MonoBehaviour
             if (character.characterStatsManager.isPoisoned)
                 return;
 
-            PoisonBuildUpEffect poisonBuildUp = Instantiate(WorldCharacterEffectManager.instance.poisonBuildUpEffect);
+            PoisonBuildUpEffect poisonBuildUp = new PoisonBuildUpEffect();//Managers.Resource.Instantiate("Data/Character Effect/Poison Build Up Effect").GetComponent<PoisonBuildUpEffect>();
+            poisonBuildUp.effectID = 69;
 
             foreach (var effect in character.characterEffectsManager.timedEffects)
             {

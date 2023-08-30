@@ -213,4 +213,8 @@ public class CharacterStatsManager : MonoBehaviour
         }
     }
 
+    public virtual void UpdateUI()
+    {
+
+    }
 }

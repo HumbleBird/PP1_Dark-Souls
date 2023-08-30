@@ -9,7 +9,13 @@ public class Managers : MonoBehaviour
     static Managers Instance { get { Init(); return s_instance; } } // 유일한 매니저를 갖고온다
 
     #region Contents
+    WorldSaveGameManager _save = new WorldSaveGameManager();
+    WorldItemDataBase _itemData= new WorldItemDataBase();
+    ObjectManager _object = new ObjectManager();
 
+    public static WorldSaveGameManager Save { get { return Instance._save; } }
+    public static WorldItemDataBase ItemData { get { return Instance._itemData; } }
+    public static ObjectManager Object { get { return Instance._object; } }
 
     #endregion
 

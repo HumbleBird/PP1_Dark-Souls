@@ -165,4 +165,11 @@ public class PlayerStatsManager : CharacterStatsManager
     {
         currentSoulCount += souls;
     }
+
+    public override void UpdateUI()
+    {
+        base.UpdateUI();
+
+        healthBar.SetCurrentHealth(currentHealth);
+    }
 }

@@ -45,7 +45,7 @@ public class SpellDamageCollider : DamageCollider
             if (spellTarget != null && spellTarget.characterStatsManager.teamIDNumber != teamIDNumber)
             {
 
-                TakeDamageEffect takeDamageEffect = Instantiate(WorldCharacterEffectManager.instance.takeDamageEffect);
+                TakeDamageEffect takeDamageEffect = new TakeDamageEffect();//Instantiate(Managers.WorldEffect.takeDamageEffect);
                 takeDamageEffect.physicalDamage = physicalDamage;
                 takeDamageEffect.fireDamage = fireDamage;
                 takeDamageEffect.poiseDamage = poiseDamage;

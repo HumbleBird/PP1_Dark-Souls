@@ -33,7 +33,7 @@ public class WeaponBuffConsumableItem : ConsumableItem
     {
         base.SucessToConsumeItem(player);
 
-        player.characterSoundFXManager.PlaySoundFX(buffTriggerSound);
+        Managers.Sound.Play(buffTriggerSound);
 
         WeaponBuffEffect weaponBuff = Instantiate(weaponBuffEffect);
         weaponBuff.isRightHandedBuff = true;

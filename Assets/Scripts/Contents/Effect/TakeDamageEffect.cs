@@ -48,6 +48,9 @@ public class TakeDamageEffect : CharacterEffect
         // 데미지 애니메이션 재생
         PlayDamageAnimation(character);
 
+        // UI 업데이트
+        CharacterUpdateUI(character);
+
         // 사운드
         //PlayDamageSoundFX(character);
 
@@ -56,8 +59,6 @@ public class TakeDamageEffect : CharacterEffect
 
         // character가 A.I라면, 공격한 캐릭터를 새로운 타겟으로 설정
         AssignNewAITarget(character);
-
-        // character가 
     }
 
     private void CalculateDamage(CharacterManager  character)
@@ -94,12 +95,7 @@ public class TakeDamageEffect : CharacterEffect
 
         character.characterStatsManager.currentHealth = Mathf.RoundToInt(character.characterStatsManager.currentHealth - finalDamage);
 
-        // character가 Player라면 UI 갱신
-        PlayerManager player = character.GetComponentInParent<PlayerManager>();
-        if(player != null)
-        {
-            player.playerStatsManager.healthBar.SetCurrentHealth(character.characterStatsManager.currentHealth);
-        }
+
 
         if(character.characterStatsManager.totalPoiseDefence < poiseDamage)
         {
@@ -253,14 +249,19 @@ public class TakeDamageEffect : CharacterEffect
         }
     }
 
+    private void CharacterUpdateUI(CharacterManager character)
+    {
+        character.characterStatsManager.UpdateUI();
+    }
+    
 
     private void PlayDamageSoundFX(CharacterManager character)
     {
-        character.characterSoundFXManager.PlayRandomDamageSoundFX();
+        character.characterSoundFXManager.PlayRandomDamageSound();
 
         if(fireDamage > 0)
         {
-            character.characterSoundFXManager.PlaySoundFX(elementalDamageSoundSFX);
+            Managers.Sound.Play(elementalDamageSoundSFX);
         }
     }
 

@@ -24,13 +24,13 @@ public class WeaponPickup : Interactable
     {
         base.Start();
 
-        // ���̺� �����Ϳ� �� ������ ������ ���ٸ�, ���� ���� ���� ��. not loot���� ����
-        if (!WorldSaveGameManager.instance.currentCharacterSaveData.itemsInWorld.ContainsKey(itemPickUpID))
+        // 아이템을 픽업하지 않았다면 월드에 추가
+        if (!Managers.Save.currentCharacterSaveData.itemsInWorld.ContainsKey(itemPickUpID))
         {
-            WorldSaveGameManager.instance.currentCharacterSaveData.itemsInWorld.Add(itemPickUpID, false);
+            Managers.Save.currentCharacterSaveData.itemsInWorld.Add(itemPickUpID, false);
         }
 
-        hasBeenLooted = WorldSaveGameManager.instance.currentCharacterSaveData.itemsInWorld[itemPickUpID];
+        hasBeenLooted = Managers.Save.currentCharacterSaveData.itemsInWorld[itemPickUpID];
 
         if (hasBeenLooted)
         {
@@ -43,12 +43,12 @@ public class WeaponPickup : Interactable
         base.Interact(playermanager);
 
         // �÷��̾ �ֿ����� �ٽ� ������ �ʿ䰡 ���ٰ� Character Data�� �����ϱ�
-        if (WorldSaveGameManager.instance.currentCharacterSaveData.itemsInWorld.ContainsKey(itemPickUpID))
+        if (Managers.Save.currentCharacterSaveData.itemsInWorld.ContainsKey(itemPickUpID))
         {
-            WorldSaveGameManager.instance.currentCharacterSaveData.itemsInWorld.Remove(itemPickUpID);
+            Managers.Save.currentCharacterSaveData.itemsInWorld.Remove(itemPickUpID);
         }
 
-        WorldSaveGameManager.instance.currentCharacterSaveData.itemsInWorld.Add(itemPickUpID, true);
+        Managers.Save.currentCharacterSaveData.itemsInWorld.Add(itemPickUpID, true);
 
         hasBeenLooted = true;
 

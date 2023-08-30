@@ -14,7 +14,7 @@ GameObject:
   - component: {fileID: 9136146450942119938}
   - component: {fileID: 6657353484026369943}
   m_Layer: 0
-  m_Name: Health Bar UI
+  m_Name: HealthBarUI
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -2757,7 +2757,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 3487662551812223566}
-  m_LocalRotation: {x: -0, y: -0.99999994, z: -0, w: -0.000436988}
+  m_LocalRotation: {x: -0, y: -0.99999994, z: 0, w: -0.00043630067}
   m_LocalPosition: {x: 0.64, y: 2.488, z: 11.96}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
@@ -2996,6 +2996,11 @@ MonoBehaviour:
   leftWeapon: {fileID: 0}
   currentConsumable: {fileID: 0}
   currentAmmo: {fileID: 11400000, guid: 061614e8ff311344782b09816f7fc630, type: 2}
+  currentArmorEquipments:
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
   currentHelmetEquipment: {fileID: 0}
   currentTorsoEquipment: {fileID: 0}
   currentLegEquipment: {fileID: 0}
