@@ -22,13 +22,15 @@ public class PlayerStatsManager : CharacterStatsManager
         base.Awake();
         player = GetComponent<PlayerManager>();
 
-        staminaBar = FindObjectOfType<StaminaBar>();
-        focusPointBar = FindObjectOfType<FocusPointBar>();
+
     }
 
     protected override void Start()
     {
         base.Start();
+        healthBar = FindObjectOfType<HealthBar>();
+        staminaBar = FindObjectOfType<StaminaBar>();
+        focusPointBar = FindObjectOfType<FocusPointBar>();
 
         maxHealth = SetMaxHealthFromHealthLevel();
         currentHealth = maxHealth;

@@ -37,7 +37,6 @@ public class PlayerManager : CharacterManager
         uiManager = FindObjectOfType<GameUIManager>();
         interactableUI = FindObjectOfType<InteractableUI>();
 
-
         animator = GetComponentInChildren<Animator>();
         inputHandler = GetComponent<InputHandler>();
 
@@ -57,6 +56,7 @@ public class PlayerManager : CharacterManager
     protected override void Start()
     {
         base.Start();
+
     }
 
     // Update is called once per frame

@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using TMPro;
 
-public class GameUIManager : MonoBehaviour
+public class GameUIManager : UI_Base
 {
     public PlayerManager player;
     public ItemStatWindowUI itemStatWindowUI;
@@ -14,6 +14,11 @@ public class GameUIManager : MonoBehaviour
     [Header("HUD")]
     public GameObject crossHair;
     public TextMeshProUGUI soulCount;
+    public HealthBar              m_HealthBar;
+    public StaminaBar             m_StaminaBar;
+    public FocusPointBar          m_FocusPointBar;
+    public PoisonBuildUpBar       m_PoisonBuildUpBar;
+    public PoisonAmountBar        m_PoisonAmountBar;
 
     [Header("UI Windows")]
     public GameObject hudWindow;
@@ -63,9 +68,14 @@ public class GameUIManager : MonoBehaviour
 
     private void Awake()
     {
-        player = FindObjectOfType<PlayerManager>();
         quickSlotsUI = GetComponentInChildren<QuickSlotsUI>();
         bonfireLitPopupUI = GetComponentInChildren<BonfireLitPopupUI>();
+
+        m_HealthBar = GetComponentInChildren<HealthBar       >();
+        m_StaminaBar = GetComponentInChildren<StaminaBar      >();
+        m_FocusPointBar = GetComponentInChildren<FocusPointBar   >();
+        m_PoisonBuildUpBar = GetComponentInChildren<PoisonBuildUpBar>();
+        m_PoisonAmountBar = GetComponentInChildren<PoisonAmountBar>();
 
         weaponInventorySlots = weaponInventorySlotsParent.GetComponentsInChildren<WeaponInventorySlot>();
         headEquipmentInventorySlots = headEquipmentInventorySlotsParent.GetComponentsInChildren<HeadEquipmentInventorySlot>();
@@ -76,6 +86,9 @@ public class GameUIManager : MonoBehaviour
 
     private void Start()
     {
+        player = Managers.Object.m_MyPlayer;
+
+
         equipmentWindowUI.LoadWeaponsOnEquipmentScreen(player.playerInventoryManager);
 
         if (player.playerInventoryManager.currentSpell != null)

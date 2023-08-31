@@ -21,7 +21,6 @@ public class CameraHandler : MonoBehaviour
     public LayerMask ignoreLayers;
     public LayerMask enviromentLayer;
 
-
     public static CameraHandler singleton;
 
     public float leftAndRightLookSpeed = 250f;
@@ -63,15 +62,16 @@ public class CameraHandler : MonoBehaviour
         singleton = this;
         defaultPosition = cameraTransform.localPosition.z;
         ignoreLayers = ~(1 << 8 | 1 << 9 | 1 << 10 |  1 << 12);
-        targetTransform = FindObjectOfType<PlayerManager>().transform;
-        inputHandler = FindObjectOfType<InputHandler>();
-        playerManager = FindObjectOfType<PlayerManager>();
         cameraObject = GetComponentInChildren<Camera>();
     }
 
     private void Start()
     {
         enviromentLayer = LayerMask.NameToLayer("Enviroment");
+        playerManager = Managers.Object.m_MyPlayer;
+        inputHandler = playerManager.GetComponent<InputHandler>();
+        playerManager = Managers.Object.m_MyPlayer;
+        targetTransform = playerManager.transform;
     }
 
     // Follow the Player

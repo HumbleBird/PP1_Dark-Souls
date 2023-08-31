@@ -1842,7 +1842,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1853761555584250175}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 1.322}
+  m_LocalPosition: {x: 0.529, y: 0.457, z: 1.297}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -4379,7 +4379,6 @@ GameObject:
   - component: {fileID: 5959672593656190904}
   - component: {fileID: 5959672593656190881}
   - component: {fileID: 5951744985032775359}
-  - component: {fileID: 5951744985032775356}
   - component: {fileID: 5951744985032775357}
   - component: {fileID: 5951744985032775298}
   - component: {fileID: 5951744985032775299}
@@ -4391,6 +4390,7 @@ GameObject:
   - component: {fileID: 5413672925893994410}
   - component: {fileID: 7817863243567736809}
   - component: {fileID: 3136919634624679243}
+  - component: {fileID: 5959672592271333361}
   m_Layer: 9
   m_Name: Player_LowPoly
   m_TagString: Character
@@ -4546,56 +4546,6 @@ MonoBehaviour:
   rightHandDamageCollider: {fileID: 0}
   rightHandIKTarget: {fileID: 0}
   leftHandIKTarget: {fileID: 0}
---- !u!114 &5951744985032775356
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4259545045103203853}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d34cb660c0aed0a45b878ec3920f1adf, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  leftHandConstraint: {fileID: 1853761556884639150}
-  rightHandConstraint: {fileID: 1853761555343951265}
-  Damage_Forward_Medium_01: Damage_Forward_Medium_01
-  Damage_Forward_Medium_02: Damage_Forward_Medium_02
-  Damage_Back_Medium_01: Damage_Back_Medium_01
-  Damage_Back_Medium_02: Damage_Back_Medium_02
-  Damage_Left_Medium_01: Damage_Left_Medium_01
-  Damage_Left_Medium_02: Damage_Left_Medium_02
-  Damage_Right_Medium_01: Damage_Right_Medium_01
-  Damage_Right_Medium_02: Damage_Right_Medium_02
-  Damage_Forward_Heavy_01: Damage_Forward_Heavy_01
-  Damage_Forward_Heavy_02: Damage_Forward_Heavy_02
-  Damage_Back_Heavy_01: Damage_Back_Heavy_01
-  Damage_Back_Heavy_02: Damage_Back_Heavy_02
-  Damage_Left_Heavy_01: Damage_Left_Heavy_01
-  Damage_Left_Heavy_02: Damage_Left_Heavy_02
-  Damage_Right_Heavy_01: Damage_Right_Heavy_01
-  Damage_Right_Heavy_02: Damage_Right_Heavy_02
-  Damage_Forward_Colssal_01: Damage_Forward_Colssal_01
-  Damage_Forward_Colssal_02: Damage_Forward_Colssal_02
-  Damage_Back_Colssal_01: Damage_Back_Colssal_01
-  Damage_Back_Colssal_02: Damage_Back_Colssal_02
-  Damage_Left_Colssal_01: Damage_Left_Colssal_01
-  Damage_Left_Colssal_02: Damage_Left_Colssal_02
-  Damage_Right_Colssal_01: Damage_Right_Colssal_01
-  Damage_Right_Colssal_02: Damage_Right_Colssal_02
-  Damage_Animation_Medium_Forward: []
-  Damage_Animation_Medium_Back: []
-  Damage_Animation_Medium_Left: []
-  Damage_Animation_Medium_Right: []
-  Damage_Animation_Heavy_Forward: []
-  Damage_Animation_Heavy_Back: []
-  Damage_Animation_Heavy_Left: []
-  Damage_Animation_Heavy_Right: []
-  Damage_Animation_Colssal_Forward: []
-  Damage_Animation_Colssal_Back: []
-  Damage_Animation_Colssal_Left: []
-  Damage_Animation_Colssal_Right: []
 --- !u!114 &5951744985032775357
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -4699,8 +4649,13 @@ MonoBehaviour:
   currentSpell: {fileID: 11400000, guid: c366cbf2bcc1a0144a1e21b313bba1be, type: 2}
   rightWeapon: {fileID: 11400000, guid: 48e75f5a988fd65469bab7cd58a33b5c, type: 2}
   leftWeapon: {fileID: 11400000, guid: 29d9d6db760280a45bcf164a2a748c8c, type: 2}
-  currentConsumable: {fileID: 11400000, guid: 1614219e8d659ea4ca5ab8011ad5a67b, type: 2}
+  currentConsumable: {fileID: 11400000, guid: cc6fb931e1871e441862ea869f60eb76, type: 2}
   currentAmmo: {fileID: 11400000, guid: 061614e8ff311344782b09816f7fc630, type: 2}
+  currentArmorEquipments:
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
   currentHelmetEquipment: {fileID: 0}
   currentTorsoEquipment: {fileID: 0}
   currentLegEquipment: {fileID: 0}
@@ -4712,7 +4667,7 @@ MonoBehaviour:
   weaponsInRightHandSlots:
   - {fileID: 11400000, guid: 48e75f5a988fd65469bab7cd58a33b5c, type: 2}
   - {fileID: 11400000, guid: 6fa3f31400c3ed444aaf29e2a3ed4e77, type: 2}
-  - {fileID: 0}
+  - {fileID: 11400000, guid: af58329a590b58043bbd92298063ed42, type: 2}
   weaponsInLeftHandSlots:
   - {fileID: 11400000, guid: 29d9d6db760280a45bcf164a2a748c8c, type: 2}
   - {fileID: 0}
@@ -4989,6 +4944,56 @@ Rigidbody:
   m_Interpolate: 1
   m_Constraints: 112
   m_CollisionDetection: 0
+--- !u!114 &5959672592271333361
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4259545045103203853}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d34cb660c0aed0a45b878ec3920f1adf, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  leftHandConstraint: {fileID: 1853761556884639150}
+  rightHandConstraint: {fileID: 1853761555343951265}
+  Damage_Forward_Medium_01: Damage_Forward_01
+  Damage_Forward_Medium_02: Damage_Forward_01
+  Damage_Back_Medium_01: Damage_Back_01
+  Damage_Back_Medium_02: Damage_Back_01
+  Damage_Left_Medium_01: Damage_Left_01
+  Damage_Left_Medium_02: Damage_Left_01
+  Damage_Right_Medium_01: Damage_Right_01
+  Damage_Right_Medium_02: Damage_Right_01
+  Damage_Forward_Heavy_01: Damage_Forward_01
+  Damage_Forward_Heavy_02: Damage_Forward_01
+  Damage_Back_Heavy_01: Damage_Back_01
+  Damage_Back_Heavy_02: Damage_Back_01
+  Damage_Left_Heavy_01: Damage_Left_01
+  Damage_Left_Heavy_02: Damage_Left_01
+  Damage_Right_Heavy_01: Damage_Right_01
+  Damage_Right_Heavy_02: Damage_Right_01
+  Damage_Forward_Colssal_01: Damage_Forward_01
+  Damage_Forward_Colssal_02: Damage_Forward_01
+  Damage_Back_Colssal_01: Damage_Back_01
+  Damage_Back_Colssal_02: Damage_Back_01
+  Damage_Left_Colssal_01: Damage_Left_01
+  Damage_Left_Colssal_02: Damage_Left_01
+  Damage_Right_Colssal_01: Damage_Right_01
+  Damage_Right_Colssal_02: Damage_Right_01
+  Damage_Animation_Medium_Forward: []
+  Damage_Animation_Medium_Back: []
+  Damage_Animation_Medium_Left: []
+  Damage_Animation_Medium_Right: []
+  Damage_Animation_Heavy_Forward: []
+  Damage_Animation_Heavy_Back: []
+  Damage_Animation_Heavy_Left: []
+  Damage_Animation_Heavy_Right: []
+  Damage_Animation_Colssal_Forward: []
+  Damage_Animation_Colssal_Back: []
+  Damage_Animation_Colssal_Left: []
+  Damage_Animation_Colssal_Right: []
 --- !u!1 &4278227996475204264
 GameObject:
   m_ObjectHideFlags: 0

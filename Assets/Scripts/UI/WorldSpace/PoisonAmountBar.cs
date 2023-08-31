@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class PoisonAmountBar : MonoBehaviour
+public class PoisonAmountBar : UI_Base
 {
     public Slider slider;
 

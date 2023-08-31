@@ -12,6 +12,7 @@ public class GameScene : BaseScene
         base.Init();
 
         SceneType = Define.Scene.Game;
+        Cursor.lockState = CursorLockMode.Locked;
     }
 
     public override void Clear()

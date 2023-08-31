@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class FocusPointBar : MonoBehaviour
+public class FocusPointBar : UI_Base
 {
     public Slider slider;
 
