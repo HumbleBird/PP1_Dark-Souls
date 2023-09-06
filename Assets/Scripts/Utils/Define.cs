@@ -71,10 +71,18 @@ public class Define
 
     public enum EquipmentArmorParts
     {
+        NoArmorHead,
         Helm,
-        Chest,
-        Gauntlet,
-        Legging,
+        Torso,
+        Arm_Upper_Right     ,
+        Arm_Upper_Left      ,
+        Arm_Lower_Right         ,
+        Arm_Lower_Left      ,
+        Hand_Right          ,
+        Hand_Left           ,
+        Hip                  ,
+        LeftLegging         ,
+        RightLegging            ,
     }
 
     public enum WeaponType

@@ -40,7 +40,7 @@ public class BodyEquipmentInventorySlot : MonoBehaviour
                 uiManager.player.playerInventoryManager.bodyEquipmentInventory.Add(uiManager.player.playerInventoryManager.currentTorsoEquipment);
             }
 
-            uiManager.player.playerInventoryManager.currentTorsoEquipment = item;
+            uiManager.player.playerInventoryManager.currentTorsoEquipment = (TorsoEquipmentItem)item;
             uiManager.player.playerInventoryManager.bodyEquipmentInventory.Remove(item);
             uiManager.player.playerEquipmentManager.EquipAllArmor();
         }

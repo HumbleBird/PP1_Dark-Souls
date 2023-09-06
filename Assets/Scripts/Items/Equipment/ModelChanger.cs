@@ -6,38 +6,17 @@ using static Util;
 
 public class ModelChanger : MonoBehaviour
 {
-    public EquipmentArmorParts equipmentArmorParts = EquipmentArmorParts.Helm;
+    public EquipmentArmorParts equipmentArmorParts;
     protected List<GameObject> equipments = new List<GameObject>();
-    protected PlayerEquipmentManager playerEquipmentManager;
+    protected PlayerManager m_playerManager;
 
     private void Awake()
     {
-        playerEquipmentManager = GetComponentInParent<PlayerEquipmentManager>();
+        m_playerManager = GetComponentInParent<PlayerManager>();
 
         GetAllEquipmentsModels();
 
-        switch (equipmentArmorParts)
-        {
-            case EquipmentArmorParts.Helm:
-                playerEquipmentManager.helmModelChanger = this;
-                break;
-            case EquipmentArmorParts.Chest:
-                playerEquipmentManager.chestsModelChanger = this;
-                break;
-            case EquipmentArmorParts.Gauntlet:
-                playerEquipmentManager.gauntletsModelChanger = this;
-                break;
-            case EquipmentArmorParts.Legging:
-                playerEquipmentManager.leggingsModelChanger = this;
-                break;
-            default:
-                break;
-        }
-    }
-
-    public virtual void SetInfo()
-    {
-        GetAllEquipmentsModels();
+        m_playerManager.playerEquipmentManager.m_dicModelChanger.Add(equipmentArmorParts, this);
     }
 
     private void GetAllEquipmentsModels()

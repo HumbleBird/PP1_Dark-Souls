@@ -20,10 +20,10 @@ public class CharacterInventoryManager : MonoBehaviour
     [Header("Current Equipment")]
     public EquipmentItem[] currentArmorEquipments = new EquipmentItem[4];
 
-    public EquipmentItem currentHelmetEquipment;
-    public EquipmentItem currentTorsoEquipment;
-    public EquipmentItem currentLegEquipment;
-    public EquipmentItem currentHandEquipment;
+    public HelmEquipmentItem currentHelmetEquipment;
+    public TorsoEquipmentItem currentTorsoEquipment;
+    public LeggingsEquipmentItem currentLegEquipment;
+    public GantletsEquipmentItem currentHandEquipment;
     public RingItem ringSlot01;
     public RingItem ringSlot02;
     public RingItem ringSlot03;

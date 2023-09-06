@@ -97,8 +97,8 @@ public class ItemStatWindowUI : MonoBehaviour
                 itemIconImage.sprite = null;
             }
 
-            armorPhysicalAbsorptionText.text = armor.physicalDefense.ToString();
-            armorMagicAbsorptionText.text = armor.magicDefense.ToString();
+            armorPhysicalAbsorptionText.text = armor.m_fPhysicalDefense.ToString();
+            armorMagicAbsorptionText.text = armor.m_fMagicDefense.ToString();
 
             armorStats.SetActive(true);
         }

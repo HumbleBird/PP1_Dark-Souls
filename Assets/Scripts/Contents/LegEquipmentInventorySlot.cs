@@ -40,7 +40,7 @@ public class LegEquipmentInventorySlot : MonoBehaviour
                 uiManager.player.playerInventoryManager.legEquipmentInventory.Add(uiManager.player.playerInventoryManager.currentLegEquipment);
             }
 
-            uiManager.player.playerInventoryManager.currentLegEquipment = item;
+            uiManager.player.playerInventoryManager.currentLegEquipment = (LeggingsEquipmentItem)item;
             uiManager.player.playerInventoryManager.legEquipmentInventory.Remove(item);
             uiManager.player.playerEquipmentManager.EquipAllArmor();
         }

@@ -1,0 +1,33 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c1e03f499bc1f39459c09760a53ca340, type: 3}
+  m_Name: Knight Helm
+  m_EditorClassIdentifier: 
+  itemIcon: {fileID: 21300000, guid: be81d32b5aec1d943b49527333742a2e, type: 3}
+  itemName: Knight Helm
+  itemID: 0
+  m_fPhysicalDefense: 4.5
+  m_fStrikeDefense: 3.8
+  m_fSlashDefense: 4.7
+  m_fThrustDefense: 4.2
+  m_fMagicDefense: 2.7
+  m_fFireDefense: 3.8
+  m_fLightningDefense: 2.4
+  m_fDarkDefense: 3
+  m_fBleedResistance: 22
+  m_fPoisonResistance: 17
+  m_fFrostResistance: 18
+  m_fCurseResistance: 12
+  m_fPoiseResistance: 4.4
+  m_fDurability: 0
+  m_fWeight: 0
+  m_HelmEquipmentItemName: Chr_Head_No_Elements_Male_06

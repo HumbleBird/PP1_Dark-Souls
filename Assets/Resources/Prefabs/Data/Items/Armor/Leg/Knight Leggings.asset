@@ -1,0 +1,35 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 43b3748dab9f7514ebf572643cdc494b, type: 3}
+  m_Name: Knight Leggings
+  m_EditorClassIdentifier: 
+  itemIcon: {fileID: 21300000, guid: a0975f1cbe2cb894eb249669dd84dbb2, type: 3}
+  itemName: Knight Leggings
+  itemID: 0
+  m_fPhysicalDefense: 8.1
+  m_fStrikeDefense: 6.9
+  m_fSlashDefense: 7.4
+  m_fThrustDefense: 7.7
+  m_fMagicDefense: 4.9
+  m_fFireDefense: 6.2
+  m_fLightningDefense: 4.4
+  m_fDarkDefense: 5.4
+  m_fBleedResistance: 26
+  m_fPoisonResistance: 23
+  m_fFrostResistance: 22
+  m_fCurseResistance: 13
+  m_fPoiseResistance: 7.4
+  m_fDurability: 370
+  m_fWeight: 6.6
+  m_HipName: Chr_Hips_Male_02
+  m_LeftLeggingName: Chr_LegLeft_Male_16
+  m_RightLeggingName: Chr_LegRight_Male_16

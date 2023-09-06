@@ -37,8 +37,8 @@ public class PlayerManager : CharacterManager
         uiManager = FindObjectOfType<GameUIManager>();
         interactableUI = FindObjectOfType<InteractableUI>();
 
-        animator = GetComponentInChildren<Animator>();
-        inputHandler = GetComponent<InputHandler>();
+        animator            = GetComponentInChildren<Animator>();
+        inputHandler        = GetComponent<InputHandler>();
 
         playerAnimatorManager = GetComponent<PlayerAnimatorManager>();
         playerLocomotionManager = GetComponent<PlayerLocomotionManager>();
@@ -217,28 +217,28 @@ public class PlayerManager : CharacterManager
         playerInventoryManager.leftWeapon = Managers.ItemData.GetWeaponItemByID(currentCharacterSaveData.currentLeftHandWeaponID);
         playerWeaponSlotManager.LoadBothWeaponsOnSlots();
 
-        EquipmentItem headEquipment = Managers.ItemData.GetEquipmentItemByID(currentCharacterSaveData.currentHeadGearItemID);
+        HelmEquipmentItem headEquipment = (HelmEquipmentItem)Managers.ItemData.GetEquipmentItemByID(currentCharacterSaveData.currentHeadGearItemID);
 
         if(headEquipment != null)
         {
             playerInventoryManager.currentHelmetEquipment = headEquipment;
         }
 
-        EquipmentItem bpduEquipment = Managers.ItemData.GetEquipmentItemByID(currentCharacterSaveData.currentChestGearItemID);
+        TorsoEquipmentItem bodyEquipment = (TorsoEquipmentItem)Managers.ItemData.GetEquipmentItemByID(currentCharacterSaveData.currentChestGearItemID);
 
-        if(bpduEquipment != null)
+        if(bodyEquipment != null)
         {
-            playerInventoryManager.currentTorsoEquipment = bpduEquipment;
+            playerInventoryManager.currentTorsoEquipment = bodyEquipment;
         }
 
-        EquipmentItem legEquipment = Managers.ItemData.GetEquipmentItemByID(currentCharacterSaveData.currentLegGearItemID);
+        LeggingsEquipmentItem legEquipment = (LeggingsEquipmentItem)Managers.ItemData.GetEquipmentItemByID(currentCharacterSaveData.currentLegGearItemID);
 
         if(legEquipment != null)
         {
             playerInventoryManager.currentLegEquipment = legEquipment;
         }
 
-        EquipmentItem handEquipment = Managers.ItemData.GetEquipmentItemByID(currentCharacterSaveData.currentHandGearItemID);
+        GantletsEquipmentItem handEquipment = (GantletsEquipmentItem)Managers.ItemData.GetEquipmentItemByID(currentCharacterSaveData.currentHandGearItemID);
 
         if(handEquipment != null)
         {
