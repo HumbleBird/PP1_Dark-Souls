@@ -473,6 +473,7 @@ public class InputHandler : MonoBehaviour
                 player.playerWeaponSlotManager.LoadWeaponOnSlot(player.playerInventoryManager.rightWeapon, false);
                 player.playerWeaponSlotManager.LoadWeaponOnSlot(player.playerInventoryManager.leftWeapon, true);
                 player.playerWeaponSlotManager.LoadTwoHandIKTargtets(false);
+
             }
         }
     }

@@ -24445,7 +24445,6 @@ GameObject:
   m_Component:
   - component: {fileID: 2929833347161455191}
   - component: {fileID: 3147580310788331835}
-  - component: {fileID: 8025358906976401726}
   m_Layer: 0
   m_Name: Left Hand IK Target
   m_TagString: Untagged
@@ -24460,14 +24459,14 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 5708235739107756718}
-  m_LocalRotation: {x: 0.048500348, y: -0.0062888935, z: 0.08073894, w: 0.9955347}
-  m_LocalPosition: {x: 1.0830002, y: 0.96599954, z: 1.5980015}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 1.117, y: -0.006, z: -1.901}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 3073654782684071110}
   m_RootOrder: 5
-  m_LocalEulerAnglesHint: {x: 5.6, y: -0.27, z: 9.26}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &3147580310788331835
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -24480,24 +24479,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e41fd02f9165b7744b7df1c4efbe06a8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
---- !u!114 &8025358906976401726
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5708235739107756718}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ece332eaee898794585ae3cb32de4b77, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  physicalBuffFX: {fileID: 0}
-  fireBuffFX: {fileID: 0}
-  defaultTrailFX: {fileID: 0}
-  fireTrailFX: {fileID: 0}
-  damageCollider: {fileID: 0}
-  audioSource: {fileID: 0}
 --- !u!1 &5998938681435574301
 GameObject:
   m_ObjectHideFlags: 0
@@ -24508,7 +24489,6 @@ GameObject:
   m_Component:
   - component: {fileID: 2095066420363497786}
   - component: {fileID: 826555822273441034}
-  - component: {fileID: 834468524822191260}
   m_Layer: 0
   m_Name: Right Hand IK Target
   m_TagString: Untagged
@@ -24523,14 +24503,14 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 5998938681435574301}
-  m_LocalRotation: {x: -0.46431863, y: -0.027267983, z: -0.344539, w: 0.81544936}
-  m_LocalPosition: {x: 0.4110004, y: -0.04600019, z: -0.39800036}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0.017, y: 0.762, z: 0.552}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 3073654782684071110}
   m_RootOrder: 4
-  m_LocalEulerAnglesHint: {x: -50.9, y: 25.9, z: -58.3}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &826555822273441034
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -24543,24 +24523,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 14cb85e2a741c314894a1a5563b5b974, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
---- !u!114 &834468524822191260
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5998938681435574301}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ece332eaee898794585ae3cb32de4b77, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  physicalBuffFX: {fileID: 0}
-  fireBuffFX: {fileID: 0}
-  defaultTrailFX: {fileID: 0}
-  fireTrailFX: {fileID: 0}
-  damageCollider: {fileID: 0}
-  audioSource: {fileID: 0}
 --- !u!1 &6426906251480784074
 GameObject:
   m_ObjectHideFlags: 0

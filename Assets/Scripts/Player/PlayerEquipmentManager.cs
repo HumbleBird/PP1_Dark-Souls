@@ -25,9 +25,6 @@ public class PlayerEquipmentManager : MonoBehaviour
     private void Start()
     {
         player.characterStatsManager.CalculateAndSetMaxEquipload();
-
-        EquipAllArmor();
-        
     }
 
     public void EquipAllArmor()

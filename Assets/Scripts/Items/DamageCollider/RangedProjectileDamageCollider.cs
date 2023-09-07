@@ -50,7 +50,7 @@ public class RangedProjectileDamageCollider : DamageCollider
             contactPoint = collision.gameObject.GetComponent<Collider>().ClosestPointOnBounds(transform.position);
             angleHitFrom = Vector3.SignedAngle(characterManager.transform.forward, enemyManager.transform.forward, Vector3.up);
 
-            TakeDamageEffect takeDamageEffect = new TakeDamageEffect();// Instantiate(Managers.WorldEffect.takeDamageEffect);
+            TakeDamageEffect takeDamageEffect = new TakeDamageEffect();
             takeDamageEffect.physicalDamage = physicalDamage;
             takeDamageEffect.fireDamage = fireDamage;
             takeDamageEffect.poiseDamage = poiseDamage;
@@ -80,8 +80,6 @@ public class RangedProjectileDamageCollider : DamageCollider
             gameObject.transform.rotation = Quaternion.LookRotation(transform.forward);
             gameObject.transform.parent = collision.collider.transform;
         }
-
-        //Destroy(transform.root.gameObject);
     }
 
     private void FixedUpdate()

@@ -487,7 +487,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 7358866862892592442}
-  m_LocalRotation: {x: -0, y: 0.69636726, z: -0, w: -0.71768564}
+  m_LocalRotation: {x: 0, y: 0.6963701, z: -0, w: -0.7176829}
   m_LocalPosition: {x: 36.258, y: 5.039, z: -12.78}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
@@ -595,7 +595,7 @@ MonoBehaviour:
   pendingCriticalDamage: 0
   inputHandler: {fileID: 0}
   cameraHandler: {fileID: 0}
-  uiManager: {fileID: 0}
+  m_GameUIManager: {fileID: 0}
   playerStatsManager: {fileID: 0}
   playerWeaponSlotManager: {fileID: 0}
   playerCombatManager: {fileID: 0}
@@ -604,8 +604,6 @@ MonoBehaviour:
   playerAnimatorManager: {fileID: 0}
   playerLocomotionManager: {fileID: 0}
   playerEffectsManager: {fileID: 0}
-  interactableUIGameObject: {fileID: 0}
-  itemInteractableUIGameObject: {fileID: 0}
 --- !u!114 &6249249227427752084
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -722,7 +720,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   currentItemBeingUsed: {fileID: 0}
   currentSpell: {fileID: 11400000, guid: c366cbf2bcc1a0144a1e21b313bba1be, type: 2}
-  rightWeapon: {fileID: 11400000, guid: 29d9d6db760280a45bcf164a2a748c8c, type: 2}
+  rightWeapon: {fileID: 11400000, guid: 48e75f5a988fd65469bab7cd58a33b5c, type: 2}
   leftWeapon: {fileID: 11400000, guid: 29d9d6db760280a45bcf164a2a748c8c, type: 2}
   currentConsumable: {fileID: 11400000, guid: cc6fb931e1871e441862ea869f60eb76, type: 2}
   currentAmmo: {fileID: 11400000, guid: 061614e8ff311344782b09816f7fc630, type: 2}
@@ -741,11 +739,11 @@ MonoBehaviour:
   ringSlot04: {fileID: 0}
   weaponsInRightHandSlots:
   - {fileID: 11400000, guid: 48e75f5a988fd65469bab7cd58a33b5c, type: 2}
-  - {fileID: 11400000, guid: 29d9d6db760280a45bcf164a2a748c8c, type: 2}
   - {fileID: 11400000, guid: af58329a590b58043bbd92298063ed42, type: 2}
+  - {fileID: 0}
   weaponsInLeftHandSlots:
   - {fileID: 11400000, guid: 29d9d6db760280a45bcf164a2a748c8c, type: 2}
-  - {fileID: 0}
+  - {fileID: 11400000, guid: 48e75f5a988fd65469bab7cd58a33b5c, type: 2}
   - {fileID: 0}
   currentRightWeaponIndex: 0
   currentLeftWeaponIndex: 0
