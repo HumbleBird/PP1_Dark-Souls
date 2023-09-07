@@ -85,6 +85,13 @@ public class WeaponManager : MonoBehaviour
                     break;
             }
         }
+        // Default
+        else
+        {
+            if (defaultTrailFX == null)
+                return;
+            defaultTrailFX.PlayWeaponTrail();
+        }
     }
 
 }

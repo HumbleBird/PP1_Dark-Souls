@@ -11,7 +11,7 @@ public class PlayerManager : CharacterManager
     public CameraHandler cameraHandler;
 
     [Header("UI")]
-    public GameUIManager uiManager;
+    public GameUIManager m_GameUIManager;
 
     [Header("Player")]
     public PlayerStatsManager playerStatsManager;
@@ -23,19 +23,12 @@ public class PlayerManager : CharacterManager
     public PlayerLocomotionManager playerLocomotionManager;
     public PlayerEffectsManager playerEffectsManager;
 
-
-    [Header("Interactables")]
-    InteractableUI interactableUI;
-    public GameObject interactableUIGameObject;
-    public GameObject itemInteractableUIGameObject;
-
     protected override void Awake()
     {
         base.Awake();
 
         cameraHandler = FindObjectOfType<CameraHandler>();
-        uiManager = FindObjectOfType<GameUIManager>();
-        interactableUI = FindObjectOfType<InteractableUI>();
+        m_GameUIManager = FindObjectOfType<GameUIManager>();
 
         animator            = GetComponentInChildren<Animator>();
         inputHandler        = GetComponent<InputHandler>();
@@ -112,8 +105,8 @@ public class PlayerManager : CharacterManager
                 if (interactable != null)
                 {
                     string interactableText = interactable.interactableText;
-                    interactableUI.interactableText.text = interactableText;
-                    interactableUIGameObject.SetActive(true);
+                    m_GameUIManager.interactableUI.interactableText.text = interactableText;
+                    m_GameUIManager.interactableUIGameObject.SetActive(true);
 
                     if (inputHandler.a_Input)
                     {
@@ -124,14 +117,14 @@ public class PlayerManager : CharacterManager
         }
         else
         {
-            if (interactableUIGameObject != null)
+            if (m_GameUIManager.interactableUIGameObject != null)
             {
-                interactableUIGameObject.SetActive(false);
+                m_GameUIManager.interactableUIGameObject.SetActive(false);
             }
 
-            if (itemInteractableUIGameObject != null && inputHandler.a_Input)
+            if (m_GameUIManager.itemInteractableUIGameObject != null && inputHandler.a_Input)
             {
-                itemInteractableUIGameObject.SetActive(false);
+                m_GameUIManager.itemInteractableUIGameObject.SetActive(false);
             }
         }
     }

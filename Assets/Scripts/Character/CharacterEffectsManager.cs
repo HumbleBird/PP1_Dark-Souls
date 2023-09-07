@@ -148,20 +148,20 @@ public class CharacterEffectsManager : MonoBehaviour
         }
     }
 
-    public virtual void PlayWeaponFX(bool isLeft)
+    public virtual void PlayWeaponFX()
     {
-        if(isLeft == false)
-        {
-            if(rightWeaponManager != null)
-            {
-                rightWeaponManager.PlayWeaponTrailFX();
-            }
-        }
-        else
+        if (character.isUsingLeftHand)
         {
             if (leftWeaponManager != null)
             {
                 leftWeaponManager.PlayWeaponTrailFX();
+            }
+        }
+        else
+        {
+            if (rightWeaponManager != null)
+            {
+                rightWeaponManager.PlayWeaponTrailFX();
             }
         }
     }

@@ -12,7 +12,7 @@ public class ChargeAttackActon : ItemAction
 
 
         character.characterAnimatorManager.EraseHandIKForWeapon();
-        character.characterEffectsManager.PlayWeaponFX(false);
+        character.characterEffectsManager.PlayWeaponFX();
 
 
         // ÄÞº¸

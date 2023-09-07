@@ -16,7 +16,12 @@ public class ModelChanger : MonoBehaviour
 
         GetAllEquipmentsModels();
 
+    }
+
+    private void Start()
+    {
         m_playerManager.playerEquipmentManager.m_dicModelChanger.Add(equipmentArmorParts, this);
+
     }
 
     private void GetAllEquipmentsModels()

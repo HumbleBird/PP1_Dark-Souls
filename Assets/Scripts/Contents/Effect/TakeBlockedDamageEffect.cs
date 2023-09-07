@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using static Define;
 
 [CreateAssetMenu(menuName = "Character Effects/Take Blocked Damage")]
 public class TakeBlockedDamageEffect : CharacterEffect
@@ -40,7 +41,7 @@ public class TakeBlockedDamageEffect : CharacterEffect
         PlayBlockDamageAnimation(character);
 
         // Block 사운드
-        //PlayBlockDamageSoundFX(character);
+        PlayBlockDamageSoundFX(character);
 
         // character가 A.I라면, 공격한 캐릭터를 새로운 타겟으로 설정
         AssignNewAITarget(character);
@@ -194,13 +195,12 @@ public class TakeBlockedDamageEffect : CharacterEffect
         // 두 손이면 오른쪽 무기를
         if(character.isTwoHandingWeapon)
         {
-            character.characterSoundFXManager.PlayRandomWeaponWhoosh(character.characterInventoryManager.rightWeapon.blockingNoises);
+            character.characterSoundFXManager.PlayRandomSound(E_RandomSoundType.Block, character.characterInventoryManager.rightWeapon.blockingNoises);
         }
         // 한 손이면 왼족 아이템(보통 방패)으로
         else
         {
-            character.characterSoundFXManager.PlayRandomWeaponWhoosh(character.characterInventoryManager.leftWeapon.blockingNoises);
-
+            character.characterSoundFXManager.PlayRandomSound(E_RandomSoundType.Block, character.characterInventoryManager.leftWeapon.blockingNoises);
         }
     }
 

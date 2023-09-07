@@ -63,8 +63,8 @@ public class WeaponItem : Item
     public ItemAction th_hold_LT_Action;
 
     [Header("SOUND FX")]
-    public AudioClip[] weaponWhooshes;
-    public AudioClip[] blockingNoises;
+    public List<AudioClip> weaponWhooshes;
+    public List<AudioClip> blockingNoises;
 
 
 }

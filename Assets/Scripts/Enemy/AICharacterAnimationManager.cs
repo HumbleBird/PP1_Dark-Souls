@@ -38,7 +38,7 @@ public class AICharacterAnimationManager : CharacterAnimatorManager
 
     public void PlayWeaponTrailFX()
     {
-        aiCharacter.aiCharacterEffectsManager.PlayWeaponFX(false);
+        aiCharacter.aiCharacterEffectsManager.PlayWeaponFX();
     }
 
     public override void OnAnimatorMove()

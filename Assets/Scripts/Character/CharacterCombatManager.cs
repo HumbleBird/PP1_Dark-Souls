@@ -21,29 +21,29 @@ public class CharacterCombatManager : MonoBehaviour
     public AttackType currentAttackType;
 
     [Header("Attack Animations")]
-    public string oh_light_attack_01 = "OH_Light_Attack_01";
-    public string oh_light_attack_02 = "OH_Light_Attack_02";
-    public string oh_heavy_attack_01 = "OH_Heavy_Attack_01";
-    public string oh_heavy_attack_02 = "OH_Heavy_Attack_02";
-    public string oh_running_attack_01 = "OH_Running_Attack_01";
-    public string oh_jumping_attack_01 = "OH_Jumping_Attack_01";
+    [HideInInspector] public string oh_light_attack_01 = "OH_Light_Attack_01";
+    [HideInInspector]public string oh_light_attack_02 = "OH_Light_Attack_02";
+    [HideInInspector]public string oh_heavy_attack_01 = "OH_Heavy_Attack_01";
+    [HideInInspector]public string oh_heavy_attack_02 = "OH_Heavy_Attack_02";
+    [HideInInspector]public string oh_running_attack_01 = "OH_Running_Attack_01";
+    [HideInInspector]public string oh_jumping_attack_01 = "OH_Jumping_Attack_01";
 
-    public string oh_charge_attack_01 = "OH_Charging_Attack_Charge_01";
-    public string oh_charge_attack_02 = "OH_Charging_Attack_Charge_02";
+    [HideInInspector]public string oh_charge_attack_01 = "OH_Charging_Attack_Charge_01";
+    [HideInInspector]public string oh_charge_attack_02 = "OH_Charging_Attack_Charge_02";
 
-    public string th_light_attack_01 = "TH_Light_Attack_01";
-    public string th_light_attack_02 = "TH_Light_Attack_02";
-    public string th_heavy_attack_01 = "TH_Heavy_Attack_01";
-    public string th_heavy_attack_02 = "TH_Heavy_Attack_02";
-    public string th_running_attack_01 = "TH_Running_Attack_01";
-    public string th_jumping_attack_01 = "TH_Jumping_Attack_01";
+    [HideInInspector]public string th_light_attack_01 = "TH_Light_Attack_01";
+    [HideInInspector]public string th_light_attack_02 = "TH_Light_Attack_02";
+    [HideInInspector]public string th_heavy_attack_01 = "TH_Heavy_Attack_01";
+    [HideInInspector]public string th_heavy_attack_02 = "TH_Heavy_Attack_02";
+    [HideInInspector]public string th_running_attack_01 = "TH_Running_Attack_01";
+    [HideInInspector]public string th_jumping_attack_01 = "TH_Jumping_Attack_01";
 
-    public string th_charge_attack_01 = "TH_Charging_Attack_Charge_01";
-    public string th_charge_attack_02 = "TH_Charging_Attack_Charge_02";
+    [HideInInspector]public string th_charge_attack_01 = "TH_Charging_Attack_Charge_01";
+    [HideInInspector]public string th_charge_attack_02 = "TH_Charging_Attack_Charge_02";
 
-    public string weapon_art = "Weapon Art";
-    public int pendingCriticalDamage;
-    public string lastAttack;
+    [HideInInspector]public string weapon_art = "Weapon Art";
+    [HideInInspector]public int pendingCriticalDamage;
+    [HideInInspector] public string lastAttack;
 
 
 

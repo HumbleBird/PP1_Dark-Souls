@@ -14,7 +14,7 @@ public class HeavyAttackAction : ItemAction
         character.isAttacking = true;
 
         character.characterAnimatorManager.EraseHandIKForWeapon();
-        character.characterEffectsManager.PlayWeaponFX(false);
+        character.characterEffectsManager.PlayWeaponFX();
 
         // 만약 running attack을 수행할 수 있다면 할지 안 할지 결정 가능
         if (character.isSprinting)

@@ -52,7 +52,7 @@ public class TakeDamageEffect : CharacterEffect
         CharacterUpdateUI(character);
 
         // 사운드
-        //PlayDamageSoundFX(character);
+        PlayDamageSoundFX(character);
 
         // 피 효과
         PlayBloodSplatter(character);

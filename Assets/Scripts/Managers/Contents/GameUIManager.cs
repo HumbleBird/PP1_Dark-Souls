@@ -6,27 +6,33 @@ using TMPro;
 public class GameUIManager : UI_Base
 {
     public PlayerManager player;
-    public ItemStatWindowUI itemStatWindowUI;
 
-    public EquipmentWindowUI equipmentWindowUI;
+
+    [Header("HUD Window UI")]
     public QuickSlotsUI quickSlotsUI;
-
-    [Header("HUD")]
-    public GameObject crossHair;
     public TextMeshProUGUI soulCount;
     public HealthBar              m_HealthBar;
     public StaminaBar             m_StaminaBar;
     public FocusPointBar          m_FocusPointBar;
     public PoisonBuildUpBar       m_PoisonBuildUpBar;
     public PoisonAmountBar        m_PoisonAmountBar;
+    public GameObject crossHair;
 
-    [Header("UI Windows")]
+    [Header("Player Private Window UI")]
     public GameObject hudWindow;
     public GameObject selectWindow;
     public GameObject equipmentScreenWindow;
     public GameObject weaponInventoryWindow;
     public GameObject itemStatsWindow;
     public GameObject levelUpWindow;
+    public ItemStatWindowUI itemStatWindowUI;
+    public EquipmentWindowUI equipmentWindowUI;
+
+    [Header("Interact Window UI")]
+    public InteractableUI interactableUI;
+    public GameObject interactableUIGameObject;
+    public GameObject itemInteractableUIGameObject;
+    BonfireLitPopupUI bonfireLitPopupUI;
 
     [Header("Equipment Window Slot Selected")]
     public bool rightHandSlot01Selected;
@@ -37,9 +43,6 @@ public class GameUIManager : UI_Base
     public bool bodyEquipmentSlotSelected;
     public bool legEquipmentSlotSelected;
     public bool handEquipmentSlotSelected;
-
-    [Header("Pop Ups")]
-    BonfireLitPopupUI bonfireLitPopupUI;
 
     [Header("Weapon Inventory")]
     public GameObject weaponInventorySlotPrefab;
@@ -76,6 +79,8 @@ public class GameUIManager : UI_Base
         m_FocusPointBar = GetComponentInChildren<FocusPointBar   >();
         m_PoisonBuildUpBar = GetComponentInChildren<PoisonBuildUpBar>();
         m_PoisonAmountBar = GetComponentInChildren<PoisonAmountBar>();
+
+        interactableUI = GetComponentInChildren<InteractableUI>();
 
         weaponInventorySlots = weaponInventorySlotsParent.GetComponentsInChildren<WeaponInventorySlot>();
         headEquipmentInventorySlots = headEquipmentInventorySlotsParent.GetComponentsInChildren<HeadEquipmentInventorySlot>();

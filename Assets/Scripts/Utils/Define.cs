@@ -280,6 +280,12 @@ public class Define
     #endregion
 
     #region Other
+    public enum E_RandomSoundType
+    {
+        Damage,
+        Block,
+        WeaponWhoose
+    }
 
     public enum OpenWhat
     {
