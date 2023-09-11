@@ -57,7 +57,10 @@ public class PlayerManager : CharacterManager
     {
         base.Update();
 
-        inputHandler.TickInput();
+        if (cameraHandler == null)
+            return;
+
+            inputHandler.TickInput();
         playerLocomotionManager.HandleRollingAndSprinting();
         playerLocomotionManager.HandleJumping();
         playerStatsManager.RegenerateStamina();

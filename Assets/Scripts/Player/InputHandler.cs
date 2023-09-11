@@ -450,7 +450,8 @@ public class InputHandler : MonoBehaviour
             }
         }
 
-        player.cameraHandler.SetCameraHeight();
+        if(player.cameraHandler != null)
+             player.cameraHandler.SetCameraHeight();
     }
 
     private void HandleTwoHandInput()
