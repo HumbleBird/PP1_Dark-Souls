@@ -1,0 +1,40 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 167fd8c93ebdad44683290524e175856, type: 3}
+  m_Name: Knight Gauntlets
+  m_EditorClassIdentifier: 
+  itemIcon: {fileID: 21300000, guid: 918d39d5897d54948a6281cacda66148, type: 3}
+  itemName: Knight Gauntlets
+  itemID: 0
+  m_fPhysicalDefense: 3.6
+  m_fStrikeDefense: 3
+  m_fSlashDefense: 3.5
+  m_fThrustDefense: 3.4
+  m_fMagicDefense: 2.3
+  m_fFireDefense: 2.9
+  m_fLightningDefense: 2.1
+  m_fDarkDefense: 2.5
+  m_fBleedResistance: 14
+  m_fPoisonResistance: 12
+  m_fFrostResistance: 11
+  m_fCurseResistance: 7
+  m_fPoiseResistance: 2.5
+  m_fDurability: 370
+  m_fWeight: 3.5
+  Elbow_Attachment_Right: Chr_ElbowAttachRight_01
+  Elbow_Attachment_Left: Chr_ElbowAttachLeft_01
+  m_Arm_Upper_RightName: Chr_ArmUpperRight_Male_06
+  m_Arm_Upper_LeftName: Chr_ArmUpperLeft_Male_06
+  m_Arm_Lower_RightName: Chr_ArmLowerRight_Male_16
+  m_Arm_Lower_LeftName: Chr_ArmLowerLeft_Male_16
+  m_Hand_RightName: Chr_HandRight_Male_12
+  m_Hand_LeftName: Chr_HandLeft_Male_12

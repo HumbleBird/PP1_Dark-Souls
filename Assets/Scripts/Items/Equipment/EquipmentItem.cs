@@ -29,7 +29,4 @@ public class EquipmentItem : Item
 
     [Header("Weight")]
     public float m_fWeight = 0;
-
-    [Header("Item Parts Name")]
-    public string[] m_sDetailItemName;
 }

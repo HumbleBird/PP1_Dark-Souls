@@ -69,10 +69,40 @@ public class Define
         Consumable
     }
 
+    public enum All_GenderItemPartsType
+    {
+        // Head
+        HeadCoverings_Base_Hair,
+        HeadCoverings_No_FacialHair,
+        HeadCoverings_No_Hair,
+        Hair,
+        Head_Attachment_Helmet,
+
+        // Torso
+        Chest_Attachment,
+        Back_Attachment,
+        Shoulder_Attachment_Right,
+        Shoulder_Attachment_Left,
+
+        // Hand
+        Elbow_Attachment_Right,
+        Elbow_Attachment_Left,
+
+        // Leg
+        Hips_Attachment,
+        Knee_Attachement_Right,
+        Knee_Attachement_Left,
+
+        // Extra
+        Extra_Elf_Ear,
+    }
+
     public enum EquipmentArmorParts
     {
-        NoArmorHead,
-        Helm,
+        Head_All_Elements,
+        Head_No_Elements,
+        Eyebrows,
+        FacialHair,
         Torso,
         Arm_Upper_Right     ,
         Arm_Upper_Left      ,
