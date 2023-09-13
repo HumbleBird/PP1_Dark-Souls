@@ -37,6 +37,13 @@ public class HairStylesSub : UI_Base
             if (count > 0)
             {
                 player.playerEquipmentManager.m_AllGenderPartsModelChanger[Define.All_GenderItemPartsType.Hair].EquipEquipmentsModelByName("Chr_Hair_" + count.ToString("00"));
+
+                Camera.main.GetComponent<CharacterPreviewCamera>().ChangeCameraPreviewTransform(E_CharacterCreationPreviewCamera.None);
+            }
+            // 첫 번째 선택지
+            else
+            {
+
             }
 
             characterCreationScreen.m_CharacterCreationLeftPannelUI.m_HairBtn.Select();

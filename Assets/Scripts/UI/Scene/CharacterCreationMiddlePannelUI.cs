@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using static Define;
 
 public class CharacterCreationMiddlePannelUI : UI_Base
 {
@@ -48,6 +49,8 @@ public class CharacterCreationMiddlePannelUI : UI_Base
             m_CharacterCreationScreen.m_CharacterCreationLeftPannelUI.AllPannelButonInteractable(true);
             m_CharacterCreationScreen.m_CharacterCreationLeftPannelUI.m_HairColorBtn.Select();
             m_goHairColor.SetActive(false);
+
+            Camera.main.GetComponent<CharacterPreviewCamera>().ChangeCameraPreviewTransform(E_CharacterCreationPreviewCamera.None);
         });
 
         GetObject((int)GameObjects.RedColor).transform.GetChild(0).GetComponent<Button>().onClick.AddListener(() =>
@@ -55,6 +58,8 @@ public class CharacterCreationMiddlePannelUI : UI_Base
             m_CharacterCreationScreen.m_CharacterCreationLeftPannelUI.AllPannelButonInteractable(true);
             m_CharacterCreationScreen.m_CharacterCreationLeftPannelUI.m_HairColorBtn.Select();
             m_goHairColor.SetActive(false);
+
+            Camera.main.GetComponent<CharacterPreviewCamera>().ChangeCameraPreviewTransform(E_CharacterCreationPreviewCamera.None);
         });
 
         GetObject((int)GameObjects.BlondeColor).transform.GetChild(0).GetComponent<Button>().onClick.AddListener(() =>
@@ -62,6 +67,8 @@ public class CharacterCreationMiddlePannelUI : UI_Base
             m_CharacterCreationScreen.m_CharacterCreationLeftPannelUI.AllPannelButonInteractable(true);
             m_CharacterCreationScreen.m_CharacterCreationLeftPannelUI.m_HairColorBtn.Select();
             m_goHairColor.SetActive(false);
+
+            Camera.main.GetComponent<CharacterPreviewCamera>().ChangeCameraPreviewTransform(E_CharacterCreationPreviewCamera.None);
         });
 
         GetObject((int)GameObjects.BrownColor).transform.GetChild(0).GetComponent<Button>().onClick.AddListener(() =>
@@ -69,6 +76,9 @@ public class CharacterCreationMiddlePannelUI : UI_Base
             m_CharacterCreationScreen.m_CharacterCreationLeftPannelUI.AllPannelButonInteractable(true);
             m_CharacterCreationScreen.m_CharacterCreationLeftPannelUI.m_HairColorBtn.Select();
             m_goHairColor.SetActive(false);
+
+            Camera.main.GetComponent<CharacterPreviewCamera>().ChangeCameraPreviewTransform(E_CharacterCreationPreviewCamera.None);
+
         });
 
         return true;

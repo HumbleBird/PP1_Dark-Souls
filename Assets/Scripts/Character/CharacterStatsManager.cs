@@ -8,7 +8,7 @@ public class CharacterStatsManager : MonoBehaviour
     CharacterManager character;
 
     [Header("Name")]
-    public string characterName;
+    public string characterName = "Nameless";
 
     [Header("Team I.D")]
     public int teamIDNumber = 0;

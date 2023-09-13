@@ -310,6 +310,16 @@ public class Define
     #endregion
 
     #region Other
+    public enum E_CharacterCreationPreviewCamera
+    {
+        None,
+        Head,
+        Chest,
+        Leg,
+        Hand,
+        Back
+    }
+
     public enum E_RandomSoundType
     {
         Damage,

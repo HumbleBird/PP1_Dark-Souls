@@ -57,7 +57,7 @@ public class CharacterCreationLeftPannelUI : UI_Base
         m_HairBtn.onClick.AddListener(() =>
         {
             m_CharacterCreationScreen.m_CharacterCreationMiddlePannelUI.m_goHairStyles.SetActive(true);
-
+            Camera.main.GetComponent<CharacterPreviewCamera>().ChangeCameraPreviewTransform(E_CharacterCreationPreviewCamera.Head);
             AllPannelButonInteractable(false);
         });
 
@@ -66,7 +66,7 @@ public class CharacterCreationLeftPannelUI : UI_Base
         {
             m_CharacterCreationScreen.m_CharacterCreationMiddlePannelUI.m_goHairColor.SetActive(true);
             //m_CharacterCreationScreen.m_CharacterCreationMiddlePannelUI.m_HairColorBtn.Select();
-
+            Camera.main.GetComponent<CharacterPreviewCamera>().ChangeCameraPreviewTransform(E_CharacterCreationPreviewCamera.Head);
             AllPannelButonInteractable(false);
         });
 

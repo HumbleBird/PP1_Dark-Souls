@@ -37,7 +37,7 @@ public class SelectHairColor : MonoBehaviour
         for (int i = 0; i < rendererList.Count; i++)
         {
             rendererList[i].material.SetColor("_Color_Hair", currentHairColor);
-            rendererList[i].material.SetColor("_Color", currentHairColor);
+            //rendererList[i].material.SetColor("_Color", currentHairColor);
         }
     }
 }
