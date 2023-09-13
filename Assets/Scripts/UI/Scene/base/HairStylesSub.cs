@@ -30,11 +30,8 @@ public class HairStylesSub : UI_Base
         // Button Function
         childBtn.onClick.AddListener(() =>
         {
-            characterCreationScreen.HairStyles.GetComponent<DisableAllChildrenOfSelectedGameObject>().DisableAllChildren();
-            characterCreationScreen.m_NameBtn.interactable = true;
-            characterCreationScreen.m_ClassBtn.interactable = true;
-            characterCreationScreen.m_HairBtn.interactable = true;
-            characterCreationScreen.m_SkinBtn.interactable = true;
+            characterCreationScreen.m_CharacterCreationMiddlePannelUI.m_goHairStyles.GetComponent<DisableAllChildrenOfSelectedGameObject>().DisableAllChildren();
+            characterCreationScreen.m_CharacterCreationLeftPannelUI.AllPannelButonInteractable(true);
 
             // 두 번째 선택지부터
             if (count > 0)
@@ -42,9 +39,9 @@ public class HairStylesSub : UI_Base
                 player.playerEquipmentManager.m_AllGenderPartsModelChanger[Define.All_GenderItemPartsType.Hair].EquipEquipmentsModelByName("Chr_Hair_" + count.ToString("00"));
             }
 
-            characterCreationScreen.m_HairBtn.Select();
+            characterCreationScreen.m_CharacterCreationLeftPannelUI.m_HairBtn.Select();
 
-            characterCreationScreen.HairStyles.SetActive(false);
+            characterCreationScreen.m_CharacterCreationMiddlePannelUI.m_goHairStyles.SetActive(false);
         });
 
         // Event Trigger
@@ -63,7 +60,7 @@ public class HairStylesSub : UI_Base
 
     void OnSelectAndPointerDown(PointerEventData data)
     {
-        characterCreationScreen.HairStyles.GetComponent<DisableAllChildrenOfSelectedGameObject>().DisableAllChildren();
+        characterCreationScreen.m_CharacterCreationMiddlePannelUI.m_goHairStyles.GetComponent<DisableAllChildrenOfSelectedGameObject>().DisableAllChildren();
 
         if (count > 0)
         {

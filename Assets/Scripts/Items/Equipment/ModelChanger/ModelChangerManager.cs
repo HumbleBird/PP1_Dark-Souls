@@ -11,7 +11,7 @@ public class ModelChangerManager : MonoBehaviour
     // 각 모델 체인지에는 파츠 구분과, 아이템 리스트들이 있음
     // 만약 플레이어가 아이템을 바꾼다면, 어떠한 유형인지, 어떠한 파츠인지, 어떤 아이템인지를 구분해야 함.
 
-    protected List<GameObject> equipments = new List<GameObject>();
+    public List<GameObject> equipments = new List<GameObject>();
     protected PlayerManager m_playerManager;
 
     protected virtual void Awake()
