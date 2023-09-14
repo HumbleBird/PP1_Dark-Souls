@@ -42,7 +42,7 @@ public class HandEquipmentInventorySlot : MonoBehaviour
 
             uiManager.player.playerInventoryManager.currentHandEquipment = (GantletsEquipmentItem)item;
             uiManager.player.playerInventoryManager.handEquipmentInventory.Remove(item);
-            uiManager.player.playerEquipmentManager.EquipAllArmor();
+            uiManager.player.playerEquipmentManager.EquipAllEquipmentModel();
         }
         else
         {

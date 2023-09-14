@@ -310,6 +310,20 @@ public class Define
     #endregion
 
     #region Other
+    public enum E_Class
+    {
+        Knight = 0,
+        Mercenary,
+        Warrior,
+        Herald,
+        Thief,
+        Assassin,
+        Sorcerer,
+        Pyromancer,
+        Cleric,
+        Deprived
+    }
+
     public enum E_CharacterCreationPreviewCamera
     {
         None,

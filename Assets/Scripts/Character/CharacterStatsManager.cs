@@ -28,15 +28,22 @@ public class CharacterStatsManager : MonoBehaviour
     [Header("CHARACTER LEVEL")]
     public int playerLevel;
 
-    [Header("STAT LEVLELS")]
-    public int healthLevel = 10; 
-    public int staminaLevel = 10; // = Endurance
-    public int focusLevel = 10; // = Attunement
-    public int poiseLevel = 10;
-    public int strengthLevel = 10;
-    public int dexterityLevel = 10;
-    public int intelligenceLevel = 10;
-    public int faithLevel = 10;
+    [Header("Character Vital STAT LEVLELS")]
+    public int healthLevel          = 10; 
+    public int staminaLevel         = 10; // = Endurance
+    public int focusLevel             = 10; // = Attunement
+    public int poiseLevel         = 10;
+
+    [Header("Class STAT LEVLELS")]
+    public int m_iVigorLevel        = 10    ;
+    public int m_iAttunementLevel   = 10    ;
+    public int m_iEnduranceLevel    = 10    ;
+    public int m_iVitalityLevel     = 10        ;
+    public int m_iStrengthLevel     = 10   ;
+    public int m_iDexterityLevel    = 10   ;
+    public int m_iIntelligenceLevel = 10       ;
+    public int m_iFaithLevel        = 10          ;
+    public int m_iLuckLevel         = 10      ;
 
     [Header("Equip Load")]
     public float currentEquipLoad = 0;

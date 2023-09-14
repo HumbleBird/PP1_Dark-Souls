@@ -11,10 +11,14 @@ public class HelmEquipmentItem : EquipmentItem
     public string HeadCoverings_No_Hair;
     public string Head_Attachment_Helmet;
 
-
     [Header("Item Gender Parts Name")]
     public string m_HelmEquipmentItemName;
 
     [Header("Extra")]
     public string Extra_Elf_Ear;
+
+    public bool hideFacialFeatures = false;
+    //public bool hideBeardFeatures;
+    //public bool hideEyebrowsFeatures;
+    // ect
 }

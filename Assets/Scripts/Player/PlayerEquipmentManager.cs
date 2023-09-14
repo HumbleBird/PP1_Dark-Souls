@@ -20,6 +20,8 @@ public class PlayerEquipmentManager : MonoBehaviour
     public LeggingsEquipmentItem Naked_LegEquipment;
     public GantletsEquipmentItem Naked_HandEquipment;
 
+    [Header("Facial Features")]
+    public GameObject[] facialFeatures;
 
     float poisonResistance = 0;
     float totalEquipmentLoad = 0;
@@ -35,7 +37,7 @@ public class PlayerEquipmentManager : MonoBehaviour
         player.characterStatsManager.CalculateAndSetMaxEquipload();
     }
 
-    public void EquipAllArmor()
+    public void EquipAllEquipmentModel()
     {
         // First All UnEquipment
         ModelChangerUnEquipAllItem();
@@ -85,6 +87,7 @@ public class PlayerEquipmentManager : MonoBehaviour
             player.playerStatsManager.physicalDamageAbsorptionHead = player.playerInventoryManager.currentHelmetEquipment.m_fPhysicalDefense;
             poisonResistance += player.playerInventoryManager.currentHelmetEquipment.m_fPoisonResistance;
             totalEquipmentLoad += player.playerInventoryManager.currentHelmetEquipment.m_fWeight;
+
         }
         else
         {
@@ -97,7 +100,13 @@ public class PlayerEquipmentManager : MonoBehaviour
                 m_MaleGenderPartsModelChanger[EquipmentArmorParts.Head_All_Elements].EquipEquipmentsModelByName(Naked_HelmetEquipment.m_HelmEquipmentItemName);
             }
             player.playerStatsManager.physicalDamageAbsorptionHead = 0;
+
+            foreach (GameObject go in facialFeatures)
+            {
+                go.SetActive(true);
+            }
         }
+
     }
 
     private void HeadItemEquipModel()
@@ -126,11 +135,25 @@ public class PlayerEquipmentManager : MonoBehaviour
         {
             if (m_bIsFemale)
             {
-                m_FemaleGenderPartsModelChanger[EquipmentArmorParts.Head_No_Elements].EquipEquipmentsModelByName(temp.m_HelmEquipmentItemName);
+                if(temp == player.playerEquipmentManager.Naked_HelmetEquipment)
+                {
+                    m_FemaleGenderPartsModelChanger[EquipmentArmorParts.Head_All_Elements].EquipEquipmentsModelByName(temp.m_HelmEquipmentItemName);
+                }
+                else
+                {
+                    m_FemaleGenderPartsModelChanger[EquipmentArmorParts.Head_No_Elements].EquipEquipmentsModelByName(temp.m_HelmEquipmentItemName);
+                }
             }
             else
             {
-                m_MaleGenderPartsModelChanger[EquipmentArmorParts.Head_No_Elements].EquipEquipmentsModelByName(temp.m_HelmEquipmentItemName);
+                if (temp == player.playerEquipmentManager.Naked_HelmetEquipment)
+                {
+                    m_MaleGenderPartsModelChanger[EquipmentArmorParts.Head_All_Elements].EquipEquipmentsModelByName(temp.m_HelmEquipmentItemName);
+                }
+                else
+                {
+                    m_MaleGenderPartsModelChanger[EquipmentArmorParts.Head_No_Elements].EquipEquipmentsModelByName(temp.m_HelmEquipmentItemName);
+                }
             }
         }
 
@@ -138,6 +161,14 @@ public class PlayerEquipmentManager : MonoBehaviour
         {
             m_AllGenderPartsModelChanger[All_GenderItemPartsType.Extra_Elf_Ear].EquipEquipmentsModelByName(temp.Extra_Elf_Ear);
 
+        }
+
+        if(temp.hideFacialFeatures == true)
+        {
+            foreach (GameObject go in facialFeatures)
+            {
+                go.SetActive(false);
+            }
         }
     }
 
@@ -205,7 +236,7 @@ public class PlayerEquipmentManager : MonoBehaviour
         {
             // 아이템 종류를 보고 넣어야 지.
 
-            HeadItemEquipModel();
+            HandItemEquipModel();
             player.playerStatsManager.physicalDamageAbsorptionHands = player.playerInventoryManager.currentHandEquipment.m_fPhysicalDefense;
             poisonResistance += player.playerInventoryManager.currentHandEquipment.m_fPoisonResistance;
             totalEquipmentLoad += player.playerInventoryManager.currentHandEquipment.m_fWeight;

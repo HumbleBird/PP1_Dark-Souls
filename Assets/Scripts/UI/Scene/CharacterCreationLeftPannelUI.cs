@@ -12,12 +12,29 @@ public class CharacterCreationLeftPannelUI : UI_Base
 
     public enum Buttons
     {
-        // Left Pannel
+        // Name
         NameBtn,
+
+        // Class
         ClassBtn,
+
+        // Hair
         HairBtn,
         HairColorBtn,
-        SkinBtn,
+        HairloomBtn,
+
+        // Face
+        EyelashesBtn,
+        EyebrowsBtn,
+        FacialHairBtn,
+        FacialMaskBtn,
+        FacialMaskColorBtn,
+        NoseBtn,
+
+        // Skin
+        SkinColorBtn,
+
+        // Game Start Button
         StartGameBtn,
     }
 
@@ -40,18 +57,26 @@ public class CharacterCreationLeftPannelUI : UI_Base
         m_NameBtn = GetButton((int)Buttons.NameBtn);
         m_ClassBtn = GetButton((int)Buttons.ClassBtn);
         m_HairBtn = GetButton((int)Buttons.HairBtn);
-        m_SkinBtn = GetButton((int)Buttons.SkinBtn);
         m_HairColorBtn = GetButton((int)Buttons.HairColorBtn);
         m_StartGameBtn = GetButton((int)Buttons.StartGameBtn);
 
         return true;
     }
 
+    HelmetHider hider;
+
     public void SetInfo()
     {
+         hider = FindObjectOfType<HelmetHider>();
         // Name
 
         // Class
+        m_ClassBtn.onClick.AddListener(() =>
+        {
+            m_CharacterCreationScreen.m_CharacterCreationMiddlePannelUI.m_goClasses.SetActive(true);
+            AllPannelButonInteractable(false);
+            //m_CharacterCreationScreen.m_CharacterCreationMiddlePannelUI.m_goFirstClass.GetComponent<Button>().Select();
+        });
 
         // Hair
         m_HairBtn.onClick.AddListener(() =>
@@ -59,15 +84,16 @@ public class CharacterCreationLeftPannelUI : UI_Base
             m_CharacterCreationScreen.m_CharacterCreationMiddlePannelUI.m_goHairStyles.SetActive(true);
             Camera.main.GetComponent<CharacterPreviewCamera>().ChangeCameraPreviewTransform(E_CharacterCreationPreviewCamera.Head);
             AllPannelButonInteractable(false);
+            hider.HideHelmet();
         });
 
         // HairColor
         m_HairColorBtn.onClick.AddListener(() =>
         {
             m_CharacterCreationScreen.m_CharacterCreationMiddlePannelUI.m_goHairColor.SetActive(true);
-            //m_CharacterCreationScreen.m_CharacterCreationMiddlePannelUI.m_HairColorBtn.Select();
             Camera.main.GetComponent<CharacterPreviewCamera>().ChangeCameraPreviewTransform(E_CharacterCreationPreviewCamera.Head);
             AllPannelButonInteractable(false);
+            hider.HideHelmet();
         });
 
 

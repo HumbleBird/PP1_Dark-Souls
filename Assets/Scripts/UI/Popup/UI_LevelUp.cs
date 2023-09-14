@@ -104,32 +104,32 @@ public class UI_LevelUp : MonoBehaviour
         projectedHealthPoiseLevelText.text = playerManager.playerStatsManager.poiseLevel.ToString();
 
 
-        strengthSlider.value = playerManager.playerStatsManager.strengthLevel;
-        strengthSlider.minValue = playerManager.playerStatsManager.strengthLevel;
+        strengthSlider.value = playerManager.playerStatsManager.m_iStrengthLevel;
+        strengthSlider.minValue = playerManager.playerStatsManager.m_iStrengthLevel;
         strengthSlider.maxValue = 99;
-        currentStrengthLevelText.text = playerManager.playerStatsManager.strengthLevel.ToString();
-        projectedStrengthLevelText.text = playerManager.playerStatsManager.strengthLevel.ToString();
+        currentStrengthLevelText.text = playerManager.playerStatsManager.m_iStrengthLevel.ToString();
+        projectedStrengthLevelText.text = playerManager.playerStatsManager.m_iStrengthLevel.ToString();
 
 
-        dexteritySlider.value = playerManager.playerStatsManager.dexterityLevel;
-        dexteritySlider.minValue = playerManager.playerStatsManager.dexterityLevel;
+        dexteritySlider.value = playerManager.playerStatsManager.m_iDexterityLevel;
+        dexteritySlider.minValue = playerManager.playerStatsManager.m_iDexterityLevel;
         dexteritySlider.maxValue = 99;
-        currentDexterityLevelText.text = playerManager.playerStatsManager.dexterityLevel.ToString();
-        projectedDexterityLevelText.text = playerManager.playerStatsManager.dexterityLevel.ToString();
+        currentDexterityLevelText.text = playerManager.playerStatsManager.m_iDexterityLevel.ToString();
+        projectedDexterityLevelText.text = playerManager.playerStatsManager.m_iDexterityLevel.ToString();
 
 
-        faithSlider.value = playerManager.playerStatsManager.intelligenceLevel;
-        faithSlider.minValue = playerManager.playerStatsManager.intelligenceLevel;
+        faithSlider.value = playerManager.playerStatsManager.m_iIntelligenceLevel;
+        faithSlider.minValue = playerManager.playerStatsManager.m_iIntelligenceLevel;
         faithSlider.maxValue = 99;
-        currentFaithLevelText.text = playerManager.playerStatsManager.faithLevel.ToString();
-        projectedFaithLevelText.text = playerManager.playerStatsManager.faithLevel.ToString();
+        currentFaithLevelText.text = playerManager.playerStatsManager.m_iFaithLevel.ToString();
+        projectedFaithLevelText.text = playerManager.playerStatsManager.m_iFaithLevel.ToString();
 
 
-        intelligenceSlider.value = playerManager.playerStatsManager.faithLevel;
-        intelligenceSlider.minValue = playerManager.playerStatsManager.faithLevel;
+        intelligenceSlider.value = playerManager.playerStatsManager.m_iFaithLevel;
+        intelligenceSlider.minValue = playerManager.playerStatsManager.m_iFaithLevel;
         intelligenceSlider.maxValue = 99;
-        currentIntelligenceLevelText.text = playerManager.playerStatsManager.intelligenceLevel.ToString();
-        projectedIntelligenceLevelText.text = playerManager.playerStatsManager.intelligenceLevel.ToString();
+        currentIntelligenceLevelText.text = playerManager.playerStatsManager.m_iIntelligenceLevel.ToString();
+        projectedIntelligenceLevelText.text = playerManager.playerStatsManager.m_iIntelligenceLevel.ToString();
 
         currentSoulsText.text = playerManager.playerStatsManager.currentSoulCount.ToString();
 
@@ -158,10 +158,10 @@ public class UI_LevelUp : MonoBehaviour
         playerManager.playerStatsManager.staminaLevel = Mathf.RoundToInt(staminaSlider.value);
         playerManager.playerStatsManager.focusLevel = Mathf.RoundToInt(focusSlider.value);
         playerManager.playerStatsManager.poiseLevel = Mathf.RoundToInt(healthPoiseSlider.value);
-        playerManager.playerStatsManager.strengthLevel = Mathf.RoundToInt(strengthSlider.value);
-        playerManager.playerStatsManager.dexterityLevel = Mathf.RoundToInt(dexteritySlider.value);
-        playerManager.playerStatsManager.intelligenceLevel = Mathf.RoundToInt(faithSlider.value);
-        playerManager.playerStatsManager.faithLevel = Mathf.RoundToInt(intelligenceSlider.value);
+        playerManager.playerStatsManager.m_iStrengthLevel = Mathf.RoundToInt(strengthSlider.value);
+        playerManager.playerStatsManager.m_iDexterityLevel = Mathf.RoundToInt(dexteritySlider.value);
+        playerManager.playerStatsManager.m_iIntelligenceLevel = Mathf.RoundToInt(faithSlider.value);
+        playerManager.playerStatsManager.m_iFaithLevel = Mathf.RoundToInt(intelligenceSlider.value);
 
         playerManager.playerStatsManager.maxHealth = playerManager.playerStatsManager.SetMaxHealthFromHealthLevel();
         playerManager.playerStatsManager.maxStamina = playerManager.playerStatsManager.SetMaxStaminaFromStaminaLevel();
@@ -193,10 +193,10 @@ public class UI_LevelUp : MonoBehaviour
         projectedPlayerLevel = projectedPlayerLevel + Mathf.RoundToInt(staminaSlider.value) - playerManager.playerStatsManager.staminaLevel;
         projectedPlayerLevel = projectedPlayerLevel + Mathf.RoundToInt(focusSlider.value) - playerManager.playerStatsManager.focusLevel;
         projectedPlayerLevel = projectedPlayerLevel + Mathf.RoundToInt(healthPoiseSlider.value) - playerManager.playerStatsManager.poiseLevel;
-        projectedPlayerLevel = projectedPlayerLevel + Mathf.RoundToInt(strengthSlider.value) - playerManager.playerStatsManager.strengthLevel;
-        projectedPlayerLevel = projectedPlayerLevel + Mathf.RoundToInt(dexteritySlider.value) - playerManager.playerStatsManager.dexterityLevel;
-        projectedPlayerLevel = projectedPlayerLevel + Mathf.RoundToInt(faithSlider.value) - playerManager.playerStatsManager.intelligenceLevel;
-        projectedPlayerLevel = projectedPlayerLevel + Mathf.RoundToInt(intelligenceSlider.value) - playerManager.playerStatsManager.faithLevel;
+        projectedPlayerLevel = projectedPlayerLevel + Mathf.RoundToInt(strengthSlider.value) - playerManager.playerStatsManager.m_iStrengthLevel;
+        projectedPlayerLevel = projectedPlayerLevel + Mathf.RoundToInt(dexteritySlider.value) - playerManager.playerStatsManager.m_iDexterityLevel;
+        projectedPlayerLevel = projectedPlayerLevel + Mathf.RoundToInt(faithSlider.value) - playerManager.playerStatsManager.m_iIntelligenceLevel;
+        projectedPlayerLevel = projectedPlayerLevel + Mathf.RoundToInt(intelligenceSlider.value) - playerManager.playerStatsManager.m_iFaithLevel;
         projectedPlayerLevelText.text = projectedPlayerLevel.ToString();
 
         CalculateSoulCostToLevelUp();
