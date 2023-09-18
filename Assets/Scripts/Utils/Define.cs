@@ -310,6 +310,13 @@ public class Define
     #endregion
 
     #region Other
+    public enum ExternalFeaturesColorParts
+    {
+        Hair,
+        FacialMask,
+        Skin
+    }
+
     public enum E_Class
     {
         Knight = 0,

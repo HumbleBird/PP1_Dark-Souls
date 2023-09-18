@@ -30,6 +30,15 @@ public class CharacterInventoryManager : MonoBehaviour
     public WeaponItem[] weaponsInRightHandSlots = new WeaponItem[3];
     public WeaponItem[] weaponsInLeftHandSlots = new WeaponItem[3];
 
+    [Header("Current External Features")]
+    public GameObject currentHairStyle;
+    public GameObject currentHairItem;
+    public GameObject currentEyelashesBtn;
+    public GameObject currentEyebrows;
+    public GameObject currentFacialHair;
+    public GameObject currentFacialMask;
+    public GameObject currentNose;
+
     public int currentRightWeaponIndex = 0;
     public int currentLeftWeaponIndex = 0;
 

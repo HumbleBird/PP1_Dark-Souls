@@ -15,7 +15,7 @@ public class HelmetHider : MonoBehaviour
 
     public void HideHelmet()
     {
-        if (player.playerInventoryManager.currentHelmetEquipment != null)
+        if (player.playerInventoryManager.currentHelmetEquipment != null && player.playerInventoryManager.currentHelmetEquipment != player.playerEquipmentManager.Naked_HelmetEquipment)
         {
             helmet = player.playerInventoryManager.currentHelmetEquipment;
             player.playerInventoryManager.currentHelmetEquipment = null;
@@ -26,11 +26,11 @@ public class HelmetHider : MonoBehaviour
 
     public void UnHiderHelmet()
     {
-        if(helmet == null)
+        if(helmet != null && helmet != player.playerEquipmentManager.Naked_HelmetEquipment)
         {
             player.playerInventoryManager.currentHelmetEquipment = helmet;
             player.playerEquipmentManager.EquipAllEquipmentModel();
-            helmet = null;
+            //helmet = null;
         }
     }
 

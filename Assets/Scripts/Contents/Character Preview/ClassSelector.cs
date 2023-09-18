@@ -45,16 +45,9 @@ public class ClassSelector : MonoBehaviour
         player.playerStatsManager.m_iFaithLevel        = classStats[classChosen].m_iFaithLevel       ; 
         player.playerStatsManager.m_iLuckLevel         = classStats[classChosen].m_iLuckLevel           ;
 
-        m_iPlayerLevelText.text = player.playerStatsManager.playerLevel.ToString();
-        m_iVigorLevelText       .text = player.playerStatsManager.m_iVigorLevel       .ToString();
-        m_iAttunementLevelText  .text = player.playerStatsManager.m_iAttunementLevel  .ToString();
-        m_iEnduranceLevelText   .text = player.playerStatsManager.m_iEnduranceLevel   .ToString();
-        m_iVitalityLevelText    .text = player.playerStatsManager.m_iVitalityLevel    .ToString();
-        m_iStrengthLevelText    .text = player.playerStatsManager.m_iStrengthLevel    .ToString();
-        m_iDexterityLevelText   .text = player.playerStatsManager.m_iDexterityLevel   .ToString();
-        m_iIntelligenceLevelText.text = player.playerStatsManager.m_iIntelligenceLevel.ToString();
-        m_iFaithLevelText       .text = player.playerStatsManager.m_iFaithLevel       .ToString();
-        m_iLuckLevelText        .text = player.playerStatsManager.m_iLuckLevel.ToString();
+        CharacterCreationScreen characterCreationScreen = FindObjectOfType<CharacterCreationScreen>();
+        characterCreationScreen.m_CharacterCreationMiddlePannelUI.classChosen = classChosen;
+        characterCreationScreen.m_CharacterCreationMiddlePannelUI.RefreshUI();
 
         classDescription.text = classStats[classChosen].m_sClassDecription;
     }

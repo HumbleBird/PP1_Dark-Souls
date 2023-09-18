@@ -37,13 +37,14 @@ public class HairStylesSub : UI_Base
             // 두 번째 선택지부터
             if (count > 0)
             {
-                player.playerEquipmentManager.m_AllGenderPartsModelChanger[Define.All_GenderItemPartsType.Hair].EquipEquipmentsModelByName("Chr_Hair_" + count.ToString("00"));
-
+                GameObject go =  player.playerEquipmentManager.m_AllGenderPartsModelChanger[Define.All_GenderItemPartsType.Hair].EquipEquipmentsModelByName("Chr_Hair_" + count.ToString("00"));
+                player.playerInventoryManager.currentHairStyle = go;
                Camera.main.GetComponent<CharacterPreviewCamera>().ChangeCameraPreviewTransform(E_CharacterCreationPreviewCamera.None);
             }
             // 첫 번째 선택지
             else
             {
+                player.playerInventoryManager.currentHairStyle = null;
             }
 
             characterCreationScreen.m_CharacterCreationLeftPannelUI.m_HairBtn.Select();

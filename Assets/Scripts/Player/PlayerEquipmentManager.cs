@@ -105,6 +105,13 @@ public class PlayerEquipmentManager : MonoBehaviour
             {
                 go.SetActive(true);
             }
+
+            // TODO ¾ó±¼ ¿ÜÇü Æ¯Â¡µé ÀåÂø
+
+            if(player.playerInventoryManager.currentHairStyle != null)
+            {
+                m_AllGenderPartsModelChanger[All_GenderItemPartsType.Hair].EquipEquipmentsModelByName(player.playerInventoryManager.currentHairStyle.name);
+            }
         }
 
     }
@@ -170,6 +177,7 @@ public class PlayerEquipmentManager : MonoBehaviour
                 go.SetActive(false);
             }
         }
+
     }
 
     private void ChestItemEquip()

@@ -21,7 +21,7 @@ public class CharacterCreationLeftPannelUI : UI_Base
         // Hair
         HairBtn,
         HairColorBtn,
-        HairloomBtn,
+        HairItemBtn,
 
         // Face
         EyelashesBtn,
@@ -38,12 +38,32 @@ public class CharacterCreationLeftPannelUI : UI_Base
         StartGameBtn,
     }
 
+        // Name
     public Button m_NameBtn;
+
+        // Class
     public Button m_ClassBtn;
+
+        // Hair
     public Button m_HairBtn;
     public Button m_HairColorBtn;
-    public Button m_SkinBtn;
+    public Button m_HairItemBtn;
+
+        // Face
+    public Button EyelashesBtn;
+    public Button EyebrowsBtn;
+    public Button FacialHairBtn;
+    public Button FacialMaskBtn;
+    public Button FacialMaskColorBtn;
+    public Button NoseBtn;
+
+        // Skin
+    public Button SkinColorBtn;
+
+        // Game Start Button
     public Button m_StartGameBtn;
+
+    HelmetHider hider;
 
     public override bool Init()
     {
@@ -51,25 +71,57 @@ public class CharacterCreationLeftPannelUI : UI_Base
             return false;
 
         m_CharacterCreationScreen = GetComponentInParent<CharacterCreationScreen>();
+        hider = FindObjectOfType<HelmetHider>();
 
         BindButton(typeof(Buttons));
 
-        m_NameBtn = GetButton((int)Buttons.NameBtn);
-        m_ClassBtn = GetButton((int)Buttons.ClassBtn);
-        m_HairBtn = GetButton((int)Buttons.HairBtn);
-        m_HairColorBtn = GetButton((int)Buttons.HairColorBtn);
-        m_StartGameBtn = GetButton((int)Buttons.StartGameBtn);
+        // Name
+        m_NameBtn               = GetButton((int)Buttons.NameBtn);
+
+        // Class
+        m_ClassBtn              = GetButton((int)Buttons.ClassBtn);
+
+        // Hair
+        m_HairBtn               = GetButton((int)Buttons.HairBtn);
+        m_HairColorBtn              = GetButton((int)Buttons.HairColorBtn);
+        m_HairItemBtn = GetButton((int)Buttons.HairItemBtn);
+
+        // Face
+        EyelashesBtn              = GetButton((int)Buttons.EyelashesBtn);
+        EyebrowsBtn              = GetButton((int)Buttons.EyebrowsBtn);
+        FacialHairBtn            = GetButton((int)Buttons.FacialHairBtn);
+        FacialMaskBtn           = GetButton((int)Buttons.FacialMaskBtn);
+        FacialMaskColorBtn          = GetButton((int)Buttons.FacialMaskColorBtn);
+        NoseBtn                  = GetButton((int)Buttons.NoseBtn);
+
+        // Skin
+        SkinColorBtn              = GetButton((int)Buttons.SkinColorBtn);
+
+        // Game Start Button
+        m_StartGameBtn          = GetButton((int)Buttons.StartGameBtn);
 
         return true;
     }
 
-    HelmetHider hider;
 
     public void SetInfo()
     {
-         hider = FindObjectOfType<HelmetHider>();
-        // Name
+        NameButtonFunctionAdd();
+        ClassButtonFunctionAdd();
+        HairButtonFunctionAdd();
+        FaceButtonFunctionAdd();
+        SkinButtonFunctionAdd();
+        GameStartButtonFunctionAdd();
+    }
 
+    #region ButtonFuncitonAdd
+    private void NameButtonFunctionAdd()
+    {
+
+    }
+
+    private void ClassButtonFunctionAdd()
+    {
         // Class
         m_ClassBtn.onClick.AddListener(() =>
         {
@@ -77,7 +129,10 @@ public class CharacterCreationLeftPannelUI : UI_Base
             AllPannelButonInteractable(false);
             //m_CharacterCreationScreen.m_CharacterCreationMiddlePannelUI.m_goFirstClass.GetComponent<Button>().Select();
         });
+    }
 
+    private void HairButtonFunctionAdd()
+    {
         // Hair
         m_HairBtn.onClick.AddListener(() =>
         {
@@ -95,19 +150,83 @@ public class CharacterCreationLeftPannelUI : UI_Base
             AllPannelButonInteractable(false);
             hider.HideHelmet();
         });
-
-
-        // Skin
-
     }
+
+    private void FaceButtonFunctionAdd()
+    {
+        EyelashesBtn.onClick.AddListener(() =>
+        {
+            AllPannelButonInteractable(false);
+        });
+
+        EyebrowsBtn.onClick.AddListener(() =>
+        {
+            AllPannelButonInteractable(false);
+        });
+
+        FacialHairBtn.onClick.AddListener(() =>
+        {
+            AllPannelButonInteractable(false);
+        });
+
+        FacialMaskBtn.onClick.AddListener(() =>
+        {
+            AllPannelButonInteractable(false);
+        });
+
+        FacialMaskColorBtn.onClick.AddListener(() =>
+        {
+            AllPannelButonInteractable(false);
+        });
+
+        NoseBtn.onClick.AddListener(() =>
+        {
+            AllPannelButonInteractable(false);
+        });
+    }
+
+    private void SkinButtonFunctionAdd()
+    {
+        SkinColorBtn.onClick.AddListener(() =>
+        {
+            AllPannelButonInteractable(false);
+        });
+    }
+
+    private void GameStartButtonFunctionAdd()
+    {
+        m_StartGameBtn.onClick.AddListener(() =>
+        {
+            AllPannelButonInteractable(false);
+        });
+    }
+
+    #endregion
 
     public void AllPannelButonInteractable(bool isTrue)
     {
+        // Name
         m_NameBtn.interactable = isTrue;
+
+        // Class
         m_ClassBtn.interactable = isTrue;
+
+        // Hair
         m_HairBtn.interactable = isTrue;
-        m_SkinBtn.interactable = isTrue;
         m_HairColorBtn.interactable = isTrue;
+
+        // Face
+        EyelashesBtn.interactable = isTrue;
+        EyebrowsBtn.interactable = isTrue;
+        FacialHairBtn.interactable = isTrue;
+        FacialMaskBtn.interactable = isTrue;
+        FacialMaskColorBtn.interactable = isTrue;
+        NoseBtn.interactable = isTrue;
+
+        // Skin
+        SkinColorBtn.interactable = isTrue;
+
+        // Game Start Button
         m_StartGameBtn.interactable = isTrue;
     }
 
