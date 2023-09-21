@@ -5,7 +5,7 @@ using static Define;
 
 public class GenderPartsModelChanger : ModelChangerManager
 {
-    public EquipmentArmorParts m_EEquipmentArmorParts;
+    public E_SingleGenderEquipmentArmorParts m_EEquipmentArmorParts;
     public bool m_bisFemalePart = true;
 
     protected override void Start()

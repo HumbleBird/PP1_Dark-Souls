@@ -11,8 +11,8 @@ public class PlayerEquipmentManager : MonoBehaviour
 
     [Header("Equipment Model Changers")]
     public Dictionary<All_GenderItemPartsType, AllGenderPartModelChanger> m_AllGenderPartsModelChanger = new Dictionary<All_GenderItemPartsType, AllGenderPartModelChanger>();
-    public Dictionary<EquipmentArmorParts, GenderPartsModelChanger> m_FemaleGenderPartsModelChanger = new Dictionary<EquipmentArmorParts, GenderPartsModelChanger>();
-    public Dictionary<EquipmentArmorParts, GenderPartsModelChanger> m_MaleGenderPartsModelChanger = new Dictionary<EquipmentArmorParts, GenderPartsModelChanger>();
+    public Dictionary<E_SingleGenderEquipmentArmorParts, GenderPartsModelChanger> m_FemaleGenderPartsModelChanger = new Dictionary<E_SingleGenderEquipmentArmorParts, GenderPartsModelChanger>();
+    public Dictionary<E_SingleGenderEquipmentArmorParts, GenderPartsModelChanger> m_MaleGenderPartsModelChanger = new Dictionary<E_SingleGenderEquipmentArmorParts, GenderPartsModelChanger>();
 
     [Header("Naked Armor Equipment")]
     public HelmEquipmentItem Naked_HelmetEquipment;
@@ -35,6 +35,8 @@ public class PlayerEquipmentManager : MonoBehaviour
     private void Start()
     {
         player.characterStatsManager.CalculateAndSetMaxEquipload();
+
+        Naked_HelmetEquipment.m_HelmEquipmentItemName = "0";
     }
 
     public void EquipAllEquipmentModel()
@@ -93,12 +95,14 @@ public class PlayerEquipmentManager : MonoBehaviour
         {
             if (m_bIsFemale)
             {
-                m_FemaleGenderPartsModelChanger[EquipmentArmorParts.Head_All_Elements].EquipEquipmentsModelByName(Naked_HelmetEquipment.m_HelmEquipmentItemName);
+                m_FemaleGenderPartsModelChanger[E_SingleGenderEquipmentArmorParts.Head].EquipEquipmentsModelByName(Naked_HelmetEquipment.m_HelmEquipmentItemName);
             }
             else
             {
-                m_MaleGenderPartsModelChanger[EquipmentArmorParts.Head_All_Elements].EquipEquipmentsModelByName(Naked_HelmetEquipment.m_HelmEquipmentItemName);
+                m_MaleGenderPartsModelChanger[E_SingleGenderEquipmentArmorParts.Head].EquipEquipmentsModelByName(Naked_HelmetEquipment.m_HelmEquipmentItemName);
             }
+
+
             player.playerStatsManager.physicalDamageAbsorptionHead = 0;
 
             foreach (GameObject go in facialFeatures)
@@ -106,12 +110,72 @@ public class PlayerEquipmentManager : MonoBehaviour
                 go.SetActive(true);
             }
 
-            // TODO ¾ó±¼ ¿ÜÇü Æ¯Â¡µé ÀåÂø
+            // ¾ó±¼ ¿ÜÇü Æ¯Â¡µé ÀåÂø
 
+            // Çì¾î ½ºÅ¸ÀÏ
             if(player.playerInventoryManager.currentHairStyle != null)
             {
                 m_AllGenderPartsModelChanger[All_GenderItemPartsType.Hair].EquipEquipmentsModelByName(player.playerInventoryManager.currentHairStyle.name);
             }
+
+            if(player.playerInventoryManager.currentHairItem != null)
+            {
+
+                m_AllGenderPartsModelChanger[All_GenderItemPartsType.HelmetAttachment].EquipEquipmentsModelByName(player.playerInventoryManager.currentHairItem.name);
+            }
+
+            // ¼Ó´«½ç
+            //if(player.playerInventoryManager.currentEyelashesBtn != null)
+            //{
+            //    if (m_bIsFemale)
+            //    {
+            //        m_FemaleGenderPartsModelChanger[EquipmentArmorParts.Head].EquipEquipmentsModelByName(player.playerInventoryManager.currentEyelashesBtn.name);
+            //    }
+            //    else
+            //    {
+            //        m_MaleGenderPartsModelChanger[EquipmentArmorParts.Head].EquipEquipmentsModelByName(player.playerInventoryManager.currentEyelashesBtn.name);
+            //    }
+            //}
+
+            // ´«½ç
+            if(player.playerInventoryManager.currentEyebrows != null)
+            {
+
+                if (m_bIsFemale)
+                {
+                    m_FemaleGenderPartsModelChanger[E_SingleGenderEquipmentArmorParts.Eyebrow].EquipEquipmentsModelByName(player.playerInventoryManager.currentEyebrows.name);
+                }
+                else
+                {
+                    m_MaleGenderPartsModelChanger[E_SingleGenderEquipmentArmorParts.Eyebrow].EquipEquipmentsModelByName(player.playerInventoryManager.currentEyebrows.name);
+                }
+            }
+
+            // Äà¼ö¿°
+            if(player.playerInventoryManager.currentFacialHair != null)
+            {
+                if (m_bIsFemale)
+                {
+                    m_FemaleGenderPartsModelChanger[E_SingleGenderEquipmentArmorParts.FacialHair].EquipEquipmentsModelByName(player.playerInventoryManager.currentFacialHair.name);
+                }
+                else
+                {
+                    m_MaleGenderPartsModelChanger[E_SingleGenderEquipmentArmorParts.FacialHair].EquipEquipmentsModelByName(player.playerInventoryManager.currentFacialHair.name);
+                }
+            }
+
+            // ÄÚ
+            //if(player.playerInventoryManager.currentNose != null)
+            //{
+            //    if (m_bIsFemale)
+            //    {
+            //        m_FemaleGenderPartsModelChanger[EquipmentArmorParts.Head].EquipEquipmentsModelByName(player.playerInventoryManager.currentNose.name);
+            //    }
+            //    else
+            //    {
+            //        m_MaleGenderPartsModelChanger[EquipmentArmorParts.Head].EquipEquipmentsModelByName(player.playerInventoryManager.currentNose.name);
+            //    }
+            //}
         }
 
     }
@@ -121,52 +185,52 @@ public class PlayerEquipmentManager : MonoBehaviour
         // all gender Ã³¸®
         HelmEquipmentItem temp = player.playerInventoryManager.currentHelmetEquipment;
 
-        if (temp.HeadCoverings_Base_Hair != null)
+        if (temp.m_HeadCoverings_Base_Hair != null)
         {
-            m_AllGenderPartsModelChanger[All_GenderItemPartsType.HeadCoverings_Base_Hair].EquipEquipmentsModelByName(temp.HeadCoverings_Base_Hair);
+            m_AllGenderPartsModelChanger[All_GenderItemPartsType.HeadCoverings_Base_Hair].EquipEquipmentsModelByName(temp.m_HeadCoverings_Base_Hair);
         }
-        if (temp.HeadCoverings_No_FacialHair != null)
+        if (temp.m_HeadCoverings_No_FacialHair != null)
         {
-            m_AllGenderPartsModelChanger[All_GenderItemPartsType.HeadCoverings_No_FacialHair].EquipEquipmentsModelByName(temp.HeadCoverings_No_FacialHair);
+            m_AllGenderPartsModelChanger[All_GenderItemPartsType.HeadCoverings_No_FacialHair].EquipEquipmentsModelByName(temp.m_HeadCoverings_No_FacialHair);
         }
-        if (temp.HeadCoverings_No_Hair != null)
+        if (temp.m_HeadCoverings_No_Hair != null)
         {
-            m_AllGenderPartsModelChanger[All_GenderItemPartsType.HeadCoverings_No_Hair].EquipEquipmentsModelByName(temp.HeadCoverings_No_Hair);
+            m_AllGenderPartsModelChanger[All_GenderItemPartsType.HeadCoverings_No_Hair].EquipEquipmentsModelByName(temp.m_HeadCoverings_No_Hair);
         }
-        if (temp.Head_Attachment_Helmet != null)
+        if (temp.m_Head_Attachment_Helmet != null)
         {
-            m_AllGenderPartsModelChanger[All_GenderItemPartsType.Head_Attachment_Helmet].EquipEquipmentsModelByName(temp.Head_Attachment_Helmet);
+            m_AllGenderPartsModelChanger[All_GenderItemPartsType.HelmetAttachment].EquipEquipmentsModelByName(temp.m_Head_Attachment_Helmet);
         }
 
-        if (temp.m_HelmEquipmentItemName != null)
+        if (temp.m_HelmEquipmentItemName != null || temp.m_HelmEquipmentItemName != null)
         {
             if (m_bIsFemale)
             {
                 if(temp == player.playerEquipmentManager.Naked_HelmetEquipment)
                 {
-                    m_FemaleGenderPartsModelChanger[EquipmentArmorParts.Head_All_Elements].EquipEquipmentsModelByName(temp.m_HelmEquipmentItemName);
+                    m_FemaleGenderPartsModelChanger[E_SingleGenderEquipmentArmorParts.Head].EquipEquipmentsModelByName(temp.m_HelmEquipmentItemName);
                 }
                 else
                 {
-                    m_FemaleGenderPartsModelChanger[EquipmentArmorParts.Head_No_Elements].EquipEquipmentsModelByName(temp.m_HelmEquipmentItemName);
+                    m_FemaleGenderPartsModelChanger[E_SingleGenderEquipmentArmorParts.Head_No_Elements].EquipEquipmentsModelByName(temp.m_HelmEquipmentItemName);
                 }
             }
             else
             {
                 if (temp == player.playerEquipmentManager.Naked_HelmetEquipment)
                 {
-                    m_MaleGenderPartsModelChanger[EquipmentArmorParts.Head_All_Elements].EquipEquipmentsModelByName(temp.m_HelmEquipmentItemName);
+                    m_MaleGenderPartsModelChanger[E_SingleGenderEquipmentArmorParts.Head].EquipEquipmentsModelByName(temp.m_HelmEquipmentItemName);
                 }
                 else
                 {
-                    m_MaleGenderPartsModelChanger[EquipmentArmorParts.Head_No_Elements].EquipEquipmentsModelByName(temp.m_HelmEquipmentItemName);
+                    m_MaleGenderPartsModelChanger[E_SingleGenderEquipmentArmorParts.Head_No_Elements].EquipEquipmentsModelByName(temp.m_HelmEquipmentItemName);
                 }
             }
         }
 
-        if(temp.Extra_Elf_Ear != null)
+        if(temp.m_Extra_Elf_Ear != null)
         {
-            m_AllGenderPartsModelChanger[All_GenderItemPartsType.Extra_Elf_Ear].EquipEquipmentsModelByName(temp.Extra_Elf_Ear);
+            m_AllGenderPartsModelChanger[All_GenderItemPartsType.Extra_Elf_Ear].EquipEquipmentsModelByName(temp.m_Extra_Elf_Ear);
 
         }
 
@@ -175,6 +239,13 @@ public class PlayerEquipmentManager : MonoBehaviour
             foreach (GameObject go in facialFeatures)
             {
                 go.SetActive(false);
+            }
+        }
+        else
+        {
+            foreach (GameObject go in facialFeatures)
+            {
+                go.SetActive(true);
             }
         }
 
@@ -195,12 +266,12 @@ public class PlayerEquipmentManager : MonoBehaviour
         {
             if (m_bIsFemale)
             {
-                m_FemaleGenderPartsModelChanger[EquipmentArmorParts.Torso].EquipEquipmentsModelByName(Naked_TorsoEquipment.m_TorsoEquipmentItemName);
+                m_FemaleGenderPartsModelChanger[E_SingleGenderEquipmentArmorParts.Torso].EquipEquipmentsModelByName(Naked_TorsoEquipment.m_TorsoEquipmentItemName);
 
             }
             else
             {
-                m_MaleGenderPartsModelChanger[EquipmentArmorParts.Torso].EquipEquipmentsModelByName(Naked_TorsoEquipment.m_TorsoEquipmentItemName);
+                m_MaleGenderPartsModelChanger[E_SingleGenderEquipmentArmorParts.Torso].EquipEquipmentsModelByName(Naked_TorsoEquipment.m_TorsoEquipmentItemName);
             }
 
             player.playerStatsManager.physicalDamageAbsorptionBody = 0;
@@ -212,28 +283,28 @@ public class PlayerEquipmentManager : MonoBehaviour
         // all gender Ã³¸®
         TorsoEquipmentItem temp = player.playerInventoryManager.currentTorsoEquipment;
 
-        if (temp.Back_Attachment != null)
+        if (temp.m_Back_Attachment != null)
         {
-            m_AllGenderPartsModelChanger[All_GenderItemPartsType.Back_Attachment].EquipEquipmentsModelByName(temp.Back_Attachment);
+            m_AllGenderPartsModelChanger[All_GenderItemPartsType.Back_Attachment].EquipEquipmentsModelByName(temp.m_Back_Attachment);
         }
-        if (temp.Shoulder_Attachment_Right != null)
+        if (temp.m_Shoulder_Attachment_Right != null)
         {
-            m_AllGenderPartsModelChanger[All_GenderItemPartsType.Shoulder_Attachment_Right].EquipEquipmentsModelByName(temp.Shoulder_Attachment_Right);
+            m_AllGenderPartsModelChanger[All_GenderItemPartsType.Shoulder_Attachment_Right].EquipEquipmentsModelByName(temp.m_Shoulder_Attachment_Right);
         }
-        if (temp.Shoulder_Attachment_Left != null)
+        if (temp.m_Shoulder_Attachment_Left != null)
         {
-            m_AllGenderPartsModelChanger[All_GenderItemPartsType.Shoulder_Attachment_Left].EquipEquipmentsModelByName(temp.Shoulder_Attachment_Left);
+            m_AllGenderPartsModelChanger[All_GenderItemPartsType.Shoulder_Attachment_Left].EquipEquipmentsModelByName(temp.m_Shoulder_Attachment_Left);
         }
 
         if (temp.m_TorsoEquipmentItemName != null)
         {
             if (m_bIsFemale)
             {
-                m_FemaleGenderPartsModelChanger[EquipmentArmorParts.Torso].EquipEquipmentsModelByName(temp.m_TorsoEquipmentItemName);
+                m_FemaleGenderPartsModelChanger[E_SingleGenderEquipmentArmorParts.Torso].EquipEquipmentsModelByName(temp.m_TorsoEquipmentItemName);
             }
             else
             {
-                m_MaleGenderPartsModelChanger[EquipmentArmorParts.Torso].EquipEquipmentsModelByName(temp.m_TorsoEquipmentItemName);
+                m_MaleGenderPartsModelChanger[E_SingleGenderEquipmentArmorParts.Torso].EquipEquipmentsModelByName(temp.m_TorsoEquipmentItemName);
             }
         }
     }
@@ -253,21 +324,21 @@ public class PlayerEquipmentManager : MonoBehaviour
         {
             if (m_bIsFemale)
             {
-                m_FemaleGenderPartsModelChanger[EquipmentArmorParts.Arm_Upper_Right].EquipEquipmentsModelByName(player.playerInventoryManager.currentHandEquipment.m_Arm_Upper_RightName);
-                m_FemaleGenderPartsModelChanger[EquipmentArmorParts.Arm_Upper_Left].EquipEquipmentsModelByName(player.playerInventoryManager.currentHandEquipment.m_Arm_Upper_LeftName);
-                m_FemaleGenderPartsModelChanger[EquipmentArmorParts.Arm_Lower_Right].EquipEquipmentsModelByName(player.playerInventoryManager.currentHandEquipment.m_Arm_Lower_RightName);
-                m_FemaleGenderPartsModelChanger[EquipmentArmorParts.Arm_Lower_Left].EquipEquipmentsModelByName(player.playerInventoryManager.currentHandEquipment.m_Arm_Lower_LeftName);
-                m_FemaleGenderPartsModelChanger[EquipmentArmorParts.Hand_Right].EquipEquipmentsModelByName(player.playerInventoryManager.currentHandEquipment.m_Hand_RightName);
-                m_FemaleGenderPartsModelChanger[EquipmentArmorParts.Hand_Left].EquipEquipmentsModelByName(player.playerInventoryManager.currentHandEquipment.m_Hand_LeftName);
+                m_FemaleGenderPartsModelChanger[E_SingleGenderEquipmentArmorParts.Arm_Upper_Right].EquipEquipmentsModelByName(Naked_HandEquipment.m_Arm_Upper_RightName);
+                m_FemaleGenderPartsModelChanger[E_SingleGenderEquipmentArmorParts.Arm_Upper_Left].EquipEquipmentsModelByName(Naked_HandEquipment.m_Arm_Upper_LeftName);
+                m_FemaleGenderPartsModelChanger[E_SingleGenderEquipmentArmorParts.Arm_Lower_Right].EquipEquipmentsModelByName(Naked_HandEquipment.m_Arm_Lower_RightName);
+                m_FemaleGenderPartsModelChanger[E_SingleGenderEquipmentArmorParts.Arm_Lower_Left].EquipEquipmentsModelByName(Naked_HandEquipment.m_Arm_Lower_LeftName);
+                m_FemaleGenderPartsModelChanger[E_SingleGenderEquipmentArmorParts.Hand_Right].EquipEquipmentsModelByName(Naked_HandEquipment.m_Hand_RightName);
+                m_FemaleGenderPartsModelChanger[E_SingleGenderEquipmentArmorParts.Hand_Left].EquipEquipmentsModelByName(Naked_HandEquipment.m_Hand_LeftName);
             }
             else
             {
-                m_MaleGenderPartsModelChanger[EquipmentArmorParts.Arm_Upper_Right].EquipEquipmentsModelByName(player.playerInventoryManager.currentHandEquipment.m_Arm_Upper_RightName);
-                m_MaleGenderPartsModelChanger[EquipmentArmorParts.Arm_Upper_Left].EquipEquipmentsModelByName(player.playerInventoryManager.currentHandEquipment.m_Arm_Upper_LeftName);
-                m_MaleGenderPartsModelChanger[EquipmentArmorParts.Arm_Lower_Right].EquipEquipmentsModelByName(player.playerInventoryManager.currentHandEquipment.m_Arm_Lower_RightName);
-                m_MaleGenderPartsModelChanger[EquipmentArmorParts.Arm_Lower_Left].EquipEquipmentsModelByName(player.playerInventoryManager.currentHandEquipment.m_Arm_Lower_LeftName);
-                m_MaleGenderPartsModelChanger[EquipmentArmorParts.Hand_Right].EquipEquipmentsModelByName(player.playerInventoryManager.currentHandEquipment.m_Hand_RightName);
-                m_MaleGenderPartsModelChanger[EquipmentArmorParts.Hand_Left].EquipEquipmentsModelByName(player.playerInventoryManager.currentHandEquipment.m_Hand_LeftName);
+                m_MaleGenderPartsModelChanger[E_SingleGenderEquipmentArmorParts.Arm_Upper_Right].EquipEquipmentsModelByName(Naked_HandEquipment.m_Arm_Upper_RightName);
+                m_MaleGenderPartsModelChanger[E_SingleGenderEquipmentArmorParts.Arm_Upper_Left].EquipEquipmentsModelByName(Naked_HandEquipment.m_Arm_Upper_LeftName);
+                m_MaleGenderPartsModelChanger[E_SingleGenderEquipmentArmorParts.Arm_Lower_Right].EquipEquipmentsModelByName(Naked_HandEquipment.m_Arm_Lower_RightName);
+                m_MaleGenderPartsModelChanger[E_SingleGenderEquipmentArmorParts.Arm_Lower_Left].EquipEquipmentsModelByName(Naked_HandEquipment.m_Arm_Lower_LeftName);
+                m_MaleGenderPartsModelChanger[E_SingleGenderEquipmentArmorParts.Hand_Right].EquipEquipmentsModelByName(Naked_HandEquipment.m_Hand_RightName);
+                m_MaleGenderPartsModelChanger[E_SingleGenderEquipmentArmorParts.Hand_Left].EquipEquipmentsModelByName(Naked_HandEquipment.m_Hand_LeftName);
             }
 
             player.playerStatsManager.physicalDamageAbsorptionHands = 0;
@@ -279,34 +350,34 @@ public class PlayerEquipmentManager : MonoBehaviour
         // all gender Ã³¸®
         GantletsEquipmentItem temp = player.playerInventoryManager.currentHandEquipment;
 
-        if (temp.Elbow_Attachment_Right != null)
+        if (temp.m_Elbow_Attachment_Right != null)
         {
-            m_AllGenderPartsModelChanger[All_GenderItemPartsType.Elbow_Attachment_Right].EquipEquipmentsModelByName(temp.Elbow_Attachment_Right);
+            m_AllGenderPartsModelChanger[All_GenderItemPartsType.Elbow_Attachment_Right].EquipEquipmentsModelByName(temp.m_Elbow_Attachment_Right);
         }
-        if (temp.Elbow_Attachment_Left != null)
+        if (temp.m_Elbow_Attachment_Left != null)
         {
-            m_AllGenderPartsModelChanger[All_GenderItemPartsType.Elbow_Attachment_Left].EquipEquipmentsModelByName(temp.Elbow_Attachment_Left);
+            m_AllGenderPartsModelChanger[All_GenderItemPartsType.Elbow_Attachment_Left].EquipEquipmentsModelByName(temp.m_Elbow_Attachment_Left);
         }
 
         if (temp != null)
         {
             if (m_bIsFemale)
             {
-                m_FemaleGenderPartsModelChanger[EquipmentArmorParts.Arm_Upper_Right].EquipEquipmentsModelByName(player.playerInventoryManager.currentHandEquipment.m_Arm_Upper_RightName);
-                m_FemaleGenderPartsModelChanger[EquipmentArmorParts.Arm_Upper_Left].EquipEquipmentsModelByName(player.playerInventoryManager.currentHandEquipment.m_Arm_Upper_LeftName);
-                m_FemaleGenderPartsModelChanger[EquipmentArmorParts.Arm_Lower_Right].EquipEquipmentsModelByName(player.playerInventoryManager.currentHandEquipment.m_Arm_Lower_RightName);
-                m_FemaleGenderPartsModelChanger[EquipmentArmorParts.Arm_Lower_Left].EquipEquipmentsModelByName(player.playerInventoryManager.currentHandEquipment.m_Arm_Lower_LeftName);
-                m_FemaleGenderPartsModelChanger[EquipmentArmorParts.Hand_Right].EquipEquipmentsModelByName(player.playerInventoryManager.currentHandEquipment.m_Hand_RightName);
-                m_FemaleGenderPartsModelChanger[EquipmentArmorParts.Hand_Left].EquipEquipmentsModelByName(player.playerInventoryManager.currentHandEquipment.m_Hand_LeftName);           
+                m_FemaleGenderPartsModelChanger[E_SingleGenderEquipmentArmorParts.Arm_Upper_Right].EquipEquipmentsModelByName(player.playerInventoryManager.currentHandEquipment.m_Arm_Upper_RightName);
+                m_FemaleGenderPartsModelChanger[E_SingleGenderEquipmentArmorParts.Arm_Upper_Left].EquipEquipmentsModelByName(player.playerInventoryManager.currentHandEquipment.m_Arm_Upper_LeftName);
+                m_FemaleGenderPartsModelChanger[E_SingleGenderEquipmentArmorParts.Arm_Lower_Right].EquipEquipmentsModelByName(player.playerInventoryManager.currentHandEquipment.m_Arm_Lower_RightName);
+                m_FemaleGenderPartsModelChanger[E_SingleGenderEquipmentArmorParts.Arm_Lower_Left].EquipEquipmentsModelByName(player.playerInventoryManager.currentHandEquipment.m_Arm_Lower_LeftName);
+                m_FemaleGenderPartsModelChanger[E_SingleGenderEquipmentArmorParts.Hand_Right].EquipEquipmentsModelByName(player.playerInventoryManager.currentHandEquipment.m_Hand_RightName);
+                m_FemaleGenderPartsModelChanger[E_SingleGenderEquipmentArmorParts.Hand_Left].EquipEquipmentsModelByName(player.playerInventoryManager.currentHandEquipment.m_Hand_LeftName);           
             }
             else
             {
-                m_MaleGenderPartsModelChanger[EquipmentArmorParts.Arm_Upper_Right].EquipEquipmentsModelByName(player.playerInventoryManager.currentHandEquipment.m_Arm_Upper_RightName);
-                m_MaleGenderPartsModelChanger[EquipmentArmorParts.Arm_Upper_Left].EquipEquipmentsModelByName(player.playerInventoryManager.currentHandEquipment.m_Arm_Upper_LeftName);
-                m_MaleGenderPartsModelChanger[EquipmentArmorParts.Arm_Lower_Right].EquipEquipmentsModelByName(player.playerInventoryManager.currentHandEquipment.m_Arm_Lower_RightName);
-                m_MaleGenderPartsModelChanger[EquipmentArmorParts.Arm_Lower_Left].EquipEquipmentsModelByName(player.playerInventoryManager.currentHandEquipment.m_Arm_Lower_LeftName);
-                m_MaleGenderPartsModelChanger[EquipmentArmorParts.Hand_Right].EquipEquipmentsModelByName(player.playerInventoryManager.currentHandEquipment.m_Hand_RightName);
-                m_MaleGenderPartsModelChanger[EquipmentArmorParts.Hand_Left].EquipEquipmentsModelByName(player.playerInventoryManager.currentHandEquipment.m_Hand_LeftName);
+                m_MaleGenderPartsModelChanger[E_SingleGenderEquipmentArmorParts.Arm_Upper_Right].EquipEquipmentsModelByName(player.playerInventoryManager.currentHandEquipment.m_Arm_Upper_RightName);
+                m_MaleGenderPartsModelChanger[E_SingleGenderEquipmentArmorParts.Arm_Upper_Left].EquipEquipmentsModelByName(player.playerInventoryManager.currentHandEquipment.m_Arm_Upper_LeftName);
+                m_MaleGenderPartsModelChanger[E_SingleGenderEquipmentArmorParts.Arm_Lower_Right].EquipEquipmentsModelByName(player.playerInventoryManager.currentHandEquipment.m_Arm_Lower_RightName);
+                m_MaleGenderPartsModelChanger[E_SingleGenderEquipmentArmorParts.Arm_Lower_Left].EquipEquipmentsModelByName(player.playerInventoryManager.currentHandEquipment.m_Arm_Lower_LeftName);
+                m_MaleGenderPartsModelChanger[E_SingleGenderEquipmentArmorParts.Hand_Right].EquipEquipmentsModelByName(player.playerInventoryManager.currentHandEquipment.m_Hand_RightName);
+                m_MaleGenderPartsModelChanger[E_SingleGenderEquipmentArmorParts.Hand_Left].EquipEquipmentsModelByName(player.playerInventoryManager.currentHandEquipment.m_Hand_LeftName);
             }
 
             player.playerStatsManager.physicalDamageAbsorptionHands = player.playerInventoryManager.currentHandEquipment.m_fPhysicalDefense;
@@ -317,21 +388,21 @@ public class PlayerEquipmentManager : MonoBehaviour
         {
             if (m_bIsFemale)
             {
-                m_FemaleGenderPartsModelChanger[EquipmentArmorParts.Arm_Upper_Right].EquipEquipmentsModelByName(player.playerInventoryManager.currentHandEquipment.m_Arm_Upper_RightName);
-                m_FemaleGenderPartsModelChanger[EquipmentArmorParts.Arm_Upper_Left].EquipEquipmentsModelByName(player.playerInventoryManager.currentHandEquipment.m_Arm_Upper_LeftName);
-                m_FemaleGenderPartsModelChanger[EquipmentArmorParts.Arm_Lower_Right].EquipEquipmentsModelByName(player.playerInventoryManager.currentHandEquipment.m_Arm_Lower_RightName);
-                m_FemaleGenderPartsModelChanger[EquipmentArmorParts.Arm_Lower_Left].EquipEquipmentsModelByName(player.playerInventoryManager.currentHandEquipment.m_Arm_Lower_LeftName);
-                m_FemaleGenderPartsModelChanger[EquipmentArmorParts.Hand_Right].EquipEquipmentsModelByName(player.playerInventoryManager.currentHandEquipment.m_Hand_RightName);
-                m_FemaleGenderPartsModelChanger[EquipmentArmorParts.Hand_Left].EquipEquipmentsModelByName(player.playerInventoryManager.currentHandEquipment.m_Hand_LeftName);
+                m_FemaleGenderPartsModelChanger[E_SingleGenderEquipmentArmorParts.Arm_Upper_Right].EquipEquipmentsModelByName(player.playerInventoryManager.currentHandEquipment.m_Arm_Upper_RightName);
+                m_FemaleGenderPartsModelChanger[E_SingleGenderEquipmentArmorParts.Arm_Upper_Left].EquipEquipmentsModelByName(player.playerInventoryManager.currentHandEquipment.m_Arm_Upper_LeftName);
+                m_FemaleGenderPartsModelChanger[E_SingleGenderEquipmentArmorParts.Arm_Lower_Right].EquipEquipmentsModelByName(player.playerInventoryManager.currentHandEquipment.m_Arm_Lower_RightName);
+                m_FemaleGenderPartsModelChanger[E_SingleGenderEquipmentArmorParts.Arm_Lower_Left].EquipEquipmentsModelByName(player.playerInventoryManager.currentHandEquipment.m_Arm_Lower_LeftName);
+                m_FemaleGenderPartsModelChanger[E_SingleGenderEquipmentArmorParts.Hand_Right].EquipEquipmentsModelByName(player.playerInventoryManager.currentHandEquipment.m_Hand_RightName);
+                m_FemaleGenderPartsModelChanger[E_SingleGenderEquipmentArmorParts.Hand_Left].EquipEquipmentsModelByName(player.playerInventoryManager.currentHandEquipment.m_Hand_LeftName);
             }
             else
             {
-                m_MaleGenderPartsModelChanger[EquipmentArmorParts.Arm_Upper_Right].EquipEquipmentsModelByName(player.playerInventoryManager.currentHandEquipment.m_Arm_Upper_RightName);
-                m_MaleGenderPartsModelChanger[EquipmentArmorParts.Arm_Upper_Left].EquipEquipmentsModelByName(player.playerInventoryManager.currentHandEquipment.m_Arm_Upper_LeftName);
-                m_MaleGenderPartsModelChanger[EquipmentArmorParts.Arm_Lower_Right].EquipEquipmentsModelByName(player.playerInventoryManager.currentHandEquipment.m_Arm_Lower_RightName);
-                m_MaleGenderPartsModelChanger[EquipmentArmorParts.Arm_Lower_Left].EquipEquipmentsModelByName(player.playerInventoryManager.currentHandEquipment.m_Arm_Lower_LeftName);
-                m_MaleGenderPartsModelChanger[EquipmentArmorParts.Hand_Right].EquipEquipmentsModelByName(player.playerInventoryManager.currentHandEquipment.m_Hand_RightName);
-                m_MaleGenderPartsModelChanger[EquipmentArmorParts.Hand_Left].EquipEquipmentsModelByName(player.playerInventoryManager.currentHandEquipment.m_Hand_LeftName);
+                m_MaleGenderPartsModelChanger[E_SingleGenderEquipmentArmorParts.Arm_Upper_Right].EquipEquipmentsModelByName(player.playerInventoryManager.currentHandEquipment.m_Arm_Upper_RightName);
+                m_MaleGenderPartsModelChanger[E_SingleGenderEquipmentArmorParts.Arm_Upper_Left].EquipEquipmentsModelByName(player.playerInventoryManager.currentHandEquipment.m_Arm_Upper_LeftName);
+                m_MaleGenderPartsModelChanger[E_SingleGenderEquipmentArmorParts.Arm_Lower_Right].EquipEquipmentsModelByName(player.playerInventoryManager.currentHandEquipment.m_Arm_Lower_RightName);
+                m_MaleGenderPartsModelChanger[E_SingleGenderEquipmentArmorParts.Arm_Lower_Left].EquipEquipmentsModelByName(player.playerInventoryManager.currentHandEquipment.m_Arm_Lower_LeftName);
+                m_MaleGenderPartsModelChanger[E_SingleGenderEquipmentArmorParts.Hand_Right].EquipEquipmentsModelByName(player.playerInventoryManager.currentHandEquipment.m_Hand_RightName);
+                m_MaleGenderPartsModelChanger[E_SingleGenderEquipmentArmorParts.Hand_Left].EquipEquipmentsModelByName(player.playerInventoryManager.currentHandEquipment.m_Hand_LeftName);
             }
         }
     }
@@ -351,15 +422,15 @@ public class PlayerEquipmentManager : MonoBehaviour
         {
             if (m_bIsFemale)
             {
-                m_FemaleGenderPartsModelChanger[EquipmentArmorParts.LeftLegging].EquipEquipmentsModelByName(Naked_LegEquipment.m_LeftLeggingName);
-                m_FemaleGenderPartsModelChanger[EquipmentArmorParts.RightLegging].EquipEquipmentsModelByName(Naked_LegEquipment.m_RightLeggingName);
-                m_FemaleGenderPartsModelChanger[EquipmentArmorParts.Hip].EquipEquipmentsModelByName(Naked_LegEquipment.m_HipName);
+                m_FemaleGenderPartsModelChanger[E_SingleGenderEquipmentArmorParts.LeftLegging].EquipEquipmentsModelByName(Naked_LegEquipment.m_LeftLeggingName);
+                m_FemaleGenderPartsModelChanger[E_SingleGenderEquipmentArmorParts.RightLegging].EquipEquipmentsModelByName(Naked_LegEquipment.m_RightLeggingName);
+                m_FemaleGenderPartsModelChanger[E_SingleGenderEquipmentArmorParts.Hip].EquipEquipmentsModelByName(Naked_LegEquipment.m_HipName);
             }
             else
             {
-                m_MaleGenderPartsModelChanger[EquipmentArmorParts.LeftLegging].EquipEquipmentsModelByName(Naked_LegEquipment.m_LeftLeggingName);
-                m_MaleGenderPartsModelChanger[EquipmentArmorParts.RightLegging].EquipEquipmentsModelByName(Naked_LegEquipment.m_RightLeggingName);
-                m_MaleGenderPartsModelChanger[EquipmentArmorParts.Hip].EquipEquipmentsModelByName(Naked_LegEquipment.m_HipName);
+                m_MaleGenderPartsModelChanger[E_SingleGenderEquipmentArmorParts.LeftLegging].EquipEquipmentsModelByName(Naked_LegEquipment.m_LeftLeggingName);
+                m_MaleGenderPartsModelChanger[E_SingleGenderEquipmentArmorParts.RightLegging].EquipEquipmentsModelByName(Naked_LegEquipment.m_RightLeggingName);
+                m_MaleGenderPartsModelChanger[E_SingleGenderEquipmentArmorParts.Hip].EquipEquipmentsModelByName(Naked_LegEquipment.m_HipName);
             }
             player.playerStatsManager.physicalDamageAbsorptionLegs = 0;
         }
@@ -370,31 +441,38 @@ public class PlayerEquipmentManager : MonoBehaviour
         // all gender Ã³¸®
         LeggingsEquipmentItem temp = player.playerInventoryManager.currentLegEquipment;
 
-        if (temp.Hips_Attachment != null)
+        if (temp.m_Hips_Attachment != null)
         {
-            m_AllGenderPartsModelChanger[All_GenderItemPartsType.Hips_Attachment].EquipEquipmentsModelByName(temp.Hips_Attachment);
+            m_AllGenderPartsModelChanger[All_GenderItemPartsType.Hips_Attachment].EquipEquipmentsModelByName(temp.m_Hips_Attachment);
         }
-        if (temp.Knee_Attachement_Right != null)
+        if (temp.m_Knee_Attachement_Right != null)
         {
-            m_AllGenderPartsModelChanger[All_GenderItemPartsType.Knee_Attachement_Right].EquipEquipmentsModelByName(temp.Knee_Attachement_Right);
+            m_AllGenderPartsModelChanger[All_GenderItemPartsType.Knee_Attachement_Right].EquipEquipmentsModelByName(temp.m_Knee_Attachement_Right);
         }
-        if (temp.Knee_Attachement_Left != null)
+        if (temp.m_Knee_Attachement_Left != null)
         {
-            m_AllGenderPartsModelChanger[All_GenderItemPartsType.Knee_Attachement_Left].EquipEquipmentsModelByName(temp.Knee_Attachement_Left);
+            m_AllGenderPartsModelChanger[All_GenderItemPartsType.Knee_Attachement_Left].EquipEquipmentsModelByName(temp.m_Knee_Attachement_Left);
         }
 
         if (m_bIsFemale)
         {
-            m_FemaleGenderPartsModelChanger[EquipmentArmorParts.Hip].EquipEquipmentsModelByName(temp.m_HipName);
-            m_FemaleGenderPartsModelChanger[EquipmentArmorParts.LeftLegging].EquipEquipmentsModelByName(temp.m_LeftLeggingName);
-            m_FemaleGenderPartsModelChanger[EquipmentArmorParts.RightLegging].EquipEquipmentsModelByName(temp.m_RightLeggingName);
+            m_FemaleGenderPartsModelChanger[E_SingleGenderEquipmentArmorParts.Hip].EquipEquipmentsModelByName(temp.m_HipName);
+            m_FemaleGenderPartsModelChanger[E_SingleGenderEquipmentArmorParts.LeftLegging].EquipEquipmentsModelByName(temp.m_LeftLeggingName);
+            m_FemaleGenderPartsModelChanger[E_SingleGenderEquipmentArmorParts.RightLegging].EquipEquipmentsModelByName(temp.m_RightLeggingName);
         }
         else
         {
-            m_MaleGenderPartsModelChanger[EquipmentArmorParts.Hip].EquipEquipmentsModelByName(temp.m_HipName);
-            m_MaleGenderPartsModelChanger[EquipmentArmorParts.LeftLegging].EquipEquipmentsModelByName(temp.m_LeftLeggingName);
-            m_MaleGenderPartsModelChanger[EquipmentArmorParts.RightLegging].EquipEquipmentsModelByName(temp.m_RightLeggingName);
+            m_MaleGenderPartsModelChanger[E_SingleGenderEquipmentArmorParts.Hip].EquipEquipmentsModelByName(temp.m_HipName);
+            m_MaleGenderPartsModelChanger[E_SingleGenderEquipmentArmorParts.LeftLegging].EquipEquipmentsModelByName(temp.m_LeftLeggingName);
+            m_MaleGenderPartsModelChanger[E_SingleGenderEquipmentArmorParts.RightLegging].EquipEquipmentsModelByName(temp.m_RightLeggingName);
         }
     }
 
+    public void SelectGender(bool isFemale)
+    {
+        // ÇÃ·¹ÀÌ¾îÀÇ ¸ðµâ·¯¸¦ ±³Ã¼
+        m_bIsFemale = isFemale;
+
+        EquipAllEquipmentModel();
+    }
 }

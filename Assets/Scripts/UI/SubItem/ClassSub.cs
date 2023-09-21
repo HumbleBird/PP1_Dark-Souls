@@ -23,7 +23,7 @@ public class ClassSub : MonoBehaviour
 
         // Text
         TextMeshProUGUI classText = GetComponentInChildren<TextMeshProUGUI>();
-        classText.text = ((E_Class)count).ToString();
+        classText.text = ((E_CharacterClass)count).ToString();
 
         // Buton
         Button childBtn = GetComponent<Button>();

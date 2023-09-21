@@ -7,19 +7,22 @@ public class CharacterPreviewCamera : MonoBehaviour
 {
     RectTransform myImg;
 
+    Vector3 changePos;
     Vector3 m_StandCharacterPreviewPos = new Vector3(1.25f, 1.46f, -3.68f);
     Vector3 m_HairZoomPreviewPos = new Vector3(1.25f, 1.7f, -3.9f);
+    Vector3 m_AllZoomPreviewPos = new Vector3(1.25f, 0.87f, -2.87f);
+
 
     private void Awake()
     {
         myImg = GetComponent<RectTransform>();
-
         ChangeCameraPreviewTransform(E_CharacterCreationPreviewCamera.None);
     }
 
+
     public void ChangeCameraPreviewTransform(E_CharacterCreationPreviewCamera type)
     {
-        Vector3 changePos = m_StandCharacterPreviewPos;
+        changePos = m_StandCharacterPreviewPos;
 
         switch (type)
         {
@@ -37,10 +40,14 @@ public class CharacterPreviewCamera : MonoBehaviour
                 break;
             case E_CharacterCreationPreviewCamera.Back:
                 break;
+            case E_CharacterCreationPreviewCamera.All:
+                changePos = m_AllZoomPreviewPos;
+                break;
             default:
                 break;
         }
 
+        StopAllCoroutines();
         StartCoroutine(IChangeCameraPreviewTransform(changePos));
     }
 

@@ -69,6 +69,15 @@ public class Define
         Consumable
     }
 
+    public enum E_ArmorEquipmentType
+    {
+        Helmet,
+        Torso,
+        Leggings,
+        Gauntlet,
+        All
+    }
+
     public enum All_GenderItemPartsType
     {
         // Head
@@ -76,7 +85,7 @@ public class Define
         HeadCoverings_No_FacialHair,
         HeadCoverings_No_Hair,
         Hair,
-        Head_Attachment_Helmet,
+        HelmetAttachment,
 
         // Torso
         Chest_Attachment,
@@ -97,11 +106,11 @@ public class Define
         Extra_Elf_Ear,
     }
 
-    public enum EquipmentArmorParts
+    public enum E_SingleGenderEquipmentArmorParts
     {
-        Head_All_Elements,
+        Head,
         Head_No_Elements,
-        Eyebrows,
+        Eyebrow,
         FacialHair,
         Torso,
         Arm_Upper_Right     ,
@@ -317,7 +326,7 @@ public class Define
         Skin
     }
 
-    public enum E_Class
+    public enum E_CharacterClass
     {
         Knight = 0,
         Mercenary,
@@ -328,7 +337,8 @@ public class Define
         Sorcerer,
         Pyromancer,
         Cleric,
-        Deprived
+        Deprived,
+        MaxCount
     }
 
     public enum E_CharacterCreationPreviewCamera
@@ -338,7 +348,8 @@ public class Define
         Chest,
         Leg,
         Hand,
-        Back
+        Back,
+        All
     }
 
     public enum E_RandomSoundType

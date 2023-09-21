@@ -7,6 +7,19 @@ using static Util;
 [CreateAssetMenu(menuName = "Items/Eqipment/Armor")]
 public class EquipmentItem : Item
 {
+    protected string playerGender
+    {
+        get {
+            string gender = null;
+
+            if (Managers.Object.m_MyPlayer.playerEquipmentManager.m_bIsFemale)
+                gender = "Female_";
+            else
+                gender = "Male_";
+
+            return gender; }
+    }
+
     [Header("Defense Bonus")]
     public float m_fPhysicalDefense;
     public float m_fStrikeDefense;

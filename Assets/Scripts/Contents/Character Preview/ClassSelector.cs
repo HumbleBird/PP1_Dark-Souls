@@ -9,16 +9,6 @@ public class ClassSelector : MonoBehaviour
     PlayerManager player;
 
     [Header("Class Info UI")]
-    public TextMeshProUGUI m_iPlayerLevelText            ;
-    public TextMeshProUGUI m_iVigorLevelText            ;
-    public TextMeshProUGUI m_iAttunementLevelText       ;
-    public TextMeshProUGUI m_iEnduranceLevelText        ;
-    public TextMeshProUGUI m_iVitalityLevelText     ;
-    public TextMeshProUGUI m_iStrengthLevelText         ;
-    public TextMeshProUGUI m_iDexterityLevelText        ;
-    public TextMeshProUGUI m_iIntelligenceLevelText         ;
-    public TextMeshProUGUI m_iFaithLevelText            ;
-    public TextMeshProUGUI m_iLuckLevelText             ;
     public TextMeshProUGUI classDescription;
 
     [Header("Class Starting Stats")]

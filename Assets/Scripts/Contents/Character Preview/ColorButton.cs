@@ -6,7 +6,7 @@ using UnityEngine.UI;
 
 public class ColorButton : MonoBehaviour
 {
-    public SelectExternalFeaturesColor m_SelectExternalFeaturesColor;
+    public ExternalFeaturesColorSubItem m_SelectExternalFeaturesColor;
 
     [Header("Color Values")]
     public float redAmount;
@@ -23,7 +23,7 @@ public class ColorButton : MonoBehaviour
 
     private void Awake()
     {
-        m_SelectExternalFeaturesColor = GetComponentInParent<SelectExternalFeaturesColor>();
+        m_SelectExternalFeaturesColor = GetComponentInParent<ExternalFeaturesColorSubItem>();
 
         colorImage = GetComponent<Image>();
         redAmount = colorImage.color.r;

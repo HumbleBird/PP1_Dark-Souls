@@ -6,10 +6,14 @@ using UnityEngine;
 public class TorsoEquipmentItem : EquipmentItem
 {
     [Header("Item All Gender Parts Name")]
-    public string Back_Attachment;
-    public string Shoulder_Attachment_Right;
-    public string Shoulder_Attachment_Left;
+    [SerializeField] int Back_Attachment;
+    [SerializeField] int Shoulder_Attachment_Right;
+    [SerializeField] int Shoulder_Attachment_Left;
+    public string m_Back_Attachment { get { return "Chr_BackAttachment_" + Back_Attachment.ToString("00"); } }
+    public string m_Shoulder_Attachment_Right { get { return "Chr_ShoulderAttachRight_" + Shoulder_Attachment_Right.ToString("00"); } }
+    public string m_Shoulder_Attachment_Left { get { return "Chr_ShoulderAttachLeft_" + Shoulder_Attachment_Left.ToString("00"); } }
 
     [Header("Item Gender Parts Name")]
-    public string m_TorsoEquipmentItemName;
+    [SerializeField] int TorsoEquipmentItemName;
+    public string m_TorsoEquipmentItemName { get { return "Chr_Torso_" + playerGender + TorsoEquipmentItemName.ToString("00"); } }
 }

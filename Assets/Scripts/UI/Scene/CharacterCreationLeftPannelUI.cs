@@ -15,6 +15,8 @@ public class CharacterCreationLeftPannelUI : UI_Base
         // Name
         NameBtn,
 
+        GenderBtn,
+
         // Class
         ClassBtn,
 
@@ -24,12 +26,12 @@ public class CharacterCreationLeftPannelUI : UI_Base
         HairItemBtn,
 
         // Face
-        EyelashesBtn,
+        //EyelashesBtn,
         EyebrowsBtn,
         FacialHairBtn,
         FacialMaskBtn,
         FacialMaskColorBtn,
-        NoseBtn,
+        //NoseBtn,
 
         // Skin
         SkinColorBtn,
@@ -40,6 +42,8 @@ public class CharacterCreationLeftPannelUI : UI_Base
 
         // Name
     public Button m_NameBtn;
+
+    public Button m_GenderBtn;
 
         // Class
     public Button m_ClassBtn;
@@ -78,6 +82,8 @@ public class CharacterCreationLeftPannelUI : UI_Base
         // Name
         m_NameBtn               = GetButton((int)Buttons.NameBtn);
 
+        m_GenderBtn             = GetButton((int)Buttons.GenderBtn);
+
         // Class
         m_ClassBtn              = GetButton((int)Buttons.ClassBtn);
 
@@ -87,12 +93,12 @@ public class CharacterCreationLeftPannelUI : UI_Base
         m_HairItemBtn = GetButton((int)Buttons.HairItemBtn);
 
         // Face
-        EyelashesBtn              = GetButton((int)Buttons.EyelashesBtn);
+        //EyelashesBtn              = GetButton((int)Buttons.EyelashesBtn);
         EyebrowsBtn              = GetButton((int)Buttons.EyebrowsBtn);
         FacialHairBtn            = GetButton((int)Buttons.FacialHairBtn);
         FacialMaskBtn           = GetButton((int)Buttons.FacialMaskBtn);
         FacialMaskColorBtn          = GetButton((int)Buttons.FacialMaskColorBtn);
-        NoseBtn                  = GetButton((int)Buttons.NoseBtn);
+        //NoseBtn                  = GetButton((int)Buttons.NoseBtn);
 
         // Skin
         SkinColorBtn              = GetButton((int)Buttons.SkinColorBtn);
@@ -107,6 +113,7 @@ public class CharacterCreationLeftPannelUI : UI_Base
     public void SetInfo()
     {
         NameButtonFunctionAdd();
+        GenderButtonFunctionAdd();
         ClassButtonFunctionAdd();
         HairButtonFunctionAdd();
         FaceButtonFunctionAdd();
@@ -120,6 +127,17 @@ public class CharacterCreationLeftPannelUI : UI_Base
 
     }
 
+    private void GenderButtonFunctionAdd()
+    {
+        // Class
+        m_GenderBtn.onClick.AddListener(() =>
+        {
+            m_CharacterCreationScreen.m_CharacterCreationMiddlePannelUI.m_goGender.SetActive(true);
+            Camera.main.GetComponent<CharacterPreviewCamera>().ChangeCameraPreviewTransform(E_CharacterCreationPreviewCamera.All);
+            AllPannelButonInteractable(false);
+        });
+    }
+
     private void ClassButtonFunctionAdd()
     {
         // Class
@@ -127,7 +145,6 @@ public class CharacterCreationLeftPannelUI : UI_Base
         {
             m_CharacterCreationScreen.m_CharacterCreationMiddlePannelUI.m_goClasses.SetActive(true);
             AllPannelButonInteractable(false);
-            //m_CharacterCreationScreen.m_CharacterCreationMiddlePannelUI.m_goFirstClass.GetComponent<Button>().Select();
         });
     }
 
@@ -139,7 +156,7 @@ public class CharacterCreationLeftPannelUI : UI_Base
             m_CharacterCreationScreen.m_CharacterCreationMiddlePannelUI.m_goHairStyles.SetActive(true);
             Camera.main.GetComponent<CharacterPreviewCamera>().ChangeCameraPreviewTransform(E_CharacterCreationPreviewCamera.Head);
             AllPannelButonInteractable(false);
-            hider.HideHelmet();
+            hider.HideEquipment(E_ArmorEquipmentType.Helmet);
         });
 
         // HairColor
@@ -148,41 +165,76 @@ public class CharacterCreationLeftPannelUI : UI_Base
             m_CharacterCreationScreen.m_CharacterCreationMiddlePannelUI.m_goHairColor.SetActive(true);
             Camera.main.GetComponent<CharacterPreviewCamera>().ChangeCameraPreviewTransform(E_CharacterCreationPreviewCamera.Head);
             AllPannelButonInteractable(false);
-            hider.HideHelmet();
+            hider.HideEquipment(E_ArmorEquipmentType.Helmet);
+
         });
+
+        m_HairItemBtn.onClick.AddListener(() =>
+        {
+            m_CharacterCreationScreen.m_CharacterCreationMiddlePannelUI.m_goHairItem.SetActive(true);
+            Camera.main.GetComponent<CharacterPreviewCamera>().ChangeCameraPreviewTransform(E_CharacterCreationPreviewCamera.Head);
+            AllPannelButonInteractable(false);
+            hider.HideEquipment(E_ArmorEquipmentType.Helmet);
+
+        });
+
+
     }
 
     private void FaceButtonFunctionAdd()
     {
-        EyelashesBtn.onClick.AddListener(() =>
-        {
-            AllPannelButonInteractable(false);
-        });
+        //EyelashesBtn.onClick.AddListener(() =>
+        //{
+        //    Managers.UI.ShowPopupUI<AnnouncementUI>();
+        //    // 機等檜お で機 嗨辦晦
+
+
+        //    //AllPannelButonInteractable(false);
+        //    // TODO
+        //});
 
         EyebrowsBtn.onClick.AddListener(() =>
         {
+            m_CharacterCreationScreen.m_CharacterCreationMiddlePannelUI.m_goEyebrows.SetActive(true);
+            Camera.main.GetComponent<CharacterPreviewCamera>().ChangeCameraPreviewTransform(E_CharacterCreationPreviewCamera.Head);
             AllPannelButonInteractable(false);
+            hider.HideEquipment(E_ArmorEquipmentType.Helmet);
+
         });
 
         FacialHairBtn.onClick.AddListener(() =>
         {
+            m_CharacterCreationScreen.m_CharacterCreationMiddlePannelUI.m_goFacialHair.SetActive(true);
+            Camera.main.GetComponent<CharacterPreviewCamera>().ChangeCameraPreviewTransform(E_CharacterCreationPreviewCamera.Head);
             AllPannelButonInteractable(false);
+            hider.HideEquipment(E_ArmorEquipmentType.Helmet);
+
         });
 
         FacialMaskBtn.onClick.AddListener(() =>
         {
+            m_CharacterCreationScreen.m_CharacterCreationMiddlePannelUI.m_goFacialMask.SetActive(true);
+            Camera.main.GetComponent<CharacterPreviewCamera>().ChangeCameraPreviewTransform(E_CharacterCreationPreviewCamera.Head);
             AllPannelButonInteractable(false);
+            hider.HideEquipment(E_ArmorEquipmentType.Helmet);
+
+            //AllPannelButonInteractable(false);
+            // TODO
         });
 
         FacialMaskColorBtn.onClick.AddListener(() =>
         {
-            AllPannelButonInteractable(false);
+            Managers.UI.ShowPopupUI<AnnouncementUI>();
+            //AllPannelButonInteractable(false);
+            // TODO
         });
 
-        NoseBtn.onClick.AddListener(() =>
-        {
-            AllPannelButonInteractable(false);
-        });
+        //NoseBtn.onClick.AddListener(() =>
+        //{
+        //    Managers.UI.ShowPopupUI<AnnouncementUI>();
+        //    //AllPannelButonInteractable(false);
+        //    // TODO 
+        //});
     }
 
     private void SkinButtonFunctionAdd()
@@ -190,6 +242,12 @@ public class CharacterCreationLeftPannelUI : UI_Base
         SkinColorBtn.onClick.AddListener(() =>
         {
             AllPannelButonInteractable(false);
+
+            m_CharacterCreationScreen.m_CharacterCreationMiddlePannelUI.m_goSkinColor.SetActive(true);
+            Camera.main.GetComponent<CharacterPreviewCamera>().ChangeCameraPreviewTransform(E_CharacterCreationPreviewCamera.All);
+            AllPannelButonInteractable(false);
+            hider.HideEquipment(E_ArmorEquipmentType.All);
+
         });
     }
 
@@ -197,7 +255,8 @@ public class CharacterCreationLeftPannelUI : UI_Base
     {
         m_StartGameBtn.onClick.AddListener(() =>
         {
-            AllPannelButonInteractable(false);
+            Managers.UI.ShowPopupUI<AnnouncementUI>();
+            //AllPannelButonInteractable(false);
         });
     }
 
@@ -205,6 +264,8 @@ public class CharacterCreationLeftPannelUI : UI_Base
 
     public void AllPannelButonInteractable(bool isTrue)
     {
+        m_GenderBtn.interactable = isTrue;
+
         // Name
         m_NameBtn.interactable = isTrue;
 
@@ -216,12 +277,12 @@ public class CharacterCreationLeftPannelUI : UI_Base
         m_HairColorBtn.interactable = isTrue;
 
         // Face
-        EyelashesBtn.interactable = isTrue;
+        //EyelashesBtn.interactable = isTrue;
         EyebrowsBtn.interactable = isTrue;
         FacialHairBtn.interactable = isTrue;
         FacialMaskBtn.interactable = isTrue;
         FacialMaskColorBtn.interactable = isTrue;
-        NoseBtn.interactable = isTrue;
+        //NoseBtn.interactable = isTrue;
 
         // Skin
         SkinColorBtn.interactable = isTrue;

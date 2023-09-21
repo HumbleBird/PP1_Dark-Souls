@@ -6,10 +6,11 @@ using static Define;
 
 public class CharacterCreationMiddlePannelUI : UI_Base
 {
-    CharacterCreationScreen m_CharacterCreationScreen;
 
     enum GameObjects
     {
+        Gender,
+
         // Classes
         ClassList,
         Classes,
@@ -31,12 +32,6 @@ public class CharacterCreationMiddlePannelUI : UI_Base
         SkinColor,
     }
 
-    enum Buttons
-    {
-        HairColorBtn,
-        ConfirmHairColorBtn
-    }
-
     enum Texts
     {
 
@@ -55,6 +50,7 @@ public class CharacterCreationMiddlePannelUI : UI_Base
     }
 
 
+    public GameObject m_goGender;
     public GameObject m_goClasses;
     public GameObject m_goHairStyles;
     public GameObject m_goHairColor;
@@ -67,24 +63,14 @@ public class CharacterCreationMiddlePannelUI : UI_Base
     public GameObject m_goNose;
     public GameObject m_goSkinColor;
 
-    public GameObject m_goFirstHairStyle;
-    public GameObject m_goFirstClass;
-
     HelmetHider hider;
     PlayerManager player;
 
     public int classChosen;
 
-    // 1개의 색에는 r, g, b 값에 알파 값이 1 으로 적용됨
-    // 리스트에 색들을 보관해 뒀다가 생성.
-    // a(155, 132, 513), b(194, 94, 09) ... n개까지
-    // 리스트에 담겨 있음
+    CharacterCreationScreen m_CharacterCreationScreen;
+    public List<ExternalFeaturesSubItem> m_listExternalFeaturesSubItem = new List<ExternalFeaturesSubItem>();
 
-    int[,] m_Colors = 
-    {
-        { 255, 216, 216 }, // 아주 밝은 빨강
-        { 250, 224, 212 }, // 아주 밝은 주황
-    };
 
     public override bool Init()
     {
@@ -94,11 +80,11 @@ public class CharacterCreationMiddlePannelUI : UI_Base
         m_CharacterCreationScreen = GetComponentInParent<CharacterCreationScreen>();
         hider = FindObjectOfType<HelmetHider>();
 
-        BindButton(typeof(Buttons));
         BindText(typeof(Texts));
         BindObject(typeof(GameObjects));
 
         m_goClasses = GetObject((int)GameObjects.Classes);
+        m_goGender = GetObject((int)GameObjects.Gender);
         m_goHairStyles = GetObject((int)GameObjects.HairStyles);
         m_goHairColor = GetObject((int)GameObjects.HairColor);
         m_goHairItem = GetObject((int)GameObjects.HairItem);
@@ -113,58 +99,30 @@ public class CharacterCreationMiddlePannelUI : UI_Base
         return true;
     }
 
-    private void CreateHairColorSetInfo()
-    {
-        CreateColor();
-
-        // Buton
-        ColorButton[] colors = m_goHairColor.GetComponentsInChildren<ColorButton>();
-        foreach (ColorButton color in colors)
-        {
-            color.GetComponent<Button>().onClick.AddListener(() =>
-            {
-                m_CharacterCreationScreen.m_CharacterCreationLeftPannelUI.AllPannelButonInteractable(true);
-                m_CharacterCreationScreen.m_CharacterCreationLeftPannelUI.m_HairColorBtn.Select();
-                m_goHairColor.SetActive(false);
-
-                Camera.main.GetComponent<CharacterPreviewCamera>().ChangeCameraPreviewTransform(E_CharacterCreationPreviewCamera.None);
-                hider.UnHiderHelmet();
-            });
-        }
-
-        GetButton((int)Buttons.ConfirmHairColorBtn).onClick.AddListener(() =>
-        {
-            m_CharacterCreationScreen.m_CharacterCreationLeftPannelUI.AllPannelButonInteractable(true);
-            m_CharacterCreationScreen.m_CharacterCreationLeftPannelUI.m_HairColorBtn.Select();
-            m_goHairColor.SetActive(false);
-
-            Camera.main.GetComponent<CharacterPreviewCamera>().ChangeCameraPreviewTransform(E_CharacterCreationPreviewCamera.None);
-            hider.UnHiderHelmet();
-        });
-
-        // Slider
-        Slider[] sliers = m_goHairColor.GetComponentsInChildren<Slider>();
-        foreach (Slider slider in sliers)
-        {
-            slider.onValueChanged.AddListener(delegate { m_goHairColor.GetComponent<SelectExternalFeaturesColor>().UpdateSliders(); });
-        }
-    }
-
-    private void CreateColor()
-    {
-
-
-    }
-
     public void SetInfo()
     {
         player = m_CharacterCreationScreen.Player;
 
+        // 숫자는 후에 자동으로 처리할 것. 호출 순서 문제 때문에 걍 박음
+
+        // All Gender
         CreateAllGenderPartsSubItem(GetObject((int)GameObjects.HairStyles), 39, All_GenderItemPartsType.Hair);
+        CreateAllGenderPartsSubItem(GetObject((int)GameObjects.HairItem), 14, All_GenderItemPartsType.HelmetAttachment);
 
+        // Gender
+        {
+            // TODO
+            // CreateGenderPartsSubItem(GetObject((int)GameObjects.Eyelashes), 10, EquipmentArmorParts.);
+            CreateGenderPartsSubItem(GetObject((int)GameObjects.Eyebrows), 11, E_SingleGenderEquipmentArmorParts.Eyebrow);
+            CreateGenderPartsSubItem(GetObject((int)GameObjects.FacialHair), 19, E_SingleGenderEquipmentArmorParts.FacialHair);
+
+            // TODO
+            CreateGenderPartsSubItem(GetObject((int)GameObjects.FacialMask), 22, E_SingleGenderEquipmentArmorParts.Head);
+            //CreateGenderPartsSubItem(GetObject((int)GameObjects.FacialMaskColor), 19, EquipmentArmorParts.);
+        }
+         
+        // Uniqu
         CreateClassSubItem();
-
-        CreateHairColorSetInfo();
     }
 
     private void CreateClassSubItem()
@@ -173,23 +131,20 @@ public class CharacterCreationMiddlePannelUI : UI_Base
         foreach (Transform child in gridPannel.transform)
             Managers.Resource.Destroy(child.gameObject);
 
-        for (int i = 0; i < 3; i++)
+        for (int i = 0; i < (int)E_CharacterClass.MaxCount; i++)
         {
             GameObject go = Managers.Resource.Instantiate("UI/SubItem/ClassSubItem", gridPannel.transform);
             ClassSub item = go.GetOrAddComponent<ClassSub>();
 
             item.count = i;
             item.SetInfo();
-
-            if (i == 0)
-                m_goFirstClass = go;
         }
     }
 
     private void CreateAllGenderPartsSubItem(GameObject parent, int count, All_GenderItemPartsType type)
     {
         Transform[] gridPannels = parent.GetComponentsInChildren<Transform>();
-        Transform gridPannel = gridPannels[2];
+        Transform gridPannel = gridPannels[3];
         foreach (Transform child in gridPannel)
             Managers.Resource.Destroy(child.gameObject);
 
@@ -202,13 +157,15 @@ public class CharacterCreationMiddlePannelUI : UI_Base
             item.e_AllGenderPartsType = type;
             item.m_bIsAllGender = true;
             item.SetInfo();
+            m_listExternalFeaturesSubItem.Add(item);
         }
     }
 
-    private void CreateGenderPartsSubItem(GameObject parent, int count, EquipmentArmorParts type)
+    private void CreateGenderPartsSubItem(GameObject parent, int count, E_SingleGenderEquipmentArmorParts type)
     {
-        GameObject gridPannel = parent;
-        foreach (Transform child in gridPannel.transform)
+        Transform[] gridPannels = parent.GetComponentsInChildren<Transform>();
+        Transform gridPannel = gridPannels[3];
+        foreach (Transform child in gridPannel)
             Managers.Resource.Destroy(child.gameObject);
 
         for (int i = 0; i < count; i++)
@@ -220,6 +177,7 @@ public class CharacterCreationMiddlePannelUI : UI_Base
             item.e_genderPartsType = type;
             item.m_bIsAllGender = false;
             item.SetInfo();
+            m_listExternalFeaturesSubItem.Add(item);
         }
     }
 
@@ -229,6 +187,7 @@ public class CharacterCreationMiddlePannelUI : UI_Base
 
     public void PostSetInfo()
     {
+        m_goGender.SetActive(false);
         m_goHairStyles.SetActive(false);
         m_goHairColor.SetActive(false);
         m_goClasses.SetActive(false);
