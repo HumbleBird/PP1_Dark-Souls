@@ -46,6 +46,16 @@ public class PlayerManager : CharacterManager
         Managers.Object.Add(1, gameObject);
     }
 
+    public void ReStart()
+    {
+        cameraHandler = Managers.Camera.m_Camera;
+        m_GameUIManager = FindObjectOfType<GameUIManager>();
+        m_GameUIManager.equipmentWindowUI.LoadWeaponsOnEquipmentScreen(playerInventoryManager);
+
+        Managers.Camera.m_Camera.ReStart();
+    }
+
+
     protected override void Start()
     {
         base.Start();

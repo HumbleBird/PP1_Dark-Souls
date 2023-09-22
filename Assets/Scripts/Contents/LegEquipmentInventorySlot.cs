@@ -41,7 +41,7 @@ public class LegEquipmentInventorySlot : MonoBehaviour
             }
 
             uiManager.player.playerInventoryManager.currentLegEquipment = (LeggingsEquipmentItem)item;
-            uiManager.player.playerInventoryManager.legEquipmentInventory.Remove(item);
+            uiManager.player.playerInventoryManager.legEquipmentInventory.Remove((LeggingsEquipmentItem)item);
             uiManager.player.playerEquipmentManager.EquipAllEquipmentModel();
         }
         else

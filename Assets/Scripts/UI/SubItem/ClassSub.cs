@@ -35,6 +35,7 @@ public class ClassSub : MonoBehaviour
             m_CharacterCreationScreen.m_CharacterCreationLeftPannelUI.AllPannelButonInteractable(true);
             m_CharacterCreationScreen.m_CharacterCreationMiddlePannelUI.m_goClasses.SetActive(false);
             m_CharacterCreationScreen.m_CharacterCreationLeftPannelUI.m_ClassBtn.Select();
+            Camera.main.GetComponent<CharacterPreviewCamera>().ChangeCameraPreviewTransform(E_CharacterCreationPreviewCamera.None);
         });
 
         // Event Trigger

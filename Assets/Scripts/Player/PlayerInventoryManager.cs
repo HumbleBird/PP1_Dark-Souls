@@ -4,11 +4,11 @@ using UnityEngine;
 
 public class PlayerInventoryManager : CharacterInventoryManager
 {
-    public List<WeaponItem> weaponsInventory;
-    public List<EquipmentItem> headEquipmentInventory;
-    public List<EquipmentItem> bodyEquipmentInventory;
-    public List<EquipmentItem> legEquipmentInventory;
-    public List<EquipmentItem> handEquipmentInventory;
+    public List<WeaponItem> weaponsInventory = new List<WeaponItem>();
+    public List<HelmEquipmentItem> headEquipmentInventory = new List<HelmEquipmentItem>();
+    public List<TorsoEquipmentItem> bodyEquipmentInventory = new List<TorsoEquipmentItem>();
+    public List<LeggingsEquipmentItem> legEquipmentInventory = new List<LeggingsEquipmentItem>();
+    public List<GantletsEquipmentItem> handEquipmentInventory = new List<GantletsEquipmentItem>();
 
     public void ChangeRightWeapon()
     {
@@ -61,5 +61,14 @@ public class PlayerInventoryManager : CharacterInventoryManager
             leftWeapon = character.characterWeaponSlotManager.unarmWeapon;
             character.characterWeaponSlotManager.LoadWeaponOnSlot(character.characterWeaponSlotManager.unarmWeapon, true);
         }
+    }
+
+    public void InventoryItemClear()
+    {
+        weaponsInventory.Clear();
+        headEquipmentInventory.Clear();
+        bodyEquipmentInventory.Clear();
+        legEquipmentInventory.Clear();
+        handEquipmentInventory.Clear();
     }
 }

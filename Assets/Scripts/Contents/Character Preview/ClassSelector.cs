@@ -44,6 +44,10 @@ public class ClassSelector : MonoBehaviour
 
     private void AssignClassEquipment(int classChosen)
     {
+        // 전 아이템 전부 처분 후 바꿔뀌기
+        player.playerInventoryManager.InventoryItemClear();
+
+        // 현재 장착
         player.playerInventoryManager.currentHelmetEquipment = classGear[classChosen].headEquipment;
         player.playerInventoryManager.currentTorsoEquipment = classGear[classChosen].chestEquipment;
         player.playerInventoryManager.currentLegEquipment = classGear[classChosen].legEquipment;
@@ -51,6 +55,17 @@ public class ClassSelector : MonoBehaviour
 
         player.playerInventoryManager.weaponsInRightHandSlots[0] = classGear[classChosen].primaryWeapon;
         player.playerInventoryManager.weaponsInLeftHandSlots[0] = classGear[classChosen].offHandWeapon;
+        player.playerInventoryManager.rightWeapon = player.playerInventoryManager.weaponsInRightHandSlots[0];
+        player.playerInventoryManager.leftWeapon = player.playerInventoryManager.weaponsInLeftHandSlots[0];
+
+        // 인벤토리에 넣기
+        player.playerInventoryManager.weaponsInventory.Add(classGear[classChosen].primaryWeapon);
+        player.playerInventoryManager.weaponsInventory.Add(classGear[classChosen].offHandWeapon);
+
+        player.playerInventoryManager.headEquipmentInventory.Add(classGear[classChosen].headEquipment);
+        player.playerInventoryManager.bodyEquipmentInventory.Add(classGear[classChosen].chestEquipment);
+        player.playerInventoryManager.legEquipmentInventory.Add(classGear[classChosen].legEquipment);
+        player.playerInventoryManager.handEquipmentInventory.Add(classGear[classChosen].handEquipment);
 
         player.playerEquipmentManager.EquipAllEquipmentModel();
         player.playerWeaponSlotManager.LoadBothWeaponsOnSlots();

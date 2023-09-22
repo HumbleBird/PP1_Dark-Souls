@@ -61,6 +61,9 @@ public class PlayerEquipmentManager : MonoBehaviour
 
         player.playerStatsManager.poisonResistance = poisonResistance;
         player.playerStatsManager.CaculateAndSetCurrentEquipLoad(totalEquipmentLoad);
+
+        // Weapon
+
     }
 
     private void ModelChangerUnEquipAllItem()

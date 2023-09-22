@@ -41,7 +41,7 @@ public class HeadEquipmentInventorySlot : MonoBehaviour
             }
 
             uiManager.player.playerInventoryManager.currentHelmetEquipment = (HelmEquipmentItem)item;
-            uiManager.player.playerInventoryManager.headEquipmentInventory.Remove(item);
+            uiManager.player.playerInventoryManager.headEquipmentInventory.Remove((HelmEquipmentItem)item);
             uiManager.player.playerEquipmentManager.EquipAllEquipmentModel();
         }
         else

@@ -43,6 +43,6 @@ public class RotateObject : MonoBehaviour
         }
 
         currentRotation = Vector3.Lerp(currentRotation, targetRoatation, rotationSpeed * Time.deltaTime);
-        transform.eulerAngles = currentRotation;
+        Managers.Object.m_MyPlayer.transform.eulerAngles = currentRotation;
     }
 }

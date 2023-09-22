@@ -68,4 +68,22 @@ public class QuickSlotsUI : MonoBehaviour
             currentConsumableIcon.enabled = false;
         }
     }
+
+    public void UpdateAllQuickSlotUI()
+    {
+        PlayerManager player = Managers.Object.m_MyPlayer;
+
+        UpdateWeaponQuickSlotUI(true,  player.playerInventoryManager.rightWeapon);
+        UpdateWeaponQuickSlotUI(false, player.playerInventoryManager.leftWeapon);
+
+        if (player.playerInventoryManager.currentSpell != null)
+        {
+            UpdateCurrentSpellIcon(player.playerInventoryManager.currentSpell);
+        }
+
+        if (player.playerInventoryManager.currentConsumable != null)
+        {
+            UpdateCurrentConsumableIcon(player.playerInventoryManager.currentConsumable);
+        }
+    }
 }

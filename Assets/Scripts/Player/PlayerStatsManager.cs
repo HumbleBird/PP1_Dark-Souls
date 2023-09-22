@@ -28,6 +28,8 @@ public class PlayerStatsManager : CharacterStatsManager
     protected override void Start()
     {
         base.Start();
+
+
         healthBar = FindObjectOfType<HealthBar>();
         staminaBar = FindObjectOfType<StaminaBar>();
         focusPointBar = FindObjectOfType<FocusPointBar>();

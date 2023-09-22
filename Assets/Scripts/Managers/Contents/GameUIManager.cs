@@ -6,8 +6,12 @@ using TMPro;
 
 public class GameUIManager : UI_Base
 {
-    public PlayerManager player;
+    enum GameObjects
+    {
 
+    }
+
+    public PlayerManager player;
 
     [Header("HUD Window UI")]
     public QuickSlotsUI quickSlotsUI;
@@ -100,13 +104,11 @@ public class GameUIManager : UI_Base
         if (player.playerInventoryManager.currentSpell != null)
         {
             quickSlotsUI.UpdateCurrentSpellIcon(player.playerInventoryManager.currentSpell);
-
         }
 
         if (player.playerInventoryManager.currentConsumable != null)
         {
             quickSlotsUI.UpdateCurrentConsumableIcon(player.playerInventoryManager.currentConsumable);
-
         }
 
         soulCount.text = player.playerStatsManager.currentSoulCount.ToString();

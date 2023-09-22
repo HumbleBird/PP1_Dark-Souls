@@ -144,6 +144,7 @@ public class CharacterCreationLeftPannelUI : UI_Base
         m_ClassBtn.onClick.AddListener(() =>
         {
             m_CharacterCreationScreen.m_CharacterCreationMiddlePannelUI.m_goClasses.SetActive(true);
+            Camera.main.GetComponent<CharacterPreviewCamera>().ChangeCameraPreviewTransform(E_CharacterCreationPreviewCamera.All);
             AllPannelButonInteractable(false);
         });
     }
@@ -255,8 +256,9 @@ public class CharacterCreationLeftPannelUI : UI_Base
     {
         m_StartGameBtn.onClick.AddListener(() =>
         {
-            Managers.UI.ShowPopupUI<AnnouncementUI>();
-            //AllPannelButonInteractable(false);
+            // TODO 정말 완료했는지 팝업 창 뛰우기
+            // 1. 인트로 신으로 넘어가기
+            Managers.UI.ShowPopupUI<ConfirmationUI>();
         });
     }
 

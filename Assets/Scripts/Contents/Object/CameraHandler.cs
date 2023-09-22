@@ -63,14 +63,25 @@ public class CameraHandler : MonoBehaviour
         defaultPosition = cameraTransform.localPosition.z;
         ignoreLayers = ~(1 << 8 | 1 << 9 | 1 << 10 |  1 << 12);
         cameraObject = GetComponentInChildren<Camera>();
+        Managers.Camera.m_Camera = this;
     }
 
     private void Start()
     {
         enviromentLayer = LayerMask.NameToLayer("Enviroment");
+
+        if(Managers.Object.m_MyPlayer != null)
+        {
+            playerManager = Managers.Object.m_MyPlayer;
+            inputHandler = playerManager.GetComponent<InputHandler>();
+            targetTransform = playerManager.transform;
+        }
+    }
+
+    public void ReStart()
+    {
         playerManager = Managers.Object.m_MyPlayer;
         inputHandler = playerManager.GetComponent<InputHandler>();
-        playerManager = Managers.Object.m_MyPlayer;
         targetTransform = playerManager.transform;
     }
 
