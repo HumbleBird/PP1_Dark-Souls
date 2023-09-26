@@ -6,38 +6,18 @@ using TMPro;
 
 public class GameUIManager : UI_Base
 {
-    enum GameObjects
-    {
-
-    }
-
     public PlayerManager player;
 
-    [Header("HUD Window UI")]
-    public QuickSlotsUI quickSlotsUI;
-    public TextMeshProUGUI soulCount;
-    public HealthBar              m_HealthBar;
-    public StaminaBar             m_StaminaBar;
-    public FocusPointBar          m_FocusPointBar;
-    public PoisonBuildUpBar       m_PoisonBuildUpBar;
-    public PoisonAmountBar        m_PoisonAmountBar;
-    public GameObject crossHair;
-
     [Header("Player Private Window UI")]
-    public GameObject hudWindow;
-    public GameObject selectWindow;
-    public GameObject equipmentScreenWindow;
-    public GameObject weaponInventoryWindow;
-    public GameObject itemStatsWindow;
-    public GameObject levelUpWindow;
-    public ItemStatWindowUI itemStatWindowUI;
-    public EquipmentWindowUI equipmentWindowUI;
+    public PlayerPrivateUI m_PlayerPrivateUI;
+
+    [Header("HUD Window UI")]
+    public HUDUI m_HUDUI;
 
     [Header("Interact Window UI")]
-    public InteractableUI interactableUI;
-    public GameObject interactableUIGameObject;
-    public GameObject itemInteractableUIGameObject;
-    BonfireLitPopupUI bonfireLitPopupUI;
+    public InteractablePopupUI m_InteractablePopupUI;
+
+    public bool m_bIsShowingPopup = false;
 
     [Header("Equipment Window Slot Selected")]
     public bool rightHandSlot01Selected;
@@ -74,19 +54,19 @@ public class GameUIManager : UI_Base
     public Transform handEquipmentInventorySlotsParent;
     HandEquipmentInventorySlot[] handEquipmentInventorySlots;
 
-    private void Awake()
+    public override bool Init()
     {
-        quickSlotsUI = GetComponentInChildren<QuickSlotsUI>();
-        bonfireLitPopupUI = GetComponentInChildren<BonfireLitPopupUI>();
+        if (base.Init() == false)
+            return false;
 
-        m_HealthBar = GetComponentInChildren<HealthBar       >();
-        m_StaminaBar = GetComponentInChildren<StaminaBar      >();
-        m_FocusPointBar = GetComponentInChildren<FocusPointBar   >();
-        m_PoisonBuildUpBar = GetComponentInChildren<PoisonBuildUpBar>();
-        m_PoisonAmountBar = GetComponentInChildren<PoisonAmountBar>();
 
-        interactableUI = GetComponentInChildren<InteractableUI>();
+        AwakeInit();
 
+        return true;
+    }
+
+    private void AwakeInit()
+    {
         weaponInventorySlots = weaponInventorySlotsParent.GetComponentsInChildren<WeaponInventorySlot>();
         headEquipmentInventorySlots = headEquipmentInventorySlotsParent.GetComponentsInChildren<HeadEquipmentInventorySlot>();
         bodyEquipmentInventorySlots = bodyEquipmentInventorySlotsParent.GetComponentsInChildren<BodyEquipmentInventorySlot>();
@@ -99,19 +79,19 @@ public class GameUIManager : UI_Base
         player = Managers.Object.m_MyPlayer;
 
 
-        equipmentWindowUI.LoadWeaponsOnEquipmentScreen(player.playerInventoryManager);
+        m_HUDUI.equipmentWindowUI.LoadWeaponsOnEquipmentScreen(player.playerInventoryManager);
 
         if (player.playerInventoryManager.currentSpell != null)
         {
-            quickSlotsUI.UpdateCurrentSpellIcon(player.playerInventoryManager.currentSpell);
+            m_HUDUI.quickSlotsUI.UpdateCurrentSpellIcon(player.playerInventoryManager.currentSpell);
         }
 
         if (player.playerInventoryManager.currentConsumable != null)
         {
-            quickSlotsUI.UpdateCurrentConsumableIcon(player.playerInventoryManager.currentConsumable);
+            m_HUDUI.quickSlotsUI.UpdateCurrentConsumableIcon(player.playerInventoryManager.currentConsumable);
         }
 
-        soulCount.text = player.playerStatsManager.currentSoulCount.ToString();
+        m_HUDUI.m_textSoulCount.text = player.playerStatsManager.currentSoulCount.ToString();
     }
 
     public void UpdateUI()
@@ -211,20 +191,20 @@ public class GameUIManager : UI_Base
 
     public void OpenSelectWindow()
     {
-        selectWindow.SetActive(true);
+        m_PlayerPrivateUI.m_SelectWindowUI.gameObject.SetActive(true);
     }
 
     public void CloseSelectWindow()
     {
-        selectWindow.SetActive(false);
+        m_PlayerPrivateUI.m_SelectWindowUI.gameObject.SetActive(false);
     }
 
     public void CloseAllInventoryWindows()
     {
         ResetAllSelectedSlots();
-        weaponInventoryWindow.SetActive(false);
-        equipmentScreenWindow.SetActive(false);
-        itemStatsWindow.SetActive(false);
+        m_PlayerPrivateUI.m_goInventory.SetActive(false);
+        m_PlayerPrivateUI.m_Equipemnt.gameObject.SetActive(false);
+        m_PlayerPrivateUI.m_ItemStat.gameObject.SetActive(false);
     }
 
     public void ResetAllSelectedSlots()
@@ -238,10 +218,5 @@ public class GameUIManager : UI_Base
         bodyEquipmentSlotSelected = false;
         legEquipmentSlotSelected = false;
         handEquipmentSlotSelected = false;
-    }
-
-    public void ActivateBonfirePopup()
-    {
-        bonfireLitPopupUI.DisplayBonfireLitPopup();
     }
 }

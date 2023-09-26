@@ -62,6 +62,6 @@ public class WeaponEquipmentSlotUI : MonoBehaviour
 
         }
 
-        uiManager.itemStatWindowUI.UpdateWeaponItemStats(equipmentItem);
+        uiManager.m_HUDUI.itemStatWindowUI.UpdateWeaponItemStats(equipmentItem);
     }
 }

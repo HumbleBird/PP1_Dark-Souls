@@ -58,8 +58,6 @@ public class WeaponPickup : Interactable
 
     }
 
-    
-
     private void PickUpItem(PlayerManager playerManager)
     {
         PlayerInventoryManager playerInventoryManager;
@@ -74,10 +72,10 @@ public class WeaponPickup : Interactable
         playerAnimatorManager.PlayTargetAnimation("Pick Up Item", true);
         playerInventoryManager.weaponsInventory.Add(weapon);
 
-        playerManager.m_GameUIManager.itemInteractableUIGameObject.SetActive(true);
-        playerManager.m_GameUIManager.itemInteractableUIGameObject.GetComponentInChildren<TextMeshProUGUI>().text = weapon.itemName;
-        playerManager.m_GameUIManager.itemInteractableUIGameObject.GetComponentInChildren<Image>().sprite = weapon.itemIcon; 
-        // TODO UI Bind�� ��ġ��
+        playerManager.m_GameUIManager.m_InteractablePopupUI.m_InteractionText.gameObject.SetActive(false);
+        playerManager.m_GameUIManager.m_InteractablePopupUI.m_ItemText.gameObject.SetActive(true);
+        playerManager.m_GameUIManager.m_InteractablePopupUI.m_ItemText.text = weapon.itemName;
+        playerManager.m_GameUIManager.m_InteractablePopupUI.m_ItemImage.sprite = weapon.itemIcon;
 
         Destroy(gameObject);
 

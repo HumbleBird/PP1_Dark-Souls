@@ -40,7 +40,7 @@ public class BonfireInteractable : Interactable
         else
         {
             playermanager.playerAnimatorManager.PlayTargetAnimation("Bonfire_Activate", true);
-            playermanager.m_GameUIManager.ActivateBonfirePopup();
+            Managers.UI.ShowPopupUI<BonfireLitPopupUI>();
             hasBeenActivated = true;
             interactableText = "Rest";
             activationFX.gameObject.SetActive(true);

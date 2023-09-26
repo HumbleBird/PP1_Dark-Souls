@@ -2,17 +2,21 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class BonfireLitPopupUI : MonoBehaviour
+public class BonfireLitPopupUI : UI_Popup
 {
     CanvasGroup canvas;
 
-    // Start is called before the first frame update
-    private void Awake()
+    public override bool Init()
     {
+        if (base.Init() == false)
+            return false;
+
         canvas = GetComponent<CanvasGroup>();
+
+        return true;
     }
 
-    public void DisplayBonfireLitPopup()
+    public void Start()
     {
         StartCoroutine(FadeInPopup());
     }
@@ -42,7 +46,7 @@ public class BonfireLitPopupUI : MonoBehaviour
 
             if (fade <= 0.05f)
             {
-                gameObject.SetActive(false);
+                Managers.UI.ClosePopupUI();
             }
 
             yield return new WaitForSeconds(0.05f);

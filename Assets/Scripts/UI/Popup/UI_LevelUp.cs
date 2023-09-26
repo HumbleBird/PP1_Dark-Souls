@@ -400,7 +400,7 @@ public class UI_LevelUp : UI_Base
 
         // 소울 비용 계산
         playerManager.playerStatsManager.currentSoulCount -= m_iRequiredSouls;
-        playerManager.m_GameUIManager.soulCount.text = playerManager.playerStatsManager.currentSoulCount.ToString();
+        playerManager.m_GameUIManager.m_HUDUI.m_textSoulCount.text = playerManager.playerStatsManager.currentSoulCount.ToString();
         m_iRequiredSouls = 0;
 
         // Celar 

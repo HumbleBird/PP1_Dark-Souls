@@ -71,7 +71,7 @@ public class WeaponInventorySlot : MonoBehaviour
         uiManager.player.playerWeaponSlotManager.LoadWeaponOnSlot(uiManager.player.playerInventoryManager.rightWeapon, false);
         uiManager.player.playerWeaponSlotManager.LoadWeaponOnSlot(uiManager.player.playerInventoryManager.leftWeapon, true);
 
-        uiManager.equipmentWindowUI.LoadWeaponsOnEquipmentScreen(uiManager.player.playerInventoryManager);
+        uiManager.m_HUDUI.equipmentWindowUI.LoadWeaponsOnEquipmentScreen(uiManager.player.playerInventoryManager);
         uiManager.ResetAllSelectedSlots();
     }
 

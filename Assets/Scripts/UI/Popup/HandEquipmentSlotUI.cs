@@ -38,7 +38,7 @@ public class HandEquipmentSlotUI : MonoBehaviour
         uiManager.handEquipmentSlotSelected = true;
 
         // 업데이트
-        uiManager.itemStatWindowUI.UpdateArmorItemStats((EquipmentItem)equipmentItem);
+        uiManager.m_HUDUI.itemStatWindowUI.UpdateArmorItemStats((EquipmentItem)equipmentItem);
 
         // EquipmentScreenWindow 닫기
         //uiManager.EquipmentScreenWindow.gameObject.SetActive(false);

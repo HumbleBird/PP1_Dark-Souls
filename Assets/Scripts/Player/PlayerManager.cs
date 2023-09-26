@@ -50,7 +50,7 @@ public class PlayerManager : CharacterManager
     {
         cameraHandler = Managers.Camera.m_Camera;
         m_GameUIManager = FindObjectOfType<GameUIManager>();
-        m_GameUIManager.equipmentWindowUI.LoadWeaponsOnEquipmentScreen(playerInventoryManager);
+        m_GameUIManager.m_HUDUI.equipmentWindowUI.LoadWeaponsOnEquipmentScreen(playerInventoryManager);
 
         Managers.Camera.m_Camera.ReStart();
     }
@@ -118,8 +118,10 @@ public class PlayerManager : CharacterManager
                 if (interactable != null)
                 {
                     string interactableText = interactable.interactableText;
-                    m_GameUIManager.interactableUI.interactableText.text = interactableText;
-                    m_GameUIManager.interactableUIGameObject.SetActive(true);
+                    InteractablePopupUI ui = Managers.UI.ShowPopupUI<InteractablePopupUI>();
+                    ui.m_InteractionText.text = interactableText;
+                    m_GameUIManager.m_bIsShowingPopup = true;
+                    m_GameUIManager.m_InteractablePopupUI = ui;
 
                     if (inputHandler.a_Input)
                     {
@@ -130,14 +132,10 @@ public class PlayerManager : CharacterManager
         }
         else
         {
-            if (m_GameUIManager.interactableUIGameObject != null)
+            if (m_GameUIManager.m_bIsShowingPopup  == true && inputHandler.a_Input)
             {
-                m_GameUIManager.interactableUIGameObject.SetActive(false);
-            }
-
-            if (m_GameUIManager.itemInteractableUIGameObject != null && inputHandler.a_Input)
-            {
-                m_GameUIManager.itemInteractableUIGameObject.SetActive(false);
+                Managers.UI.ClosePopupUI();
+                m_GameUIManager.m_bIsShowingPopup = false;
             }
         }
     }

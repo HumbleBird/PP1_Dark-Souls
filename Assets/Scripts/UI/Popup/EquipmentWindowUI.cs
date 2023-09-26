@@ -3,8 +3,18 @@ using System.Collections.Generic;
 using UnityEngine;
 using static Define;
 
-public class EquipmentWindowUI : MonoBehaviour
+public class EquipmentWindowUI : UI_Popup
 {
+    public override bool Init()
+    {
+        if (base.Init() == false)
+            return false;
+
+        gameObject.SetActive(false);
+
+        return true;
+    }
+
     public WeaponEquipmentSlotUI[] weaponEquipmentSlotsUI;
     public HeadEquipmentSlotUI headEquipmentSlotUI;
     public BodyEquipmentSlotUI bodyEquipmentSlotUI;

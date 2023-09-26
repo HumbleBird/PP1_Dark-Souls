@@ -44,7 +44,7 @@ public class PlayerWeaponSlotManager : CharacterWeaponSlotManager
                 player.animator.runtimeAnimatorController = weaponItem.weaponController;
             }
 
-            player.m_GameUIManager.quickSlotsUI.UpdateWeaponQuickSlotUI(isLeft, weaponItem);
+            player.m_GameUIManager.m_HUDUI.quickSlotsUI.UpdateWeaponQuickSlotUI(isLeft, weaponItem);
         }
         else
         {
@@ -68,7 +68,7 @@ public class PlayerWeaponSlotManager : CharacterWeaponSlotManager
 
             }
 
-            player.m_GameUIManager.quickSlotsUI.UpdateWeaponQuickSlotUI(isLeft, unarmWeapon);
+            player.m_GameUIManager.m_HUDUI.quickSlotsUI.UpdateWeaponQuickSlotUI(isLeft, unarmWeapon);
         }
 
     }

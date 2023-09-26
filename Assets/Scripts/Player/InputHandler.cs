@@ -335,7 +335,7 @@ public class InputHandler : MonoBehaviour
             if (player.isAiming)
             {
                 player.isAiming = false;
-                player.m_GameUIManager.crossHair.SetActive(false);
+                player.m_GameUIManager.m_HUDUI.m_goCrosshair.SetActive(false);
                 player.cameraHandler.ResetAimCameraRotations();
             }
 
@@ -400,13 +400,13 @@ public class InputHandler : MonoBehaviour
             {
                 player.m_GameUIManager.OpenSelectWindow();
                 player.m_GameUIManager.UpdateUI();
-                player.m_GameUIManager.hudWindow.SetActive(false);
+                player.m_GameUIManager.m_HUDUI.gameObject.SetActive(false);
             }
             else
             {
                 player.m_GameUIManager.CloseSelectWindow();
                 player.m_GameUIManager.CloseAllInventoryWindows();
-                player.m_GameUIManager.hudWindow.SetActive(true);
+                player.m_GameUIManager.m_HUDUI.gameObject.SetActive(true);
             }
         }
     }
