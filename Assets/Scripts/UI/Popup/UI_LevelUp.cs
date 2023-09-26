@@ -5,259 +5,407 @@ using TMPro;
 using UnityEngine.UI;
 using System;
 
-public class UI_LevelUp : MonoBehaviour
+public class UI_LevelUp : UI_Base
 {
-    public PlayerManager playerManager;
-    public Button confirmLevelUpButton;
-
-    [Header("Player Level")]
-    public int currentPlayerLevel;
-    public int projectedPlayerLevel;
-    public TextMeshProUGUI currentPlayerLevelText;
-    public TextMeshProUGUI projectedPlayerLevelText;
-
-    [Header("Souls")]
-    public TextMeshProUGUI currentSoulsText;
-    public TextMeshProUGUI soulsRequiredToLevelUpText;
-    private int soulsRequiredToLevelUp;
-    public int baseLevelUpCost = 5;
-
-    [Header("Health")]
-    public Slider healthSlider;
-    public TextMeshProUGUI currentHealthLevelText;
-    public TextMeshProUGUI projectedHealthLevelText;
-
-    [Header("Stamina")]
-    public Slider staminaSlider;
-    public TextMeshProUGUI currentStaminaLevelText;
-    public TextMeshProUGUI projectedStaminaLevelText;
-
-    [Header("Focus")]
-    public Slider focusSlider;
-    public TextMeshProUGUI currentFocusLevelText;
-    public TextMeshProUGUI projectedFocusLevelText;
-
-    [Header("HealthPoise")]
-    public Slider healthPoiseSlider;
-    public TextMeshProUGUI currentHealthPoiseLevelText;
-    public TextMeshProUGUI projectedHealthPoiseLevelText;
-
-    [Header("Strength")]
-    public Slider strengthSlider;
-    public TextMeshProUGUI currentStrengthLevelText;
-    public TextMeshProUGUI projectedStrengthLevelText;
-
-    [Header("Dexterity")]
-    public Slider dexteritySlider;
-    public TextMeshProUGUI currentDexterityLevelText;
-    public TextMeshProUGUI projectedDexterityLevelText;
-
-    [Header("Faith")]
-    public Slider faithSlider;
-    public TextMeshProUGUI currentFaithLevelText;
-    public TextMeshProUGUI projectedFaithLevelText;
-
-    [Header("Intelligence")]
-    public Slider intelligenceSlider;
-    public TextMeshProUGUI currentIntelligenceLevelText;
-    public TextMeshProUGUI projectedIntelligenceLevelText;
-
-    private void Awake()
+    enum Texts
     {
-        playerManager = FindObjectOfType<PlayerManager>();
+        // Player Level
+        CurrentPlayerLevelText,
+        ProjectedPlayerLevelText,
+
+        // Souls
+        CurrentSoulsText,
+        CaluateToSoulsText,
+        SoulsRequiredToLevelUpText,
+
+        // Attributes
+        CurrentVigorLevelText,
+        CurrentAttunementLevelText,
+        CurrentEnduranceLevelText,
+        CurrentVitalityLevelText,
+        CurrentStrengthLevelText,
+        CurrentDexterityLevelText,
+        CurrentIntelligenceLevelText,
+        CurrentFaithLevelText,
+        CurrentLuckLevelText,
+
+        ProjectedVigorLevelText         ,
+        ProjectedAttunementLevelText            ,
+        ProjectedEnduranceLevelText     ,
+        ProjectedVitalityLevelText      ,
+        ProjectedStrengthLevelText      ,
+        ProjectedDexterityLevelText     ,
+        ProjectedIntelligenceLevelText ,
+        ProjectedFaithLevelText,
+        ProjectedLuckLevelText
     }
 
-    // Update all of the Stats on the UI to the Player's current state
-    private void OnEnable()
+    enum GameObjects
     {
-        currentPlayerLevel = playerManager.playerStatsManager.playerLevel;
-        currentPlayerLevelText.text = currentPlayerLevel.ToString();
+        VigorArrow              ,
+        AttunementArrow         ,
+        EnduranceArrow          ,
+        VitalityArrow           ,
+        StrengthArrow           ,
+        DexterityArrow              ,
+        FaithArrow              ,
+        IntelligenceArrow           ,
+        LuckArrow,
 
-        projectedPlayerLevel = playerManager.playerStatsManager.playerLevel;
-        projectedPlayerLevelText.text = projectedPlayerLevel.ToString();
+        ConfirmBtn,
+    }
 
-        healthSlider.value = playerManager.playerStatsManager.healthLevel;
-        healthSlider.minValue = playerManager.playerStatsManager.healthLevel;
-        healthSlider.maxValue = 99;
-        currentHealthLevelText.text = playerManager.playerStatsManager.healthLevel.ToString();
-        projectedHealthLevelText.text = playerManager.playerStatsManager.healthLevel.ToString();
+    public PlayerManager playerManager;
 
+    int m_iCurrentPlayerLevel               ;
+    int m_iProjectedPlayerLevel             ;
+    int m_iCurrentSouls                     ;
+    int m_iRequiredSouls                    ;
+    int m_iProjectedVigorLevel              ;
+    int m_iProjectedAttunementLevel         ;
+    int m_iProjectedEnduranceLevel                  ;
+    int m_iProjectedVitalityLevel                   ;
+    int m_iProjectedStrengthLevel                   ;
+    int m_iProjectedDexterityLevel                  ;
+    int m_iProjectedFaithLevel              ;
+    int m_iProjectedIntelligenceLevel           ;
+    int m_iProjectedLuckLevel               ;
 
-        staminaSlider.value = playerManager.playerStatsManager.staminaLevel;
-        staminaSlider.minValue = playerManager.playerStatsManager.staminaLevel;
-        staminaSlider.maxValue = 99;
-        currentStaminaLevelText.text = playerManager.playerStatsManager.staminaLevel.ToString();
-        projectedStaminaLevelText.text = playerManager.playerStatsManager.staminaLevel.ToString();
+    public int baseLevelUpCost = 5;
 
+    public override bool Init()
+    {
+        if (base.Init() == false)
+            return false;
 
-        focusSlider.value = playerManager.playerStatsManager.focusLevel;
-        focusSlider.minValue = playerManager.playerStatsManager.focusLevel;
-        focusSlider.maxValue = 99;
-        currentFocusLevelText.text = playerManager.playerStatsManager.focusLevel.ToString();
-        projectedFocusLevelText.text = playerManager.playerStatsManager.focusLevel.ToString();
+        BindText(typeof(Texts));
+        BindObject(typeof(GameObjects));
 
+        GetObject((int)GameObjects.VigorArrow        ).BindEvent(() => UpdateAttributesStat(0)); ;
+        GetObject((int)GameObjects.AttunementArrow   ).BindEvent(() => UpdateAttributesStat(1)); ;
+        GetObject((int)GameObjects.EnduranceArrow    ).BindEvent(() => UpdateAttributesStat(2)); ;
+        GetObject((int)GameObjects.VitalityArrow     ).BindEvent(() => UpdateAttributesStat(3)); ;
+        GetObject((int)GameObjects.StrengthArrow     ).BindEvent(() => UpdateAttributesStat(4)); ;
+        GetObject((int)GameObjects.DexterityArrow    ).BindEvent(() => UpdateAttributesStat(5)); ;
+        GetObject((int)GameObjects.FaithArrow        ).BindEvent(() => UpdateAttributesStat(6)); ;
+        GetObject((int)GameObjects.IntelligenceArrow ).BindEvent(() => UpdateAttributesStat(7)); ;
+        GetObject((int)GameObjects.LuckArrow ).BindEvent(() => UpdateAttributesStat(8)); ;
 
-        healthPoiseSlider.value = playerManager.playerStatsManager.poiseLevel;
-        healthPoiseSlider.minValue = playerManager.playerStatsManager.poiseLevel;
-        healthPoiseSlider.maxValue = 99;
-        currentHealthPoiseLevelText.text = playerManager.playerStatsManager.poiseLevel.ToString();
-        projectedHealthPoiseLevelText.text = playerManager.playerStatsManager.poiseLevel.ToString();
+        GetObject((int)GameObjects.ConfirmBtn ).BindEvent(() => ConfirmPlayerLevelUpStates()); ;
 
-
-        strengthSlider.value = playerManager.playerStatsManager.m_iStrengthLevel;
-        strengthSlider.minValue = playerManager.playerStatsManager.m_iStrengthLevel;
-        strengthSlider.maxValue = 99;
-        currentStrengthLevelText.text = playerManager.playerStatsManager.m_iStrengthLevel.ToString();
-        projectedStrengthLevelText.text = playerManager.playerStatsManager.m_iStrengthLevel.ToString();
-
-
-        dexteritySlider.value = playerManager.playerStatsManager.m_iDexterityLevel;
-        dexteritySlider.minValue = playerManager.playerStatsManager.m_iDexterityLevel;
-        dexteritySlider.maxValue = 99;
-        currentDexterityLevelText.text = playerManager.playerStatsManager.m_iDexterityLevel.ToString();
-        projectedDexterityLevelText.text = playerManager.playerStatsManager.m_iDexterityLevel.ToString();
-
-
-        faithSlider.value = playerManager.playerStatsManager.m_iIntelligenceLevel;
-        faithSlider.minValue = playerManager.playerStatsManager.m_iIntelligenceLevel;
-        faithSlider.maxValue = 99;
-        currentFaithLevelText.text = playerManager.playerStatsManager.m_iFaithLevel.ToString();
-        projectedFaithLevelText.text = playerManager.playerStatsManager.m_iFaithLevel.ToString();
-
-
-        intelligenceSlider.value = playerManager.playerStatsManager.m_iFaithLevel;
-        intelligenceSlider.minValue = playerManager.playerStatsManager.m_iFaithLevel;
-        intelligenceSlider.maxValue = 99;
-        currentIntelligenceLevelText.text = playerManager.playerStatsManager.m_iIntelligenceLevel.ToString();
-        projectedIntelligenceLevelText.text = playerManager.playerStatsManager.m_iIntelligenceLevel.ToString();
-
-        currentSoulsText.text = playerManager.playerStatsManager.currentSoulCount.ToString();
-
-        UpdateProjectedPlayerLevel();
+        return true;
     }
 
     public void Start()
     {
-        healthSlider.onValueChanged.AddListener(delegate { UpdateHealthLevelSlider(); });
-        staminaSlider.onValueChanged.AddListener(delegate { UpdateStaminaLevelSlider(); });
-        focusSlider.onValueChanged.AddListener(delegate { UpdateFocusLevelSlider(); });
-        healthPoiseSlider.onValueChanged.AddListener(delegate { UpdateHealthPoiseLevelSlider(); });
-        strengthSlider.onValueChanged.AddListener(delegate { UpdateStrengthLevelSlider(); });
-        dexteritySlider.onValueChanged.AddListener(delegate { UpdateDexterityLevelSlider(); });
-        faithSlider.onValueChanged.AddListener(delegate { UpdateFaithLevelSlider(); });
-        intelligenceSlider.onValueChanged.AddListener(delegate { UpdateIntelligenceLevelSlider(); });
+        playerManager = Managers.Object.m_MyPlayer;
 
-        confirmLevelUpButton.gameObject.BindEvent(() => { ConfirmPlayerLevelUpStates(); });
-    }
-
-    // Update Player's state to the projected state, providing they have enough souls to confirm
-    public void ConfirmPlayerLevelUpStates()
-    {
-        playerManager.playerStatsManager.playerLevel = projectedPlayerLevel;
-        playerManager.playerStatsManager.healthLevel = Mathf.RoundToInt(healthSlider.value);
-        playerManager.playerStatsManager.staminaLevel = Mathf.RoundToInt(staminaSlider.value);
-        playerManager.playerStatsManager.focusLevel = Mathf.RoundToInt(focusSlider.value);
-        playerManager.playerStatsManager.poiseLevel = Mathf.RoundToInt(healthPoiseSlider.value);
-        playerManager.playerStatsManager.m_iStrengthLevel = Mathf.RoundToInt(strengthSlider.value);
-        playerManager.playerStatsManager.m_iDexterityLevel = Mathf.RoundToInt(dexteritySlider.value);
-        playerManager.playerStatsManager.m_iIntelligenceLevel = Mathf.RoundToInt(faithSlider.value);
-        playerManager.playerStatsManager.m_iFaithLevel = Mathf.RoundToInt(intelligenceSlider.value);
-
-        playerManager.playerStatsManager.maxHealth = playerManager.playerStatsManager.SetMaxHealthFromHealthLevel();
-        playerManager.playerStatsManager.maxStamina = playerManager.playerStatsManager.SetMaxStaminaFromStaminaLevel();
-        playerManager.playerStatsManager.maxfocusPoint = playerManager.playerStatsManager.SetMaxfocusPointsFromStaminaLevel();
-
-        playerManager.playerStatsManager.currentSoulCount -= soulsRequiredToLevelUp;
-        playerManager.m_GameUIManager.soulCount.text = playerManager.playerStatsManager.currentSoulCount.ToString();
-
-        playerManager.playerStatsManager.CalculateAndSetMaxEquipload();
+        InfoReset();
 
         gameObject.SetActive(false);
     }
 
-    private void CalculateSoulCostToLevelUp()
+    // 초기 셋팅
+    private void OnEnable()
     {
-        for (int i = 0; i < projectedPlayerLevel; i++)
-        {
-            soulsRequiredToLevelUp += Mathf.RoundToInt((projectedPlayerLevel * baseLevelUpCost) * 1.5f);
-        }
+        if (playerManager == null)
+            return;
+
+        InfoReset();
     }
 
-    // Update the projected player's total level, by adding up all the projected level up stats
+    void InfoReset()
+    {
+        // 플레이어 레벨
+        m_iCurrentPlayerLevel = playerManager.playerStatsManager.playerLevel;
+        GetText((int)Texts.CurrentPlayerLevelText).text = m_iCurrentPlayerLevel.ToString();
+        GetText((int)Texts.ProjectedPlayerLevelText).text = m_iCurrentPlayerLevel.ToString();
+
+        // 소울
+        m_iCurrentSouls = playerManager.playerStatsManager.currentSoulCount;
+        GetText((int)Texts.CurrentSoulsText).text = m_iCurrentSouls.ToString();
+        GetText((int)Texts.SoulsRequiredToLevelUpText).text = "0";
+        GetText((int)Texts.SoulsRequiredToLevelUpText).color = new Color(1f, 1f, 1f);
+
+        // 스텟
+        m_iProjectedVigorLevel = playerManager.playerStatsManager.m_iVigorLevel;
+        GetText((int)Texts.CurrentVigorLevelText).text = m_iProjectedVigorLevel.ToString();
+        GetText((int)Texts.ProjectedVigorLevelText).text = m_iProjectedVigorLevel.ToString();
+        GetText((int)Texts.ProjectedVigorLevelText).color = new Color(1f, 1f, 1f);
+
+        m_iProjectedAttunementLevel = playerManager.playerStatsManager.m_iAttunementLevel;
+        GetText((int)Texts.CurrentAttunementLevelText).text = m_iProjectedAttunementLevel.ToString();
+        GetText((int)Texts.ProjectedAttunementLevelText).text = m_iProjectedAttunementLevel.ToString();
+        GetText((int)Texts.ProjectedAttunementLevelText).color = new Color(1f, 1f, 1f);
+
+        m_iProjectedEnduranceLevel = playerManager.playerStatsManager.m_iEnduranceLevel;
+        GetText((int)Texts.CurrentEnduranceLevelText).text = m_iProjectedEnduranceLevel.ToString();
+        GetText((int)Texts.ProjectedEnduranceLevelText).text = m_iProjectedEnduranceLevel.ToString();
+        GetText((int)Texts.ProjectedEnduranceLevelText).color = new Color(1f, 1f, 1f);
+
+        m_iProjectedVitalityLevel = playerManager.playerStatsManager.m_iVitalityLevel;
+        GetText((int)Texts.CurrentVitalityLevelText).text = m_iProjectedVitalityLevel.ToString();
+        GetText((int)Texts.ProjectedVitalityLevelText).text = m_iProjectedVitalityLevel.ToString();
+        GetText((int)Texts.ProjectedVitalityLevelText).color = new Color(1f, 1f, 1f);
+
+        m_iProjectedStrengthLevel = playerManager.playerStatsManager.m_iStrengthLevel;
+        GetText((int)Texts.CurrentStrengthLevelText).text = m_iProjectedStrengthLevel.ToString();
+        GetText((int)Texts.ProjectedStrengthLevelText).text = m_iProjectedStrengthLevel.ToString();
+        GetText((int)Texts.ProjectedStrengthLevelText).color = new Color(1f, 1f, 1f);
+
+        m_iProjectedDexterityLevel = playerManager.playerStatsManager.m_iDexterityLevel;
+        GetText((int)Texts.CurrentDexterityLevelText).text = m_iProjectedDexterityLevel.ToString();
+        GetText((int)Texts.ProjectedDexterityLevelText).text = m_iProjectedDexterityLevel.ToString();
+        GetText((int)Texts.ProjectedDexterityLevelText).color = new Color(1f, 1f, 1f);
+
+        m_iProjectedIntelligenceLevel = playerManager.playerStatsManager.m_iIntelligenceLevel;
+        GetText((int)Texts.CurrentFaithLevelText).text = m_iProjectedIntelligenceLevel.ToString();
+        GetText((int)Texts.ProjectedFaithLevelText).text = m_iProjectedIntelligenceLevel.ToString();
+        GetText((int)Texts.ProjectedFaithLevelText).color = new Color(1f, 1f, 1f);
+
+        m_iProjectedFaithLevel = playerManager.playerStatsManager.m_iFaithLevel;
+        GetText((int)Texts.CurrentIntelligenceLevelText).text = m_iProjectedFaithLevel.ToString();
+        GetText((int)Texts.ProjectedIntelligenceLevelText).text = m_iProjectedFaithLevel.ToString();
+        GetText((int)Texts.ProjectedIntelligenceLevelText).color = new Color(1f, 1f, 1f);
+
+        m_iProjectedLuckLevel = playerManager.playerStatsManager.m_iLuckLevel;
+        GetText((int)Texts.CurrentIntelligenceLevelText).text = m_iProjectedLuckLevel.ToString();
+        GetText((int)Texts.ProjectedIntelligenceLevelText).text = m_iProjectedLuckLevel.ToString();
+        GetText((int)Texts.ProjectedIntelligenceLevelText).color = new Color(1f, 1f, 1f);
+
+        UpdateProjectedPlayerLevel();
+    }
+
+    // 화살표에 따른 해당 스텟 다음 레벨 올림
+    public void UpdateAttributesStat(int num)
+    {
+        if (num == 0)
+            m_iProjectedVigorLevel++;
+        else if (num == 1)
+            m_iProjectedAttunementLevel++;
+        else if (num == 2)
+            m_iProjectedEnduranceLevel++;
+        else if (num == 3)
+            m_iProjectedVitalityLevel++;
+        else if (num == 4)
+            m_iProjectedStrengthLevel++;
+        else if (num == 5)
+            m_iProjectedDexterityLevel++;
+        else if (num == 6)
+            m_iProjectedIntelligenceLevel++;
+        else if (num == 7)
+            m_iProjectedFaithLevel++;
+        else if (num == 8)
+            m_iProjectedLuckLevel++;
+
+        // 해당 스텟을 올리기 전에 돈이 충분한지. 그러니까 다음 업그레이드 비용이 있는지를 체크
+        if (playerManager.playerStatsManager.currentSoulCount <= CalculateSoulCostToLevelUp())
+        {
+            if (num == 0)
+                m_iProjectedVigorLevel--;
+            else if (num == 1)
+                m_iProjectedAttunementLevel--;
+            else if (num == 2)
+                m_iProjectedEnduranceLevel--;
+            else if (num == 3)
+                m_iProjectedVitalityLevel--;
+            else if (num == 4)
+                m_iProjectedStrengthLevel--;
+            else if (num == 5)
+                m_iProjectedDexterityLevel--;
+            else if (num == 6)
+                m_iProjectedIntelligenceLevel--;
+            else if (num == 7)
+                m_iProjectedFaithLevel--;
+            else if (num == 8)
+                m_iProjectedLuckLevel--;
+            return;
+        }
+
+        // UI Stat 표시
+        GetText((int)Texts.ProjectedVigorLevelText).text = m_iProjectedVigorLevel.ToString();
+        GetText((int)Texts.ProjectedAttunementLevelText).text = m_iProjectedAttunementLevel.ToString();
+        GetText((int)Texts.ProjectedEnduranceLevelText).text = m_iProjectedEnduranceLevel.ToString();
+        GetText((int)Texts.ProjectedVitalityLevelText).text = m_iProjectedVitalityLevel.ToString();
+        GetText((int)Texts.ProjectedStrengthLevelText).text = m_iProjectedStrengthLevel.ToString();
+        GetText((int)Texts.ProjectedDexterityLevelText).text = m_iProjectedDexterityLevel.ToString();
+        GetText((int)Texts.ProjectedFaithLevelText).text = m_iProjectedIntelligenceLevel.ToString();
+        GetText((int)Texts.ProjectedIntelligenceLevelText).text = m_iProjectedFaithLevel.ToString();
+        GetText((int)Texts.ProjectedIntelligenceLevelText).text = m_iProjectedLuckLevel.ToString();
+
+        m_iRequiredSouls = 0;
+        m_iRequiredSouls = CalculateSoulCostToLevelUp();
+        UpdateProjectedPlayerLevel();
+    }
+
+    // 플레이어 레벨 변화 수치 계산
     private void UpdateProjectedPlayerLevel()
     {
-        soulsRequiredToLevelUp = 0;
+        // 플레이어 레벨 계산
+        int sum = 0;
 
-        projectedPlayerLevel = currentPlayerLevel;
-        projectedPlayerLevel = projectedPlayerLevel + Mathf.RoundToInt(healthSlider.value) - playerManager.playerStatsManager.healthLevel;
-        projectedPlayerLevel = projectedPlayerLevel + Mathf.RoundToInt(staminaSlider.value) - playerManager.playerStatsManager.staminaLevel;
-        projectedPlayerLevel = projectedPlayerLevel + Mathf.RoundToInt(focusSlider.value) - playerManager.playerStatsManager.focusLevel;
-        projectedPlayerLevel = projectedPlayerLevel + Mathf.RoundToInt(healthPoiseSlider.value) - playerManager.playerStatsManager.poiseLevel;
-        projectedPlayerLevel = projectedPlayerLevel + Mathf.RoundToInt(strengthSlider.value) - playerManager.playerStatsManager.m_iStrengthLevel;
-        projectedPlayerLevel = projectedPlayerLevel + Mathf.RoundToInt(dexteritySlider.value) - playerManager.playerStatsManager.m_iDexterityLevel;
-        projectedPlayerLevel = projectedPlayerLevel + Mathf.RoundToInt(faithSlider.value) - playerManager.playerStatsManager.m_iIntelligenceLevel;
-        projectedPlayerLevel = projectedPlayerLevel + Mathf.RoundToInt(intelligenceSlider.value) - playerManager.playerStatsManager.m_iFaithLevel;
-        projectedPlayerLevelText.text = projectedPlayerLevel.ToString();
+        sum = sum + (m_iProjectedVigorLevel - playerManager.playerStatsManager.m_iVigorLevel);
+        sum = sum + (m_iProjectedAttunementLevel - playerManager.playerStatsManager.m_iAttunementLevel);
+        sum = sum + (m_iProjectedEnduranceLevel - playerManager.playerStatsManager.m_iEnduranceLevel);
+        sum = sum + (m_iProjectedVitalityLevel - playerManager.playerStatsManager.m_iVitalityLevel);
+        sum = sum + (m_iProjectedStrengthLevel - playerManager.playerStatsManager.m_iStrengthLevel);
+        sum = sum + (m_iProjectedDexterityLevel - playerManager.playerStatsManager.m_iDexterityLevel);
+        sum = sum + (m_iProjectedIntelligenceLevel - playerManager.playerStatsManager.m_iIntelligenceLevel);
+        sum = sum + (m_iProjectedFaithLevel - playerManager.playerStatsManager.m_iFaithLevel);
+        sum = sum + (m_iProjectedLuckLevel - playerManager.playerStatsManager.m_iLuckLevel);
 
-        CalculateSoulCostToLevelUp();
-        soulsRequiredToLevelUpText.text = soulsRequiredToLevelUp.ToString();
+        m_iProjectedPlayerLevel = m_iCurrentPlayerLevel + sum;
+        GetText((int)Texts.ProjectedPlayerLevelText).text = m_iProjectedPlayerLevel.ToString();
 
-        if (playerManager.playerStatsManager.currentSoulCount < soulsRequiredToLevelUp)
+        GetText((int)Texts.SoulsRequiredToLevelUpText).text = m_iRequiredSouls.ToString();
+        GetText((int)Texts.CaluateToSoulsText).text = (playerManager.playerStatsManager.currentSoulCount - m_iRequiredSouls).ToString();
+
+        SetLevelTextColor();
+    }
+
+    // 소울 코스트 계산
+    private int CalculateSoulCostToLevelUp()
+    {
+        int sum = 0;
+        for (int i = 0; i < m_iProjectedPlayerLevel; i++)
         {
-            confirmLevelUpButton.interactable = false;
+            sum += Mathf.RoundToInt((m_iProjectedPlayerLevel * baseLevelUpCost) * 1.5f);
         }
+
+        return sum;
+    }
+
+    // 변동 수치 값 텍스트 컬러 변화
+    void SetLevelTextColor()
+    {
+        // 플레이어 레벨
+        if (m_iCurrentPlayerLevel == m_iProjectedPlayerLevel)
+            GetText((int)Texts.CaluateToSoulsText).color = new Color(1f, 1f, 1f);
         else
-        {
-            confirmLevelUpButton.interactable = true;
+            GetText((int)Texts.CaluateToSoulsText).color = new Color(0f, 0f, 1f);
 
-        }
+        // 코스트 
+        if (m_iRequiredSouls == 0)
+            GetText((int)Texts.CaluateToSoulsText).color = new Color(1f, 1f, 1f);
+        else
+            GetText((int)Texts.CaluateToSoulsText).color = new Color(1f, 0f, 0f);
+
+        // 스텟
+
+        // Vigor
+        if (playerManager.playerStatsManager.m_iVigorLevel == m_iProjectedVigorLevel)
+            GetText((int)Texts.ProjectedVigorLevelText).color = new Color(1f, 1f, 1f);
+        else
+            GetText((int)Texts.ProjectedVigorLevelText).color = new Color(0f, 0f, 1f);
+
+        // Attunement
+        if (playerManager.playerStatsManager.m_iAttunementLevel == m_iProjectedAttunementLevel)
+            GetText((int)Texts.ProjectedAttunementLevelText).color = new Color(1f, 1f, 1f);
+        else
+            GetText((int)Texts.ProjectedAttunementLevelText).color = new Color(0f, 0f, 1f);
+
+        // Endurance
+        if (playerManager.playerStatsManager.m_iEnduranceLevel == m_iProjectedEnduranceLevel)
+            GetText((int)Texts.ProjectedEnduranceLevelText).color = new Color(1f, 1f, 1f);
+        else
+            GetText((int)Texts.ProjectedEnduranceLevelText).color = new Color(0f, 0f, 1f);
+
+        // Vitality
+        if (playerManager.playerStatsManager.m_iVitalityLevel == m_iProjectedVitalityLevel)
+            GetText((int)Texts.ProjectedVitalityLevelText).color = new Color(1f, 1f, 1f);
+        else
+            GetText((int)Texts.ProjectedVitalityLevelText).color = new Color(0f, 0f, 1f);
+
+        // Strength
+        if (playerManager.playerStatsManager.m_iStrengthLevel == m_iProjectedStrengthLevel)
+            GetText((int)Texts.ProjectedStrengthLevelText).color = new Color(1f, 1f, 1f);
+        else
+            GetText((int)Texts.ProjectedStrengthLevelText).color = new Color(0f, 0f, 1f);
+
+        // Dexterity
+        if (playerManager.playerStatsManager.m_iDexterityLevel == m_iProjectedDexterityLevel)
+            GetText((int)Texts.ProjectedDexterityLevelText).color = new Color(1f, 1f, 1f);
+        else
+            GetText((int)Texts.ProjectedDexterityLevelText).color = new Color(0f, 0f, 1f);
+
+        // Intelligen
+        if (playerManager.playerStatsManager.m_iIntelligenceLevel == m_iProjectedIntelligenceLevel)
+            GetText((int)Texts.ProjectedIntelligenceLevelText).color = new Color(1f, 1f, 1f);
+        else
+            GetText((int)Texts.ProjectedIntelligenceLevelText).color = new Color(0f, 0f, 1f);
+
+        // Faith
+        if (playerManager.playerStatsManager.m_iFaithLevel == m_iProjectedFaithLevel)
+            GetText((int)Texts.ProjectedFaithLevelText).color = new Color(1f, 1f, 1f);
+        else
+            GetText((int)Texts.ProjectedFaithLevelText).color = new Color(0f, 0f, 1f);
+
+        // Luck
+        if (playerManager.playerStatsManager.m_iLuckLevel == m_iProjectedLuckLevel)
+            GetText((int)Texts.ProjectedLuckLevelText).color = new Color(1f, 1f, 1f);
+        else
+            GetText((int)Texts.ProjectedLuckLevelText).color = new Color(0f, 0f, 1f);
     }
 
-    public void UpdateHealthLevelSlider()
-    {
-        projectedHealthLevelText.text = healthSlider.value.ToString();
-        UpdateProjectedPlayerLevel();
-    }
 
-    public void UpdateStaminaLevelSlider()
-    {
-        projectedStaminaLevelText.text = staminaSlider.value.ToString();
-        UpdateProjectedPlayerLevel();
-    }
 
-    public void UpdateFocusLevelSlider()
+    // 변화 수치를 확정 업데이트
+    public void ConfirmPlayerLevelUpStates()
     {
-        projectedFocusLevelText.text = focusSlider.value.ToString();
-        UpdateProjectedPlayerLevel();
-    }
+        // 플레이어 레벨 변경
+        playerManager.playerStatsManager.playerLevel = m_iProjectedPlayerLevel;
 
-    public void UpdateHealthPoiseLevelSlider()
-    {
-        projectedHealthPoiseLevelText.text = healthPoiseSlider.value.ToString();
-        UpdateProjectedPlayerLevel();
-    }
+        // 업데이트 된 특성 레벨 변경
+        playerManager.playerStatsManager.m_iVigorLevel = m_iProjectedVigorLevel;
+        playerManager.playerStatsManager.m_iAttunementLevel = m_iProjectedAttunementLevel;
+        playerManager.playerStatsManager.m_iEnduranceLevel = m_iProjectedEnduranceLevel;
+        playerManager.playerStatsManager.m_iVitalityLevel = m_iProjectedVitalityLevel;
+        playerManager.playerStatsManager.m_iStrengthLevel = m_iProjectedStrengthLevel;
+        playerManager.playerStatsManager.m_iDexterityLevel = m_iProjectedDexterityLevel;
+        playerManager.playerStatsManager.m_iIntelligenceLevel = m_iProjectedIntelligenceLevel;
+        playerManager.playerStatsManager.m_iFaithLevel = m_iProjectedFaithLevel;
+        playerManager.playerStatsManager.m_iLuckLevel = m_iProjectedLuckLevel;
 
-    public void UpdateStrengthLevelSlider()
-    {
-        projectedStrengthLevelText.text = strengthSlider.value.ToString();
-        UpdateProjectedPlayerLevel();
-    }
+        // 특성 파생 효과 업데이트
 
-    public void UpdateDexterityLevelSlider()
-    {
-        projectedDexterityLevelText.text = dexteritySlider.value.ToString();
-        UpdateProjectedPlayerLevel();
-    }
+        // Vigor 생명력. 최대 생명력이 오름
+        playerManager.playerStatsManager.maxHealth = playerManager.playerStatsManager.SetMaxHealthFromHealthLevel();
+        playerManager.playerStatsManager.currentHealth = playerManager.playerStatsManager.maxHealth;
 
-    public void UpdateFaithLevelSlider()
-    {
-        projectedFaithLevelText.text = faithSlider.value.ToString();
-        UpdateProjectedPlayerLevel();
-    }
+        // Attunement 집중력. 최대 FP가 오름
+        playerManager.playerStatsManager.maxfocusPoint = playerManager.playerStatsManager.SetMaxfocusPointsFromStaminaLevel();
+        playerManager.playerStatsManager.currentFocusPoints = playerManager.playerStatsManager.maxfocusPoint;
 
-    public void UpdateIntelligenceLevelSlider()
-    {
-        projectedIntelligenceLevelText.text = intelligenceSlider.value.ToString();
-        UpdateProjectedPlayerLevel();
+        // Endurance 지구력. 최대 스테미너가 오름
+        playerManager.playerStatsManager.maxStamina = playerManager.playerStatsManager.SetMaxStaminaFromStaminaLevel();
+        playerManager.playerStatsManager.currentStamina = playerManager.playerStatsManager.maxStamina;
+
+        // Vitality 체력. 장비중량과 물리 방어력, 독 내성이 오름
+        playerManager.playerStatsManager.CalculateAndSetMaxEquipload();
+
+        // Strength 근력. 근력 보정을 받는 무기의 공격력과 화염 내성, 물리 방어력을 상승, 손에 든 장비를 양손잡기하면 현 스탯의 1.5배로 계산
+        playerManager.playerStatsManager.CalculateStrength();
+
+        // Dexterity 기량. 기량 보정을 받는 무기의 공격력이 상승
+        playerManager.playerStatsManager.CalculateDexterity();
+
+        // Intelligence 지성. 마술과 주술의 위력이 상승, 마력 방어력이 오름
+        playerManager.playerStatsManager.CalculateIntelligence();
+
+        // Faith 신앙. 기적과 주술의 위력이 상승, 어둠 방어력이 오름
+        playerManager.playerStatsManager.CalculateFaith();
+
+        // Luck 운. 아이템의 발견율과 속성 내성치가 상승함.
+        playerManager.playerStatsManager.CalculateLuck();
+
+        // 소울 비용 계산
+        playerManager.playerStatsManager.currentSoulCount -= m_iRequiredSouls;
+        playerManager.m_GameUIManager.soulCount.text = playerManager.playerStatsManager.currentSoulCount.ToString();
+        m_iRequiredSouls = 0;
+
+        // Celar 
+
+
+        gameObject.SetActive(false);
     }
 }

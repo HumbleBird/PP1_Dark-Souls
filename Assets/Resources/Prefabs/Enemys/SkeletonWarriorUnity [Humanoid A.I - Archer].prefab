@@ -2394,7 +2394,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 3487662551812223566}
-  m_LocalRotation: {x: -0, y: -0.99999994, z: -0, w: -0.00043630067}
+  m_LocalRotation: {x: -0, y: -0.99999994, z: 0, w: -0.00043630067}
   m_LocalPosition: {x: 3.9339378, y: 0.009999275, z: -18.22048}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
@@ -2453,10 +2453,15 @@ MonoBehaviour:
   staminaLevel: 10
   focusLevel: 10
   poiseLevel: 10
-  strengthLevel: 10
-  dexterityLevel: 10
-  intelligenceLevel: 10
-  faithLevel: 10
+  m_iVigorLevel: 10
+  m_iAttunementLevel: 10
+  m_iEnduranceLevel: 10
+  m_iVitalityLevel: 10
+  m_iStrengthLevel: 10
+  m_iDexterityLevel: 10
+  m_iIntelligenceLevel: 10
+  m_iFaithLevel: 10
+  m_iLuckLevel: 10
   currentEquipLoad: 0
   maxEquipLoad: 0
   encumbranceLevel: 0
@@ -2632,11 +2637,6 @@ MonoBehaviour:
   leftWeapon: {fileID: 0}
   currentConsumable: {fileID: 0}
   currentAmmo: {fileID: 11400000, guid: 061614e8ff311344782b09816f7fc630, type: 2}
-  currentArmorEquipments:
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
   currentHelmetEquipment: {fileID: 0}
   currentTorsoEquipment: {fileID: 0}
   currentLegEquipment: {fileID: 0}
@@ -2653,6 +2653,14 @@ MonoBehaviour:
   - {fileID: 0}
   - {fileID: 0}
   - {fileID: 0}
+  currentHairStyle: {fileID: 0}
+  currentHairItem: {fileID: 0}
+  currentEyelashesBtn: {fileID: 0}
+  currentEyebrows: {fileID: 0}
+  currentFacialHair: {fileID: 0}
+  currentFacialMask: {fileID: 0}
+  currentNose: {fileID: 0}
+  currentExtra: {fileID: 0}
   currentRightWeaponIndex: -1
   currentLeftWeaponIndex: -1
 --- !u!82 &3487662551812223538
@@ -3254,14 +3262,14 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 3487662552054831361}
-  m_LocalRotation: {x: 0.11666641, y: 0.37557393, z: 0.9148348, w: 0.09170905}
-  m_LocalPosition: {x: 0.148, y: -0.09, z: 0.033}
+  m_LocalRotation: {x: -0.5650709, y: 0.47949514, z: 0.10246388, w: -0.6635363}
+  m_LocalPosition: {x: 0.077, y: -0.075, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 3487662551027089404}
   m_RootOrder: 6
-  m_LocalEulerAnglesHint: {x: -41.742, y: 22.235, z: 159.981}
+  m_LocalEulerAnglesHint: {x: 40.665, y: -97.457, z: 296.663}
 --- !u!114 &3487662552054831367
 MonoBehaviour:
   m_ObjectHideFlags: 0

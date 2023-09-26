@@ -20,7 +20,7 @@ public class AICharacterAnimationManager : CharacterAnimatorManager
 
         if (playerstatus != null)
         {
-            playerstatus.AddSouls(character.characterStatsManager.soulsAwardedOnDeath);
+            playerstatus.AddSouls(aiCharacter.aiCharacterStatsManager.soulsAwardedOnDeath);
 
 
             if (soulCountBar != null)

@@ -12,8 +12,8 @@ public class ClassStats
     public string m_sClassDecription;
 
     [Header("Class Stats")]
-    public int m_iVigorLevel;
-    public int m_iAttunementLevel;
+    public int m_iVigorLevel; 
+    public int m_iAttunementLevel; 
     public int m_iEnduranceLevel;
     public int m_iVitalityLevel;
     public int m_iStrengthLevel;

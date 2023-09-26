@@ -36,10 +36,6 @@ public class HelmEquipmentItem : EquipmentItem
         } 
     }
 
-    [Header("Extra")]
-    [SerializeField] int Extra_Elf_Ear;
-    public string m_Extra_Elf_Ear { get { return "Chr_Ear_Ear_"  + Extra_Elf_Ear.ToString("00"); } }
-
     public bool hideFacialFeatures = false;
     //public bool hideBeardFeatures;
     //public bool hideEyebrowsFeatures;

@@ -106,6 +106,9 @@ public class TakeDamageEffect : CharacterEffect
         {
             character.characterStatsManager.currentHealth = 0;
             character.isDead = true;
+
+            // 플레이어의 카메라 focus on 해제
+
         }
     }
 

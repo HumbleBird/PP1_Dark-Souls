@@ -38,6 +38,7 @@ public class CharacterInventoryManager : MonoBehaviour
     public GameObject currentFacialHair;
     public GameObject currentFacialMask;
     public GameObject currentNose;
+    public GameObject currentExtra;
 
     public int currentRightWeaponIndex = 0;
     public int currentLeftWeaponIndex = 0;

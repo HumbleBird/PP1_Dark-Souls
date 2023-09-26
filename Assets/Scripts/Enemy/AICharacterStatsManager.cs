@@ -10,6 +10,7 @@ public class AICharacterStatsManager : CharacterStatsManager
 {
     AICharacterManager aiCharacter;
 
+    public int soulsAwardedOnDeath = 50;
     public UIAICharacterHealthBar aiCharacterHealthBar;
 
     public bool isBoss;

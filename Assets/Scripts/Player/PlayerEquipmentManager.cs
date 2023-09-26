@@ -37,6 +37,8 @@ public class PlayerEquipmentManager : MonoBehaviour
         player.characterStatsManager.CalculateAndSetMaxEquipload();
 
         Naked_HelmetEquipment.m_HelmEquipmentItemName = "0";
+
+        EquipAllEquipmentModel();
     }
 
     public void EquipAllEquipmentModel()
@@ -114,71 +116,79 @@ public class PlayerEquipmentManager : MonoBehaviour
             }
 
             // ¾ó±¼ ¿ÜÇü Æ¯Â¡µé ÀåÂø
+            {
 
             // Çì¾î ½ºÅ¸ÀÏ
-            if(player.playerInventoryManager.currentHairStyle != null)
-            {
-                m_AllGenderPartsModelChanger[All_GenderItemPartsType.Hair].EquipEquipmentsModelByName(player.playerInventoryManager.currentHairStyle.name);
-            }
-
-            if(player.playerInventoryManager.currentHairItem != null)
-            {
-
-                m_AllGenderPartsModelChanger[All_GenderItemPartsType.HelmetAttachment].EquipEquipmentsModelByName(player.playerInventoryManager.currentHairItem.name);
-            }
-
-            // ¼Ó´«½ç
-            //if(player.playerInventoryManager.currentEyelashesBtn != null)
-            //{
-            //    if (m_bIsFemale)
-            //    {
-            //        m_FemaleGenderPartsModelChanger[EquipmentArmorParts.Head].EquipEquipmentsModelByName(player.playerInventoryManager.currentEyelashesBtn.name);
-            //    }
-            //    else
-            //    {
-            //        m_MaleGenderPartsModelChanger[EquipmentArmorParts.Head].EquipEquipmentsModelByName(player.playerInventoryManager.currentEyelashesBtn.name);
-            //    }
-            //}
-
-            // ´«½ç
-            if(player.playerInventoryManager.currentEyebrows != null)
-            {
-
-                if (m_bIsFemale)
+                if(player.playerInventoryManager.currentHairStyle != null)
                 {
-                    m_FemaleGenderPartsModelChanger[E_SingleGenderEquipmentArmorParts.Eyebrow].EquipEquipmentsModelByName(player.playerInventoryManager.currentEyebrows.name);
+                    m_AllGenderPartsModelChanger[All_GenderItemPartsType.Hair].EquipEquipmentsModelByName(player.playerInventoryManager.currentHairStyle.name);
                 }
-                else
+
+                if(player.playerInventoryManager.currentHairItem != null)
                 {
-                    m_MaleGenderPartsModelChanger[E_SingleGenderEquipmentArmorParts.Eyebrow].EquipEquipmentsModelByName(player.playerInventoryManager.currentEyebrows.name);
+
+                    m_AllGenderPartsModelChanger[All_GenderItemPartsType.HelmetAttachment].EquipEquipmentsModelByName(player.playerInventoryManager.currentHairItem.name);
+                }
+
+                // ¼Ó´«½ç
+                //if(player.playerInventoryManager.currentEyelashesBtn != null)
+                //{
+                //    if (m_bIsFemale)
+                //    {
+                //        m_FemaleGenderPartsModelChanger[EquipmentArmorParts.Head].EquipEquipmentsModelByName(player.playerInventoryManager.currentEyelashesBtn.name);
+                //    }
+                //    else
+                //    {
+                //        m_MaleGenderPartsModelChanger[EquipmentArmorParts.Head].EquipEquipmentsModelByName(player.playerInventoryManager.currentEyelashesBtn.name);
+                //    }
+                //}
+
+                // ´«½ç
+                if(player.playerInventoryManager.currentEyebrows != null)
+                {
+
+                    if (m_bIsFemale)
+                    {
+                        m_FemaleGenderPartsModelChanger[E_SingleGenderEquipmentArmorParts.Eyebrow].EquipEquipmentsModelByName(player.playerInventoryManager.currentEyebrows.name);
+                    }
+                    else
+                    {
+                        m_MaleGenderPartsModelChanger[E_SingleGenderEquipmentArmorParts.Eyebrow].EquipEquipmentsModelByName(player.playerInventoryManager.currentEyebrows.name);
+                    }
+                }
+
+                // Äà¼ö¿°
+                if(player.playerInventoryManager.currentFacialHair != null)
+                {
+                    if (m_bIsFemale)
+                    {
+                        m_FemaleGenderPartsModelChanger[E_SingleGenderEquipmentArmorParts.FacialHair].EquipEquipmentsModelByName(player.playerInventoryManager.currentFacialHair.name);
+                    }
+                    else
+                    {
+                        m_MaleGenderPartsModelChanger[E_SingleGenderEquipmentArmorParts.FacialHair].EquipEquipmentsModelByName(player.playerInventoryManager.currentFacialHair.name);
+                    }
+                }
+
+                // ÄÚ
+                //if(player.playerInventoryManager.currentNose != null)
+                //{
+                //    if (m_bIsFemale)
+                //    {
+                //        m_FemaleGenderPartsModelChanger[EquipmentArmorParts.Head].EquipEquipmentsModelByName(player.playerInventoryManager.currentNose.name);
+                //    }
+                //    else
+                //    {
+                //        m_MaleGenderPartsModelChanger[EquipmentArmorParts.Head].EquipEquipmentsModelByName(player.playerInventoryManager.currentNose.name);
+                //    }
+                //}
+
+                // Ãß°¡
+                if (player.playerInventoryManager.currentExtra != null)
+                {
+                    m_AllGenderPartsModelChanger[All_GenderItemPartsType.Extra_Elf_Ear].EquipEquipmentsModelByName(player.playerInventoryManager.currentExtra.name);
                 }
             }
-
-            // Äà¼ö¿°
-            if(player.playerInventoryManager.currentFacialHair != null)
-            {
-                if (m_bIsFemale)
-                {
-                    m_FemaleGenderPartsModelChanger[E_SingleGenderEquipmentArmorParts.FacialHair].EquipEquipmentsModelByName(player.playerInventoryManager.currentFacialHair.name);
-                }
-                else
-                {
-                    m_MaleGenderPartsModelChanger[E_SingleGenderEquipmentArmorParts.FacialHair].EquipEquipmentsModelByName(player.playerInventoryManager.currentFacialHair.name);
-                }
-            }
-
-            // ÄÚ
-            //if(player.playerInventoryManager.currentNose != null)
-            //{
-            //    if (m_bIsFemale)
-            //    {
-            //        m_FemaleGenderPartsModelChanger[EquipmentArmorParts.Head].EquipEquipmentsModelByName(player.playerInventoryManager.currentNose.name);
-            //    }
-            //    else
-            //    {
-            //        m_MaleGenderPartsModelChanger[EquipmentArmorParts.Head].EquipEquipmentsModelByName(player.playerInventoryManager.currentNose.name);
-            //    }
-            //}
         }
 
     }
@@ -188,54 +198,47 @@ public class PlayerEquipmentManager : MonoBehaviour
         // all gender Ã³¸®
         HelmEquipmentItem temp = player.playerInventoryManager.currentHelmetEquipment;
 
-        if (temp.m_HeadCoverings_Base_Hair != null)
+        if (temp.m_HeadCoverings_Base_Hair != "0")
         {
             m_AllGenderPartsModelChanger[All_GenderItemPartsType.HeadCoverings_Base_Hair].EquipEquipmentsModelByName(temp.m_HeadCoverings_Base_Hair);
         }
-        if (temp.m_HeadCoverings_No_FacialHair != null)
+        if (temp.m_HeadCoverings_No_FacialHair != "0")
         {
             m_AllGenderPartsModelChanger[All_GenderItemPartsType.HeadCoverings_No_FacialHair].EquipEquipmentsModelByName(temp.m_HeadCoverings_No_FacialHair);
         }
-        if (temp.m_HeadCoverings_No_Hair != null)
+        if (temp.m_HeadCoverings_No_Hair != "0")
         {
             m_AllGenderPartsModelChanger[All_GenderItemPartsType.HeadCoverings_No_Hair].EquipEquipmentsModelByName(temp.m_HeadCoverings_No_Hair);
         }
-        if (temp.m_Head_Attachment_Helmet != null)
+        if (temp.m_Head_Attachment_Helmet != "0")
         {
             m_AllGenderPartsModelChanger[All_GenderItemPartsType.HelmetAttachment].EquipEquipmentsModelByName(temp.m_Head_Attachment_Helmet);
         }
 
-        if (temp.m_HelmEquipmentItemName != null || temp.m_HelmEquipmentItemName != null)
+        if (m_bIsFemale)
         {
-            if (m_bIsFemale)
+            if(temp == player.playerEquipmentManager.Naked_HelmetEquipment)
             {
-                if(temp == player.playerEquipmentManager.Naked_HelmetEquipment)
-                {
-                    m_FemaleGenderPartsModelChanger[E_SingleGenderEquipmentArmorParts.Head].EquipEquipmentsModelByName(temp.m_HelmEquipmentItemName);
-                }
-                else
-                {
-                    m_FemaleGenderPartsModelChanger[E_SingleGenderEquipmentArmorParts.Head_No_Elements].EquipEquipmentsModelByName(temp.m_HelmEquipmentItemName);
-                }
+                m_FemaleGenderPartsModelChanger[E_SingleGenderEquipmentArmorParts.Head].EquipEquipmentsModelByName(temp.m_HelmEquipmentItemName);
             }
             else
             {
-                if (temp == player.playerEquipmentManager.Naked_HelmetEquipment)
-                {
-                    m_MaleGenderPartsModelChanger[E_SingleGenderEquipmentArmorParts.Head].EquipEquipmentsModelByName(temp.m_HelmEquipmentItemName);
-                }
-                else
-                {
-                    m_MaleGenderPartsModelChanger[E_SingleGenderEquipmentArmorParts.Head_No_Elements].EquipEquipmentsModelByName(temp.m_HelmEquipmentItemName);
-                }
+                m_FemaleGenderPartsModelChanger[E_SingleGenderEquipmentArmorParts.Head_No_Elements].EquipEquipmentsModelByName(temp.m_HelmEquipmentItemName);
+            }
+        }
+        else
+        {
+            if (temp == player.playerEquipmentManager.Naked_HelmetEquipment)
+            {
+                m_MaleGenderPartsModelChanger[E_SingleGenderEquipmentArmorParts.Head].EquipEquipmentsModelByName(temp.m_HelmEquipmentItemName);
+            }
+            else
+            {
+                m_MaleGenderPartsModelChanger[E_SingleGenderEquipmentArmorParts.Head_No_Elements].EquipEquipmentsModelByName(temp.m_HelmEquipmentItemName);
             }
         }
 
-        if(temp.m_Extra_Elf_Ear != null)
-        {
-            m_AllGenderPartsModelChanger[All_GenderItemPartsType.Extra_Elf_Ear].EquipEquipmentsModelByName(temp.m_Extra_Elf_Ear);
 
-        }
 
         if(temp.hideFacialFeatures == true)
         {
@@ -469,13 +472,5 @@ public class PlayerEquipmentManager : MonoBehaviour
             m_MaleGenderPartsModelChanger[E_SingleGenderEquipmentArmorParts.LeftLegging].EquipEquipmentsModelByName(temp.m_LeftLeggingName);
             m_MaleGenderPartsModelChanger[E_SingleGenderEquipmentArmorParts.RightLegging].EquipEquipmentsModelByName(temp.m_RightLeggingName);
         }
-    }
-
-    public void SelectGender(bool isFemale)
-    {
-        // ÇÃ·¹ÀÌ¾îÀÇ ¸ðµâ·¯¸¦ ±³Ã¼
-        m_bIsFemale = isFemale;
-
-        EquipAllEquipmentModel();
     }
 }
