@@ -330,15 +330,6 @@ public partial class @PlayerControls : IInputActionCollection2, IDisposable
                 {
                     ""name"": ""Select"",
                     ""type"": ""Button"",
-                    ""id"": ""91270da3-d761-49ec-9964-b5fff43bbb3d"",
-                    ""expectedControlType"": ""Button"",
-                    ""processors"": """",
-                    ""interactions"": """",
-                    ""initialStateCheck"": false
-                },
-                {
-                    ""name"": ""Inventory"",
-                    ""type"": ""Button"",
                     ""id"": ""f17a1343-7a81-4b49-9141-f0c926c3430a"",
                     ""expectedControlType"": ""Button"",
                     ""processors"": """",
@@ -382,23 +373,12 @@ public partial class @PlayerControls : IInputActionCollection2, IDisposable
                 },
                 {
                     ""name"": """",
-                    ""id"": ""487b9b89-292e-4b8f-9b69-d1f5e4655e4c"",
-                    ""path"": """",
-                    ""interactions"": """",
-                    ""processors"": """",
-                    ""groups"": """",
-                    ""action"": ""Select"",
-                    ""isComposite"": false,
-                    ""isPartOfComposite"": false
-                },
-                {
-                    ""name"": """",
                     ""id"": ""6b433c4a-069c-4aaf-b5d3-2d1c367c7ef2"",
                     ""path"": ""<Gamepad>/start"",
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": """",
-                    ""action"": ""Inventory"",
+                    ""action"": ""Select"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
                 },
@@ -409,7 +389,7 @@ public partial class @PlayerControls : IInputActionCollection2, IDisposable
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": """",
-                    ""action"": ""Inventory"",
+                    ""action"": ""Select"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
                 },
@@ -838,7 +818,6 @@ public partial class @PlayerControls : IInputActionCollection2, IDisposable
         m_PlayerActions_Roll = m_PlayerActions.FindAction("Roll", throwIfNotFound: true);
         m_PlayerActions_Jump = m_PlayerActions.FindAction("Jump", throwIfNotFound: true);
         m_PlayerActions_Select = m_PlayerActions.FindAction("Select", throwIfNotFound: true);
-        m_PlayerActions_Inventory = m_PlayerActions.FindAction("Inventory", throwIfNotFound: true);
         // PlayerQuickSlots
         m_PlayerQuickSlots = asset.FindActionMap("PlayerQuickSlots", throwIfNotFound: true);
         m_PlayerQuickSlots_DPadUp = m_PlayerQuickSlots.FindAction("D-Pad Up", throwIfNotFound: true);
@@ -977,7 +956,6 @@ public partial class @PlayerControls : IInputActionCollection2, IDisposable
     private readonly InputAction m_PlayerActions_Roll;
     private readonly InputAction m_PlayerActions_Jump;
     private readonly InputAction m_PlayerActions_Select;
-    private readonly InputAction m_PlayerActions_Inventory;
     public struct PlayerActionsActions
     {
         private @PlayerControls m_Wrapper;
@@ -998,7 +976,6 @@ public partial class @PlayerControls : IInputActionCollection2, IDisposable
         public InputAction @Roll => m_Wrapper.m_PlayerActions_Roll;
         public InputAction @Jump => m_Wrapper.m_PlayerActions_Jump;
         public InputAction @Select => m_Wrapper.m_PlayerActions_Select;
-        public InputAction @Inventory => m_Wrapper.m_PlayerActions_Inventory;
         public InputActionMap Get() { return m_Wrapper.m_PlayerActions; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
@@ -1056,9 +1033,6 @@ public partial class @PlayerControls : IInputActionCollection2, IDisposable
                 @Select.started -= m_Wrapper.m_PlayerActionsActionsCallbackInterface.OnSelect;
                 @Select.performed -= m_Wrapper.m_PlayerActionsActionsCallbackInterface.OnSelect;
                 @Select.canceled -= m_Wrapper.m_PlayerActionsActionsCallbackInterface.OnSelect;
-                @Inventory.started -= m_Wrapper.m_PlayerActionsActionsCallbackInterface.OnInventory;
-                @Inventory.performed -= m_Wrapper.m_PlayerActionsActionsCallbackInterface.OnInventory;
-                @Inventory.canceled -= m_Wrapper.m_PlayerActionsActionsCallbackInterface.OnInventory;
             }
             m_Wrapper.m_PlayerActionsActionsCallbackInterface = instance;
             if (instance != null)
@@ -1111,9 +1085,6 @@ public partial class @PlayerControls : IInputActionCollection2, IDisposable
                 @Select.started += instance.OnSelect;
                 @Select.performed += instance.OnSelect;
                 @Select.canceled += instance.OnSelect;
-                @Inventory.started += instance.OnInventory;
-                @Inventory.performed += instance.OnInventory;
-                @Inventory.canceled += instance.OnInventory;
             }
         }
     }
@@ -1200,7 +1171,6 @@ public partial class @PlayerControls : IInputActionCollection2, IDisposable
         void OnRoll(InputAction.CallbackContext context);
         void OnJump(InputAction.CallbackContext context);
         void OnSelect(InputAction.CallbackContext context);
-        void OnInventory(InputAction.CallbackContext context);
     }
     public interface IPlayerQuickSlotsActions
     {

@@ -50,7 +50,7 @@ public class PlayerManager : CharacterManager
     {
         cameraHandler = Managers.Camera.m_Camera;
         m_GameUIManager = FindObjectOfType<GameUIManager>();
-        m_GameUIManager.m_HUDUI.equipmentWindowUI.LoadWeaponsOnEquipmentScreen(playerInventoryManager);
+        m_GameUIManager.m_PlayerPrivateUI.m_EquipmentUI.LoadWeaponsOnEquipmentScreen(playerInventoryManager);
 
         Managers.Camera.m_Camera.ReStart();
     }
@@ -94,7 +94,7 @@ public class PlayerManager : CharacterManager
         inputHandler.d_Pad_Left = false;
         inputHandler.d_Pad_Right = false;
         inputHandler.a_Input = false;
-        inputHandler.inventory_Input = false;
+        inputHandler.select_Input = false;
 
         if (cameraHandler != null)
         {

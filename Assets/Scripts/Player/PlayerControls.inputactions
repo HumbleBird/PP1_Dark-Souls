@@ -308,15 +308,6 @@
                 {
                     "name": "Select",
                     "type": "Button",
-                    "id": "91270da3-d761-49ec-9964-b5fff43bbb3d",
-                    "expectedControlType": "Button",
-                    "processors": "",
-                    "interactions": "",
-                    "initialStateCheck": false
-                },
-                {
-                    "name": "Inventory",
-                    "type": "Button",
                     "id": "f17a1343-7a81-4b49-9141-f0c926c3430a",
                     "expectedControlType": "Button",
                     "processors": "",
@@ -360,23 +351,12 @@
                 },
                 {
                     "name": "",
-                    "id": "487b9b89-292e-4b8f-9b69-d1f5e4655e4c",
-                    "path": "",
-                    "interactions": "",
-                    "processors": "",
-                    "groups": "",
-                    "action": "Select",
-                    "isComposite": false,
-                    "isPartOfComposite": false
-                },
-                {
-                    "name": "",
                     "id": "6b433c4a-069c-4aaf-b5d3-2d1c367c7ef2",
                     "path": "<Gamepad>/start",
                     "interactions": "",
                     "processors": "",
                     "groups": "",
-                    "action": "Inventory",
+                    "action": "Select",
                     "isComposite": false,
                     "isPartOfComposite": false
                 },
@@ -387,7 +367,7 @@
                     "interactions": "",
                     "processors": "",
                     "groups": "",
-                    "action": "Inventory",
+                    "action": "Select",
                     "isComposite": false,
                     "isPartOfComposite": false
                 },

@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class QuickSlotsUI : MonoBehaviour
+public class QuickSlotsUI : UI_Base
 {
     public Image currentSpellIcon;
     public Image currentConsumableIcon;

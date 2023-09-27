@@ -4,6 +4,8 @@ using UnityEngine;
 
 public class PlayerInventoryManager : CharacterInventoryManager
 {
+    public List<Item> m_Item = new List<Item>();
+
     public List<WeaponItem> weaponsInventory = new List<WeaponItem>();
     public List<HelmEquipmentItem> headEquipmentInventory = new List<HelmEquipmentItem>();
     public List<TorsoEquipmentItem> bodyEquipmentInventory = new List<TorsoEquipmentItem>();

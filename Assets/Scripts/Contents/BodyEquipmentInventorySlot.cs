@@ -49,7 +49,7 @@ public class BodyEquipmentInventorySlot : MonoBehaviour
             return;
         }
 
-        uiManager.m_HUDUI.equipmentWindowUI.LoadArmorOnEquipmentScreen(uiManager.player.playerInventoryManager);
-        uiManager.ResetAllSelectedSlots();
+        uiManager.m_PlayerPrivateUI.m_EquipmentUI.LoadArmorOnEquipmentScreen(uiManager.player.playerInventoryManager);
+        //uiManager.ResetAllSelectedSlots();
     }
 }

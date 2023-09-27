@@ -5,28 +5,15 @@ using UnityEngine;
 
 public class PlayerPrivateUI : UI_Base
 {
-    enum GameObjects
-    {
-        InventoryUI,
-        EquipementUI,
-    }
-
-    public GameObject m_goInventory;
-    public EquipmentWindowUI m_Equipemnt;
-    public SelectWindowUI m_SelectWindowUI;
-    public ItemStatWindowUI m_ItemStat;
-    public GameObject m_goLevelUp;
+    public SelectUI m_SelectUI;
+    public EquipmentUI m_EquipmentUI;
+    public InventoryUI m_InventoryUI;
+    public LevelUpUI m_LevelUpUI;
 
     public override bool Init()
     {
         if (base.Init() == false)
             return false;
-
-        BindObject(typeof(GameObjects));
-
-        m_goInventory = GetObject((int)GameObjects.InventoryUI);
-
-        m_SelectWindowUI = GetComponentInChildren<SelectWindowUI>();
 
         return true;
     }

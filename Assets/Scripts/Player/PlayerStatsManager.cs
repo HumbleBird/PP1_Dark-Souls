@@ -168,6 +168,7 @@ public class PlayerStatsManager : CharacterStatsManager
     public void AddSouls(int souls)
     {
         currentSoulCount += souls;
+        player.m_GameUIManager.m_HUDUI.RefreshUI();
     }
 
     public override void UpdateUI()

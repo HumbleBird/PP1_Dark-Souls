@@ -9,22 +9,21 @@ public class HUDUI : UI_Base
     {
         StatBars,
         Crosshair,
-        BossHealthBar,
     }
 
     enum Texts
     {
-        SoulCount,
-
+        SoulCountText,
     }
 
     public QuickSlotsUI quickSlotsUI;
     public TextMeshProUGUI m_textSoulCount;
     public GameObject m_goStatBars;
     public GameObject m_goCrosshair;
-    public GameObject m_goBossHealthBar;
+    public UIBossHealthBar m_BossHealthBar;
     public ItemStatWindowUI itemStatWindowUI;
-    public EquipmentWindowUI equipmentWindowUI;
+
+    PlayerManager m_Player;
 
     public override bool Init()
     {
@@ -34,14 +33,38 @@ public class HUDUI : UI_Base
         BindObject(typeof(GameObjects));
         BindText(typeof(Texts));
 
-        m_textSoulCount = GetText((int)Texts.SoulCount);
+        m_textSoulCount = GetText((int)Texts.SoulCountText);
         m_goStatBars = GetObject((int)GameObjects.StatBars);
         m_goCrosshair = GetObject((int)GameObjects.Crosshair);
-        m_goBossHealthBar = GetObject((int)GameObjects.BossHealthBar);
 
         quickSlotsUI = GetComponentInChildren<QuickSlotsUI>();
+        m_BossHealthBar = GetComponentInChildren<UIBossHealthBar>();
+
+        m_goCrosshair.SetActive(false);
         return true;
     }
 
+    public void Start()
+    {
+        m_Player = Managers.Object.m_MyPlayer;
 
+        if (m_Player.playerInventoryManager.currentSpell != null)
+        {
+            quickSlotsUI.UpdateCurrentSpellIcon(m_Player.playerInventoryManager.currentSpell);
+        }
+
+        if (m_Player.playerInventoryManager.currentConsumable != null)
+        {
+            quickSlotsUI.UpdateCurrentConsumableIcon(m_Player.playerInventoryManager.currentConsumable);
+        }
+
+        m_textSoulCount.text = m_Player.playerStatsManager.currentSoulCount.ToString();
+    }
+
+    public override void RefreshUI()
+    {
+        base.RefreshUI();
+
+        m_textSoulCount.text = m_Player.playerStatsManager.currentSoulCount.ToString();
+    }
 }

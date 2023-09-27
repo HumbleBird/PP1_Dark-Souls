@@ -28,7 +28,7 @@ public class GameManager
             Managers.Object.m_MyPlayer.ReStart();
 
             // Äü½½·Ô Refresh
-            Managers.Object.m_MyPlayer.m_GameUIManager.m_HUDUI.equipmentWindowUI.LoadWeaponsOnEquipmentScreen(Managers.Object.m_MyPlayer.playerInventoryManager);
+            Managers.Object.m_MyPlayer.m_GameUIManager.m_PlayerPrivateUI.m_EquipmentUI.LoadWeaponsOnEquipmentScreen(Managers.Object.m_MyPlayer.playerInventoryManager);
             Managers.Object.m_MyPlayer.m_GameUIManager.m_HUDUI.quickSlotsUI.UpdateAllQuickSlotUI();
         }
         else

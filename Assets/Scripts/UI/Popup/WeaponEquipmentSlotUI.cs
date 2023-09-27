@@ -40,7 +40,7 @@ public class WeaponEquipmentSlotUI : MonoBehaviour
 
     public  void SelectThisSlot()
     {
-        uiManager.ResetAllSelectedSlots();
+        //uiManager.ResetAllSelectedSlots();
 
         if(rightHandSlot01)
         {

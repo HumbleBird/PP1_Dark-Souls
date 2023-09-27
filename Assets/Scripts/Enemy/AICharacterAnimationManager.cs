@@ -14,20 +14,8 @@ public class AICharacterAnimationManager : CharacterAnimatorManager
 
     public override void AwardSoulsOnDeath()
     {
-
-        PlayerStatsManager playerstatus = FindObjectOfType<PlayerStatsManager>();
-        SoulCountBar soulCountBar = FindObjectOfType<SoulCountBar>();
-
-        if (playerstatus != null)
-        {
-            playerstatus.AddSouls(aiCharacter.aiCharacterStatsManager.soulsAwardedOnDeath);
-
-
-            if (soulCountBar != null)
-            {
-                soulCountBar.SetSoulCountText(playerstatus.currentSoulCount);
-            }
-        }
+        PlayerManager player = Managers.Object.m_MyPlayer;
+        player.playerStatsManager.AddSouls(aiCharacter.aiCharacterStatsManager.soulsAwardedOnDeath);
     }
 
     public void InstantiateBossParticleFX()

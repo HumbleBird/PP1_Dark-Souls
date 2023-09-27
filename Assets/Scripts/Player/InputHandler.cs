@@ -31,12 +31,14 @@ public class InputHandler : MonoBehaviour
 
 
     public bool jump_Input;
-    public bool inventory_Input;
+    public bool select_Input;
     public bool lockOnInput;
     public bool right_Stick_Right_Input;
     public bool right_Stick_Left_Input;
 
-
+    /// <summary>
+    /// ///////////////////////
+    /// </summary>
     public bool d_Pad_Up;
     public bool d_Pad_Down;
     public bool d_Pad_Left;
@@ -47,7 +49,7 @@ public class InputHandler : MonoBehaviour
     public bool comboFlag;
     public bool lockOnFlag;
     public bool fireFlag;
-    public bool inventoryFlag;
+    public bool selectFlag;
 
     public float rollInputTimer;
 
@@ -95,13 +97,16 @@ public class InputHandler : MonoBehaviour
             inputActions.PlayerActions.Roll.canceled += i => b_Input = false;
 
             inputActions.PlayerActions.Jump.performed += i => jump_Input = true;
-            inputActions.PlayerActions.Inventory.performed += i => inventory_Input = true;
             inputActions.PlayerActions.LockOn.performed += i => lockOnInput = true;
             inputActions.PlayerMovement.LockOnTargetRight.performed += i => right_Stick_Right_Input = true;
             inputActions.PlayerMovement.LockOnTargetLeft.performed += i => right_Stick_Left_Input = true;
             inputActions.PlayerActions.Y.performed += i => y_Input = true;
 
             inputActions.PlayerActions.QuedRB.performed += i => QueInput(ref qued_RB_Input);
+
+            // 게임 외 설정
+            inputActions.PlayerActions.Select.performed += i => select_Input = true;
+
         }
 
         inputActions.Enable();
@@ -131,7 +136,7 @@ public class InputHandler : MonoBehaviour
         HandleHoldLBInput();
 
         HandleQuickSlotsInput();
-        HandleInventoryInput();
+        HandleSelectUIInput();
 
         HandleLockOnInput();
         HandleTwoHandInput();
@@ -163,8 +168,6 @@ public class InputHandler : MonoBehaviour
             mouseX = cameraInput.x;
             mouseY = cameraInput.y;
         }
-
-
     }
 
     private void HandleRollInput()
@@ -385,27 +388,35 @@ public class InputHandler : MonoBehaviour
         }
     }
 
-    private void HandleInventoryInput()
+    private void HandleSelectUIInput()
     {
-        if(inventoryFlag)
+        // 다른 팝업 창이 켜져 있으면 하나씩 꺼준다.
+        // 인벤토리가 켜져 있다면 인벤토리를 닫고, 선택 창을 켜주고 다시 선택하면 꺼주는 걸로.
+
+        if (select_Input)
         {
-            player.m_GameUIManager.UpdateUI();
+            if (Managers.UI._popupStack.Count > 0)
+            {
+                Managers.UI.CloseAllPopupUI();
+                // TODO
+
+            }
         }
 
-        if(inventory_Input)
+        if(select_Input)
         {
-            inventoryFlag = !inventoryFlag;
+            selectFlag = !selectFlag;
 
-            if(inventoryFlag)
+            // 선택 창을 처음 켰다면.
+            if(selectFlag)
             {
-                player.m_GameUIManager.OpenSelectWindow();
-                player.m_GameUIManager.UpdateUI();
+                Managers.UI.ShowPopupUI<SelectUI>();
                 player.m_GameUIManager.m_HUDUI.gameObject.SetActive(false);
             }
+            // 선택 창을 끄는 거라면
             else
             {
-                player.m_GameUIManager.CloseSelectWindow();
-                player.m_GameUIManager.CloseAllInventoryWindows();
+                Managers.UI.ClosePopupUI();
                 player.m_GameUIManager.m_HUDUI.gameObject.SetActive(true);
             }
         }
