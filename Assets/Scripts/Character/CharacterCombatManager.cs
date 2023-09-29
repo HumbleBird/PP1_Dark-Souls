@@ -58,13 +58,13 @@ public class CharacterCombatManager : MonoBehaviour
         {
             character.characterStatsManager.blockingPhysicalDamageAbsorption = character.characterInventoryManager.rightWeapon.physicalBlockingDamageAbsorption;
             character.characterStatsManager.blockingFireDamageAbsorption = character.characterInventoryManager.rightWeapon.fireBlockingDamageAbsorption;
-            character.characterStatsManager.blockingStabilityRating = character.characterInventoryManager.rightWeapon.stability;
+            character.characterStatsManager.blockingStabilityRating = character.characterInventoryManager.rightWeapon.m_iStability;
         }
         else if (character.isUsingLeftHand)
         {
             character.characterStatsManager.blockingPhysicalDamageAbsorption = character.characterInventoryManager.leftWeapon.physicalBlockingDamageAbsorption;
             character.characterStatsManager.blockingFireDamageAbsorption = character.characterInventoryManager.leftWeapon.fireBlockingDamageAbsorption;
-            character.characterStatsManager.blockingStabilityRating = character.characterInventoryManager.leftWeapon.stability;
+            character.characterStatsManager.blockingStabilityRating = character.characterInventoryManager.leftWeapon.m_iStability;
         }
     }
 
@@ -181,8 +181,8 @@ public class CharacterCombatManager : MonoBehaviour
                 character.characterAnimatorManager.PlayTargetAnimation("Back_Stab_01", true);
 
                 float criticalDamage = (character.characterInventoryManager.rightWeapon.criticalDamagemuiltiplier *
-                    (character.characterInventoryManager.rightWeapon.physicalDamage +
-                    character.characterInventoryManager.rightWeapon.fireDamage));
+                    (character.characterInventoryManager.rightWeapon.m_iPhysicalDamage +
+                    character.characterInventoryManager.rightWeapon.m_iFireDamage));
 
                 int roundedCriticalDamage = Mathf.RoundToInt(criticalDamage);
                 enemycharacter.characterCombatManager.pendingCriticalDamage = roundedCriticalDamage;
@@ -206,8 +206,8 @@ public class CharacterCombatManager : MonoBehaviour
                 character.characterAnimatorManager.PlayTargetAnimation("Riposte_01", true);
 
                 float criticalDamage = (character.characterInventoryManager.rightWeapon.criticalDamagemuiltiplier *
-                    (character.characterInventoryManager.rightWeapon.physicalDamage +
-                    character.characterInventoryManager.rightWeapon.fireDamage));
+                    (character.characterInventoryManager.rightWeapon.m_iPhysicalDamage +
+                    character.characterInventoryManager.rightWeapon.m_iFireDamage));
 
                 int roundedCriticalDamage = Mathf.RoundToInt(criticalDamage);
                 enemycharacter.characterCombatManager.pendingCriticalDamage = roundedCriticalDamage;

@@ -21,7 +21,6 @@ public class HUDUI : UI_Base
     public GameObject m_goStatBars;
     public GameObject m_goCrosshair;
     public UIBossHealthBar m_BossHealthBar;
-    public ItemStatWindowUI itemStatWindowUI;
 
     PlayerManager m_Player;
 

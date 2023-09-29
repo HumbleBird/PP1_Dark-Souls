@@ -26,37 +26,16 @@ public class InventoryUI : UI_Popup
     enum Texts
     {
         SoulText, // 현재 소울양
-
-
-        // Left Panel - Iten Inventory
-
-        // Item Part 부분
-        ItemPartSubjectName, // 아이템 부문 별 이름
-        // Item Inventory 부분
-        ItemNameText, // 아이템 이름
-
-        // Middle Panel - Item Description Detail
-
-        // Right Panel - Player State
     }
 
     enum GameObjects
     {
-        // Left Panel
-        LeftArrow,
-        RightArrow,
-        InvnetoryContents, // 아이템 슬롯을 생성할 부모 오브젝트
-    }
-
-    enum Images
-    {
-        // Left Panel
-        ItemBasePlateIcon,
-        ItemIcon,
-        ItemSelectIcon
     }
 
     PlayerManager player;
+    public InventoryLeftPanelUI m_InventoryLeftPanelUI;
+    public InventoryMiddleUI m_InventoryMiddleUI;
+    public InventoryRightPanel m_InventoryRightPanel;
 
     public override bool Init()
     {
@@ -64,31 +43,16 @@ public class InventoryUI : UI_Popup
             return false;
 
         BindText(typeof(Texts));
-        BindImage(typeof(Images));
-        BindObject(typeof(GameObjects));
 
-        gameObject.SetActive(false);
+        player =  Managers.Object.m_MyPlayer;
+
+        GetText((int)Texts.SoulText).text = player.playerStatsManager.currentSoulCount.ToString();
+
+        m_InventoryLeftPanelUI = GetComponentInChildren<InventoryLeftPanelUI>();
+        m_InventoryMiddleUI = GetComponentInChildren<InventoryMiddleUI>();
+        m_InventoryRightPanel = GetComponentInChildren<InventoryRightPanel>();
+
         return true;
     }
 
-    private void Start()
-    {
-        player = Managers.Object.m_MyPlayer;
-        GetText((int)Texts.SoulText).text = player.playerStatsManager.currentSoulCount.ToString();
-        CreateInventorySlot(GetObject((int)GameObjects.InvnetoryContents), player.playerInventoryManager.m_Item.Count);
-    }
-
-    private void CreateInventorySlot(GameObject parent, int count)
-    {
-        foreach (Transform child in parent.transform)
-            Managers.Resource.Destroy(child.gameObject);
-
-        for (int i = 0; i < count; i++)
-        {
-            GameObject go = Managers.Resource.Instantiate("UI/SubItem/InventoryItemSlot", parent.transform);
-            InventoryItemSlot item = go.GetOrAddComponent<InventoryItemSlot>();
-
-            item.SetInfo(player.playerInventoryManager.m_Item[i]);
-        }
-    }
 }

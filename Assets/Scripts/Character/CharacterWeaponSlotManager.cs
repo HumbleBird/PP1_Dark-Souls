@@ -117,8 +117,8 @@ public class CharacterWeaponSlotManager : MonoBehaviour
     {
         leftHandDamageCollider = leftHandSlot.currentWeaponModel.GetComponentInChildren<DamageCollider>();
 
-        leftHandDamageCollider.physicalDamage = character.characterInventoryManager.leftWeapon.physicalDamage;
-        leftHandDamageCollider.fireDamage = character.characterInventoryManager.leftWeapon.fireDamage;
+        leftHandDamageCollider.physicalDamage = character.characterInventoryManager.leftWeapon.m_iPhysicalDamage;
+        leftHandDamageCollider.fireDamage = character.characterInventoryManager.leftWeapon.m_iFireDamage;
 
         leftHandDamageCollider.characterManager = character;
         leftHandDamageCollider.teamIDNumber = character.characterStatsManager.teamIDNumber;
@@ -134,8 +134,8 @@ public class CharacterWeaponSlotManager : MonoBehaviour
         if (rightHandDamageCollider == null)
             return;
 
-        rightHandDamageCollider.physicalDamage = character.characterInventoryManager.rightWeapon.physicalDamage;
-        rightHandDamageCollider.fireDamage = character.characterInventoryManager.rightWeapon.fireDamage;
+        rightHandDamageCollider.physicalDamage = character.characterInventoryManager.rightWeapon.m_iPhysicalDamage;
+        rightHandDamageCollider.fireDamage = character.characterInventoryManager.rightWeapon.m_iFireDamage;
 
         rightHandDamageCollider.characterManager = character;
         rightHandDamageCollider.teamIDNumber = character.characterStatsManager.teamIDNumber;

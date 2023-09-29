@@ -4,7 +4,6 @@ using UnityEngine;
 
 public class SelectUI : UI_Popup
 {
-    GameUIManager m_GameUIManager;
 
     enum GameObjects
     {
@@ -21,7 +20,7 @@ public class SelectUI : UI_Popup
         BindObject(typeof(GameObjects));
 
         GetObject((int)GameObjects.SelectInventory).BindEvent(() => ShowInventory());
-        GetObject((int)GameObjects.SelectEquipment).BindEvent(() => ShowEquipemnt());
+        GetObject((int)GameObjects.SelectEquipment).BindEvent(() => ShowEquipment());
         GetObject((int)GameObjects.SelectGameOptions).BindEvent(() => ShowGameOption());
 
         return true;
@@ -29,18 +28,19 @@ public class SelectUI : UI_Popup
 
     public void ShowInventory()
     {
-        m_GameUIManager.m_PlayerPrivateUI.m_InventoryUI.gameObject.SetActive(true);
         Managers.UI.ClosePopupUI();
+        Managers.UI.ShowPopupUI<InventoryUI>();
     }
 
-    public void ShowEquipemnt()
+    public void ShowEquipment()
     {
-        m_GameUIManager.m_PlayerPrivateUI.m_EquipmentUI.gameObject.SetActive(true);
         Managers.UI.ClosePopupUI();
+        Managers.UI.ShowPopupUI<EquipmentUI>();
     }
 
     public void ShowGameOption()
     {
+        Managers.UI.ClosePopupUI();
 
     }
 }

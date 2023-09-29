@@ -4,8 +4,48 @@ using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class ItemStatWindowUI : MonoBehaviour
+public class ItemStatWindowUI : UI_Base
 {
+    enum GameObjects
+    {
+        StatBars,
+        Crosshair,
+    }
+
+    enum Texts
+    {
+        SoulCountText,
+    }
+
+    enum Images
+    {
+        // Left Panel
+        ItemBasePlateIcon,
+        ItemIcon,
+        ItemSelectIcon
+    }
+
+    Item m_Item;
+
+    public override bool Init()
+    {
+        if (base.Init() == false)
+            return false;
+
+
+
+        return true;
+
+    }
+
+    public void SetInfo(Item item)
+    {
+        m_Item = item;
+        GetImage((int)Images.ItemIcon).sprite = m_Item.itemIcon;
+        GetImage((int)Images.ItemIcon).enabled = true;
+        GetImage((int)Images.ItemBasePlateIcon).enabled = true;
+    }
+
     public TextMeshProUGUI itemNameText;
     public Image itemIconImage;
 
@@ -53,7 +93,7 @@ public class ItemStatWindowUI : MonoBehaviour
                 itemIconImage.sprite = null;
             }
 
-            physicalDamageText.text = weapon.physicalDamage.ToString();
+            physicalDamageText.text = weapon.m_iPhysicalDamage.ToString();
             physicalAbsorptionText.text = weapon.physicalBlockingDamageAbsorption.ToString();
 
             weaponsStats.SetActive(true);

@@ -39,7 +39,7 @@ public class LegEquipmentSlotUI : MonoBehaviour
         uiManager.legEquipmentSlotSelected = true;
 
         // 업데이트
-        uiManager.m_HUDUI.itemStatWindowUI.UpdateArmorItemStats((EquipmentItem)equipmentItem);
+        //uiManager.m_HUDUI.itemStatWindowUI.UpdateArmorItemStats((EquipmentItem)equipmentItem);
 
         // EquipmentScreenWindow 닫기
         //uiManager.EquipmentScreenWindow.gameObject.SetActive(false);

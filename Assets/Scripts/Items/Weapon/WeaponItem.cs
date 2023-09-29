@@ -15,10 +15,49 @@ public class WeaponItem : Item
 
     [Header("Weapon Type")]
     public WeaponType weaponType;
+    public string AttackType;
+    public string Skill;
+    public int FocusCost;
 
-    [Header("Damage")]
-    public int physicalDamage;
-    public int fireDamage;
+    [Header("Requirement")] // 필요 능력치 F = 1, E = 2, D = 3, C = 4, B = 5, A = 6
+    public int m_iRequirementStrength;
+    public int m_iRequirementDexterity;
+    public int m_iRequirementIntelligence;
+    public int m_iRequirementFaith;
+
+    [Header("Parameter Bonus")] // 능력치 보정
+    public int m_iParameterBonusStrength;
+    public int m_iParameterBonusDexterity;
+    public int m_iParameterBonusIntelligence;
+    public int m_iParameterBonusFaith;
+
+    [Header("Attack Values")]
+    public int m_iPhysicalDamage;
+    public int m_iMagicDamage;
+    public int m_iFireDamage;
+    public int m_iLightningDamage;
+    public int m_iDarkDamage;
+    public int m_iCriticalDamage;
+    public int m_iSpellBuff;
+    public int m_iRange;
+
+    [Header("Damage Reduction %")]
+    public int m_iPhysicalDamageReduction;
+    public int m_iMagicDamageReduction;
+    public int m_iFireDamageReduction;
+    public int m_iLightningDamageReduction;
+    public int m_iDarkDamageReduction;
+    public int m_iStability;
+
+    [Header("Auxiliary Effects")]
+    public int m_iBleeding;
+    public int m_iPoison;
+    public int m_iFrost;
+    public int m_iCurse;
+
+    [Header("Others")]
+    public int m_iDurability;
+    public int m_iWeight;
 
     [Header("Damage Modifiers")]
     public float lightAttackDamageModifier;
@@ -33,9 +72,6 @@ public class WeaponItem : Item
     [Header("Absorption")]
     public float physicalBlockingDamageAbsorption;
     public float fireBlockingDamageAbsorption;
-
-    [Header("Stability")]
-    public int stability = 67;
 
     [Header("Stamina Costs")]
     public int baseStaminaCost;
