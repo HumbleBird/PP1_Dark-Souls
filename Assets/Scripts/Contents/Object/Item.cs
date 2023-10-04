@@ -9,5 +9,5 @@ public class Item : ScriptableObject
     public Sprite itemIcon;
     public string itemName;
     public int itemID;
-    public ItemType m_EItemType;
+    public E_ItemType m_EItemType;
 }

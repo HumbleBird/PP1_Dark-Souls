@@ -8,8 +8,20 @@ public class InventoryMiddleUI : UI_Base
 {
     enum Texts
     {
+        // Toll
+        ToolItemNameText,
+        ToolItemTypeText,
+        CountValueText,
+        SaveCountValueText,
+        ItemEffectDescriptionText,
+        Tool_ParameterBonusStrengthValueText,
+        Tool_ParameterBonusDexterityValueText,
+        Tool_ParameterBonusIntelligenceValueText,
+        Tool_ParameterBonusFaithValueText,
+
+
         // Weapon Information
-        ItemNameText,
+        WeaponItemNameText,
         WeaponTypeText,
         AttackTypeText,
         SkillText,
@@ -57,11 +69,19 @@ public class InventoryMiddleUI : UI_Base
     enum GameObjects
     {
         WeaponStats,
-        ArmorStats
+        ArmorStats,
+        ToolStats,
+        ItemStats,
+        AmmoStats,
     }
 
+    GameObject m_ToolStats;
+    GameObject m_ItemStats;
     GameObject m_WeaponStats;
     GameObject m_ArmorStats;
+    GameObject m_AmmoStats;
+
+
     Image m_ItemBasePlateIcon;
     Image m_ItemIcon;
 
@@ -80,6 +100,9 @@ public class InventoryMiddleUI : UI_Base
 
         m_WeaponStats = GetObject((int)GameObjects.WeaponStats);
         m_ArmorStats = GetObject((int)GameObjects.ArmorStats);
+        m_ToolStats = GetObject((int)GameObjects.ToolStats);
+        m_ItemStats = GetObject((int)GameObjects.ItemStats);
+        m_AmmoStats = GetObject((int)GameObjects.AmmoStats);
 
         m_ItemBasePlateIcon = GetImage((int)Images.ItemBasePlateIcon);
         m_ItemIcon = GetImage((int)Images.ItemIcon);
@@ -102,27 +125,63 @@ public class InventoryMiddleUI : UI_Base
 
         switch (item.m_EItemType)
         {
-            case Define.ItemType.None:
+            case Define.E_ItemType.Tool:
+                ShowToolItemInfo((ToolItem)item); // 툴 타입, 소지수, 저장수, 아이템 효과, 능력 보정
                 break;
-            case Define.ItemType.Weapon:
+            case Define.E_ItemType.ReinforcedMaterial: // 소지수 (1/  1), 저장수(- / -) 고정, 아이템 효과
+            case Define.E_ItemType.Valuables: // 툴 타입, 소지수, 저장수
+                break;
+            case Define.E_ItemType.Magic: // 아이템 타입, 소지수, 저장수, 아이템 효과, 능력 보정
+                break;
+            case Define.E_ItemType.MeleeWeapon:
+            case Define.E_ItemType.RangeWeapon:
+            case Define.E_ItemType.Catalyst:
+            case Define.E_ItemType.Shield:
                 ShowWeaponItemInfo((WeaponItem)item);
                 break;
-            case Define.ItemType.Armor:
+            case Define.E_ItemType.Helmet: // 중략, 내구도, 감소율, 내성치
+            case Define.E_ItemType.ChestArmor:
+            case Define.E_ItemType.Gauntlets:
+            case Define.E_ItemType.Leggings:
                 break;
-            case Define.ItemType.Consumable:
+            case Define.E_ItemType.Ammo:// 아이템 속성, 공격력, 특수 효과
                 break;
-            case Define.ItemType.Order:
+            case Define.E_ItemType.Ring: // 중량, 아이템 효과
+                break;
+            case Define.E_ItemType.Pledge: // 아이템 효과
                 break;
             default:
                 break;
         }
     }
 
+    void ShowNomalItemInfo(ToolItem item)
+    {
+
+    }
+
+    void ShowToolItemInfo(ToolItem item)
+    {
+        m_ToolStats.SetActive(true);
+
+        GetText((int)Texts.ToolItemNameText).text = item.itemName;
+        GetText((int)Texts.ToolItemTypeText).text = item.m_ToolType.ToString();
+        GetText((int)Texts.CountValueText).text = item.currentItemAmount.ToString() + " / " + item.maxItemAmount.ToString();
+        //GetText((int)Texts.SaveCountValueText).text = item.currentItemAmount.ToString();
+
+        GetText((int)Texts.ItemEffectDescriptionText).text = item.m_sItemDescription.ToString();
+
+        GetText((int)Texts.Tool_ParameterBonusStrengthValueText).text = item.m_iParameterBonusStrength.ToString();
+        GetText((int)Texts.Tool_ParameterBonusDexterityValueText).text = item.m_iParameterBonusDexterity.ToString();
+        GetText((int)Texts.Tool_ParameterBonusIntelligenceValueText).text = item.m_iParameterBonusIntelligence.ToString();
+        GetText((int)Texts.Tool_ParameterBonusFaithValueText).text = item.m_iParameterBonusFaith.ToString();
+    }
+
     void ShowWeaponItemInfo(WeaponItem item)
     {
         m_WeaponStats.SetActive(true);
 
-        GetText((int)Texts.ItemNameText).text = item.itemName;
+        GetText((int)Texts.WeaponItemNameText).text = item.itemName;
         GetText((int)Texts.WeaponTypeText).text = item.weaponType.ToString();
         GetText((int)Texts.AttackTypeText).text = item.AttackType;
         GetText((int)Texts.SkillText).text = item.Skill;
@@ -165,5 +224,8 @@ public class InventoryMiddleUI : UI_Base
     {
         m_WeaponStats.SetActive(false);
         m_ArmorStats.SetActive(false);
+        m_AmmoStats.SetActive(false);
+        m_ToolStats.SetActive(false);
+        m_ItemStats.SetActive(false);
     }
 }

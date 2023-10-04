@@ -15,11 +15,20 @@ MonoBehaviour:
   itemIcon: {fileID: 21300000, guid: 87de97c159355fd478c615de09be6130, type: 3}
   itemName: Estus Flask
   itemID: 0
+  m_EItemType: 0
+  m_ToolType: 0
   maxItemAmount: 10
   currentItemAmount: 10
   itemModel: {fileID: 7694254933542424885, guid: 0f51766a926e5e74f8354c9951bfc5ff, type: 3}
   consumeAnimation: Drinking
   isInteracting: 0
+  m_sItemDescription: '"The Undead treasure these dull green flasks. Fill with Estus
+    at bonfires, and drink to restore HP. The journey of an Undead has always traced
+    the bonfires, and no journey of import has been made without an Estus Flask."'
+  m_iParameterBonusStrength: 0
+  m_iParameterBonusDexterity: 0
+  m_iParameterBonusIntelligence: 0
+  m_iParameterBonusFaith: 0
   estusFlask: 1
   ashenFlask: 0
   healthRecoverAmount: 250

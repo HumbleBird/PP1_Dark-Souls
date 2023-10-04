@@ -15,6 +15,7 @@ MonoBehaviour:
   itemIcon: {fileID: 21300000, guid: 918d39d5897d54948a6281cacda66148, type: 3}
   itemName: Knight Gauntlets
   itemID: 0
+  m_EItemType: 5
   m_fPhysicalDefense: 0
   m_fStrikeDefense: 0
   m_fSlashDefense: 0
@@ -30,11 +31,11 @@ MonoBehaviour:
   m_fPoiseResistance: 0
   m_fDurability: 0
   m_fWeight: 0
-  Elbow_Attachment_Right: 
-  Elbow_Attachment_Left: 
-  m_Arm_Upper_RightName: Chr_ArmUpperRight_Male_00
-  m_Arm_Upper_LeftName: Chr_ArmUpperLeft_Male_00
-  m_Arm_Lower_RightName: Chr_ArmLowerRight_Male_00
-  m_Arm_Lower_LeftName: Chr_ArmLowerLeft_Male_00
-  m_Hand_RightName: Chr_HandRight_Male_00
-  m_Hand_LeftName: Chr_HandLeft_Male_00
+  Elbow_Attachment_Right: 0
+  Elbow_Attachment_Left: 0
+  Arm_Upper_RightName: 0
+  Arm_Upper_LeftName: 0
+  Arm_Lower_RightName: 0
+  Arm_Lower_LeftName: 0
+  Hand_RightName: 0
+  Hand_LeftName: 0

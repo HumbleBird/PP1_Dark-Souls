@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 
 [CreateAssetMenu(menuName ="Items/Consumables/Bomb Item")]
-public class BombConsumeableItem : ConsumableItem
+public class BombConsumeableItem : ToolItem
 {
     [Header("Velocity")]
     public int upwardVelocity = 50;

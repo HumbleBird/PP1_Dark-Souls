@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 
 [CreateAssetMenu(menuName ="Items/Consumables/Flask")]
-public class FlaskItem : ConsumableItem
+public class FlaskItem : ToolItem
 {
     [Header("Flask Type")]
     public bool estusFlask;

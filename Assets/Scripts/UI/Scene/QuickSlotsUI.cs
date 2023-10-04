@@ -55,7 +55,7 @@ public class QuickSlotsUI : UI_Base
         }
     }
 
-    public void UpdateCurrentConsumableIcon(ConsumableItem consumable)
+    public void UpdateCurrentConsumableIcon(ToolItem consumable)
     {
         if(consumable.itemIcon != null)
         {

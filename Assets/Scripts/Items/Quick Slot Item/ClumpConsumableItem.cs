@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 
 [CreateAssetMenu(menuName ="Items/Consumables/Cure Effect Clump")]
-public class ClumpConsumableItem : ConsumableItem
+public class ClumpConsumableItem : ToolItem
 {
     [Header("Recovery FX")]
     public GameObject clumpConsumeFX;

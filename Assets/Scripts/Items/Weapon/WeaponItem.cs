@@ -25,7 +25,7 @@ public class WeaponItem : Item
     public int m_iRequirementIntelligence;
     public int m_iRequirementFaith;
 
-    [Header("Parameter Bonus")] // 능력치 보정
+    [Header("Parameter Bonus")] // 능력치 보정 // 필요 능력치 F = 1, E = 2, D = 3, C = 4, B = 5, A = 6
     public int m_iParameterBonusStrength;
     public int m_iParameterBonusDexterity;
     public int m_iParameterBonusIntelligence;

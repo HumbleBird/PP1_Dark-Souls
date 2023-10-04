@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 
 [CreateAssetMenu(menuName = "Items/Consumables/Weapon Buff")]
-public class WeaponBuffConsumableItem : ConsumableItem
+public class WeaponBuffConsumableItem : ToolItem
 {
     [Header("Effect")]
     [SerializeField] WeaponBuffEffect weaponBuffEffect;

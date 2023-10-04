@@ -4,57 +4,30 @@ using UnityEngine;
 
 public class Define
 {
-    #region Creature
-    public enum ObjectType
-    {
-        None,
-        Player,
-        Monster,
-        Boss,
-        Projectile,
-    }
-
-    public enum CharacterClass
-    {
-        None = 0,
-        Warior = 1,
-        Knight = 2,
-        Archer = 3,
-        Wizard = 4
-    }
-
-    public enum CreatureState
-    {
-        Idle,
-        Move,
-        Skill,
-        Dead
-    }
-
-    public enum MonsterType
-    {
-        Skeleton,
-        Jombi,
-        Mummy, // 미라
-
-    }
-    #endregion
-
-    #region Multy
-
-    public enum Team
-    {
-        All,
-        Player1,
-        Player2
-    }
-    #endregion
-
     #region Item
-    public enum eWeaponTrail
+    public enum E_ItemType
     {
-        Normal,
-        Fire
+        Tool,
+        ReinforcedMaterial,
+        Valuables,
+        Magic,
+        MeleeWeapon,
+        RangeWeapon,
+        Catalyst,
+        Shield,
+        Helmet,
+        ChestArmor,
+        Gauntlets,
+        Leggings,
+        Ammo,
+        Ring,
+        Pledge
+    }
+
+    public enum ToolItemType
+    {
+        Unlimited,
+        limited
     }
 
     public enum AmmoType
@@ -63,18 +36,148 @@ public class Define
         Bolt
     }
 
-    public enum ConsumableType
-    {
-        None,
-        Consumable
-    }
-
     public enum E_ArmorEquipmentType
     {
         Helmet,
         Torso,
         Leggings,
         Gauntlet,
+        All
+    }
+
+    public enum WeaponType
+    {
+        PyroCaster,
+        FaithCaster,
+        SpellCaster,
+        Unarmed,
+        StraightSwords,
+        SmallShield,
+        Shield,
+        Bow
+    }
+
+    public enum eWeaponTrail
+    {
+        Normal,
+        Fire
+    }
+
+    public enum WeaponType2
+    {
+        Daggers = 1,
+        StraightSwords,
+        Greatswords,
+        UltraGreatswords,
+        CurvedSword,
+        Katanas,
+        CurvedGreatswords,
+        PiercingSwords,
+        Axes,
+        Greataxes,
+
+        Hammers,
+        GreatHammers,
+        FistAndClaws,
+        SpearsAndPikes,
+        Halberds,
+        Reapers,
+        Whips,
+        Bows,
+        Greatbows,
+        Crossbows,
+
+        Staves,
+        Flames,
+        Talismans,
+        SacredChimes,
+        Shield = 25
+    }
+    #endregion
+
+    #region Battle
+
+    public enum EncumbranceLevel
+    {
+        Light,
+        Medium,
+        Heavy,
+        Overloaded
+    }
+
+    public enum EffectParticleType
+    {
+        Poison,
+        Bleed,
+        Curse,
+        Frost
+    }
+
+    public enum BuffClass
+    {
+        Physical,
+        Fire
+    }
+
+    public enum Damagetype
+    {
+        Physical,
+        Fire
+    }
+
+    public enum AICombatStyle
+    { 
+        swordAndShield,
+        Archer
+    }
+
+    public enum AIAttackActionType
+    { 
+        meleeAttackAction,
+        magicAttackACtion,
+        rangedAttackaCtion,
+    }
+
+
+    public enum AttackType
+    {
+        light,
+        heavy
+    }
+
+    public enum E_CharacterClass
+    {
+        Knight = 0,
+        Mercenary,
+        Warrior,
+        Herald,
+        Thief,
+        Assassin,
+        Sorcerer,
+        Pyromancer,
+        Cleric,
+        Deprived,
+        MaxCount
+    }
+
+    #endregion
+
+    #region Character Eternal Appearance
+    public enum ExternalFeaturesColorParts
+    {
+        Hair,
+        FacialMask,
+        Skin
+    }
+
+    public enum E_CharacterCreationPreviewCamera
+    {
+        None,
+        Head,
+        Chest,
+        Leg,
+        Hand,
+        Back,
         All
     }
 
@@ -113,244 +216,20 @@ public class Define
         Eyebrow,
         FacialHair,
         Torso,
-        Arm_Upper_Right     ,
-        Arm_Upper_Left      ,
-        Arm_Lower_Right         ,
-        Arm_Lower_Left      ,
-        Hand_Right          ,
-        Hand_Left           ,
-        Hip                  ,
-        LeftLegging         ,
-        RightLegging            ,
-    }
-
-    public enum WeaponType
-    {
-        PyroCaster,
-        FaithCaster,
-        SpellCaster,
-        Unarmed,
-        StraightSwords,
-        SmallShield,
-        Shield,
-        Bow
-    }
-
-    public enum WeaponType2
-    {
-        Daggers = 1,
-        StraightSwords,
-        Greatswords,
-        UltraGreatswords,
-        CurvedSword,
-        Katanas,
-        CurvedGreatswords,
-        PiercingSwords,
-        Axes,
-        Greataxes,
-
-        Hammers,
-        GreatHammers,
-        FistAndClaws,
-        SpearsAndPikes,
-        Halberds,
-        Reapers,
-        Whips,
-        Bows,
-        Greatbows,
-        Crossbows,
-
-        Staves,
-        Flames,
-        Talismans,
-        SacredChimes,
-        Shield = 25
-    }
-
-    public enum ItemType
-    {
-        None = 0,
-        Weapon = 1,
-        Armor = 2,
-        Consumable = 3,
-        Order = 4,
-    }
-
-    public enum EquimentItemCategory
-    {
-        Weapon,
-        RightProjectile,
-        Shield,
-        LeftProjectile,
-        Armor,
-        Speicial,
-        Ring,
-        Item
-    }
-
-
-    #endregion
-
-    #region Battle
-
-    public enum EncumbranceLevel
-    {
-        Light,
-        Medium,
-        Heavy,
-        Overloaded
-    }
-
-    public enum EffectParticleType
-    {
-        Poison
-    }
-
-    public enum BuffClass
-    {
-        Physical,
-        Fire
-    }
-
-    public enum Damagetype
-    {
-        Physical,
-        Fire
-    }
-
-    public enum AICombatStyle
-    { 
-        swordAndShield,
-        Archer
-    }
-
-    public enum AIAttackActionType
-    { 
-        meleeAttackAction,
-        magicAttackACtion,
-        rangedAttackaCtion,
-    }
-
-
-    public enum AttackType
-    {
-        light,
-        heavy
-    }
-
-    #endregion
-
-    #region Action
-
-    public enum HitMotion
-    {
-        NormalHit,
-        ShieldHit,
-        CrouchingHit,
-        CrouchShieldHit,
-    }
-
-    public enum MoveState
-    {
-        None,
-        Walk,
-        Run,
-        Sprint,
-        Falling,
-        Jump
-    }
-
-    public enum ActionState
-    {
-        None,
-        Shield,
-        Charging,
-        Reload,
-        Invincible,
-    }
-
-    public enum UserAction
-    {
-        // Move
-        Walk,
-        Run_Forward,
-        Run_Backward,
-        Run_Left,
-        Run_Right,
-        Dash_BackStep_Roll,
-        Jump,
-
-        // Camera
-        TiltCameraUp,
-        TiltCameraDown,
-        TiltCameraLeft_ChangeTargetLeft,
-        TiltCameraRight_ChangeTargetRight,
-        CameraReset_LockOn,
-
-        // Switch Equipment
-        SwitchSpells,
-        SwitchQuickItems,
-        SwitchRightHandWeapon,
-        switchLeftHandWeapon,
-
-        // Attack
-        Attack_RightHand,
-        StrongAttack_RightHand,
-        Attack_LeftHand,
-        StrongAttack_LeftHand,
-        UseItem,
-        Interact,
-        TwoHandWeapon,
-
-        // Key Bindings
-        OpenMenu,
-        OpenGestureMenu,
-        MoveCurser_Up,
-        MoveCurser_Down,
-        MoveCurser_Right,
-        MoveCurser_Left,
-        Confirm,
-        Cancel,
-        SwitchTab_Left,
-        SwitchTab_Right,
-        Function1,
+        Arm_Upper_Right,
+        Arm_Upper_Left,
+        Arm_Lower_Right,
+        Arm_Lower_Left,
+        Hand_Right,
+        Hand_Left,
+        Hip,
+        LeftLegging,
+        RightLegging,
     }
 
     #endregion
 
     #region Other
-    public enum ExternalFeaturesColorParts
-    {
-        Hair,
-        FacialMask,
-        Skin
-    }
-
-    public enum E_CharacterClass
-    {
-        Knight = 0,
-        Mercenary,
-        Warrior,
-        Herald,
-        Thief,
-        Assassin,
-        Sorcerer,
-        Pyromancer,
-        Cleric,
-        Deprived,
-        MaxCount
-    }
-
-    public enum E_CharacterCreationPreviewCamera
-    {
-        None,
-        Head,
-        Chest,
-        Leg,
-        Hand,
-        Back,
-        All
-    }
 
     public enum E_RandomSoundType
     {
@@ -359,34 +238,10 @@ public class Define
         WeaponWhoose
     }
 
-    public enum OpenWhat
-    {
-        None,
-        Inventory,
-        Shop
-    }
-
-    public enum Layer
-    {
-        UI = 5,
-        Player = 7,
-        Monster = 8,
-        Obstacle = 10,
-        NPC = 11,
-    }
-
-
-    public enum CameraMode
-    {
-        Third,
-        QuarterView,
-        Aim
-    }
-
     public enum Scene
     {
         Unknown = 0,
-        Login = 1,
+        Start = 1,
         Lobby = 2,
         Game = 3,
     }
@@ -405,12 +260,6 @@ public class Define
         PointerDown,
         PointerUp,
         
-    }
-
-    public enum AnimationLayers
-    {
-        BaseLayer = 0,
-        UpperLayer = 1,
     }
 
     public enum CursorType

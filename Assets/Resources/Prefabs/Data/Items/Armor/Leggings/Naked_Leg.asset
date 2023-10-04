@@ -15,6 +15,7 @@ MonoBehaviour:
   itemIcon: {fileID: 0}
   itemName: Naked_Leg
   itemID: 0
+  m_EItemType: 5
   m_fPhysicalDefense: 0
   m_fStrikeDefense: 0
   m_fSlashDefense: 0
@@ -30,6 +31,9 @@ MonoBehaviour:
   m_fPoiseResistance: 0
   m_fDurability: 0
   m_fWeight: 0
-  m_HipName: Chr_Hips_Male_00
-  m_LeftLeggingName: Chr_LegLeft_Male_00
-  m_RightLeggingName: Chr_LegRight_Male_00
+  Hips_Attachment: 0
+  Knee_Attachement_Right: 0
+  Knee_Attachement_Left: 0
+  HipName: 0
+  LeftLeggingName: 0
+  RightLeggingName: 0

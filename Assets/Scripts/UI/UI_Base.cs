@@ -89,6 +89,26 @@ public abstract class UI_Base : MonoBehaviour
 				break;
 		}
 	}
+	public static void BindEventRemove(GameObject go, Define.UIEvent type = Define.UIEvent.Click)
+	{
+		UI_EventHandler evt = Util.GetOrAddComponent<UI_EventHandler>(go);
+
+		switch (type)
+		{
+			case Define.UIEvent.Click:
+				evt.OnClickHandler = null;
+				break;
+			case Define.UIEvent.Pressed:
+				evt.OnPressedHandler = null;
+				break;
+			case Define.UIEvent.PointerDown:
+				evt.OnPointerDownHandler = null;
+				break;
+			case Define.UIEvent.PointerUp:
+				evt.OnPointerUpHandler = null;
+				break;
+		}
+	}
 
 	public virtual void RefreshUI()
     {
