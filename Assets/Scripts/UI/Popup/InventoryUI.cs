@@ -34,8 +34,8 @@ public class InventoryUI : UI_Popup
 
     PlayerManager player;
     public InventoryLeftPanelUI m_InventoryLeftPanelUI;
-    public InventoryMiddleUI m_InventoryMiddleUI;
-    public InventoryRightPanel m_InventoryRightPanel;
+    public ItemInformationUI m_InventoryMiddleUI;
+    public BriefPlayerStatInformationUI m_InventoryRightPanel;
 
     public override bool Init()
     {
@@ -49,8 +49,8 @@ public class InventoryUI : UI_Popup
         GetText((int)Texts.SoulText).text = player.playerStatsManager.currentSoulCount.ToString();
 
         m_InventoryLeftPanelUI = GetComponentInChildren<InventoryLeftPanelUI>();
-        m_InventoryMiddleUI = GetComponentInChildren<InventoryMiddleUI>();
-        m_InventoryRightPanel = GetComponentInChildren<InventoryRightPanel>();
+        m_InventoryMiddleUI = GetComponentInChildren<ItemInformationUI>();
+        m_InventoryRightPanel = GetComponentInChildren<BriefPlayerStatInformationUI>();
 
         return true;
     }

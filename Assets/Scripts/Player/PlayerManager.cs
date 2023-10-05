@@ -50,7 +50,7 @@ public class PlayerManager : CharacterManager
     {
         cameraHandler = Managers.Camera.m_Camera;
         m_GameUIManager = FindObjectOfType<GameUIManager>();
-        m_GameUIManager.m_PlayerPrivateUI.m_EquipmentUI.LoadWeaponsOnEquipmentScreen(playerInventoryManager);
+        //m_GameUIManager.m_PlayerPrivateUI.m_EquipmentUI.RefreshUI();
 
         Managers.Camera.m_Camera.ReStart();
     }

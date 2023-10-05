@@ -77,7 +77,7 @@ public class StartSceneUI : UI_Scene
 
     void IntroScreen()
     {
-        m_FadeInOutScreenUI.FadeIn(
+        m_FadeInOutScreenUI.FadeInOut(
             null, // 페이드 인에서 조건 없이 실행.
             () => { m_Intro.SetActive(false); m_Start.SetActive(true); StartScreen(); });
 
@@ -91,7 +91,7 @@ public class StartSceneUI : UI_Scene
         // 텍스트 백그라운드 이미지 효과 주기.
         m_Animator.Play("UntilSelectButtonTextEffect");
 
-        m_FadeInOutScreenUI.FadeIn(
+        m_FadeInOutScreenUI.FadeInOut(
                 // 아무 키나 입력하면 다음으로 이동.
                 () =>
                 {
@@ -119,7 +119,7 @@ public class StartSceneUI : UI_Scene
         // 텍스트 백그라운드 이미지 효과 주기.
         m_Animator.Play("UntilSelectButtonTextEffect");
 
-        m_FadeInOutScreenUI.FadeIn(
+        m_FadeInOutScreenUI.FadeInOut(
             // 아무 키나 입력하면 다음으로 이동.
             () =>
             {

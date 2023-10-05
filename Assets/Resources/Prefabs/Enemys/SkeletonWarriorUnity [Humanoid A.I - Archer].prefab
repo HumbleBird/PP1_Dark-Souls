@@ -2438,21 +2438,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5fac9d561d0f1ba4cb0371be659e376f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  characterName: 
-  teamIDNumber: 1
-  maxHealth: 0
-  currentHealth: 0
-  maxStamina: 10
-  currentStamina: 10
-  maxfocusPoint: 0
-  currentFocusPoints: 0
-  currentSoulCount: 0
-  soulsAwardedOnDeath: 50
+  characterName: Nameless
+  teamIDNumber: 0
   playerLevel: 0
-  healthLevel: 10
-  staminaLevel: 10
-  focusLevel: 10
-  poiseLevel: 10
+  currentSoulCount: 0
   m_iVigorLevel: 10
   m_iAttunementLevel: 10
   m_iEnduranceLevel: 10
@@ -2462,14 +2451,23 @@ MonoBehaviour:
   m_iIntelligenceLevel: 10
   m_iFaithLevel: 10
   m_iLuckLevel: 10
+  maxHealth: 0
+  currentHealth: 0
+  maxfocusPoint: 0
+  currentFocusPoints: 0
+  maxStamina: 0
+  currentStamina: 0
   currentEquipLoad: 0
   maxEquipLoad: 0
   encumbranceLevel: 0
-  totalPoiseDefence: 0
-  offensivePoiseBonus: 0
-  armorPoiseBonus: 0
-  totalPoiseResetTime: 15
-  poiseResetTimer: 0
+  poiseLevel: 10
+  m_iItemDiscovery: 10
+  m_iRWeapon1: 0
+  m_iRWeapon2: 0
+  m_iRWeapon3: 0
+  m_iLWeapon1: 0
+  m_iLWeapon2: 0
+  m_iLWeapon3: 0
   physicalDamageAbsorptionHead: 0
   physicalDamageAbsorptionBody: 0
   physicalDamageAbsorptionLegs: 0
@@ -2478,10 +2476,22 @@ MonoBehaviour:
   fireDamageAbsorptionBody: 0
   fireDamageAbsorptionLegs: 0
   fireDamageAbsorptionHands: 0
-  poisonResistance: 0
   blockingPhysicalDamageAbsorption: 0
   blockingFireDamageAbsorption: 0
   blockingStabilityRating: 0
+  m_fMagicDefense: 0
+  m_fLightningDefense: 0
+  m_fDarkDefense: 0
+  poisonResistance: 0
+  m_fBleedResistance: 0
+  m_fFrostResistance: 0
+  m_fCurseResistance: 0
+  AttunementSlots: 0
+  totalPoiseDefence: 0
+  offensivePoiseBonus: 0
+  armorPoiseBonus: 0
+  totalPoiseResetTime: 15
+  poiseResetTimer: 0
   physicalDamagePercentageModifier: 100
   fireDamagePercentageModifier: 100
   physicalAbsorptionPercentageModifier: 0
@@ -2489,6 +2499,7 @@ MonoBehaviour:
   isPoisoned: 0
   poisonBuildup: 0
   poisonAmount: 100
+  soulsAwardedOnDeath: 50
   aiCharacterHealthBar: {fileID: 0}
   isBoss: 0
 --- !u!114 &3487662551812223540

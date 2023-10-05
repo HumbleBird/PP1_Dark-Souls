@@ -3,11 +3,13 @@ using System.Collections.Generic;
 using UnityEngine;
 using static Define;
 
-public class PlayerEquipmentManager : MonoBehaviour
+public class PlayerEquipmentManager : CharacterEquipmentManager
 {
     PlayerManager player;
 
     public bool m_bIsFemale = false;
+
+    #region Character Creation
 
     [Header("Equipment Model Changers")]
     public Dictionary<All_GenderItemPartsType, AllGenderPartModelChanger> m_AllGenderPartsModelChanger = new Dictionary<All_GenderItemPartsType, AllGenderPartModelChanger>();
@@ -22,6 +24,10 @@ public class PlayerEquipmentManager : MonoBehaviour
 
     [Header("Facial Features")]
     public GameObject[] facialFeatures;
+
+    #endregion
+
+    // Current Item 
 
     float poisonResistance = 0;
     float totalEquipmentLoad = 0;

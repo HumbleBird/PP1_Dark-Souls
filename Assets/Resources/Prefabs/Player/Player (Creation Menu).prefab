@@ -38,7 +38,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 347833055415664871}
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
@@ -77,7 +77,7 @@ MonoBehaviour:
   tap_lb_Input: 0
   tab_lt_Input: 0
   jump_Input: 0
-  inventory_Input: 0
+  select_Input: 0
   lockOnInput: 0
   right_Stick_Right_Input: 0
   right_Stick_Left_Input: 0
@@ -90,7 +90,7 @@ MonoBehaviour:
   comboFlag: 0
   lockOnFlag: 0
   fireFlag: 0
-  inventoryFlag: 0
+  selectFlag: 0
   rollInputTimer: 0
   input_Has_Been_Qued: 0
   current_Qued_Input_Timer: 0
@@ -282,14 +282,14 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   currentItemBeingUsed: {fileID: 0}
   currentSpell: {fileID: 0}
-  rightWeapon: {fileID: 0}
-  leftWeapon: {fileID: 0}
-  currentConsumable: {fileID: 0}
+  rightWeapon: {fileID: 11400000, guid: 950c54dd3d5db784f9220334c914a1db, type: 2}
+  leftWeapon: {fileID: 11400000, guid: 950c54dd3d5db784f9220334c914a1db, type: 2}
+  currentConsumable: {fileID: 11400000, guid: c7963e088a06f74478bd8375ab885623, type: 2}
   currentAmmo: {fileID: 0}
-  currentHelmetEquipment: {fileID: 0}
-  currentTorsoEquipment: {fileID: 0}
-  currentLegEquipment: {fileID: 0}
-  currentHandEquipment: {fileID: 0}
+  currentHelmetEquipment: {fileID: 11400000, guid: 988aab8869179614eae84faa3284d2a2, type: 2}
+  currentTorsoEquipment: {fileID: 11400000, guid: 2cf022a44c0c75c4d81f4804639beeef, type: 2}
+  currentLegEquipment: {fileID: 11400000, guid: f98e935e2857ce846ade7b13ea0eee98, type: 2}
+  currentHandEquipment: {fileID: 11400000, guid: 941c776a633cbfb4ca0eabe7b8a67b81, type: 2}
   ringSlot01: {fileID: 0}
   ringSlot02: {fileID: 0}
   ringSlot03: {fileID: 0}
@@ -309,8 +309,10 @@ MonoBehaviour:
   currentFacialHair: {fileID: 0}
   currentFacialMask: {fileID: 0}
   currentNose: {fileID: 0}
+  currentExtra: {fileID: 0}
   currentRightWeaponIndex: 0
   currentLeftWeaponIndex: 0
+  m_Item: []
   weaponsInventory: []
   headEquipmentInventory:
   - {fileID: 0}
@@ -334,19 +336,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   characterName: Nightmare
   teamIDNumber: 0
-  maxHealth: 0
-  currentHealth: 0
-  maxStamina: 0
-  currentStamina: 0
-  maxfocusPoint: 0
-  currentFocusPoints: 0
-  currentSoulCount: 8500
-  soulsAwardedOnDeath: 50
   playerLevel: 13
-  healthLevel: 10
-  staminaLevel: 50
-  focusLevel: 10
-  poiseLevel: 10
+  currentSoulCount: 8500
   m_iVigorLevel: 0
   m_iAttunementLevel: 0
   m_iEnduranceLevel: 0
@@ -356,14 +347,23 @@ MonoBehaviour:
   m_iIntelligenceLevel: 0
   m_iFaithLevel: 0
   m_iLuckLevel: 0
+  maxHealth: 0
+  currentHealth: 0
+  maxfocusPoint: 0
+  currentFocusPoints: 0
+  maxStamina: 0
+  currentStamina: 0
   currentEquipLoad: 0
   maxEquipLoad: 0
   encumbranceLevel: 0
-  totalPoiseDefence: 0
-  offensivePoiseBonus: 0
-  armorPoiseBonus: 0
-  totalPoiseResetTime: 15
-  poiseResetTimer: 0
+  poiseLevel: 10
+  m_iItemDiscovery: 10
+  m_iRWeapon1: 0
+  m_iRWeapon2: 0
+  m_iRWeapon3: 0
+  m_iLWeapon1: 0
+  m_iLWeapon2: 0
+  m_iLWeapon3: 0
   physicalDamageAbsorptionHead: 0
   physicalDamageAbsorptionBody: 0
   physicalDamageAbsorptionLegs: 0
@@ -372,10 +372,22 @@ MonoBehaviour:
   fireDamageAbsorptionBody: 0
   fireDamageAbsorptionLegs: 0
   fireDamageAbsorptionHands: 0
-  poisonResistance: 0
   blockingPhysicalDamageAbsorption: 0
   blockingFireDamageAbsorption: 0
   blockingStabilityRating: 0
+  m_fMagicDefense: 0
+  m_fLightningDefense: 0
+  m_fDarkDefense: 0
+  poisonResistance: 0
+  m_fBleedResistance: 0
+  m_fFrostResistance: 0
+  m_fCurseResistance: 0
+  AttunementSlots: 0
+  totalPoiseDefence: 0
+  offensivePoiseBonus: 0
+  armorPoiseBonus: 0
+  totalPoiseResetTime: 15
+  poiseResetTimer: 0
   physicalDamagePercentageModifier: 100
   fireDamagePercentageModifier: 100
   physicalAbsorptionPercentageModifier: 0

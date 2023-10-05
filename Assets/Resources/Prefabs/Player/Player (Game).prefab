@@ -16,7 +16,6 @@ GameObject:
   - component: {fileID: 3780201453589398859}
   - component: {fileID: 3780201453589398868}
   - component: {fileID: 7888674121781100874}
-  - component: {fileID: 7888674121781100870}
   - component: {fileID: 7888674121781100883}
   - component: {fileID: 3780201453589398864}
   - component: {fileID: 3780201453589398865}
@@ -24,6 +23,7 @@ GameObject:
   - component: {fileID: 1461314987884993441}
   - component: {fileID: 3780201453589398861}
   - component: {fileID: 1461314987884993446}
+  - component: {fileID: 2131131853}
   m_Layer: 9
   m_Name: Player (Game)
   m_TagString: Character
@@ -77,7 +77,7 @@ MonoBehaviour:
   tap_lb_Input: 0
   tab_lt_Input: 0
   jump_Input: 0
-  inventory_Input: 0
+  select_Input: 0
   lockOnInput: 0
   right_Stick_Right_Input: 0
   right_Stick_Left_Input: 0
@@ -90,7 +90,7 @@ MonoBehaviour:
   comboFlag: 0
   lockOnFlag: 0
   fireFlag: 0
-  inventoryFlag: 0
+  selectFlag: 0
   rollInputTimer: 0
   input_Has_Been_Qued: 0
   current_Qued_Input_Timer: 0
@@ -309,9 +309,18 @@ MonoBehaviour:
   currentFacialHair: {fileID: 0}
   currentFacialMask: {fileID: 0}
   currentNose: {fileID: 0}
+  currentExtra: {fileID: 0}
   currentRightWeaponIndex: 0
   currentLeftWeaponIndex: 0
-  weaponsInventory: []
+  m_Item:
+  - {fileID: 11400000, guid: 48e75f5a988fd65469bab7cd58a33b5c, type: 2}
+  - {fileID: 11400000, guid: 48e75f5a988fd65469bab7cd58a33b5c, type: 2}
+  - {fileID: 11400000, guid: 48e75f5a988fd65469bab7cd58a33b5c, type: 2}
+  - {fileID: 11400000, guid: 48e75f5a988fd65469bab7cd58a33b5c, type: 2}
+  - {fileID: 11400000, guid: 48e75f5a988fd65469bab7cd58a33b5c, type: 2}
+  - {fileID: 11400000, guid: c7963e088a06f74478bd8375ab885623, type: 2}
+  weaponsInventory:
+  - {fileID: 11400000, guid: 48e75f5a988fd65469bab7cd58a33b5c, type: 2}
   headEquipmentInventory:
   - {fileID: 11400000, guid: c3934700670d4784d9fd70c0da2708c6, type: 2}
   bodyEquipmentInventory:
@@ -320,76 +329,6 @@ MonoBehaviour:
   - {fileID: 11400000, guid: 7c4a0d900189cd748ba634ec09e9a8f5, type: 2}
   handEquipmentInventory:
   - {fileID: 11400000, guid: 345d66b9b13601740905041d4fcf5c76, type: 2}
---- !u!114 &7888674121781100870
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 347833055415664871}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 30cb461b5e3124146b8e8aa84f952625, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  characterName: Nightmare
-  teamIDNumber: 0
-  maxHealth: 0
-  currentHealth: 0
-  maxStamina: 0
-  currentStamina: 0
-  maxfocusPoint: 0
-  currentFocusPoints: 0
-  currentSoulCount: 8500
-  soulsAwardedOnDeath: 50
-  playerLevel: 13
-  healthLevel: 10
-  staminaLevel: 50
-  focusLevel: 10
-  poiseLevel: 10
-  m_iVigorLevel: 0
-  m_iAttunementLevel: 0
-  m_iEnduranceLevel: 0
-  m_iVitalityLevel: 0
-  m_iStrengthLevel: 10
-  m_iDexterityLevel: 0
-  m_iIntelligenceLevel: 0
-  m_iFaithLevel: 0
-  m_iLuckLevel: 0
-  currentEquipLoad: 0
-  maxEquipLoad: 0
-  encumbranceLevel: 0
-  totalPoiseDefence: 0
-  offensivePoiseBonus: 0
-  armorPoiseBonus: 0
-  totalPoiseResetTime: 15
-  poiseResetTimer: 0
-  physicalDamageAbsorptionHead: 0
-  physicalDamageAbsorptionBody: 0
-  physicalDamageAbsorptionLegs: 0
-  physicalDamageAbsorptionHands: 0
-  fireDamageAbsorptionHead: 0
-  fireDamageAbsorptionBody: 0
-  fireDamageAbsorptionLegs: 0
-  fireDamageAbsorptionHands: 0
-  poisonResistance: 0
-  blockingPhysicalDamageAbsorption: 0
-  blockingFireDamageAbsorption: 0
-  blockingStabilityRating: 0
-  physicalDamagePercentageModifier: 100
-  fireDamagePercentageModifier: 100
-  physicalAbsorptionPercentageModifier: 0
-  fireAbsorptionPercentageModifier: 0
-  isPoisoned: 0
-  poisonBuildup: 0
-  poisonAmount: 100
-  healthBar: {fileID: 0}
-  staminaBar: {fileID: 0}
-  focusPointBar: {fileID: 0}
-  staminaRegenerationAmount: 1
-  staminaRegenerationAmountWhilstBlocking: 0.1
-  staminaRegenTimer: 0
-  spritingTimer: 0
 --- !u!114 &7888674121781100883
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -556,6 +495,86 @@ MonoBehaviour:
   - m_Rig: {fileID: 3300042734347596242}
     m_Active: 1
   m_Effectors: []
+--- !u!114 &2131131853
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 347833055415664871}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 30cb461b5e3124146b8e8aa84f952625, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  characterName: Nameless
+  teamIDNumber: 0
+  playerLevel: 9
+  currentSoulCount: 8500
+  m_iVigorLevel: 10
+  m_iAttunementLevel: 10
+  m_iEnduranceLevel: 10
+  m_iVitalityLevel: 10
+  m_iStrengthLevel: 10
+  m_iDexterityLevel: 10
+  m_iIntelligenceLevel: 10
+  m_iFaithLevel: 10
+  m_iLuckLevel: 10
+  maxHealth: 0
+  currentHealth: 0
+  maxfocusPoint: 0
+  currentFocusPoints: 0
+  maxStamina: 0
+  currentStamina: 0
+  currentEquipLoad: 0
+  maxEquipLoad: 0
+  encumbranceLevel: 0
+  poiseLevel: 10
+  m_iItemDiscovery: 10
+  m_iRWeapon1: 0
+  m_iRWeapon2: 0
+  m_iRWeapon3: 0
+  m_iLWeapon1: 0
+  m_iLWeapon2: 0
+  m_iLWeapon3: 0
+  physicalDamageAbsorptionHead: 0
+  physicalDamageAbsorptionBody: 0
+  physicalDamageAbsorptionLegs: 0
+  physicalDamageAbsorptionHands: 0
+  fireDamageAbsorptionHead: 0
+  fireDamageAbsorptionBody: 0
+  fireDamageAbsorptionLegs: 0
+  fireDamageAbsorptionHands: 0
+  blockingPhysicalDamageAbsorption: 0
+  blockingFireDamageAbsorption: 0
+  blockingStabilityRating: 0
+  m_fMagicDefense: 0
+  m_fLightningDefense: 0
+  m_fDarkDefense: 0
+  poisonResistance: 0
+  m_fBleedResistance: 0
+  m_fFrostResistance: 0
+  m_fCurseResistance: 0
+  AttunementSlots: 0
+  totalPoiseDefence: 0
+  offensivePoiseBonus: 0
+  armorPoiseBonus: 0
+  totalPoiseResetTime: 15
+  poiseResetTimer: 0
+  physicalDamagePercentageModifier: 100
+  fireDamagePercentageModifier: 100
+  physicalAbsorptionPercentageModifier: 0
+  fireAbsorptionPercentageModifier: 0
+  isPoisoned: 0
+  poisonBuildup: 0
+  poisonAmount: 100
+  healthBar: {fileID: 0}
+  staminaBar: {fileID: 0}
+  focusPointBar: {fileID: 0}
+  staminaRegenerationAmount: 1
+  staminaRegenerationAmountWhilstBlocking: 0.1
+  staminaRegenTimer: 0
+  spritingTimer: 0
 --- !u!1 &2032616575613666571
 GameObject:
   m_ObjectHideFlags: 0

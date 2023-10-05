@@ -25,10 +25,10 @@ public class FadeInOutScreenUI : MonoBehaviour
     {
         m_Canvase.sortingOrder = 10;
 
-        FadeIn(null, null);
+        FadeInOut(null, null);
     }
 
-    public void FadeIn(Func<bool> FadeInCondition, Action FadeOutFunc)
+    public void FadeInOut(Func<bool> FadeInCondition, Action FadeOutFunc)
     {
 
         StartCoroutine(IFadeIn(FadeInCondition, FadeOutFunc));
