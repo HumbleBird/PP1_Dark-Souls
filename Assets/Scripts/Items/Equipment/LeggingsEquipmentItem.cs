@@ -5,6 +5,11 @@ using UnityEngine;
 [CreateAssetMenu(menuName = "Items/Eqipment/Leggings Armor")]
 public class LeggingsEquipmentItem : EquipmentItem
 {
+    LeggingsEquipmentItem()
+    {
+        m_EItemType = Define.E_ItemType.Leggings;
+    }
+
     [Header("Item All Gender Parts Name")]
     [SerializeField] int Hips_Attachment;
     [SerializeField] int Knee_Attachement_Right;

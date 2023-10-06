@@ -5,6 +5,8 @@ using static Define;
 
 public class PlayerEquipmentManager : CharacterEquipmentManager
 {
+    // 아이템 바꿔서 장착하기
+
     PlayerManager player;
 
     public bool m_bIsFemale = false;
@@ -25,9 +27,17 @@ public class PlayerEquipmentManager : CharacterEquipmentManager
     [Header("Facial Features")]
     public GameObject[] facialFeatures;
 
-    #endregion
+    [Header("Current External Features")]
+    public GameObject currentHairStyle;
+    public GameObject currentHairItem;
+    public GameObject currentEyelashesBtn;
+    public GameObject currentEyebrows;
+    public GameObject currentFacialHair;
+    public GameObject currentFacialMask;
+    public GameObject currentNose;
+    public GameObject currentExtra;
 
-    // Current Item 
+    #endregion
 
     float poisonResistance = 0;
     float totalEquipmentLoad = 0;
@@ -92,14 +102,14 @@ public class PlayerEquipmentManager : CharacterEquipmentManager
 
     private void HeadItemEquip()
     {
-        if (player.playerInventoryManager.currentHelmetEquipment != null)
+        if (m_HelmetEquipment != null)
         {
             // 아이템 종류를 보고 넣어야 지.
 
             HeadItemEquipModel();
-            player.playerStatsManager.physicalDamageAbsorptionHead = player.playerInventoryManager.currentHelmetEquipment.m_fPhysicalDefense;
-            poisonResistance += player.playerInventoryManager.currentHelmetEquipment.m_fPoisonResistance;
-            totalEquipmentLoad += player.playerInventoryManager.currentHelmetEquipment.m_fWeight;
+            player.playerStatsManager.physicalDamageAbsorptionHead = m_HelmetEquipment.m_fPhysicalDefense;
+            poisonResistance += m_HelmetEquipment.m_fPoisonResistance;
+            totalEquipmentLoad += m_HelmetEquipment.m_fWeight;
 
         }
         else
@@ -125,15 +135,15 @@ public class PlayerEquipmentManager : CharacterEquipmentManager
             {
 
             // 헤어 스타일
-                if(player.playerInventoryManager.currentHairStyle != null)
+                if(currentHairStyle != null)
                 {
-                    m_AllGenderPartsModelChanger[All_GenderItemPartsType.Hair].EquipEquipmentsModelByName(player.playerInventoryManager.currentHairStyle.name);
+                    m_AllGenderPartsModelChanger[All_GenderItemPartsType.Hair].EquipEquipmentsModelByName(currentHairStyle.name);
                 }
 
-                if(player.playerInventoryManager.currentHairItem != null)
+                if(currentHairItem != null)
                 {
 
-                    m_AllGenderPartsModelChanger[All_GenderItemPartsType.HelmetAttachment].EquipEquipmentsModelByName(player.playerInventoryManager.currentHairItem.name);
+                    m_AllGenderPartsModelChanger[All_GenderItemPartsType.HelmetAttachment].EquipEquipmentsModelByName(currentHairItem.name);
                 }
 
                 // 속눈썹
@@ -150,29 +160,29 @@ public class PlayerEquipmentManager : CharacterEquipmentManager
                 //}
 
                 // 눈썹
-                if(player.playerInventoryManager.currentEyebrows != null)
+                if(currentEyebrows != null)
                 {
 
                     if (m_bIsFemale)
                     {
-                        m_FemaleGenderPartsModelChanger[E_SingleGenderEquipmentArmorParts.Eyebrow].EquipEquipmentsModelByName(player.playerInventoryManager.currentEyebrows.name);
+                        m_FemaleGenderPartsModelChanger[E_SingleGenderEquipmentArmorParts.Eyebrow].EquipEquipmentsModelByName(currentEyebrows.name);
                     }
                     else
                     {
-                        m_MaleGenderPartsModelChanger[E_SingleGenderEquipmentArmorParts.Eyebrow].EquipEquipmentsModelByName(player.playerInventoryManager.currentEyebrows.name);
+                        m_MaleGenderPartsModelChanger[E_SingleGenderEquipmentArmorParts.Eyebrow].EquipEquipmentsModelByName(currentEyebrows.name);
                     }
                 }
 
                 // 콧수염
-                if(player.playerInventoryManager.currentFacialHair != null)
+                if(currentFacialHair != null)
                 {
                     if (m_bIsFemale)
                     {
-                        m_FemaleGenderPartsModelChanger[E_SingleGenderEquipmentArmorParts.FacialHair].EquipEquipmentsModelByName(player.playerInventoryManager.currentFacialHair.name);
+                        m_FemaleGenderPartsModelChanger[E_SingleGenderEquipmentArmorParts.FacialHair].EquipEquipmentsModelByName(currentFacialHair.name);
                     }
                     else
                     {
-                        m_MaleGenderPartsModelChanger[E_SingleGenderEquipmentArmorParts.FacialHair].EquipEquipmentsModelByName(player.playerInventoryManager.currentFacialHair.name);
+                        m_MaleGenderPartsModelChanger[E_SingleGenderEquipmentArmorParts.FacialHair].EquipEquipmentsModelByName(currentFacialHair.name);
                     }
                 }
 
@@ -190,9 +200,9 @@ public class PlayerEquipmentManager : CharacterEquipmentManager
                 //}
 
                 // 추가
-                if (player.playerInventoryManager.currentExtra != null)
+                if (currentExtra != null)
                 {
-                    m_AllGenderPartsModelChanger[All_GenderItemPartsType.Extra_Elf_Ear].EquipEquipmentsModelByName(player.playerInventoryManager.currentExtra.name);
+                    m_AllGenderPartsModelChanger[All_GenderItemPartsType.Extra_Elf_Ear].EquipEquipmentsModelByName(currentExtra.name);
                 }
             }
         }
@@ -202,7 +212,7 @@ public class PlayerEquipmentManager : CharacterEquipmentManager
     private void HeadItemEquipModel()
     {
         // all gender 처리
-        HelmEquipmentItem temp = player.playerInventoryManager.currentHelmetEquipment;
+        HelmEquipmentItem temp = m_HelmetEquipment;
 
         if (temp.m_HeadCoverings_Base_Hair != "0")
         {
@@ -265,14 +275,14 @@ public class PlayerEquipmentManager : CharacterEquipmentManager
 
     private void ChestItemEquip()
     {
-        if (player.playerInventoryManager.currentTorsoEquipment != null)
+        if (m_TorsoEquipment != null)
         {
             // 아이템 종류를 보고 넣어야 지.
 
             ChestItemEquipModel();
-            player.playerStatsManager.physicalDamageAbsorptionBody = player.playerInventoryManager.currentTorsoEquipment.m_fPhysicalDefense;
-            poisonResistance += player.playerInventoryManager.currentTorsoEquipment.m_fPoisonResistance;
-            totalEquipmentLoad += player.playerInventoryManager.currentTorsoEquipment.m_fWeight;
+            player.playerStatsManager.physicalDamageAbsorptionBody = m_TorsoEquipment.m_fPhysicalDefense;
+            poisonResistance += m_TorsoEquipment.m_fPoisonResistance;
+            totalEquipmentLoad += m_TorsoEquipment.m_fWeight;
         }
         else
         {
@@ -293,7 +303,7 @@ public class PlayerEquipmentManager : CharacterEquipmentManager
     private void ChestItemEquipModel()
     {
         // all gender 처리
-        TorsoEquipmentItem temp = player.playerInventoryManager.currentTorsoEquipment;
+        TorsoEquipmentItem temp = m_TorsoEquipment;
 
         if (temp.m_Back_Attachment != null)
         {
@@ -323,14 +333,14 @@ public class PlayerEquipmentManager : CharacterEquipmentManager
 
     private void HandItemEquip()
     {
-        if (player.playerInventoryManager.currentHandEquipment != null)
+        if (m_HandEquipment != null)
         {
             // 아이템 종류를 보고 넣어야 지.
 
             HandItemEquipModel();
-            player.playerStatsManager.physicalDamageAbsorptionHands = player.playerInventoryManager.currentHandEquipment.m_fPhysicalDefense;
-            poisonResistance += player.playerInventoryManager.currentHandEquipment.m_fPoisonResistance;
-            totalEquipmentLoad += player.playerInventoryManager.currentHandEquipment.m_fWeight;
+            player.playerStatsManager.physicalDamageAbsorptionHands = m_HandEquipment.m_fPhysicalDefense;
+            poisonResistance += m_HandEquipment.m_fPoisonResistance;
+            totalEquipmentLoad += m_HandEquipment.m_fWeight;
         }
         else
         {
@@ -360,7 +370,7 @@ public class PlayerEquipmentManager : CharacterEquipmentManager
     private void HandItemEquipModel()
     {
         // all gender 처리
-        GantletsEquipmentItem temp = player.playerInventoryManager.currentHandEquipment;
+        GantletsEquipmentItem temp = m_HandEquipment;
 
         if (temp.m_Elbow_Attachment_Right != null)
         {
@@ -375,60 +385,60 @@ public class PlayerEquipmentManager : CharacterEquipmentManager
         {
             if (m_bIsFemale)
             {
-                m_FemaleGenderPartsModelChanger[E_SingleGenderEquipmentArmorParts.Arm_Upper_Right].EquipEquipmentsModelByName(player.playerInventoryManager.currentHandEquipment.m_Arm_Upper_RightName);
-                m_FemaleGenderPartsModelChanger[E_SingleGenderEquipmentArmorParts.Arm_Upper_Left].EquipEquipmentsModelByName(player.playerInventoryManager.currentHandEquipment.m_Arm_Upper_LeftName);
-                m_FemaleGenderPartsModelChanger[E_SingleGenderEquipmentArmorParts.Arm_Lower_Right].EquipEquipmentsModelByName(player.playerInventoryManager.currentHandEquipment.m_Arm_Lower_RightName);
-                m_FemaleGenderPartsModelChanger[E_SingleGenderEquipmentArmorParts.Arm_Lower_Left].EquipEquipmentsModelByName(player.playerInventoryManager.currentHandEquipment.m_Arm_Lower_LeftName);
-                m_FemaleGenderPartsModelChanger[E_SingleGenderEquipmentArmorParts.Hand_Right].EquipEquipmentsModelByName(player.playerInventoryManager.currentHandEquipment.m_Hand_RightName);
-                m_FemaleGenderPartsModelChanger[E_SingleGenderEquipmentArmorParts.Hand_Left].EquipEquipmentsModelByName(player.playerInventoryManager.currentHandEquipment.m_Hand_LeftName);           
+                m_FemaleGenderPartsModelChanger[E_SingleGenderEquipmentArmorParts.Arm_Upper_Right].EquipEquipmentsModelByName(m_HandEquipment.m_Arm_Upper_RightName);
+                m_FemaleGenderPartsModelChanger[E_SingleGenderEquipmentArmorParts.Arm_Upper_Left].EquipEquipmentsModelByName(m_HandEquipment.m_Arm_Upper_LeftName);
+                m_FemaleGenderPartsModelChanger[E_SingleGenderEquipmentArmorParts.Arm_Lower_Right].EquipEquipmentsModelByName(m_HandEquipment.m_Arm_Lower_RightName);
+                m_FemaleGenderPartsModelChanger[E_SingleGenderEquipmentArmorParts.Arm_Lower_Left].EquipEquipmentsModelByName(m_HandEquipment.m_Arm_Lower_LeftName);
+                m_FemaleGenderPartsModelChanger[E_SingleGenderEquipmentArmorParts.Hand_Right].EquipEquipmentsModelByName(m_HandEquipment.m_Hand_RightName);
+                m_FemaleGenderPartsModelChanger[E_SingleGenderEquipmentArmorParts.Hand_Left].EquipEquipmentsModelByName(m_HandEquipment.m_Hand_LeftName);           
             }
             else
             {
-                m_MaleGenderPartsModelChanger[E_SingleGenderEquipmentArmorParts.Arm_Upper_Right].EquipEquipmentsModelByName(player.playerInventoryManager.currentHandEquipment.m_Arm_Upper_RightName);
-                m_MaleGenderPartsModelChanger[E_SingleGenderEquipmentArmorParts.Arm_Upper_Left].EquipEquipmentsModelByName(player.playerInventoryManager.currentHandEquipment.m_Arm_Upper_LeftName);
-                m_MaleGenderPartsModelChanger[E_SingleGenderEquipmentArmorParts.Arm_Lower_Right].EquipEquipmentsModelByName(player.playerInventoryManager.currentHandEquipment.m_Arm_Lower_RightName);
-                m_MaleGenderPartsModelChanger[E_SingleGenderEquipmentArmorParts.Arm_Lower_Left].EquipEquipmentsModelByName(player.playerInventoryManager.currentHandEquipment.m_Arm_Lower_LeftName);
-                m_MaleGenderPartsModelChanger[E_SingleGenderEquipmentArmorParts.Hand_Right].EquipEquipmentsModelByName(player.playerInventoryManager.currentHandEquipment.m_Hand_RightName);
-                m_MaleGenderPartsModelChanger[E_SingleGenderEquipmentArmorParts.Hand_Left].EquipEquipmentsModelByName(player.playerInventoryManager.currentHandEquipment.m_Hand_LeftName);
+                m_MaleGenderPartsModelChanger[E_SingleGenderEquipmentArmorParts.Arm_Upper_Right].EquipEquipmentsModelByName(m_HandEquipment.m_Arm_Upper_RightName);
+                m_MaleGenderPartsModelChanger[E_SingleGenderEquipmentArmorParts.Arm_Upper_Left].EquipEquipmentsModelByName(m_HandEquipment.m_Arm_Upper_LeftName);
+                m_MaleGenderPartsModelChanger[E_SingleGenderEquipmentArmorParts.Arm_Lower_Right].EquipEquipmentsModelByName(m_HandEquipment.m_Arm_Lower_RightName);
+                m_MaleGenderPartsModelChanger[E_SingleGenderEquipmentArmorParts.Arm_Lower_Left].EquipEquipmentsModelByName(m_HandEquipment.m_Arm_Lower_LeftName);
+                m_MaleGenderPartsModelChanger[E_SingleGenderEquipmentArmorParts.Hand_Right].EquipEquipmentsModelByName(m_HandEquipment.m_Hand_RightName);
+                m_MaleGenderPartsModelChanger[E_SingleGenderEquipmentArmorParts.Hand_Left].EquipEquipmentsModelByName(m_HandEquipment.m_Hand_LeftName);
             }
 
-            player.playerStatsManager.physicalDamageAbsorptionHands = player.playerInventoryManager.currentHandEquipment.m_fPhysicalDefense;
-            poisonResistance += player.playerInventoryManager.currentHandEquipment.m_fPoisonResistance;
-            totalEquipmentLoad += player.playerInventoryManager.currentHandEquipment.m_fWeight;
+            player.playerStatsManager.physicalDamageAbsorptionHands = m_HandEquipment.m_fPhysicalDefense;
+            poisonResistance += m_HandEquipment.m_fPoisonResistance;
+            totalEquipmentLoad += m_HandEquipment.m_fWeight;
         }
         else
         {
             if (m_bIsFemale)
             {
-                m_FemaleGenderPartsModelChanger[E_SingleGenderEquipmentArmorParts.Arm_Upper_Right].EquipEquipmentsModelByName(player.playerInventoryManager.currentHandEquipment.m_Arm_Upper_RightName);
-                m_FemaleGenderPartsModelChanger[E_SingleGenderEquipmentArmorParts.Arm_Upper_Left].EquipEquipmentsModelByName(player.playerInventoryManager.currentHandEquipment.m_Arm_Upper_LeftName);
-                m_FemaleGenderPartsModelChanger[E_SingleGenderEquipmentArmorParts.Arm_Lower_Right].EquipEquipmentsModelByName(player.playerInventoryManager.currentHandEquipment.m_Arm_Lower_RightName);
-                m_FemaleGenderPartsModelChanger[E_SingleGenderEquipmentArmorParts.Arm_Lower_Left].EquipEquipmentsModelByName(player.playerInventoryManager.currentHandEquipment.m_Arm_Lower_LeftName);
-                m_FemaleGenderPartsModelChanger[E_SingleGenderEquipmentArmorParts.Hand_Right].EquipEquipmentsModelByName(player.playerInventoryManager.currentHandEquipment.m_Hand_RightName);
-                m_FemaleGenderPartsModelChanger[E_SingleGenderEquipmentArmorParts.Hand_Left].EquipEquipmentsModelByName(player.playerInventoryManager.currentHandEquipment.m_Hand_LeftName);
+                m_FemaleGenderPartsModelChanger[E_SingleGenderEquipmentArmorParts.Arm_Upper_Right].EquipEquipmentsModelByName(m_HandEquipment.m_Arm_Upper_RightName);
+                m_FemaleGenderPartsModelChanger[E_SingleGenderEquipmentArmorParts.Arm_Upper_Left].EquipEquipmentsModelByName(m_HandEquipment.m_Arm_Upper_LeftName);
+                m_FemaleGenderPartsModelChanger[E_SingleGenderEquipmentArmorParts.Arm_Lower_Right].EquipEquipmentsModelByName(m_HandEquipment.m_Arm_Lower_RightName);
+                m_FemaleGenderPartsModelChanger[E_SingleGenderEquipmentArmorParts.Arm_Lower_Left].EquipEquipmentsModelByName(m_HandEquipment.m_Arm_Lower_LeftName);
+                m_FemaleGenderPartsModelChanger[E_SingleGenderEquipmentArmorParts.Hand_Right].EquipEquipmentsModelByName(m_HandEquipment.m_Hand_RightName);
+                m_FemaleGenderPartsModelChanger[E_SingleGenderEquipmentArmorParts.Hand_Left].EquipEquipmentsModelByName(m_HandEquipment.m_Hand_LeftName);
             }
             else
             {
-                m_MaleGenderPartsModelChanger[E_SingleGenderEquipmentArmorParts.Arm_Upper_Right].EquipEquipmentsModelByName(player.playerInventoryManager.currentHandEquipment.m_Arm_Upper_RightName);
-                m_MaleGenderPartsModelChanger[E_SingleGenderEquipmentArmorParts.Arm_Upper_Left].EquipEquipmentsModelByName(player.playerInventoryManager.currentHandEquipment.m_Arm_Upper_LeftName);
-                m_MaleGenderPartsModelChanger[E_SingleGenderEquipmentArmorParts.Arm_Lower_Right].EquipEquipmentsModelByName(player.playerInventoryManager.currentHandEquipment.m_Arm_Lower_RightName);
-                m_MaleGenderPartsModelChanger[E_SingleGenderEquipmentArmorParts.Arm_Lower_Left].EquipEquipmentsModelByName(player.playerInventoryManager.currentHandEquipment.m_Arm_Lower_LeftName);
-                m_MaleGenderPartsModelChanger[E_SingleGenderEquipmentArmorParts.Hand_Right].EquipEquipmentsModelByName(player.playerInventoryManager.currentHandEquipment.m_Hand_RightName);
-                m_MaleGenderPartsModelChanger[E_SingleGenderEquipmentArmorParts.Hand_Left].EquipEquipmentsModelByName(player.playerInventoryManager.currentHandEquipment.m_Hand_LeftName);
+                m_MaleGenderPartsModelChanger[E_SingleGenderEquipmentArmorParts.Arm_Upper_Right].EquipEquipmentsModelByName(m_HandEquipment.m_Arm_Upper_RightName);
+                m_MaleGenderPartsModelChanger[E_SingleGenderEquipmentArmorParts.Arm_Upper_Left].EquipEquipmentsModelByName(m_HandEquipment.m_Arm_Upper_LeftName);
+                m_MaleGenderPartsModelChanger[E_SingleGenderEquipmentArmorParts.Arm_Lower_Right].EquipEquipmentsModelByName(m_HandEquipment.m_Arm_Lower_RightName);
+                m_MaleGenderPartsModelChanger[E_SingleGenderEquipmentArmorParts.Arm_Lower_Left].EquipEquipmentsModelByName(m_HandEquipment.m_Arm_Lower_LeftName);
+                m_MaleGenderPartsModelChanger[E_SingleGenderEquipmentArmorParts.Hand_Right].EquipEquipmentsModelByName(m_HandEquipment.m_Hand_RightName);
+                m_MaleGenderPartsModelChanger[E_SingleGenderEquipmentArmorParts.Hand_Left].EquipEquipmentsModelByName(m_HandEquipment.m_Hand_LeftName);
             }
         }
     }
 
     private void LegItemEquip()
     {
-        if (player.playerInventoryManager.currentLegEquipment != null)
+        if (m_LegEquipment != null)
         {
             // 아이템 종류를 보고 넣어야 지.
 
             LegItemEquipModel();
-            player.playerStatsManager.physicalDamageAbsorptionLegs = player.playerInventoryManager.currentLegEquipment.m_fPhysicalDefense;
-            poisonResistance += player.playerInventoryManager.currentLegEquipment.m_fPoisonResistance;
-            totalEquipmentLoad += player.playerInventoryManager.currentLegEquipment.m_fWeight;
+            player.playerStatsManager.physicalDamageAbsorptionLegs = m_LegEquipment.m_fPhysicalDefense;
+            poisonResistance += m_LegEquipment.m_fPoisonResistance;
+            totalEquipmentLoad += m_LegEquipment.m_fWeight;
         }
         else
         {
@@ -451,7 +461,7 @@ public class PlayerEquipmentManager : CharacterEquipmentManager
     private void LegItemEquipModel()
     {
         // all gender 처리
-        LeggingsEquipmentItem temp = player.playerInventoryManager.currentLegEquipment;
+        LeggingsEquipmentItem temp = m_LegEquipment;
 
         if (temp.m_Hips_Attachment != null)
         {
@@ -478,5 +488,134 @@ public class PlayerEquipmentManager : CharacterEquipmentManager
             m_MaleGenderPartsModelChanger[E_SingleGenderEquipmentArmorParts.LeftLegging].EquipEquipmentsModelByName(temp.m_LeftLeggingName);
             m_MaleGenderPartsModelChanger[E_SingleGenderEquipmentArmorParts.RightLegging].EquipEquipmentsModelByName(temp.m_RightLeggingName);
         }
+    }
+
+    public void ChangeCurrentEquipmentToNextNumSlotEquipment(int num)
+    {
+        // Left Hand Slot
+        if(num == 0)
+        {
+            m_iCurrentLeftWeaponIndex++;
+
+            // 마지막 슬롯에서 넘어가서 다시 처음 슬롯으로
+            if(m_iCurrentLeftWeaponIndex > m_LeftWeaponsSlots.Length - 1)
+                m_iCurrentLeftWeaponIndex = 0;
+
+            // 왼쪽 키 Left Hand slot
+            for (int i = 0; i < m_LeftWeaponsSlots.Length; i++)
+            {
+                // 다음 슬롯에 아이템이 있다면 아이템 로드
+                if (m_iCurrentLeftWeaponIndex == i && m_LeftWeaponsSlots[i] != null)
+                {
+                    m_CurrentHandRightWeapon = m_LeftWeaponsSlots[m_iCurrentLeftWeaponIndex];
+                    character.characterWeaponSlotManager.LoadWeaponOnSlot(m_LeftWeaponsSlots[m_iCurrentLeftWeaponIndex], true);
+                    break;
+                }
+                // 다음 슬롯에 아이템이 없다면 건너뛰기
+                else if (m_iCurrentLeftWeaponIndex == i && m_LeftWeaponsSlots[i] == null)
+                {
+                    m_iCurrentLeftWeaponIndex += 1;
+                }
+            }
+        }
+        
+        // Right Hand Slot
+        else if (num == 1)
+        {
+            m_iCurrentRightWeaponIndex++;
+
+            // 마지막 슬롯에서 넘어가서 다시 처음 슬롯으로
+            if (m_iCurrentRightWeaponIndex > m_RightWeaponsSlots.Length - 1)
+                m_iCurrentRightWeaponIndex = 0;
+
+            // 왼쪽 키 Left Hand slot
+            for (int i = 0; i < m_RightWeaponsSlots.Length; i++)
+            {
+                // 다음 슬롯에 아이템이 있다면 아이템 로드
+                if (m_iCurrentRightWeaponIndex == i && m_RightWeaponsSlots[i] != null)
+                {
+                    m_CurrentHandRightWeapon = m_RightWeaponsSlots[m_iCurrentRightWeaponIndex];
+                    character.characterWeaponSlotManager.LoadWeaponOnSlot(m_RightWeaponsSlots[m_iCurrentRightWeaponIndex], false);
+                    break;
+                }
+                // 다음 슬롯에 아이템이 없다면 건너뛰기
+                else if (m_iCurrentRightWeaponIndex == i && m_RightWeaponsSlots[i] == null)
+                {
+                    m_iCurrentRightWeaponIndex += 1;
+                }
+            }
+
+        }
+        
+        // Consumable Slot
+        else if (num == 2)
+        {
+            m_iCurrentConsumableItemndex++;
+
+            // 마지막 슬롯에서 넘어가서 다시 처음 슬롯으로
+            if (m_iCurrentConsumableItemndex > m_ConsumableItemSlots.Length - 1)
+            {
+                m_iCurrentConsumableItemndex = 0;
+            }
+
+            // 왼쪽 키 Left Hand slot
+            for (int i = 0; i < m_ConsumableItemSlots.Length; i++)
+            {
+                // 다음 슬롯에 아이템이 있다면 아이템 로드
+                if (m_iCurrentConsumableItemndex == i && m_ConsumableItemSlots[i] != null)
+                {
+                    m_CurrentHandConsumable = m_ConsumableItemSlots[m_iCurrentConsumableItemndex];
+                    break;
+                }
+                // 다음 슬롯에 아이템이 없다면 건너뛰기
+                else if (m_iCurrentConsumableItemndex == i && m_ConsumableItemSlots[i] == null)
+                {
+                    m_iCurrentConsumableItemndex += 1;
+                }
+            }
+
+            player.m_GameUIManager.m_HUDUI.quickSlotsUI.RefreshUI();
+
+        }
+
+    }
+
+    public void Refresh()
+    {
+        // 현재 인덱스 번호를 가지고 정보 업데이트.
+
+        // Right Weapon
+        if (m_LeftWeaponsSlots[m_iCurrentRightWeaponIndex] != null)
+            character.characterWeaponSlotManager.LoadWeaponOnSlot(m_RightWeaponsSlots[m_iCurrentRightWeaponIndex], false);
+        else
+        {
+            m_CurrentHandRightWeapon = character.characterWeaponSlotManager.unarmWeapon;
+            character.characterWeaponSlotManager.LoadWeaponOnSlot(character.characterWeaponSlotManager.unarmWeapon, false);
+        }
+
+        // Left Weapon
+        if (m_LeftWeaponsSlots[m_iCurrentLeftWeaponIndex] != null)
+            character.characterWeaponSlotManager.LoadWeaponOnSlot(m_LeftWeaponsSlots[m_iCurrentLeftWeaponIndex], true);
+        else
+        {
+            m_CurrentHandLeftWeapon = character.characterWeaponSlotManager.unarmWeapon;
+            character.characterWeaponSlotManager.LoadWeaponOnSlot(character.characterWeaponSlotManager.unarmWeapon, true);
+        }
+
+        // Current Consumable Item
+
+        if (m_ConsumableItemSlots[m_iCurrentConsumableItemndex] != null)
+        {
+            m_CurrentHandConsumable = m_ConsumableItemSlots[m_iCurrentConsumableItemndex];
+            player.m_GameUIManager.m_HUDUI.quickSlotsUI.RefreshUI();
+
+        }
+        else
+        {
+            m_CurrentHandConsumable = null;
+            character.characterWeaponSlotManager.LoadWeaponOnSlot(character.characterWeaponSlotManager.unarmWeapon, false);
+            player.m_GameUIManager.m_HUDUI.quickSlotsUI.RefreshUI();
+        }
+        // Spell Item
     }
 }

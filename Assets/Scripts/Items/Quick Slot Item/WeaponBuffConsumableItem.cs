@@ -43,10 +43,10 @@ public class WeaponBuffConsumableItem : ToolItem
 
     public override bool CanUseThisItem(PlayerManager player)
     {
-        if (player.playerInventoryManager.currentConsumable.currentItemAmount <= 0)
+        if (player.playerEquipmentManager.m_CurrentHandConsumable.currentItemAmount <= 0)
             return false;
 
-        MeleeWeaponItem meleeWeapon = player.playerInventoryManager.rightWeapon as MeleeWeaponItem;
+        MeleeWeaponItem meleeWeapon = player.playerEquipmentManager.m_CurrentHandRightWeapon as MeleeWeaponItem;
 
         if(meleeWeapon != null && meleeWeapon.canBeBeffued)
         {

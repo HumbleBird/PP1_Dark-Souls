@@ -42,7 +42,7 @@ public class InventoryLeftPanelUI : UI_Base
 
         player = Managers.Object.m_MyPlayer;
 
-        CreateInventorySlot(GetObject((int)GameObjects.InvnetoryContents), player.playerInventoryManager.m_Item.Count);
+        CreateInventorySlot(GetObject((int)GameObjects.InvnetoryContents), player.playerInventoryManager.m_Items.Count);
 
 
         return true;
@@ -66,11 +66,11 @@ public class InventoryLeftPanelUI : UI_Base
         for (int i = 0; i < makeSlotCountMax; i++)
         {
             GameObject go = Managers.Resource.Instantiate("UI/SubItem/InventoryItemSlot", parent.transform);
-            InventoryItemSlot item = go.GetOrAddComponent<InventoryItemSlot>();
+            InventoryItemSlotUI item = go.GetOrAddComponent<InventoryItemSlotUI>();
 
             if (i < count)
             {
-                item.SetInfo(player.playerInventoryManager.m_Item[i]);
+                item.SetInfo(player.playerInventoryManager.m_Items[i]);
             }
         }
     }

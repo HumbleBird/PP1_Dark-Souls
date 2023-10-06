@@ -5,6 +5,8 @@ using UnityEngine;
 public class Define
 {
     #region Item
+
+
     public enum E_ItemType
     {
         Tool,
@@ -36,14 +38,7 @@ public class Define
         Bolt
     }
 
-    public enum E_ArmorEquipmentType
-    {
-        Helmet,
-        Torso,
-        Leggings,
-        Gauntlet,
-        All
-    }
+
 
     public enum WeaponType
     {
@@ -226,6 +221,39 @@ public class Define
         LeftLegging,
         RightLegging,
     }
+
+    #endregion
+
+    #region UI
+    public enum E_CameraShowPartType
+    {
+        Head,
+        Chest,
+        Leg,
+        Hand,
+        All
+    }
+
+    public enum E_EquipmentSlotsPartType
+    {
+        Right_Hand_Weapon,
+        Left_Hand_Weapon,
+
+        Arrow,
+        Bolt,
+
+        Helmt,
+        Chest_Armor,
+        Gantlets,
+        Leggings,
+
+        Ring,
+
+        Consumable,
+
+        Pledge,
+    }
+
 
     #endregion
 

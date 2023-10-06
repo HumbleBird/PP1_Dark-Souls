@@ -10,13 +10,13 @@ public class PyromancySpellAction : ItemAction
         if (character.isInteracting)
             return;
 
-        if (character.characterInventoryManager.currentSpell != null && character.characterInventoryManager.currentSpell.isPyroSpell)
+        if (character.characterEquipmentManager.m_CurrentHandSpell != null && character.characterEquipmentManager.m_CurrentHandSpell.isPyroSpell)
         {
             // CHECK FOR FP
-            if (character.characterStatsManager.currentFocusPoints >= character.characterInventoryManager.currentSpell.focusPointCost)
+            if (character.characterStatsManager.currentFocusPoints >= character.characterEquipmentManager.m_CurrentHandSpell.focusPointCost)
             {
                 character.isAttacking = true;
-                character.characterInventoryManager.currentSpell.AttemptToCastSpell(character);
+                character.characterEquipmentManager.m_CurrentHandSpell.AttemptToCastSpell(character);
             }
             else
                 character.characterAnimatorManager.PlayTargetAnimation("Shrug", true);

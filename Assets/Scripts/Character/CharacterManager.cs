@@ -9,10 +9,10 @@ public class CharacterManager : MonoBehaviour
     public CharacterAnimatorManager characterAnimatorManager;
     public CharacterWeaponSlotManager characterWeaponSlotManager;
     public CharacterStatsManager characterStatsManager;
-    public CharacterInventoryManager characterInventoryManager;
     public CharacterEffectsManager characterEffectsManager;
     public CharacterSoundFXManager characterSoundFXManager;
     public CharacterCombatManager characterCombatManager;
+    public CharacterEquipmentManager characterEquipmentManager;
 
     [Header("Lock On Tranform")]
     public Transform lockOnTransform;
@@ -67,10 +67,10 @@ public class CharacterManager : MonoBehaviour
         characterAnimatorManager = GetComponent<CharacterAnimatorManager>();
         characterWeaponSlotManager = GetComponent<CharacterWeaponSlotManager>();
         characterStatsManager = GetComponent<CharacterStatsManager>();
-        characterInventoryManager = GetComponent<CharacterInventoryManager>();
         characterEffectsManager = GetComponent<CharacterEffectsManager>();
         characterSoundFXManager = GetComponent<CharacterSoundFXManager>();
         characterCombatManager = GetComponent<CharacterCombatManager>();
+        characterEquipmentManager = GetComponent<CharacterEquipmentManager>();
     }
 
     protected virtual void Start()

@@ -47,16 +47,6 @@ public class HUDUI : UI_Base
     {
         m_Player = Managers.Object.m_MyPlayer;
 
-        if (m_Player.playerInventoryManager.currentSpell != null)
-        {
-            quickSlotsUI.UpdateCurrentSpellIcon(m_Player.playerInventoryManager.currentSpell);
-        }
-
-        if (m_Player.playerInventoryManager.currentConsumable != null)
-        {
-            quickSlotsUI.UpdateCurrentConsumableIcon(m_Player.playerInventoryManager.currentConsumable);
-        }
-
         m_textSoulCount.text = m_Player.playerStatsManager.currentSoulCount.ToString();
     }
 

@@ -18,7 +18,7 @@ public class DrawArrowAction : ItemAction
         character.characterAnimatorManager.PlayTargetAnimation("Bow_TH_Draw_01", true);
 
         // Instantiate Arrow
-        GameObject loadedArrow = Instantiate(character.characterInventoryManager.currentAmmo.loadedItemModel, character.characterWeaponSlotManager.rightHandSlot.transform);
+        GameObject loadedArrow = Instantiate(character.characterEquipmentManager.m_CurrentHandAmmo.loadedItemModel, character.characterWeaponSlotManager.rightHandSlot.transform);
         character.characterEffectsManager.instantiatedFXModel = loadedArrow;
 
         //Animate the bow

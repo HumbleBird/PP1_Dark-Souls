@@ -21,13 +21,13 @@ public class MeleeWeaponDamageCollider : DamageCollider
         {
             if (characterManager.characterCombatManager.currentAttackType == AttackType.light)
             {
-                finalDamage = finalPhysicalDamage * characterManager.characterInventoryManager.rightWeapon.lightAttackStaminaMultiplier;
-                finalDamage += finalFireDamage * characterManager.characterInventoryManager.rightWeapon.lightAttackStaminaMultiplier;
+                finalDamage = finalPhysicalDamage * characterManager.characterEquipmentManager.m_CurrentHandRightWeapon.lightAttackStaminaMultiplier;
+                finalDamage += finalFireDamage * characterManager.characterEquipmentManager.m_CurrentHandRightWeapon.lightAttackStaminaMultiplier;
             }
             else if (characterManager.characterCombatManager.currentAttackType == AttackType.heavy)
             {
-                finalDamage = finalPhysicalDamage * characterManager.characterInventoryManager.rightWeapon.heavyAttackStaminaMultiplier;
-                finalDamage += finalFireDamage * characterManager.characterInventoryManager.rightWeapon.lightAttackStaminaMultiplier;
+                finalDamage = finalPhysicalDamage * characterManager.characterEquipmentManager.m_CurrentHandRightWeapon.heavyAttackStaminaMultiplier;
+                finalDamage += finalFireDamage * characterManager.characterEquipmentManager.m_CurrentHandRightWeapon.lightAttackStaminaMultiplier;
             }
         }
 
@@ -36,14 +36,14 @@ public class MeleeWeaponDamageCollider : DamageCollider
         {
             if (characterManager.characterCombatManager.currentAttackType == AttackType.light)
             {
-                finalDamage = finalPhysicalDamage * characterManager.characterInventoryManager.leftWeapon.lightAttackStaminaMultiplier;
-                finalDamage += finalFireDamage * characterManager.characterInventoryManager.leftWeapon.lightAttackStaminaMultiplier;
+                finalDamage = finalPhysicalDamage * characterManager.characterEquipmentManager.m_CurrentHandLeftWeapon.lightAttackStaminaMultiplier;
+                finalDamage += finalFireDamage * characterManager.characterEquipmentManager.m_CurrentHandLeftWeapon.lightAttackStaminaMultiplier;
 
             }
             else if (characterManager.characterCombatManager.currentAttackType == AttackType.heavy)
             {
-                finalDamage = finalPhysicalDamage * characterManager.characterInventoryManager.leftWeapon.heavyAttackStaminaMultiplier;
-                finalDamage += finalFireDamage * characterManager.characterInventoryManager.leftWeapon.lightAttackStaminaMultiplier;
+                finalDamage = finalPhysicalDamage * characterManager.characterEquipmentManager.m_CurrentHandLeftWeapon.heavyAttackStaminaMultiplier;
+                finalDamage += finalFireDamage * characterManager.characterEquipmentManager.m_CurrentHandLeftWeapon.lightAttackStaminaMultiplier;
 
             }
         }

@@ -95,9 +95,9 @@ public class PlayerAnimatorManager : CharacterAnimatorManager
 
     public virtual void SucessFullyUseCurrentConsumable()
     {
-        if (character.characterInventoryManager.currentConsumable != null)
+        if (character.characterEquipmentManager.m_CurrentHandConsumable != null)
         {
-            character.characterInventoryManager.currentConsumable.SucessToConsumeItem(player);
+            character.characterEquipmentManager.m_CurrentHandConsumable.SucessToConsumeItem(player);
         }
     }
 }

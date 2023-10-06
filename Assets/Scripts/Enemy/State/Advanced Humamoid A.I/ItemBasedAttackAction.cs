@@ -68,22 +68,22 @@ public class ItemBasedAttackAction : ScriptableObject
         {
             if(attackType == AttackType.light)
             {
-                enemy.characterInventoryManager.rightWeapon.th_tap_RB_Action.PerformAction(enemy);
+                enemy.characterEquipmentManager.m_CurrentHandRightWeapon.th_tap_RB_Action.PerformAction(enemy);
             }
             else if (attackType == AttackType.heavy)
             {
-                enemy.characterInventoryManager.rightWeapon.th_tap_RT_Action.PerformAction(enemy);
+                enemy.characterEquipmentManager.m_CurrentHandRightWeapon.th_tap_RT_Action.PerformAction(enemy);
             }
         }
         else
         {
             if (attackType == AttackType.light)
             {
-                enemy.characterInventoryManager.rightWeapon.oh_tap_RB_Action.PerformAction(enemy);
+                enemy.characterEquipmentManager.m_CurrentHandRightWeapon.oh_tap_RB_Action.PerformAction(enemy);
             }
             else if (attackType == AttackType.heavy)
             {
-                enemy.characterInventoryManager.rightWeapon.oh_tap_RT_Action.PerformAction(enemy);
+                enemy.characterEquipmentManager.m_CurrentHandRightWeapon.oh_tap_RT_Action.PerformAction(enemy);
             }
         }
     }

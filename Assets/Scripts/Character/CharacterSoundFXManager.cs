@@ -82,12 +82,12 @@ public class CharacterSoundFXManager : MonoBehaviour
         // 왼순 무기면 이것
         if (character.isUsingLeftHand)
         {
-            PlayRandomSound(E_RandomSoundType.WeaponWhoose, character.characterInventoryManager.leftWeapon.weaponWhooshes);
+            PlayRandomSound(E_RandomSoundType.WeaponWhoose, character.characterEquipmentManager.m_CurrentHandLeftWeapon.weaponWhooshes);
         }
         // 한 손이면 왼족 아이템(보통 방패)으로
         else
         {
-            PlayRandomSound(E_RandomSoundType.WeaponWhoose, character.characterInventoryManager.rightWeapon.weaponWhooshes);
+            PlayRandomSound(E_RandomSoundType.WeaponWhoose, character.characterEquipmentManager.m_CurrentHandRightWeapon.weaponWhooshes);
         }
     }
 }

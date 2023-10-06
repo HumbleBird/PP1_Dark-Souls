@@ -157,7 +157,7 @@ public class CharacterCreationLeftPannelUI : UI_Base
             m_CharacterCreationScreen.m_CharacterCreationMiddlePannelUI.m_goHairStyles.SetActive(true);
             Camera.main.GetComponent<CharacterPreviewCamera>().ChangeCameraPreviewTransform(E_CharacterCreationPreviewCamera.Head);
             AllPannelButonInteractable(false);
-            hider.HideEquipment(E_ArmorEquipmentType.Helmet);
+            hider.HideEquipment(E_CameraShowPartType.Head);
         });
 
         // HairColor
@@ -166,7 +166,7 @@ public class CharacterCreationLeftPannelUI : UI_Base
             m_CharacterCreationScreen.m_CharacterCreationMiddlePannelUI.m_goHairColor.SetActive(true);
             Camera.main.GetComponent<CharacterPreviewCamera>().ChangeCameraPreviewTransform(E_CharacterCreationPreviewCamera.Head);
             AllPannelButonInteractable(false);
-            hider.HideEquipment(E_ArmorEquipmentType.Helmet);
+            hider.HideEquipment(E_CameraShowPartType.Head);
 
         });
 
@@ -175,7 +175,7 @@ public class CharacterCreationLeftPannelUI : UI_Base
             m_CharacterCreationScreen.m_CharacterCreationMiddlePannelUI.m_goHairItem.SetActive(true);
             Camera.main.GetComponent<CharacterPreviewCamera>().ChangeCameraPreviewTransform(E_CharacterCreationPreviewCamera.Head);
             AllPannelButonInteractable(false);
-            hider.HideEquipment(E_ArmorEquipmentType.Helmet);
+            hider.HideEquipment(E_CameraShowPartType.Head);
 
         });
 
@@ -199,7 +199,7 @@ public class CharacterCreationLeftPannelUI : UI_Base
             m_CharacterCreationScreen.m_CharacterCreationMiddlePannelUI.m_goEyebrows.SetActive(true);
             Camera.main.GetComponent<CharacterPreviewCamera>().ChangeCameraPreviewTransform(E_CharacterCreationPreviewCamera.Head);
             AllPannelButonInteractable(false);
-            hider.HideEquipment(E_ArmorEquipmentType.Helmet);
+            hider.HideEquipment(E_CameraShowPartType.Head);
 
         });
 
@@ -208,7 +208,7 @@ public class CharacterCreationLeftPannelUI : UI_Base
             m_CharacterCreationScreen.m_CharacterCreationMiddlePannelUI.m_goFacialHair.SetActive(true);
             Camera.main.GetComponent<CharacterPreviewCamera>().ChangeCameraPreviewTransform(E_CharacterCreationPreviewCamera.Head);
             AllPannelButonInteractable(false);
-            hider.HideEquipment(E_ArmorEquipmentType.Helmet);
+            hider.HideEquipment(E_CameraShowPartType.Head);
 
         });
 
@@ -217,7 +217,7 @@ public class CharacterCreationLeftPannelUI : UI_Base
             m_CharacterCreationScreen.m_CharacterCreationMiddlePannelUI.m_goFacialMask.SetActive(true);
             Camera.main.GetComponent<CharacterPreviewCamera>().ChangeCameraPreviewTransform(E_CharacterCreationPreviewCamera.Head);
             AllPannelButonInteractable(false);
-            hider.HideEquipment(E_ArmorEquipmentType.Helmet);
+            hider.HideEquipment(E_CameraShowPartType.Head);
 
             //AllPannelButonInteractable(false);
             // TODO
@@ -247,7 +247,7 @@ public class CharacterCreationLeftPannelUI : UI_Base
             m_CharacterCreationScreen.m_CharacterCreationMiddlePannelUI.m_goSkinColor.SetActive(true);
             Camera.main.GetComponent<CharacterPreviewCamera>().ChangeCameraPreviewTransform(E_CharacterCreationPreviewCamera.All);
             AllPannelButonInteractable(false);
-            hider.HideEquipment(E_ArmorEquipmentType.All);
+            hider.HideEquipment(E_CameraShowPartType.All);
 
         });
     }

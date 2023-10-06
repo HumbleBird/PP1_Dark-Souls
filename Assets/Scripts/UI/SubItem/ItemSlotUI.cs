@@ -5,7 +5,7 @@ using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.UI;
 
-public class InventoryItemSlot : UI_Base
+public class ItemSlotUI : UI_Base
 {
     enum Images
     {
@@ -15,8 +15,7 @@ public class InventoryItemSlot : UI_Base
         ItemSelectIcon
     }
 
-    Item m_Item;
-    InventoryUI m_InventoryUI;
+    protected Item m_Item;
 
     public override bool Init()
     {
@@ -25,7 +24,20 @@ public class InventoryItemSlot : UI_Base
 
         BindImage(typeof(Images));
 
-        GetImage((int)Images.ItemSelectIcon).gameObject.BindEvent(() => { ShowItemInfomation(); });
+        if (m_Item != null)
+        {
+            GetImage((int)Images.ItemIcon).sprite = m_Item.itemIcon;
+            GetImage((int)Images.ItemIcon).enabled = true;
+            //GetImage((int)Images.ItemBasePlateIcon).enabled = true;
+        }
+        else
+        {
+            GetImage((int)Images.ItemIcon).sprite = null;
+            GetImage((int)Images.ItemIcon).enabled = false;
+            //GetImage((int)Images.ItemBasePlateIcon).enabled = false;
+        }
+
+        GetImage((int)Images.ItemSelectIcon).gameObject.BindEvent(() => { ShowHowtoItem(); });
 
         // Event Trigger
         EventTrigger trigger = gameObject.GetOrAddComponent<EventTrigger>();
@@ -37,24 +49,19 @@ public class InventoryItemSlot : UI_Base
 
         EventTrigger.Entry entry2 = new EventTrigger.Entry();
         entry2.eventID = EventTriggerType.PointerEnter;
-        entry2.callback.AddListener((data) => { PointerEnterItem((PointerEventData)data); });
+        entry2.callback.AddListener((data) => { ShowItemInformation((PointerEventData)data); });
         trigger.triggers.Add(entry2);
-
-        m_InventoryUI = GetComponentInParent<InventoryUI>();
 
         return true;
     }
 
-    public void SetInfo(Item item)
+    public  void SetInfo(Item item)
     {
         m_Item = item;
-        GetImage((int)Images.ItemIcon).sprite = m_Item.itemIcon;
-        GetImage((int)Images.ItemIcon).enabled = true;
-        GetImage((int)Images.ItemBasePlateIcon).enabled = true;
     }
 
     // 아이템 이미지를 선택했을 때 사용 여부를 묻는다.
-    public void ShowItemInfomation()
+    public virtual void ShowHowtoItem()
     {
         if (m_Item == null)
             return;
@@ -63,14 +70,12 @@ public class InventoryItemSlot : UI_Base
     }
 
     // 아이템 이미지를 클릭하면 가운데 패널에 아이템 정보를 보여준다.
-    public void PointerEnterItem(PointerEventData data)
+    public virtual void ShowItemInformation(PointerEventData data)
     {
         if (m_Item == null)
             return;
 
         GetImage((int)Images.ItemSelectIcon).enabled = true;
-
-        m_InventoryUI.m_InventoryMiddleUI.ShowItemInformation(m_Item);
     }
 
     // 아이템 선택 효과를 삭제한다.
@@ -80,7 +85,5 @@ public class InventoryItemSlot : UI_Base
             return;
 
         GetImage((int)Images.ItemSelectIcon).enabled = false;
-
-        Debug.Log("PointerExitItem" + m_Item.itemName);
     }
 }

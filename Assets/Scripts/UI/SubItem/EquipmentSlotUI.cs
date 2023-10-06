@@ -4,48 +4,11 @@ using TMPro;
 using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.UI;
+using static Define;
 
-public class EquipmentSlotUI : UI_Base
+public class EquipmentSlotUI : ItemSlotUI
 {
-    public enum EquipmentSlotsPartsName
-    {
-        Right_Hand_Weapon_1,
-        Right_Hand_Weapon_2,
-        Right_Hand_Weapon_3,
-        Left_Hand_Weapon_1,
-        Left_Hand_Weapon_2,
-        Left_Hand_Weapon_3,
-
-        Arrow_1,
-        Arrow_2,
-        Bolt_1,
-        Bolt_2,
-
-        Helmt,
-        Chest_Armor,
-        Gantlets,
-        Leggings,
-
-        Ring_1,
-        Ring_2,
-        Ring_3,
-        Ring_4,
-
-        Consumable_Slot_1,
-        Consumable_Slot_2,
-        Consumable_Slot_3,
-        Consumable_Slot_4,
-        Consumable_Slot_5,
-        Consumable_Slot_6,
-        Consumable_Slot_7,
-        Consumable_Slot_8,
-        Consumable_Slot_9,
-        Consumable_Slot_10,
-
-        Pledge,
-    }
-
-    public EquipmentSlotsPartsName m_EquipmentSlotsPartsName;
+    public E_EquipmentSlotsPartType m_EquipmentSlotsPartsName;
 
     enum Images
     {
@@ -55,7 +18,8 @@ public class EquipmentSlotUI : UI_Base
         ItemSelectIcon
     }
 
-    Item m_Item;
+    public int m_iSlotNum = -1;
+    public string m_sSlotName;
     EquipmentUI m_EquipmentUI;
 
     public override bool Init()
@@ -63,72 +27,48 @@ public class EquipmentSlotUI : UI_Base
         if (base.Init() == false)
             return false;
 
-        BindImage(typeof(Images));
+        if (m_iSlotNum != -1)
+        {
+            m_iSlotNum += 1;
+            m_sSlotName = m_EquipmentSlotsPartsName.ToString() + " " + m_iSlotNum;
 
-        GetImage((int)Images.ItemSelectIcon).gameObject.BindEvent(() => { ShowItemInfomation(); });
+        }
+        else
+        {
+            m_sSlotName = m_EquipmentSlotsPartsName.ToString();
 
-        // Event Trigger
-        EventTrigger trigger = gameObject.GetOrAddComponent<EventTrigger>();
-
-        EventTrigger.Entry entry = new EventTrigger.Entry();
-        entry.eventID = EventTriggerType.PointerExit;
-        entry.callback.AddListener((data) => { PointerExitItem((PointerEventData)data); });
-        trigger.triggers.Add(entry);
-
-        EventTrigger.Entry entry2 = new EventTrigger.Entry();
-        entry2.eventID = EventTriggerType.PointerEnter;
-        entry2.callback.AddListener((data) => { PointerEnterItem((PointerEventData)data); });
-        trigger.triggers.Add(entry2);
+        }
+        m_sSlotName = m_sSlotName.Replace("_", " ");
 
         m_EquipmentUI = GetComponentInParent<EquipmentUI>();
 
         return true;
     }
 
-    public void SetInfo(Item item)
-    {
-        m_Item = item;
-        GetImage((int)Images.ItemIcon).sprite = m_Item.itemIcon;
-        GetImage((int)Images.ItemIcon).enabled = true;
-        GetImage((int)Images.ItemBasePlateIcon).enabled = true;
-
-        // Item
-
-        PlayerManager player = Managers.Object.m_MyPlayer;
-
-    }
-
     // 아이템 이미지를 선택했을 때 이 아이템과 같은 종류의 아이템 창을 보여준다.
     // 종류는 다음과 같다.
     // 무기, 화살, 볼트, 각 값옷들, 링, 소모성 아이템, 계약
-    public void ShowItemInfomation()
+    public override void ShowHowtoItem()
     {
-        if (m_Item == null)
-            return;
+        base.ShowHowtoItem();
 
-        Debug.Log("ShowItemInfomation" + m_Item.itemName);
+        // 해당 슬롯 파트의 아이템과 슬롯 정보를 가져와서 넘겨준다.
+        m_EquipmentUI.m_ShowItemInventoryUI.SetInfo(m_sSlotName, m_EquipmentSlotsPartsName, m_iSlotNum);
+
+        m_EquipmentUI.m_CurrentEquipmentsUI.gameObject.SetActive(false);
+        m_EquipmentUI.m_ShowItemInventoryUI.gameObject.SetActive(true);
+        // 여기에 아이템이 있다면 교체.
+        // 아이템이 없다면 새롭게 장착.
+        // 아이템 파트와 아이템 슬롯 넘버를 넘겨준다.
+
     }
 
     // 아이템 이미지를 클릭하면 가운데 패널에 아이템 정보를 보여준다.
-    public void PointerEnterItem(PointerEventData data)
+    public override void ShowItemInformation(PointerEventData data)
     {
-        if (m_Item == null)
-            return;
-
-        GetImage((int)Images.ItemSelectIcon).enabled = true;
+        base.ShowItemInformation(data);
 
         m_EquipmentUI.m_ItemInformationUI.ShowItemInformation(m_Item);
-        m_EquipmentUI.m_CurrentEquipmentsUI.ShowItemInformation(m_Item.name, gameObject.name);
-    }
-
-    // 아이템 선택 효과를 삭제한다.
-    public void PointerExitItem(PointerEventData data)
-    {
-        if (m_Item == null)
-            return;
-
-        GetImage((int)Images.ItemSelectIcon).enabled = false;
-
-        Debug.Log("PointerExitItem" + m_Item.itemName);
+        m_EquipmentUI.m_CurrentEquipmentsUI.ShowItemInformation(m_Item.name, m_sSlotName);
     }
 }

@@ -174,8 +174,8 @@ public class CompanionStateAttackTarget : State
         if (aiCharacterManager.isHoldingArrow)
         {
             hasPerformedAttack = true;
-            aiCharacterManager.characterInventoryManager.currentItemBeingUsed = aiCharacterManager.characterInventoryManager.rightWeapon;
-            aiCharacterManager.characterInventoryManager.rightWeapon.th_tap_RB_Action.PerformAction(aiCharacterManager);
+            aiCharacterManager.characterEquipmentManager.currentItemBeingUsed = aiCharacterManager.characterEquipmentManager.m_CurrentHandRightWeapon;
+            aiCharacterManager.characterEquipmentManager.m_CurrentHandRightWeapon.th_tap_RB_Action.PerformAction(aiCharacterManager);
         }
     }
 }

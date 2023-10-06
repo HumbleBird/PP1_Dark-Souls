@@ -27,7 +27,7 @@ public class FireArrowAction : ItemAction
         if(player != null)
         {
             // live arrow 持失
-            GameObject liveArrow = Instantiate(character.characterInventoryManager.currentAmmo.liveAmmoModel, arrowInstantiationLocation.transform.position, player.cameraHandler.cameraPivotTranform.rotation);
+            GameObject liveArrow = Instantiate(character.characterEquipmentManager.m_CurrentHandAmmo.liveAmmoModel, arrowInstantiationLocation.transform.position, player.cameraHandler.cameraPivotTranform.rotation);
             Rigidbody rigidBody = liveArrow.GetComponent<Rigidbody>();
             RangedProjectileDamageCollider damageCollider = liveArrow.GetComponent<RangedProjectileDamageCollider>();
 
@@ -59,16 +59,16 @@ public class FireArrowAction : ItemAction
                 }
             }
 
-            rigidBody.AddForce(liveArrow.transform.forward * character.characterInventoryManager.currentAmmo.forwardVelocity);
-            rigidBody.AddForce(liveArrow.transform.up * character.characterInventoryManager.currentAmmo.upwardVelocity);
-            rigidBody.useGravity = character.characterInventoryManager.currentAmmo.useGravity;
-            rigidBody.mass = character.characterInventoryManager.currentAmmo.ammoMass;
+            rigidBody.AddForce(liveArrow.transform.forward * character.characterEquipmentManager.m_CurrentHandAmmo.forwardVelocity);
+            rigidBody.AddForce(liveArrow.transform.up * character.characterEquipmentManager.m_CurrentHandAmmo.upwardVelocity);
+            rigidBody.useGravity = character.characterEquipmentManager.m_CurrentHandAmmo.useGravity;
+            rigidBody.mass = character.characterEquipmentManager.m_CurrentHandAmmo.ammoMass;
             liveArrow.transform.parent = null;
 
             // damage collider set
             damageCollider.characterManager = character;
-            damageCollider.ammoItem = character.characterInventoryManager.currentAmmo;
-            damageCollider.physicalDamage = character.characterInventoryManager.currentAmmo.physicalDamage;
+            damageCollider.ammoItem = character.characterEquipmentManager.m_CurrentHandAmmo;
+            damageCollider.physicalDamage = character.characterEquipmentManager.m_CurrentHandAmmo.physicalDamage;
         }
         // Fire the Arrow as an A.I character
 
@@ -78,7 +78,7 @@ public class FireArrowAction : ItemAction
 
             // live arrow 持失
             GameObject liveArrow = Instantiate
-                (character.characterInventoryManager.currentAmmo.liveAmmoModel, 
+                (character.characterEquipmentManager.m_CurrentHandAmmo.liveAmmoModel, 
                 arrowInstantiationLocation.transform.position, 
                 Quaternion.identity);
             Rigidbody rigidBody = liveArrow.GetComponent<Rigidbody>();
@@ -92,16 +92,16 @@ public class FireArrowAction : ItemAction
                 liveArrow.transform.rotation = arrowRotation;
             }
 
-            rigidBody.AddForce(liveArrow.transform.forward * enemy.characterInventoryManager.currentAmmo.forwardVelocity);
-            rigidBody.AddForce(liveArrow.transform.up * enemy.characterInventoryManager.currentAmmo.upwardVelocity);
-            rigidBody.useGravity = enemy.characterInventoryManager.currentAmmo.useGravity;
-            rigidBody.mass = enemy.characterInventoryManager.currentAmmo.ammoMass;
+            rigidBody.AddForce(liveArrow.transform.forward * enemy.characterEquipmentManager.m_CurrentHandAmmo.forwardVelocity);
+            rigidBody.AddForce(liveArrow.transform.up * enemy.characterEquipmentManager.m_CurrentHandAmmo.upwardVelocity);
+            rigidBody.useGravity = enemy.characterEquipmentManager.m_CurrentHandAmmo.useGravity;
+            rigidBody.mass = enemy.characterEquipmentManager.m_CurrentHandAmmo.ammoMass;
             liveArrow.transform.parent = null;
 
             // damage collider set
             damageCollider.characterManager = enemy;
-            damageCollider.ammoItem = enemy.characterInventoryManager.currentAmmo;
-            damageCollider.physicalDamage = enemy.characterInventoryManager.currentAmmo.physicalDamage;
+            damageCollider.ammoItem = enemy.characterEquipmentManager.m_CurrentHandAmmo;
+            damageCollider.physicalDamage = enemy.characterEquipmentManager.m_CurrentHandAmmo.physicalDamage;
             damageCollider.teamIDNumber = enemy.characterStatsManager.teamIDNumber;
         }
 

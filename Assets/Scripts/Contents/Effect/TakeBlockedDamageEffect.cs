@@ -195,12 +195,12 @@ public class TakeBlockedDamageEffect : CharacterEffect
         // 두 손이면 오른쪽 무기를
         if(character.isTwoHandingWeapon)
         {
-            character.characterSoundFXManager.PlayRandomSound(E_RandomSoundType.Block, character.characterInventoryManager.rightWeapon.blockingNoises);
+            character.characterSoundFXManager.PlayRandomSound(E_RandomSoundType.Block, character.characterEquipmentManager.m_CurrentHandRightWeapon.blockingNoises);
         }
         // 한 손이면 왼족 아이템(보통 방패)으로
         else
         {
-            character.characterSoundFXManager.PlayRandomSound(E_RandomSoundType.Block, character.characterInventoryManager.leftWeapon.blockingNoises);
+            character.characterSoundFXManager.PlayRandomSound(E_RandomSoundType.Block, character.characterEquipmentManager.m_CurrentHandLeftWeapon.blockingNoises);
         }
     }
 

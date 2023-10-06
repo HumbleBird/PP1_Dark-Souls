@@ -10,12 +10,12 @@ public class MagicSpellAction : ItemAction
         if (character.isInteracting)
             return;
 
-        if (character.characterInventoryManager.currentSpell != null && character.characterInventoryManager.currentSpell.isMagicSpell)
+        if (character.characterEquipmentManager.m_CurrentHandSpell != null && character.characterEquipmentManager.m_CurrentHandSpell.isMagicSpell)
         {
             // CHECK FOR FP
-            if (character.characterStatsManager.currentFocusPoints >= character.characterInventoryManager.currentSpell.focusPointCost)
+            if (character.characterStatsManager.currentFocusPoints >= character.characterEquipmentManager.m_CurrentHandSpell.focusPointCost)
             {
-                character.characterInventoryManager.currentSpell.AttemptToCastSpell(character);
+                character.characterEquipmentManager.m_CurrentHandSpell.AttemptToCastSpell(character);
             }
             else
                 character.characterAnimatorManager.PlayTargetAnimation("Shrug", true);

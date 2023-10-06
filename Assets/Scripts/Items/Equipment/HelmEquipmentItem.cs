@@ -5,6 +5,11 @@ using UnityEngine;
 [CreateAssetMenu(menuName = "Items/Eqipment/Helm Armor")]
 public class HelmEquipmentItem : EquipmentItem
 {
+    HelmEquipmentItem()
+    {
+        m_EItemType = Define.E_ItemType.Helmet;
+    }
+
     [Header("Item All Gender Parts Name")]
     [SerializeField] int HeadCoverings_Base_Hair;
     [SerializeField] int HeadCoverings_No_FacialHair;
@@ -25,7 +30,7 @@ public class HelmEquipmentItem : EquipmentItem
         get 
         {
             PlayerManager player = Managers.Object.m_MyPlayer;
-            if (player.playerInventoryManager.currentHelmetEquipment == null || player.playerInventoryManager.currentHelmetEquipment == player.playerEquipmentManager.Naked_HelmetEquipment)
+            if (player.playerEquipmentManager.m_HelmetEquipment == null || player.playerEquipmentManager.m_HelmetEquipment == player.playerEquipmentManager.Naked_HelmetEquipment)
             {
                 return "Chr_Head_" + playerGender + HelmEquipmentItemName.ToString("00");
             }

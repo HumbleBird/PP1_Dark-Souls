@@ -5,6 +5,11 @@ using UnityEngine;
 [CreateAssetMenu(menuName = "Items/Eqipment/Gantlets Armor")]
 public class GantletsEquipmentItem : EquipmentItem
 {
+    GantletsEquipmentItem()
+    {
+        m_EItemType = Define.E_ItemType.Gauntlets;
+    }
+
     [Header("Item All Gender Parts Name")]
     [SerializeField] int  Elbow_Attachment_Right;
     [SerializeField] int  Elbow_Attachment_Left;

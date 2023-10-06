@@ -373,7 +373,7 @@ public class CompanionStateCombatStance : State
             if (aiCharacter.allowAIToPerformBlock)
             {
                 aiCharacter.isBlocking = true;
-                aiCharacter.characterInventoryManager.currentItemBeingUsed = aiCharacter.characterInventoryManager.leftWeapon;
+                aiCharacter.characterEquipmentManager.currentItemBeingUsed = aiCharacter.characterEquipmentManager.m_CurrentHandLeftWeapon;
                 aiCharacter.characterCombatManager.SetBlockingAbsorptionsFromBlockingWeapon();
             }
         }
@@ -421,8 +421,8 @@ public class CompanionStateCombatStance : State
         else
         {
             hasAmmoLoaded = true;
-            aiCharacter.characterInventoryManager.currentItemBeingUsed = aiCharacter.characterInventoryManager.rightWeapon;
-            aiCharacter.characterInventoryManager.rightWeapon.th_hold_RB_Action.PerformAction(aiCharacter);
+            aiCharacter.characterEquipmentManager.currentItemBeingUsed = aiCharacter.characterEquipmentManager.m_CurrentHandRightWeapon;
+            aiCharacter.characterEquipmentManager.m_CurrentHandRightWeapon.th_hold_RB_Action.PerformAction(aiCharacter);
         }
     }
 

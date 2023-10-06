@@ -5,6 +5,11 @@ using UnityEngine;
 [CreateAssetMenu(menuName = "Items/Eqipment/Torso Armor")]
 public class TorsoEquipmentItem : EquipmentItem
 {
+    TorsoEquipmentItem()
+    {
+        m_EItemType = Define.E_ItemType.ChestArmor;
+    }
+
     [Header("Item All Gender Parts Name")]
     [SerializeField] int Back_Attachment;
     [SerializeField] int Shoulder_Attachment_Right;

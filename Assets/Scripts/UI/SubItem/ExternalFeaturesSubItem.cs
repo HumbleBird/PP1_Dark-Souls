@@ -176,27 +176,27 @@ public class ExternalFeaturesSubItem : UI_Base
                     break;
                 case All_GenderItemPartsType.Hair:
                     {
-                        player.playerInventoryManager.currentHairStyle = go;
+                        player.playerEquipmentManager.currentHairStyle = go;
 
                         characterCreationScreen.m_CharacterCreationLeftPannelUI.m_HairBtn.Select();
                         characterCreationScreen.m_CharacterCreationMiddlePannelUI.m_goHairStyles.SetActive(false);
                         
                         Camera.main.GetComponent<CharacterPreviewCamera>().ChangeCameraPreviewTransform(E_CharacterCreationPreviewCamera.None);
 
-                        hider.UnHideEquipment(E_ArmorEquipmentType.Helmet);
+                        hider.UnHideEquipment(E_CameraShowPartType.Head);
 
                     }
                     break;
                 case All_GenderItemPartsType.HelmetAttachment:
                     {
-                        player.playerInventoryManager.currentHairItem = go;
+                        player.playerEquipmentManager.currentHairItem = go;
 
                         characterCreationScreen.m_CharacterCreationLeftPannelUI.m_HairItemBtn.Select();
                         characterCreationScreen.m_CharacterCreationMiddlePannelUI.m_goHairItem.SetActive(false);
 
                         Camera.main.GetComponent<CharacterPreviewCamera>().ChangeCameraPreviewTransform(E_CharacterCreationPreviewCamera.None);
 
-                        hider.UnHideEquipment(E_ArmorEquipmentType.Helmet);
+                        hider.UnHideEquipment(E_CameraShowPartType.Head);
 
                     }
                     break;
@@ -230,7 +230,7 @@ public class ExternalFeaturesSubItem : UI_Base
             {
                 case E_SingleGenderEquipmentArmorParts.Head:
                     {
-                        player.playerInventoryManager.currentFacialMask = go;
+                        player.playerEquipmentManager.currentFacialMask = go;
 
                         if(go != null)
                         {
@@ -244,7 +244,7 @@ public class ExternalFeaturesSubItem : UI_Base
 
                         Camera.main.GetComponent<CharacterPreviewCamera>().ChangeCameraPreviewTransform(E_CharacterCreationPreviewCamera.None);
 
-                        hider.UnHideEquipment(E_ArmorEquipmentType.Helmet);
+                        hider.UnHideEquipment(E_CameraShowPartType.Head);
 
                     }
                     break;
@@ -252,27 +252,27 @@ public class ExternalFeaturesSubItem : UI_Base
                     break;
                 case E_SingleGenderEquipmentArmorParts.Eyebrow:
                     {
-                        player.playerInventoryManager.currentEyebrows = go;
+                        player.playerEquipmentManager.currentEyebrows = go;
 
                         characterCreationScreen.m_CharacterCreationLeftPannelUI.EyebrowsBtn.Select();
                         characterCreationScreen.m_CharacterCreationMiddlePannelUI.m_goEyebrows.SetActive(false);
 
                         Camera.main.GetComponent<CharacterPreviewCamera>().ChangeCameraPreviewTransform(E_CharacterCreationPreviewCamera.None);
 
-                        hider.UnHideEquipment(E_ArmorEquipmentType.Helmet);
+                        hider.UnHideEquipment(E_CameraShowPartType.Head);
 
                     }
                     break;
                 case E_SingleGenderEquipmentArmorParts.FacialHair:
                     {
-                        player.playerInventoryManager.currentFacialHair = go;
+                        player.playerEquipmentManager.currentFacialHair = go;
 
                         characterCreationScreen.m_CharacterCreationLeftPannelUI.FacialHairBtn.Select();
                         characterCreationScreen.m_CharacterCreationMiddlePannelUI.m_goFacialHair.SetActive(false);
 
                         Camera.main.GetComponent<CharacterPreviewCamera>().ChangeCameraPreviewTransform(E_CharacterCreationPreviewCamera.None);
 
-                        hider.UnHideEquipment(E_ArmorEquipmentType.Helmet);
+                        hider.UnHideEquipment(E_CameraShowPartType.Head);
 
                     }
                     break;

@@ -18,6 +18,7 @@ public class EquipmentUI : UI_Popup
     public CurrentEquipmentsUI m_CurrentEquipmentsUI;
     public ItemInformationUI m_ItemInformationUI;
     public BriefPlayerStatInformationUI m_BriefPlayerStatInformationUI;
+    public ShowItemInventoryUI m_ShowItemInventoryUI;
 
     public override bool Init()
     {
@@ -27,7 +28,7 @@ public class EquipmentUI : UI_Popup
         BindText(typeof(Texts));
 
         PlayerManager player = Managers.Object.m_MyPlayer;
-        GetText((int)Texts.EquipLoadValueText).text = $"{player.playerStatsManager.currentEquipLoad} /  {player.playerStatsManager.maxEquipLoad}";
+        GetText((int)Texts.EquipLoadValueText).text = string.Format("{0:0.0} /   {1:0.0}", player.playerStatsManager.currentEquipLoad, player.playerStatsManager.maxEquipLoad);
 
         float weightRatio = (player.playerStatsManager.currentEquipLoad / player.playerStatsManager.maxEquipLoad) * 100;
         GetText((int)Texts.WeightRatioValueText).text = string.Format("{0:0.0}%", weightRatio);
@@ -35,6 +36,9 @@ public class EquipmentUI : UI_Popup
         m_CurrentEquipmentsUI = GetComponentInChildren<CurrentEquipmentsUI>();
         m_ItemInformationUI = GetComponentInChildren<ItemInformationUI>();
         m_BriefPlayerStatInformationUI = GetComponentInChildren<BriefPlayerStatInformationUI>();
+        m_ShowItemInventoryUI = GetComponentInChildren<ShowItemInventoryUI>();
+
+        m_ShowItemInventoryUI.gameObject.SetActive(false);
 
         return true;
     }

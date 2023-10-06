@@ -14,25 +14,69 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   itemIcon: {fileID: 21300000, guid: 52b6c36079851f144926bbf3cd431d7e, type: 3}
   itemName: Talisman
+  itemID: 0
+  m_EItemType: 6
   modelPrefab: {fileID: 7694254933542424885, guid: 0cfd39d66170d3b438fff6b37a7e75e7, type: 3}
   isUnarmed: 0
   weaponController: {fileID: 0}
-  offHandIdleAnimation: Left Arm Idle_01
   weaponType: 1
-  physicalDamage: 0
-  fireDamage: 0
+  AttackType: 
+  Skill: 
+  FocusCost: 0
+  m_iRequirementStrength: 0
+  m_iRequirementDexterity: 0
+  m_iRequirementIntelligence: 0
+  m_iRequirementFaith: 0
+  m_iParameterBonusStrength: 0
+  m_iParameterBonusDexterity: 0
+  m_iParameterBonusIntelligence: 0
+  m_iParameterBonusFaith: 0
+  m_iPhysicalDamage: 0
+  m_iMagicDamage: 0
+  m_iFireDamage: 0
+  m_iLightningDamage: 0
+  m_iDarkDamage: 0
+  m_iCriticalDamage: 0
+  m_iSpellBuff: 0
+  m_iRange: 0
+  m_iPhysicalDamageReduction: 0
+  m_iMagicDamageReduction: 0
+  m_iFireDamageReduction: 0
+  m_iLightningDamageReduction: 0
+  m_iDarkDamageReduction: 0
+  m_iStability: 0
+  m_iBleeding: 0
+  m_iPoison: 0
+  m_iFrost: 0
+  m_iCurse: 0
+  m_iDurability: 0
+  m_iWeight: 0
+  lightAttackDamageModifier: 0
+  heavyAttackDaamgeModifier: 0
   criticalDamagemuiltiplier: 4
+  guardBreakModifier: 1
   poiseBreak: 0
   offensivePoiseBonus: 0
-  physicalDamageAbsorption: 0
-  baseStamina: 0
-  lightAttackMultiplier: 0
-  heavyAttackMultiplier: 0
-  tap_RB_Action: {fileID: 11400000, guid: 87333b00b77393f49af36afa2887b8bb, type: 2}
-  hold_RB_Action: {fileID: 0}
-  tap_RT_Action: {fileID: 0}
-  hold_RT_Action: {fileID: 0}
-  tap_LB_Action: {fileID: 11400000, guid: 87333b00b77393f49af36afa2887b8bb, type: 2}
-  hold_LB_Action: {fileID: 0}
-  tap_LT_Action: {fileID: 0}
-  hold_LT_Action: {fileID: 0}
+  physicalBlockingDamageAbsorption: 0
+  fireBlockingDamageAbsorption: 0
+  baseStaminaCost: 0
+  lightAttackStaminaMultiplier: 0
+  heavyAttackStaminaMultiplier: 0
+  oh_tap_RB_Action: {fileID: 0}
+  oh_hold_RB_Action: {fileID: 0}
+  oh_tap_RT_Action: {fileID: 0}
+  oh_hold_RT_Action: {fileID: 0}
+  oh_tap_LB_Action: {fileID: 0}
+  oh_hold_LB_Action: {fileID: 0}
+  oh_tap_LT_Action: {fileID: 0}
+  oh_hold_LT_Action: {fileID: 0}
+  th_tap_RB_Action: {fileID: 0}
+  th_hold_RB_Action: {fileID: 0}
+  th_tap_RT_Action: {fileID: 0}
+  th_hold_RT_Action: {fileID: 0}
+  th_tap_LB_Action: {fileID: 0}
+  th_hold_LB_Action: {fileID: 0}
+  th_tap_LT_Action: {fileID: 0}
+  th_hold_LT_Action: {fileID: 0}
+  weaponWhooshes: []
+  blockingNoises: []

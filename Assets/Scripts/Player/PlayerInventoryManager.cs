@@ -1,76 +1,73 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class PlayerInventoryManager : CharacterInventoryManager
+public class PlayerInventoryManager : MonoBehaviour
 {
-    public List<Item> m_Item = new List<Item>();
+    //public Dictionary<int, Item> m_dicItem { get; } = new Dictionary<int, Item>();
+    public List<Item> m_Items { get; } = new List<Item>();
 
-    public List<WeaponItem> weaponsInventory = new List<WeaponItem>();
-    public List<HelmEquipmentItem> headEquipmentInventory = new List<HelmEquipmentItem>();
-    public List<TorsoEquipmentItem> bodyEquipmentInventory = new List<TorsoEquipmentItem>();
-    public List<LeggingsEquipmentItem> legEquipmentInventory = new List<LeggingsEquipmentItem>();
-    public List<GantletsEquipmentItem> handEquipmentInventory = new List<GantletsEquipmentItem>();
-
-    public void ChangeRightWeapon()
+    public void Add(Item item)
     {
-        currentRightWeaponIndex += 1;
-
-        for (int index = 0; index < 3; index++)
-        {
-            if (currentRightWeaponIndex == index && weaponsInRightHandSlots[index] != null)
-            {
-                rightWeapon = weaponsInRightHandSlots[currentRightWeaponIndex];
-                character.characterWeaponSlotManager.LoadWeaponOnSlot(weaponsInRightHandSlots[currentRightWeaponIndex], false);
-                break;
-            }
-            else if (currentRightWeaponIndex == index && weaponsInRightHandSlots[index] == null)
-            {
-                currentRightWeaponIndex += 1;
-            }
-        }
-
-        if(currentRightWeaponIndex > weaponsInRightHandSlots.Length - 1)
-        {
-            currentRightWeaponIndex = -1;
-            rightWeapon = character.characterWeaponSlotManager.unarmWeapon;
-            character.characterWeaponSlotManager.LoadWeaponOnSlot(character.characterWeaponSlotManager.unarmWeapon, false);
-
-        }
+        //m_dicItem.Add(item.Id, item);
+        m_Items.Add(item);
     }
 
-    public void ChangeLeftWeapon()
+    //public Item Get(int itemID)
+    //{
+    //    Item item = null;
+    //    m_dicItem.TryGetValue(itemID, out item);
+    //    return item;
+    //}
+
+    public Item Get(Item item)
     {
-        currentLeftWeaponIndex += 1;
-
-        for (int index = 0; index < 3; index++)
-        {
-            if (currentLeftWeaponIndex == index && weaponsInLeftHandSlots[index] != null)
-            {
-                leftWeapon = weaponsInLeftHandSlots[currentLeftWeaponIndex];
-                character.characterWeaponSlotManager.LoadWeaponOnSlot(weaponsInLeftHandSlots[currentLeftWeaponIndex], true);
-                break;
-            }
-            else if (currentLeftWeaponIndex == index && weaponsInLeftHandSlots[index] == null)
-            {
-                currentLeftWeaponIndex += 1;
-            }
-        }
-
-        if (currentLeftWeaponIndex > weaponsInLeftHandSlots.Length - 1)
-        {
-            currentLeftWeaponIndex = -1;
-            leftWeapon = character.characterWeaponSlotManager.unarmWeapon;
-            character.characterWeaponSlotManager.LoadWeaponOnSlot(character.characterWeaponSlotManager.unarmWeapon, true);
-        }
+        Item finditem = m_Items.Find(i => i == item);
+        return finditem;
     }
 
-    public void InventoryItemClear()
+    //public Item Find(Func<Item, bool> condition)
+    //{
+    //    foreach (Item item in m_dicItem.Values)
+    //    {
+    //        if (condition.Invoke(item))
+    //            return item;
+    //    }
+
+    //    return null;
+    //}
+
+    public Item Find(Func<Item, bool> condition)
     {
-        weaponsInventory.Clear();
-        headEquipmentInventory.Clear();
-        bodyEquipmentInventory.Clear();
-        legEquipmentInventory.Clear();
-        handEquipmentInventory.Clear();
+        foreach (Item item in m_Items)
+        {
+            if (condition.Invoke(item))
+                return item;
+        }
+
+        return null;
+    }
+
+    public List<Item> FindItems(Func<Item, bool> condition)
+    {
+        List<Item> items = new List<Item>();
+
+        foreach (Item item in m_Items)
+        {
+            if (condition.Invoke(item))
+                items.Add(item);
+        }
+
+        if (items.Count > 0)
+            return items;
+        else
+            return null;
+    }
+
+    public void Clear()
+    {
+        //m_dicItem.Clear();
+        m_Items.Clear();
     }
 }

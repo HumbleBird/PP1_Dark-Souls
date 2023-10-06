@@ -180,8 +180,8 @@ public class AttackStateHumanoid : State
         if(aiCharacter.isHoldingArrow)
         {
             hasPerformedAttack = true;
-            aiCharacter.characterInventoryManager.currentItemBeingUsed = aiCharacter.characterInventoryManager.rightWeapon;
-            aiCharacter.characterInventoryManager.rightWeapon.th_tap_RB_Action.PerformAction(aiCharacter);
+            aiCharacter.characterEquipmentManager.currentItemBeingUsed = aiCharacter.characterEquipmentManager.m_CurrentHandRightWeapon;
+            aiCharacter.characterEquipmentManager.m_CurrentHandRightWeapon.th_tap_RB_Action.PerformAction(aiCharacter);
         }
     }
 }

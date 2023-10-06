@@ -43,8 +43,6 @@ public class PlayerWeaponSlotManager : CharacterWeaponSlotManager
                 LoadRightWeaponDamageCollider();
                 player.animator.runtimeAnimatorController = weaponItem.weaponController;
             }
-
-            player.m_GameUIManager.m_HUDUI.quickSlotsUI.UpdateWeaponQuickSlotUI(isLeft, weaponItem);
         }
         else
         {
@@ -52,7 +50,7 @@ public class PlayerWeaponSlotManager : CharacterWeaponSlotManager
 
             if (isLeft)
             {
-                player.playerInventoryManager.leftWeapon = unarmWeapon;
+                player.playerEquipmentManager.m_CurrentHandLeftWeapon = unarmWeapon;
                 leftHandSlot.currentWeapon = unarmWeapon;
                 leftHandSlot.LoadWeaponModel(unarmWeapon);
                 LoadLeftWeaponDamageCollider();
@@ -60,23 +58,22 @@ public class PlayerWeaponSlotManager : CharacterWeaponSlotManager
             }
             else
             {
-                player.playerInventoryManager.rightWeapon = unarmWeapon;
+                player.playerEquipmentManager.m_CurrentHandRightWeapon = unarmWeapon;
                 rightHandSlot.currentWeapon = unarmWeapon;
                 rightHandSlot.LoadWeaponModel(unarmWeapon);
                 LoadRightWeaponDamageCollider();
                 player.animator.runtimeAnimatorController = weaponItem.weaponController;
 
             }
-
-            player.m_GameUIManager.m_HUDUI.quickSlotsUI.UpdateWeaponQuickSlotUI(isLeft, unarmWeapon);
         }
 
+        player.m_GameUIManager.m_HUDUI.quickSlotsUI.RefreshUI();
     }
 
     public void SucessfullyThrowFireBomb()
     {
         Destroy(player.playerEffectsManager.instantiatedFXModel2);
-        BombConsumeableItem fireBombItem = player.playerInventoryManager.currentConsumable as BombConsumeableItem;
+        BombConsumeableItem fireBombItem = player.playerEquipmentManager.m_CurrentHandConsumable as BombConsumeableItem;
         GameObject activeModelBomb = Instantiate(fireBombItem.liveBombModel, rightHandSlot.transform.position, player.cameraHandler.cameraPivotTranform.rotation);
         activeModelBomb.GetComponentInChildren<BombDamageColider>().characterManager = player;
         activeModelBomb.transform.rotation = Quaternion.Euler(player.cameraHandler.cameraPivotTranform.eulerAngles.x, player.lockOnTransform.eulerAngles.y, 0);
@@ -90,7 +87,7 @@ public class PlayerWeaponSlotManager : CharacterWeaponSlotManager
         damageCollider.bombRigidBody.AddForce(activeModelBomb.transform.forward * fireBombItem.forwardVelocity);
         damageCollider.bombRigidBody.AddForce(activeModelBomb.transform.up * fireBombItem.upwardVelocity);
         damageCollider.teamIDNumber = player.playerStatsManager.teamIDNumber;
-        LoadWeaponOnSlot(player.playerInventoryManager.rightWeapon, false);
+        LoadWeaponOnSlot(player.playerEquipmentManager.m_CurrentHandRightWeapon, false);
 
     }
 

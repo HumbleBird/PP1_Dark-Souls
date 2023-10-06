@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using static Define;
 
 public class CurrentEquipmentsUI : UI_Base
 {
@@ -10,6 +11,8 @@ public class CurrentEquipmentsUI : UI_Base
         ItemNameText,
     }
 
+    PlayerManager player;
+
     public override bool Init()
     {
         if (base.Init() == false)
@@ -17,7 +20,9 @@ public class CurrentEquipmentsUI : UI_Base
 
         BindText(typeof(Texts));
 
-        PlayerManager player = Managers.Object.m_MyPlayer;
+        player = Managers.Object.m_MyPlayer;
+
+        SetSlotInit();
 
         return true;
     }
@@ -32,6 +37,135 @@ public class CurrentEquipmentsUI : UI_Base
         else
         {
             GetText((int)Texts.ItemNameText).text = "";
+        }
+    }
+
+    void SetSlotInit()
+    {
+
+        int rightWeaponNum = 0;
+        int leftWeaponNum = 0;
+        int ArrowNum = 0;
+        int BoltNum = 0;
+        int RingNum = 0;
+        int ConsumableNum = 0;
+
+        EquipmentSlotUI[] slots = GetComponentsInChildren<EquipmentSlotUI>();
+        foreach (EquipmentSlotUI slot in slots)
+        {
+            switch (slot.m_EquipmentSlotsPartsName)
+            {
+                case E_EquipmentSlotsPartType.Right_Hand_Weapon:
+                    slot.m_iSlotNum = rightWeaponNum;
+                    DetailPushItems(slot, player.playerEquipmentManager.m_RightWeaponsSlots);
+                    rightWeaponNum++;
+                    break;
+                case E_EquipmentSlotsPartType.Left_Hand_Weapon:
+                    slot.m_iSlotNum = leftWeaponNum;
+                    DetailPushItems(slot, player.playerEquipmentManager.m_LeftWeaponsSlots);
+                    leftWeaponNum++;
+                    break;
+                case E_EquipmentSlotsPartType.Arrow:
+                    slot.m_iSlotNum = ArrowNum;
+                    DetailPushItems(slot, player.playerEquipmentManager.m_ArrowAmmoSlots);
+                    ArrowNum++;
+                    break;
+                case E_EquipmentSlotsPartType.Bolt:
+                    slot.m_iSlotNum = BoltNum;
+                    DetailPushItems(slot, player.playerEquipmentManager.m_BoltAmmoSlots);
+                    BoltNum++;
+                    break;
+                case E_EquipmentSlotsPartType.Helmt:
+                    slot.SetInfo(player.playerEquipmentManager.m_HelmetEquipment);
+                    break;
+                case E_EquipmentSlotsPartType.Chest_Armor:
+                    slot.SetInfo(player.playerEquipmentManager.m_TorsoEquipment);
+                    break;
+                case E_EquipmentSlotsPartType.Gantlets:
+                    slot.SetInfo(player.playerEquipmentManager.m_HandEquipment);
+                    break;
+                case E_EquipmentSlotsPartType.Leggings:
+                    slot.SetInfo(player.playerEquipmentManager.m_LegEquipment);
+                    break;
+                case E_EquipmentSlotsPartType.Ring:
+                    slot.m_iSlotNum = RingNum;
+                    DetailPushItems(slot, player.playerEquipmentManager.m_RingSlots);
+                    RingNum++;
+                    break;
+                case E_EquipmentSlotsPartType.Consumable:
+                    slot.m_iSlotNum = ConsumableNum;
+                    DetailPushItems(slot, player.playerEquipmentManager.m_ConsumableItemSlots);
+                    ConsumableNum++;
+                    break;
+                case E_EquipmentSlotsPartType.Pledge:
+                    slot.SetInfo(player.playerEquipmentManager.m_CurrentPledge);
+                    break;
+            }
+        }
+    }
+
+    public override void RefreshUI()
+    {
+        EquipmentSlotUI[] slots = GetComponentsInChildren<EquipmentSlotUI>();
+        foreach (EquipmentSlotUI slot in slots)
+        {
+            switch (slot.m_EquipmentSlotsPartsName)
+            {
+                case E_EquipmentSlotsPartType.Right_Hand_Weapon:
+                    DetailPushItems(slot, player.playerEquipmentManager.m_RightWeaponsSlots);
+                    break;
+                case E_EquipmentSlotsPartType.Left_Hand_Weapon:
+                    DetailPushItems(slot, player.playerEquipmentManager.m_LeftWeaponsSlots);
+                    break;
+                case E_EquipmentSlotsPartType.Arrow:
+                    DetailPushItems(slot, player.playerEquipmentManager.m_ArrowAmmoSlots);
+                    break;
+                case E_EquipmentSlotsPartType.Bolt:
+                    DetailPushItems(slot, player.playerEquipmentManager.m_BoltAmmoSlots);
+                    break;
+                case E_EquipmentSlotsPartType.Helmt:
+                    DetailPushItem(slot, player.playerEquipmentManager.m_HelmetEquipment);
+                    break;
+                case E_EquipmentSlotsPartType.Chest_Armor:
+                    DetailPushItem(slot, player.playerEquipmentManager.m_TorsoEquipment);
+                    break;
+                case E_EquipmentSlotsPartType.Gantlets:
+                    DetailPushItem(slot, player.playerEquipmentManager.m_HandEquipment);
+                    break;
+                case E_EquipmentSlotsPartType.Leggings:
+                    DetailPushItem(slot, player.playerEquipmentManager.m_LegEquipment);
+                    break;
+                case E_EquipmentSlotsPartType.Ring:
+                    DetailPushItems(slot, player.playerEquipmentManager.m_RingSlots);
+                    break;
+                case E_EquipmentSlotsPartType.Consumable:
+                    DetailPushItems(slot, player.playerEquipmentManager.m_ConsumableItemSlots);
+                    break;
+                case E_EquipmentSlotsPartType.Pledge:
+                    DetailPushItem(slot, player.playerEquipmentManager.m_CurrentPledge);
+                    break;
+            }
+        }
+    }
+
+    void DetailPushItems(EquipmentSlotUI slotUI, Item[] playerEquipmentItems)
+    {
+        for (int i = 0; i < playerEquipmentItems.Length; i++)
+        {
+            if(playerEquipmentItems[slotUI.m_iSlotNum] != null)
+            {
+                slotUI.SetInfo(playerEquipmentItems[slotUI.m_iSlotNum]);
+                return;
+            }
+        }
+    }
+
+    void DetailPushItem(EquipmentSlotUI slotUI, Item playerEquipmentItems)
+    {
+        if (playerEquipmentItems != null)
+        {
+            slotUI.SetInfo(playerEquipmentItems);
+                return;
         }
     }
 }

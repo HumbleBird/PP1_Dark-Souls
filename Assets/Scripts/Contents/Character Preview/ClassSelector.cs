@@ -45,27 +45,27 @@ public class ClassSelector : MonoBehaviour
     private void AssignClassEquipment(int classChosen)
     {
         // 전 아이템 전부 처분 후 바꿔뀌기
-        player.playerInventoryManager.InventoryItemClear();
+        player.playerInventoryManager.Clear();
 
         // 현재 장착
-        player.playerInventoryManager.currentHelmetEquipment = classGear[classChosen].headEquipment;
-        player.playerInventoryManager.currentTorsoEquipment = classGear[classChosen].chestEquipment;
-        player.playerInventoryManager.currentLegEquipment = classGear[classChosen].legEquipment;
-        player.playerInventoryManager.currentHandEquipment = classGear[classChosen].handEquipment;
+        player.playerEquipmentManager.m_HelmetEquipment = classGear[classChosen].headEquipment;
+        player.playerEquipmentManager.m_TorsoEquipment = classGear[classChosen].chestEquipment;
+        player.playerEquipmentManager.m_LegEquipment = classGear[classChosen].legEquipment;
+        player.playerEquipmentManager.m_HandEquipment = classGear[classChosen].handEquipment;
 
-        player.playerInventoryManager.weaponsInRightHandSlots[0] = classGear[classChosen].primaryWeapon;
-        player.playerInventoryManager.weaponsInLeftHandSlots[0] = classGear[classChosen].offHandWeapon;
-        player.playerInventoryManager.rightWeapon = player.playerInventoryManager.weaponsInRightHandSlots[0];
-        player.playerInventoryManager.leftWeapon = player.playerInventoryManager.weaponsInLeftHandSlots[0];
+        player.playerEquipmentManager.m_RightWeaponsSlots[0] = classGear[classChosen].primaryWeapon;
+        player.playerEquipmentManager.m_LeftWeaponsSlots[0] = classGear[classChosen].offHandWeapon;
+        player.playerEquipmentManager.m_CurrentHandRightWeapon = player.playerEquipmentManager.m_RightWeaponsSlots[0];
+        player.playerEquipmentManager.m_CurrentHandLeftWeapon = player.playerEquipmentManager.m_LeftWeaponsSlots[0];
 
         // 인벤토리에 넣기
-        player.playerInventoryManager.weaponsInventory.Add(classGear[classChosen].primaryWeapon);
-        player.playerInventoryManager.weaponsInventory.Add(classGear[classChosen].offHandWeapon);
+        player.playerInventoryManager.Add(classGear[classChosen].primaryWeapon);
+        player.playerInventoryManager.Add(classGear[classChosen].offHandWeapon);
 
-        player.playerInventoryManager.headEquipmentInventory.Add(classGear[classChosen].headEquipment);
-        player.playerInventoryManager.bodyEquipmentInventory.Add(classGear[classChosen].chestEquipment);
-        player.playerInventoryManager.legEquipmentInventory.Add(classGear[classChosen].legEquipment);
-        player.playerInventoryManager.handEquipmentInventory.Add(classGear[classChosen].handEquipment);
+        player.playerInventoryManager.Add(classGear[classChosen].headEquipment);
+        player.playerInventoryManager.Add(classGear[classChosen].chestEquipment);
+        player.playerInventoryManager.Add(classGear[classChosen].legEquipment);
+        player.playerInventoryManager.Add(classGear[classChosen].handEquipment);
 
         player.playerEquipmentManager.EquipAllEquipmentModel();
         player.playerWeaponSlotManager.LoadBothWeaponsOnSlots();

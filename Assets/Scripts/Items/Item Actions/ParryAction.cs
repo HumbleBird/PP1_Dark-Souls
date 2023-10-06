@@ -13,7 +13,7 @@ public class ParryAction : ItemAction
 
         character.characterAnimatorManager.EraseHandIKForWeapon();
 
-        WeaponItem parryingWeapon = character.characterInventoryManager.currentItemBeingUsed as WeaponItem;
+        WeaponItem parryingWeapon = character.characterEquipmentManager.currentItemBeingUsed as WeaponItem;
 
         if(parryingWeapon.weaponType == WeaponType.SmallShield)
         {

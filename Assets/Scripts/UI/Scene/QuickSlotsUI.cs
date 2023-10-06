@@ -5,85 +5,78 @@ using UnityEngine.UI;
 
 public class QuickSlotsUI : UI_Base
 {
-    public Image currentSpellIcon;
-    public Image currentConsumableIcon;
-    public Image rightWeaponIcon;
-    public Image leftWeaponIcon;
-
-    public void UpdateWeaponQuickSlotUI(bool isLeft, WeaponItem weapon)
+    enum Images
     {
-        if(isLeft)
-        {
-            if(weapon != null)
-            {
-                leftWeaponIcon.sprite = weapon.itemIcon;
-                leftWeaponIcon.enabled = true;
-            }
-            else
-            {
-                leftWeaponIcon.sprite = null;
-                leftWeaponIcon.enabled = false;
-            }
+        QuickSlotImage,
+        SpellSlotImage,
+        RightHandSlotImage,
+        LeftHandSlotImage
+    }
 
+    PlayerManager player;
+
+    public override bool Init()
+    {
+        if (base.Init() == false)
+            return false;
+
+        BindImage(typeof(Images));
+        player = Managers.Object.m_MyPlayer;
+        RefreshUI();
+
+        return true;
+    }
+
+    public override void RefreshUI()
+    {
+
+        // Quick Slot (Up Slot)
+        if(player.playerEquipmentManager.m_CurrentHandSpell != null)
+        {
+            GetImage((int)Images.QuickSlotImage).sprite = player.playerEquipmentManager.m_CurrentHandSpell.itemIcon;
+            GetImage((int)Images.QuickSlotImage).enabled = true;
         }
         else
         {
-            if (weapon != null)
-            {
-                rightWeaponIcon.sprite = weapon.itemIcon;
-                rightWeaponIcon.enabled = true;
-            }
-            else
-            {
-                rightWeaponIcon.sprite = null;
-                rightWeaponIcon.enabled = false;
-            }
+            GetImage((int)Images.QuickSlotImage).sprite = null;
+            GetImage((int)Images.QuickSlotImage).enabled = false;
         }
-    }
 
-    public void UpdateCurrentSpellIcon(SpellItem spell)
-    {
-        if(spell.itemIcon != null)
+        // Consumable Item Slot (Down Slot)
+        if(player.playerEquipmentManager.m_CurrentHandConsumable != null)
         {
-            currentSpellIcon.sprite = spell.itemIcon;
-            currentSpellIcon.enabled = true;
+            GetImage((int)Images.SpellSlotImage).sprite = player.playerEquipmentManager.m_CurrentHandConsumable.itemIcon;
+            GetImage((int)Images.SpellSlotImage).enabled = true;
         }
         else
         {
-            currentSpellIcon.sprite = null;
-            currentSpellIcon.enabled = false;
+            GetImage((int)Images.SpellSlotImage).sprite = null;
+            GetImage((int)Images.SpellSlotImage).enabled = false;
         }
-    }
 
-    public void UpdateCurrentConsumableIcon(ToolItem consumable)
-    {
-        if(consumable.itemIcon != null)
+        // Right Hand Slot (Right Slot)
+        if(player.playerEquipmentManager.m_CurrentHandRightWeapon != null)
         {
-            currentConsumableIcon.sprite = consumable.itemIcon;
-            currentConsumableIcon.enabled = true;
+            GetImage((int)Images.RightHandSlotImage).sprite = player.playerEquipmentManager.m_CurrentHandRightWeapon.itemIcon;
+            GetImage((int)Images.RightHandSlotImage).enabled = true;
         }
         else
         {
-            currentConsumableIcon.sprite = null;
-            currentConsumableIcon.enabled = false;
+            GetImage((int)Images.RightHandSlotImage).sprite = null;
+            GetImage((int)Images.RightHandSlotImage).enabled = false;
         }
-    }
 
-    public void UpdateAllQuickSlotUI()
-    {
-        PlayerManager player = Managers.Object.m_MyPlayer;
-
-        UpdateWeaponQuickSlotUI(true,  player.playerInventoryManager.rightWeapon);
-        UpdateWeaponQuickSlotUI(false, player.playerInventoryManager.leftWeapon);
-
-        if (player.playerInventoryManager.currentSpell != null)
+        // Left Hand Slot (Left Slot)
+        if (player.playerEquipmentManager.m_CurrentHandLeftWeapon != null)
         {
-            UpdateCurrentSpellIcon(player.playerInventoryManager.currentSpell);
+            GetImage((int)Images.LeftHandSlotImage).sprite = player.playerEquipmentManager.m_CurrentHandLeftWeapon.itemIcon;
+            GetImage((int)Images.LeftHandSlotImage).enabled = true;
+        }
+        else
+        {
+            GetImage((int)Images.LeftHandSlotImage).sprite = null;
+            GetImage((int)Images.LeftHandSlotImage).enabled = false;
         }
 
-        if (player.playerInventoryManager.currentConsumable != null)
-        {
-            UpdateCurrentConsumableIcon(player.playerInventoryManager.currentConsumable);
-        }
     }
 }

@@ -169,39 +169,39 @@ public class PlayerManager : CharacterManager
         currentCharacterSaveData.yPosition      = transform.position.y;
         currentCharacterSaveData.zPosition      = transform.position.z;
 
-        currentCharacterSaveData.currentRightHandWeaponID = playerInventoryManager.rightWeapon.itemID;
-        currentCharacterSaveData.currentLeftHandWeaponID  = playerInventoryManager.leftWeapon.itemID ;
+        currentCharacterSaveData.currentRightHandWeaponID = playerEquipmentManager.m_CurrentHandRightWeapon.itemID;
+        currentCharacterSaveData.currentLeftHandWeaponID  = playerEquipmentManager.m_CurrentHandLeftWeapon.itemID ;
 
-        if(playerInventoryManager.currentHelmetEquipment != null)
+        if(playerEquipmentManager.m_HelmetEquipment != null)
         {
-            currentCharacterSaveData.currentHeadGearItemID     = playerInventoryManager.currentHelmetEquipment.itemID;
+            currentCharacterSaveData.currentHeadGearItemID     = playerEquipmentManager.m_HelmetEquipment.itemID;
         }
         else
         {
             currentCharacterSaveData.currentHeadGearItemID = -1;
         }
 
-        if(playerInventoryManager.currentTorsoEquipment != null)
+        if(playerEquipmentManager.m_TorsoEquipment != null)
         {
-            currentCharacterSaveData.currentChestGearItemID = playerInventoryManager.currentTorsoEquipment.itemID;
+            currentCharacterSaveData.currentChestGearItemID = playerEquipmentManager.m_TorsoEquipment.itemID;
         }
         else
         {
             currentCharacterSaveData.currentChestGearItemID = -1;
         }
 
-        if(playerInventoryManager.currentLegEquipment != null)
+        if(playerEquipmentManager.m_LegEquipment != null)
         {
-            currentCharacterSaveData.currentLegGearItemID = playerInventoryManager.currentLegEquipment.itemID;
+            currentCharacterSaveData.currentLegGearItemID = playerEquipmentManager.m_LegEquipment.itemID;
         }
         else
         {
             currentCharacterSaveData.currentLegGearItemID = -1;
         }
 
-        if(playerInventoryManager.currentHandEquipment != null)
+        if(playerEquipmentManager.m_HandEquipment != null)
         {
-            currentCharacterSaveData.currentHandGearItemID = playerInventoryManager.currentHandEquipment.itemID;
+            currentCharacterSaveData.currentHandGearItemID = playerEquipmentManager.m_HandEquipment.itemID;
         }
         else
         {
@@ -217,36 +217,36 @@ public class PlayerManager : CharacterManager
 
         transform.position = new Vector3(currentCharacterSaveData.xPosition, currentCharacterSaveData.yPosition, currentCharacterSaveData.zPosition);
 
-        playerInventoryManager.rightWeapon = Managers.ItemData.GetWeaponItemByID(currentCharacterSaveData.currentRightHandWeaponID);
-        playerInventoryManager.leftWeapon = Managers.ItemData.GetWeaponItemByID(currentCharacterSaveData.currentLeftHandWeaponID);
+        playerEquipmentManager.m_CurrentHandRightWeapon = Managers.ItemData.GetWeaponItemByID(currentCharacterSaveData.currentRightHandWeaponID);
+        playerEquipmentManager.m_CurrentHandLeftWeapon = Managers.ItemData.GetWeaponItemByID(currentCharacterSaveData.currentLeftHandWeaponID);
         playerWeaponSlotManager.LoadBothWeaponsOnSlots();
 
         HelmEquipmentItem headEquipment = (HelmEquipmentItem)Managers.ItemData.GetEquipmentItemByID(currentCharacterSaveData.currentHeadGearItemID);
 
         if(headEquipment != null)
         {
-            playerInventoryManager.currentHelmetEquipment = headEquipment;
+            playerEquipmentManager.m_HelmetEquipment = headEquipment;
         }
 
         TorsoEquipmentItem bodyEquipment = (TorsoEquipmentItem)Managers.ItemData.GetEquipmentItemByID(currentCharacterSaveData.currentChestGearItemID);
 
         if(bodyEquipment != null)
         {
-            playerInventoryManager.currentTorsoEquipment = bodyEquipment;
+            playerEquipmentManager.m_TorsoEquipment = bodyEquipment;
         }
 
         LeggingsEquipmentItem legEquipment = (LeggingsEquipmentItem)Managers.ItemData.GetEquipmentItemByID(currentCharacterSaveData.currentLegGearItemID);
 
         if(legEquipment != null)
         {
-            playerInventoryManager.currentLegEquipment = legEquipment;
+            playerEquipmentManager.m_LegEquipment = legEquipment;
         }
 
         GantletsEquipmentItem handEquipment = (GantletsEquipmentItem)Managers.ItemData.GetEquipmentItemByID(currentCharacterSaveData.currentHandGearItemID);
 
         if(handEquipment != null)
         {
-            playerInventoryManager.currentHandEquipment = handEquipment;
+            playerEquipmentManager.m_HandEquipment = handEquipment;
         }
 
         playerEquipmentManager.EquipAllEquipmentModel();

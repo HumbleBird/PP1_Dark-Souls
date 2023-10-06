@@ -56,15 +56,15 @@ public class CharacterCombatManager : MonoBehaviour
     {
         if (character.isUsingRightHand)
         {
-            character.characterStatsManager.blockingPhysicalDamageAbsorption = character.characterInventoryManager.rightWeapon.physicalBlockingDamageAbsorption;
-            character.characterStatsManager.blockingFireDamageAbsorption = character.characterInventoryManager.rightWeapon.fireBlockingDamageAbsorption;
-            character.characterStatsManager.blockingStabilityRating = character.characterInventoryManager.rightWeapon.m_iStability;
+            character.characterStatsManager.blockingPhysicalDamageAbsorption = character.characterEquipmentManager.m_CurrentHandRightWeapon.physicalBlockingDamageAbsorption;
+            character.characterStatsManager.blockingFireDamageAbsorption = character.characterEquipmentManager.m_CurrentHandRightWeapon.fireBlockingDamageAbsorption;
+            character.characterStatsManager.blockingStabilityRating = character.characterEquipmentManager.m_CurrentHandRightWeapon.m_iStability;
         }
         else if (character.isUsingLeftHand)
         {
-            character.characterStatsManager.blockingPhysicalDamageAbsorption = character.characterInventoryManager.leftWeapon.physicalBlockingDamageAbsorption;
-            character.characterStatsManager.blockingFireDamageAbsorption = character.characterInventoryManager.leftWeapon.fireBlockingDamageAbsorption;
-            character.characterStatsManager.blockingStabilityRating = character.characterInventoryManager.leftWeapon.m_iStability;
+            character.characterStatsManager.blockingPhysicalDamageAbsorption = character.characterEquipmentManager.m_CurrentHandLeftWeapon.physicalBlockingDamageAbsorption;
+            character.characterStatsManager.blockingFireDamageAbsorption = character.characterEquipmentManager.m_CurrentHandLeftWeapon.fireBlockingDamageAbsorption;
+            character.characterStatsManager.blockingStabilityRating = character.characterEquipmentManager.m_CurrentHandLeftWeapon.m_iStability;
         }
     }
 
@@ -75,7 +75,7 @@ public class CharacterCombatManager : MonoBehaviour
 
     private void SuccessfullyCastSpell()
     {
-        character.characterInventoryManager.currentSpell.SuccessfullyCastSpell(character);
+        character.characterEquipmentManager.m_CurrentHandSpell.SuccessfullyCastSpell(character);
         character.animator.SetBool("isFiringSpell", true);
     }
 
@@ -180,9 +180,9 @@ public class CharacterCombatManager : MonoBehaviour
 
                 character.characterAnimatorManager.PlayTargetAnimation("Back_Stab_01", true);
 
-                float criticalDamage = (character.characterInventoryManager.rightWeapon.criticalDamagemuiltiplier *
-                    (character.characterInventoryManager.rightWeapon.m_iPhysicalDamage +
-                    character.characterInventoryManager.rightWeapon.m_iFireDamage));
+                float criticalDamage = (character.characterEquipmentManager.m_CurrentHandRightWeapon.criticalDamagemuiltiplier *
+                    (character.characterEquipmentManager.m_CurrentHandRightWeapon.m_iPhysicalDamage +
+                    character.characterEquipmentManager.m_CurrentHandRightWeapon.m_iFireDamage));
 
                 int roundedCriticalDamage = Mathf.RoundToInt(criticalDamage);
                 enemycharacter.characterCombatManager.pendingCriticalDamage = roundedCriticalDamage;
@@ -205,9 +205,9 @@ public class CharacterCombatManager : MonoBehaviour
                 
                 character.characterAnimatorManager.PlayTargetAnimation("Riposte_01", true);
 
-                float criticalDamage = (character.characterInventoryManager.rightWeapon.criticalDamagemuiltiplier *
-                    (character.characterInventoryManager.rightWeapon.m_iPhysicalDamage +
-                    character.characterInventoryManager.rightWeapon.m_iFireDamage));
+                float criticalDamage = (character.characterEquipmentManager.m_CurrentHandRightWeapon.criticalDamagemuiltiplier *
+                    (character.characterEquipmentManager.m_CurrentHandRightWeapon.m_iPhysicalDamage +
+                    character.characterEquipmentManager.m_CurrentHandRightWeapon.m_iFireDamage));
 
                 int roundedCriticalDamage = Mathf.RoundToInt(criticalDamage);
                 enemycharacter.characterCombatManager.pendingCriticalDamage = roundedCriticalDamage;

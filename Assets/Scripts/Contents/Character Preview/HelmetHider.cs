@@ -17,23 +17,23 @@ public class HelmetHider : MonoBehaviour
         player = Managers.Object.m_MyPlayer;    
     }
 
-    public void HideEquipment(E_ArmorEquipmentType type)
+    public void HideEquipment(E_CameraShowPartType type)
     {
         switch (type)
         {
-            case E_ArmorEquipmentType.Helmet:
+            case E_CameraShowPartType.Head:
                 HideHelmet();
                 break;
-            case E_ArmorEquipmentType.Torso:
+            case E_CameraShowPartType.Chest:
                 HideTorso();
                 break;
-            case E_ArmorEquipmentType.Leggings:
+            case E_CameraShowPartType.Leg:
                 HideLeggings();
                 break;
-            case E_ArmorEquipmentType.Gauntlet:
+            case E_CameraShowPartType.Hand:
                 HideGauntlet();
                 break;
-            case E_ArmorEquipmentType.All:
+            case E_CameraShowPartType.All:
                 {
                     HideHelmet();
                     HideTorso();
@@ -46,23 +46,23 @@ public class HelmetHider : MonoBehaviour
         }
     }
 
-    public void UnHideEquipment(E_ArmorEquipmentType type)
+    public void UnHideEquipment(E_CameraShowPartType type)
     {
         switch (type)
         {
-            case E_ArmorEquipmentType.Helmet:
+            case E_CameraShowPartType.Head:
                 UnHiderHelmet();
                 break;
-            case E_ArmorEquipmentType.Torso:
+            case E_CameraShowPartType.Chest:
                 UnHiderTorso();
                 break;
-            case E_ArmorEquipmentType.Leggings:
+            case E_CameraShowPartType.Leg:
                 UnHiderLeggings();
                 break;
-            case E_ArmorEquipmentType.Gauntlet:
+            case E_CameraShowPartType.Hand:
                 UnHiderGauntlet();
                 break;
-            case E_ArmorEquipmentType.All:
+            case E_CameraShowPartType.All:
                 {
                     UnHiderHelmet();
                     UnHiderTorso();
@@ -77,10 +77,10 @@ public class HelmetHider : MonoBehaviour
 
     private void HideHelmet()
     {
-        if (player.playerInventoryManager.currentHelmetEquipment != null && player.playerInventoryManager.currentHelmetEquipment != player.playerEquipmentManager.Naked_HelmetEquipment)
+        if (player.playerEquipmentManager.m_HelmetEquipment != null && player.playerEquipmentManager.m_HelmetEquipment != player.playerEquipmentManager.Naked_HelmetEquipment)
         {
-            helmet = player.playerInventoryManager.currentHelmetEquipment;
-            player.playerInventoryManager.currentHelmetEquipment = null;
+            helmet = player.playerEquipmentManager.m_HelmetEquipment;
+            player.playerEquipmentManager.m_HelmetEquipment = null;
             player.playerEquipmentManager.EquipAllEquipmentModel();
         }
 
@@ -90,17 +90,17 @@ public class HelmetHider : MonoBehaviour
     {
         if(helmet != null && helmet != player.playerEquipmentManager.Naked_HelmetEquipment)
         {
-            player.playerInventoryManager.currentHelmetEquipment = helmet;
+            player.playerEquipmentManager.m_HelmetEquipment = helmet;
             player.playerEquipmentManager.EquipAllEquipmentModel();
         }
     }
 
     private void HideTorso()
     {
-        if (player.playerInventoryManager.currentTorsoEquipment != null && player.playerInventoryManager.currentTorsoEquipment != player.playerEquipmentManager.Naked_TorsoEquipment)
+        if (player.playerEquipmentManager.m_TorsoEquipment != null && player.playerEquipmentManager.m_TorsoEquipment != player.playerEquipmentManager.Naked_TorsoEquipment)
         {
-            torso = player.playerInventoryManager.currentTorsoEquipment;
-            player.playerInventoryManager.currentTorsoEquipment = null;
+            torso = player.playerEquipmentManager.m_TorsoEquipment;
+            player.playerEquipmentManager.m_TorsoEquipment = null;
             player.playerEquipmentManager.EquipAllEquipmentModel();
         }
 
@@ -110,17 +110,17 @@ public class HelmetHider : MonoBehaviour
     {
         if(torso != null && torso != player.playerEquipmentManager.Naked_TorsoEquipment)
         {
-            player.playerInventoryManager.currentTorsoEquipment = torso;
+            player.playerEquipmentManager.m_TorsoEquipment = torso;
             player.playerEquipmentManager.EquipAllEquipmentModel();
         }
     }
 
     private void HideLeggings()
     {
-        if (player.playerInventoryManager.currentLegEquipment != null && player.playerInventoryManager.currentLegEquipment != player.playerEquipmentManager.Naked_LegEquipment)
+        if (player.playerEquipmentManager.m_LegEquipment != null && player.playerEquipmentManager.m_LegEquipment != player.playerEquipmentManager.Naked_LegEquipment)
         {
-            leggings = player.playerInventoryManager.currentLegEquipment;
-            player.playerInventoryManager.currentLegEquipment = null;
+            leggings = player.playerEquipmentManager.m_LegEquipment;
+            player.playerEquipmentManager.m_LegEquipment = null;
             player.playerEquipmentManager.EquipAllEquipmentModel();
         }
 
@@ -130,17 +130,17 @@ public class HelmetHider : MonoBehaviour
     {
         if(leggings != null && leggings != player.playerEquipmentManager.Naked_HelmetEquipment)
         {
-            player.playerInventoryManager.currentLegEquipment = leggings;
+            player.playerEquipmentManager.m_LegEquipment = leggings;
             player.playerEquipmentManager.EquipAllEquipmentModel();
         }
     }
 
     private void HideGauntlet()
     {
-        if (player.playerInventoryManager.currentHandEquipment != null && player.playerInventoryManager.currentHandEquipment != player.playerEquipmentManager.Naked_HandEquipment)
+        if (player.playerEquipmentManager.m_HandEquipment != null && player.playerEquipmentManager.m_HandEquipment != player.playerEquipmentManager.Naked_HandEquipment)
         {
-            gantlets = player.playerInventoryManager.currentHandEquipment;
-            player.playerInventoryManager.currentHandEquipment = null;
+            gantlets = player.playerEquipmentManager.m_HandEquipment;
+            player.playerEquipmentManager.m_HandEquipment = null;
             player.playerEquipmentManager.EquipAllEquipmentModel();
         }
 
@@ -150,7 +150,7 @@ public class HelmetHider : MonoBehaviour
     {
         if(gantlets != null && helmet != player.playerEquipmentManager.Naked_HandEquipment)
         {
-            player.playerInventoryManager.currentHandEquipment = gantlets;
+            player.playerEquipmentManager.m_HandEquipment = gantlets;
             player.playerEquipmentManager.EquipAllEquipmentModel();
         }
     }
