@@ -317,7 +317,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 541625410862577791}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 574548130d618c042a2458c27824607e, type: 3}
+  m_Script: {fileID: 11500000, guid: c9c07929449e8174cbd3c354ee0cde8e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
 --- !u!1 &541625410898412974
@@ -1586,7 +1586,7 @@ GameObject:
   - component: {fileID: 541625411603623712}
   - component: {fileID: 2431900301316768404}
   m_Layer: 5
-  m_Name: InventoryLeftPanelUI
+  m_Name: InventoryItemMainUI
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1662,7 +1662,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 541625411603623726}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 0611a377a762e9f4b981b4a76b067a05, type: 3}
+  m_Script: {fileID: 11500000, guid: 43acf41c8c61df147afbb40db3434a90, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
 --- !u!1 &541625411620797010
@@ -1993,7 +1993,7 @@ MonoBehaviour:
   m_fontSizeMin: 18
   m_fontSizeMax: 72
   m_fontStyle: 0
-  m_HorizontalAlignment: 2
+  m_HorizontalAlignment: 1
   m_VerticalAlignment: 512
   m_textAlignment: 65535
   m_characterSpacing: 0

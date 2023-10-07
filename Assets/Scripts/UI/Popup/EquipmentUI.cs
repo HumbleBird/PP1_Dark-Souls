@@ -19,6 +19,7 @@ public class EquipmentUI : UI_Popup
     public ItemInformationUI m_ItemInformationUI;
     public BriefPlayerStatInformationUI m_BriefPlayerStatInformationUI;
     public ShowItemInventoryUI m_ShowItemInventoryUI;
+    public Item m_TempPrivateItem; // 인벤토리에서 아이템을 교체할 때 쓰는 것.
 
     public override bool Init()
     {

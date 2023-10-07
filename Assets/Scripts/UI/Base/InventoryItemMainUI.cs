@@ -4,20 +4,12 @@ using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class InventoryLeftPanelUI : UI_Base
+public class InventoryItemMainUI : UI_Base
 {
     enum Texts
     {
         ItemPartSubjectName, // 아이템 부문 별 이름
         ItemNameText, // 아이템 이름
-    }
-
-    enum Images
-    {
-        // Left Panel
-        ItemBasePlateIcon,
-        ItemIcon,
-        ItemSelectIcon
     }
 
     enum GameObjects
@@ -30,14 +22,12 @@ public class InventoryLeftPanelUI : UI_Base
 
     PlayerManager player;
 
-
     public override bool Init()
     {
         if (base.Init() == false)
             return false;
 
         BindText(typeof(Texts));
-        BindImage(typeof(Images));
         BindObject(typeof(GameObjects));
 
         player = Managers.Object.m_MyPlayer;
@@ -46,6 +36,11 @@ public class InventoryLeftPanelUI : UI_Base
 
 
         return true;
+    }
+
+    public void SetInfo(string itemName)
+    {
+        GetText((int)Texts.ItemNameText).text = itemName;
     }
 
     private void CreateInventorySlot(GameObject parent, int count)
@@ -71,6 +66,7 @@ public class InventoryLeftPanelUI : UI_Base
             if (i < count)
             {
                 item.SetInfo(player.playerInventoryManager.m_Items[i]);
+                item.RefreshUI();
             }
         }
     }

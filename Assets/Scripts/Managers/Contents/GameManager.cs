@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -35,12 +36,15 @@ public class GameManager
         {
             // 캐릭터 데이터 가져오기
         }
-
-
     }
 
     public void SpawnPlayer()
     {
         PlayerManager player = Managers.Object.m_MyPlayer;
+    }
+
+    public void PlayAction(Action action)
+    {
+        action.Invoke();
     }
 }

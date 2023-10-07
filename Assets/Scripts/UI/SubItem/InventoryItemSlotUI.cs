@@ -22,54 +22,36 @@ public class InventoryItemSlotUI : ItemSlotUI
     // 아이템 이미지를 선택했을 때 해당 아이템 선택지를 보여준다.
     // 장비라면 장착
     // 소울이라면 사용 등
+    // 지금은 일단 장착
     public override void ShowHowtoItem()
     {
         if (m_Item == null)
             return;
 
-        switch (m_Item.m_EItemType)
-        {
-            case Define.E_ItemType.Tool:
-                break;
-            case Define.E_ItemType.ReinforcedMaterial:
-                break;
-            case Define.E_ItemType.Valuables:
-                break;
-            case Define.E_ItemType.Magic:
-                break;
-            case Define.E_ItemType.MeleeWeapon:
-                break;
-            case Define.E_ItemType.RangeWeapon:
-                break;
-            case Define.E_ItemType.Catalyst:
-                break;
-            case Define.E_ItemType.Shield:
-                break;
-            case Define.E_ItemType.Helmet:
-                break;
-            case Define.E_ItemType.ChestArmor:
-                break;
-            case Define.E_ItemType.Gauntlets:
-                break;
-            case Define.E_ItemType.Leggings:
-                break;
-            case Define.E_ItemType.Ammo:
-                break;
-            case Define.E_ItemType.Ring:
-                break;
-            case Define.E_ItemType.Pledge:
-                break;
-            default:
-                break;
-        }
+        EquipmentItemChange();
     }
 
-    // 아이템 이미지를 클릭하면 가운데 패널에 아이템 정보를 보여준다.
+    // 장비창에서 아이템을 교체 혹은 장착하려고 함.
+    void EquipmentItemChange()
+    {
+        Managers.Game.PlayAction(() =>
+        {
+            Managers.UI.ClosePopupUI();
+            EquipmentUI eui = Managers.UI.ShowPopupUI<EquipmentUI>();
+            eui.m_TempPrivateItem = m_Item;
+            eui.m_CurrentEquipmentsUI.ChangeSlotsBindEvent();
+        });
+    }
+
+    // 아이템 이미지를 선택하면 가운데 패널에 아이템 정보를 보여준다.
     public override void ShowItemInformation(PointerEventData data)
     {
-        base.ShowItemInformation(data);
+        if (m_Item == null)
+            return;
 
+        GetImage((int)Images.ItemSelectIcon).enabled = true;
         m_InventoryUI.m_InventoryMiddleUI.ShowItemInformation(m_Item);
+        m_InventoryUI.m_InventoryLeftPanelUI.SetInfo(m_Item.itemName);
     }
 
     // 각 타입에 따른 Refresh

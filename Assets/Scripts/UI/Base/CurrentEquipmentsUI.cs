@@ -180,4 +180,13 @@ public class CurrentEquipmentsUI : UI_Base
             return;
         }
     }
+
+    public void ChangeSlotsBindEvent()
+    {
+        EquipmentSlotUI[] slots = GetComponentsInChildren<EquipmentSlotUI>();
+        foreach (EquipmentSlotUI slot in slots)
+        {
+            slot.ItemChangeFromInventoryBindEvent();
+        }
+    }
 }

@@ -74,14 +74,13 @@ public class EquipmentToInventoryShowItemSubItem : ItemSlotUI
         m_EquipmentUI.m_ShowItemInventoryUI.gameObject.SetActive(false);
     }
 
-    // 아이템 이미지를 클릭하면 가운데 패널에 아이템 정보를 보여준다.
+    // 아이템 이미지를 선택하면 가운데 패널에 아이템 정보를 보여준다.
     public override void ShowItemInformation(PointerEventData data)
     {
-        base.ShowItemInformation(data);
-
         if (m_Item == null)
             return;
 
+        GetImage((int)Images.ItemSelectIcon).enabled = true;
         m_EquipmentUI.m_ItemInformationUI.ShowItemInformation(m_Item);
         m_EquipmentUI.m_ShowItemInventoryUI.ShowItemInformation(m_Item.name);
     }

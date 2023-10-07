@@ -33,7 +33,7 @@ public class InventoryUI : UI_Popup
     }
 
     PlayerManager player;
-    public InventoryLeftPanelUI m_InventoryLeftPanelUI;
+    public InventoryItemMainUI m_InventoryLeftPanelUI;
     public ItemInformationUI m_InventoryMiddleUI;
     public BriefPlayerStatInformationUI m_InventoryRightPanel;
 
@@ -48,7 +48,7 @@ public class InventoryUI : UI_Popup
 
         GetText((int)Texts.SoulText).text = player.playerStatsManager.currentSoulCount.ToString();
 
-        m_InventoryLeftPanelUI = GetComponentInChildren<InventoryLeftPanelUI>();
+        m_InventoryLeftPanelUI = GetComponentInChildren<InventoryItemMainUI>();
         m_InventoryMiddleUI = GetComponentInChildren<ItemInformationUI>();
         m_InventoryRightPanel = GetComponentInChildren<BriefPlayerStatInformationUI>();
 

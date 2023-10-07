@@ -14,12 +14,43 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   itemIcon: {fileID: 21300000, guid: ce0b64e1e6856f842bfedc0700250ddd, type: 3}
   itemName: Boss Butucher Sword
+  itemID: 0
+  m_EItemType: 4
   modelPrefab: {fileID: 7694254933542424885, guid: 410de10278cf72842af407a2abc76282, type: 3}
   isUnarmed: 0
   weaponController: {fileID: 22100000, guid: 10f21dedf98d2174498bb58bc4091ab7, type: 2}
   weaponType: 4
-  physicalDamage: 20
-  fireDamage: 0
+  AttackType: 
+  Skill: 
+  FocusCost: 0
+  m_iRequirementStrength: 0
+  m_iRequirementDexterity: 0
+  m_iRequirementIntelligence: 0
+  m_iRequirementFaith: 0
+  m_iParameterBonusStrength: 0
+  m_iParameterBonusDexterity: 0
+  m_iParameterBonusIntelligence: 0
+  m_iParameterBonusFaith: 0
+  m_iPhysicalDamage: 0
+  m_iMagicDamage: 0
+  m_iFireDamage: 0
+  m_iLightningDamage: 0
+  m_iDarkDamage: 0
+  m_iCriticalDamage: 0
+  m_iSpellBuff: 0
+  m_iRange: 0
+  m_iPhysicalDamageReduction: 0
+  m_iMagicDamageReduction: 0
+  m_iFireDamageReduction: 0
+  m_iLightningDamageReduction: 0
+  m_iDarkDamageReduction: 0
+  m_iStability: 0
+  m_iBleeding: 0
+  m_iPoison: 0
+  m_iFrost: 0
+  m_iCurse: 0
+  m_iDurability: 0
+  m_iWeight: 0
   lightAttackDamageModifier: 1
   heavyAttackDaamgeModifier: 2
   criticalDamagemuiltiplier: 4
@@ -28,7 +59,6 @@ MonoBehaviour:
   offensivePoiseBonus: 1
   physicalBlockingDamageAbsorption: 0
   fireBlockingDamageAbsorption: 0
-  stability: 67
   baseStaminaCost: 1
   lightAttackStaminaMultiplier: 1
   heavyAttackStaminaMultiplier: 1
@@ -49,3 +79,4 @@ MonoBehaviour:
   th_tap_LT_Action: {fileID: 0}
   th_hold_LT_Action: {fileID: 0}
   weaponWhooshes: []
+  blockingNoises: []

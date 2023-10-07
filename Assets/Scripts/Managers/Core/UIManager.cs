@@ -97,7 +97,7 @@ public class UIManager
     {
 		if (_popupStack.Count == 0)
 			return;
-
+        
         if (_popupStack.Peek() != popup)
         {
             Debug.Log("Close Popup Failed!");
@@ -105,6 +105,26 @@ public class UIManager
         }
 
         ClosePopupUI();
+    }
+
+    public void ClosePopupUI<T>(string name = null) where T : UI_Popup
+    {
+        if (_popupStack.Count == 0)
+            return;
+
+        if (string.IsNullOrEmpty(name))
+            name = typeof(T).Name;
+
+        foreach (UI_Popup pop in _popupStack)
+        {
+            if(pop.name == name)
+            {
+                pop.ClosePopupUI();
+                return;
+            }
+        }
+
+        Debug.Log("Close Popup Failed!");
     }
 
     public void ClosePopupUI()
