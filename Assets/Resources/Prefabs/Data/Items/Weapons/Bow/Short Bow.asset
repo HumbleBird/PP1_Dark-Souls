@@ -14,12 +14,43 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   itemIcon: {fileID: 21300000, guid: 55b668f45eace2245bd9b55991317a72, type: 3}
   itemName: Short Bow
+  itemID: 0
+  m_EItemType: 5
   modelPrefab: {fileID: 7694254933542424885, guid: e7468f845fa35214b808b838155390e0, type: 3}
   isUnarmed: 0
   weaponController: {fileID: 22100000, guid: 22d5de4468c37da489e7bcf2fba8efb0, type: 2}
-  weaponType: 6
-  physicalDamage: 25
-  fireDamage: 0
+  weaponType: 7
+  AttackType: 
+  Skill: 
+  FocusCost: 0
+  m_iRequirementStrength: 0
+  m_iRequirementDexterity: 0
+  m_iRequirementIntelligence: 0
+  m_iRequirementFaith: 0
+  m_iParameterBonusStrength: 0
+  m_iParameterBonusDexterity: 0
+  m_iParameterBonusIntelligence: 0
+  m_iParameterBonusFaith: 0
+  m_iPhysicalDamage: 0
+  m_iMagicDamage: 0
+  m_iFireDamage: 0
+  m_iLightningDamage: 0
+  m_iDarkDamage: 0
+  m_iCriticalDamage: 0
+  m_iSpellBuff: 0
+  m_iRange: 0
+  m_iPhysicalDamageReduction: 0
+  m_iMagicDamageReduction: 0
+  m_iFireDamageReduction: 0
+  m_iLightningDamageReduction: 0
+  m_iDarkDamageReduction: 0
+  m_iStability: 0
+  m_iBleeding: 0
+  m_iPoison: 0
+  m_iFrost: 0
+  m_iCurse: 0
+  m_iDurability: 0
+  m_iWeight: 0
   lightAttackDamageModifier: 0
   heavyAttackDaamgeModifier: 0
   criticalDamagemuiltiplier: 4
@@ -28,7 +59,6 @@ MonoBehaviour:
   offensivePoiseBonus: 0
   physicalBlockingDamageAbsorption: 0
   fireBlockingDamageAbsorption: 0
-  stability: 67
   baseStaminaCost: 0
   lightAttackStaminaMultiplier: 0
   heavyAttackStaminaMultiplier: 0
@@ -49,3 +79,4 @@ MonoBehaviour:
   th_tap_LT_Action: {fileID: 0}
   th_hold_LT_Action: {fileID: 0}
   weaponWhooshes: []
+  blockingNoises: []

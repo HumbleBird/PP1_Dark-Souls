@@ -5,6 +5,11 @@ using UnityEngine;
 [CreateAssetMenu(menuName = "Items/Ring")]
 public class RingItem : Item
 {
+    RingItem()
+    {
+        m_EItemType = Define.E_ItemType.Ring;
+    }
+
     [SerializeField] StaticCharacterEffect effect;
     private StaticCharacterEffect effectClone;
 

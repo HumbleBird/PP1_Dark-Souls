@@ -7,7 +7,7 @@ public class QuickSlotsUI : UI_Base
 {
     enum Images
     {
-        QuickSlotImage,
+        ConsumableItemSlotImage,
         SpellSlotImage,
         RightHandSlotImage,
         LeftHandSlotImage
@@ -30,28 +30,28 @@ public class QuickSlotsUI : UI_Base
     public override void RefreshUI()
     {
 
-        // Quick Slot (Up Slot)
+        // Spell Slot
         if(player.playerEquipmentManager.m_CurrentHandSpell != null)
         {
-            GetImage((int)Images.QuickSlotImage).sprite = player.playerEquipmentManager.m_CurrentHandSpell.itemIcon;
-            GetImage((int)Images.QuickSlotImage).enabled = true;
-        }
-        else
-        {
-            GetImage((int)Images.QuickSlotImage).sprite = null;
-            GetImage((int)Images.QuickSlotImage).enabled = false;
-        }
-
-        // Consumable Item Slot (Down Slot)
-        if(player.playerEquipmentManager.m_CurrentHandConsumable != null)
-        {
-            GetImage((int)Images.SpellSlotImage).sprite = player.playerEquipmentManager.m_CurrentHandConsumable.itemIcon;
+            GetImage((int)Images.SpellSlotImage).sprite = player.playerEquipmentManager.m_CurrentHandSpell.itemIcon;
             GetImage((int)Images.SpellSlotImage).enabled = true;
         }
         else
         {
             GetImage((int)Images.SpellSlotImage).sprite = null;
             GetImage((int)Images.SpellSlotImage).enabled = false;
+        }
+
+        // Consumable Item Slot (Down Slot)
+        if(player.playerEquipmentManager.m_CurrentHandConsumable != null)
+        {
+            GetImage((int)Images.ConsumableItemSlotImage).sprite = player.playerEquipmentManager.m_CurrentHandConsumable.itemIcon;
+            GetImage((int)Images.ConsumableItemSlotImage).enabled = true;
+        }
+        else
+        {
+            GetImage((int)Images.ConsumableItemSlotImage).sprite = null;
+            GetImage((int)Images.ConsumableItemSlotImage).enabled = false;
         }
 
         // Right Hand Slot (Right Slot)

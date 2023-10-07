@@ -32,18 +32,27 @@ public class ShowItemInventoryUI : UI_Base
         BindText(typeof(Texts));
         BindObject(typeof(GameObjects));
 
+        GetText((int)Texts.EquipmentSlotsNameText).text = m_sItemPartSlotName;
+
+        // 슬롯 만들기
+        CreateInventorySlot(GetObject((int)GameObjects.Panel), m_E_EquipmentSlotsPartType);
+
         return true;
     }
 
     // Equipment UI를 통해서 들어 왔을 떄
     public void SetInfo(string slotPartName, E_EquipmentSlotsPartType equipmentSlotsPartsName, int SlotNum)
     {
-        GetText((int)Texts.EquipmentSlotsNameText).text = slotPartName;
+        // 슬롯 파트 이름
+        m_sItemPartSlotName = slotPartName;
 
+        // 슬롯 Num
         m_iEquipmentSlotNum = SlotNum;
 
+        // 장비 Type
         m_E_EquipmentSlotsPartType = equipmentSlotsPartsName;
-        CreateInventorySlot(GetObject((int)GameObjects.Panel), equipmentSlotsPartsName);
+
+
     }
 
     // EquipmentToInventoryShowItemSubItem에서 Pointer Down Event를 발생시켰을 때
@@ -82,10 +91,10 @@ public class ShowItemInventoryUI : UI_Base
 
                 break;
             case E_EquipmentSlotsPartType.Arrow:
-                items = player.playerInventoryManager.FindItems(i => ((RangedAmmoItem)i).ammoType == AmmoType.Arrow);
+                items = player.playerInventoryManager.FindItems(i => i.m_EItemType == E_ItemType.Ammo && ((RangedAmmoItem)i).ammoType == AmmoType.Arrow);
                 break;
             case E_EquipmentSlotsPartType.Bolt:
-                items = player.playerInventoryManager.FindItems(i => ((RangedAmmoItem)i).ammoType == AmmoType.Bolt);
+                items = player.playerInventoryManager.FindItems(i => i.m_EItemType == E_ItemType.Ammo && ((RangedAmmoItem)i).ammoType == AmmoType.Bolt);
                 break;
             case E_EquipmentSlotsPartType.Helmt:
                 items = player.playerInventoryManager.FindItems(i => i.m_EItemType == E_ItemType.Helmet);
@@ -135,6 +144,7 @@ public class ShowItemInventoryUI : UI_Base
             if (i < items.Count)
             {
                 item.SetInfo(items[i]);
+                item.RefreshUI();
             }
         }
     }

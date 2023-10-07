@@ -5,14 +5,6 @@ using UnityEngine.EventSystems;
 
 public class EquipmentToInventoryShowItemSubItem : ItemSlotUI
 {
-    enum Images
-    {
-        // Left Panel
-        ItemBasePlateIcon,
-        ItemIcon,
-        ItemSelectIcon,
-        ItemProtectIcon,
-    }
 
     EquipmentUI m_EquipmentUI;
 
@@ -25,22 +17,11 @@ public class EquipmentToInventoryShowItemSubItem : ItemSlotUI
 
         return true;
     }
-
-    // 클릭시 장착
-    // 어떠한 아이템을 플레이어의 몇 번째 슬롯에 장착시킬지 알아야 함.
-
-    public void ChangeItem()
-    {
-        if (m_Item == null)
-            return;
-
-        // 몇 번째 칸의 아이템을 플레이어의 equipment에 정착
-        // UI 닫고 열기
-    }
     
     public override void ShowHowtoItem()
     {
-        base.ShowHowtoItem();
+        if (m_Item == null)
+            return;
 
         // 아이템 교체
         PlayerManager player = Managers.Object.m_MyPlayer;
@@ -87,7 +68,9 @@ public class EquipmentToInventoryShowItemSubItem : ItemSlotUI
 
         player.playerEquipmentManager.Refresh();
 
+        // Equipment UI Refresh
         m_EquipmentUI.m_CurrentEquipmentsUI.gameObject.SetActive(true);
+        m_EquipmentUI.m_CurrentEquipmentsUI.RefreshUI();
         m_EquipmentUI.m_ShowItemInventoryUI.gameObject.SetActive(false);
     }
 
@@ -96,7 +79,26 @@ public class EquipmentToInventoryShowItemSubItem : ItemSlotUI
     {
         base.ShowItemInformation(data);
 
+        if (m_Item == null)
+            return;
+
         m_EquipmentUI.m_ItemInformationUI.ShowItemInformation(m_Item);
         m_EquipmentUI.m_ShowItemInventoryUI.ShowItemInformation(m_Item.name);
+    }
+
+    public override void RefreshUI()
+    {
+        if (m_Item != null)
+        {
+            GetImage((int)Images.ItemIcon).sprite = m_Item.itemIcon;
+            GetImage((int)Images.ItemIcon).enabled = true;
+            GetImage((int)Images.ItemBasePlateIcon).enabled = true;
+        }
+        else
+        {
+            GetImage((int)Images.ItemIcon).sprite = null;
+            GetImage((int)Images.ItemIcon).enabled = false;
+            GetImage((int)Images.ItemBasePlateIcon).enabled = false;
+        }
     }
 }

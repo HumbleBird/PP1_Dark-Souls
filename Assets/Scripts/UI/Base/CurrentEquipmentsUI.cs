@@ -112,60 +112,72 @@ public class CurrentEquipmentsUI : UI_Base
             switch (slot.m_EquipmentSlotsPartsName)
             {
                 case E_EquipmentSlotsPartType.Right_Hand_Weapon:
-                    DetailPushItems(slot, player.playerEquipmentManager.m_RightWeaponsSlots);
+                    DetailPushItems(slot, player.playerEquipmentManager.m_RightWeaponsSlots, true);
                     break;
                 case E_EquipmentSlotsPartType.Left_Hand_Weapon:
-                    DetailPushItems(slot, player.playerEquipmentManager.m_LeftWeaponsSlots);
+                    DetailPushItems(slot, player.playerEquipmentManager.m_LeftWeaponsSlots, true);
                     break;
                 case E_EquipmentSlotsPartType.Arrow:
-                    DetailPushItems(slot, player.playerEquipmentManager.m_ArrowAmmoSlots);
+                    DetailPushItems(slot, player.playerEquipmentManager.m_ArrowAmmoSlots, true);
                     break;
                 case E_EquipmentSlotsPartType.Bolt:
-                    DetailPushItems(slot, player.playerEquipmentManager.m_BoltAmmoSlots);
+                    DetailPushItems(slot, player.playerEquipmentManager.m_BoltAmmoSlots, true);
                     break;
                 case E_EquipmentSlotsPartType.Helmt:
-                    DetailPushItem(slot, player.playerEquipmentManager.m_HelmetEquipment);
+                    DetailPushItem(slot, player.playerEquipmentManager.m_HelmetEquipment, true);
                     break;
                 case E_EquipmentSlotsPartType.Chest_Armor:
-                    DetailPushItem(slot, player.playerEquipmentManager.m_TorsoEquipment);
+                    DetailPushItem(slot, player.playerEquipmentManager.m_TorsoEquipment, true);
                     break;
                 case E_EquipmentSlotsPartType.Gantlets:
-                    DetailPushItem(slot, player.playerEquipmentManager.m_HandEquipment);
+                    DetailPushItem(slot, player.playerEquipmentManager.m_HandEquipment, true);
                     break;
                 case E_EquipmentSlotsPartType.Leggings:
-                    DetailPushItem(slot, player.playerEquipmentManager.m_LegEquipment);
+                    DetailPushItem(slot, player.playerEquipmentManager.m_LegEquipment, true);
                     break;
                 case E_EquipmentSlotsPartType.Ring:
-                    DetailPushItems(slot, player.playerEquipmentManager.m_RingSlots);
+                    DetailPushItems(slot, player.playerEquipmentManager.m_RingSlots, true);
                     break;
                 case E_EquipmentSlotsPartType.Consumable:
-                    DetailPushItems(slot, player.playerEquipmentManager.m_ConsumableItemSlots);
+                    DetailPushItems(slot, player.playerEquipmentManager.m_ConsumableItemSlots, true);
                     break;
                 case E_EquipmentSlotsPartType.Pledge:
-                    DetailPushItem(slot, player.playerEquipmentManager.m_CurrentPledge);
+                    DetailPushItem(slot, player.playerEquipmentManager.m_CurrentPledge, true);
                     break;
             }
         }
     }
 
-    void DetailPushItems(EquipmentSlotUI slotUI, Item[] playerEquipmentItems)
+    void DetailPushItems(EquipmentSlotUI slotUI, Item[] playerEquipmentItems, bool isRefresh = false)
     {
         for (int i = 0; i < playerEquipmentItems.Length; i++)
         {
             if(playerEquipmentItems[slotUI.m_iSlotNum] != null)
             {
                 slotUI.SetInfo(playerEquipmentItems[slotUI.m_iSlotNum]);
+
+                if (isRefresh == true)
+                {
+                    slotUI.RefreshUI();
+
+                }
                 return;
             }
         }
     }
 
-    void DetailPushItem(EquipmentSlotUI slotUI, Item playerEquipmentItems)
+    void DetailPushItem(EquipmentSlotUI slotUI, Item playerEquipmentItems, bool isRefresh = false)
     {
         if (playerEquipmentItems != null)
         {
             slotUI.SetInfo(playerEquipmentItems);
-                return;
+
+            if (isRefresh == true)
+            {
+                slotUI.RefreshUI();
+
+            }
+            return;
         }
     }
 }

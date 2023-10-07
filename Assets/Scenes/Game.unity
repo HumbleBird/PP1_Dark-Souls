@@ -94735,6 +94735,10 @@ PrefabInstance:
       propertyPath: m_AnchorMax.y
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 5605357063501757778, guid: 6e25b484b3bb3814db987c6f6444f4cd, type: 3}
+      propertyPath: m_Name
+      value: ConsumableItemSlotImage
+      objectReference: {fileID: 0}
     - target: {fileID: 7146991833348221194, guid: 6e25b484b3bb3814db987c6f6444f4cd, type: 3}
       propertyPath: m_AnchorMax.x
       value: 0
@@ -94742,6 +94746,10 @@ PrefabInstance:
     - target: {fileID: 7146991833348221194, guid: 6e25b484b3bb3814db987c6f6444f4cd, type: 3}
       propertyPath: m_AnchorMax.y
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7146991833520195354, guid: 6e25b484b3bb3814db987c6f6444f4cd, type: 3}
+      propertyPath: m_Name
+      value: Consumable Item Slot
       objectReference: {fileID: 0}
     - target: {fileID: 7219483554172045778, guid: 6e25b484b3bb3814db987c6f6444f4cd, type: 3}
       propertyPath: m_Pivot.x
@@ -97923,6 +97931,54 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 7888674121781100874, guid: f2364dbd084da4c48bb002f14c888e58, type: 3}
+      propertyPath: m_Items.Array.size
+      value: 11
+      objectReference: {fileID: 0}
+    - target: {fileID: 7888674121781100874, guid: f2364dbd084da4c48bb002f14c888e58, type: 3}
+      propertyPath: m_Items.Array.data[0]
+      value: 
+      objectReference: {fileID: 11400000, guid: 48e75f5a988fd65469bab7cd58a33b5c, type: 2}
+    - target: {fileID: 7888674121781100874, guid: f2364dbd084da4c48bb002f14c888e58, type: 3}
+      propertyPath: m_Items.Array.data[1]
+      value: 
+      objectReference: {fileID: 11400000, guid: 345d66b9b13601740905041d4fcf5c76, type: 2}
+    - target: {fileID: 7888674121781100874, guid: f2364dbd084da4c48bb002f14c888e58, type: 3}
+      propertyPath: m_Items.Array.data[2]
+      value: 
+      objectReference: {fileID: 11400000, guid: 7c4a0d900189cd748ba634ec09e9a8f5, type: 2}
+    - target: {fileID: 7888674121781100874, guid: f2364dbd084da4c48bb002f14c888e58, type: 3}
+      propertyPath: m_Items.Array.data[3]
+      value: 
+      objectReference: {fileID: 11400000, guid: 80e4c0cd2bd972d4dba3828826b36b35, type: 2}
+    - target: {fileID: 7888674121781100874, guid: f2364dbd084da4c48bb002f14c888e58, type: 3}
+      propertyPath: m_Items.Array.data[4]
+      value: 
+      objectReference: {fileID: 11400000, guid: c366cbf2bcc1a0144a1e21b313bba1be, type: 2}
+    - target: {fileID: 7888674121781100874, guid: f2364dbd084da4c48bb002f14c888e58, type: 3}
+      propertyPath: m_Items.Array.data[5]
+      value: 
+      objectReference: {fileID: 11400000, guid: 24a4e7211d2165b4b85c891c62082805, type: 2}
+    - target: {fileID: 7888674121781100874, guid: f2364dbd084da4c48bb002f14c888e58, type: 3}
+      propertyPath: m_Items.Array.data[6]
+      value: 
+      objectReference: {fileID: 11400000, guid: c366cbf2bcc1a0144a1e21b313bba1be, type: 2}
+    - target: {fileID: 7888674121781100874, guid: f2364dbd084da4c48bb002f14c888e58, type: 3}
+      propertyPath: m_Items.Array.data[7]
+      value: 
+      objectReference: {fileID: 11400000, guid: c7963e088a06f74478bd8375ab885623, type: 2}
+    - target: {fileID: 7888674121781100874, guid: f2364dbd084da4c48bb002f14c888e58, type: 3}
+      propertyPath: m_Items.Array.data[8]
+      value: 
+      objectReference: {fileID: 11400000, guid: 1614219e8d659ea4ca5ab8011ad5a67b, type: 2}
+    - target: {fileID: 7888674121781100874, guid: f2364dbd084da4c48bb002f14c888e58, type: 3}
+      propertyPath: m_Items.Array.data[9]
+      value: 
+      objectReference: {fileID: 11400000, guid: c3934700670d4784d9fd70c0da2708c6, type: 2}
+    - target: {fileID: 7888674121781100874, guid: f2364dbd084da4c48bb002f14c888e58, type: 3}
+      propertyPath: m_Items.Array.data[10]
+      value: 
+      objectReference: {fileID: 11400000, guid: af58329a590b58043bbd92298063ed42, type: 2}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: f2364dbd084da4c48bb002f14c888e58, type: 3}
 --- !u!1 &6272312895276140487

@@ -6,7 +6,8 @@ using UnityEngine;
 public class PlayerInventoryManager : MonoBehaviour
 {
     //public Dictionary<int, Item> m_dicItem { get; } = new Dictionary<int, Item>();
-    public List<Item> m_Items { get; } = new List<Item>();
+    //public List<Item> m_Items { get; } = new List<Item>();
+    public List<Item> m_Items  = new List<Item>();
 
     public void Add(Item item)
     {

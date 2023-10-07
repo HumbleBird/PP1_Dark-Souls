@@ -89,6 +89,7 @@ public class InputHandler : MonoBehaviour
 
             inputActions.PlayerQuickSlots.DPadRight.performed += i => d_Pad_Right = true;
             inputActions.PlayerQuickSlots.DPadLeft.performed += i => d_Pad_Left = true;
+            inputActions.PlayerQuickSlots.DPadDown.performed += i => d_Pad_Down = true;
 
             inputActions.PlayerActions.A.performed += i => a_Input = true;
             inputActions.PlayerActions.X.performed += i => x_Input = true;
@@ -382,9 +383,15 @@ public class InputHandler : MonoBehaviour
         {
             player.playerEquipmentManager.ChangeCurrentEquipmentToNextNumSlotEquipment(1);
         }
-        else if (d_Pad_Left)
+
+        if (d_Pad_Left)
         {
             player.playerEquipmentManager.ChangeCurrentEquipmentToNextNumSlotEquipment(0);
+        }
+
+        if (d_Pad_Down)
+        {
+            player.playerEquipmentManager.ChangeCurrentEquipmentToNextNumSlotEquipment(2);
         }
     }
 

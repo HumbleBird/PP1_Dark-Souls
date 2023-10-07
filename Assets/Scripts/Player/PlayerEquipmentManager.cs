@@ -42,8 +42,10 @@ public class PlayerEquipmentManager : CharacterEquipmentManager
     float poisonResistance = 0;
     float totalEquipmentLoad = 0;
 
-    private void Awake()
+    protected override void Awake()
     {
+        base.Awake();
+
         player = GetComponent<PlayerManager>();
 
     }
@@ -65,6 +67,9 @@ public class PlayerEquipmentManager : CharacterEquipmentManager
         poisonResistance = 0;
         totalEquipmentLoad = 0;
 
+        // Weapon
+        // Todo
+
         // Helm
         HeadItemEquip();
 
@@ -83,6 +88,8 @@ public class PlayerEquipmentManager : CharacterEquipmentManager
         // Weapon
 
     }
+
+    // 나중에 외형이랑 능력치 적용은 따로 부리하기
 
     private void ModelChangerUnEquipAllItem()
     {
@@ -585,21 +592,27 @@ public class PlayerEquipmentManager : CharacterEquipmentManager
         // 현재 인덱스 번호를 가지고 정보 업데이트.
 
         // Right Weapon
-        if (m_LeftWeaponsSlots[m_iCurrentRightWeaponIndex] != null)
-            character.characterWeaponSlotManager.LoadWeaponOnSlot(m_RightWeaponsSlots[m_iCurrentRightWeaponIndex], false);
+        if (m_RightWeaponsSlots[m_iCurrentRightWeaponIndex] != null)
+        {
+            m_CurrentHandRightWeapon = m_RightWeaponsSlots[m_iCurrentRightWeaponIndex];
+            player.playerWeaponSlotManager.LoadWeaponOnSlot(m_RightWeaponsSlots[m_iCurrentRightWeaponIndex], false);
+        }
         else
         {
-            m_CurrentHandRightWeapon = character.characterWeaponSlotManager.unarmWeapon;
-            character.characterWeaponSlotManager.LoadWeaponOnSlot(character.characterWeaponSlotManager.unarmWeapon, false);
+            m_CurrentHandRightWeapon = player.playerWeaponSlotManager.unarmWeapon;
+            player.playerWeaponSlotManager.LoadWeaponOnSlot(player.playerWeaponSlotManager.unarmWeapon, false);
         }
 
         // Left Weapon
         if (m_LeftWeaponsSlots[m_iCurrentLeftWeaponIndex] != null)
-            character.characterWeaponSlotManager.LoadWeaponOnSlot(m_LeftWeaponsSlots[m_iCurrentLeftWeaponIndex], true);
+        {
+            m_CurrentHandLeftWeapon = m_LeftWeaponsSlots[m_iCurrentLeftWeaponIndex];
+            player.playerWeaponSlotManager.LoadWeaponOnSlot(m_LeftWeaponsSlots[m_iCurrentLeftWeaponIndex], true);
+        }
         else
         {
-            m_CurrentHandLeftWeapon = character.characterWeaponSlotManager.unarmWeapon;
-            character.characterWeaponSlotManager.LoadWeaponOnSlot(character.characterWeaponSlotManager.unarmWeapon, true);
+            m_CurrentHandLeftWeapon = player.playerWeaponSlotManager.unarmWeapon;
+            player.playerWeaponSlotManager.LoadWeaponOnSlot(player.playerWeaponSlotManager.unarmWeapon, true);
         }
 
         // Current Consumable Item
@@ -608,12 +621,10 @@ public class PlayerEquipmentManager : CharacterEquipmentManager
         {
             m_CurrentHandConsumable = m_ConsumableItemSlots[m_iCurrentConsumableItemndex];
             player.m_GameUIManager.m_HUDUI.quickSlotsUI.RefreshUI();
-
         }
         else
         {
             m_CurrentHandConsumable = null;
-            character.characterWeaponSlotManager.LoadWeaponOnSlot(character.characterWeaponSlotManager.unarmWeapon, false);
             player.m_GameUIManager.m_HUDUI.quickSlotsUI.RefreshUI();
         }
         // Spell Item

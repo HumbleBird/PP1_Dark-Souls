@@ -51,7 +51,7 @@ public class CharacterEquipmentManager : MonoBehaviour
     public int m_iCurrentAmmoBoltIndex = 0;
     public int m_iCurrentConsumableItemndex = 0;
 
-    private void Awake()
+    protected virtual void Awake()
     {
         character = GetComponent<CharacterManager>();
     }
