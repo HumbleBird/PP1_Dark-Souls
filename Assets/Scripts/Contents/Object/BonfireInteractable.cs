@@ -15,8 +15,10 @@ public class BonfireInteractable : Interactable
     public ParticleSystem fireFX;
     public AudioClip bonfireActivationSoundFX;
 
-    private void Awake()
+    protected override void Awake()
     {
+        base.Awake();
+
         if(hasBeenActivated)
         {
             fireFX.gameObject.SetActive(true);
@@ -27,12 +29,11 @@ public class BonfireInteractable : Interactable
         {
             interactableText = "Light Bonfire";
         }
+
     }
 
     public override void Interact(PlayerManager playermanager)
     {
-        Debug.Log("Bonfire Interactecd with");
-
         if(hasBeenActivated)
         {
             // 지역 이동ㅈ
@@ -40,7 +41,7 @@ public class BonfireInteractable : Interactable
         else
         {
             playermanager.playerAnimatorManager.PlayTargetAnimation("Bonfire_Activate", true);
-            Managers.UI.ShowPopupUI<BonfireLitPopupUI>();
+            Managers.Resource.Instantiate("UI/Popup/BonfireLitPopupUI");
             hasBeenActivated = true;
             interactableText = "Rest";
             activationFX.gameObject.SetActive(true);

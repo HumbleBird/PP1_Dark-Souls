@@ -92,6 +92,7 @@ public class Define
 
     #region Battle
 
+
     public enum EncumbranceLevel
     {
         Light,
@@ -258,6 +259,12 @@ public class Define
     #endregion
 
     #region Other
+
+    public enum E_TeamId
+    {
+        Player = 0,
+        Monster = 1,
+    }
 
     public enum E_RandomSoundType
     {

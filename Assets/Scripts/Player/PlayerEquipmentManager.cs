@@ -52,7 +52,7 @@ public class PlayerEquipmentManager : CharacterEquipmentManager
 
     private void Start()
     {
-        player.characterStatsManager.CalculateAndSetMaxEquipload();
+        player.playerStatsManager.CalculateAndSetMaxEquipload();
 
         Naked_HelmetEquipment.m_HelmEquipmentItemName = "0";
 
@@ -581,7 +581,7 @@ public class PlayerEquipmentManager : CharacterEquipmentManager
                 }
             }
 
-            player.m_GameUIManager.m_HUDUI.quickSlotsUI.RefreshUI();
+            player.m_GameUIManager.quickSlotsUI.RefreshUI();
 
         }
 
@@ -620,12 +620,12 @@ public class PlayerEquipmentManager : CharacterEquipmentManager
         if (m_ConsumableItemSlots[m_iCurrentConsumableItemndex] != null)
         {
             m_CurrentHandConsumable = m_ConsumableItemSlots[m_iCurrentConsumableItemndex];
-            player.m_GameUIManager.m_HUDUI.quickSlotsUI.RefreshUI();
+            player.m_GameUIManager.quickSlotsUI.RefreshUI();
         }
         else
         {
             m_CurrentHandConsumable = null;
-            player.m_GameUIManager.m_HUDUI.quickSlotsUI.RefreshUI();
+            player.m_GameUIManager.quickSlotsUI.RefreshUI();
         }
         // Spell Item
     }

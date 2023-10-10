@@ -84,8 +84,12 @@ public class CharacterCombatManager : MonoBehaviour
         if (character.isInteracting)
             return;
 
-        if (character.characterStatsManager.currentStamina <= 0)
-            return;
+        PlayerManager player = character as PlayerManager;
+        if(player != null)
+        {
+            if (player.playerStatsManager.currentStamina <= 0)
+                return;
+        }
 
         RaycastHit hit;
 
@@ -95,8 +99,6 @@ public class CharacterCombatManager : MonoBehaviour
             CharacterManager enemyCharacter = hit.transform.GetComponent<CharacterManager>();
             Vector3 directionFromChracterToEnemy = transform.position - enemyCharacter.transform.position;
             float dotValue = Vector3.Dot(directionFromChracterToEnemy, enemyCharacter.transform.forward);
-
-            Debug.Log("Current Dot value is " + dotValue);
 
             if(enemyCharacter.canBeRiposted)
             {
@@ -139,7 +141,6 @@ public class CharacterCombatManager : MonoBehaviour
             transform.parent = characterPerformingRiposte.characterCombatManager.ripostedReceiverTransform;
             transform.localPosition = characterPerformingRiposte.characterCombatManager.ripostedReceiverTransform.localPosition;
             transform.parent = null;
-            Debug.Log("Running corountine");
             yield return new WaitForSeconds(0.05f);
         }
     }

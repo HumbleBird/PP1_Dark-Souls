@@ -52,17 +52,21 @@ public class TakeBlockedDamageEffect : CharacterEffect
         }
         else
         {
-            if(character.characterStatsManager.currentStamina <= 0)
+            PlayerManager player = character as PlayerManager;
+            if (player != null)
             {
-                character.characterAnimatorManager.PlayTargetAnimation("Guard_Break_01", true);
-                character.canBeRiposted = true;
-                //character.characterSoundFXManager.PlayGuardBreakSound();
-                character.isBlocking = false;
-            }
-            else
-            {
-                character.characterAnimatorManager.PlayTargetAnimation(blockAnimation, true);
-                character.isAttacking = false;
+                if (player.playerStatsManager.currentStamina <= 0)
+                {
+                    player.playerAnimatorManager.PlayTargetAnimation("Guard_Break_01", true);
+                    player.canBeRiposted = true;
+                    //player.playerSoundFXManager.PlayGuardBreakSound();
+                    player.isBlocking = false;
+                }
+                else
+                {
+                    player.playerAnimatorManager.PlayTargetAnimation(blockAnimation, true);
+                    player.isAttacking = false;
+                }
             }
         }
     }
@@ -122,7 +126,12 @@ public class TakeBlockedDamageEffect : CharacterEffect
     {
         float staminaDamageAbsorption = staminaDamage * (character.characterStatsManager.blockingStabilityRating / 100);
         float staminaDamageAfterAbsorption = staminaDamage - staminaDamageAbsorption;
-        character.characterStatsManager.currentStamina -= staminaDamageAfterAbsorption;
+
+        PlayerManager player = character as PlayerManager;
+        if (player != null)
+        {
+            player.playerStatsManager.currentStamina -= staminaDamageAfterAbsorption;
+        }
     }
 
     private void PlayBlockDamageAnimation(CharacterManager character)

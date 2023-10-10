@@ -7,8 +7,13 @@ public class ChargeAttackActon : ItemAction
 {
     public override void PerformAction(CharacterManager character)
     {
-        if (character.characterStatsManager.currentStamina <= 0)
-            return;
+
+        PlayerManager player = character as PlayerManager;
+        if (player != null)
+        {
+            if (player.playerStatsManager.currentStamina <= 0)
+                return;
+        }
 
 
         character.characterAnimatorManager.EraseHandIKForWeapon();

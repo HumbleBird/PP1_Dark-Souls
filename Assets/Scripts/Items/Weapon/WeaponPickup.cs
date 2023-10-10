@@ -72,10 +72,10 @@ public class WeaponPickup : Interactable
         playerAnimatorManager.PlayTargetAnimation("Pick Up Item", true);
         playerInventoryManager.Add(weapon);
 
-        playerManager.m_GameUIManager.m_InteractablePopupUI.m_InteractionText.gameObject.SetActive(false);
-        playerManager.m_GameUIManager.m_InteractablePopupUI.m_ItemText.gameObject.SetActive(true);
-        playerManager.m_GameUIManager.m_InteractablePopupUI.m_ItemText.text = weapon.itemName;
-        playerManager.m_GameUIManager.m_InteractablePopupUI.m_ItemImage.sprite = weapon.itemIcon;
+        Managers.GameUI.m_InteractablePopupUI.m_InteractionText.gameObject.SetActive(false);
+        Managers.GameUI.m_InteractablePopupUI.m_ItemText.gameObject.SetActive(true);
+        Managers.GameUI.m_InteractablePopupUI.m_ItemText.text = weapon.itemName;
+        Managers.GameUI.m_InteractablePopupUI.m_ItemImage.sprite = weapon.itemIcon;
 
         Destroy(gameObject);
 

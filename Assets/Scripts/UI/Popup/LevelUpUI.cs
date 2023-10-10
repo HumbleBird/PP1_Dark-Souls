@@ -369,15 +369,15 @@ public class LevelUpUI : UI_Popup
         // 특성 파생 효과 업데이트
 
         // Vigor 생명력. 최대 생명력이 오름
-        playerManager.playerStatsManager.maxHealth = playerManager.playerStatsManager.SetMaxHealthFromHealthLevel();
+        playerManager.playerStatsManager.maxHealth = playerManager.playerStatsManager.SetMaxHealth();
         playerManager.playerStatsManager.currentHealth = playerManager.playerStatsManager.maxHealth;
 
         // Attunement 집중력. 최대 FP가 오름
-        playerManager.playerStatsManager.maxfocusPoint = playerManager.playerStatsManager.SetMaxfocusPointsFromStaminaLevel();
+        playerManager.playerStatsManager.maxfocusPoint = playerManager.playerStatsManager.SetMaxfocusPoints();
         playerManager.playerStatsManager.currentFocusPoints = playerManager.playerStatsManager.maxfocusPoint;
 
         // Endurance 지구력. 최대 스테미너가 오름
-        playerManager.playerStatsManager.maxStamina = playerManager.playerStatsManager.SetMaxStaminaFromStaminaLevel();
+        playerManager.playerStatsManager.maxStamina = playerManager.playerStatsManager.SetMaxStamina();
         playerManager.playerStatsManager.currentStamina = playerManager.playerStatsManager.maxStamina;
 
         // Vitality 체력. 장비중량과 물리 방어력, 독 내성이 오름
@@ -400,7 +400,7 @@ public class LevelUpUI : UI_Popup
 
         // 소울 비용 계산
         playerManager.playerStatsManager.currentSoulCount -= m_iRequiredSouls;
-        playerManager.m_GameUIManager.m_HUDUI.m_textSoulCount.text = playerManager.playerStatsManager.currentSoulCount.ToString();
+        playerManager.m_GameUIManager.m_textSoulCount.text = playerManager.playerStatsManager.currentSoulCount.ToString();
         m_iRequiredSouls = 0;
 
         // Celar 

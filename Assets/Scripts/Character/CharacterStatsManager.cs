@@ -13,52 +13,16 @@ public class CharacterStatsManager : MonoBehaviour
     [Header("Team I.D")]
     public int teamIDNumber = 0;
 
-    [Header("CHARACTER LEVEL")]
-    public int playerLevel;
     public int currentSoulCount = 0;
 
-    [Header("Character Attributes Stat")]
-    public int m_iVigorLevel        = 10    ; // 생명력. 최대 생명력이 오름
-    public int m_iAttunementLevel   = 10    ; // 집중력. 최대 FP가 오름
-    public int m_iEnduranceLevel    = 10    ; // 지구력. 최대 스테미너가 오름
-    public int m_iVitalityLevel     = 10    ; // 체력. 장비중량과 물리 방어력, 독 내성이 오름
-    public int m_iStrengthLevel     = 10    ; // 근력. 근력 보정을 받는 무기의 공격력과 화염 내성, 물리 방어력을 상승, 손에 든 장비를 양손잡기하면 현 스탯의 1.5배로 계산
-    public int m_iDexterityLevel    = 10    ; // 기량. 기량 보정을 받는 무기의 공격력이 상승
-    public int m_iIntelligenceLevel = 10    ; // 지성. 마술과 주술의 위력이 상승, 마력 방어력이 오름
-    public int m_iFaithLevel        = 10    ; // 신앙. 기적과 주술의 위력이 상승, 어둠 방어력이 오름
-    public int m_iLuckLevel         = 10    ; // 운. 아이템의 발견율과 속성 내성치가 상승함.
 
+    
     [Header("Character Base Power")]
     // HP
     public int maxHealth;
     public int currentHealth;
 
-    // FP
-    public float maxfocusPoint;
-    public float currentFocusPoints;
-
-    // Stamina
-    public float maxStamina;
-    public float currentStamina;
-
-    // Equip Load
-    public float currentEquipLoad = 0;
-    public float maxEquipLoad = 0;
-    public EncumbranceLevel encumbranceLevel;
-
-    // Poise
-    public int poiseLevel         = 10;
-
-    // Item Discovery
-    public int m_iItemDiscovery = 10;
-
-    [Header("Character Attack Power")]
-    public int m_iRWeapon1;
-    public int m_iRWeapon2;
-    public int m_iRWeapon3;
-    public int m_iLWeapon1;
-    public int m_iLWeapon2;
-    public int m_iLWeapon3;
+    
 
     [Header("Character Defense")]
     public float physicalDamageAbsorptionHead;
@@ -122,7 +86,6 @@ public class CharacterStatsManager : MonoBehaviour
     protected virtual void Start()
     {
         totalPoiseDefence = armorPoiseBonus;
-        //CalculateAndSetMaxEquipload();
     }
 
     public virtual void TakeDamageNoAnimation(int damage, int fireDamage)
@@ -161,95 +124,14 @@ public class CharacterStatsManager : MonoBehaviour
 
     public virtual void DeductStamina(float staminaToDeduct)
     {
-        currentStamina -= staminaToDeduct;
     }
 
-    public int SetMaxHealthFromHealthLevel()
+    public virtual int SetMaxHealth()
     {
-        maxHealth = m_iVigorLevel * 10;
-        return maxHealth;
-    }
+        // 플레이어는 vigorlevel에 따라 결정
 
-    public float SetMaxStaminaFromStaminaLevel()
-    {
-        maxStamina = m_iEnduranceLevel * 10;
-        return maxStamina;
-    }
-
-    public float SetMaxfocusPointsFromStaminaLevel()
-    {
-        maxfocusPoint = m_iAttunementLevel * 10;
-        return maxfocusPoint;
-    }
-
-    public void CalculateAndSetMaxEquipload()
-    {
-        float totalEquipLoad = 40;
-
-        for (int i = 0; i < m_iEnduranceLevel; i++)
-        {
-            if(i < 25)
-            {
-                totalEquipLoad += 1.2f;
-            }
-            if(i >= 25 && i <= 50)
-            {
-                totalEquipLoad += 1.4f;
-
-            }
-            if (i > 50)
-            {
-                totalEquipLoad += 1f;
-
-            }
-        }
-
-        maxEquipLoad = totalEquipLoad;
-    }
-
-    public void CaculateAndSetCurrentEquipLoad(float equipLoad)
-    {
-        currentEquipLoad = equipLoad;
-
-        encumbranceLevel = EncumbranceLevel.Light;
-
-        if(currentEquipLoad > (maxEquipLoad * 0.3f))
-        {
-            encumbranceLevel = EncumbranceLevel.Medium;
-        }
-        if(currentEquipLoad > (maxEquipLoad * 0.7f))
-        {
-            encumbranceLevel = EncumbranceLevel.Heavy;
-        }
-        if(currentEquipLoad > (maxEquipLoad))
-        {
-            encumbranceLevel = EncumbranceLevel.Overloaded;
-        }
-    }
-
-    public void CalculateStrength()
-    {
-
-    }
-
-    public void CalculateDexterity()
-    {
-
-    }
-
-    public void CalculateIntelligence()
-    {
-
-    }
-
-    public void CalculateFaith()
-    {
-
-    }
-
-    public void CalculateLuck()
-    {
-
+        // 그 외는 전부 테이블에서 가져오기
+        return 0;
     }
 
     public virtual void HealCharacter(int healAmount)
@@ -265,5 +147,13 @@ public class CharacterStatsManager : MonoBehaviour
     public virtual void UpdateUI()
     {
 
+    }
+
+    public virtual void Dead()
+    {
+        // 몬스터가 죽었다면 기본적으로 소울 및 아이템 추가
+        // 보스 : 보스 관련 이벤트 실행, 화톳불 생성 가능
+
+        // 플레이어 : 게임 매니저에서 모든 몬스터 재배치, 소울 잃어버림, 시작 지점 스폰, 현재 모든 체력 및 기타 회복
     }
 }

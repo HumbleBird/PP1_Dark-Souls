@@ -14,12 +14,14 @@ public class Managers : MonoBehaviour
     ObjectManager _object = new ObjectManager();
     GameManager _game = new GameManager();
     CameraManager _camera = new CameraManager();
+    GameUIManager _gameUI = new GameUIManager();
 
     public static WorldSaveGameManager Save { get { return Instance._save; } }
     public static WorldItemDataBase ItemData { get { return Instance._itemData; } }
     public static ObjectManager Object { get { return Instance._object; } }
     public static GameManager Game { get { return Instance._game; } }
     public static CameraManager Camera { get { return Instance._camera; } }
+    public static GameUIManager GameUI { get { return Instance._gameUI; } }
 
     #endregion
 

@@ -143,6 +143,8 @@ public class InputHandler : MonoBehaviour
         HandleTwoHandInput();
         HandleUseConsumableInput();
         HandleQuedInput();
+
+        HandleAInput();
     }
 
     private void HandleMoveInput()
@@ -175,6 +177,7 @@ public class InputHandler : MonoBehaviour
     {
         if (b_Input)
         {
+
             rollInputTimer += Time.deltaTime;
 
             if(player.playerStatsManager.currentStamina <= 0 )
@@ -339,7 +342,7 @@ public class InputHandler : MonoBehaviour
             if (player.isAiming)
             {
                 player.isAiming = false;
-                player.m_GameUIManager.m_HUDUI.m_goCrosshair.SetActive(false);
+                player.m_GameUIManager.m_goCrosshair.SetActive(false);
                 player.cameraHandler.ResetAimCameraRotations();
             }
 
@@ -418,13 +421,13 @@ public class InputHandler : MonoBehaviour
             if(selectFlag)
             {
                 Managers.UI.ShowPopupUI<SelectUI>();
-                player.m_GameUIManager.m_HUDUI.gameObject.SetActive(false);
+                player.m_GameUIManager.gameObject.SetActive(false);
             }
             // 선택 창을 끄는 거라면
             else
             {
                 Managers.UI.ClosePopupUI();
-                player.m_GameUIManager.m_HUDUI.gameObject.SetActive(true);
+                player.m_GameUIManager.gameObject.SetActive(true);
             }
         }
     }
@@ -474,13 +477,13 @@ public class InputHandler : MonoBehaviour
 
     private void HandleTwoHandInput()
     {
-        if(y_Input)
+        if (y_Input)
         {
             y_Input = false;
 
             twoHandFlag = !twoHandFlag;
 
-            if(twoHandFlag)
+            if (twoHandFlag)
             {
                 player.isTwoHandingWeapon = true;
                 player.playerWeaponSlotManager.LoadWeaponOnSlot(player.playerEquipmentManager.m_CurrentHandRightWeapon, false);
@@ -495,6 +498,8 @@ public class InputHandler : MonoBehaviour
 
             }
         }
+
+        player.canRoll = true;
     }
 
     private void HandleUseConsumableInput()
@@ -502,7 +507,11 @@ public class InputHandler : MonoBehaviour
         if(x_Input)
         {
             x_Input = false;
-            player.playerEquipmentManager.m_CurrentHandConsumable.AttemptToConsumeItem(player);
+
+            if(player.playerEquipmentManager.m_CurrentHandConsumable != null)
+            {
+                player.playerEquipmentManager.m_CurrentHandConsumable.AttemptToConsumeItem(player);
+            }
         }
     }
 
@@ -549,6 +558,22 @@ public class InputHandler : MonoBehaviour
 
         // if Qued Lb Input => Tap LB Input = true;
         // if Qued LT Input => Tap LT Input = true;
+    }
+
+    private void HandleAInput()
+    {
+        // UI 선택
+
+        // Interactble
+        if (a_Input)
+        {
+            if(Managers.Game.m_Interactable != null)
+            {
+                Managers.Game.m_Interactable.Interact(player);
+            }
+        }
+
+        // Inventory, Equipment, Item ...
     }
 }
 

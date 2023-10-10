@@ -19,7 +19,7 @@ public class CameraHandler : MonoBehaviour
     private Vector3 cameraFollwVelocity = Vector3.zero;
 
     public LayerMask ignoreLayers;
-    public LayerMask enviromentLayer;
+    public int CharacterLayer = 9;
 
     public static CameraHandler singleton;
 
@@ -68,8 +68,6 @@ public class CameraHandler : MonoBehaviour
 
     private void Start()
     {
-        enviromentLayer = LayerMask.NameToLayer("Enviroment");
-
         if(Managers.Object.m_MyPlayer != null)
         {
             playerManager = Managers.Object.m_MyPlayer;
@@ -249,7 +247,7 @@ public class CameraHandler : MonoBehaviour
                     {
                         Debug.DrawLine(playerManager.lockOnTransform.position, character.lockOnTransform.position);
 
-                        if(hit.transform.gameObject.layer == enviromentLayer)
+                        if(hit.collider.gameObject.layer != CharacterLayer)
                         {
 
                         }

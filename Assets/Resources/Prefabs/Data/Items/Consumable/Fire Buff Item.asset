@@ -12,13 +12,20 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 06cdf7b42121e3746a8531968a26dc80, type: 3}
   m_Name: Fire Buff Item
   m_EditorClassIdentifier: 
-  itemIcon: {fileID: 0}
+  itemIcon: {fileID: 21300000, guid: 0314f2775114a274781118b5258fe4cd, type: 3}
   itemName: Fire Buff
   itemID: 0
+  m_EItemType: 0
+  m_ToolType: 0
   maxItemAmount: 10
   currentItemAmount: 10
   itemModel: {fileID: 0}
   consumeAnimation: Buff_Weapon_01
   isInteracting: 1
+  m_sItemDescription: 
+  m_iParameterBonusStrength: 0
+  m_iParameterBonusDexterity: 0
+  m_iParameterBonusIntelligence: 0
+  m_iParameterBonusFaith: 0
   weaponBuffEffect: {fileID: 11400000, guid: e8c7558b445ee714896f7134c3ec47b0, type: 2}
   buffTriggerSound: {fileID: 8300000, guid: c4ac1dae86efd2f4d9019f5924fe1b77, type: 3}

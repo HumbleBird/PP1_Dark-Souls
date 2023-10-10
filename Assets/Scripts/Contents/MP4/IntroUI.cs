@@ -48,9 +48,6 @@ public class IntroUI : UI_Popup
         m_Vidioplayer.source = VideoSource.VideoClip;
         m_Vidioplayer.clip = Managers.Resource.Load<VideoClip>("Art/MP4/" +name);
         m_Vidioplayer.StepForward();
-
-        // 코루틴으로 클릭 감지하면 사라짐. 이미지의 알파값을 이용한다.
-        // 검은 화면 좀 보여주다가 페이드 인으로 인게임 화면으로 넘어감
     }
 
     IEnumerator FadeOut()

@@ -13,6 +13,9 @@ public class DrawArrowAction : ItemAction
         if (character.isHoldingArrow)
             return;
 
+        // 현재 사용 가능한 화살이 없다면 으쓱하는 애니메이션 후 종료
+        // 퀵 슬롯에 UI 표시
+
         //Animator Player
         character.animator.SetBool("isHoldingArrow", true);
         character.characterAnimatorManager.PlayTargetAnimation("Bow_TH_Draw_01", true);

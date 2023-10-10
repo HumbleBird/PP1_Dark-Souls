@@ -11,7 +11,7 @@ public class PlayerManager : CharacterManager
     public CameraHandler cameraHandler;
 
     [Header("UI")]
-    public GameUIManager m_GameUIManager;
+    public GameSceneUI m_GameUIManager;
 
     [Header("Player")]
     public PlayerStatsManager playerStatsManager;
@@ -28,7 +28,7 @@ public class PlayerManager : CharacterManager
         base.Awake();
 
         cameraHandler = FindObjectOfType<CameraHandler>();
-        m_GameUIManager = FindObjectOfType<GameUIManager>();
+        m_GameUIManager = FindObjectOfType<GameSceneUI>();
 
         animator            = GetComponentInChildren<Animator>();
         inputHandler        = GetComponent<InputHandler>();
@@ -49,7 +49,7 @@ public class PlayerManager : CharacterManager
     public void ReStart()
     {
         cameraHandler = Managers.Camera.m_Camera;
-        m_GameUIManager = FindObjectOfType<GameUIManager>();
+        m_GameUIManager = FindObjectOfType<GameSceneUI>();
         //m_GameUIManager.m_PlayerPrivateUI.m_EquipmentUI.RefreshUI();
 
         Managers.Camera.m_Camera.ReStart();
@@ -117,25 +117,8 @@ public class PlayerManager : CharacterManager
 
                 if (interactable != null)
                 {
-                    string interactableText = interactable.interactableText;
-                    InteractablePopupUI ui = Managers.UI.ShowPopupUI<InteractablePopupUI>();
-                    ui.m_InteractionText.text = interactableText;
-                    m_GameUIManager.m_bIsShowingPopup = true;
-                    m_GameUIManager.m_InteractablePopupUI = ui;
-
-                    if (inputHandler.a_Input)
-                    {
-                        hit.collider.GetComponent<Interactable>().Interact(this);
-                    }
+                    interactable.ShowInteractUI();
                 }
-            }
-        }
-        else
-        {
-            if (m_GameUIManager.m_bIsShowingPopup  == true && inputHandler.a_Input)
-            {
-                Managers.UI.ClosePopupUI();
-                m_GameUIManager.m_bIsShowingPopup = false;
             }
         }
     }

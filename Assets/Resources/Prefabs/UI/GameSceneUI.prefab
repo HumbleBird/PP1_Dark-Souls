@@ -14,7 +14,7 @@ GameObject:
   - component: {fileID: 7219483554172045791}
   - component: {fileID: 4725431234795126672}
   m_Layer: 5
-  m_Name: GameUIManager
+  m_Name: GameSceneUI
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -139,7 +139,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1367959289276424592, guid: b67d8c3b91873204898ee5b8a4d56069, type: 3}
       propertyPath: m_Name
-      value: QuickSlotImage
+      value: ConsumableItemSlotImage
       objectReference: {fileID: 0}
     - target: {fileID: 1447375178325594038, guid: b67d8c3b91873204898ee5b8a4d56069, type: 3}
       propertyPath: m_AnchorMax.x
@@ -164,6 +164,10 @@ PrefabInstance:
     - target: {fileID: 3206000157794659756, guid: b67d8c3b91873204898ee5b8a4d56069, type: 3}
       propertyPath: m_AnchorMax.y
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4332174769889549272, guid: b67d8c3b91873204898ee5b8a4d56069, type: 3}
+      propertyPath: m_Name
+      value: Consumable Item Slot
       objectReference: {fileID: 0}
     - target: {fileID: 4332174771344995784, guid: b67d8c3b91873204898ee5b8a4d56069, type: 3}
       propertyPath: m_AnchorMax.x

@@ -129,7 +129,21 @@ public class PlayerLocomotionManager : CharacterLocomotionManager
         moveDirection.Normalize();
         moveDirection.y = 0;
 
-        if(player.isSprinting && player.inputHandler.moveAmount > 0.5f)
+        // Two Hand Animation Rig
+        if (player.inputHandler.twoHandFlag)
+        {
+            if (player.isSprinting && player.inputHandler.moveAmount > 0.1f)
+            {
+                player.playerWeaponSlotManager.LoadTwoHandIKTargtets(true);
+            }
+            else
+            {
+                player.playerWeaponSlotManager.LoadTwoHandIKTargtets(false);
+
+            }
+        }
+
+        if (player.isSprinting && player.inputHandler.moveAmount > 0.5f)
         {
             player.characterController.Move(moveDirection * sprintSpeed * Time.deltaTime);
             player.playerStatsManager.DeductSprintingStamina(sprintStaminaCost);

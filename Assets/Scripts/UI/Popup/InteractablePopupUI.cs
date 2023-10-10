@@ -30,7 +30,7 @@ public class InteractablePopupUI : UI_Popup
         BindImage(typeof(Images));
 
         m_InteractionText = GetText((int)Texts.InteractionText);
-        m_ItemText = GetText((int)Texts.InteractionText);
+        m_ItemText = GetText((int)Texts.ItemText);
         m_ItemImage = GetImage((int)Images.ItemImage);
 
         m_ItemText.gameObject.SetActive(false);

@@ -1,37 +1,33 @@
  using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
-public class BonfireLitPopupUI : UI_Popup
+public class BonfireLitPopupUI : MonoBehaviour
 {
-    CanvasGroup canvas;
-
-    public override bool Init()
-    {
-        if (base.Init() == false)
-            return false;
-
-        canvas = GetComponent<CanvasGroup>();
-
-        return true;
-    }
+    Image image;
 
     public void Start()
     {
+        image = GetComponentInChildren<Image>();
+
         StartCoroutine(FadeInPopup());
     }
 
     IEnumerator FadeInPopup()
     {
-        gameObject.SetActive(true);
+        Color c = image.color;
 
-        for (float fade = 0.05f; fade < 1; fade = fade + 0.05f)
+        while (true)
         {
-            canvas.alpha = fade;
+            c.a += Time.deltaTime;
+            image.color = c;
 
-            if(fade > 0.9f)
+            if (c.a >= 1)
             {
-                StartCoroutine(FadeOutPopup());
+                c.a = 1;
+                image.color = c;
+                yield return StartCoroutine(FadeOutPopup());
             }
 
             yield return new WaitForSeconds(0.05f);
@@ -40,13 +36,16 @@ public class BonfireLitPopupUI : UI_Popup
 
     IEnumerator FadeOutPopup()
     {
-        for (float fade = 1f; fade > 0; fade = fade - 0.05f)
-        {
-            canvas.alpha = fade;
+        Color c = image.color;
 
-            if (fade <= 0.05f)
+        while (true)
+        {
+            c.a -= Time.deltaTime;
+            image.color = c;
+
+            if (c.a <= 0.01f)
             {
-                Managers.UI.ClosePopupUI();
+                Managers.Resource.Destroy(gameObject);
             }
 
             yield return new WaitForSeconds(0.05f);

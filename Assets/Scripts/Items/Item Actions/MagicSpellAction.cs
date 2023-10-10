@@ -12,13 +12,17 @@ public class MagicSpellAction : ItemAction
 
         if (character.characterEquipmentManager.m_CurrentHandSpell != null && character.characterEquipmentManager.m_CurrentHandSpell.isMagicSpell)
         {
-            // CHECK FOR FP
-            if (character.characterStatsManager.currentFocusPoints >= character.characterEquipmentManager.m_CurrentHandSpell.focusPointCost)
+            PlayerManager player = character as PlayerManager;
+            if (player != null)
             {
-                character.characterEquipmentManager.m_CurrentHandSpell.AttemptToCastSpell(character);
+                // CHECK FOR FP
+                if (player.playerStatsManager.currentFocusPoints >= player.playerEquipmentManager.m_CurrentHandSpell.focusPointCost)
+                {
+                    player.playerEquipmentManager.m_CurrentHandSpell.AttemptToCastSpell(player);
+                }
+                else
+                    player.playerAnimatorManager.PlayTargetAnimation("Shrug", true);
             }
-            else
-                character.characterAnimatorManager.PlayTargetAnimation("Shrug", true);
         }
     }
 }

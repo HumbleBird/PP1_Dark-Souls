@@ -1,9 +1,10 @@
+
 using System.Collections;
 using System.Collections.Generic;
-using TMPro;
 using UnityEngine;
+using TMPro;
 
-public class HUDUI : UI_Base
+public class GameSceneUI : UI_Scene
 {
     enum GameObjects
     {

@@ -127,7 +127,7 @@ public class DamageCollider : MonoBehaviour
     {
         if (enemyManager.isParrying)
         {
-            characterManager.GetComponentInChildren<CharacterAnimatorManager>().PlayTargetAnimation("Parried", true);
+            characterManager.characterAnimatorManager.PlayTargetAnimation("Parried", true);
             hasBeenParried = true;
         }
     }
