@@ -64,32 +64,36 @@ public class PlayerEquipmentManager : CharacterEquipmentManager
         // First All UnEquipment
         ModelChangerUnEquipAllItem();
 
+        // 장비 능력치 적용
+        EquipAllEquipmentAbilityValue();
+
+        // 장비 외형 적용
+        EquipAllEquipmentLook();
+
+        // TODO Weapon
+    }
+
+    public void EquipAllEquipmentAbilityValue()
+    {
         poisonResistance = 0;
         totalEquipmentLoad = 0;
 
-        // Weapon
-        // Todo
-
-        // Helm
-        HeadItemEquip();
-
-        // Torso
-        ChestItemEquip();
-
-        // Hands
-        HandItemEquip();
-
-        // Legs
-        LegItemEquip();
+        EquipHeadEquipmentAbilityValue();
+        EquipChestEquipmentAbilityValue();
+        EquipHandEquipmentAbilityValue();
+        EquipLegEquipmentAbilityValue();
 
         player.playerStatsManager.poisonResistance = poisonResistance;
         player.playerStatsManager.CaculateAndSetCurrentEquipLoad(totalEquipmentLoad);
-
-        // Weapon
-
     }
 
-    // 나중에 외형이랑 능력치 적용은 따로 부리하기
+    public void EquipAllEquipmentLook()
+    {
+        EquipHeadEquipmentLook();
+        EquipChestEquipmentLook();
+        EquipHandArmorEquipmentLook();
+        EquipLegArmorEquipmentLook();
+    }
 
     private void ModelChangerUnEquipAllItem()
     {
@@ -107,20 +111,87 @@ public class PlayerEquipmentManager : CharacterEquipmentManager
         }
     }
 
-    private void HeadItemEquip()
+    private void EquipHeadEquipmentAbilityValue()
     {
         if (m_HelmetEquipment != null)
         {
             // 아이템 종류를 보고 넣어야 지.
-
-            HeadItemEquipModel();
             player.playerStatsManager.physicalDamageAbsorptionHead = m_HelmetEquipment.m_fPhysicalDefense;
             poisonResistance += m_HelmetEquipment.m_fPoisonResistance;
             totalEquipmentLoad += m_HelmetEquipment.m_fWeight;
-
         }
         else
         {
+            player.playerStatsManager.physicalDamageAbsorptionHead = 0;
+        }
+    }
+
+    private void EquipHeadEquipmentLook()
+    {
+        // 얼굴 특징 숨기기 관련
+        foreach (GameObject go in facialFeatures)
+        {
+            go.SetActive(true);
+        }
+
+        // 장착중인 장비가 있다면
+        if (m_HelmetEquipment != null)
+        {
+            // all gender 처리
+            HelmEquipmentItem temp = m_HelmetEquipment;
+
+            if (temp.m_HeadCoverings_Base_Hair != "Chr_HeadCoverings_Base_00")
+            {
+                m_AllGenderPartsModelChanger[All_GenderItemPartsType.HeadCoverings_Base_Hair].EquipEquipmentsModelByName(temp.m_HeadCoverings_Base_Hair);
+            }
+            if (temp.m_HeadCoverings_No_FacialHair != "Chr_HeadCoverings_No_FacialHair_00")
+            {
+                m_AllGenderPartsModelChanger[All_GenderItemPartsType.HeadCoverings_No_FacialHair].EquipEquipmentsModelByName(temp.m_HeadCoverings_No_FacialHair);
+            }
+            if (temp.m_HeadCoverings_No_Hair != "Chr_HeadCoverings_No_Hair_00")
+            {
+                m_AllGenderPartsModelChanger[All_GenderItemPartsType.HeadCoverings_No_Hair].EquipEquipmentsModelByName(temp.m_HeadCoverings_No_Hair);
+            }
+            if (temp.m_Head_Attachment_Helmet != "Chr_HelmetAttachment_00")
+            {
+                m_AllGenderPartsModelChanger[All_GenderItemPartsType.HelmetAttachment].EquipEquipmentsModelByName(temp.m_Head_Attachment_Helmet);
+            }
+
+            if (m_bIsFemale)
+            {
+                if (temp == player.playerEquipmentManager.Naked_HelmetEquipment)
+                {
+                    m_FemaleGenderPartsModelChanger[E_SingleGenderEquipmentArmorParts.Head].EquipEquipmentsModelByName(temp.m_HelmEquipmentItemName);
+                }
+                else
+                {
+                    m_FemaleGenderPartsModelChanger[E_SingleGenderEquipmentArmorParts.Head_No_Elements].EquipEquipmentsModelByName(temp.m_HelmEquipmentItemName);
+                }
+            }
+            else
+            {
+                if (temp == player.playerEquipmentManager.Naked_HelmetEquipment)
+                {
+                    m_MaleGenderPartsModelChanger[E_SingleGenderEquipmentArmorParts.Head].EquipEquipmentsModelByName(temp.m_HelmEquipmentItemName);
+                }
+                else
+                {
+                    m_MaleGenderPartsModelChanger[E_SingleGenderEquipmentArmorParts.Head_No_Elements].EquipEquipmentsModelByName(temp.m_HelmEquipmentItemName);
+                }
+            }
+
+            // 외형 숨기기
+            if (temp.m_bisHideFacialFeatures == true)
+            {
+                foreach (GameObject go in facialFeatures)
+                {
+                    go.SetActive(false);
+                }
+            }
+        }
+        else
+        {
+            // Naked
             if (m_bIsFemale)
             {
                 m_FemaleGenderPartsModelChanger[E_SingleGenderEquipmentArmorParts.Head].EquipEquipmentsModelByName(Naked_HelmetEquipment.m_HelmEquipmentItemName);
@@ -130,226 +201,161 @@ public class PlayerEquipmentManager : CharacterEquipmentManager
                 m_MaleGenderPartsModelChanger[E_SingleGenderEquipmentArmorParts.Head].EquipEquipmentsModelByName(Naked_HelmetEquipment.m_HelmEquipmentItemName);
             }
 
+            
+        }
 
-            player.playerStatsManager.physicalDamageAbsorptionHead = 0;
-
-            foreach (GameObject go in facialFeatures)
-            {
-                go.SetActive(true);
-            }
-
-            // 얼굴 외형 특징들 장착
-            {
-
+        // 헤어 스타일 및 장식품
+        {
             // 헤어 스타일
-                if(currentHairStyle != null)
+            if (currentHairStyle != null)
+            {
+                m_AllGenderPartsModelChanger[All_GenderItemPartsType.Hair].EquipEquipmentsModelByName(currentHairStyle.name);
+            }
+
+            if (currentHairItem != null)
+            {
+
+                m_AllGenderPartsModelChanger[All_GenderItemPartsType.HelmetAttachment].EquipEquipmentsModelByName(currentHairItem.name);
+            }
+
+            // 속눈썹
+            //if(player.playerInventoryManager.currentEyelashesBtn != null)
+            //{
+            //    if (m_bIsFemale)
+            //    {
+            //        m_FemaleGenderPartsModelChanger[EquipmentArmorParts.Head].EquipEquipmentsModelByName(player.playerInventoryManager.currentEyelashesBtn.name);
+            //    }
+            //    else
+            //    {
+            //        m_MaleGenderPartsModelChanger[EquipmentArmorParts.Head].EquipEquipmentsModelByName(player.playerInventoryManager.currentEyelashesBtn.name);
+            //    }
+            //}
+
+            // 눈썹
+            if (currentEyebrows != null)
+            {
+
+                if (m_bIsFemale)
                 {
-                    m_AllGenderPartsModelChanger[All_GenderItemPartsType.Hair].EquipEquipmentsModelByName(currentHairStyle.name);
+                    m_FemaleGenderPartsModelChanger[E_SingleGenderEquipmentArmorParts.Eyebrow].EquipEquipmentsModelByName(currentEyebrows.name);
                 }
-
-                if(currentHairItem != null)
+                else
                 {
-
-                    m_AllGenderPartsModelChanger[All_GenderItemPartsType.HelmetAttachment].EquipEquipmentsModelByName(currentHairItem.name);
-                }
-
-                // 속눈썹
-                //if(player.playerInventoryManager.currentEyelashesBtn != null)
-                //{
-                //    if (m_bIsFemale)
-                //    {
-                //        m_FemaleGenderPartsModelChanger[EquipmentArmorParts.Head].EquipEquipmentsModelByName(player.playerInventoryManager.currentEyelashesBtn.name);
-                //    }
-                //    else
-                //    {
-                //        m_MaleGenderPartsModelChanger[EquipmentArmorParts.Head].EquipEquipmentsModelByName(player.playerInventoryManager.currentEyelashesBtn.name);
-                //    }
-                //}
-
-                // 눈썹
-                if(currentEyebrows != null)
-                {
-
-                    if (m_bIsFemale)
-                    {
-                        m_FemaleGenderPartsModelChanger[E_SingleGenderEquipmentArmorParts.Eyebrow].EquipEquipmentsModelByName(currentEyebrows.name);
-                    }
-                    else
-                    {
-                        m_MaleGenderPartsModelChanger[E_SingleGenderEquipmentArmorParts.Eyebrow].EquipEquipmentsModelByName(currentEyebrows.name);
-                    }
-                }
-
-                // 콧수염
-                if(currentFacialHair != null)
-                {
-                    if (m_bIsFemale)
-                    {
-                        m_FemaleGenderPartsModelChanger[E_SingleGenderEquipmentArmorParts.FacialHair].EquipEquipmentsModelByName(currentFacialHair.name);
-                    }
-                    else
-                    {
-                        m_MaleGenderPartsModelChanger[E_SingleGenderEquipmentArmorParts.FacialHair].EquipEquipmentsModelByName(currentFacialHair.name);
-                    }
-                }
-
-                // 코
-                //if(player.playerInventoryManager.currentNose != null)
-                //{
-                //    if (m_bIsFemale)
-                //    {
-                //        m_FemaleGenderPartsModelChanger[EquipmentArmorParts.Head].EquipEquipmentsModelByName(player.playerInventoryManager.currentNose.name);
-                //    }
-                //    else
-                //    {
-                //        m_MaleGenderPartsModelChanger[EquipmentArmorParts.Head].EquipEquipmentsModelByName(player.playerInventoryManager.currentNose.name);
-                //    }
-                //}
-
-                // 추가
-                if (currentExtra != null)
-                {
-                    m_AllGenderPartsModelChanger[All_GenderItemPartsType.Extra_Elf_Ear].EquipEquipmentsModelByName(currentExtra.name);
+                    m_MaleGenderPartsModelChanger[E_SingleGenderEquipmentArmorParts.Eyebrow].EquipEquipmentsModelByName(currentEyebrows.name);
                 }
             }
-        }
 
+            // 콧수염
+            if (currentFacialHair != null)
+            {
+                if (m_bIsFemale)
+                {
+                    m_FemaleGenderPartsModelChanger[E_SingleGenderEquipmentArmorParts.FacialHair].EquipEquipmentsModelByName(currentFacialHair.name);
+                }
+                else
+                {
+                    m_MaleGenderPartsModelChanger[E_SingleGenderEquipmentArmorParts.FacialHair].EquipEquipmentsModelByName(currentFacialHair.name);
+                }
+            }
+
+            // 코
+            //if(player.playerInventoryManager.currentNose != null)
+            //{
+            //    if (m_bIsFemale)
+            //    {
+            //        m_FemaleGenderPartsModelChanger[EquipmentArmorParts.Head].EquipEquipmentsModelByName(player.playerInventoryManager.currentNose.name);
+            //    }
+            //    else
+            //    {
+            //        m_MaleGenderPartsModelChanger[EquipmentArmorParts.Head].EquipEquipmentsModelByName(player.playerInventoryManager.currentNose.name);
+            //    }
+            //}
+
+            // 추가
+            if (currentExtra != null)
+            {
+                m_AllGenderPartsModelChanger[All_GenderItemPartsType.Extra_Elf_Ear].EquipEquipmentsModelByName(currentExtra.name);
+            }
+        }
+        
     }
 
-    private void HeadItemEquipModel()
-    {
-        // all gender 처리
-        HelmEquipmentItem temp = m_HelmetEquipment;
-
-        if (temp.m_HeadCoverings_Base_Hair != "0")
-        {
-            m_AllGenderPartsModelChanger[All_GenderItemPartsType.HeadCoverings_Base_Hair].EquipEquipmentsModelByName(temp.m_HeadCoverings_Base_Hair);
-        }
-        if (temp.m_HeadCoverings_No_FacialHair != "0")
-        {
-            m_AllGenderPartsModelChanger[All_GenderItemPartsType.HeadCoverings_No_FacialHair].EquipEquipmentsModelByName(temp.m_HeadCoverings_No_FacialHair);
-        }
-        if (temp.m_HeadCoverings_No_Hair != "0")
-        {
-            m_AllGenderPartsModelChanger[All_GenderItemPartsType.HeadCoverings_No_Hair].EquipEquipmentsModelByName(temp.m_HeadCoverings_No_Hair);
-        }
-        if (temp.m_Head_Attachment_Helmet != "0")
-        {
-            m_AllGenderPartsModelChanger[All_GenderItemPartsType.HelmetAttachment].EquipEquipmentsModelByName(temp.m_Head_Attachment_Helmet);
-        }
-
-        if (m_bIsFemale)
-        {
-            if(temp == player.playerEquipmentManager.Naked_HelmetEquipment)
-            {
-                m_FemaleGenderPartsModelChanger[E_SingleGenderEquipmentArmorParts.Head].EquipEquipmentsModelByName(temp.m_HelmEquipmentItemName);
-            }
-            else
-            {
-                m_FemaleGenderPartsModelChanger[E_SingleGenderEquipmentArmorParts.Head_No_Elements].EquipEquipmentsModelByName(temp.m_HelmEquipmentItemName);
-            }
-        }
-        else
-        {
-            if (temp == player.playerEquipmentManager.Naked_HelmetEquipment)
-            {
-                m_MaleGenderPartsModelChanger[E_SingleGenderEquipmentArmorParts.Head].EquipEquipmentsModelByName(temp.m_HelmEquipmentItemName);
-            }
-            else
-            {
-                m_MaleGenderPartsModelChanger[E_SingleGenderEquipmentArmorParts.Head_No_Elements].EquipEquipmentsModelByName(temp.m_HelmEquipmentItemName);
-            }
-        }
-
-
-
-        if(temp.hideFacialFeatures == true)
-        {
-            foreach (GameObject go in facialFeatures)
-            {
-                go.SetActive(false);
-            }
-        }
-        else
-        {
-            foreach (GameObject go in facialFeatures)
-            {
-                go.SetActive(true);
-            }
-        }
-
-    }
-
-    private void ChestItemEquip()
+    private void EquipChestEquipmentAbilityValue()
     {
         if (m_TorsoEquipment != null)
         {
-            // 아이템 종류를 보고 넣어야 지.
-
-            ChestItemEquipModel();
             player.playerStatsManager.physicalDamageAbsorptionBody = m_TorsoEquipment.m_fPhysicalDefense;
             poisonResistance += m_TorsoEquipment.m_fPoisonResistance;
             totalEquipmentLoad += m_TorsoEquipment.m_fWeight;
         }
         else
         {
+            player.playerStatsManager.physicalDamageAbsorptionBody = 0;
+        }
+    }
+
+    private void EquipChestEquipmentLook()
+    {
+        if (m_TorsoEquipment == null)
+        {
             if (m_bIsFemale)
             {
                 m_FemaleGenderPartsModelChanger[E_SingleGenderEquipmentArmorParts.Torso].EquipEquipmentsModelByName(Naked_TorsoEquipment.m_TorsoEquipmentItemName);
-
             }
             else
             {
                 m_MaleGenderPartsModelChanger[E_SingleGenderEquipmentArmorParts.Torso].EquipEquipmentsModelByName(Naked_TorsoEquipment.m_TorsoEquipmentItemName);
             }
-
-            player.playerStatsManager.physicalDamageAbsorptionBody = 0;
         }
-    }
+        else
+        {
+            // all gender 처리
+            TorsoEquipmentItem temp = m_TorsoEquipment;
 
-    private void ChestItemEquipModel()
-    {
-        // all gender 처리
-        TorsoEquipmentItem temp = m_TorsoEquipment;
-
-        if (temp.m_Back_Attachment != null)
-        {
-            m_AllGenderPartsModelChanger[All_GenderItemPartsType.Back_Attachment].EquipEquipmentsModelByName(temp.m_Back_Attachment);
-        }
-        if (temp.m_Shoulder_Attachment_Right != null)
-        {
-            m_AllGenderPartsModelChanger[All_GenderItemPartsType.Shoulder_Attachment_Right].EquipEquipmentsModelByName(temp.m_Shoulder_Attachment_Right);
-        }
-        if (temp.m_Shoulder_Attachment_Left != null)
-        {
-            m_AllGenderPartsModelChanger[All_GenderItemPartsType.Shoulder_Attachment_Left].EquipEquipmentsModelByName(temp.m_Shoulder_Attachment_Left);
-        }
-
-        if (temp.m_TorsoEquipmentItemName != null)
-        {
-            if (m_bIsFemale)
+            if (temp.m_Back_Attachment != "Chr_BackAttachment_00")
             {
-                m_FemaleGenderPartsModelChanger[E_SingleGenderEquipmentArmorParts.Torso].EquipEquipmentsModelByName(temp.m_TorsoEquipmentItemName);
+                m_AllGenderPartsModelChanger[All_GenderItemPartsType.Back_Attachment].EquipEquipmentsModelByName(temp.m_Back_Attachment);
             }
-            else
+            if (temp.m_Shoulder_Attachment_Right != "Chr_ShoulderAttachRight_00")
             {
-                m_MaleGenderPartsModelChanger[E_SingleGenderEquipmentArmorParts.Torso].EquipEquipmentsModelByName(temp.m_TorsoEquipmentItemName);
+                m_AllGenderPartsModelChanger[All_GenderItemPartsType.Shoulder_Attachment_Right].EquipEquipmentsModelByName(temp.m_Shoulder_Attachment_Right);
+            }
+            if (temp.m_Shoulder_Attachment_Left != "Chr_ShoulderAttachLeft_00")
+            {
+                m_AllGenderPartsModelChanger[All_GenderItemPartsType.Shoulder_Attachment_Left].EquipEquipmentsModelByName(temp.m_Shoulder_Attachment_Left);
+            }
+
+            if (temp.m_TorsoEquipmentItemName != "Chr_Torso_00")
+            {
+                if (m_bIsFemale)
+                {
+                    m_FemaleGenderPartsModelChanger[E_SingleGenderEquipmentArmorParts.Torso].EquipEquipmentsModelByName(temp.m_TorsoEquipmentItemName);
+                }
+                else
+                {
+                    m_MaleGenderPartsModelChanger[E_SingleGenderEquipmentArmorParts.Torso].EquipEquipmentsModelByName(temp.m_TorsoEquipmentItemName);
+                }
             }
         }
     }
 
-    private void HandItemEquip()
+    private void EquipHandEquipmentAbilityValue()
     {
         if (m_HandEquipment != null)
         {
-            // 아이템 종류를 보고 넣어야 지.
-
-            HandItemEquipModel();
             player.playerStatsManager.physicalDamageAbsorptionHands = m_HandEquipment.m_fPhysicalDefense;
             poisonResistance += m_HandEquipment.m_fPoisonResistance;
             totalEquipmentLoad += m_HandEquipment.m_fWeight;
         }
         else
+        {
+            player.playerStatsManager.physicalDamageAbsorptionHands = 0;
+        }
+    }
+
+    private void EquipHandArmorEquipmentLook()
+    {
+        if(m_HandEquipment == null)
         {
             if (m_bIsFemale)
             {
@@ -369,85 +375,61 @@ public class PlayerEquipmentManager : CharacterEquipmentManager
                 m_MaleGenderPartsModelChanger[E_SingleGenderEquipmentArmorParts.Hand_Right].EquipEquipmentsModelByName(Naked_HandEquipment.m_Hand_RightName);
                 m_MaleGenderPartsModelChanger[E_SingleGenderEquipmentArmorParts.Hand_Left].EquipEquipmentsModelByName(Naked_HandEquipment.m_Hand_LeftName);
             }
-
-            player.playerStatsManager.physicalDamageAbsorptionHands = 0;
-        }
-    }
-
-    private void HandItemEquipModel()
-    {
-        // all gender 처리
-        GantletsEquipmentItem temp = m_HandEquipment;
-
-        if (temp.m_Elbow_Attachment_Right != null)
-        {
-            m_AllGenderPartsModelChanger[All_GenderItemPartsType.Elbow_Attachment_Right].EquipEquipmentsModelByName(temp.m_Elbow_Attachment_Right);
-        }
-        if (temp.m_Elbow_Attachment_Left != null)
-        {
-            m_AllGenderPartsModelChanger[All_GenderItemPartsType.Elbow_Attachment_Left].EquipEquipmentsModelByName(temp.m_Elbow_Attachment_Left);
-        }
-
-        if (temp != null)
-        {
-            if (m_bIsFemale)
-            {
-                m_FemaleGenderPartsModelChanger[E_SingleGenderEquipmentArmorParts.Arm_Upper_Right].EquipEquipmentsModelByName(m_HandEquipment.m_Arm_Upper_RightName);
-                m_FemaleGenderPartsModelChanger[E_SingleGenderEquipmentArmorParts.Arm_Upper_Left].EquipEquipmentsModelByName(m_HandEquipment.m_Arm_Upper_LeftName);
-                m_FemaleGenderPartsModelChanger[E_SingleGenderEquipmentArmorParts.Arm_Lower_Right].EquipEquipmentsModelByName(m_HandEquipment.m_Arm_Lower_RightName);
-                m_FemaleGenderPartsModelChanger[E_SingleGenderEquipmentArmorParts.Arm_Lower_Left].EquipEquipmentsModelByName(m_HandEquipment.m_Arm_Lower_LeftName);
-                m_FemaleGenderPartsModelChanger[E_SingleGenderEquipmentArmorParts.Hand_Right].EquipEquipmentsModelByName(m_HandEquipment.m_Hand_RightName);
-                m_FemaleGenderPartsModelChanger[E_SingleGenderEquipmentArmorParts.Hand_Left].EquipEquipmentsModelByName(m_HandEquipment.m_Hand_LeftName);           
-            }
-            else
-            {
-                m_MaleGenderPartsModelChanger[E_SingleGenderEquipmentArmorParts.Arm_Upper_Right].EquipEquipmentsModelByName(m_HandEquipment.m_Arm_Upper_RightName);
-                m_MaleGenderPartsModelChanger[E_SingleGenderEquipmentArmorParts.Arm_Upper_Left].EquipEquipmentsModelByName(m_HandEquipment.m_Arm_Upper_LeftName);
-                m_MaleGenderPartsModelChanger[E_SingleGenderEquipmentArmorParts.Arm_Lower_Right].EquipEquipmentsModelByName(m_HandEquipment.m_Arm_Lower_RightName);
-                m_MaleGenderPartsModelChanger[E_SingleGenderEquipmentArmorParts.Arm_Lower_Left].EquipEquipmentsModelByName(m_HandEquipment.m_Arm_Lower_LeftName);
-                m_MaleGenderPartsModelChanger[E_SingleGenderEquipmentArmorParts.Hand_Right].EquipEquipmentsModelByName(m_HandEquipment.m_Hand_RightName);
-                m_MaleGenderPartsModelChanger[E_SingleGenderEquipmentArmorParts.Hand_Left].EquipEquipmentsModelByName(m_HandEquipment.m_Hand_LeftName);
-            }
-
-            player.playerStatsManager.physicalDamageAbsorptionHands = m_HandEquipment.m_fPhysicalDefense;
-            poisonResistance += m_HandEquipment.m_fPoisonResistance;
-            totalEquipmentLoad += m_HandEquipment.m_fWeight;
         }
         else
         {
+            // all gender 처리
+            GantletsEquipmentItem temp = m_HandEquipment;
+
+            if (temp.m_Elbow_Attachment_Right != "Chr_ElbowAttachRight_00")
+            {
+                m_AllGenderPartsModelChanger[All_GenderItemPartsType.Elbow_Attachment_Right].EquipEquipmentsModelByName(temp.m_Elbow_Attachment_Right);
+            }
+            if (temp.m_Elbow_Attachment_Left != "Chr_ElbowAttachLeft_00")
+            {
+                m_AllGenderPartsModelChanger[All_GenderItemPartsType.Elbow_Attachment_Left].EquipEquipmentsModelByName(temp.m_Elbow_Attachment_Left);
+            }
+
+            // Gender
             if (m_bIsFemale)
             {
-                m_FemaleGenderPartsModelChanger[E_SingleGenderEquipmentArmorParts.Arm_Upper_Right].EquipEquipmentsModelByName(m_HandEquipment.m_Arm_Upper_RightName);
-                m_FemaleGenderPartsModelChanger[E_SingleGenderEquipmentArmorParts.Arm_Upper_Left].EquipEquipmentsModelByName(m_HandEquipment.m_Arm_Upper_LeftName);
-                m_FemaleGenderPartsModelChanger[E_SingleGenderEquipmentArmorParts.Arm_Lower_Right].EquipEquipmentsModelByName(m_HandEquipment.m_Arm_Lower_RightName);
-                m_FemaleGenderPartsModelChanger[E_SingleGenderEquipmentArmorParts.Arm_Lower_Left].EquipEquipmentsModelByName(m_HandEquipment.m_Arm_Lower_LeftName);
-                m_FemaleGenderPartsModelChanger[E_SingleGenderEquipmentArmorParts.Hand_Right].EquipEquipmentsModelByName(m_HandEquipment.m_Hand_RightName);
-                m_FemaleGenderPartsModelChanger[E_SingleGenderEquipmentArmorParts.Hand_Left].EquipEquipmentsModelByName(m_HandEquipment.m_Hand_LeftName);
+                m_FemaleGenderPartsModelChanger[E_SingleGenderEquipmentArmorParts.Arm_Upper_Right].EquipEquipmentsModelByName(temp.m_Arm_Upper_RightName);
+                m_FemaleGenderPartsModelChanger[E_SingleGenderEquipmentArmorParts.Arm_Upper_Left].EquipEquipmentsModelByName(temp.m_Arm_Upper_LeftName);
+                m_FemaleGenderPartsModelChanger[E_SingleGenderEquipmentArmorParts.Arm_Lower_Right].EquipEquipmentsModelByName(temp.m_Arm_Lower_RightName);
+                m_FemaleGenderPartsModelChanger[E_SingleGenderEquipmentArmorParts.Arm_Lower_Left].EquipEquipmentsModelByName(temp.m_Arm_Lower_LeftName);
+                m_FemaleGenderPartsModelChanger[E_SingleGenderEquipmentArmorParts.Hand_Right].EquipEquipmentsModelByName(temp.m_Hand_RightName);
+                m_FemaleGenderPartsModelChanger[E_SingleGenderEquipmentArmorParts.Hand_Left].EquipEquipmentsModelByName(temp.m_Hand_LeftName);
             }
             else
             {
-                m_MaleGenderPartsModelChanger[E_SingleGenderEquipmentArmorParts.Arm_Upper_Right].EquipEquipmentsModelByName(m_HandEquipment.m_Arm_Upper_RightName);
-                m_MaleGenderPartsModelChanger[E_SingleGenderEquipmentArmorParts.Arm_Upper_Left].EquipEquipmentsModelByName(m_HandEquipment.m_Arm_Upper_LeftName);
-                m_MaleGenderPartsModelChanger[E_SingleGenderEquipmentArmorParts.Arm_Lower_Right].EquipEquipmentsModelByName(m_HandEquipment.m_Arm_Lower_RightName);
-                m_MaleGenderPartsModelChanger[E_SingleGenderEquipmentArmorParts.Arm_Lower_Left].EquipEquipmentsModelByName(m_HandEquipment.m_Arm_Lower_LeftName);
-                m_MaleGenderPartsModelChanger[E_SingleGenderEquipmentArmorParts.Hand_Right].EquipEquipmentsModelByName(m_HandEquipment.m_Hand_RightName);
-                m_MaleGenderPartsModelChanger[E_SingleGenderEquipmentArmorParts.Hand_Left].EquipEquipmentsModelByName(m_HandEquipment.m_Hand_LeftName);
+                m_MaleGenderPartsModelChanger[E_SingleGenderEquipmentArmorParts.Arm_Upper_Right].EquipEquipmentsModelByName(temp.m_Arm_Upper_RightName);
+                m_MaleGenderPartsModelChanger[E_SingleGenderEquipmentArmorParts.Arm_Upper_Left].EquipEquipmentsModelByName(temp.m_Arm_Upper_LeftName);
+                m_MaleGenderPartsModelChanger[E_SingleGenderEquipmentArmorParts.Arm_Lower_Right].EquipEquipmentsModelByName(temp.m_Arm_Lower_RightName);
+                m_MaleGenderPartsModelChanger[E_SingleGenderEquipmentArmorParts.Arm_Lower_Left].EquipEquipmentsModelByName(temp.m_Arm_Lower_LeftName);
+                m_MaleGenderPartsModelChanger[E_SingleGenderEquipmentArmorParts.Hand_Right].EquipEquipmentsModelByName(temp.m_Hand_RightName);
+                m_MaleGenderPartsModelChanger[E_SingleGenderEquipmentArmorParts.Hand_Left].EquipEquipmentsModelByName(temp.m_Hand_LeftName);
             }
         }
     }
 
-    private void LegItemEquip()
+    private void EquipLegEquipmentAbilityValue()
     {
         if (m_LegEquipment != null)
         {
-            // 아이템 종류를 보고 넣어야 지.
-
-            LegItemEquipModel();
             player.playerStatsManager.physicalDamageAbsorptionLegs = m_LegEquipment.m_fPhysicalDefense;
             poisonResistance += m_LegEquipment.m_fPoisonResistance;
             totalEquipmentLoad += m_LegEquipment.m_fWeight;
         }
         else
+        {
+
+            player.playerStatsManager.physicalDamageAbsorptionLegs = 0;
+        }
+    }
+
+    private void EquipLegArmorEquipmentLook()
+    {
+        if(m_LegEquipment == null)
         {
             if (m_bIsFemale)
             {
@@ -461,39 +443,39 @@ public class PlayerEquipmentManager : CharacterEquipmentManager
                 m_MaleGenderPartsModelChanger[E_SingleGenderEquipmentArmorParts.RightLegging].EquipEquipmentsModelByName(Naked_LegEquipment.m_RightLeggingName);
                 m_MaleGenderPartsModelChanger[E_SingleGenderEquipmentArmorParts.Hip].EquipEquipmentsModelByName(Naked_LegEquipment.m_HipName);
             }
-            player.playerStatsManager.physicalDamageAbsorptionLegs = 0;
-        }
-    }
 
-    private void LegItemEquipModel()
-    {
-        // all gender 처리
-        LeggingsEquipmentItem temp = m_LegEquipment;
-
-        if (temp.m_Hips_Attachment != null)
-        {
-            m_AllGenderPartsModelChanger[All_GenderItemPartsType.Hips_Attachment].EquipEquipmentsModelByName(temp.m_Hips_Attachment);
-        }
-        if (temp.m_Knee_Attachement_Right != null)
-        {
-            m_AllGenderPartsModelChanger[All_GenderItemPartsType.Knee_Attachement_Right].EquipEquipmentsModelByName(temp.m_Knee_Attachement_Right);
-        }
-        if (temp.m_Knee_Attachement_Left != null)
-        {
-            m_AllGenderPartsModelChanger[All_GenderItemPartsType.Knee_Attachement_Left].EquipEquipmentsModelByName(temp.m_Knee_Attachement_Left);
-        }
-
-        if (m_bIsFemale)
-        {
-            m_FemaleGenderPartsModelChanger[E_SingleGenderEquipmentArmorParts.Hip].EquipEquipmentsModelByName(temp.m_HipName);
-            m_FemaleGenderPartsModelChanger[E_SingleGenderEquipmentArmorParts.LeftLegging].EquipEquipmentsModelByName(temp.m_LeftLeggingName);
-            m_FemaleGenderPartsModelChanger[E_SingleGenderEquipmentArmorParts.RightLegging].EquipEquipmentsModelByName(temp.m_RightLeggingName);
         }
         else
         {
-            m_MaleGenderPartsModelChanger[E_SingleGenderEquipmentArmorParts.Hip].EquipEquipmentsModelByName(temp.m_HipName);
-            m_MaleGenderPartsModelChanger[E_SingleGenderEquipmentArmorParts.LeftLegging].EquipEquipmentsModelByName(temp.m_LeftLeggingName);
-            m_MaleGenderPartsModelChanger[E_SingleGenderEquipmentArmorParts.RightLegging].EquipEquipmentsModelByName(temp.m_RightLeggingName);
+            // all gender 처리
+            LeggingsEquipmentItem temp = m_LegEquipment;
+
+            if (temp.m_Hips_Attachment != "Chr_HipsAttachment_00")
+            {
+                m_AllGenderPartsModelChanger[All_GenderItemPartsType.Hips_Attachment].EquipEquipmentsModelByName(temp.m_Hips_Attachment);
+            }
+            if (temp.m_Knee_Attachement_Right != "Chr_KneeAttachRight_00")
+            {
+                m_AllGenderPartsModelChanger[All_GenderItemPartsType.Knee_Attachement_Right].EquipEquipmentsModelByName(temp.m_Knee_Attachement_Right);
+            }
+            if (temp.m_Knee_Attachement_Left != "Chr_KneeAttachLeft_00")
+            {
+                m_AllGenderPartsModelChanger[All_GenderItemPartsType.Knee_Attachement_Left].EquipEquipmentsModelByName(temp.m_Knee_Attachement_Left);
+            }
+
+            // Gender
+            if (m_bIsFemale)
+            {
+                m_FemaleGenderPartsModelChanger[E_SingleGenderEquipmentArmorParts.Hip].EquipEquipmentsModelByName(temp.m_HipName);
+                m_FemaleGenderPartsModelChanger[E_SingleGenderEquipmentArmorParts.LeftLegging].EquipEquipmentsModelByName(temp.m_LeftLeggingName);
+                m_FemaleGenderPartsModelChanger[E_SingleGenderEquipmentArmorParts.RightLegging].EquipEquipmentsModelByName(temp.m_RightLeggingName);
+            }
+            else
+            {
+                m_MaleGenderPartsModelChanger[E_SingleGenderEquipmentArmorParts.Hip].EquipEquipmentsModelByName(temp.m_HipName);
+                m_MaleGenderPartsModelChanger[E_SingleGenderEquipmentArmorParts.LeftLegging].EquipEquipmentsModelByName(temp.m_LeftLeggingName);
+                m_MaleGenderPartsModelChanger[E_SingleGenderEquipmentArmorParts.RightLegging].EquipEquipmentsModelByName(temp.m_RightLeggingName);
+            }
         }
     }
 
@@ -581,7 +563,7 @@ public class PlayerEquipmentManager : CharacterEquipmentManager
                 }
             }
 
-            player.m_GameUIManager.quickSlotsUI.RefreshUI();
+            player.GameSceneUI.quickSlotsUI.RefreshUI();
 
         }
 
@@ -620,12 +602,12 @@ public class PlayerEquipmentManager : CharacterEquipmentManager
         if (m_ConsumableItemSlots[m_iCurrentConsumableItemndex] != null)
         {
             m_CurrentHandConsumable = m_ConsumableItemSlots[m_iCurrentConsumableItemndex];
-            player.m_GameUIManager.quickSlotsUI.RefreshUI();
+            player.GameSceneUI.quickSlotsUI.RefreshUI();
         }
         else
         {
             m_CurrentHandConsumable = null;
-            player.m_GameUIManager.quickSlotsUI.RefreshUI();
+            player.GameSceneUI.quickSlotsUI.RefreshUI();
         }
         // Spell Item
     }

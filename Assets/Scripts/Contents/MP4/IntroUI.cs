@@ -8,28 +8,24 @@ using UnityEngine.Video;
 
 public class IntroUI : UI_Popup
 {
-    enum GameObjects
-    {
-        VideoImg,
-    }
-
     public VideoPlayer m_Vidioplayer;
-    float DownSpeed = 1f;
+    bool m_isPressKey = false;
+    Animator m_Animator;
+
+    public float m_fWaitForTimePostFadeOutMP4 = 3.5f;
 
     public override bool Init()
     {
         if (base.Init() == false)
             return false;
 
-        BindObject(typeof(GameObjects));
 
         m_Vidioplayer = GetComponentInChildren<VideoPlayer>();
         m_Vidioplayer.SetDirectAudioVolume(0, 1);
+        m_Animator = GetComponent<Animator>();
 
         return true;
     }
-
-    bool m_isPressKey = false;
 
     private void Update()
     {
@@ -38,7 +34,15 @@ public class IntroUI : UI_Popup
             if (m_isPressKey == false)
             {
                 m_isPressKey = true;
-                StartCoroutine(FadeOut());
+                if(Managers.Game.m_isNewGame)
+                {
+                    StartCoroutine(FadeOut(() => { Managers.Object.m_MyPlayer.gameObject.SetActive(true); }));
+
+                }
+                else
+                {
+                    StartCoroutine(FadeOut());
+                }
             }
         }
     }
@@ -50,29 +54,23 @@ public class IntroUI : UI_Popup
         m_Vidioplayer.StepForward();
     }
 
-    IEnumerator FadeOut()
+    IEnumerator FadeOut(Action fadeOutAction = null)
     {
-        Color color1 = GetObject((int)GameObjects.VideoImg).GetComponent<RawImage>().color;
-        float vol = m_Vidioplayer.GetDirectAudioVolume(0);
-        while (true)
+        // MP4 Fade Out
+        m_Animator.Play("IntroUI_FadeOut_MP4"); // Fade Out 시간은 2초
+
+        yield return new WaitForSeconds(m_fWaitForTimePostFadeOutMP4); // 검정 화면에서 약간의 대기
+
+
+        m_Animator.Play("IntroUI_FadeOut_BackGround"); // Fade Out 시간은 1초
+
+
+        if (fadeOutAction != null)
         {
-            // 오디오
-            vol -= (DownSpeed * Time.deltaTime * 0.8f);
-            m_Vidioplayer.SetDirectAudioVolume(0, vol);
-
-            // 이미지
-            color1.a = color1.a - (DownSpeed * Time.deltaTime);
-
-            GetObject((int)GameObjects.VideoImg).GetComponent<RawImage>().color = color1;
-
-            if (color1.a <= 0)
-            {
-                yield return new WaitForSeconds(5f);
-
-                Managers.UI.ClosePopupUI();
-            }
-
-            yield return null;
+            fadeOutAction.Invoke();
         }
+
+        Managers.UI.ClosePopupUI();
     }
+
 }

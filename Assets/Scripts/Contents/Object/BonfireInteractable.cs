@@ -36,7 +36,10 @@ public class BonfireInteractable : Interactable
     {
         if(hasBeenActivated)
         {
-            // 지역 이동ㅈ
+            // 주변 지역 뿌옇게
+            // 지역 이동
+            // Spell 저장
+            // 에스트 강화
         }
         else
         {
@@ -52,4 +55,5 @@ public class BonfireInteractable : Interactable
         }
     }
 
+    // 일정 범위 내에 들어오면 BonFire 사운드 틀기
 }

@@ -6,9 +6,6 @@ public class PlayerEffectsManager : CharacterEffectsManager
 {
     PlayerManager player;
 
-    PoisonBuildUpBar poisonBuildUpBar;
-    public PoisonAmountBar poisonAmountBar;
-
     public GameObject currentParticleFX;
     public GameObject instantiatedFXModel2;
     public int amountToBeHealed;
@@ -23,9 +20,6 @@ public class PlayerEffectsManager : CharacterEffectsManager
         base.Awake();
 
         player = GetComponent<PlayerManager>();
-
-        poisonBuildUpBar = FindObjectOfType<PoisonBuildUpBar>();
-        poisonAmountBar = FindObjectOfType<PoisonAmountBar>();
     }
 
     public void HealPlayerFromEffect()
@@ -45,8 +39,10 @@ public class PlayerEffectsManager : CharacterEffectsManager
         {
             player.characterStatsManager.poisonBuildup -= 1;
 
-            poisonBuildUpBar.gameObject.SetActive(true);
-            poisonBuildUpBar.SetPoisonBuildUpAmount(Mathf.RoundToInt(player.characterStatsManager.poisonBuildup));
+            if(player.GameSceneUI != null)
+            {
+                player.GameSceneUI.m_StatBarsUI.RefreshUI(Define.E_StatUI.Posion);
+            }
         }
     }
 }

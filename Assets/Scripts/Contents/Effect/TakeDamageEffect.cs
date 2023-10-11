@@ -49,7 +49,7 @@ public class TakeDamageEffect : CharacterEffect
         PlayDamageAnimation(character);
 
         // UI 업데이트
-        CharacterUpdateUI(character);
+        CharacterHealthBarUIUpdate(character);
 
         // 사운드
         PlayDamageSoundFX(character);
@@ -252,9 +252,12 @@ public class TakeDamageEffect : CharacterEffect
         }
     }
 
-    private void CharacterUpdateUI(CharacterManager character)
+    private void CharacterHealthBarUIUpdate(CharacterManager character)
     {
-        character.characterStatsManager.UpdateUI();
+        // 몬스터라면 지 아래에 있는 Helath Bar를 수정
+
+        // 플레이어라면 UI를 수정
+        character.characterStatsManager.HealthBarUIUpdate();
     }
     
 

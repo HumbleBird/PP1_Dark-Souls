@@ -31,6 +31,8 @@ public class ClassSub : MonoBehaviour
         // Button Function
         childBtn.onClick.AddListener(() =>
         {
+            Managers.Sound.Play("Sounds/UI/UI_Button_Select_02");
+
             classSelector.AssignClass(count);
             m_CharacterCreationScreen.m_CharacterCreationLeftPannelUI.AllPannelButonInteractable(true);
             m_CharacterCreationScreen.m_CharacterCreationMiddlePannelUI.m_goClasses.SetActive(false);
@@ -54,6 +56,7 @@ public class ClassSub : MonoBehaviour
 
     void OnSelectAndPointerDown(PointerEventData data)
     {
+        Managers.Sound.Play("Sounds/UI/UI_Button_PointerDown_04");
         classSelector.AssignClass(count);
     }
 }

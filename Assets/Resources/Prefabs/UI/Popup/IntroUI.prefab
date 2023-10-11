@@ -13,6 +13,7 @@ GameObject:
   - component: {fileID: 4792897503629835698}
   - component: {fileID: 1036708541640105614}
   - component: {fileID: 8438426016821667880}
+  - component: {fileID: 266113520696710911}
   m_Layer: 5
   m_Name: IntroUI
   m_TagString: Untagged
@@ -63,7 +64,7 @@ Canvas:
   m_SortingBucketNormalizedSize: 0
   m_AdditionalShaderChannelsFlag: 0
   m_SortingLayerID: 0
-  m_SortingOrder: 10
+  m_SortingOrder: 0
   m_TargetDisplay: 0
 --- !u!114 &4792897503629835698
 MonoBehaviour:
@@ -118,6 +119,27 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Vidioplayer: {fileID: 0}
+  m_fWaitForTimePostFadeOutMP4: 3.5
+--- !u!95 &266113520696710911
+Animator:
+  serializedVersion: 4
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1960233691335197642}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: 28714a3086b3f6c4dbdff48ec5e83f46, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_StabilizeFeet: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorControllerStateOnDisable: 0
 --- !u!1 &5222071286746213214
 GameObject:
   m_ObjectHideFlags: 0

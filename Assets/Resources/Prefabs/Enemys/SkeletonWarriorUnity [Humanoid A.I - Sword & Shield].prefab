@@ -178,34 +178,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   characterName: Nameless
   teamIDNumber: 0
-  playerLevel: 0
   currentSoulCount: 0
-  m_iVigorLevel: 10
-  m_iAttunementLevel: 10
-  m_iEnduranceLevel: 10
-  m_iVitalityLevel: 10
-  m_iStrengthLevel: 10
-  m_iDexterityLevel: 10
-  m_iIntelligenceLevel: 10
-  m_iFaithLevel: 10
-  m_iLuckLevel: 10
-  maxHealth: 0
-  currentHealth: 0
-  maxfocusPoint: 0
-  currentFocusPoints: 0
-  maxStamina: 100
-  currentStamina: 100
-  currentEquipLoad: 0
-  maxEquipLoad: 0
-  encumbranceLevel: 0
-  poiseLevel: 10
-  m_iItemDiscovery: 10
-  m_iRWeapon1: 0
-  m_iRWeapon2: 0
-  m_iRWeapon3: 0
-  m_iLWeapon1: 0
-  m_iLWeapon2: 0
-  m_iLWeapon3: 0
+  maxHealth: 5000
+  currentHealth: 5000
   physicalDamageAbsorptionHead: 0
   physicalDamageAbsorptionBody: 0
   physicalDamageAbsorptionLegs: 0
@@ -306,12 +281,12 @@ MonoBehaviour:
   maximumDetectionAngle: 50
   currentRecoveryTime: 0
   stoppingDistance: 1.2
-  allowAIToPerformBlock: 0
-  blockLikelyHood: 30
+  allowAIToPerformBlock: 1
+  blockLikelyHood: 100
   allowAIToPerformDodge: 0
   dodgeLikelyHood: 20
-  allowAIToPerformParry: 1
-  ParryLikelyHood: 100
+  allowAIToPerformParry: 0
+  ParryLikelyHood: 20
   allowAIToPerformCombos: 1
   isPhaseShifting: 0
   comboLikelyHood: 100

@@ -67,7 +67,13 @@ public class PlayerWeaponSlotManager : CharacterWeaponSlotManager
             }
         }
 
-        player.m_GameUIManager.quickSlotsUI.RefreshUI();
+        if(player.GameSceneUI != null)
+        {
+            if(player.GameSceneUI.quickSlotsUI != null)
+            {
+                player.GameSceneUI.quickSlotsUI.RefreshUI();
+            }
+        }
     }
 
     public void SucessfullyThrowFireBomb()

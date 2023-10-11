@@ -226,6 +226,19 @@ public class Define
     #endregion
 
     #region UI
+    public enum E_StatUI
+    {
+        Hp,
+        Stamina,
+        FocusPoint,
+
+        // 특수
+        Posion,
+
+
+        All,
+    }
+
     public enum E_CameraShowPartType
     {
         Head,

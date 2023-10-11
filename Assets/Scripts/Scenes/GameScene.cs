@@ -7,8 +7,6 @@ using static Define;
 
 public class GameScene : BaseScene
 {
-    public bool m_isNewGame = true;
-
     protected override void Init()
     {
         base.Init();
@@ -20,7 +18,7 @@ public class GameScene : BaseScene
 
     public void Start()
     {
-        Managers.Game.GameStart(m_isNewGame);
+        Managers.Game.GameStart();
     }
 
     public override void Clear()

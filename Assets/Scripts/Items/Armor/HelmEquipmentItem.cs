@@ -41,7 +41,7 @@ public class HelmEquipmentItem : EquipmentItem
         } 
     }
 
-    public bool hideFacialFeatures = false;
+    public bool m_bisHideFacialFeatures = false;
     //public bool hideBeardFeatures;
     //public bool hideEyebrowsFeatures;
     // ect

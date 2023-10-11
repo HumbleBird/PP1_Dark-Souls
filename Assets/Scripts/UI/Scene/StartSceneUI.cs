@@ -6,8 +6,6 @@ using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.UI;
 
-// 아 애니메이터로 처리하면 되는 걸ㅋㅋㅋ 노가다 씹 
-
 public class StartSceneUI : UI_Scene
 {
     public FadeInOutScreenUI m_FadeInOutScreenUI;
@@ -144,6 +142,7 @@ public class StartSceneUI : UI_Scene
 
 	void Continue()
     {
+        // 캐릭터 정보 로드
     }
 
     void LoadGame()
@@ -153,6 +152,7 @@ public class StartSceneUI : UI_Scene
 
     void NewGame()
     {
+        Managers.Game.m_isNewGame = true;
         m_bIsButtonPress = true;
         m_Animator.Play("SelectButton_New Game");
         m_FadeOutAction = () => { Managers.Scene.LoadScene(Define.Scene.Lobby); };
@@ -167,10 +167,10 @@ public class StartSceneUI : UI_Scene
     {
         EventTrigger trigger = go.GetOrAddComponent<EventTrigger>();
 
-        EventTrigger.Entry entry = new EventTrigger.Entry();
-        entry.eventID = EventTriggerType.Select;
-        entry.callback.AddListener((data) => { PointerDownSoundPlay((PointerEventData)data); });
-        trigger.triggers.Add(entry);
+        //EventTrigger.Entry entry = new EventTrigger.Entry();
+        //entry.eventID = EventTriggerType.Select;
+        //entry.callback.AddListener((data) => { PointerDownSoundPlay((PointerEventData)data); });
+        //trigger.triggers.Add(entry);
 
         EventTrigger.Entry entry2 = new EventTrigger.Entry();
         entry2.eventID = EventTriggerType.PointerEnter;

@@ -66,6 +66,8 @@ public class ExternalFeaturesSubItem : UI_Base
         // Button Function
         childBtn.onClick.AddListener(() =>
         {
+            Managers.Sound.Play("Sounds/UI/UI_Button_Select_02");
+
             //characterCreationScreen.m_CharacterCreationMiddlePannelUI.m_goHairStyles.GetComponent<DisableAllChildrenOfSelectedGameObject>().DisableAllChildren();
             DisableAllChildrenOfSelectedGameObject();
             characterCreationScreen.m_CharacterCreationLeftPannelUI.AllPannelButonInteractable(true);
@@ -124,10 +126,10 @@ public class ExternalFeaturesSubItem : UI_Base
         // Event Trigger
         EventTrigger trigger = gameObject.GetOrAddComponent<EventTrigger>();
 
-        EventTrigger.Entry entry = new EventTrigger.Entry();
-        entry.eventID = EventTriggerType.Select;
-        entry.callback.AddListener((data) => { OnSelectAndPointerDown((PointerEventData)data); });
-        trigger.triggers.Add(entry);
+        //EventTrigger.Entry entry = new EventTrigger.Entry();
+        //entry.eventID = EventTriggerType.Select;
+        //entry.callback.AddListener((data) => { OnSelectAndPointerDown((PointerEventData)data); });
+        //trigger.triggers.Add(entry);
 
         EventTrigger.Entry entry2 = new EventTrigger.Entry();
         entry2.eventID = EventTriggerType.PointerEnter;
@@ -137,6 +139,7 @@ public class ExternalFeaturesSubItem : UI_Base
 
     void OnSelectAndPointerDown(PointerEventData data)
     {
+        Managers.Sound.Play("Sounds/UI/UI_Button_PointerDown_04");
         DisableAllChildrenOfSelectedGameObject();
 
         if (count > 0)
@@ -159,6 +162,7 @@ public class ExternalFeaturesSubItem : UI_Base
         }
 
          ExceptionHandling();
+
     }
 
     private void TypeUniquFunction(GameObject go)

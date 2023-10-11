@@ -109,10 +109,10 @@ public class TakeBlockedDamageEffect : CharacterEffect
         character.characterStatsManager.currentHealth = Mathf.RoundToInt(character.characterStatsManager.currentHealth - finalDamage);
 
         // character가 Player라면 UI 갱신
-        PlayerManager player = character.GetComponentInParent<PlayerManager>();
+        PlayerManager player = character as PlayerManager;
         if (player != null)
         {
-            player.playerStatsManager.healthBar.SetCurrentHealth(character.characterStatsManager.currentHealth);
+            player.GameSceneUI.m_StatBarsUI.RefreshUI(E_StatUI.Hp);
         }
 
         if (character.characterStatsManager.currentHealth <= 0)

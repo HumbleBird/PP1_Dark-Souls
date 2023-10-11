@@ -98,15 +98,12 @@ public class AICharacterStatsManager : CharacterStatsManager
 
     private void HandleDeath()
     {
-        currentHealth = 0;
         aiCharacter.aiCharacterAnimationManager.PlayTargetAnimation("Dead_01", true);
         aiCharacter.isDead = true;
     }
 
-    public override void UpdateUI()
+    public override void HealthBarUIUpdate()
     {
-        base.UpdateUI();
-
         aiCharacterHealthBar.SetHealth(currentHealth);
     }
 }

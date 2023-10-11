@@ -11,7 +11,7 @@ public class PlayerManager : CharacterManager
     public CameraHandler cameraHandler;
 
     [Header("UI")]
-    public GameSceneUI m_GameUIManager;
+    public GameSceneUI GameSceneUI;
 
     [Header("Player")]
     public PlayerStatsManager playerStatsManager;
@@ -26,9 +26,6 @@ public class PlayerManager : CharacterManager
     protected override void Awake()
     {
         base.Awake();
-
-        cameraHandler = FindObjectOfType<CameraHandler>();
-        m_GameUIManager = FindObjectOfType<GameSceneUI>();
 
         animator            = GetComponentInChildren<Animator>();
         inputHandler        = GetComponent<InputHandler>();
@@ -46,13 +43,27 @@ public class PlayerManager : CharacterManager
         Managers.Object.Add(1, gameObject);
     }
 
-    public void ReStart()
+    void Init()
     {
-        cameraHandler = Managers.Camera.m_Camera;
-        m_GameUIManager = FindObjectOfType<GameSceneUI>();
-        //m_GameUIManager.m_PlayerPrivateUI.m_EquipmentUI.RefreshUI();
+        cameraHandler = FindObjectOfType<CameraHandler>();
+        GameSceneUI = FindObjectOfType<GameSceneUI>();
 
-        Managers.Camera.m_Camera.ReStart();
+        Managers.Camera.m_Camera.StartGame();
+    }
+
+    public void StartGame()
+    {
+        Init();
+
+        if(Managers.Game.m_isNewGame)
+        {
+            // 위치
+            transform.eulerAngles = new Vector3(0f, -90f, 0f);
+            transform.position = Managers.Game.m_StartPoint;
+
+            // 스텟 레벨에 따른 능력치 정하기
+            playerStatsManager.SetAbilityValueFromLevel();
+        }
     }
 
 

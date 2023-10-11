@@ -111,13 +111,13 @@ public class ExternalFeaturesColorSubItem : UI_Base
                 switch (m_eExternalFeaturesColorParts)
                 {
                     case ExternalFeaturesColorParts.Hair:
-                        hider.HideEquipment(E_CameraShowPartType.Head);
+                        hider.UnHideEquipment(E_CameraShowPartType.Head);
                         break;
                     case ExternalFeaturesColorParts.FacialMask:
-                        hider.HideEquipment(E_CameraShowPartType.Head);
+                        hider.UnHideEquipment(E_CameraShowPartType.Head);
                         break;
                     case ExternalFeaturesColorParts.Skin:
-                        hider.HideEquipment(E_CameraShowPartType.All);
+                        hider.UnHideEquipment(E_CameraShowPartType.All);
                         break;
                     default:
                         break;

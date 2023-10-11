@@ -38,16 +38,15 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 347833055415664871}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalRotation: {x: 0, y: -0.7071068, z: 0, w: 0.7071068}
+  m_LocalPosition: {x: 33.78, y: 5.015, z: -14.021}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 3775640246154021718}
-  - {fileID: 3300042734347596241}
   m_Father: {fileID: 0}
   m_RootOrder: 0
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: -90, z: 0}
 --- !u!114 &7888674121781100882
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -113,10 +112,10 @@ MonoBehaviour:
   characterAnimatorManager: {fileID: 0}
   characterWeaponSlotManager: {fileID: 0}
   characterStatsManager: {fileID: 0}
-  characterInventoryManager: {fileID: 0}
   characterEffectsManager: {fileID: 0}
   characterSoundFXManager: {fileID: 0}
   characterCombatManager: {fileID: 0}
+  characterEquipmentManager: {fileID: 0}
   lockOnTransform: {fileID: 7119120353931914124}
   criticalAttackRayCastStartPoint: {fileID: 7119120353170246266}
   isInteracting: 0
@@ -226,6 +225,53 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5f75feb7be18f434bac0b37bb02715fd, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  currentItemBeingUsed: {fileID: 0}
+  m_CurrentHandSpell: {fileID: 11400000, guid: c366cbf2bcc1a0144a1e21b313bba1be, type: 2}
+  m_CurrentHandRightWeapon: {fileID: 11400000, guid: 48e75f5a988fd65469bab7cd58a33b5c, type: 2}
+  m_CurrentHandLeftWeapon: {fileID: 11400000, guid: 29d9d6db760280a45bcf164a2a748c8c, type: 2}
+  m_CurrentHandConsumable: {fileID: 0}
+  m_CurrentHandAmmo: {fileID: 0}
+  m_RightWeaponsSlots:
+  - {fileID: 11400000, guid: 48e75f5a988fd65469bab7cd58a33b5c, type: 2}
+  - {fileID: 0}
+  - {fileID: 11400000, guid: 24a4e7211d2165b4b85c891c62082805, type: 2}
+  m_LeftWeaponsSlots:
+  - {fileID: 11400000, guid: 29d9d6db760280a45bcf164a2a748c8c, type: 2}
+  - {fileID: 11400000, guid: 29d9d6db760280a45bcf164a2a748c8c, type: 2}
+  - {fileID: 0}
+  m_ArrowAmmoSlots:
+  - {fileID: 0}
+  - {fileID: 0}
+  m_BoltAmmoSlots:
+  - {fileID: 0}
+  - {fileID: 0}
+  m_HelmetEquipment: {fileID: 11400000, guid: c3934700670d4784d9fd70c0da2708c6, type: 2}
+  m_TorsoEquipment: {fileID: 11400000, guid: 0748845b2b5a3734b9e7a81badaf57cc, type: 2}
+  m_LegEquipment: {fileID: 11400000, guid: 7c4a0d900189cd748ba634ec09e9a8f5, type: 2}
+  m_HandEquipment: {fileID: 11400000, guid: 345d66b9b13601740905041d4fcf5c76, type: 2}
+  m_RingSlots:
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  m_ConsumableItemSlots:
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  m_CurrentPledge: {fileID: 0}
+  m_Unarmed: {fileID: 0}
+  m_iCurrentRightWeaponIndex: 0
+  m_iCurrentLeftWeaponIndex: 0
+  m_iCurrentAmmoArrowIndex: 0
+  m_iCurrentAmmoBoltIndex: 0
+  m_iCurrentConsumableItemndex: 0
   m_bIsFemale: 0
   Naked_HelmetEquipment: {fileID: 11400000, guid: 988aab8869179614eae84faa3284d2a2, type: 2}
   Naked_TorsoEquipment: {fileID: 11400000, guid: 2cf022a44c0c75c4d81f4804639beeef, type: 2}
@@ -240,6 +286,14 @@ MonoBehaviour:
   - {fileID: 3778854444039167204}
   - {fileID: 3778525938590957994}
   - {fileID: 3778949813239863980}
+  currentHairStyle: {fileID: 0}
+  currentHairItem: {fileID: 0}
+  currentEyelashesBtn: {fileID: 0}
+  currentEyebrows: {fileID: 0}
+  currentFacialHair: {fileID: 0}
+  currentFacialMask: {fileID: 0}
+  currentNose: {fileID: 0}
+  currentExtra: {fileID: 0}
 --- !u!114 &3780201453589398868
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -280,55 +334,18 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a495dfb517f865944aa946040a518506, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  currentItemBeingUsed: {fileID: 0}
-  currentSpell: {fileID: 11400000, guid: c366cbf2bcc1a0144a1e21b313bba1be, type: 2}
-  rightWeapon: {fileID: 11400000, guid: 48e75f5a988fd65469bab7cd58a33b5c, type: 2}
-  leftWeapon: {fileID: 11400000, guid: 29d9d6db760280a45bcf164a2a748c8c, type: 2}
-  currentConsumable: {fileID: 11400000, guid: c7963e088a06f74478bd8375ab885623, type: 2}
-  currentAmmo: {fileID: 11400000, guid: 061614e8ff311344782b09816f7fc630, type: 2}
-  currentHelmetEquipment: {fileID: 11400000, guid: c3934700670d4784d9fd70c0da2708c6, type: 2}
-  currentTorsoEquipment: {fileID: 11400000, guid: 0748845b2b5a3734b9e7a81badaf57cc, type: 2}
-  currentLegEquipment: {fileID: 11400000, guid: 7c4a0d900189cd748ba634ec09e9a8f5, type: 2}
-  currentHandEquipment: {fileID: 11400000, guid: 345d66b9b13601740905041d4fcf5c76, type: 2}
-  ringSlot01: {fileID: 11400000, guid: 80e4c0cd2bd972d4dba3828826b36b35, type: 2}
-  ringSlot02: {fileID: 0}
-  ringSlot03: {fileID: 0}
-  ringSlot04: {fileID: 0}
-  weaponsInRightHandSlots:
+  m_Items:
   - {fileID: 11400000, guid: 48e75f5a988fd65469bab7cd58a33b5c, type: 2}
-  - {fileID: 0}
-  - {fileID: 0}
-  weaponsInLeftHandSlots:
-  - {fileID: 11400000, guid: 29d9d6db760280a45bcf164a2a748c8c, type: 2}
-  - {fileID: 0}
-  - {fileID: 0}
-  currentHairStyle: {fileID: 0}
-  currentHairItem: {fileID: 0}
-  currentEyelashesBtn: {fileID: 0}
-  currentEyebrows: {fileID: 0}
-  currentFacialHair: {fileID: 0}
-  currentFacialMask: {fileID: 0}
-  currentNose: {fileID: 0}
-  currentExtra: {fileID: 0}
-  currentRightWeaponIndex: 0
-  currentLeftWeaponIndex: 0
-  m_Item:
-  - {fileID: 11400000, guid: 48e75f5a988fd65469bab7cd58a33b5c, type: 2}
-  - {fileID: 11400000, guid: 48e75f5a988fd65469bab7cd58a33b5c, type: 2}
-  - {fileID: 11400000, guid: 48e75f5a988fd65469bab7cd58a33b5c, type: 2}
-  - {fileID: 11400000, guid: 48e75f5a988fd65469bab7cd58a33b5c, type: 2}
-  - {fileID: 11400000, guid: 48e75f5a988fd65469bab7cd58a33b5c, type: 2}
-  - {fileID: 11400000, guid: c7963e088a06f74478bd8375ab885623, type: 2}
-  weaponsInventory:
-  - {fileID: 11400000, guid: 48e75f5a988fd65469bab7cd58a33b5c, type: 2}
-  headEquipmentInventory:
-  - {fileID: 11400000, guid: c3934700670d4784d9fd70c0da2708c6, type: 2}
-  bodyEquipmentInventory:
-  - {fileID: 11400000, guid: 0748845b2b5a3734b9e7a81badaf57cc, type: 2}
-  legEquipmentInventory:
-  - {fileID: 11400000, guid: 7c4a0d900189cd748ba634ec09e9a8f5, type: 2}
-  handEquipmentInventory:
   - {fileID: 11400000, guid: 345d66b9b13601740905041d4fcf5c76, type: 2}
+  - {fileID: 11400000, guid: 7c4a0d900189cd748ba634ec09e9a8f5, type: 2}
+  - {fileID: 11400000, guid: 80e4c0cd2bd972d4dba3828826b36b35, type: 2}
+  - {fileID: 11400000, guid: c366cbf2bcc1a0144a1e21b313bba1be, type: 2}
+  - {fileID: 11400000, guid: 24a4e7211d2165b4b85c891c62082805, type: 2}
+  - {fileID: 11400000, guid: c366cbf2bcc1a0144a1e21b313bba1be, type: 2}
+  - {fileID: 11400000, guid: c7963e088a06f74478bd8375ab885623, type: 2}
+  - {fileID: 11400000, guid: 1614219e8d659ea4ca5ab8011ad5a67b, type: 2}
+  - {fileID: 11400000, guid: c3934700670d4784d9fd70c0da2708c6, type: 2}
+  - {fileID: 11400000, guid: af58329a590b58043bbd92298063ed42, type: 2}
 --- !u!114 &7888674121781100883
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -509,34 +526,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   characterName: Nameless
   teamIDNumber: 0
-  playerLevel: 9
   currentSoulCount: 8500
-  m_iVigorLevel: 10
-  m_iAttunementLevel: 10
-  m_iEnduranceLevel: 10
-  m_iVitalityLevel: 10
-  m_iStrengthLevel: 10
-  m_iDexterityLevel: 10
-  m_iIntelligenceLevel: 10
-  m_iFaithLevel: 10
-  m_iLuckLevel: 10
   maxHealth: 0
   currentHealth: 0
-  maxfocusPoint: 0
-  currentFocusPoints: 0
-  maxStamina: 0
-  currentStamina: 0
-  currentEquipLoad: 0
-  maxEquipLoad: 0
-  encumbranceLevel: 0
-  poiseLevel: 10
-  m_iItemDiscovery: 10
-  m_iRWeapon1: 0
-  m_iRWeapon2: 0
-  m_iRWeapon3: 0
-  m_iLWeapon1: 0
-  m_iLWeapon2: 0
-  m_iLWeapon3: 0
   physicalDamageAbsorptionHead: 0
   physicalDamageAbsorptionBody: 0
   physicalDamageAbsorptionLegs: 0
@@ -571,6 +563,31 @@ MonoBehaviour:
   healthBar: {fileID: 0}
   staminaBar: {fileID: 0}
   focusPointBar: {fileID: 0}
+  playerLevel: 9
+  m_iVigorLevel: 1000
+  m_iAttunementLevel: 1000
+  m_iEnduranceLevel: 1000
+  m_iVitalityLevel: 1000
+  m_iStrengthLevel: 10
+  m_iDexterityLevel: 10
+  m_iIntelligenceLevel: 10
+  m_iFaithLevel: 10
+  m_iLuckLevel: 10
+  maxfocusPoint: 0
+  currentFocusPoints: 0
+  maxStamina: 0
+  currentStamina: 0
+  currentEquipLoad: 0
+  maxEquipLoad: 0
+  encumbranceLevel: 0
+  poiseLevel: 10
+  m_iItemDiscovery: 10
+  m_iRWeapon1: 0
+  m_iRWeapon2: 0
+  m_iRWeapon3: 0
+  m_iLWeapon1: 0
+  m_iLWeapon2: 0
+  m_iLWeapon3: 0
   staminaRegenerationAmount: 1
   staminaRegenerationAmountWhilstBlocking: 0.1
   staminaRegenTimer: 0
@@ -718,14 +735,14 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 3300042734347596240}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -1.9241254, y: 0, z: -0.05802965}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 3300042734579340667}
   - {fileID: 3300042733046652274}
-  m_Father: {fileID: 7879022753532149868}
-  m_RootOrder: 1
+  m_Father: {fileID: 3775640246154021718}
+  m_RootOrder: 5
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &3300042734347596242
 MonoBehaviour:
@@ -58068,6 +58085,7 @@ Transform:
   - {fileID: 7119120353931914124}
   - {fileID: 7119120353854060416}
   - {fileID: 7119120354489404313}
+  - {fileID: 3300042734347596241}
   m_Father: {fileID: 7879022753532149868}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -61933,14 +61951,14 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 3780201454214889366}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0.011, y: 0.139, z: 0.004}
+  m_LocalRotation: {x: 0.9705107, y: 0.14022583, z: -0.19402292, w: 0.028299082}
+  m_LocalPosition: {x: 0.122, y: 0.074, z: -0.08}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 3775239944581498422}
   m_RootOrder: 5
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_LocalEulerAnglesHint: {x: 6.277, y: -158.23, z: -195.235}
 --- !u!114 &3780201454214889364
 MonoBehaviour:
   m_ObjectHideFlags: 0

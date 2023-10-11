@@ -20,14 +20,14 @@ public class PoisonedEffect : CharacterEffect
 
                 if(player != null)
                 {
-                    player.playerEffectsManager.poisonAmountBar.SetPoisonAmount(Mathf.RoundToInt(character.characterStatsManager.poisonAmount));
+                    player.GameSceneUI.m_StatBarsUI.RefreshUI(Define.E_StatUI.Posion);
                 }
             }
             else
             {
                 character.characterStatsManager.isPoisoned = false;
                 character.characterStatsManager.poisonAmount = 0;
-                player.playerEffectsManager.poisonAmountBar.SetPoisonAmount(-1);
+                player.GameSceneUI.m_StatBarsUI.RefreshUI(Define.E_StatUI.Posion);
             }
         }
         else

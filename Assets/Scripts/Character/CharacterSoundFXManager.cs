@@ -90,4 +90,14 @@ public class CharacterSoundFXManager : MonoBehaviour
             PlayRandomSound(E_RandomSoundType.WeaponWhoose, character.characterEquipmentManager.m_CurrentHandRightWeapon.weaponWhooshes);
         }
     }
+
+    public virtual void FootStep()
+    {
+        // 현재 지형에 따라
+
+        // 현재 걷는지, 띄는지, 점프 하는지에 따라
+
+        Managers.Sound.Play("Sounds/Character/FootStep/");
+
+    }
 }
