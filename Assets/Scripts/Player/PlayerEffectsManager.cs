@@ -35,7 +35,7 @@ public class PlayerEffectsManager : CharacterEffectsManager
 
     protected override void ProcessBuildUpDecay()
     {
-        if(player.characterStatsManager.poisonBuildup >= 0)
+        if(player.characterStatsManager.poisonBuildup > 0)
         {
             player.characterStatsManager.poisonBuildup -= 1;
 

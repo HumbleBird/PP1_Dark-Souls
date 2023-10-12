@@ -43,8 +43,6 @@ public class StatBarsUI : UI_Base
         BindImage(typeof(Images));
         BindObject(typeof(GameObjects));
 
-        m_Player = Managers.Object.m_MyPlayer;
-
         m_HealthBarFill       = GetImage((int)Images.HealthBarFill      );
         m_DownHealthBarFill = GetImage((int)Images.DownHealthBarFill);
         m_StaminaBarFill      = GetImage((int)Images.StaminaBarFill     );
@@ -57,6 +55,11 @@ public class StatBarsUI : UI_Base
         m_PoisonBar.SetActive(false);
 
         return true;
+    }
+
+    public void Start()
+    {
+        m_Player = Managers.Object.m_MyPlayer;
     }
 
     public void RefreshUI(E_StatUI stat)

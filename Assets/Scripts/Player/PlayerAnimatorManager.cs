@@ -100,4 +100,9 @@ public class PlayerAnimatorManager : CharacterAnimatorManager
             character.characterEquipmentManager.m_CurrentHandConsumable.SucessToConsumeItem(player);
         }
     }
+
+    public override void RollCameraShake()
+    {
+        Managers.Camera.CameraShake(1);
+    }
 }

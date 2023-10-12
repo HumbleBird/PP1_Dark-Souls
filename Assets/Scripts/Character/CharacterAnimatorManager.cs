@@ -272,6 +272,11 @@ public class CharacterAnimatorManager : MonoBehaviour
     {
 
     }
+
+    public virtual void RollCameraShake()
+    {
+
+    }
 }
 
 

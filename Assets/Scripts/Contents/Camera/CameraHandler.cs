@@ -6,22 +6,23 @@ public class CameraHandler : MonoBehaviour
 {
     #region Variable
 
+    // Camera Holder 카메라의 위치를
+    // Camera Pivot 카메라의 특수 효과 위치를 (Zoom, Shake)
+
     InputHandler inputHandler;
     PlayerManager playerManager;
 
-    public Transform targetTransform;  // 플레이어를 따라감
-    public Transform targetTransformWhileAiming; // 플레이어를 따라감 aim 중일 때 한정
-    public Transform cameraTransform;
-    public Camera cameraObject;
-    public Transform cameraPivotTranform;
+    public Transform targetTransform;            // 플레이어의 위치
+    public Transform targetTransformWhileAiming; // Aim 중일 때의 카메라 위치
+    public Transform cameraTransform;            // Main Camera의 Transform
+    public Transform cameraPivotTranform;        // Camera pivot의 Transform
+    public Camera cameraObject;                  // Main Camera
 
     private Vector3 cameraTransformPosition;
     private Vector3 cameraFollwVelocity = Vector3.zero;
 
     public LayerMask ignoreLayers;
     public int CharacterLayer = 9;
-
-    public static CameraHandler singleton;
 
     public float leftAndRightLookSpeed = 250f;
     public float leftAndRightAimingLookSpeed = 25f;
@@ -59,10 +60,9 @@ public class CameraHandler : MonoBehaviour
 
     private void Awake()
     {
-        singleton = this;
         defaultPosition = cameraTransform.localPosition.z;
         ignoreLayers = ~(1 << 8 | 1 << 9 | 1 << 10 |  1 << 12);
-        cameraObject = GetComponentInChildren<Camera>();
+        cameraObject = Camera.main;
         Managers.Camera.m_Camera = this;
     }
 

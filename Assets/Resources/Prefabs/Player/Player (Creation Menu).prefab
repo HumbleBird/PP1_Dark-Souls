@@ -146,7 +146,7 @@ MonoBehaviour:
   pendingCriticalDamage: 0
   inputHandler: {fileID: 0}
   cameraHandler: {fileID: 0}
-  m_GameUIManager: {fileID: 0}
+  GameSceneUI: {fileID: 0}
   playerStatsManager: {fileID: 0}
   playerWeaponSlotManager: {fileID: 0}
   playerCombatManager: {fileID: 0}
@@ -273,10 +273,10 @@ MonoBehaviour:
   m_iCurrentAmmoBoltIndex: 0
   m_iCurrentConsumableItemndex: 0
   m_bIsFemale: 0
-  Naked_HelmetEquipment: {fileID: 0}
-  Naked_TorsoEquipment: {fileID: 0}
-  Naked_LegEquipment: {fileID: 0}
-  Naked_HandEquipment: {fileID: 0}
+  Naked_HelmetEquipment: {fileID: 11400000, guid: 988aab8869179614eae84faa3284d2a2, type: 2}
+  Naked_TorsoEquipment: {fileID: 11400000, guid: 2cf022a44c0c75c4d81f4804639beeef, type: 2}
+  Naked_LegEquipment: {fileID: 11400000, guid: f98e935e2857ce846ade7b13ea0eee98, type: 2}
+  Naked_HandEquipment: {fileID: 11400000, guid: 941c776a633cbfb4ca0eabe7b8a67b81, type: 2}
   facialFeatures: []
   currentHairStyle: {fileID: 0}
   currentHairItem: {fileID: 0}
@@ -310,7 +310,6 @@ MonoBehaviour:
   leftWeaponManager: {fileID: 0}
   rightWeaponBuffEffect: {fileID: 0}
   buildUpTransform: {fileID: 0}
-  poisonAmountBar: {fileID: 0}
   currentParticleFX: {fileID: 0}
   instantiatedFXModel2: {fileID: 0}
   amountToBeHealed: 0
@@ -541,9 +540,6 @@ MonoBehaviour:
   isPoisoned: 0
   poisonBuildup: 0
   poisonAmount: 100
-  healthBar: {fileID: 0}
-  staminaBar: {fileID: 0}
-  focusPointBar: {fileID: 0}
   playerLevel: 9
   m_iVigorLevel: 1000
   m_iAttunementLevel: 1000

@@ -21,10 +21,14 @@ public class QuickSlotsUI : UI_Base
             return false;
 
         BindImage(typeof(Images));
-        player = Managers.Object.m_MyPlayer;
-        RefreshUI();
 
         return true;
+    }
+
+    public void Start()
+    {
+        player = Managers.Object.m_MyPlayer;
+        RefreshUI();
     }
 
     public override void RefreshUI()
