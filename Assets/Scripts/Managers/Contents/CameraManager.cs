@@ -9,6 +9,6 @@ public class CameraManager
 
     public void CameraShake(int id)
     {
-        //m_CameraEffectController.Shake(id);
+        m_CameraEffectController.Shake(id);
     }
 }

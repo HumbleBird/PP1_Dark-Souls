@@ -9,7 +9,7 @@ public class Define
 
     public enum E_ItemType
     {
-        Tool,
+        Tool = 1,
         ReinforcedMaterial,
         Valuables,
         Magic,

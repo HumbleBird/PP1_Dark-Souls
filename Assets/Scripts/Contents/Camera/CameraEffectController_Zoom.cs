@@ -5,6 +5,9 @@ using static Define;
 
 public partial class CameraEffectController : MonoBehaviour
 {
+    public Transform m_CameraZoomTr;
+
+
     public bool m_IsCameraAni = false;
     public bool m_IsFallowMy;
     public float m_ZoomDelta = 0f;
@@ -31,13 +34,47 @@ public partial class CameraEffectController : MonoBehaviour
     }
 
     cZoomInfo m_ZoomInfo = new cZoomInfo();
-    //bool m_IsEndStage = false;
+    bool m_IsEndStage = false;
 
     protected void ResetZoom()
     {
         m_ZoomDelta = 0f;
-        //m_IsEndStage = false;
+        m_IsEndStage = false;
         m_IsFallowMy = true;
+    }
+
+    public void Zoom(int CameraID)
+    {
+        // 아이디 받아와서 넘기기
+    }
+
+    // 카메라 연출, 카메라 앞으로 뒤로만, 오브젝트를 주위를 회전하는 것은 애니메이션으로 처리할 것.
+    public void Zoom(float Startdelay, float ZoomDest,
+        float BlendInTime, float Duration, float BlendOutTime, Vector3 vDeltaPos)
+    {
+        m_ZoomInfo.m_FadeIn_Time = (BlendInTime * Time.timeScale);
+        m_ZoomInfo.m_FadeOut_Time = (BlendOutTime * Time.timeScale);
+
+        m_ZoomInfo.m_StartDelay = Startdelay;
+        m_ZoomInfo.m_Dest = ZoomDest;
+        m_ZoomInfo.m_IsZoom = (m_ZoomInfo.m_Dest < 0);
+        m_ZoomInfo.m_Duration = Duration * Time.timeScale;
+        m_ZoomInfo.m_FadeIn_Velocity = (m_ZoomInfo.m_Dest) / m_ZoomInfo.m_FadeIn_Time;
+        m_ZoomInfo.m_FadeOut_Velocity = (-m_ZoomInfo.m_Dest) / m_ZoomInfo.m_FadeOut_Time;
+
+        if (vDeltaPos != Vector3.zero)
+        {
+            vDeltaPos.z = 0;
+            float lenth = vDeltaPos.magnitude;
+            m_ZoomInfo.m_FadeIn_MoveSpeed = lenth / m_ZoomInfo.m_FadeIn_Time;
+            m_ZoomInfo.m_FadeOut_MoveSpeed = lenth / m_ZoomInfo.m_FadeOut_Time;
+            vDeltaPos.Normalize();
+        }
+        m_ZoomInfo.m_DeltaDir = vDeltaPos;
+
+        StopCoroutine(ZoomCoroutine());
+        ResetZoom();
+        StartCoroutine(ZoomCoroutine());
     }
 
     IEnumerator ZoomCoroutine()
@@ -49,7 +86,7 @@ public partial class CameraEffectController : MonoBehaviour
             yield return new WaitForSeconds(m_ZoomInfo.m_StartDelay);
         }
 
-        Transform trCon = transform.parent.parent;
+        Transform trCon = m_CameraZoomTr;
         bool bMoveCamera = false;
 
         if(m_ZoomInfo.m_DeltaDir != Vector3.zero)
@@ -98,8 +135,6 @@ public partial class CameraEffectController : MonoBehaviour
 
             yield return null;
         }
-
-        Debug.Break();
 
         if(m_ZoomInfo.m_Duration > 0)
         {
@@ -280,40 +315,6 @@ public partial class CameraEffectController : MonoBehaviour
         }
 
         Destroy(filter);
-    }
-
-    public void Zoom(int CameraID)
-    {
-        // 아이디 받아와서 넘기기
-    }
-
-    // 카메라 연출, 카메라 앞으로 뒤로만, 오브젝트를 주위를 회전하는 것은 애니메이션으로 처리할 것.
-    public void Zoom(float Startdelay, float ZoomDest,
-        float BlendInTime, float Duration, float BlendOutTime, Vector3 vDeltaPos) 
-    {
-        m_ZoomInfo.m_FadeIn_Time = (BlendInTime * Time.timeScale);
-        m_ZoomInfo.m_FadeOut_Time = (BlendOutTime * Time.timeScale);
-
-        m_ZoomInfo.m_StartDelay = Startdelay;
-        m_ZoomInfo.m_Dest = ZoomDest;
-        m_ZoomInfo.m_IsZoom = (m_ZoomInfo.m_Dest < 0);
-        m_ZoomInfo.m_Duration = Duration * Time.timeScale;
-        m_ZoomInfo.m_FadeIn_Velocity = (m_ZoomInfo.m_Dest) / m_ZoomInfo.m_FadeIn_Time;
-        m_ZoomInfo.m_FadeOut_Velocity = (-m_ZoomInfo.m_Dest) / m_ZoomInfo.m_FadeOut_Time;
-
-        if(vDeltaPos != Vector3.zero)
-        {
-            vDeltaPos.z = 0;
-            float lenth = vDeltaPos.magnitude;
-            m_ZoomInfo.m_FadeIn_MoveSpeed = lenth / m_ZoomInfo.m_FadeIn_Time;
-            m_ZoomInfo.m_FadeOut_MoveSpeed = lenth / m_ZoomInfo.m_FadeOut_Time;
-            vDeltaPos.Normalize();
-        }
-        m_ZoomInfo.m_DeltaDir = vDeltaPos;
-
-        StopCoroutine(ZoomCoroutine());
-        ResetZoom();
-        StartCoroutine(ZoomCoroutine());
     }
 
     // 보스 잡았을 때 블러효과를 줌

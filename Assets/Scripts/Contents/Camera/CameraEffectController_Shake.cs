@@ -4,13 +4,6 @@ using UnityEngine;
 
 public partial class CameraEffectController : MonoBehaviour
 {
-    private bool m_bCameraShake = false;
-
-    Transform m_ShakeTr;
-
-    public float LEFT { get; set; } = 0.1f;
-    public float RIGHT { get; set; } = -0.1f;
-
     public class cShakeInfo
     {
         public float m_StartDelay;
@@ -33,6 +26,14 @@ public partial class CameraEffectController : MonoBehaviour
         public float m_Damping;
         public float m_DampingTime;
     }
+    
+    private bool m_bCameraShake = false;
+
+    public Transform m_CameraShakeTr;
+    Transform m_ShakeTr;
+
+    public float LEFT { get; set; } = 0.1f;
+    public float RIGHT { get; set; } = -0.1f;
 
     cShakeInfo m_ShakeInfo = new cShakeInfo();
 
@@ -43,14 +44,14 @@ public partial class CameraEffectController : MonoBehaviour
 
     public void Awake()
     {
-        m_vOrgPos = transform.position;
+        m_vOrgPos = m_CameraShakeTr.localPosition;
 
         InitShake();
     }
 
     protected void InitShake()
     {
-        m_ShakeTr = transform.parent;
+        m_ShakeTr = m_CameraShakeTr;
         m_bCameraShake = false;
     }
 
@@ -132,12 +133,12 @@ public partial class CameraEffectController : MonoBehaviour
             {
                 m_ShakeTr.localPosition += m_ShakeInfo.m_Dir * dist;
 
-                float rc = transform.position.x - m_CameraFOV_X - LEFT;
+                float rc = transform.localPosition.x - m_CameraFOV_X - LEFT;
 
                 if (rc < 0)
                     m_ShakeTr.localPosition += new Vector3(-rc, 0, 0);
 
-                rc = RIGHT - (transform.position.x + m_CameraFOV_X);
+                rc = RIGHT - (transform.localPosition.x + m_CameraFOV_X);
 
                 if (rc < 0)
                     m_ShakeTr.localPosition += new Vector3(rc, 0, 0);
@@ -176,12 +177,12 @@ public partial class CameraEffectController : MonoBehaviour
                 m_ShakeTr.localPosition = m_ShakeInfo.m_Dest -
                     m_ShakeInfo.m_Dir * (-m_ShakeInfo.m_RemainDist);
 
-                float rc = transform.position.x - m_CameraFOV_X - LEFT;
+                float rc = transform.localPosition.x - m_CameraFOV_X - LEFT;
 
                 if (rc < 0)
                     m_ShakeTr.localPosition += new Vector3(-rc, 0, 0);
 
-                rc = RIGHT - (transform.position.x + m_CameraFOV_X);
+                rc = RIGHT - (transform.localPosition.x + m_CameraFOV_X);
 
                 if (rc < 0)
                     m_ShakeTr.localPosition += new Vector3(rc, 0, 0);

@@ -132,6 +132,7 @@ public class CameraHandler : MonoBehaviour
         rotation.x = upAndDownAngle;
 
         targetRotation = Quaternion.Euler(rotation);
+
         cameraPivotTranform.localRotation = targetRotation;
 
     }

@@ -143,6 +143,7 @@ public class PlayerLocomotionManager : CharacterLocomotionManager
             }
         }
 
+        // Player Movement
         if (player.isSprinting && player.inputHandler.moveAmount > 0.5f)
         {
             player.characterController.Move(moveDirection * sprintSpeed * Time.deltaTime);
@@ -160,6 +161,7 @@ public class PlayerLocomotionManager : CharacterLocomotionManager
             }
         }
 
+        // Animator Parameters Value Change
         if(player.inputHandler.lockOnFlag && player.isSprinting == false)
         {
             player.playerAnimatorManager.UpdateAnimatorValues(player.inputHandler.moveAmount, player.inputHandler.horizontal, player.isSprinting);
@@ -175,7 +177,10 @@ public class PlayerLocomotionManager : CharacterLocomotionManager
     public void HandleRollingAndSprinting()
     {
         if (player.playerStatsManager.currentStamina <= 0)
-            return; 
+        {
+            player.inputHandler.rollFlag = false;
+            return;
+        }
 
         if (player.inputHandler.rollFlag)
         {

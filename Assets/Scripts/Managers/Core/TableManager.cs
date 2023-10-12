@@ -23,20 +23,20 @@ public class TableManager
     public void Init()
     {
 #if UNITY_EDITOR
-        m_Camera.Init_CSV("Camera", 2, 0);
-        m_Stat.Init_CSV("Stat", 2, 0);
-        m_Attack.Init_CSV("Attack", 2, 0);
-        m_Player.Init_CSV("Player", 2, 0);
-        m_Boss.Init_CSV("Boss", 2, 0);
-        m_AI.Init_CSV("AI", 2, 0);
-        m_Monster.Init_CSV("Monster", 2, 0);
-        m_Item.Init_CSV("Item", 2, 0);
-        m_Item_Weapon.Init_CSV("Weapon", 2, 0);
-        m_Item_Armor.Init_CSV("Armor", 2, 0);
-        m_Item_Consumable.Init_CSV("Consumable", 2, 0);
-        m_Sound.Init_CSV("Sound", 2, 0);
-        m_Dialogue.Init_CSV("Dialogue", 2, 0);
-        m_Shop.Init_CSV("Shop", 2, 0);
+        m_Camera.Init_CSV("Camera_Shake", 2, 0);
+        //m_Stat.Init_CSV("Stat", 2, 0);
+        //m_Attack.Init_CSV("Attack", 2, 0);
+        //m_Player.Init_CSV("Player", 2, 0);
+        //m_Boss.Init_CSV("Boss", 2, 0);
+        //m_AI.Init_CSV("AI", 2, 0);
+        //m_Monster.Init_CSV("Monster", 2, 0);
+        //m_Item.Init_CSV("Item", 2, 0);
+        //m_Item_Weapon.Init_CSV("Weapon", 2, 0);
+        //m_Item_Armor.Init_CSV("Armor", 2, 0);
+        //m_Item_Consumable.Init_CSV("Consumable", 2, 0);
+        //m_Sound.Init_CSV("Sound", 2, 0);
+        //m_Dialogue.Init_CSV("Dialogue", 2, 0);
+        //m_Shop.Init_CSV("Shop", 2, 0);
 #else
         m_Camera.Init_Binary("Camera");
 #endif
@@ -45,19 +45,19 @@ public class TableManager
     public void Save()
     {
         m_Camera.Save_Binary("Camera");
-        m_Stat.Save_Binary("Stat");
-        m_Attack.Save_Binary("Attack");
-        m_Player.Save_Binary("Player");
-        m_Boss.Save_Binary("Boss");
-        m_AI.Save_Binary("AI");
-        m_Monster.Save_Binary("Monster");
-        m_Item.Save_Binary("Item");
-        m_Item_Weapon.Save_Binary("Weapon");
-        m_Item_Armor.Save_Binary("Armor");
-        m_Item_Consumable.Save_Binary("Consumable");
-        m_Sound.Save_Binary("Sound");
-        m_Dialogue.Save_Binary("Dialogue");
-        m_Shop.Save_Binary("Shop");
+        //m_Stat.Save_Binary("Stat");
+        //m_Attack.Save_Binary("Attack");
+        //m_Player.Save_Binary("Player");
+        //m_Boss.Save_Binary("Boss");
+        //m_AI.Save_Binary("AI");
+        //m_Monster.Save_Binary("Monster");
+        //m_Item.Save_Binary("Item");
+        //m_Item_Weapon.Save_Binary("Weapon");
+        //m_Item_Armor.Save_Binary("Armor");
+        //m_Item_Consumable.Save_Binary("Consumable");
+        //m_Sound.Save_Binary("Sound");
+        //m_Dialogue.Save_Binary("Dialogue");
+        //m_Shop.Save_Binary("Shop");
 
 #if UNITY_EDITOR
         AssetDatabase.Refresh();

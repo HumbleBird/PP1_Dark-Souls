@@ -42,13 +42,16 @@ public class CameraFilterPack_Blur_Focus : MonoBehaviour
 
     private void Awake()
     {
-        m_MyPlayer2DPos = Managers.Object.Find(1).transform;
-
         ChangeCenterX = CenterX;
         ChangeCenterY = CenterY;
         ChangeSize = _Size;
         ChangeEyes = _Eyes;
         SCShader = Shader.Find("CameraFilterPack/Blur_Focus");
+    }
+
+    private void Start()
+    {
+        m_MyPlayer2DPos = Managers.Object.m_MyPlayer.transform;
     }
 
     void OnRenderImage(RenderTexture sourceTexture, RenderTexture destTexture)
