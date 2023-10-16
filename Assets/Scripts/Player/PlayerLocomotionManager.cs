@@ -170,8 +170,6 @@ public class PlayerLocomotionManager : CharacterLocomotionManager
         {
             player.playerAnimatorManager.UpdateAnimatorValues(player.inputHandler.moveAmount, 0, player.isSprinting);
         }
-
-
     }
 
     public void HandleRollingAndSprinting()

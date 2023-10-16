@@ -1,0 +1,22 @@
+using System.Collections;
+using System.Collections.Generic;
+using UnityEngine;
+
+public class PickUpDeadSouls : Interactable
+{
+    protected override void Awake()
+    {
+        base.Awake();
+
+        interactableText = "Recover lost souls"; // ÀÒ¾î¹ö¸° ¼Ò¿ïÀ» µÇÃ£´Â´Ù
+
+
+    }
+
+    public override void Interact(PlayerManager playermanager)
+    {
+        // souls restrived ÆË¾÷ ¶ÙÀ¨
+        // sound
+        // ¼Ò¿ï ³Ö±â
+    }
+}

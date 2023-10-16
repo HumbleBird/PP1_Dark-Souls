@@ -104,11 +104,7 @@ public class TakeDamageEffect : CharacterEffect
 
         if (character.characterStatsManager.currentHealth <= 0)
         {
-            character.characterStatsManager.currentHealth = 0;
-            character.isDead = true;
-
-            // 플레이어의 카메라 focus on 해제
-
+            character.Dead();
         }
     }
 
@@ -287,6 +283,7 @@ public class TakeDamageEffect : CharacterEffect
         {
             character.characterWeaponSlotManager.CloseDamageCollider();
             character.characterAnimatorManager.PlayTargetAnimation("Dead_01", true);
+            return;
         }
 
         // 캐릭터 poise broken이 되지 않았다면, 데미지 애니메이션을 재생하지 않는다

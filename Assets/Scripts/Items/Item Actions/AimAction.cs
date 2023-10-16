@@ -14,7 +14,7 @@ public class AimAction : ItemAction
 
         if(player != null)
         {
-            player.GameSceneUI.m_goCrosshair.SetActive(true);
+            player.m_GameSceneUI.m_goCrosshair.SetActive(true);
         }
         character.isAiming = true;
     }

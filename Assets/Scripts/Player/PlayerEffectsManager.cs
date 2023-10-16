@@ -39,9 +39,9 @@ public class PlayerEffectsManager : CharacterEffectsManager
         {
             player.characterStatsManager.poisonBuildup -= 1;
 
-            if(player.GameSceneUI != null)
+            if(player.m_GameSceneUI != null)
             {
-                player.GameSceneUI.m_StatBarsUI.RefreshUI(Define.E_StatUI.Posion);
+                player.m_GameSceneUI.m_StatBarsUI.RefreshUI(Define.E_StatUI.Posion);
             }
         }
     }

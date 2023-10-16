@@ -20,6 +20,9 @@ public class CharacterManager : MonoBehaviour
     [Header("Ray Casts")]
     public Transform criticalAttackRayCastStartPoint;
 
+    [Header("Start Pos")]
+    public Vector3 m_StartPos;
+    public Vector3 m_StartRo;
 
     [Header("IsInteraction")]
     public bool isInteracting;
@@ -71,6 +74,8 @@ public class CharacterManager : MonoBehaviour
         characterSoundFXManager = GetComponent<CharacterSoundFXManager>();
         characterCombatManager = GetComponent<CharacterCombatManager>();
         characterEquipmentManager = GetComponent<CharacterEquipmentManager>();
+
+        Managers.Object.Add(gameObject);
     }
 
     protected virtual void Start()
@@ -115,5 +120,30 @@ public class CharacterManager : MonoBehaviour
         }
     }
 
+    // 초기화
+    public virtual void InitCharacterManager()
+    {
+        animator.SetFloat("Vertical", 0);
+        animator.SetFloat("Horizontal", 0);
+
+        // 체력 값 초기화
+        characterStatsManager.InitStats();
+
+        // 위치 초기화
+        transform.position = m_StartPos;
+        transform.eulerAngles = m_StartRo;
+
+        isDead = false;
+
+        isInteracting = false;
+    }
+
+    // 죽었을 때
+    public virtual void Dead()
+    {
+        characterStatsManager.currentHealth = 0;
+        isDead = true;
+
+    }
 }
  

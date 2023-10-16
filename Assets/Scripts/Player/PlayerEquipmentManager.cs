@@ -563,7 +563,7 @@ public class PlayerEquipmentManager : CharacterEquipmentManager
                 }
             }
 
-            player.GameSceneUI.quickSlotsUI.RefreshUI();
+            player.m_GameSceneUI.quickSlotsUI.RefreshUI();
 
         }
 
@@ -602,12 +602,12 @@ public class PlayerEquipmentManager : CharacterEquipmentManager
         if (m_ConsumableItemSlots[m_iCurrentConsumableItemndex] != null)
         {
             m_CurrentHandConsumable = m_ConsumableItemSlots[m_iCurrentConsumableItemndex];
-            player.GameSceneUI.quickSlotsUI.RefreshUI();
+            player.m_GameSceneUI.quickSlotsUI.RefreshUI();
         }
         else
         {
             m_CurrentHandConsumable = null;
-            player.GameSceneUI.quickSlotsUI.RefreshUI();
+            player.m_GameSceneUI.quickSlotsUI.RefreshUI();
         }
         // Spell Item
     }

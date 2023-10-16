@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using TMPro;
+using static Define;
 
 public class GameSceneUI : UI_Scene
 {
@@ -16,6 +17,7 @@ public class GameSceneUI : UI_Scene
         SoulCountText,
     }
 
+    [Header("Childes")]
     public QuickSlotsUI quickSlotsUI;
     public TextMeshProUGUI m_textSoulCount;
     public StatBarsUI m_StatBarsUI;
@@ -23,7 +25,11 @@ public class GameSceneUI : UI_Scene
     public UIBossHealthBar m_BossHealthBar;
     public AreaUI m_AreaUI;
 
+    Animator m_animator;
+
     PlayerManager m_Player;
+
+    public FadeInOutScreenUI m_FadeInOutScreenUI;
 
     public override bool Init()
     {
@@ -41,8 +47,12 @@ public class GameSceneUI : UI_Scene
         m_StatBarsUI = GetComponentInChildren<StatBarsUI>();
         m_AreaUI = GetComponentInChildren<AreaUI>();
 
-
         m_goCrosshair.SetActive(false);
+
+        m_FadeInOutScreenUI = GetComponentInChildren<FadeInOutScreenUI>();
+
+        m_animator = GetComponent<Animator>();
+
         return true;
     }
 
@@ -50,13 +60,24 @@ public class GameSceneUI : UI_Scene
     {
         m_Player = Managers.Object.m_MyPlayer;
 
-        m_textSoulCount.text = m_Player.playerStatsManager.currentSoulCount.ToString();
+        RefreshUI();
     }
 
-    public override void RefreshUI()
+    public void RefreshUI(E_StatUI stat = E_StatUI.All)
     {
         base.RefreshUI();
 
         m_textSoulCount.text = m_Player.playerStatsManager.currentSoulCount.ToString();
+        m_StatBarsUI.RefreshUI(stat);
+    }
+
+    public void ShowYouDied()
+    {
+        m_animator.Play("YouDied");
+    }
+
+    public void DeadSoundPlay()
+    {
+        Managers.Sound.Play("Sounds/Effect/Dead");
     }
 }

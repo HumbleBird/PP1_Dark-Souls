@@ -67,39 +67,22 @@ public class StatBarsUI : UI_Base
         switch (stat)
         {
             case E_StatUI.Hp:
-                m_HealthBarFill.fillAmount = m_Player.playerStatsManager.currentHealth / (float)m_Player.playerStatsManager.maxHealth;
-                StartCoroutine(DownHP());
+                RefreshHPBar();
                 break;
             case E_StatUI.Stamina:
-                m_StaminaBarFill.fillAmount = m_Player.playerStatsManager.currentStamina / (float)m_Player.playerStatsManager.maxStamina;
+                RefreshStaminaBar();
                 break;
             case E_StatUI.FocusPoint:
-                m_FocusPointBarFill.fillAmount = m_Player.playerStatsManager.currentFocusPoints / (float)m_Player.playerStatsManager.maxfocusPoint;
+                RefreshFocusPointBar();
                 break;
             case E_StatUI.Posion:
-                m_PoisonBar.SetActive(true);
-
-                // 중독 전
-                if (m_Player.playerStatsManager.isPoisoned == false)
-                {
-                    m_PoisonBuildDownFill.gameObject.SetActive(false);
-
-                    m_PoisonBuildUpFill.gameObject.SetActive(true);
-                    m_PoisonBuildUpFill.fillAmount = m_Player.playerStatsManager.poisonBuildup / (float)m_Player.playerStatsManager.poisonAmount;
-                    
-                    if(m_Player.playerStatsManager.poisonBuildup <= m_Player.playerStatsManager.poisonAmount)
-                        m_PoisonBar.SetActive(true);
-                }
-                // 중독 후
-                else
-                {
-                    m_PoisonBuildUpFill.gameObject.SetActive(false);
-
-                    m_PoisonBuildDownFill.gameObject.SetActive(true);
-                    m_PoisonBuildDownFill.fillAmount = m_Player.playerStatsManager.poisonBuildup / (float)m_Player.playerStatsManager.poisonAmount;
-                }
+                RefreshPoisonBar();
                 break;
             case E_StatUI.All:
+                RefreshHPBar();
+                RefreshStaminaBar();
+                RefreshFocusPointBar();
+                RefreshPoisonBar();
                 break;
             default:
                 break;
@@ -120,6 +103,50 @@ public class StatBarsUI : UI_Base
             }
 
             yield return null;
+        }
+    }
+
+    void RefreshHPBar()
+    {
+        m_HealthBarFill.fillAmount = m_Player.playerStatsManager.currentHealth / (float)m_Player.playerStatsManager.maxHealth;
+        StartCoroutine(DownHP());
+    }
+
+    void RefreshStaminaBar()
+    {
+        m_StaminaBarFill.fillAmount = m_Player.playerStatsManager.currentStamina / (float)m_Player.playerStatsManager.maxStamina;
+
+    }
+
+    void RefreshFocusPointBar()
+    {
+        m_FocusPointBarFill.fillAmount = m_Player.playerStatsManager.currentFocusPoints / (float)m_Player.playerStatsManager.maxfocusPoint;
+
+    }
+
+    void RefreshPoisonBar()
+    {
+        m_PoisonBar.SetActive(true);
+
+        // 중독 전
+        if (m_Player.playerStatsManager.isPoisoned == false)
+        {
+            m_PoisonBuildDownFill.gameObject.SetActive(false);
+
+            m_PoisonBuildUpFill.gameObject.SetActive(true);
+            m_PoisonBuildUpFill.fillAmount = m_Player.playerStatsManager.poisonBuildup / (float)m_Player.playerStatsManager.poisonAmount;
+
+            if (m_Player.playerStatsManager.poisonBuildup <= m_Player.playerStatsManager.poisonAmount)
+                m_PoisonBar.SetActive(false);
+        }
+        // 중독 후
+        else
+        {
+            m_PoisonBuildUpFill.gameObject.SetActive(false);
+
+            m_PoisonBuildDownFill.gameObject.SetActive(true);
+            m_PoisonBuildDownFill.fillAmount = m_Player.playerStatsManager.poisonBuildup / (float)m_Player.playerStatsManager.poisonAmount;
+
         }
     }
 }

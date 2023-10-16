@@ -400,7 +400,7 @@ public class LevelUpUI : UI_Popup
 
         // 소울 비용 계산
         playerManager.playerStatsManager.currentSoulCount -= m_iRequiredSouls;
-        playerManager.GameSceneUI.m_textSoulCount.text = playerManager.playerStatsManager.currentSoulCount.ToString();
+        playerManager.m_GameSceneUI.m_textSoulCount.text = playerManager.playerStatsManager.currentSoulCount.ToString();
         m_iRequiredSouls = 0;
 
         // Celar 

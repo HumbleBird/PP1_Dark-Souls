@@ -67,11 +67,11 @@ public class PlayerWeaponSlotManager : CharacterWeaponSlotManager
             }
         }
 
-        if(player.GameSceneUI != null)
+        if(player.m_GameSceneUI != null)
         {
-            if(player.GameSceneUI.quickSlotsUI != null)
+            if(player.m_GameSceneUI.quickSlotsUI != null)
             {
-                player.GameSceneUI.quickSlotsUI.RefreshUI();
+                player.m_GameSceneUI.quickSlotsUI.RefreshUI();
             }
         }
     }

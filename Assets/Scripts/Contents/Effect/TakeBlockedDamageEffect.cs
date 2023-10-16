@@ -112,13 +112,12 @@ public class TakeBlockedDamageEffect : CharacterEffect
         PlayerManager player = character as PlayerManager;
         if (player != null)
         {
-            player.GameSceneUI.m_StatBarsUI.RefreshUI(E_StatUI.Hp);
+            player.m_GameSceneUI.m_StatBarsUI.RefreshUI(E_StatUI.Hp);
         }
 
         if (character.characterStatsManager.currentHealth <= 0)
         {
-            character.characterStatsManager.currentHealth = 0;
-            character.isDead = true;
+            character.Dead();
         }
     }
 

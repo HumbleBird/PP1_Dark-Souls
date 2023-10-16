@@ -91,6 +91,7 @@ public class CharacterSoundFXManager : MonoBehaviour
         }
     }
 
+    // 플레이어 몸 자체에서 보냄.
     public virtual void FootStep()
     {
         // 현재 지형에 따라
@@ -98,6 +99,11 @@ public class CharacterSoundFXManager : MonoBehaviour
         // 현재 걷는지, 띄는지, 점프 하는지에 따라
 
         Managers.Sound.Play("Sounds/Character/FootStep/");
+
+    }
+
+    public virtual void DeadSoundPlay()
+    {
 
     }
 }

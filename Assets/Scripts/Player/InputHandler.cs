@@ -342,7 +342,7 @@ public class InputHandler : MonoBehaviour
             if (player.isAiming)
             {
                 player.isAiming = false;
-                player.GameSceneUI.m_goCrosshair.SetActive(false);
+                player.m_GameSceneUI.m_goCrosshair.SetActive(false);
                 player.cameraHandler.ResetAimCameraRotations();
             }
 
@@ -421,13 +421,13 @@ public class InputHandler : MonoBehaviour
             if(selectFlag)
             {
                 Managers.UI.ShowPopupUI<SelectUI>();
-                player.GameSceneUI.gameObject.SetActive(false);
+                player.m_GameSceneUI.gameObject.SetActive(false);
             }
             // 선택 창을 끄는 거라면
             else
             {
                 Managers.UI.ClosePopupUI();
-                player.GameSceneUI.gameObject.SetActive(true);
+                player.m_GameSceneUI.gameObject.SetActive(true);
             }
         }
     }

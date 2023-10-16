@@ -54,7 +54,6 @@ public class PlayerStatsManager : CharacterStatsManager
 
     public float spritingTimer = 0;
 
-
     protected override void Awake()
     {
         base.Awake();
@@ -63,27 +62,40 @@ public class PlayerStatsManager : CharacterStatsManager
 
     }
 
-    public void SetAbilityValueFromLevel()
+    protected override void Start()
+    {
+        base.Start();
+
+        SetAbilityValueFromLevel();
+    }
+
+    public override void SetAbilityValueFromLevel()
     {
         maxHealth = SetMaxHealth();
         maxStamina = SetMaxStamina();
         maxfocusPoint = SetMaxfocusPoints();
 
+        InitStats();
+    }
+
+    public override void InitStats()
+    {
         currentHealth = maxHealth;
         currentStamina = maxStamina;
         currentFocusPoints = maxfocusPoint;
     }
 
+
+    // 게임 로드시 캐릭터 정보 로드
     public void LoadAbilityValue()
     {
         // 저장된 DB에서 능력치를 가져옴.
         // 최대, 현재 값들 등.
-
     }
+
 
     public override int SetMaxHealth()
     {
-
         maxHealth = m_iVigorLevel * 10;
         return maxHealth;
     }
@@ -100,7 +112,6 @@ public class PlayerStatsManager : CharacterStatsManager
         return maxfocusPoint;
     }
 
-
     public override void HandlePoiseResetTime()
     {
         base.HandlePoiseResetTime();
@@ -115,12 +126,11 @@ public class PlayerStatsManager : CharacterStatsManager
         }
     }
 
-
     public override void TakeDamageNoAnimation(int damage, int fireDamage)
     {
         base.TakeDamageNoAnimation(damage, fireDamage);
 
-        player.GameSceneUI.m_StatBarsUI.RefreshUI(E_StatUI.Hp);
+        player.m_GameSceneUI.m_StatBarsUI.RefreshUI(E_StatUI.Hp);
     }
 
     public override void TakePoisonDamage(int damage)
@@ -129,13 +139,12 @@ public class PlayerStatsManager : CharacterStatsManager
             return;
 
         base.TakePoisonDamage(damage);
-        player.GameSceneUI.m_StatBarsUI.RefreshUI(E_StatUI.Hp);
+        player.m_GameSceneUI.m_StatBarsUI.RefreshUI(E_StatUI.Hp);
 
 
         if (currentHealth <= 0)
         {
-            currentHealth = 0;
-            player.isDead = true;
+            player.Dead();
             player.playerAnimatorManager.PlayTargetAnimation("Dead_01", true);
         }
     }
@@ -143,7 +152,7 @@ public class PlayerStatsManager : CharacterStatsManager
     public override void DeductStamina(float staminaToDeduct)
     {
         currentStamina -= staminaToDeduct;
-        player.GameSceneUI.m_StatBarsUI.RefreshUI(E_StatUI.Stamina);
+        player.m_GameSceneUI.m_StatBarsUI.RefreshUI(E_StatUI.Stamina);
     }
 
     public  void DeductSprintingStamina(float staminaToDeduct)
@@ -156,7 +165,7 @@ public class PlayerStatsManager : CharacterStatsManager
             {
                 spritingTimer = 0;
                 currentStamina -= staminaToDeduct;
-                player.GameSceneUI.m_StatBarsUI.RefreshUI(E_StatUI.Stamina);
+                player.m_GameSceneUI.m_StatBarsUI.RefreshUI(E_StatUI.Stamina);
             }
         }
         else
@@ -187,7 +196,7 @@ public class PlayerStatsManager : CharacterStatsManager
                     currentStamina += staminaRegenerationAmount * Time.deltaTime;
                 }
 
-                player.GameSceneUI.m_StatBarsUI.RefreshUI(E_StatUI.Stamina);
+                player.m_GameSceneUI.m_StatBarsUI.RefreshUI(E_StatUI.Stamina);
 
             }
         }
@@ -199,7 +208,7 @@ public class PlayerStatsManager : CharacterStatsManager
     {
         base.HealCharacter(healAmount);
 
-        player.GameSceneUI.m_StatBarsUI.RefreshUI(E_StatUI.Hp);
+        player.m_GameSceneUI.m_StatBarsUI.RefreshUI(E_StatUI.Hp);
     }
 
     public void DeductFocusPoints(int focusPoints)
@@ -211,20 +220,20 @@ public class PlayerStatsManager : CharacterStatsManager
             currentFocusPoints = 0;
         }
 
-        player.GameSceneUI.m_StatBarsUI.RefreshUI(E_StatUI.FocusPoint);
+        player.m_GameSceneUI.m_StatBarsUI.RefreshUI(E_StatUI.FocusPoint);
     }
 
     public void AddSouls(int souls)
     {
         currentSoulCount += souls;
-        player.GameSceneUI.RefreshUI();
+        player.m_GameSceneUI.RefreshUI();
     }
 
     public override void HealthBarUIUpdate()
     {
         base.HealthBarUIUpdate();
 
-        player.GameSceneUI.m_StatBarsUI.RefreshUI(E_StatUI.Hp);
+        player.m_GameSceneUI.m_StatBarsUI.RefreshUI(E_StatUI.Hp);
     }
 
     public void CalculateAndSetMaxEquipload()

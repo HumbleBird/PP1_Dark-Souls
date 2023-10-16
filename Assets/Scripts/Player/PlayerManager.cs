@@ -11,7 +11,10 @@ public class PlayerManager : CharacterManager
     public CameraHandler cameraHandler;
 
     [Header("UI")]
-    public GameSceneUI GameSceneUI;
+    public GameSceneUI m_GameSceneUI;
+
+    [Header("Model")]
+    public GameObject m_goModel;
 
     [Header("Player")]
     public PlayerStatsManager playerStatsManager;
@@ -40,37 +43,30 @@ public class PlayerManager : CharacterManager
         playerEffectsManager = GetComponent<PlayerEffectsManager>();
 
         Managers.Object.m_MyPlayer = this;
-        Managers.Object.Add(1, gameObject);
-    }
-
-    void Init()
-    {
-        cameraHandler = FindObjectOfType<CameraHandler>();
-        GameSceneUI = FindObjectOfType<GameSceneUI>();
-
-        Managers.Camera.m_Camera.StartGame();
     }
 
     public void StartGame()
     {
-        Init();
+        // 위치
+        m_StartPos = new Vector3(36.36f, 4.95f, -14.23298f);
+        m_StartRo = new Vector3(0f, -90f, 0f);
 
-        if(Managers.Game.m_isNewGame)
-        {
-            // 위치
-            transform.eulerAngles = new Vector3(0f, -90f, 0f);
-            transform.position = Managers.Game.m_StartPoint;
+        //if (Managers.Game.m_isNewGame)
+        //{
+        //    // 위치
+        //    m_StartPos = new Vector3(36.36f, 4.95f, -14.23298f);
+        //    m_StartRo = new Vector3(0f, -90f, 0f);
+        //}
+        //// 정보 로드
+        //else
+        //{
 
-            // 스텟 레벨에 따른 능력치 정하기
-            playerStatsManager.SetAbilityValueFromLevel();
-        }
-    }
+        //}
 
+        cameraHandler = FindObjectOfType<CameraHandler>();
+        m_GameSceneUI = FindObjectOfType<GameSceneUI>();
 
-    protected override void Start()
-    {
-        base.Start();
-
+        Managers.Camera.m_Camera.StartGame();
     }
 
     // Update is called once per frame
@@ -81,7 +77,7 @@ public class PlayerManager : CharacterManager
         if (cameraHandler == null)
             return;
 
-            inputHandler.TickInput();
+        inputHandler.TickInput();
         playerLocomotionManager.HandleRollingAndSprinting();
         playerLocomotionManager.HandleJumping();
         playerStatsManager.RegenerateStamina();
@@ -91,7 +87,6 @@ public class PlayerManager : CharacterManager
 
         CheckForInteractableObject();
     }
-
 
     protected override void FixedUpdate()
     {
@@ -154,6 +149,7 @@ public class PlayerManager : CharacterManager
 
     #endregion
 
+    #region Player Save & Load Data
     public void SaveCharacterdataToCurrentSaveData(ref CharacterSaveData currentCharacterSaveData)
     {
         currentCharacterSaveData.characterName  = playerStatsManager.characterName;
@@ -244,5 +240,40 @@ public class PlayerManager : CharacterManager
         }
 
         playerEquipmentManager.EquipAllEquipmentModel();
-    }       
+    }
+
+    #endregion
+
+    // 초기화
+    public override void InitCharacterManager()
+    {
+        base.InitCharacterManager();
+
+        //  two hand 해제
+
+        if(inputHandler.twoHandFlag)
+        {
+            inputHandler.twoHandFlag = false;
+
+            isTwoHandingWeapon = false;
+            playerWeaponSlotManager.LoadWeaponOnSlot(playerEquipmentManager.m_CurrentHandRightWeapon, false);
+            playerWeaponSlotManager.LoadWeaponOnSlot(playerEquipmentManager.m_CurrentHandLeftWeapon, true);
+            playerWeaponSlotManager.LoadTwoHandIKTargtets(false);
+        }
+
+        m_GameSceneUI.RefreshUI();
+    }
+
+    public override void Dead()
+    {
+        base.Dead();
+
+        // 소울 초기화
+        playerStatsManager.currentSoulCount = 0;
+
+        StopCoroutine(Managers.Game.PlayerDead());
+        StartCoroutine(Managers.Game.PlayerDead()); 
+    }
+
+
 }

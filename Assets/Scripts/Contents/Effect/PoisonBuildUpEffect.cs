@@ -56,7 +56,7 @@ public class PoisonBuildUpEffect : CharacterEffect
 
             if(player != null)
             {
-                player.GameSceneUI.m_StatBarsUI.RefreshUI(Define.E_StatUI.Posion);
+                player.m_GameSceneUI.m_StatBarsUI.RefreshUI(Define.E_StatUI.Posion);
             }
 
             // 해당 오리지널 이펙트 매니저는 수정하지 않는다. 카피본만을 수정하는 거지.

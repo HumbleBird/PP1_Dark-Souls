@@ -13,6 +13,7 @@ public class AICharacterManager : CharacterManager
     public AICharacterEffectsManager aiCharacterEffectsManager;
 
     public State currentState;
+    public State m_InitState;
     public CharacterManager currentTarget;
     public NavMeshAgent navMeshAgent;
     public Rigidbody aiCharacterRigidbody;
@@ -78,7 +79,13 @@ public class AICharacterManager : CharacterManager
     protected override void Start()
     {
         base.Start();
+
+        m_StartPos = transform.position;
+        m_StartRo = transform.eulerAngles;
+
         aiCharacterRigidbody.isKinematic = false;
+
+        m_InitState = currentState;
     }
 
     protected override void Update()
@@ -151,5 +158,19 @@ public class AICharacterManager : CharacterManager
                 isPreformingAction = false;
             }
         }    
+    }
+
+    public override void InitCharacterManager()
+    {
+        base.InitCharacterManager();
+
+        // 공격 시간 초기화
+        currentRecoveryTime = 0;
+
+        // 상태 초기화
+        currentState = m_InitState;
+
+        // 몬스터의 현재 타깃 초기화
+        currentTarget = null;
     }
 }

@@ -75,9 +75,9 @@ public class StartSceneUI : UI_Scene
 
     void IntroScreen()
     {
-        m_FadeInOutScreenUI.FadeInOut(
-            null, // 페이드 인에서 조건 없이 실행.
-            () => { m_Intro.SetActive(false); m_Start.SetActive(true); StartScreen(); });
+        //m_FadeInOutScreenUI.FadeInOut(
+        //    null, // 페이드 인에서 조건 없이 실행.
+        //    () => { m_Intro.SetActive(false); m_Start.SetActive(true); StartScreen(); });
 
     }
 
@@ -89,26 +89,26 @@ public class StartSceneUI : UI_Scene
         // 텍스트 백그라운드 이미지 효과 주기.
         m_Animator.Play("UntilSelectButtonTextEffect");
 
-        m_FadeInOutScreenUI.FadeInOut(
-                // 아무 키나 입력하면 다음으로 이동.
-                () =>
-                {
-                    if (Input.anyKeyDown)
-                    {
-                        Managers.Sound.Play("Sounds/UI/UI_Button_Select_02");
-                        m_Animator.Play("SelectButton_PressAnyButton");
-                        return true;
-                    }
-                    else
-                        return false;
-                },
-                () => 
-                {
-                    m_Start.SetActive(false);
-                    m_MainMenu.SetActive(true);
-                    MainmenuScreen();
-                }
-            );
+        //m_FadeInOutScreenUI.FadeInOut(
+        //        // 아무 키나 입력하면 다음으로 이동.
+        //        () =>
+        //        {
+        //            if (Input.anyKeyDown)
+        //            {
+        //                Managers.Sound.Play("Sounds/UI/UI_Button_Select_02");
+        //                m_Animator.Play("SelectButton_PressAnyButton");
+        //                return true;
+        //            }
+        //            else
+        //                return false;
+        //        },
+        //        () => 
+        //        {
+        //            m_Start.SetActive(false);
+        //            m_MainMenu.SetActive(true);
+        //            MainmenuScreen();
+        //        }
+        //    );
 
     }
 
@@ -117,26 +117,26 @@ public class StartSceneUI : UI_Scene
         // 텍스트 백그라운드 이미지 효과 주기.
         m_Animator.Play("UntilSelectButtonTextEffect");
 
-        m_FadeInOutScreenUI.FadeInOut(
-            // 아무 키나 입력하면 다음으로 이동.
-            () =>
-            {
-                if (m_bIsButtonPress)
-                {
-                    Managers.Sound.Play("Sounds/UI/UI_Button_Select_02");
-                    m_bIsButtonPress = false;
-                    return true;
-                }
-                else
-                    return false;
-            },
-            () => 
-            {
-                m_MainMenu.SetActive(false);
-                m_FadeOutAction();
-                MainmenuScreen();
-            }
-        );
+        //m_FadeInOutScreenUI.FadeInOut(
+        //    // 아무 키나 입력하면 다음으로 이동.
+        //    () =>
+        //    {
+        //        if (m_bIsButtonPress)
+        //        {
+        //            Managers.Sound.Play("Sounds/UI/UI_Button_Select_02");
+        //            m_bIsButtonPress = false;
+        //            return true;
+        //        }
+        //        else
+        //            return false;
+        //    },
+        //    () => 
+        //    {
+        //        m_MainMenu.SetActive(false);
+        //        m_FadeOutAction();
+        //        MainmenuScreen();
+        //    }
+        //);
     }
 
 

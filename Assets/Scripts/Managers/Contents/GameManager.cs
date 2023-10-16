@@ -8,8 +8,10 @@ public class GameManager
     public Interactable m_Interactable;
     PlayerManager m_Player;
 
-    public Vector3 m_StartPoint = new Vector3(36.36f, 4.95f, -14.23298f);
     public bool m_isNewGame = true;
+
+    float m_fRestartWaitTime = 3f;
+
 
     public void GameStart()
     {
@@ -18,14 +20,9 @@ public class GameManager
         // 게임을 처음 시작했다면
         if (m_isNewGame)
         {
-            // TODO 캐릭터 초기 데이터 가져오기
 
             // 인트로씬 처음으로 보여주기
             Managers.GameUI.ShowIntro("StartOpening");
-
-            // 퀵슬롯 Refresh
-            //Managers.Object.m_MyPlayer.m_GameUIManager.m_PlayerPrivateUI.m_EquipmentUI.RefreshUI();
-            //Managers.Object.m_MyPlayer.m_GameUIManager.quickSlotsUI.UpdateAllQuickSlotUI();
         }
         else
         {
@@ -40,21 +37,48 @@ public class GameManager
         action.Invoke();
     }
 
-    public void PlayerDead()
-    {
-        // 모든 몬스터의 CurrentTarget null
-        // 몬스터 제자리 위치
-        // 몬스터 피 회복
-        // 플레이어의 소울을 남기는 Interactable Object 생성
-        // 플레이어 마지막 본파이어에 리스폰
-        // 플레이어의 체력 회복
-        // 스크린 인 아웃
-    }
-
     public void EntryNewArea(string name)
     {
         // UI로 화면 뛰우기
-        m_Player.GameSceneUI.m_AreaUI.ShowNewAreaName(name);
+        m_Player.m_GameSceneUI.m_AreaUI.ShowNewAreaName(name);
 
+    }
+
+    public IEnumerator PlayerDead()
+    {
+
+        // 유다이 Popup (+ 사운드)
+        m_Player.m_GameSceneUI.ShowYouDied();
+
+        // 페이드 아웃
+        yield return new WaitForSeconds(5);
+
+        m_Player.m_GameSceneUI.m_FadeInOutScreenUI.FadeOut();
+
+        // 페이드 아웃 유지 시간
+        yield return new WaitForSeconds(3);
+
+        // 페이드 아웃이 전부 끝나면 3초간 대기
+        // 이후에는 여기에 서버 데이터를 받을 것.
+
+        // 소울을 남김
+        GameObject deadSouls = Managers.Resource.Instantiate("Objects/Interact Object/Dead Soul");
+        deadSouls.transform.position = m_Player.transform.position;
+
+        // UI 업데이트
+        m_Player.m_GameSceneUI.RefreshUI(Define.E_StatUI.All);
+
+        //모든 캐릭터 초기화
+        foreach (GameObject go in Managers.Object._objects)
+        {
+            CharacterManager character = go.GetComponent<CharacterManager>();
+
+            character.InitCharacterManager();
+        }
+
+        // 페이드 인
+        m_Player.m_GameSceneUI.m_FadeInOutScreenUI.FadeIn();
+
+        yield break;
     }
 }

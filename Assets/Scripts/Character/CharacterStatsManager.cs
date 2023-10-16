@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using static Define;
 
-public class CharacterStatsManager : MonoBehaviour
+public abstract class CharacterStatsManager : MonoBehaviour
 {
     CharacterManager character;
 
@@ -14,15 +14,11 @@ public class CharacterStatsManager : MonoBehaviour
     public int teamIDNumber = 0;
 
     public int currentSoulCount = 0;
-
-
     
     [Header("Character Base Power")]
     // HP
     public int maxHealth;
     public int currentHealth;
-
-    
 
     [Header("Character Defense")]
     public float physicalDamageAbsorptionHead;
@@ -76,6 +72,8 @@ public class CharacterStatsManager : MonoBehaviour
     protected virtual void Awake()
     {
         character = GetComponent<CharacterManager>();
+
+        // 능력치 로드
     }
 
     protected virtual void Update()
@@ -87,6 +85,13 @@ public class CharacterStatsManager : MonoBehaviour
     {
         totalPoiseDefence = armorPoiseBonus;
     }
+
+    // 능력치 csv 테이블에서 로드
+    public abstract void SetAbilityValueFromLevel();
+
+    // 능력치 초기화
+    // 현재 체력을 최대 체력으로
+    public abstract void InitStats();
 
     public virtual void TakeDamageNoAnimation(int damage, int fireDamage)
     {
@@ -126,13 +131,7 @@ public class CharacterStatsManager : MonoBehaviour
     {
     }
 
-    public virtual int SetMaxHealth()
-    {
-        // 플레이어는 vigorlevel에 따라 결정
-
-        // 그 외는 전부 테이블에서 가져오기
-        return 0;
-    }
+    public abstract int SetMaxHealth();
 
     public virtual void HealCharacter(int healAmount)
     {
@@ -147,13 +146,5 @@ public class CharacterStatsManager : MonoBehaviour
     public virtual void HealthBarUIUpdate()
     {
 
-    }
-
-    public virtual void Dead()
-    {
-        // 몬스터가 죽었다면 기본적으로 소울 및 아이템 추가
-        // 보스 : 보스 관련 이벤트 실행, 화톳불 생성 가능
-
-        // 플레이어 : 게임 매니저에서 모든 몬스터 재배치, 소울 잃어버림, 시작 지점 스폰, 현재 모든 체력 및 기타 회복
     }
 }

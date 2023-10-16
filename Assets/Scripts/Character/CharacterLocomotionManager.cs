@@ -7,7 +7,7 @@ public class CharacterLocomotionManager : MonoBehaviour
     CharacterManager character;
 
     public Vector3 moveDirection;
-    public LayerMask groundLayer;
+    public LayerMask groundLayer = 1;
 
     [Header("Gravity Settings")]
     public float inAirTimer;
@@ -28,6 +28,7 @@ public class CharacterLocomotionManager : MonoBehaviour
     {
 
     }
+
 
     protected virtual void Update()
     {
