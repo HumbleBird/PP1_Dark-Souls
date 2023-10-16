@@ -33,14 +33,22 @@ public class AICharacterAnimationManager : CharacterAnimatorManager
     {
         //if (character.isInteracting == false)
         //    return;
-
-        Vector3 velocity = character.animator.deltaPosition;
-        character.characterController.Move(velocity);
-
-        if(aiCharacter.isRotatingWithRootMotion)
+        
+        if(Managers.Game.isReSeting)
         {
-            character.transform.rotation *= character.animator.deltaRotation;
+            transform.position = aiCharacter.m_StartPos;
+            transform.eulerAngles = aiCharacter.m_StartRo;
+        }
+        else
+        {
+            Vector3 velocity = character.animator.deltaPosition;
+            character.characterController.Move(velocity);
 
+            if (aiCharacter.isRotatingWithRootMotion)
+            {
+                character.transform.rotation *= character.animator.deltaRotation;
+
+            }
         }
     }
 }

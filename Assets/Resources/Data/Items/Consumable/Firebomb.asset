@@ -14,11 +14,19 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   itemIcon: {fileID: 21300000, guid: d2276b4c97148ed4687b092bee37017d, type: 3}
   itemName: Firebomb
+  itemID: 0
+  m_EItemType: 1
+  m_ToolType: 1
   maxItemAmount: 20
   currentItemAmount: 20
   itemModel: {fileID: 939402196391381232, guid: 9b78f95bdd9040b489845af596f7ef6a, type: 3}
   consumeAnimation: Throw
   isInteracting: 0
+  m_sItemDescription: 
+  m_iParameterBonusStrength: 0
+  m_iParameterBonusDexterity: 0
+  m_iParameterBonusIntelligence: 0
+  m_iParameterBonusFaith: 0
   upwardVelocity: 300
   forwardVelocity: 300
   bombMass: 1

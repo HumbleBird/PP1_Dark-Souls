@@ -84,7 +84,7 @@ public class StartSceneUI : UI_Scene
     void StartScreen()
     {
         // BGM 틀기
-        Managers.Sound.Play("Bgm/Dark Souls III", 1, Define.Sound.Bgm);
+        Managers.Sound.Play("Dark Souls III", 1, Define.Sound.Bgm);
 
         // 텍스트 백그라운드 이미지 효과 주기.
         m_Animator.Play("UntilSelectButtonTextEffect");
@@ -180,6 +180,6 @@ public class StartSceneUI : UI_Scene
 
     void PointerDownSoundPlay(PointerEventData data)
     {
-        Managers.Sound.Play("Sounds/UI/UI_Button_PointerDown_04");
+        Managers.Sound.Play("UI/Popup_OrderButtonSelect");
     }
 }

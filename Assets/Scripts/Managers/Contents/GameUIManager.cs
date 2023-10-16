@@ -6,7 +6,8 @@ using UnityEngine.UI;
 
 public class GameUIManager
 {
-    public InteractablePopupUI m_InteractablePopupUI;
+    public GameSceneUI m_GameSceneUI;
+    public bool m_isShowingInteratablePopup = false;
 
     public void ShowIntro(string path)
     {

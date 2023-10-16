@@ -66,7 +66,7 @@ public class PoisonBuildUpEffect : CharacterEffect
             poisonedEffect.poisonDamage = PoisonDamagePerTick;
             character.characterEffectsManager.timedEffects.Add(poisonedEffect);
             character.characterEffectsManager.timedEffects.Remove(this);
-            Managers.Sound.Play("Effect/Poisoned_Alert");
+            Managers.Sound.Play("Object/Poisoned_Alert");
             //character.characterSoundFXManager.PlaySoundFX(Managers.WorldEffect.poisonSFX);
 
             GameObject posionParticle= Managers.Resource.Instantiate("FX/Particles/Poison_Particle");

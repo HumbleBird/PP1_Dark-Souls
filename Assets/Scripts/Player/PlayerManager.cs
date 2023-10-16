@@ -123,8 +123,16 @@ public class PlayerManager : CharacterManager
 
                 if (interactable != null)
                 {
-                    interactable.ShowInteractUI();
+                    interactable.CanInteractable();
                 }
+            }
+        }
+        else
+        {
+            if (Managers.GameUI.m_isShowingInteratablePopup == true)
+            {
+                Managers.GameUI.m_GameSceneUI.m_InteractablePopupUI.ClosePopup();
+                Managers.Game.m_Interactable = null;
             }
         }
     }

@@ -66,7 +66,7 @@ public class ExternalFeaturesSubItem : UI_Base
         // Button Function
         childBtn.onClick.AddListener(() =>
         {
-            Managers.Sound.Play("Sounds/UI/UI_Button_Select_02");
+            Managers.Sound.Play("UI/Popup_OrderButtonSelect");
 
             //characterCreationScreen.m_CharacterCreationMiddlePannelUI.m_goHairStyles.GetComponent<DisableAllChildrenOfSelectedGameObject>().DisableAllChildren();
             DisableAllChildrenOfSelectedGameObject();
@@ -139,7 +139,8 @@ public class ExternalFeaturesSubItem : UI_Base
 
     void OnSelectAndPointerDown(PointerEventData data)
     {
-        Managers.Sound.Play("Sounds/UI/UI_Button_PointerDown_04");
+        Managers.Sound.Play("UI/Popup_OrderButtonSelect");
+
         DisableAllChildrenOfSelectedGameObject();
 
         if (count > 0)

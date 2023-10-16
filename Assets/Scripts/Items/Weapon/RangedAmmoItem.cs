@@ -6,6 +6,8 @@ using static Define;
 [CreateAssetMenu(menuName = "Items/Ammo")]
 public class RangedAmmoItem : Item
 {
+
+
     [Header("Ammo Type")]
     public AmmoType ammoType;
 

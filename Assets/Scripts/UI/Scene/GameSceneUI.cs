@@ -7,23 +7,19 @@ using static Define;
 
 public class GameSceneUI : UI_Scene
 {
-    enum GameObjects
-    {
-        Crosshair,
-    }
-
     enum Texts
     {
         SoulCountText,
     }
 
     [Header("Childes")]
-    public QuickSlotsUI quickSlotsUI;
     public TextMeshProUGUI m_textSoulCount;
+    public QuickSlotsUI quickSlotsUI;
     public StatBarsUI m_StatBarsUI;
     public GameObject m_goCrosshair;
     public UIBossHealthBar m_BossHealthBar;
     public AreaUI m_AreaUI;
+    public InteractablePopupUI m_InteractablePopupUI;
 
     Animator m_animator;
 
@@ -36,22 +32,21 @@ public class GameSceneUI : UI_Scene
         if (base.Init() == false)
             return false;
 
-        BindObject(typeof(GameObjects));
         BindText(typeof(Texts));
 
         m_textSoulCount = GetText((int)Texts.SoulCountText);
-        m_goCrosshair = GetObject((int)GameObjects.Crosshair);
 
         quickSlotsUI = GetComponentInChildren<QuickSlotsUI>();
         m_BossHealthBar = GetComponentInChildren<UIBossHealthBar>();
         m_StatBarsUI = GetComponentInChildren<StatBarsUI>();
         m_AreaUI = GetComponentInChildren<AreaUI>();
-
-        m_goCrosshair.SetActive(false);
+        m_InteractablePopupUI = GetComponentInChildren<InteractablePopupUI>();
 
         m_FadeInOutScreenUI = GetComponentInChildren<FadeInOutScreenUI>();
 
         m_animator = GetComponent<Animator>();
+
+        Managers.GameUI.m_GameSceneUI = this;
 
         return true;
     }
@@ -76,8 +71,19 @@ public class GameSceneUI : UI_Scene
         m_animator.Play("YouDied");
     }
 
+    public void ShowSoulsRetrieved()
+    {
+        m_animator.Play("SoulsRetrieved");
+    }
+
     public void DeadSoundPlay()
     {
-        Managers.Sound.Play("Sounds/Effect/Dead");
+        Managers.Sound.Play("Character/Player/YOU DIED");
+    }
+
+
+    public void SoulsRetrievedSoundPlay()
+    {
+        Managers.Sound.Play("Object/Souls Retrieved");
     }
 }

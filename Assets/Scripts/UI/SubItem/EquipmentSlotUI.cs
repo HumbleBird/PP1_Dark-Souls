@@ -176,7 +176,7 @@ public class EquipmentSlotUI : ItemSlotUI
     // 아이템 이미지를 클릭하면 가운데 패널에 아이템 정보를 보여준다.
     public override void ShowItemInformation(PointerEventData data)
     {
-        Managers.Sound.Play("Sounds/UI/UI_Button_PointerDown_04");
+        Managers.Sound.Play("UI/Popup_OrderButtonSelect");
         GetImage((int)Images.ItemSelectIcon).enabled = true;
 
         if (m_Item == null)

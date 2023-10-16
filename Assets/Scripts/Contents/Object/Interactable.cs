@@ -17,7 +17,6 @@ public class Interactable : MonoBehaviour
 
     }
 
-
     private void OnDrawGizmosSelected()
     {
         Gizmos.color = Color.blue;
@@ -26,41 +25,17 @@ public class Interactable : MonoBehaviour
 
     public virtual void Interact(PlayerManager playermanager)
     {
-        Debug.Log("You interactable with an Object");
+        Managers.GameUI.m_GameSceneUI.m_InteractablePopupUI.ClosePopup();
     }
 
-    public virtual void ShowInteractUI()
+    // ÆË¾÷ ¶Ù¿ì±â
+    public virtual void CanInteractable()
     {
-        if(Managers.GameUI.m_InteractablePopupUI == null)
+        if(Managers.GameUI.m_isShowingInteratablePopup == false)
         {
-            // Object
             Managers.Game.m_Interactable = this;
+            Managers.GameUI.m_GameSceneUI.m_InteractablePopupUI.ShowPopup();
 
-            // UI
-            Managers.GameUI.m_InteractablePopupUI = Managers.UI.ShowPopupUI<InteractablePopupUI>();
-            Managers.GameUI.m_InteractablePopupUI.m_InteractionText.text = interactableText;
-        }
-    }
-
-    public virtual void CloseInteractUI()
-    {
-        if(Managers.GameUI.m_InteractablePopupUI != null)
-        {
-            Managers.Game.PlayAction(() => 
-            {
-                Managers.UI.ClosePopupUI(Managers.GameUI.m_InteractablePopupUI);
-                Managers.GameUI.m_InteractablePopupUI = null;
-                Managers.Game.m_Interactable = null;
-            });
-        }
-    }
-     
-    public void OnTriggerExit(Collider other)
-    {
-        PlayerManager player = other.GetComponentInParent<PlayerManager>();
-        if(player != null)
-        {
-            CloseInteractUI();
         }
     }
 }

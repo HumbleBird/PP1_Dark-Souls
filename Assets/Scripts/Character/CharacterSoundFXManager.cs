@@ -98,7 +98,7 @@ public class CharacterSoundFXManager : MonoBehaviour
 
         // 현재 걷는지, 띄는지, 점프 하는지에 따라
 
-        Managers.Sound.Play("Sounds/Character/FootStep/");
+        Managers.Sound.Play("character/FootStep/");
 
     }
 

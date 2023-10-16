@@ -34,6 +34,7 @@ public class BonfireInteractable : Interactable
 
     public override void Interact(PlayerManager playermanager)
     {
+        base.Interact(playermanager);
         if(hasBeenActivated)
         {
             // ÁÖº¯ Áö¿ª »Ñ¿¸°Ô

@@ -133,6 +133,27 @@ public class CharacterManager : MonoBehaviour
         transform.position = m_StartPos;
         transform.eulerAngles = m_StartRo;
 
+        // Flag √ ±‚»≠
+        isBlocking = false;
+        canBeRiposted= false;
+        canDoCombo= false;
+        canBeParryied= false;
+        canRoll = true;
+        isParrying= false;
+        isBlocking= false;
+        isInvulnerable= false;
+        isUsingRightHand= false;
+        isUsingLeftHand= false;
+        isHoldingArrow= false;
+        isAiming= false;
+        isTwoHandingWeapon= false;
+        isPerformingFullyChargedAttack= false;
+        isAttacking= false;
+        isBeingBackstabbed= false;
+        isBeingRiposted= false;
+        isPerformingBackstab= false;
+        isPerformingRipost= false;
+
         isDead = false;
 
         isInteracting = false;

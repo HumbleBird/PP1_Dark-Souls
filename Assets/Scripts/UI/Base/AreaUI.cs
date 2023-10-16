@@ -37,6 +37,6 @@ public class AreaUI : UI_Base
 
     public void NewAreSoundPlay()
     {
-        Managers.Sound.Play("Sounds/Effect/Area/NewAreaEntry");
+        Managers.Sound.Play("Area/NewAreaEntry");
     }
 }

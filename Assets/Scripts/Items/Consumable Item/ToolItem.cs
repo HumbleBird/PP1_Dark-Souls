@@ -5,6 +5,10 @@ using static Define;
 
 public class ToolItem : Item
 {
+    public ToolItem()
+    {
+        m_EItemType = E_ItemType.Tool;
+    }
     public ToolItemType m_ToolType;
 
     [Header("Item Quantity")]

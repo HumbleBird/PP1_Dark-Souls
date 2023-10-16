@@ -97,18 +97,18 @@ public class SoundManager
 	AudioClip GetOrAddAudioClip(string path, Define.Sound type = Define.Sound.Effect)
     {
 		if (path.Contains("Sounds/") == false)
-			path = $"Sounds/{path}";
+			path = $"Sounds/{type}/{path}";
 
 		AudioClip audioClip = null;
 
 		if (type == Define.Sound.Bgm)
 		{
-			audioClip = Managers.Resource.Load<AudioClip>(path);
+            audioClip = Managers.Resource.Load<AudioClip>(path);
 		}
 		else
 		{
 			if (_audioClips.TryGetValue(path, out audioClip) == false)
-			{
+            {
 				audioClip = Managers.Resource.Load<AudioClip>(path);
 				_audioClips.Add(path, audioClip);
 			}

@@ -145,7 +145,7 @@ public class CharacterCreationLeftPannelUI : UI_Base
         // Class
         m_GenderBtn.onClick.AddListener(() =>
         {
-            Managers.Sound.Play("Sounds/UI/UI_Button_Select_02");
+            Managers.Sound.Play("UI/Popup_ButtonShow");
             m_CharacterCreationScreen.m_CharacterCreationMiddlePannelUI.m_goGender.SetActive(true);
             Camera.main.GetComponent<CharacterPreviewCamera>().ChangeCameraPreviewTransform(E_CharacterCreationPreviewCamera.All);
             AllPannelButonInteractable(false);
@@ -157,7 +157,8 @@ public class CharacterCreationLeftPannelUI : UI_Base
         // Class
         m_ClassBtn.onClick.AddListener(() =>
         {
-            Managers.Sound.Play("Sounds/UI/UI_Button_Select_02");
+            Managers.Sound.Play("UI/Popup_ButtonShow");
+
             m_CharacterCreationScreen.m_CharacterCreationMiddlePannelUI.m_goClasses.SetActive(true);
             Camera.main.GetComponent<CharacterPreviewCamera>().ChangeCameraPreviewTransform(E_CharacterCreationPreviewCamera.All);
             AllPannelButonInteractable(false);
@@ -169,7 +170,8 @@ public class CharacterCreationLeftPannelUI : UI_Base
         // Hair
         m_HairBtn.onClick.AddListener(() =>
         {
-            Managers.Sound.Play("Sounds/UI/UI_Button_Select_02");
+            Managers.Sound.Play("UI/Popup_ButtonShow");
+
             m_CharacterCreationScreen.m_CharacterCreationMiddlePannelUI.m_goHairStyles.SetActive(true);
             Camera.main.GetComponent<CharacterPreviewCamera>().ChangeCameraPreviewTransform(E_CharacterCreationPreviewCamera.Head);
             AllPannelButonInteractable(false);
@@ -179,7 +181,8 @@ public class CharacterCreationLeftPannelUI : UI_Base
         // HairColor
         m_HairColorBtn.onClick.AddListener(() =>
         {
-            Managers.Sound.Play("Sounds/UI/UI_Button_Select_02");
+            Managers.Sound.Play("UI/Popup_ButtonShow");
+
             m_CharacterCreationScreen.m_CharacterCreationMiddlePannelUI.m_goHairColor.SetActive(true);
             Camera.main.GetComponent<CharacterPreviewCamera>().ChangeCameraPreviewTransform(E_CharacterCreationPreviewCamera.Head);
             AllPannelButonInteractable(false);
@@ -189,7 +192,8 @@ public class CharacterCreationLeftPannelUI : UI_Base
 
         m_HairItemBtn.onClick.AddListener(() =>
         {
-            Managers.Sound.Play("Sounds/UI/UI_Button_Select_02");
+            Managers.Sound.Play("UI/Popup_ButtonShow");
+
             m_CharacterCreationScreen.m_CharacterCreationMiddlePannelUI.m_goHairItem.SetActive(true);
             Camera.main.GetComponent<CharacterPreviewCamera>().ChangeCameraPreviewTransform(E_CharacterCreationPreviewCamera.Head);
             AllPannelButonInteractable(false);
@@ -214,7 +218,8 @@ public class CharacterCreationLeftPannelUI : UI_Base
 
         EyebrowsBtn.onClick.AddListener(() =>
         {
-            Managers.Sound.Play("Sounds/UI/UI_Button_Select_02");
+            Managers.Sound.Play("UI/Popup_ButtonShow");
+
             m_CharacterCreationScreen.m_CharacterCreationMiddlePannelUI.m_goEyebrows.SetActive(true);
             Camera.main.GetComponent<CharacterPreviewCamera>().ChangeCameraPreviewTransform(E_CharacterCreationPreviewCamera.Head);
             AllPannelButonInteractable(false);
@@ -224,7 +229,8 @@ public class CharacterCreationLeftPannelUI : UI_Base
 
         FacialHairBtn.onClick.AddListener(() =>
         {
-            Managers.Sound.Play("Sounds/UI/UI_Button_Select_02");
+            Managers.Sound.Play("UI/Popup_ButtonShow");
+
             m_CharacterCreationScreen.m_CharacterCreationMiddlePannelUI.m_goFacialHair.SetActive(true);
             Camera.main.GetComponent<CharacterPreviewCamera>().ChangeCameraPreviewTransform(E_CharacterCreationPreviewCamera.Head);
             AllPannelButonInteractable(false);
@@ -234,7 +240,7 @@ public class CharacterCreationLeftPannelUI : UI_Base
 
         FacialMaskBtn.onClick.AddListener(() =>
         {
-            Managers.Sound.Play("Sounds/UI/UI_Button_Select_02");
+                        Managers.Sound.Play("UI/Popup_ButtonShow");
             m_CharacterCreationScreen.m_CharacterCreationMiddlePannelUI.m_goFacialMask.SetActive(true);
             Camera.main.GetComponent<CharacterPreviewCamera>().ChangeCameraPreviewTransform(E_CharacterCreationPreviewCamera.Head);
             AllPannelButonInteractable(false);
@@ -246,7 +252,7 @@ public class CharacterCreationLeftPannelUI : UI_Base
 
         FacialMaskColorBtn.onClick.AddListener(() =>
         {
-            Managers.Sound.Play("Sounds/UI/UI_Button_Select_02");
+                        Managers.Sound.Play("UI/Popup_ButtonShow");
             Managers.UI.ShowPopupUI<AnnouncementUI>();
             //AllPannelButonInteractable(false);
             // TODO
@@ -266,7 +272,7 @@ public class CharacterCreationLeftPannelUI : UI_Base
         {
             AllPannelButonInteractable(false);
 
-            Managers.Sound.Play("Sounds/UI/UI_Button_Select_02");
+                        Managers.Sound.Play("UI/Popup_ButtonShow");
             m_CharacterCreationScreen.m_CharacterCreationMiddlePannelUI.m_goSkinColor.SetActive(true);
             Camera.main.GetComponent<CharacterPreviewCamera>().ChangeCameraPreviewTransform(E_CharacterCreationPreviewCamera.All);
             AllPannelButonInteractable(false);
@@ -281,7 +287,7 @@ public class CharacterCreationLeftPannelUI : UI_Base
         {
             // TODO 정말 완료했는지 팝업 창 뛰우기
             // 1. 인트로 신으로 넘어가기
-            Managers.Sound.Play("Sounds/UI/UI_Button_Select_02");
+                        Managers.Sound.Play("UI/Popup_ButtonShow");
             m_CharacterCreationScreen.m_ConfirmationUI.gameObject.SetActive(true);
         });
     }
@@ -334,6 +340,6 @@ public class CharacterCreationLeftPannelUI : UI_Base
 
     void PointerDownSoundPlay(PointerEventData data)
     {
-        Managers.Sound.Play("Sounds/UI/UI_Button_PointerDown_04");
+        Managers.Sound.Play("UI/Popup_OrderButtonSelect");
     }
 }

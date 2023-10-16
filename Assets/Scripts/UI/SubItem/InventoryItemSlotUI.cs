@@ -28,7 +28,7 @@ public class InventoryItemSlotUI : ItemSlotUI
         if (m_Item == null)
             return;
 
-        Managers.Sound.Play("Sounds/UI/UI_Button_Select_02");
+        Managers.Sound.Play("UI/Popup_ButtonClose");
 
         EquipmentItemChange();
     }
@@ -51,7 +51,7 @@ public class InventoryItemSlotUI : ItemSlotUI
         if (m_Item == null)
             return;
 
-        Managers.Sound.Play("Sounds/UI/UI_Button_PointerDown_04");
+        Managers.Sound.Play("UI/Popup_OrderButtonSelect");
         GetImage((int)Images.ItemSelectIcon).enabled = true;
         m_InventoryUI.m_InventoryMiddleUI.ShowItemInformation(m_Item);
         m_InventoryUI.m_InventoryLeftPanelUI.SetInfo(m_Item.itemName);

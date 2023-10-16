@@ -23,7 +23,7 @@ public class EquipmentToInventoryShowItemSubItem : ItemSlotUI
         if (m_Item == null)
             return;
 
-        Managers.Sound.Play("Sounds/UI/UI_Button_Select_02");
+        Managers.Sound.Play("UI/UI_Button_Select_02");
 
 
         // 아이템 교체
@@ -83,7 +83,7 @@ public class EquipmentToInventoryShowItemSubItem : ItemSlotUI
         if (m_Item == null)
             return;
 
-        Managers.Sound.Play("Sounds/UI/UI_Button_PointerDown_04");
+        Managers.Sound.Play("UI/Popup_OrderButtonSelect");
         GetImage((int)Images.ItemSelectIcon).enabled = true;
         m_EquipmentUI.m_ItemInformationUI.ShowItemInformation(m_Item);
         m_EquipmentUI.m_ShowItemInventoryUI.ShowItemInformation(m_Item.name);

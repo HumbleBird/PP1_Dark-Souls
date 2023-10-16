@@ -421,12 +421,14 @@ public class InputHandler : MonoBehaviour
             if(selectFlag)
             {
                 Managers.UI.ShowPopupUI<SelectUI>();
+                Managers.Sound.Play("UI/Popup_ButtonClose");
                 player.m_GameSceneUI.gameObject.SetActive(false);
             }
             // 선택 창을 끄는 거라면
             else
             {
                 Managers.UI.ClosePopupUI();
+                Managers.Sound.Play("UI/Popup_ButtonShow");
                 player.m_GameSceneUI.gameObject.SetActive(true);
             }
         }

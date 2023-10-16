@@ -20,7 +20,7 @@ public class ConfirmationUI : UI_Base
 
         GetObject((int)GameObjcts.Yes).BindEvent(() => 
         {
-            Managers.Sound.Play("Sounds/UI/UI_Button_Select_02");
+            Managers.Sound.Play("UI/Popup_ButtonClose");
             DontDestroyOnLoad(Managers.Object.m_MyPlayer.gameObject);
             m_CharacterCreationScreen.m_FadeInOutScreenUI.FadeOut(() => {
                 Managers.Object.m_MyPlayer.gameObject.SetActive(false);
