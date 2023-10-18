@@ -27,7 +27,7 @@ public class CharacterCreationScreen : UI_Scene
         m_CharacterCreationRightPannelUI = GetComponentInChildren<CharacterCreationRightPannelUI>();
         m_ConfirmationUI = GetComponentInChildren<ConfirmationUI>();
 
-        m_FadeInOutScreenUI = FindObjectOfType<FadeInOutScreenUI>();
+        m_FadeInOutScreenUI = GetComponentInChildren<FadeInOutScreenUI>();
 
         return true;
     }

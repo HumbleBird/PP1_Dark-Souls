@@ -21,6 +21,7 @@ public class QuickSlotsUI : UI_Base
             return false;
 
         BindImage(typeof(Images));
+        player = Managers.Object.m_MyPlayer;
 
         return true;
     }

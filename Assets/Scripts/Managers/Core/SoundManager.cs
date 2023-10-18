@@ -5,6 +5,7 @@ using UnityEngine;
 public class SoundManager
 {
     AudioSource[] _audioSources = new AudioSource[(int)Define.Sound.MaxCount];
+    Dictionary<string, AudioSource> _characterAudioSources = new Dictionary<string, AudioSource>();
     Dictionary<string, AudioClip> _audioClips = new Dictionary<string, AudioClip>();
 
     // MP3 Player   -> AudioSource
@@ -76,6 +77,21 @@ public class SoundManager
             }
         }
 	}
+
+    public void SoundPlayFromCharacter(GameObject go, string path, AudioSource source)
+    {
+        AudioClip audioClip = GetOrAddAudioClip(path);
+        SoundPlayFromCharacter(go, audioClip, source);
+    }
+
+    public void SoundPlayFromCharacter(GameObject go, AudioClip audioClip, AudioSource source)
+    {
+        if (audioClip == null)
+            return;
+
+        source.clip = audioClip;
+        source.Play();
+    }
 
     // TODO 뮤트 기능
     //bool m_bMute = false;

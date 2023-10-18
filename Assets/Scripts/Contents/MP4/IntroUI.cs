@@ -6,7 +6,7 @@ using UnityEngine.Rendering;
 using UnityEngine.UI;
 using UnityEngine.Video;
 
-public class IntroUI : UI_Popup
+public class IntroUI : UI_Base
 {
     public VideoPlayer m_Vidioplayer;
     bool m_isPressKey = false;
@@ -50,8 +50,9 @@ public class IntroUI : UI_Popup
     public void PlayMP4(string name)
     {
         m_Vidioplayer.source = VideoSource.VideoClip;
-        m_Vidioplayer.clip = Managers.Resource.Load<VideoClip>("Art/MP4/" +name);
+        m_Vidioplayer.clip = Managers.Resource.Load<VideoClip>("Art/MP4/" + name);
         m_Vidioplayer.StepForward();
+        m_Vidioplayer.Play();
     }
 
     IEnumerator FadeOut(Action fadeOutAction = null)
@@ -70,7 +71,7 @@ public class IntroUI : UI_Popup
             fadeOutAction.Invoke();
         }
 
-        Managers.UI.ClosePopupUI();
+        Managers.Resource.Destroy(gameObject);
     }
 
 }

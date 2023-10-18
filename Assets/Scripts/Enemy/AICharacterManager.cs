@@ -11,6 +11,7 @@ public class AICharacterManager : CharacterManager
     public AICharacterAnimationManager aiCharacterAnimationManager;
     public AICharacterStatsManager   aiCharacterStatsManager;
     public AICharacterEffectsManager aiCharacterEffectsManager;
+    public AICharacterSoundFXManager aICharacterSoundFXManager;
 
     public State currentState;
     public State m_InitState;
@@ -69,6 +70,7 @@ public class AICharacterManager : CharacterManager
         aiCharacterRigidbody = GetComponent<Rigidbody>();
         aiCharacterStatsManager = GetComponent<AICharacterStatsManager>();
         aiCharacterEffectsManager = GetComponent<AICharacterEffectsManager>();
+        aICharacterSoundFXManager = GetComponent<AICharacterSoundFXManager>();
 
         navMeshAgent = GetComponentInChildren<NavMeshAgent>();
         navMeshAgent.enabled = false;
@@ -127,6 +129,9 @@ public class AICharacterManager : CharacterManager
 
     private void HandleStateMachine()
     {
+        if (isDead == true)
+            return;
+
         if(currentState != null)
         {
             State nextState = currentState.Tick(this);

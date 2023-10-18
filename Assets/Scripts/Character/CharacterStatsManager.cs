@@ -143,7 +143,7 @@ public abstract class CharacterStatsManager : MonoBehaviour
         }
     }
 
-    public virtual void HealthBarUIUpdate()
+    public virtual void HealthBarUIUpdate(int Damage)
     {
 
     }

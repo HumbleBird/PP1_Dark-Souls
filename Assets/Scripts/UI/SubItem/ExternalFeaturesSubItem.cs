@@ -20,7 +20,6 @@ public class ExternalFeaturesSubItem : UI_Base
     PlayerManager player;
     HelmetHider hider;
 
-
     public void SetModularName()
     {
         m_sModulerName = "Chr_";
@@ -66,7 +65,8 @@ public class ExternalFeaturesSubItem : UI_Base
         // Button Function
         childBtn.onClick.AddListener(() =>
         {
-            Managers.Sound.Play("UI/Popup_OrderButtonSelect");
+            // »ç¿îµå
+            Managers.Sound.Play("UI/Popup_ButtonShow");
 
             //characterCreationScreen.m_CharacterCreationMiddlePannelUI.m_goHairStyles.GetComponent<DisableAllChildrenOfSelectedGameObject>().DisableAllChildren();
             DisableAllChildrenOfSelectedGameObject();
@@ -125,11 +125,6 @@ public class ExternalFeaturesSubItem : UI_Base
 
         // Event Trigger
         EventTrigger trigger = gameObject.GetOrAddComponent<EventTrigger>();
-
-        //EventTrigger.Entry entry = new EventTrigger.Entry();
-        //entry.eventID = EventTriggerType.Select;
-        //entry.callback.AddListener((data) => { OnSelectAndPointerDown((PointerEventData)data); });
-        //trigger.triggers.Add(entry);
 
         EventTrigger.Entry entry2 = new EventTrigger.Entry();
         entry2.eventID = EventTriggerType.PointerEnter;

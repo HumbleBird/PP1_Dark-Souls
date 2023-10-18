@@ -46,7 +46,7 @@ public class AICharacterStatsManager : CharacterStatsManager
 
         if(!isBoss)
         {
-            aiCharacterHealthBar.SetHealth(currentHealth);
+            aiCharacterHealthBar.RefreshUI(damage);
 
         }
         else if (isBoss && aiCharacter.aiCharacterBossManager != null)
@@ -65,7 +65,8 @@ public class AICharacterStatsManager : CharacterStatsManager
 
         if (!isBoss)
         {
-            aiCharacterHealthBar.SetHealth(currentHealth);
+            aiCharacterHealthBar.RefreshUI(damage);
+
 
         }
         else if (isBoss && aiCharacter.aiCharacterBossManager != null)
@@ -86,9 +87,10 @@ public class AICharacterStatsManager : CharacterStatsManager
         aiCharacter.aiCharacterAnimationManager.PlayTargetAnimation("Break Guard", true);
     }
 
-    public override void HealthBarUIUpdate()
+    public override void HealthBarUIUpdate(int damage)
     {
-        aiCharacterHealthBar.SetHealth(currentHealth);
+        aiCharacterHealthBar.RefreshUI(damage);
+
     }
 
     public override void SetAbilityValueFromLevel()

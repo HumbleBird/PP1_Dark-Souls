@@ -229,9 +229,9 @@ public class PlayerStatsManager : CharacterStatsManager
         player.m_GameSceneUI.RefreshUI();
     }
 
-    public override void HealthBarUIUpdate()
+    public override void HealthBarUIUpdate(int damage)
     {
-        base.HealthBarUIUpdate();
+        base.HealthBarUIUpdate(damage);
 
         player.m_GameSceneUI.m_StatBarsUI.RefreshUI(E_StatUI.Hp);
     }

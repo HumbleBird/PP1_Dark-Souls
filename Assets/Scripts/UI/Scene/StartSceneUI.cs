@@ -50,6 +50,7 @@ public class StartSceneUI : UI_Scene
         m_MainMenu = GetObject((int)GameObjects.MainMenu);
 
         // Button Event
+        GetText((int)Texts.PressAnyButtonText).gameObject.BindEvent(() => m_bIsButtonPress = true);
         GetText((int)Texts.ContinueText      ).gameObject.BindEvent(() => { Continue(); });
         GetText((int)Texts.LoadGameText      ).gameObject.BindEvent(() => { LoadGame(); });
         GetText((int)Texts.NewGameText       ).gameObject.BindEvent(() => { NewGame(); });
@@ -62,81 +63,101 @@ public class StartSceneUI : UI_Scene
         PointerDown(GetText((int)Texts.NewGameText       ).gameObject);
         PointerDown(GetText((int)Texts.QuitText).gameObject);
 
+
         m_Animator = GetComponentInChildren<Animator>();
-        m_FadeInOutScreenUI = FindObjectOfType<FadeInOutScreenUI>();
+        m_FadeInOutScreenUI = GetComponentInChildren<FadeInOutScreenUI>();
 
         m_Start.SetActive(false);
         m_MainMenu.SetActive(false);
-
-        IntroScreen();
+        StartCoroutine( IntroScreen());
 
         return true;
 	}
 
-    void IntroScreen()
+    // 처음 화면을 걷고 게임 타이틀을 보여줌
+    IEnumerator IntroScreen()
     {
-        //m_FadeInOutScreenUI.FadeInOut(
-        //    null, // 페이드 인에서 조건 없이 실행.
-        //    () => { m_Intro.SetActive(false); m_Start.SetActive(true); StartScreen(); });
+        // 3초간 대기
+        yield return new WaitForSeconds(1f); 
 
+        // 페이드 인 (=화면 보여짐)
+        yield return StartCoroutine(m_FadeInOutScreenUI.IFadeIn());
+
+        // 3초간 게임 타이틀을 보여줌
+        yield return new WaitForSeconds(1f);
+
+        yield return StartCoroutine(m_FadeInOutScreenUI.IFadeOut());
+
+        m_Intro.SetActive(false);
+
+
+        StartCoroutine(StartScreen());
     }
 
-    void StartScreen()
+    IEnumerator StartScreen()
     {
+        m_Start.SetActive(true);
+
         // BGM 틀기
         Managers.Sound.Play("Dark Souls III", 1, Define.Sound.Bgm);
 
         // 텍스트 백그라운드 이미지 효과 주기.
         m_Animator.Play("UntilSelectButtonTextEffect");
 
-        //m_FadeInOutScreenUI.FadeInOut(
-        //        // 아무 키나 입력하면 다음으로 이동.
-        //        () =>
-        //        {
-        //            if (Input.anyKeyDown)
-        //            {
-        //                Managers.Sound.Play("Sounds/UI/UI_Button_Select_02");
-        //                m_Animator.Play("SelectButton_PressAnyButton");
-        //                return true;
-        //            }
-        //            else
-        //                return false;
-        //        },
-        //        () => 
-        //        {
-        //            m_Start.SetActive(false);
-        //            m_MainMenu.SetActive(true);
-        //            MainmenuScreen();
-        //        }
-        //    );
+        // (=화면 보여짐)
+        yield return StartCoroutine(m_FadeInOutScreenUI.IFadeIn());
 
+        // 아무 버튼이나 입력 전까지 무한 대기
+
+        while (true)
+        {
+            if (m_bIsButtonPress)
+            {
+                Managers.Sound.Play("UI/Popup_ButtonClose");
+                m_Animator.Play("SelectButton_PressAnyButton");
+                m_bIsButtonPress = false;
+                break;
+            }
+
+            yield return null;
+        }
+
+        //  (=화면 가려짐)
+        yield return StartCoroutine(m_FadeInOutScreenUI.IFadeOut());
+
+        m_Start.SetActive(false);
+
+        StartCoroutine(MainmenuScreen());
     }
 
-    void MainmenuScreen()
+    IEnumerator MainmenuScreen()
     {
+        m_MainMenu.SetActive(true);
+
+        // 페이드 아웃 (=화면 보여짐)
+        yield return StartCoroutine(m_FadeInOutScreenUI.IFadeIn());
+
         // 텍스트 백그라운드 이미지 효과 주기.
         m_Animator.Play("UntilSelectButtonTextEffect");
 
-        //m_FadeInOutScreenUI.FadeInOut(
-        //    // 아무 키나 입력하면 다음으로 이동.
-        //    () =>
-        //    {
-        //        if (m_bIsButtonPress)
-        //        {
-        //            Managers.Sound.Play("Sounds/UI/UI_Button_Select_02");
-        //            m_bIsButtonPress = false;
-        //            return true;
-        //        }
-        //        else
-        //            return false;
-        //    },
-        //    () => 
-        //    {
-        //        m_MainMenu.SetActive(false);
-        //        m_FadeOutAction();
-        //        MainmenuScreen();
-        //    }
-        //);
+        while (true)
+        {
+            if (m_bIsButtonPress)
+            {
+                Managers.Sound.Play("UI/Popup_ButtonClose");
+                m_bIsButtonPress = false;
+                break;
+            }
+
+            yield return null;
+        }
+
+        // 화면 가려짐
+        yield return StartCoroutine(m_FadeInOutScreenUI.IFadeOut());
+
+        m_MainMenu.SetActive(false);
+
+        m_FadeOutAction();
     }
 
 
@@ -166,11 +187,6 @@ public class StartSceneUI : UI_Scene
     void PointerDown(GameObject go)
     {
         EventTrigger trigger = go.GetOrAddComponent<EventTrigger>();
-
-        //EventTrigger.Entry entry = new EventTrigger.Entry();
-        //entry.eventID = EventTriggerType.Select;
-        //entry.callback.AddListener((data) => { PointerDownSoundPlay((PointerEventData)data); });
-        //trigger.triggers.Add(entry);
 
         EventTrigger.Entry entry2 = new EventTrigger.Entry();
         entry2.eventID = EventTriggerType.PointerEnter;

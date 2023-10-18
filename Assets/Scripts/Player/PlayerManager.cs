@@ -25,6 +25,7 @@ public class PlayerManager : CharacterManager
     public PlayerAnimatorManager playerAnimatorManager;
     public PlayerLocomotionManager playerLocomotionManager;
     public PlayerEffectsManager playerEffectsManager;
+    public PlayerSoundFXManager playerSoundFXManager;
 
     protected override void Awake()
     {
@@ -41,27 +42,29 @@ public class PlayerManager : CharacterManager
         playerInventoryManager = GetComponent<PlayerInventoryManager>();
         playerEquipmentManager = GetComponent<PlayerEquipmentManager>();
         playerEffectsManager = GetComponent<PlayerEffectsManager>();
+        playerSoundFXManager = GetComponent<PlayerSoundFXManager>();
 
         Managers.Object.m_MyPlayer = this;
     }
 
     public void StartGame()
     {
-        // 위치
-        m_StartPos = new Vector3(36.36f, 4.95f, -14.23298f);
-        m_StartRo = new Vector3(0f, -90f, 0f);
+        if (Managers.Game.m_isNewGame)
+        {
+            // 위치
+            m_StartPos = new Vector3(36.36f, 4.95f, -14.23298f);
+            m_StartRo = new Vector3(0f, -90f, 0f);
+        }
+        // 정보 로드
+        else
+        {
+            // 위치
+            m_StartPos = new Vector3(36.36f, 4.95f, -14.23298f);
+            m_StartRo = new Vector3(0f, -90f, 0f);
+        }
 
-        //if (Managers.Game.m_isNewGame)
-        //{
-        //    // 위치
-        //    m_StartPos = new Vector3(36.36f, 4.95f, -14.23298f);
-        //    m_StartRo = new Vector3(0f, -90f, 0f);
-        //}
-        //// 정보 로드
-        //else
-        //{
-
-        //}
+        transform.position = m_StartPos;
+        transform.eulerAngles = m_StartRo;
 
         cameraHandler = FindObjectOfType<CameraHandler>();
         m_GameSceneUI = FindObjectOfType<GameSceneUI>();
@@ -129,9 +132,10 @@ public class PlayerManager : CharacterManager
         }
         else
         {
-            if (Managers.GameUI.m_isShowingInteratablePopup == true)
+            if (Managers.GameUI.m_InteractablePopupUI != null)
             {
-                Managers.GameUI.m_GameSceneUI.m_InteractablePopupUI.ClosePopup();
+                Managers.UI.ClosePopupUI();
+                Managers.GameUI.m_InteractablePopupUI = null;
                 Managers.Game.m_Interactable = null;
             }
         }

@@ -2405,12 +2405,12 @@ GameObject:
   - component: {fileID: 3487662551812223536}
   - component: {fileID: 3487662551812223538}
   - component: {fileID: 3487662551812223542}
-  - component: {fileID: 3487662551812223539}
   - component: {fileID: 3487662551812223564}
   - component: {fileID: 917023147716679369}
   - component: {fileID: 3487662551812223546}
   - component: {fileID: 588308184874017117}
   - component: {fileID: 3487662552594357294}
+  - component: {fileID: 3487662552594357281}
   m_Layer: 9
   m_Name: SkeletonWarriorUnity [Humanoid A.I - Archer]
   m_TagString: Character
@@ -2532,6 +2532,8 @@ MonoBehaviour:
   characterEquipmentManager: {fileID: 0}
   lockOnTransform: {fileID: 3487662550739399246}
   criticalAttackRayCastStartPoint: {fileID: 0}
+  m_StartPos: {x: 0, y: 0, z: 0}
+  m_StartRo: {x: 0, y: 0, z: 0}
   isInteracting: 0
   isDead: 0
   canBeRiposted: 1
@@ -2563,7 +2565,9 @@ MonoBehaviour:
   aiCharacterAnimationManager: {fileID: 0}
   aiCharacterStatsManager: {fileID: 0}
   aiCharacterEffectsManager: {fileID: 0}
+  aICharacterSoundFXManager: {fileID: 0}
   currentState: {fileID: 0}
+  m_InitState: {fileID: 0}
   currentTarget: {fileID: 0}
   navMeshAgent: {fileID: 0}
   aiCharacterRigidbody: {fileID: 0}
@@ -2783,24 +2787,6 @@ MonoBehaviour:
   Damage_Animation_Colssal_Back: []
   Damage_Animation_Colssal_Left: []
   Damage_Animation_Colssal_Right: []
---- !u!114 &3487662551812223539
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3487662551812223566}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 282dd00098d843143a08dc23c8bc9873, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  takingDamageSounds:
-  - {fileID: 8300000, guid: b3493d7eded307a4db7c59c5315ef31c, type: 3}
-  - {fileID: 8300000, guid: 3a067f379f6291d40819215698bdc9a8, type: 3}
-  - {fileID: 8300000, guid: be235f8d4a2c1634a9ffad5a9ef0a7d5, type: 3}
-  - {fileID: 8300000, guid: 8955b56d1a87945479ae70ef02ea3354, type: 3}
-  - {fileID: 8300000, guid: 31affb79c7969ae4992dec318113263b, type: 3}
 --- !u!114 &3487662551812223564
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2862,6 +2848,12 @@ MonoBehaviour:
   fallStartYVelocity: -7
   gravityForce: -25
   groundCheckSphereRadius: 1
+  movementSpeed: 1
+  walkingSpeed: 2
+  sprintSpeed: 4
+  horizontal: 0
+  vertical: 0
+  moveAmount: 0
 --- !u!54 &3487662551812223546
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -2955,6 +2947,24 @@ MonoBehaviour:
   m_iCurrentAmmoArrowIndex: 0
   m_iCurrentAmmoBoltIndex: 0
   m_iCurrentConsumableItemndex: 0
+--- !u!114 &3487662552594357281
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3487662551812223566}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a21080635c31dfc45bf31d66bbddf90c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  takingDamageSounds:
+  - {fileID: 8300000, guid: b3493d7eded307a4db7c59c5315ef31c, type: 3}
+  - {fileID: 8300000, guid: 3a067f379f6291d40819215698bdc9a8, type: 3}
+  - {fileID: 8300000, guid: be235f8d4a2c1634a9ffad5a9ef0a7d5, type: 3}
+  - {fileID: 8300000, guid: 8955b56d1a87945479ae70ef02ea3354, type: 3}
+  - {fileID: 8300000, guid: 31affb79c7969ae4992dec318113263b, type: 3}
 --- !u!1 &3487662551866894317
 GameObject:
   m_ObjectHideFlags: 0

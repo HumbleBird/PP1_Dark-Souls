@@ -2,28 +2,27 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class PlayerSoundFXManager : CharacterSoundFXManager
+public class AICharacterSoundFXManager : CharacterSoundFXManager
 {
-    PlayerManager player;
+    AICharacterManager aiCharacter;
 
     protected override void Awake()
     {
         base.Awake();
 
-        player = GetComponent<PlayerManager>();
+        aiCharacter = GetComponent<AICharacterManager>();
     }
 
     protected override void SetMoveStateSoundName(ref string moveStateName)
     {
         base.SetMoveStateSoundName(ref moveStateName);
 
-
         // 움직임 정도에 따라
-        if (player.inputHandler.moveAmount > 0.5f)
+        if (aiCharacter.aiCharacterLocomotionManager.moveAmount > 0.5f)
         {
             moveStateName = "Run";
         }
-        else if (player.inputHandler.moveAmount <= 0.5f)
+        else if (aiCharacter.aiCharacterLocomotionManager.moveAmount <= 0.5f)
         {
             moveStateName = "Walk";
         }

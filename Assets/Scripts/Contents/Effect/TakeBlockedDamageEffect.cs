@@ -46,29 +46,11 @@ public class TakeBlockedDamageEffect : CharacterEffect
         // character가 A.I라면, 공격한 캐릭터를 새로운 타겟으로 설정
         AssignNewAITarget(character);
 
-        if(character.isDead)
-        {
-            character.characterAnimatorManager.PlayTargetAnimation("Dead_01", true);
-        }
-        else
-        {
-            PlayerManager player = character as PlayerManager;
-            if (player != null)
-            {
-                if (player.playerStatsManager.currentStamina <= 0)
-                {
-                    player.playerAnimatorManager.PlayTargetAnimation("Guard_Break_01", true);
-                    player.canBeRiposted = true;
-                    //player.playerSoundFXManager.PlayGuardBreakSound();
-                    player.isBlocking = false;
-                }
-                else
-                {
-                    player.playerAnimatorManager.PlayTargetAnimation(blockAnimation, true);
-                    player.isAttacking = false;
-                }
-            }
-        }
+        // 캐릭터의 Guard 상태 체크
+        CheckPlayerGuardState(character);
+
+        // character가 Player라면, 카메라 쉐이크 효과를 줌.
+        SetCameraShake(character);
     }
 
     private void CalculateDamage(CharacterManager character)
@@ -135,65 +117,73 @@ public class TakeBlockedDamageEffect : CharacterEffect
 
     private void PlayBlockDamageAnimation(CharacterManager character)
     {
-        // OWN HANDED BLOCK ANIMATION
-        if(!character.isTwoHandingWeapon)
+        if (character.isDead)
         {
-            // Poise backet < 25         small
-            // Poise backet > 25 < 50    medium
-            // Poise backet > 50 < 75    large
-            // Poise backet > 75         colosaal
-
-            if (poiseDamage <= 24 && poiseDamage >= 0)
-            {
-                blockAnimation = "OH_Block_Guard_Ping_01";
-                return;
-            }
-            else if (poiseDamage <= 49 && poiseDamage >= 25)
-            {
-                blockAnimation = "OH_Block_Guard_Light_01";
-                return;
-
-            }
-            else if (poiseDamage <= 74 && poiseDamage >= 50)
-            {
-                blockAnimation = "OH_Block_Guard_Medium_01";
-                return;
-
-            }
-            else if (poiseDamage <= 75)
-            {
-                blockAnimation = "OH_Block_Guard_Heavy_01";
-                return;
-            }
+            character.characterWeaponSlotManager.CloseDamageCollider();
+            character.characterAnimatorManager.PlayTargetAnimation("Dead_01", true);
         }
         else
         {
-            // Poise backet < 25         small
-            // Poise backet > 25 < 50    medium
-            // Poise backet > 50 < 75    large
-            // Poise backet > 75         colosaal
+            // OWN HANDED BLOCK ANIMATION
+            if (!character.isTwoHandingWeapon)
+            {
+                // Poise backet < 25         small
+                // Poise backet > 25 < 50    medium
+                // Poise backet > 50 < 75    large
+                // Poise backet > 75         colosaal
 
-            if (poiseDamage <= 24 && poiseDamage >= 0)
-            {
-                blockAnimation = "TH_Block_Guard_Ping_01";
-                return;
-            }
-            else if (poiseDamage <= 49 && poiseDamage >= 25)
-            {
-                blockAnimation = "TH_Block_Guard_Light_01";
-                return;
+                if (poiseDamage <= 24 && poiseDamage >= 0)
+                {
+                    blockAnimation = "OH_Block_Guard_Ping_01";
+                    return;
+                }
+                else if (poiseDamage <= 49 && poiseDamage >= 25)
+                {
+                    blockAnimation = "OH_Block_Guard_Light_01";
+                    return;
 
-            }
-            else if (poiseDamage <= 74 && poiseDamage >= 50)
-            {
-                blockAnimation = "TH_Block_Guard_Medium_01";
-                return;
+                }
+                else if (poiseDamage <= 74 && poiseDamage >= 50)
+                {
+                    blockAnimation = "OH_Block_Guard_Medium_01";
+                    return;
 
+                }
+                else if (poiseDamage <= 75)
+                {
+                    blockAnimation = "OH_Block_Guard_Heavy_01";
+                    return;
+                }
             }
-            else if (poiseDamage <= 75)
+            else
             {
-                blockAnimation = "TH_Block_Guard_Heavy_01";
-                return;
+                // Poise backet < 25         small
+                // Poise backet > 25 < 50    medium
+                // Poise backet > 50 < 75    large
+                // Poise backet > 75         colosaal
+
+                if (poiseDamage <= 24 && poiseDamage >= 0)
+                {
+                    blockAnimation = "TH_Block_Guard_Ping_01";
+                    return;
+                }
+                else if (poiseDamage <= 49 && poiseDamage >= 25)
+                {
+                    blockAnimation = "TH_Block_Guard_Light_01";
+                    return;
+
+                }
+                else if (poiseDamage <= 74 && poiseDamage >= 50)
+                {
+                    blockAnimation = "TH_Block_Guard_Medium_01";
+                    return;
+
+                }
+                else if (poiseDamage <= 75)
+                {
+                    blockAnimation = "TH_Block_Guard_Heavy_01";
+                    return;
+                }
             }
         }
     }
@@ -219,6 +209,36 @@ public class TakeBlockedDamageEffect : CharacterEffect
         if (aiCharacter != null && characterCausingDamage != null)
         {
             aiCharacter.currentTarget = characterCausingDamage;
+        }
+    }
+
+    private void CheckPlayerGuardState(CharacterManager character)
+    {
+        PlayerManager player = character as PlayerManager;
+        if (player != null)
+        {
+            if (player.playerStatsManager.currentStamina <= 0)
+            {
+                player.playerAnimatorManager.PlayTargetAnimation("Guard_Break_01", true);
+                player.canBeRiposted = true;
+                //player.playerSoundFXManager.PlayGuardBreakSound();
+                player.isBlocking = false;
+            }
+            else
+            {
+                player.playerAnimatorManager.PlayTargetAnimation(blockAnimation, true);
+                player.isAttacking = false;
+            }
+        }
+    }
+
+    private void SetCameraShake(CharacterManager character)
+    {
+        PlayerManager player = character as PlayerManager;
+
+        if (player != null)
+        {
+            Managers.Camera.CameraShake(1);
         }
     }
 }

@@ -21,8 +21,6 @@ public class InteractablePopupUI : UI_Popup
     public TextMeshProUGUI m_ItemText;
     public Image m_ItemImage;
 
-    public GameObject m_goPanel;
-
     public override bool Init()
     {
         if (base.Init() == false)
@@ -37,21 +35,6 @@ public class InteractablePopupUI : UI_Popup
 
         m_ItemText.gameObject.SetActive(false);
         m_ItemImage.gameObject.SetActive(false);
-
-        m_goPanel.SetActive(false);
-
         return true;
-    }
-
-    public void ShowPopup()
-    {
-        Managers.GameUI.m_isShowingInteratablePopup = true;
-        m_goPanel.SetActive(true);
-    }
-
-    public void ClosePopup()
-    {
-        Managers.GameUI.m_isShowingInteratablePopup = false;
-        m_goPanel.SetActive(false);
     }
 }

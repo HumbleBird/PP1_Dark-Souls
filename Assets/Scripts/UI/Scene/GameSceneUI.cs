@@ -19,7 +19,6 @@ public class GameSceneUI : UI_Scene
     public GameObject m_goCrosshair;
     public UIBossHealthBar m_BossHealthBar;
     public AreaUI m_AreaUI;
-    public InteractablePopupUI m_InteractablePopupUI;
 
     Animator m_animator;
 
@@ -40,7 +39,6 @@ public class GameSceneUI : UI_Scene
         m_BossHealthBar = GetComponentInChildren<UIBossHealthBar>();
         m_StatBarsUI = GetComponentInChildren<StatBarsUI>();
         m_AreaUI = GetComponentInChildren<AreaUI>();
-        m_InteractablePopupUI = GetComponentInChildren<InteractablePopupUI>();
 
         m_FadeInOutScreenUI = GetComponentInChildren<FadeInOutScreenUI>();
 

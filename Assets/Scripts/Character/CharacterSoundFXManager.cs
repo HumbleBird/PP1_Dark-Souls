@@ -15,9 +15,17 @@ public class CharacterSoundFXManager : MonoBehaviour
     private AudioClip m_LastBlockDamageAudioClip;
     private AudioClip m_LastWeaponWhooshes;
 
-    private void Awake()
+    AudioSource m_AudioSource;
+
+    public bool m_bCanStepL;
+    public bool m_bCanStepR = false;
+
+    protected virtual void Awake()
     {
         character = GetComponent<CharacterManager>();
+        m_AudioSource = gameObject.GetOrAddComponent<AudioSource>();
+        m_AudioSource.playOnAwake = false;
+        m_AudioSource.loop = false;
     }
 
     public void PlayRandomSound(E_RandomSoundType type, List<AudioClip> audioClips)
@@ -92,18 +100,33 @@ public class CharacterSoundFXManager : MonoBehaviour
     }
 
     // 플레이어 몸 자체에서 보냄.
-    public virtual void FootStep()
+    public void FootStep()
     {
-        // 현재 지형에 따라
+        string path = null;
+        string moveState = null;
+        string location = null;
 
-        // 현재 걷는지, 띄는지, 점프 하는지에 따라
+        // 지형별
+        location = "Rock";
 
-        Managers.Sound.Play("character/FootStep/");
+        SetMoveStateSoundName(ref moveState);
+
+        path = $"Footsteps";
+
+        // 해당 캐릭터의 오디오 소스에서
+        string audioClipPath = $"Sounds/Effect/Character/{path}/{path}_{location}/{path}_{location}_{moveState}/{path}_{location}_{moveState}_07";
+
+        Managers.Sound.SoundPlayFromCharacter(gameObject, audioClipPath, m_AudioSource);
+    }
+
+    protected virtual void SetMoveStateSoundName(ref string moveStateName)
+    {
 
     }
 
-    public virtual void DeadSoundPlay()
+    public void RollSoundPlay()
     {
-
+        string audioClipPath = $"Sounds/Effect/Character/Footsteps/Footsteps_Tile/Footsteps_Tile_Jump/Footsteps_Tile_Jump_Land_01";
+        Managers.Sound.SoundPlayFromCharacter(gameObject, audioClipPath, m_AudioSource);
     }
 }

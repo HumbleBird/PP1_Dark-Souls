@@ -54,6 +54,8 @@ public class GenderSelect : UI_Base
             // 모듈러 다시 장착
             player.playerEquipmentManager.EquipAllEquipmentModel();
 
+            // 사운드
+            Managers.Sound.Play("UI/Popup_ButtonShow");
         });
 
         Button Femalebutton = GetButton((int)Buttons.FemaleSelectBtn);
@@ -73,16 +75,15 @@ public class GenderSelect : UI_Base
 
             // 모듈러 다시 장착
             player.playerEquipmentManager.EquipAllEquipmentModel();
+
+            // 사운드
+            Managers.Sound.Play("UI/Popup_ButtonShow");
+
         });
 
         // Event Trigger
         {
             EventTrigger trigger = Malebutton.gameObject.GetOrAddComponent<EventTrigger>();
-
-            EventTrigger.Entry entry = new EventTrigger.Entry();
-            entry.eventID = EventTriggerType.Select;
-            entry.callback.AddListener((data) => { SelectMale((PointerEventData)data); });
-            trigger.triggers.Add(entry);
 
             EventTrigger.Entry entry2 = new EventTrigger.Entry();
             entry2.eventID = EventTriggerType.PointerEnter;
@@ -91,11 +92,6 @@ public class GenderSelect : UI_Base
         }
         {
             EventTrigger trigger = Femalebutton.gameObject.GetOrAddComponent<EventTrigger>();
-
-            EventTrigger.Entry entry = new EventTrigger.Entry();
-            entry.eventID = EventTriggerType.Select;
-            entry.callback.AddListener((data) => { SelectFemale((PointerEventData)data); });
-            trigger.triggers.Add(entry);
 
             EventTrigger.Entry entry2 = new EventTrigger.Entry();
             entry2.eventID = EventTriggerType.PointerEnter;
@@ -114,6 +110,9 @@ public class GenderSelect : UI_Base
 
         // 모듈러 다시 장착
         player.playerEquipmentManager.EquipAllEquipmentModel();
+
+        // 사운드
+        Managers.Sound.Play("UI/Popup_OrderButtonSelect");
     }
 
     void SelectFemale(PointerEventData data)
@@ -125,6 +124,9 @@ public class GenderSelect : UI_Base
 
         // 모듈러 다시 장착
         player.playerEquipmentManager.EquipAllEquipmentModel();
+
+        // 사운드
+        Managers.Sound.Play("UI/Popup_OrderButtonSelect");
     }
 
     private void ChangeSubItemGender()

@@ -9,6 +9,7 @@ public class TakeDamageEffect : CharacterEffect
     public CharacterManager characterCausingDamage; // 데미지 유발이 캐릭터라면, they are listed here?
 
     [Header("Damage")]
+    public float finalDamage = 0;
     public float physicalDamage = 0;
     public float fireDamage = 0;
 
@@ -59,6 +60,9 @@ public class TakeDamageEffect : CharacterEffect
 
         // character가 A.I라면, 공격한 캐릭터를 새로운 타겟으로 설정
         AssignNewAITarget(character);
+
+        // character가 Player라면, 카메라 쉐이크 효과를 줌.
+        SetCameraShake(character);
     }
 
     private void CalculateDamage(CharacterManager  character)
@@ -91,7 +95,7 @@ public class TakeDamageEffect : CharacterEffect
         physicalDamage = physicalDamage - Mathf.RoundToInt(physicalDamage * (character.characterStatsManager.physicalAbsorptionPercentageModifier / 100));
         fireDamage = fireDamage - Mathf.RoundToInt(fireDamage * (character.characterStatsManager.fireAbsorptionPercentageModifier / 100));
 
-        float finalDamage = physicalDamage + fireDamage; // + fire + mage + lightning + dark Damage
+        finalDamage = physicalDamage + fireDamage; // + fire + mage + lightning + dark Damage
 
         character.characterStatsManager.currentHealth = Mathf.RoundToInt(character.characterStatsManager.currentHealth - finalDamage);
 
@@ -253,7 +257,7 @@ public class TakeDamageEffect : CharacterEffect
         // 몬스터라면 지 아래에 있는 Helath Bar를 수정
 
         // 플레이어라면 UI를 수정
-        character.characterStatsManager.HealthBarUIUpdate();
+        character.characterStatsManager.HealthBarUIUpdate(Mathf.RoundToInt( finalDamage));
     }
     
 
@@ -283,23 +287,25 @@ public class TakeDamageEffect : CharacterEffect
         {
             character.characterWeaponSlotManager.CloseDamageCollider();
             character.characterAnimatorManager.PlayTargetAnimation("Dead_01", true);
-            return;
-        }
-
-        // 캐릭터 poise broken이 되지 않았다면, 데미지 애니메이션을 재생하지 않는다
-        if(!poiseIsBroken)
-        {
-            return;
         }
         else
         {
-            // 활성/비활성 stun lock
-
-            if (playDamageAnimation)
+            // 캐릭터 poise broken이 되지 않았다면, 데미지 애니메이션을 재생하지 않는다
+            if (!poiseIsBroken)
             {
-                character.characterAnimatorManager.PlayTargetAnimation(damageAnimation, true);
+                return;
+            }
+            else
+            {
+                // 활성/비활성 stun lock
+
+                if (playDamageAnimation)
+                {
+                    character.characterAnimatorManager.PlayTargetAnimation(damageAnimation, true);
+                }
             }
         }
+
     }
 
     private void PlayBloodSplatter(CharacterManager character)
@@ -314,6 +320,16 @@ public class TakeDamageEffect : CharacterEffect
         if(aiCharacter != null && characterCausingDamage != null)
         {
             aiCharacter.currentTarget = characterCausingDamage;
+        }
+    }
+
+    private void SetCameraShake(CharacterManager character)
+    {
+        PlayerManager player = character as PlayerManager;
+
+        if(player != null)
+        {
+            Managers.Camera.CameraShake(1);
         }
     }
 }

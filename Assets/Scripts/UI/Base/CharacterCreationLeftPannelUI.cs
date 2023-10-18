@@ -137,7 +137,11 @@ public class CharacterCreationLeftPannelUI : UI_Base
     #region ButtonFuncitonAdd
     private void NameButtonFunctionAdd()
     {
-
+        // Name
+        m_NameBtn.onClick.AddListener(() =>
+        {
+            Managers.Sound.Play("UI/Popup_ButtonShow");
+        });
     }
 
     private void GenderButtonFunctionAdd()

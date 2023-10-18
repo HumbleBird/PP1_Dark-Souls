@@ -11,8 +11,6 @@ public class DeadSouls : Interactable
         base.Awake();
 
         interactableText = "Recover lost souls"; // 잃어버린 소울을 되찾는다
-
-
     }
 
     public override void Interact(PlayerManager playermanager)

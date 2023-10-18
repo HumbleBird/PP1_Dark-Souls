@@ -17,18 +17,6 @@ public class GameManager
     {
         m_Player = Managers.Object.m_MyPlayer;
 
-        // 게임을 처음 시작했다면
-        if (m_isNewGame)
-        {
-
-            // 인트로씬 처음으로 보여주기
-            Managers.GameUI.ShowIntro("StartOpening");
-        }
-        else
-        {
-            // 캐릭터 데이터 가져오기
-        }
-
         m_Player.StartGame();
     }
 
