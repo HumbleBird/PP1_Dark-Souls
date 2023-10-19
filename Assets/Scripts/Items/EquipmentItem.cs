@@ -21,21 +21,21 @@ public class EquipmentItem : Item
     }
 
     [Header("Defense Bonus")]
-    public float m_fPhysicalDefense;
-    public float m_fStrikeDefense;
-    public float m_fSlashDefense;
-    public float m_fThrustDefense;
-    public float m_fMagicDefense;
-    public float m_fFireDefense;
-    public float m_fLightningDefense;
-    public float m_fDarkDefense;
+    public float m_fPhysicalDefense     ;
+    public float m_fVSStrikeDefense           ;
+    public float m_fVSSlashDefense            ;
+    public float m_fVSThrustDefense           ;
+    public float m_fMagicDefense            ;
+    public float m_fFireDefense             ;
+    public float m_fLightningDefense            ;
+    public float m_fDarkDefense         ;
 
     [Header("Resistances")]
-    public float m_fBleedResistance;
+    public float m_fBleedResistance ;
     public float m_fPoisonResistance;
-    public float m_fFrostResistance;
-    public float m_fCurseResistance;
-    public float m_fPoiseResistance;
+    public float m_fFrostResistance ;
+    public float m_fCurseResistance ;
+    public float m_fPoiseResistance ;
 
     [Header("Durability")]
     public float m_fDurability = 0;

@@ -19,17 +19,17 @@ public class WeaponItem : Item
     public string Skill;
     public int FocusCost;
 
-    [Header("Requirement")] // 필요 능력치 F = 1, E = 2, D = 3, C = 4, B = 5, A = 6
-    public int m_iRequirementStrength;
-    public int m_iRequirementDexterity;
-    public int m_iRequirementIntelligence;
-    public int m_iRequirementFaith;
+    [Header("Requirement Ability")] // 필요 능력치 F = 1, E = 2, D = 3, C = 4, B = 5, A = 6
+    public int m_iAttributeRequirementStrength;
+    public int m_iAttributeRequirementDexterity;
+    public int m_iAttributeRequirementIntelligence;
+    public int m_iAttributeRequirementFaith;
 
     [Header("Parameter Bonus")] // 능력치 보정 // 필요 능력치 F = 1, E = 2, D = 3, C = 4, B = 5, A = 6
-    public int m_iParameterBonusStrength;
-    public int m_iParameterBonusDexterity;
-    public int m_iParameterBonusIntelligence;
-    public int m_iParameterBonusFaith;
+    public int m_iAttributeBonusStrength;
+    public int m_iAttributeBonusDexterity;
+    public int m_iAttributeBonusIntelligence;
+    public int m_iAttributeBonusFaith;
 
     [Header("Attack Values")]
     public int m_iPhysicalDamage;

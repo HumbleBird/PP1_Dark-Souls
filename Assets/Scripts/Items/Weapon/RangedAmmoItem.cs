@@ -6,10 +6,38 @@ using static Define;
 [CreateAssetMenu(menuName = "Items/Ammo")]
 public class RangedAmmoItem : Item
 {
+    public RangedAmmoItem()
+    {
+        m_EItemType = Define.E_ItemType.Ammo;
+    }
 
-
-    [Header("Ammo Type")]
+    [Header("Property")]
     public AmmoType ammoType;
+    public string AttackType;
+
+    [Header("Current Count")]
+    public int m_iCurrentCount; // 현재 소지 가능한 수
+    public int m_iMaxCount; // 최대 소지 가능한 수
+
+    [Header("Save Count")]
+    public int m_iCurrentSaveCount; // 현재 저장한 수
+    public int m_iMaxSaveCount; // 최대 저장한 가능한 수
+
+    [Header("Ammo Base Damage")]
+    public int physicalDamage = 50;
+
+    [Header("Attack Values")]
+    public int m_iPhysicalDamage;
+    public int m_iMagicDamage;
+    public int m_iFireDamage;
+    public int m_iLightningDamage;
+    public int m_iDarkDamage;
+    public int m_iCriticalDamage;
+
+    [Header("Auxiliary Effects")]
+    public int m_iBleeding;
+    public int m_iPoison;
+    public int m_iFrost;
 
     [Header("Ammo Velocity")]
     public float forwardVelocity = 550;
@@ -17,12 +45,7 @@ public class RangedAmmoItem : Item
     public float ammoMass = 0;
     public bool useGravity = false;
 
-    [Header("Ammo Capacity")]
-    public int carryLimit = 99;
-    public int currentAmount = 99;
 
-    [Header("Ammo Base Damage")]
-    public int physicalDamage = 50;
 
 
     [Header("Item Modles")]
