@@ -16,15 +16,15 @@ public class CharacterEquipmentManager : MonoBehaviour
     public WeaponItem m_CurrentHandRightWeapon; // Equick Slot Right
     public WeaponItem m_CurrentHandLeftWeapon; // Equick Slot Left
     public ToolItem m_CurrentHandConsumable; // Equick Slot Down
-    public RangedAmmoItem m_CurrentHandAmmo; // Equick Slot Left Down
+    public AmmoItem m_CurrentHandAmmo; // Equick Slot Left Down
 
     [Header("Weapon Items")]
     public WeaponItem[] m_RightWeaponsSlots = new WeaponItem[3];
     public WeaponItem[] m_LeftWeaponsSlots = new WeaponItem[3];
 
     [Header("Ammo Items")]
-    public RangedAmmoItem[] m_ArrowAmmoSlots = new RangedAmmoItem[2];
-    public RangedAmmoItem[] m_BoltAmmoSlots = new RangedAmmoItem[2];
+    public AmmoItem[] m_ArrowAmmoSlots = new AmmoItem[2];
+    public AmmoItem[] m_BoltAmmoSlots = new AmmoItem[2];
     
     [Header("Arrmor Items")]
     public HelmEquipmentItem m_HelmetEquipment;
@@ -39,7 +39,7 @@ public class CharacterEquipmentManager : MonoBehaviour
     public ToolItem[] m_ConsumableItemSlots = new ToolItem[10];
 
     [Header("Pledge")]
-    public Item m_CurrentPledge;
+    public PledgeItem m_CurrentPledge;
 
     [Header("Unarme Item")]
     public Item m_Unarmed;

@@ -8,9 +8,8 @@ using static Define;
 
 public class EquipmentSlotUI : ItemSlotUI
 {
-    public E_EquipmentSlotsPartType m_EquipmentSlotsPartsName;
+    public E_EquipmentSlotsPartType m_EquipmentSlotType;
 
-    public int m_iSlotNum = -1; // 슬롯 번호
     public string m_sSlotPartName; // 슬롯 파트 이름
 
     EquipmentUI m_EquipmentUI;
@@ -20,9 +19,9 @@ public class EquipmentSlotUI : ItemSlotUI
         if (base.Init() == false)
             return false;
 
-        SetSlotPartName();
-
         m_EquipmentUI = GetComponentInParent<EquipmentUI>();
+
+        SetSlotPartName();
 
         return true;
     }
@@ -32,24 +31,25 @@ public class EquipmentSlotUI : ItemSlotUI
         if (m_iSlotNum != -1)
         {
             int num = m_iSlotNum + 1;
-            m_sSlotPartName = m_EquipmentSlotsPartsName.ToString() + " " + num;
+            m_sSlotPartName = m_EquipmentSlotType.ToString() + " " + num;
 
         }
         else
         {
-            m_sSlotPartName = m_EquipmentSlotsPartsName.ToString();
+            m_sSlotPartName = m_EquipmentSlotType.ToString();
 
         }
         m_sSlotPartName = m_sSlotPartName.Replace("_", " ");
     }
 
     // 아이템 이미지를 클릭했을 때 나타나는 이벤트 함수.
+    // Equipment UI에서 열었을 떄 (인벤토리를 통해서가 아니라)
     public override void ShowHowtoItem()
     {
         // 장착할 아이템을 인벤토리에서 가져온다.
 
         // 해당 슬롯 파트의 아이템과 슬롯 정보를 가져와서 넘겨준다.
-        m_EquipmentUI.m_ShowItemInventoryUI.SetInfo(m_sSlotPartName, m_EquipmentSlotsPartsName, m_iSlotNum);
+        m_EquipmentUI.m_ShowItemInventoryUI.SetInfo(m_sSlotPartName, m_EquipmentSlotType, m_iSlotNum);
 
         m_EquipmentUI.m_CurrentEquipmentsUI.gameObject.SetActive(false);
         m_EquipmentUI.m_ShowItemInventoryUI.gameObject.SetActive(true);
@@ -57,16 +57,16 @@ public class EquipmentSlotUI : ItemSlotUI
 
     public void ItemChangeFromInventoryBindEvent()
     {
-        GetImage((int)Images.ItemSelectIcon).gameObject.BindEvent(() => ChangeBindEvent()); ;
+        m_ItemSlotSubUI.m_ItemSelectIcon.gameObject.BindEvent(() => ChangeBindEvent()); ;
     }
 
+    // 처음에 인벤토리에서 열었다면 교체하려는 아이템 파트의 아이템만 교체 가능하게
     void ChangeBindEvent()
     {
         PlayerManager player = Managers.Object.m_MyPlayer;
         bool isSuccess = false;
 
-        // 처음에 인벤토리에서 열었다면 교체하려는 아이템 파트의 아이템만 교체 가능하게
-        switch (m_EquipmentSlotsPartsName)
+        switch (m_EquipmentSlotType)
         {
             case E_EquipmentSlotsPartType.Right_Hand_Weapon:
                 if (m_EquipmentUI.m_TempPrivateItem.m_EItemType == E_ItemType.MeleeWeapon ||
@@ -91,17 +91,17 @@ public class EquipmentSlotUI : ItemSlotUI
                 break;
             case E_EquipmentSlotsPartType.Arrow:
                 if (m_EquipmentUI.m_TempPrivateItem.m_EItemType == E_ItemType.Ammo &&
-                    (((RangedAmmoItem)m_EquipmentUI.m_TempPrivateItem).ammoType == AmmoType.Arrow))
+                    (((AmmoItem)m_EquipmentUI.m_TempPrivateItem).ammoType == AmmoType.Arrow))
                 {
-                    player.playerEquipmentManager.m_ArrowAmmoSlots[m_iSlotNum] = (RangedAmmoItem)m_EquipmentUI.m_TempPrivateItem;
+                    player.playerEquipmentManager.m_ArrowAmmoSlots[m_iSlotNum] = (AmmoItem)m_EquipmentUI.m_TempPrivateItem;
                     isSuccess = true;
                 }
                 break;
             case E_EquipmentSlotsPartType.Bolt:
                 if (m_EquipmentUI.m_TempPrivateItem.m_EItemType == E_ItemType.Ammo &&
-                    (((RangedAmmoItem)m_EquipmentUI.m_TempPrivateItem).ammoType == AmmoType.Bolt))
+                    (((AmmoItem)m_EquipmentUI.m_TempPrivateItem).ammoType == AmmoType.Bolt))
                 {
-                    player.playerEquipmentManager.m_ArrowAmmoSlots[m_iSlotNum] = (RangedAmmoItem)m_EquipmentUI.m_TempPrivateItem;
+                    player.playerEquipmentManager.m_ArrowAmmoSlots[m_iSlotNum] = (AmmoItem)m_EquipmentUI.m_TempPrivateItem;
                     isSuccess = true;
                 }
                 break;
@@ -150,7 +150,7 @@ public class EquipmentSlotUI : ItemSlotUI
             case E_EquipmentSlotsPartType.Pledge:
                 if (m_EquipmentUI.m_TempPrivateItem.m_EItemType == E_ItemType.Pledge)
                 {
-                    player.playerEquipmentManager.m_CurrentPledge = (Item)m_EquipmentUI.m_TempPrivateItem;
+                    player.playerEquipmentManager.m_CurrentPledge = (PledgeItem)m_EquipmentUI.m_TempPrivateItem;
                     isSuccess = true;
                 }
                 break;
@@ -160,6 +160,7 @@ public class EquipmentSlotUI : ItemSlotUI
 
         if(isSuccess)
         {
+            m_EquipmentUI.m_TempPrivateItem.m_isEquiping = true;
             player.playerEquipmentManager.Refresh();
             m_EquipmentUI.m_CurrentEquipmentsUI.RefreshUI();
 
@@ -168,16 +169,19 @@ public class EquipmentSlotUI : ItemSlotUI
             Managers.Game.PlayAction(() =>
             {
                 Managers.UI.ClosePopupUI();
+                Managers.GameUI.m_EquipmentUI = null;
                 Managers.UI.ShowPopupUI<InventoryUI>();
             });
         }
     }
 
     // 아이템 이미지를 클릭하면 가운데 패널에 아이템 정보를 보여준다.
-    public override void ShowItemInformation(PointerEventData data)
+    public override void ShowItemInformation()
     {
         Managers.Sound.Play("UI/Popup_OrderButtonSelect");
-        GetImage((int)Images.ItemSelectIcon).enabled = true;
+        m_EquipmentUI.m_CurrentEquipmentsUI.PriviousSlotClear();
+        m_EquipmentUI.m_CurrentEquipmentsUI.m_CurrentEquipmentSlot = this;
+        m_ItemSlotSubUI.m_ItemSelectIcon.enabled = true;
 
         if (m_Item == null)
         {
@@ -188,12 +192,14 @@ public class EquipmentSlotUI : ItemSlotUI
             m_EquipmentUI.m_ItemInformationUI.ShowItemInformation(m_Item);
             m_EquipmentUI.m_CurrentEquipmentsUI.ShowItemInformation(m_Item.name, m_sSlotPartName);
         }
+
     }
 
-    // 아이템 이미지를 선택하지 않을 때 선택 이미지 효과를 삭제한다.
-    public override void PointerExitItem(PointerEventData data)
+    public override void RefreshUI()
     {
+        base.RefreshUI();
 
-        GetImage((int)Images.ItemSelectIcon).enabled = false;
+        m_ItemSlotSubUI.m_ItemPlateIcon.enabled = false;
+        m_ItemSlotSubUI.m_ItemUsingIcon.enabled = false;
     }
 }

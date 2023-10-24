@@ -1,0 +1,83 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c92353b4be4650b4cb2754d3c0795952, type: 3}
+  m_Name: Short Bow
+  m_EditorClassIdentifier: 
+  itemIcon: {fileID: 21300000, guid: 55b668f45eace2245bd9b55991317a72, type: 3}
+  itemName: Short Bow
+  itemID: 0
+  m_EItemType: 6
+  modelPrefab: {fileID: 7694254933542424885, guid: e7468f845fa35214b808b838155390e0, type: 3}
+  isUnarmed: 0
+  weaponController: {fileID: 22100000, guid: 22d5de4468c37da489e7bcf2fba8efb0, type: 2}
+  weaponType: 7
+  AttackType: 
+  Skill: 
+  FocusCost: 0
+  m_iAttributeRequirementStrength: 0
+  m_iAttributeRequirementDexterity: 0
+  m_iAttributeRequirementIntelligence: 0
+  m_iAttributeRequirementFaith: 0
+  m_iAttributeBonusStrength: 0
+  m_iAttributeBonusDexterity: 0
+  m_iAttributeBonusIntelligence: 0
+  m_iAttributeBonusFaith: 0
+  m_iPhysicalDamage: 0
+  m_iMagicDamage: 0
+  m_iFireDamage: 0
+  m_iLightningDamage: 0
+  m_iDarkDamage: 0
+  m_iCriticalDamage: 0
+  m_iSpellBuff: 0
+  m_iRange: 0
+  m_iPhysicalDamageReduction: 0
+  m_iMagicDamageReduction: 0
+  m_iFireDamageReduction: 0
+  m_iLightningDamageReduction: 0
+  m_iDarkDamageReduction: 0
+  m_iStability: 0
+  m_iBleeding: 0
+  m_iPoison: 0
+  m_iFrost: 0
+  m_iCurse: 0
+  m_iDurability: 0
+  m_iWeight: 0
+  lightAttackDamageModifier: 0
+  heavyAttackDaamgeModifier: 0
+  criticalDamagemuiltiplier: 4
+  guardBreakModifier: 1
+  poiseBreak: 25
+  offensivePoiseBonus: 0
+  physicalBlockingDamageAbsorption: 0
+  fireBlockingDamageAbsorption: 0
+  baseStaminaCost: 0
+  lightAttackStaminaMultiplier: 0
+  heavyAttackStaminaMultiplier: 0
+  oh_tap_RB_Action: {fileID: 11400000, guid: 787f7096a0a7d174a8ba2bffb0122f9e, type: 2}
+  oh_hold_RB_Action: {fileID: 11400000, guid: 639765a0d658eae46971baea9dcbb3dc, type: 2}
+  oh_tap_RT_Action: {fileID: 0}
+  oh_hold_RT_Action: {fileID: 0}
+  oh_tap_LB_Action: {fileID: 0}
+  oh_hold_LB_Action: {fileID: 11400000, guid: 0f25974ff900cc64096def5c7366e927, type: 2}
+  oh_tap_LT_Action: {fileID: 0}
+  oh_hold_LT_Action: {fileID: 0}
+  th_tap_RB_Action: {fileID: 11400000, guid: 787f7096a0a7d174a8ba2bffb0122f9e, type: 2}
+  th_hold_RB_Action: {fileID: 11400000, guid: 639765a0d658eae46971baea9dcbb3dc, type: 2}
+  th_tap_RT_Action: {fileID: 0}
+  th_hold_RT_Action: {fileID: 0}
+  th_tap_LB_Action: {fileID: 0}
+  th_hold_LB_Action: {fileID: 11400000, guid: 0f25974ff900cc64096def5c7366e927, type: 2}
+  th_tap_LT_Action: {fileID: 0}
+  th_hold_LT_Action: {fileID: 0}
+  weaponWhooshes: []
+  blockingNoises: []
+  m_iAttackRange: 50

@@ -6,21 +6,23 @@ using UnityEngine.UI;
 
 public class ItemInformationUI : UI_Base
 {
-    ItemInfo_Tool                           m_ItemInfo_Tool;
-    ItemInfo_ReinforcedMaterial_Valuables   m_ItemInfo_ReinforcedMaterial_Valuables;
-    ItemInfo_Magic                          m_ItemInfo_Magic;
-    ItemInfo_Weapon                         m_ItemInfo_Weapon;
-    ItemInfo_Armor                          m_ItemInfo_Armor;
-    ItemInfo_Ammo                           m_ItemInfo_Ammo;
-    ItemInfo_Ring                           m_ItemInfo_Ring;
-    ItemInfo_Pledge                         m_ItemInfo_Pledge;
+    public Image m_ItemBasePlateIcon;
+    public Image m_ItemIcon;
+
+    public ItemInfo_Tool                           m_ItemInfo_Tool;
+    public ItemInfo_ReinforcedMaterial_Valuables   m_ItemInfo_ReinforcedMaterial_Valuables;
+    public ItemInfo_Magic                          m_ItemInfo_Magic;
+    public ItemInfo_Weapon                         m_ItemInfo_Weapon;
+    public ItemInfo_Armor                          m_ItemInfo_Armor;
+    public ItemInfo_Ammo                           m_ItemInfo_Ammo;
+    public ItemInfo_Ring                           m_ItemInfo_Ring;
+    public ItemInfo_Pledge                         m_ItemInfo_Pledge;
 
     public override bool Init()
     {
         if (base.Init() == false)
             return false;
 
-        AllItemTypeWindowClose();
 
         m_ItemInfo_Tool = GetComponentInChildren<ItemInfo_Tool                        >();
         m_ItemInfo_ReinforcedMaterial_Valuables = GetComponentInChildren<ItemInfo_ReinforcedMaterial_Valuables>();
@@ -31,12 +33,18 @@ public class ItemInformationUI : UI_Base
         m_ItemInfo_Ring = GetComponentInChildren<ItemInfo_Ring                        >();
         m_ItemInfo_Pledge = GetComponentInChildren<ItemInfo_Pledge                      >();
 
+        CloseShowItemInformation();
+
         return true;
     }
 
     public void ShowItemInformation(Item item)
     {
-        AllItemTypeWindowClose();
+        CloseShowItemInformation();
+
+        m_ItemBasePlateIcon.enabled = true;
+        m_ItemIcon.enabled = true;
+        m_ItemIcon.sprite = item.itemIcon;
 
         switch (item.m_EItemType)
         {
@@ -84,8 +92,12 @@ public class ItemInformationUI : UI_Base
         }
     }
 
-    void AllItemTypeWindowClose()
+
+    public void CloseShowItemInformation()
     {
+        m_ItemBasePlateIcon.enabled = false;
+        m_ItemIcon.enabled = false;
+
         m_ItemInfo_Tool.gameObject.SetActive(false);
         m_ItemInfo_ReinforcedMaterial_Valuables.gameObject.SetActive(false);
         m_ItemInfo_Magic.gameObject.SetActive(false);

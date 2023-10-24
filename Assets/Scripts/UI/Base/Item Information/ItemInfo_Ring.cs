@@ -4,13 +4,24 @@ using UnityEngine;
 
 public class ItemInfo_Ring : ItemInfo_Base
 {
-    new protected enum Texts
+    enum Texts
     {
         // Property
-        ItemNameText,
-        EquipLoadValueText,
+        Ring_ItemNameText,
+        Ring_EquipLoadValueText,
 
         ItemEffectDescriptionText,
+    }
+
+
+    public override bool Init()
+    {
+        if (base.Init() == false)
+            return false;
+
+        BindText(typeof(Texts));
+
+        return true;
     }
 
     public override void ShowItemInfo(Item item)
@@ -23,8 +34,8 @@ public class ItemInfo_Ring : ItemInfo_Base
 
     void ShowToolItem(RingItem item)
     {
-        GetText((int)Texts.ItemNameText).text = item.itemName;
-        GetText((int)Texts.EquipLoadValueText).text = item.m_iWeight.ToString();
+        GetText((int)Texts.Ring_ItemNameText).text = item.itemName;
+        GetText((int)Texts.Ring_EquipLoadValueText).text = item.m_iWeight.ToString();
 
         GetText((int)Texts.ItemEffectDescriptionText).text = item.m_sItemDescription.ToString();
     }

@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class RangedProjectileDamageCollider : DamageCollider
 {
-    public RangedAmmoItem ammoItem;
+    public AmmoItem ammoItem;
     protected bool hasAlreadyPenetratedSurface;
 
     Rigidbody arrowRigidbody;

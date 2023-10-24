@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
 using static Define;
 
@@ -9,42 +10,22 @@ public class ShowItemInventoryUI : UI_Base
     // Right Hand Slot을 클릭하면 무기, 쉴드에 해당하는 아이템들을 전부 가져온다.
     // 슬롯은 처음에 많게. 아이템의 인벤토리가 그보다 더 많으면 새로 생성, Scroll을 활성화 시킨다.
 
-    enum Texts
-    {
-        EquipmentSlotsNameText,
-        ItemNameText,
-    }
-
-    enum GameObjects
-    {
-        Panel
-    }
-
-    public string m_sItemPartSlotName;
-    public int m_iEquipmentSlotNum;
     public E_EquipmentSlotsPartType m_E_EquipmentSlotsPartType;
+    List<EquipmentShowInventorySlotUI> m_EquipmentShowInventorySlot = new List<EquipmentShowInventorySlotUI>();
 
-    public override bool Init()
-    {
-        if (base.Init() == false)
-            return false;
+    public int m_iEquipmentSlotNum;
+    public int m_iCurrentSelectSlot = 0;
 
-        BindText(typeof(Texts));
-        BindObject(typeof(GameObjects));
+    public TextMeshProUGUI m_sEquipmentSlotsNameText;
+    public TextMeshProUGUI m_ItemNameText;
 
-        GetText((int)Texts.EquipmentSlotsNameText).text = m_sItemPartSlotName;
-
-        // 슬롯 만들기
-        CreateInventorySlot(GetObject((int)GameObjects.Panel), m_E_EquipmentSlotsPartType);
-
-        return true;
-    }
+    public GameObject m_goPanel;
 
     // Equipment UI를 통해서 들어 왔을 떄
     public void SetInfo(string slotPartName, E_EquipmentSlotsPartType equipmentSlotsPartsName, int SlotNum)
     {
         // 슬롯 파트 이름
-        m_sItemPartSlotName = slotPartName;
+        m_sEquipmentSlotsNameText.text = slotPartName;
 
         // 슬롯 Num
         m_iEquipmentSlotNum = SlotNum;
@@ -52,7 +33,8 @@ public class ShowItemInventoryUI : UI_Base
         // 장비 Type
         m_E_EquipmentSlotsPartType = equipmentSlotsPartsName;
 
-
+        // 슬롯 만들기
+        CreateInventorySlot(m_goPanel, m_E_EquipmentSlotsPartType);
     }
 
     // EquipmentToInventoryShowItemSubItem에서 Pointer Down Event를 발생시켰을 때
@@ -60,11 +42,11 @@ public class ShowItemInventoryUI : UI_Base
     {
         if (itemName != null)
         {
-            GetText((int)Texts.ItemNameText).text = itemName;
+            m_ItemNameText.text = itemName;
         }
         else
         {
-            GetText((int)Texts.ItemNameText).text = "";
+            m_ItemNameText.text = "";
         }
     }
 
@@ -74,6 +56,8 @@ public class ShowItemInventoryUI : UI_Base
         // 슬롯 초기화
         foreach (Transform child in parent.transform)
             Managers.Resource.Destroy(child.gameObject);
+
+        m_EquipmentShowInventorySlot.Clear();
 
         // 슬롯 파트에 해당하는 아이템을 플레이어의 인벤토리에서 가져오기
         PlayerManager player = Managers.Object.m_MyPlayer;
@@ -91,10 +75,10 @@ public class ShowItemInventoryUI : UI_Base
 
                 break;
             case E_EquipmentSlotsPartType.Arrow:
-                items = player.playerInventoryManager.FindItems(i => i.m_EItemType == E_ItemType.Ammo && ((RangedAmmoItem)i).ammoType == AmmoType.Arrow);
+                items = player.playerInventoryManager.FindItems(i => i.m_EItemType == E_ItemType.Ammo && ((AmmoItem)i).ammoType == AmmoType.Arrow);
                 break;
             case E_EquipmentSlotsPartType.Bolt:
-                items = player.playerInventoryManager.FindItems(i => i.m_EItemType == E_ItemType.Ammo && ((RangedAmmoItem)i).ammoType == AmmoType.Bolt);
+                items = player.playerInventoryManager.FindItems(i => i.m_EItemType == E_ItemType.Ammo && ((AmmoItem)i).ammoType == AmmoType.Bolt);
                 break;
             case E_EquipmentSlotsPartType.Helmt:
                 items = player.playerInventoryManager.FindItems(i => i.m_EItemType == E_ItemType.Helmet);
@@ -121,31 +105,41 @@ public class ShowItemInventoryUI : UI_Base
                 break;
         }
 
-        if (items == null)
-            return;
-
         // 슬롯 만들기
-        int standCount = 28; // 나중에 UI 크기를 조정하면 숫자를 조정할 것.
-        int ColCount = 7;
-        //int scrollMinCount = 100; // 스크롤 최소 갯수
+        int standCount = 30; // 나중에 UI 크기를 조정하면 숫자를 조정할 것.
+        int ColCount = 5;
+        //int scrollMinCount = 41; // 스크롤 최소 갯수
 
-        if(items.Count > standCount)
+        if (items != null)
         {
-            // ex) item.count = 52라면 52 + 7 - 52 / 7 = 59 - 3 = 56
-            standCount = (items.Count + ColCount) - (items.Count % ColCount);
+            if (items.Count > standCount)
+            {
+                // ex) item.count = 52라면 52 + 7 - 52 / 7 = 59 - 3 = 56
+                standCount = (items.Count + ColCount) - (items.Count % ColCount);
+            }
         }
 
         for (int i = 0; i < standCount; i++)
         {
-            GameObject go = Managers.Resource.Instantiate("UI/SubItem/EquipmentToInventoryShowItemSubItem", parent.transform);
-            EquipmentToInventoryShowItemSubItem item = go.GetOrAddComponent<EquipmentToInventoryShowItemSubItem>();
+            GameObject go = Managers.Resource.Instantiate("UI/SubItem/EquipmentShowInventorySlotUI", parent.transform);
+            EquipmentShowInventorySlotUI slot = go.GetOrAddComponent<EquipmentShowInventorySlotUI>();
+            m_EquipmentShowInventorySlot.Add(slot);
+            slot.m_iSlotNum = i;
 
             // 슬롯 안에 아이템 집어 넣기
-            if (i < items.Count)
+            if (items != null)
             {
-                item.SetInfo(items[i]);
-                item.RefreshUI();
+                if (i < items.Count)
+                {
+                    slot.SetInfo(items[i]);
+                }
             }
         }
+    }
+
+    public void PrivousSlotClear()
+    {
+        if (m_EquipmentShowInventorySlot[m_iCurrentSelectSlot] != null)
+            m_EquipmentShowInventorySlot[m_iCurrentSelectSlot].m_ItemSlotSubUI.m_ItemSelectIcon.enabled = false;
     }
 }

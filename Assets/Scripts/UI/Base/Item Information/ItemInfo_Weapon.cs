@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class ItemInfo_Weapon : ItemInfo_Base
 {
-    new protected enum Texts
+    enum Texts
     {
         // Property
         ItemNameText,
@@ -32,7 +32,7 @@ public class ItemInfo_Weapon : ItemInfo_Base
         DamageReductionFireValueText,
         DamageReductionLightningValueText,
         DamageReductionDarkValueText,
-        DamageReductionStabilitylValueText,
+        StabilityValueText,
 
         //Additional Effects
         AdditionalEffectBleedValueText  ,
@@ -69,7 +69,8 @@ public class ItemInfo_Weapon : ItemInfo_Base
         BindText(typeof(Texts));
         BindObject(typeof(Objects));
 
-
+        m_goAttackRange = GetObject((int)Objects.AttackRange);
+        m_goMagicAdjustment = GetObject((int)Objects.MagicAdjustment);
 
         return true;
     }
@@ -107,7 +108,7 @@ public class ItemInfo_Weapon : ItemInfo_Base
         GetText((int)Texts.DamageReductionFireValueText).text = item.m_iFireDamageReduction.ToString();
         GetText((int)Texts.DamageReductionLightningValueText).text = item.m_iLightningDamageReduction.ToString();
         GetText((int)Texts.DamageReductionDarkValueText).text = item.m_iDarkDamageReduction.ToString();
-        GetText((int)Texts.DamageReductionStabilitylValueText).text = item.m_iStability.ToString();
+        GetText((int)Texts.StabilityValueText).text = item.m_iStability.ToString();
 
 
         //Additional Effects

@@ -73,28 +73,6 @@ public class PlayerEquipmentManager : CharacterEquipmentManager
         // TODO Weapon
     }
 
-    public void EquipAllEquipmentAbilityValue()
-    {
-        poisonResistance = 0;
-        totalEquipmentLoad = 0;
-
-        EquipHeadEquipmentAbilityValue();
-        EquipChestEquipmentAbilityValue();
-        EquipHandEquipmentAbilityValue();
-        EquipLegEquipmentAbilityValue();
-
-        player.playerStatsManager.poisonResistance = poisonResistance;
-        player.playerStatsManager.CaculateAndSetCurrentEquipLoad(totalEquipmentLoad);
-    }
-
-    public void EquipAllEquipmentLook()
-    {
-        EquipHeadEquipmentLook();
-        EquipChestEquipmentLook();
-        EquipHandArmorEquipmentLook();
-        EquipLegArmorEquipmentLook();
-    }
-
     private void ModelChangerUnEquipAllItem()
     {
         foreach (ModelChangerManager modelchanger in m_AllGenderPartsModelChanger.Values)
@@ -111,6 +89,21 @@ public class PlayerEquipmentManager : CharacterEquipmentManager
         }
     }
 
+    #region Equipment Ability
+    private void EquipAllEquipmentAbilityValue()
+    {
+        poisonResistance = 0;
+        totalEquipmentLoad = 0;
+
+        EquipHeadEquipmentAbilityValue();
+        EquipChestEquipmentAbilityValue();
+        EquipHandEquipmentAbilityValue();
+        EquipLegEquipmentAbilityValue();
+
+        player.playerStatsManager.poisonResistance = poisonResistance;
+        player.playerStatsManager.CaculateAndSetCurrentEquipLoad(totalEquipmentLoad);
+    }
+
     private void EquipHeadEquipmentAbilityValue()
     {
         if (m_HelmetEquipment != null)
@@ -124,6 +117,59 @@ public class PlayerEquipmentManager : CharacterEquipmentManager
         {
             player.playerStatsManager.physicalDamageAbsorptionHead = 0;
         }
+    }
+
+    private void EquipChestEquipmentAbilityValue()
+    {
+        if (m_TorsoEquipment != null)
+        {
+            player.playerStatsManager.physicalDamageAbsorptionBody = m_TorsoEquipment.m_fPhysicalDefense;
+            poisonResistance += m_TorsoEquipment.m_fPoisonResistance;
+            totalEquipmentLoad += m_TorsoEquipment.m_fWeight;
+        }
+        else
+        {
+            player.playerStatsManager.physicalDamageAbsorptionBody = 0;
+        }
+    }
+
+    private void EquipHandEquipmentAbilityValue()
+    {
+        if (m_HandEquipment != null)
+        {
+            player.playerStatsManager.physicalDamageAbsorptionHands = m_HandEquipment.m_fPhysicalDefense;
+            poisonResistance += m_HandEquipment.m_fPoisonResistance;
+            totalEquipmentLoad += m_HandEquipment.m_fWeight;
+        }
+        else
+        {
+            player.playerStatsManager.physicalDamageAbsorptionHands = 0;
+        }
+    }
+
+    private void EquipLegEquipmentAbilityValue()
+    {
+        if (m_LegEquipment != null)
+        {
+            player.playerStatsManager.physicalDamageAbsorptionLegs = m_LegEquipment.m_fPhysicalDefense;
+            poisonResistance += m_LegEquipment.m_fPoisonResistance;
+            totalEquipmentLoad += m_LegEquipment.m_fWeight;
+        }
+        else
+        {
+
+            player.playerStatsManager.physicalDamageAbsorptionLegs = 0;
+        }
+    }
+    #endregion
+
+    #region Equipment Look
+    public void EquipAllEquipmentLook()
+    {
+        EquipHeadEquipmentLook();
+        EquipChestEquipmentLook();
+        EquipHandArmorEquipmentLook();
+        EquipLegArmorEquipmentLook();
     }
 
     private void EquipHeadEquipmentLook()
@@ -201,7 +247,7 @@ public class PlayerEquipmentManager : CharacterEquipmentManager
                 m_MaleGenderPartsModelChanger[E_SingleGenderEquipmentArmorParts.Head].EquipEquipmentsModelByName(Naked_HelmetEquipment.m_HelmEquipmentItemName);
             }
 
-            
+
         }
 
         // 헤어 스타일 및 장식품
@@ -277,85 +323,57 @@ public class PlayerEquipmentManager : CharacterEquipmentManager
                 m_AllGenderPartsModelChanger[All_GenderItemPartsType.Extra_Elf_Ear].EquipEquipmentsModelByName(currentExtra.name);
             }
         }
-        
-    }
 
-    private void EquipChestEquipmentAbilityValue()
-    {
-        if (m_TorsoEquipment != null)
-        {
-            player.playerStatsManager.physicalDamageAbsorptionBody = m_TorsoEquipment.m_fPhysicalDefense;
-            poisonResistance += m_TorsoEquipment.m_fPoisonResistance;
-            totalEquipmentLoad += m_TorsoEquipment.m_fWeight;
-        }
-        else
-        {
-            player.playerStatsManager.physicalDamageAbsorptionBody = 0;
-        }
     }
 
     private void EquipChestEquipmentLook()
-    {
-        if (m_TorsoEquipment == null)
         {
-            if (m_bIsFemale)
-            {
-                m_FemaleGenderPartsModelChanger[E_SingleGenderEquipmentArmorParts.Torso].EquipEquipmentsModelByName(Naked_TorsoEquipment.m_TorsoEquipmentItemName);
-            }
-            else
-            {
-                m_MaleGenderPartsModelChanger[E_SingleGenderEquipmentArmorParts.Torso].EquipEquipmentsModelByName(Naked_TorsoEquipment.m_TorsoEquipmentItemName);
-            }
-        }
-        else
-        {
-            // all gender 처리
-            TorsoEquipmentItem temp = m_TorsoEquipment;
-
-            if (temp.m_Back_Attachment != "Chr_BackAttachment_00")
-            {
-                m_AllGenderPartsModelChanger[All_GenderItemPartsType.Back_Attachment].EquipEquipmentsModelByName(temp.m_Back_Attachment);
-            }
-            if (temp.m_Shoulder_Attachment_Right != "Chr_ShoulderAttachRight_00")
-            {
-                m_AllGenderPartsModelChanger[All_GenderItemPartsType.Shoulder_Attachment_Right].EquipEquipmentsModelByName(temp.m_Shoulder_Attachment_Right);
-            }
-            if (temp.m_Shoulder_Attachment_Left != "Chr_ShoulderAttachLeft_00")
-            {
-                m_AllGenderPartsModelChanger[All_GenderItemPartsType.Shoulder_Attachment_Left].EquipEquipmentsModelByName(temp.m_Shoulder_Attachment_Left);
-            }
-
-            if (temp.m_TorsoEquipmentItemName != "Chr_Torso_00")
+            if (m_TorsoEquipment == null)
             {
                 if (m_bIsFemale)
                 {
-                    m_FemaleGenderPartsModelChanger[E_SingleGenderEquipmentArmorParts.Torso].EquipEquipmentsModelByName(temp.m_TorsoEquipmentItemName);
+                    m_FemaleGenderPartsModelChanger[E_SingleGenderEquipmentArmorParts.Torso].EquipEquipmentsModelByName(Naked_TorsoEquipment.m_TorsoEquipmentItemName);
                 }
                 else
                 {
-                    m_MaleGenderPartsModelChanger[E_SingleGenderEquipmentArmorParts.Torso].EquipEquipmentsModelByName(temp.m_TorsoEquipmentItemName);
+                    m_MaleGenderPartsModelChanger[E_SingleGenderEquipmentArmorParts.Torso].EquipEquipmentsModelByName(Naked_TorsoEquipment.m_TorsoEquipmentItemName);
+                }
+            }
+            else
+            {
+                // all gender 처리
+                TorsoEquipmentItem temp = m_TorsoEquipment;
+
+                if (temp.m_Back_Attachment != "Chr_BackAttachment_00")
+                {
+                    m_AllGenderPartsModelChanger[All_GenderItemPartsType.Back_Attachment].EquipEquipmentsModelByName(temp.m_Back_Attachment);
+                }
+                if (temp.m_Shoulder_Attachment_Right != "Chr_ShoulderAttachRight_00")
+                {
+                    m_AllGenderPartsModelChanger[All_GenderItemPartsType.Shoulder_Attachment_Right].EquipEquipmentsModelByName(temp.m_Shoulder_Attachment_Right);
+                }
+                if (temp.m_Shoulder_Attachment_Left != "Chr_ShoulderAttachLeft_00")
+                {
+                    m_AllGenderPartsModelChanger[All_GenderItemPartsType.Shoulder_Attachment_Left].EquipEquipmentsModelByName(temp.m_Shoulder_Attachment_Left);
+                }
+
+                if (temp.m_TorsoEquipmentItemName != "Chr_Torso_00")
+                {
+                    if (m_bIsFemale)
+                    {
+                        m_FemaleGenderPartsModelChanger[E_SingleGenderEquipmentArmorParts.Torso].EquipEquipmentsModelByName(temp.m_TorsoEquipmentItemName);
+                    }
+                    else
+                    {
+                        m_MaleGenderPartsModelChanger[E_SingleGenderEquipmentArmorParts.Torso].EquipEquipmentsModelByName(temp.m_TorsoEquipmentItemName);
+                    }
                 }
             }
         }
-    }
-
-    private void EquipHandEquipmentAbilityValue()
-    {
-        if (m_HandEquipment != null)
-        {
-            player.playerStatsManager.physicalDamageAbsorptionHands = m_HandEquipment.m_fPhysicalDefense;
-            poisonResistance += m_HandEquipment.m_fPoisonResistance;
-            totalEquipmentLoad += m_HandEquipment.m_fWeight;
-        }
-        else
-        {
-            player.playerStatsManager.physicalDamageAbsorptionHands = 0;
-        }
-    }
 
     private void EquipHandArmorEquipmentLook()
     {
-        if(m_HandEquipment == null)
+        if (m_HandEquipment == null)
         {
             if (m_bIsFemale)
             {
@@ -412,21 +430,6 @@ public class PlayerEquipmentManager : CharacterEquipmentManager
         }
     }
 
-    private void EquipLegEquipmentAbilityValue()
-    {
-        if (m_LegEquipment != null)
-        {
-            player.playerStatsManager.physicalDamageAbsorptionLegs = m_LegEquipment.m_fPhysicalDefense;
-            poisonResistance += m_LegEquipment.m_fPoisonResistance;
-            totalEquipmentLoad += m_LegEquipment.m_fWeight;
-        }
-        else
-        {
-
-            player.playerStatsManager.physicalDamageAbsorptionLegs = 0;
-        }
-    }
-
     private void EquipLegArmorEquipmentLook()
     {
         if(m_LegEquipment == null)
@@ -478,95 +481,65 @@ public class PlayerEquipmentManager : CharacterEquipmentManager
             }
         }
     }
+    #endregion
 
+    // Quick Slot
     public void ChangeCurrentEquipmentToNextNumSlotEquipment(int num)
     {
         // Left Hand Slot
-        if(num == 0)
-        {
-            m_iCurrentLeftWeaponIndex++;
+        if (num == 0)
+            CheckEquipmentNextSlotItem(m_LeftWeaponsSlots, ref m_iCurrentLeftWeaponIndex);
 
-            // 마지막 슬롯에서 넘어가서 다시 처음 슬롯으로
-            if(m_iCurrentLeftWeaponIndex > m_LeftWeaponsSlots.Length - 1)
-                m_iCurrentLeftWeaponIndex = 0;
-
-            // 왼쪽 키 Left Hand slot
-            for (int i = 0; i < m_LeftWeaponsSlots.Length; i++)
-            {
-                // 다음 슬롯에 아이템이 있다면 아이템 로드
-                if (m_iCurrentLeftWeaponIndex == i && m_LeftWeaponsSlots[i] != null)
-                {
-                    m_CurrentHandRightWeapon = m_LeftWeaponsSlots[m_iCurrentLeftWeaponIndex];
-                    character.characterWeaponSlotManager.LoadWeaponOnSlot(m_LeftWeaponsSlots[m_iCurrentLeftWeaponIndex], true);
-                    break;
-                }
-                // 다음 슬롯에 아이템이 없다면 건너뛰기
-                else if (m_iCurrentLeftWeaponIndex == i && m_LeftWeaponsSlots[i] == null)
-                {
-                    m_iCurrentLeftWeaponIndex += 1;
-                }
-            }
-        }
-        
         // Right Hand Slot
-        else if (num == 1)
-        {
-            m_iCurrentRightWeaponIndex++;
+        if (num == 1)
+            CheckEquipmentNextSlotItem(m_RightWeaponsSlots, ref m_iCurrentRightWeaponIndex);
 
-            // 마지막 슬롯에서 넘어가서 다시 처음 슬롯으로
-            if (m_iCurrentRightWeaponIndex > m_RightWeaponsSlots.Length - 1)
-                m_iCurrentRightWeaponIndex = 0;
-
-            // 왼쪽 키 Left Hand slot
-            for (int i = 0; i < m_RightWeaponsSlots.Length; i++)
-            {
-                // 다음 슬롯에 아이템이 있다면 아이템 로드
-                if (m_iCurrentRightWeaponIndex == i && m_RightWeaponsSlots[i] != null)
-                {
-                    m_CurrentHandRightWeapon = m_RightWeaponsSlots[m_iCurrentRightWeaponIndex];
-                    character.characterWeaponSlotManager.LoadWeaponOnSlot(m_RightWeaponsSlots[m_iCurrentRightWeaponIndex], false);
-                    break;
-                }
-                // 다음 슬롯에 아이템이 없다면 건너뛰기
-                else if (m_iCurrentRightWeaponIndex == i && m_RightWeaponsSlots[i] == null)
-                {
-                    m_iCurrentRightWeaponIndex += 1;
-                }
-            }
-
-        }
-        
         // Consumable Slot
-        else if (num == 2)
+        if (num == 2)
+            CheckEquipmentNextSlotItem(m_ConsumableItemSlots, ref m_iCurrentConsumableItemndex);
+    }
+
+    void CheckEquipmentNextSlotItem(Item[] itemSlots, ref int index)
+    {
+        index++;
+
+        // 마지막 슬롯에서 넘어가서 다시 처음 슬롯으로
+        if (index > itemSlots.Length - 1)
+            index = 0;
+
+        // 왼쪽 키 Left Hand slot
+        for (int i = 0; i < itemSlots.Length; i++)
         {
-            m_iCurrentConsumableItemndex++;
-
-            // 마지막 슬롯에서 넘어가서 다시 처음 슬롯으로
-            if (m_iCurrentConsumableItemndex > m_ConsumableItemSlots.Length - 1)
+            // 다음 슬롯에 아이템이 있다면 아이템 로드
+            if (index == i && itemSlots[i] != null)
             {
-                m_iCurrentConsumableItemndex = 0;
+                Refresh();
+                break;
             }
-
-            // 왼쪽 키 Left Hand slot
-            for (int i = 0; i < m_ConsumableItemSlots.Length; i++)
+            // 다음 슬롯에 아이템이 없다면 건너뛰기
+            else if (index == i && itemSlots[i] == null)
             {
-                // 다음 슬롯에 아이템이 있다면 아이템 로드
-                if (m_iCurrentConsumableItemndex == i && m_ConsumableItemSlots[i] != null)
+                index += 1;
+
+                // 마지막 슬롯에서 넘어가서 다시 처음 슬롯으로
+                if (index > itemSlots.Length - 1)
+                    index = 0;
+
+                for (int x = 0; x < itemSlots.Length; x++)
                 {
-                    m_CurrentHandConsumable = m_ConsumableItemSlots[m_iCurrentConsumableItemndex];
-                    break;
-                }
-                // 다음 슬롯에 아이템이 없다면 건너뛰기
-                else if (m_iCurrentConsumableItemndex == i && m_ConsumableItemSlots[i] == null)
-                {
-                    m_iCurrentConsumableItemndex += 1;
+                    if (itemSlots[i] == null)
+                    {
+                        index += 1;
+
+                        // 마지막 슬롯에서 넘어가서 다시 처음 슬롯으로
+                        if (index > itemSlots.Length - 1)
+                            index = 0;
+                    }
+                    else
+                        break;
                 }
             }
-
-            player.m_GameSceneUI.quickSlotsUI.RefreshUI();
-
         }
-
     }
 
     public void Refresh()
@@ -598,17 +571,291 @@ public class PlayerEquipmentManager : CharacterEquipmentManager
         }
 
         // Current Consumable Item
-
         if (m_ConsumableItemSlots[m_iCurrentConsumableItemndex] != null)
         {
             m_CurrentHandConsumable = m_ConsumableItemSlots[m_iCurrentConsumableItemndex];
-            player.m_GameSceneUI.quickSlotsUI.RefreshUI();
         }
         else
         {
             m_CurrentHandConsumable = null;
-            player.m_GameSceneUI.quickSlotsUI.RefreshUI();
         }
+
         // Spell Item
+
+        // HUD - Quick Slot Update
+        player.m_GameSceneUI.quickSlotsUI.RefreshUI();
+
+        if(Managers.GameUI.m_EquipmentUI != null)
+            Managers.GameUI.m_EquipmentUI.m_CurrentEquipmentsUI.RefreshUI();
+    }
+
+    // Equipment -> Inventory
+    public void ChangeEquipment(E_EquipmentSlotsPartType type, Item item, int num = 0)
+    {
+        // 1. 새롭게 장착하려는 아이템이 이미 장착중이라면 아이템 슬롯만 교체
+        // 2. 새롭게 장착하려는 아이템 슬롯이 이미 다른 아이템이 있다면 서로 교체
+
+        // 아이템 장착 체크
+
+        switch (type)
+        {
+            case Define.E_EquipmentSlotsPartType.Right_Hand_Weapon:
+
+                // 장착하려는 아이템이 이미 장착이 되어 있다면 슬롯 넘버만 옮긴다.
+                if(item.m_isEquiping)
+                {
+                    if (((WeaponItem)item).m_isLeftHandEquiping)
+                    {
+                        m_LeftWeaponsSlots[item.m_iEquipSlotNum] = null;
+                    }
+                    else
+                        m_RightWeaponsSlots[item.m_iEquipSlotNum] = null;
+                }
+                // 새롭게 장착한다면
+                else
+                {
+                    // 이미 다른 아이템이 장착 되었는지 체크
+                    if (m_RightWeaponsSlots[num] != null)
+                    {
+                        // 이미 아이템이 있다면 현재 장착하려는 아이템과 똑같은 아이템인지 체크
+                        m_RightWeaponsSlots[num].m_isEquiping = false;
+                    }
+                }
+
+                break;
+            case Define.E_EquipmentSlotsPartType.Left_Hand_Weapon:
+                // 장착하려는 아이템이 이미 장착이 되어 있다면 슬롯 넘버만 옮긴다.
+                if (item.m_isEquiping)
+                {
+                    if (((WeaponItem)item).m_isLeftHandEquiping)
+                    {
+                        m_LeftWeaponsSlots[item.m_iEquipSlotNum] = null;
+                    }
+                    else
+                        m_RightWeaponsSlots[item.m_iEquipSlotNum] = null;
+                }
+                // 새롭게 장착한다면
+                else
+                {
+                    // 이미 다른 아이템이 장착 되었는지 체크
+                    if (m_LeftWeaponsSlots[num] != null)
+                    {
+                        // 이미 아이템이 있다면 현재 장착하려는 아이템과 똑같은 아이템인지 체크
+                        m_LeftWeaponsSlots[num].m_isEquiping = false;
+                    }
+                }
+                break;
+            case Define.E_EquipmentSlotsPartType.Arrow:
+                // 장착하려는 아이템이 이미 장착이 되어 있다면 슬롯 넘버만 옮긴다.
+                if (item.m_isEquiping)
+                {
+                    m_ArrowAmmoSlots[item.m_iEquipSlotNum] = null;
+                }
+                // 새롭게 장착한다면
+                else
+                {
+                    // 이미 다른 아이템이 장착 되었는지 체크
+                    if (m_ArrowAmmoSlots[num] != null)
+                    {
+                        // 이미 아이템이 있다면 현재 장착하려는 아이템과 똑같은 아이템인지 체크
+                        m_ArrowAmmoSlots[num].m_isEquiping = false;
+                    }
+                }
+                break;
+            case Define.E_EquipmentSlotsPartType.Bolt:
+
+                // 장착하려는 아이템이 이미 장착이 되어 있다면 슬롯 넘버만 옮긴다.
+                if (item.m_isEquiping)
+                {
+                    m_BoltAmmoSlots[item.m_iEquipSlotNum] = null;
+                }
+                // 새롭게 장착한다면
+                else
+                {
+                    // 이미 다른 아이템이 장착 되었는지 체크
+                    if (m_BoltAmmoSlots[num] != null)
+                    {
+                        // 이미 아이템이 있다면 현재 장착하려는 아이템과 똑같은 아이템인지 체크
+                        m_BoltAmmoSlots[num].m_isEquiping = false;
+                    }
+                }
+                break;
+            case Define.E_EquipmentSlotsPartType.Helmt:
+                // 장착하려는 아이템이 이미 장착이 되어 있다면 슬롯 넘버만 옮긴다.
+                if (item.m_isEquiping)
+                {
+                    m_HelmetEquipment = null;
+                }
+                // 새롭게 장착한다면
+                else
+                {
+                    // 이미 다른 아이템이 장착 되었는지 체크
+                    if (m_HelmetEquipment != null)
+                    {
+                        // 이미 아이템이 있다면 현재 장착하려는 아이템과 똑같은 아이템인지 체크
+                        m_HelmetEquipment.m_isEquiping = false;
+                    }
+                }
+                break;
+            case Define.E_EquipmentSlotsPartType.Chest_Armor:
+
+                // 장착하려는 아이템이 이미 장착이 되어 있다면 슬롯 넘버만 옮긴다.
+                if (item.m_isEquiping)
+                {
+                    m_TorsoEquipment = null;
+                }
+                // 새롭게 장착한다면
+                else
+                {
+                    // 이미 다른 아이템이 장착 되었는지 체크
+                    if (m_TorsoEquipment != null)
+                    {
+                        // 이미 아이템이 있다면 현재 장착하려는 아이템과 똑같은 아이템인지 체크
+                        m_TorsoEquipment.m_isEquiping = false;
+                    }
+                }
+                break;
+            case Define.E_EquipmentSlotsPartType.Gantlets:
+
+                // 장착하려는 아이템이 이미 장착이 되어 있다면 슬롯 넘버만 옮긴다.
+                if (item.m_isEquiping)
+                {
+                    m_HandEquipment = null;
+                }
+                // 새롭게 장착한다면
+                else
+                {
+                    // 이미 다른 아이템이 장착 되었는지 체크
+                    if (m_HandEquipment != null)
+                    {
+                        // 이미 아이템이 있다면 현재 장착하려는 아이템과 똑같은 아이템인지 체크
+                        m_HandEquipment.m_isEquiping = false;
+                    }
+                }
+                break;
+            case Define.E_EquipmentSlotsPartType.Leggings:
+
+                // 장착하려는 아이템이 이미 장착이 되어 있다면 슬롯 넘버만 옮긴다.
+                if (item.m_isEquiping)
+                {
+                    m_LegEquipment = null;
+                }
+                // 새롭게 장착한다면
+                else
+                {
+                    // 이미 다른 아이템이 장착 되었는지 체크
+                    if (m_LegEquipment != null)
+                    {
+                        // 이미 아이템이 있다면 현재 장착하려는 아이템과 똑같은 아이템인지 체크
+                        m_LegEquipment.m_isEquiping = false;
+                    }
+                }
+                break;
+            case Define.E_EquipmentSlotsPartType.Ring:
+
+                // 장착하려는 아이템이 이미 장착이 되어 있다면 슬롯 넘버만 옮긴다.
+                if (item.m_isEquiping)
+                {
+                    m_RingSlots[item.m_iEquipSlotNum] = null;
+                }
+                // 새롭게 장착한다면
+                else
+                {
+                    // 이미 다른 아이템이 장착 되었는지 체크
+                    if (m_RingSlots[num] != null)
+                    {
+                        // 이미 아이템이 있다면 현재 장착하려는 아이템과 똑같은 아이템인지 체크
+                        m_RingSlots[num].m_isEquiping = false;
+                    }
+                }
+                break;
+            case Define.E_EquipmentSlotsPartType.Consumable:
+
+                // 장착하려는 아이템이 이미 장착이 되어 있다면 슬롯 넘버만 옮긴다.
+                if (item.m_isEquiping)
+                {
+                    m_ConsumableItemSlots[item.m_iEquipSlotNum] = null;
+                }
+                // 새롭게 장착한다면
+                else
+                {
+                    // 이미 다른 아이템이 장착 되었는지 체크
+                    if (m_ConsumableItemSlots[num] != null)
+                    {
+                        // 이미 아이템이 있다면 현재 장착하려는 아이템과 똑같은 아이템인지 체크
+                        m_ConsumableItemSlots[num].m_isEquiping = false;
+                    }
+                }
+                break;
+            case Define.E_EquipmentSlotsPartType.Pledge:
+
+                // 장착하려는 아이템이 이미 장착이 되어 있다면 슬롯 넘버만 옮긴다.
+                if (item.m_isEquiping)
+                {
+                    m_CurrentPledge = null;
+                }
+                // 새롭게 장착한다면
+                else
+                {
+                    // 이미 다른 아이템이 장착 되었는지 체크
+                    if (m_CurrentPledge != null)
+                    {
+                        // 이미 아이템이 있다면 현재 장착하려는 아이템과 똑같은 아이템인지 체크
+                        m_CurrentPledge.m_isEquiping = false;
+                    }
+                }
+                break;
+            default:
+                break;
+        }
+
+        item.m_isEquiping = true;
+        item.m_EquipingType = type;
+        item.m_iEquipSlotNum = num;
+
+        // 아이템을 새롭게 장착
+        switch (type)
+        {
+            case Define.E_EquipmentSlotsPartType.Right_Hand_Weapon:
+                ((WeaponItem)item).m_isLeftHandEquiping = false;
+                m_RightWeaponsSlots[num] = (WeaponItem)item;
+                break;
+            case Define.E_EquipmentSlotsPartType.Left_Hand_Weapon:
+                ((WeaponItem)item).m_isLeftHandEquiping = true;
+                m_LeftWeaponsSlots[num] = (WeaponItem)item;
+                break;
+            case Define.E_EquipmentSlotsPartType.Arrow:
+                m_ArrowAmmoSlots[num] = (AmmoItem)item;
+                break;
+            case Define.E_EquipmentSlotsPartType.Bolt:
+                m_BoltAmmoSlots[num] = (AmmoItem)item;
+                break;
+            case Define.E_EquipmentSlotsPartType.Helmt:
+                m_HelmetEquipment = (HelmEquipmentItem)item;
+                break;
+            case Define.E_EquipmentSlotsPartType.Chest_Armor:
+                m_TorsoEquipment = (TorsoEquipmentItem)item;
+                break;
+            case Define.E_EquipmentSlotsPartType.Gantlets:
+                m_HandEquipment = (GantletsEquipmentItem)item;
+                break;
+            case Define.E_EquipmentSlotsPartType.Leggings:
+                m_LegEquipment = (LeggingsEquipmentItem)item;
+                break;
+            case Define.E_EquipmentSlotsPartType.Ring:
+                m_RingSlots[num] = (RingItem)item;
+                break;
+            case Define.E_EquipmentSlotsPartType.Consumable:
+                m_ConsumableItemSlots[num] = (ToolItem)item;
+                break;
+            case Define.E_EquipmentSlotsPartType.Pledge:
+                m_CurrentPledge = (PledgeItem)item;
+                break;
+            default:
+                break;
+        }
+
+
+        Refresh();
     }
 }

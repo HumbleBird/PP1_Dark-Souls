@@ -102,5 +102,6 @@ public class WeaponItem : Item
     public List<AudioClip> weaponWhooshes;
     public List<AudioClip> blockingNoises;
 
-
+    public bool m_isLeftHandEquiping = false;
+    public E_EquipmentSlotsPartType m_SecondE_EquipmentSlotsPartType;
 }

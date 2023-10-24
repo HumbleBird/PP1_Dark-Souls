@@ -4,15 +4,26 @@ using UnityEngine;
 
 public class ItemInfo_ReinforcedMaterial_Valuables : ItemInfo_Base
 {
-    new protected enum Texts
+    enum Texts
     {
         // Property
-        ItemNameText,
+        ReinforcedMaterial_Valuables_ItemNameText,
 
-        CurrentCountValueText, // 현재 소지수 / 최대 소지수
-        SaveCountValueText, // 화토불에 현재 저장한 수 / 최대 저장할 수 있는 수
+        ReinforcedMaterial_Valuables_CurrentCountValueText, // 현재 소지수 / 최대 소지수
+        ReinforcedMaterial_Valuables_SaveCountValueText, // 화토불에 현재 저장한 수 / 최대 저장할 수 있는 수
 
         ItemEffectDescriptionText
+    }
+
+
+    public override bool Init()
+    {
+        if (base.Init() == false)
+            return false;
+
+        BindText(typeof(Texts));
+
+        return true;
     }
 
     public override void ShowItemInfo(Item item)
@@ -28,18 +39,18 @@ public class ItemInfo_ReinforcedMaterial_Valuables : ItemInfo_Base
 
     void ShowReinforcedMaterialItemItem(ReinforcedMaterialItem item)
     {
-        GetText((int)Texts.ItemNameText).text = item.itemName;
-        GetText((int)Texts.CurrentCountValueText).text = item.m_iCurrentCount.ToString() + "/ " + item.m_iMaxCount.ToString();
-        GetText((int)Texts.SaveCountValueText).text = item.m_iCurrentCount.ToString();
+        GetText((int)Texts.ReinforcedMaterial_Valuables_ItemNameText).text = item.itemName;
+        GetText((int)Texts.ReinforcedMaterial_Valuables_CurrentCountValueText).text = item.m_iCurrentCount.ToString() + "/ " + item.m_iMaxCount.ToString();
+        GetText((int)Texts.ReinforcedMaterial_Valuables_SaveCountValueText).text = item.m_iCurrentCount.ToString();
 
         GetText((int)Texts.ItemEffectDescriptionText).text = item.m_sItemDescription.ToString();
     }
 
     void ShowValuablesItemMaterialItemItem(ValuablesItem item)
     {
-        GetText((int)Texts.ItemNameText).text = item.itemName;
-        GetText((int)Texts.CurrentCountValueText).text = item.m_iCurrentCount.ToString() + "/ " + item.m_iMaxCount.ToString();
-        GetText((int)Texts.SaveCountValueText).text = item.m_iCurrentCount.ToString();
+        GetText((int)Texts.ReinforcedMaterial_Valuables_ItemNameText).text = item.itemName;
+        GetText((int)Texts.ReinforcedMaterial_Valuables_CurrentCountValueText).text = item.m_iCurrentCount.ToString() + "/ " + item.m_iMaxCount.ToString();
+        GetText((int)Texts.ReinforcedMaterial_Valuables_SaveCountValueText).text = item.m_iCurrentCount.ToString();
 
         GetText((int)Texts.ItemEffectDescriptionText).text = item.m_sItemDescription.ToString();
     }

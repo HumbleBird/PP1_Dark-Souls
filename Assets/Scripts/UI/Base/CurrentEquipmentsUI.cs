@@ -11,6 +11,9 @@ public class CurrentEquipmentsUI : UI_Base
         ItemNameText,
     }
 
+    public EquipmentSlotUI[] m_EquipmentSlots;
+    public EquipmentSlotUI m_CurrentEquipmentSlot;
+
     PlayerManager player;
 
     public override bool Init()
@@ -50,10 +53,10 @@ public class CurrentEquipmentsUI : UI_Base
         int RingNum = 0;
         int ConsumableNum = 0;
 
-        EquipmentSlotUI[] slots = GetComponentsInChildren<EquipmentSlotUI>();
-        foreach (EquipmentSlotUI slot in slots)
+        m_EquipmentSlots = GetComponentsInChildren<EquipmentSlotUI>();
+        foreach (EquipmentSlotUI slot in m_EquipmentSlots)
         {
-            switch (slot.m_EquipmentSlotsPartsName)
+            switch (slot.m_EquipmentSlotType)
             {
                 case E_EquipmentSlotsPartType.Right_Hand_Weapon:
                     slot.m_iSlotNum = rightWeaponNum;
@@ -77,15 +80,19 @@ public class CurrentEquipmentsUI : UI_Base
                     break;
                 case E_EquipmentSlotsPartType.Helmt:
                     slot.SetInfo(player.playerEquipmentManager.m_HelmetEquipment);
+                    slot.m_iSlotNum = -1;
                     break;
                 case E_EquipmentSlotsPartType.Chest_Armor:
                     slot.SetInfo(player.playerEquipmentManager.m_TorsoEquipment);
+                    slot.m_iSlotNum = -1;
                     break;
                 case E_EquipmentSlotsPartType.Gantlets:
                     slot.SetInfo(player.playerEquipmentManager.m_HandEquipment);
+                    slot.m_iSlotNum = -1;
                     break;
                 case E_EquipmentSlotsPartType.Leggings:
                     slot.SetInfo(player.playerEquipmentManager.m_LegEquipment);
+                    slot.m_iSlotNum = -1;
                     break;
                 case E_EquipmentSlotsPartType.Ring:
                     slot.m_iSlotNum = RingNum;
@@ -99,6 +106,7 @@ public class CurrentEquipmentsUI : UI_Base
                     break;
                 case E_EquipmentSlotsPartType.Pledge:
                     slot.SetInfo(player.playerEquipmentManager.m_CurrentPledge);
+                    slot.m_iSlotNum = -1;
                     break;
             }
         }
@@ -109,7 +117,7 @@ public class CurrentEquipmentsUI : UI_Base
         EquipmentSlotUI[] slots = GetComponentsInChildren<EquipmentSlotUI>();
         foreach (EquipmentSlotUI slot in slots)
         {
-            switch (slot.m_EquipmentSlotsPartsName)
+            switch (slot.m_EquipmentSlotType)
             {
                 case E_EquipmentSlotsPartType.Right_Hand_Weapon:
                     DetailPushItems(slot, player.playerEquipmentManager.m_RightWeaponsSlots, true);
@@ -152,16 +160,16 @@ public class CurrentEquipmentsUI : UI_Base
     {
         for (int i = 0; i < playerEquipmentItems.Length; i++)
         {
-            if(playerEquipmentItems[slotUI.m_iSlotNum] != null)
+            if (playerEquipmentItems[slotUI.m_iSlotNum] != null)
             {
                 slotUI.SetInfo(playerEquipmentItems[slotUI.m_iSlotNum]);
+            }
+            else
+                slotUI.SetInfo(null);
 
-                if (isRefresh == true)
-                {
-                    slotUI.RefreshUI();
-
-                }
-                return;
+            if (isRefresh == true)
+            {
+                slotUI.RefreshUI();
             }
         }
     }
@@ -188,5 +196,11 @@ public class CurrentEquipmentsUI : UI_Base
         {
             slot.ItemChangeFromInventoryBindEvent();
         }
+    }
+
+    public void PriviousSlotClear()
+    {
+        if (m_CurrentEquipmentSlot != null)
+            m_CurrentEquipmentSlot.m_ItemSlotSubUI.m_ItemSelectIcon.enabled = false;
     }
 }

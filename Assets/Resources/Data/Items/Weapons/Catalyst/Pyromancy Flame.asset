@@ -1,0 +1,83 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 21a9429bbcaa16c46a8a82790d6954ca, type: 3}
+  m_Name: Pyromancy Flame
+  m_EditorClassIdentifier: 
+  itemIcon: {fileID: 21300000, guid: 9a6b93aa9c37cb84b9646d69a6f9dab9, type: 3}
+  itemName: Pyromancy Flame
+  itemID: 0
+  m_EItemType: 7
+  modelPrefab: {fileID: 4049393283618938371, guid: 5b3fe82ed3cbfcb448bfcc5457ff250f, type: 3}
+  isUnarmed: 0
+  weaponController: {fileID: 22100000, guid: 10f21dedf98d2174498bb58bc4091ab7, type: 2}
+  weaponType: 0
+  AttackType: 
+  Skill: 
+  FocusCost: 0
+  m_iAttributeRequirementStrength: 0
+  m_iAttributeRequirementDexterity: 0
+  m_iAttributeRequirementIntelligence: 0
+  m_iAttributeRequirementFaith: 0
+  m_iAttributeBonusStrength: 0
+  m_iAttributeBonusDexterity: 0
+  m_iAttributeBonusIntelligence: 0
+  m_iAttributeBonusFaith: 0
+  m_iPhysicalDamage: 0
+  m_iMagicDamage: 0
+  m_iFireDamage: 100
+  m_iLightningDamage: 0
+  m_iDarkDamage: 0
+  m_iCriticalDamage: 100
+  m_iSpellBuff: 0
+  m_iRange: 0
+  m_iPhysicalDamageReduction: 0
+  m_iMagicDamageReduction: 0
+  m_iFireDamageReduction: 0
+  m_iLightningDamageReduction: 0
+  m_iDarkDamageReduction: 0
+  m_iStability: 0
+  m_iBleeding: 0
+  m_iPoison: 0
+  m_iFrost: 0
+  m_iCurse: 0
+  m_iDurability: 50
+  m_iWeight: 100
+  lightAttackDamageModifier: 0
+  heavyAttackDaamgeModifier: 0
+  criticalDamagemuiltiplier: 4
+  guardBreakModifier: 1
+  poiseBreak: 0
+  offensivePoiseBonus: 0
+  physicalBlockingDamageAbsorption: 0
+  fireBlockingDamageAbsorption: 0
+  baseStaminaCost: 0
+  lightAttackStaminaMultiplier: 0
+  heavyAttackStaminaMultiplier: 0
+  oh_tap_RB_Action: {fileID: 11400000, guid: cfde88c1c62b9d94b9c5d826483a9ee8, type: 2}
+  oh_hold_RB_Action: {fileID: 0}
+  oh_tap_RT_Action: {fileID: 0}
+  oh_hold_RT_Action: {fileID: 0}
+  oh_tap_LB_Action: {fileID: 0}
+  oh_hold_LB_Action: {fileID: 0}
+  oh_tap_LT_Action: {fileID: 0}
+  oh_hold_LT_Action: {fileID: 0}
+  th_tap_RB_Action: {fileID: 0}
+  th_hold_RB_Action: {fileID: 0}
+  th_tap_RT_Action: {fileID: 0}
+  th_hold_RT_Action: {fileID: 0}
+  th_tap_LB_Action: {fileID: 0}
+  th_hold_LB_Action: {fileID: 0}
+  th_tap_LT_Action: {fileID: 0}
+  th_hold_LT_Action: {fileID: 0}
+  weaponWhooshes: []
+  blockingNoises: []
+  m_iMagicAdjustment: 144

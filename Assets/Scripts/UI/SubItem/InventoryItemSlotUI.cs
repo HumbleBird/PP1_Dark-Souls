@@ -8,6 +8,7 @@ using UnityEngine.UI;
 public class InventoryItemSlotUI : ItemSlotUI
 {
     InventoryUI m_InventoryUI;
+    public InventoryItemTapSlotUI m_InventoryItemTapSlotUI;
 
     public override bool Init()
     {
@@ -36,41 +37,31 @@ public class InventoryItemSlotUI : ItemSlotUI
     // 장비창에서 아이템을 교체 혹은 장착하려고 함.
     void EquipmentItemChange()
     {
+        if (m_Item.m_EItemType == Define.E_ItemType.Magic)
+            return;
+
         Managers.Game.PlayAction(() =>
         {
             Managers.UI.ClosePopupUI();
             EquipmentUI eui = Managers.UI.ShowPopupUI<EquipmentUI>();
+            Managers.GameUI.m_EquipmentUI = eui;
             eui.m_TempPrivateItem = m_Item;
             eui.m_CurrentEquipmentsUI.ChangeSlotsBindEvent();
         });
     }
 
-    // 아이템 이미지를 선택하면 가운데 패널에 아이템 정보를 보여준다.
-    public override void ShowItemInformation(PointerEventData data)
+    // 아이템 이미지를 선택하면(Pointer Down) 가운데 패널에 아이템 정보를 보여준다.
+    public override void ShowItemInformation()
     {
         if (m_Item == null)
             return;
 
         Managers.Sound.Play("UI/Popup_OrderButtonSelect");
-        GetImage((int)Images.ItemSelectIcon).enabled = true;
-        m_InventoryUI.m_InventoryMiddleUI.ShowItemInformation(m_Item);
-        m_InventoryUI.m_InventoryLeftPanelUI.SetInfo(m_Item.itemName);
-    }
+        m_InventoryItemTapSlotUI.PriviousSlotClear();
 
-    // 각 타입에 따른 Refresh
-    public override void RefreshUI()
-    {
-        if (m_Item != null)
-        {
-            GetImage((int)Images.ItemIcon).sprite = m_Item.itemIcon;
-            GetImage((int)Images.ItemIcon).enabled = true;
-            GetImage((int)Images.ItemBasePlateIcon).enabled = true;
-        }
-        else
-        {
-            GetImage((int)Images.ItemIcon).sprite = null;
-            GetImage((int)Images.ItemIcon).enabled = false;
-            GetImage((int)Images.ItemBasePlateIcon).enabled = false;
-        }
+        m_InventoryUI.ShowItemInfo(m_Item);
+
+        m_ItemSlotSubUI.m_ItemSelectIcon.enabled = true;
+        m_InventoryUI.m_InventoryItemMainUI.m_iCurrentSelectItemSlotNum = m_iSlotNum;
     }
 }

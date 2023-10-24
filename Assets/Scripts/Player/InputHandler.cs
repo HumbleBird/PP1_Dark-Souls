@@ -382,15 +382,17 @@ public class InputHandler : MonoBehaviour
 
     private void HandleQuickSlotsInput()
     {
-        if(d_Pad_Right)
-        {
-            player.playerEquipmentManager.ChangeCurrentEquipmentToNextNumSlotEquipment(1);
-        }
 
         if (d_Pad_Left)
         {
             player.playerEquipmentManager.ChangeCurrentEquipmentToNextNumSlotEquipment(0);
         }
+
+        if (d_Pad_Right)
+        {
+            player.playerEquipmentManager.ChangeCurrentEquipmentToNextNumSlotEquipment(1);
+        }
+
 
         if (d_Pad_Down)
         {
@@ -408,6 +410,8 @@ public class InputHandler : MonoBehaviour
             if (Managers.UI._popupStack.Count > 0)
             {
                 Managers.UI.CloseAllPopupUI();
+                Managers.GameUI.m_EquipmentUI = null;
+
                 // TODO
 
             }

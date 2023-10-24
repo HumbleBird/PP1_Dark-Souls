@@ -4,59 +4,68 @@ using UnityEngine;
 
 public class ItemInfo_Ammo : ItemInfo_Base
 {
-    new protected enum Texts
+    enum Texts
     {
         // Property
-        ItemNameText,
-        WeaponTypeText,
-        AttackTypeText,
-        CurrentCountValueText, // 현재 소지수 / 최대 소지수
-        SaveCountValueText, // 화토불에 현재 저장한 수 / 최대 저장할 수 있는 수
+        Ammo_ItemNameText,
+        Ammo_WeaponTypeText,
+        Ammo_AttackTypeText,
+        Ammo_CurrentCountValueText, // 현재 소지수 / 최대 소지수
+        Ammo_SaveCountValueText, // 화토불에 현재 저장한 수 / 최대 저장할 수 있는 수
 
         // Attack Power
-        AttackPhysicalValueText,
-        AttackMagicValueText,
-        AttackFireValueText,
-        AttackLightningValueText,
-        AttackDarkValueText,
-        AttackCriticalValueText,
-        AttackRangeValueText,
-        MagicAdjustmentValueText,
+        Ammo_AttackPhysicalValueText,
+        Ammo_AttackMagicValueText,
+        Ammo_AttackFireValueText,
+        Ammo_AttackLightningValueText,
+        Ammo_AttackDarkValueText,
+        Ammo_AttackCriticalValueText,
 
         //Additional Effects
-        AdditionalEffectBleedValueText,
-        AdditionalEffectPoisonValueText,
-        AdditionalEffectFrostValueText,
+        Ammo_AdditionalEffectBleedValueText,
+        Ammo_AdditionalEffectPoisonValueText,
+        Ammo_AdditionalEffectFrostValueText,
     }
+
+    public override bool Init()
+    {
+        if (base.Init() == false)
+            return false;
+
+        BindText(typeof(Texts));
+
+        return true;
+    }
+
 
     public override void ShowItemInfo(Item item)
     {
         base.ShowItemInfo(item);
 
-        ShowItem((RangedAmmoItem)item);
+        ShowItem((AmmoItem)item);
     }
 
-    void ShowItem(RangedAmmoItem item)
+    void ShowItem(AmmoItem item)
     {
         // Property
-        GetText((int)Texts.ItemNameText).text = item.itemName;
-        GetText((int)Texts.WeaponTypeText).text = item.ammoType.ToString();
-        GetText((int)Texts.AttackTypeText).text = item.AttackType.ToString();
-        GetText((int)Texts.CurrentCountValueText).text = item.m_iCurrentCount.ToString() + "/ " + item.m_iMaxCount.ToString();
-        GetText((int)Texts.SaveCountValueText).text = item.m_iCurrentCount.ToString();
+        GetText((int)Texts.Ammo_ItemNameText).text = item.itemName;
+        GetText((int)Texts.Ammo_WeaponTypeText).text = item.ammoType.ToString();
+        GetText((int)Texts.Ammo_AttackTypeText).text = item.AttackType.ToString();
+        GetText((int)Texts.Ammo_CurrentCountValueText).text = item.m_iCurrentCount.ToString() + "/ " + item.m_iMaxCount.ToString();
+        GetText((int)Texts.Ammo_SaveCountValueText).text = item.m_iCurrentCount.ToString();
         
         // Attack Power
-        GetText((int)Texts.AttackPhysicalValueText).text = item.m_iPhysicalDamage.ToString();
-        GetText((int)Texts.AttackMagicValueText).text = item.m_iMagicDamage.ToString();
-        GetText((int)Texts.AttackFireValueText).text = item.m_iFireDamage.ToString();
-        GetText((int)Texts.AttackLightningValueText).text = item.m_iLightningDamage.ToString();
-        GetText((int)Texts.AttackDarkValueText).text = item.m_iDarkDamage.ToString();
-        GetText((int)Texts.AttackCriticalValueText).text = item.m_iCriticalDamage.ToString();
+        GetText((int)Texts.Ammo_AttackPhysicalValueText).text = item.m_iPhysicalDamage.ToString();
+        GetText((int)Texts.Ammo_AttackMagicValueText).text = item.m_iMagicDamage.ToString();
+        GetText((int)Texts.Ammo_AttackFireValueText).text = item.m_iFireDamage.ToString();
+        GetText((int)Texts.Ammo_AttackLightningValueText).text = item.m_iLightningDamage.ToString();
+        GetText((int)Texts.Ammo_AttackDarkValueText).text = item.m_iDarkDamage.ToString();
+        GetText((int)Texts.Ammo_AttackCriticalValueText).text = item.m_iCriticalDamage.ToString();
 
         //Additional Effects
-        GetText((int)Texts.AdditionalEffectBleedValueText).text = item.m_iBleeding.ToString();
-        GetText((int)Texts.AdditionalEffectPoisonValueText).text = item.m_iPoison.ToString();
-        GetText((int)Texts.AdditionalEffectFrostValueText).text = item.m_iFrost.ToString();
+        GetText((int)Texts.Ammo_AdditionalEffectBleedValueText).text = item.m_iBleeding.ToString();
+        GetText((int)Texts.Ammo_AdditionalEffectPoisonValueText).text = item.m_iPoison.ToString();
+        GetText((int)Texts.Ammo_AdditionalEffectFrostValueText).text = item.m_iFrost.ToString();
 
     }
 }

@@ -17,13 +17,13 @@ GameObject:
   - component: {fileID: 3780201453589398868}
   - component: {fileID: 7888674121781100874}
   - component: {fileID: 7888674121781100883}
-  - component: {fileID: 3780201453589398864}
   - component: {fileID: 3780201453589398865}
   - component: {fileID: 3780201453589398866}
   - component: {fileID: 1461314987884993441}
   - component: {fileID: 3780201453589398861}
   - component: {fileID: 1461314987884993446}
   - component: {fileID: 2131131853}
+  - component: {fileID: 1933005019}
   m_Layer: 9
   m_Name: Player (Game)
   m_TagString: Character
@@ -158,6 +158,7 @@ MonoBehaviour:
   playerAnimatorManager: {fileID: 0}
   playerLocomotionManager: {fileID: 0}
   playerEffectsManager: {fileID: 0}
+  playerSoundFXManager: {fileID: 0}
 --- !u!114 &3780201453589398857
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -337,18 +338,28 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Items:
-  - {fileID: 11400000, guid: 48e75f5a988fd65469bab7cd58a33b5c, type: 2}
   - {fileID: 11400000, guid: 345d66b9b13601740905041d4fcf5c76, type: 2}
+  - {fileID: 11400000, guid: 941c776a633cbfb4ca0eabe7b8a67b81, type: 2}
+  - {fileID: 11400000, guid: c3934700670d4784d9fd70c0da2708c6, type: 2}
+  - {fileID: 11400000, guid: 988aab8869179614eae84faa3284d2a2, type: 2}
   - {fileID: 11400000, guid: 7c4a0d900189cd748ba634ec09e9a8f5, type: 2}
+  - {fileID: 11400000, guid: f98e935e2857ce846ade7b13ea0eee98, type: 2}
+  - {fileID: 11400000, guid: 0748845b2b5a3734b9e7a81badaf57cc, type: 2}
+  - {fileID: 11400000, guid: 2cf022a44c0c75c4d81f4804639beeef, type: 2}
   - {fileID: 11400000, guid: 80e4c0cd2bd972d4dba3828826b36b35, type: 2}
-  - {fileID: 11400000, guid: c366cbf2bcc1a0144a1e21b313bba1be, type: 2}
-  - {fileID: 11400000, guid: 24a4e7211d2165b4b85c891c62082805, type: 2}
-  - {fileID: 11400000, guid: c366cbf2bcc1a0144a1e21b313bba1be, type: 2}
   - {fileID: 11400000, guid: c7963e088a06f74478bd8375ab885623, type: 2}
   - {fileID: 11400000, guid: 1614219e8d659ea4ca5ab8011ad5a67b, type: 2}
-  - {fileID: 11400000, guid: c3934700670d4784d9fd70c0da2708c6, type: 2}
-  - {fileID: 11400000, guid: af58329a590b58043bbd92298063ed42, type: 2}
-  - {fileID: 11400000, guid: c7963e088a06f74478bd8375ab885623, type: 2}
+  - {fileID: 11400000, guid: cc6fb931e1871e441862ea869f60eb76, type: 2}
+  - {fileID: 11400000, guid: 1c10eb1cd6e990b44a64c744c3eabf59, type: 2}
+  - {fileID: 11400000, guid: 061614e8ff311344782b09816f7fc630, type: 2}
+  - {fileID: 11400000, guid: f6bd9669d2c7f9940a76073d21213ad2, type: 2}
+  - {fileID: 11400000, guid: 28c722eaff913d24b89c257716829ae3, type: 2}
+  - {fileID: 11400000, guid: c366cbf2bcc1a0144a1e21b313bba1be, type: 2}
+  - {fileID: 11400000, guid: 92f3f30cec432e24c890a8b99d90b115, type: 2}
+  - {fileID: 11400000, guid: 96a4fefc7750e24459d8e8a5f20f1332, type: 2}
+  - {fileID: 11400000, guid: 48e75f5a988fd65469bab7cd58a33b5c, type: 2}
+  - {fileID: 11400000, guid: 21488bd7987bf3b458e4b1c26bf9ecc4, type: 2}
+  - {fileID: 11400000, guid: 29d9d6db760280a45bcf164a2a748c8c, type: 2}
 --- !u!114 &7888674121781100883
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -377,24 +388,6 @@ MonoBehaviour:
   rotationSpeed: 10
   fallingSpeed: 70
   rollStaminaCost: 15
---- !u!114 &3780201453589398864
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 347833055415664871}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 282dd00098d843143a08dc23c8bc9873, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  takingDamageSounds:
-  - {fileID: 8300000, guid: b3493d7eded307a4db7c59c5315ef31c, type: 3}
-  - {fileID: 8300000, guid: 3a067f379f6291d40819215698bdc9a8, type: 3}
-  - {fileID: 8300000, guid: be235f8d4a2c1634a9ffad5a9ef0a7d5, type: 3}
-  - {fileID: 8300000, guid: 8955b56d1a87945479ae70ef02ea3354, type: 3}
-  - {fileID: 8300000, guid: 31affb79c7969ae4992dec318113263b, type: 3}
 --- !u!114 &3780201453589398865
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -592,6 +585,26 @@ MonoBehaviour:
   staminaRegenerationAmountWhilstBlocking: 0.1
   staminaRegenTimer: 0
   spritingTimer: 0
+--- !u!114 &1933005019
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 347833055415664871}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 516168af45b1df04d93ba35c85e6c6ee, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  takingDamageSounds:
+  - {fileID: 8300000, guid: b3493d7eded307a4db7c59c5315ef31c, type: 3}
+  - {fileID: 8300000, guid: 3a067f379f6291d40819215698bdc9a8, type: 3}
+  - {fileID: 8300000, guid: be235f8d4a2c1634a9ffad5a9ef0a7d5, type: 3}
+  - {fileID: 8300000, guid: 8955b56d1a87945479ae70ef02ea3354, type: 3}
+  - {fileID: 8300000, guid: 31affb79c7969ae4992dec318113263b, type: 3}
+  m_bCanStepL: 0
+  m_bCanStepR: 0
 --- !u!1 &2032616575613666571
 GameObject:
   m_ObjectHideFlags: 0

@@ -27,7 +27,7 @@ public class BriefPlayerStatInformationUI : UI_Base
         EquipLoadValueText              ,
         PoiseValueText                  ,     
         ItemDiscoveryValueText          ,
-        AttunementSlotsValueText            ,
+        AttunementSlotValueText            ,
     }
 
     public override bool Init()
@@ -59,7 +59,7 @@ public class BriefPlayerStatInformationUI : UI_Base
         GetText((int)Texts.EquipLoadValueText).text = string.Format("{0, -3} / {1, 3}", player.playerStatsManager.currentEquipLoad.ToString(), player.playerStatsManager.maxEquipLoad.ToString("0.00"));
         GetText((int)Texts.PoiseValueText           ).text = player.playerStatsManager.poiseLevel.ToString("0.00");
         GetText((int)Texts.ItemDiscoveryValueText   ).text = player.playerStatsManager.m_iItemDiscovery.ToString();
-        GetText((int)Texts.AttunementSlotsValueText).text = player.playerStatsManager.m_iAttunementLevel.ToString();
+        GetText((int)Texts.AttunementSlotValueText).text = player.playerStatsManager.m_iAttunementLevel.ToString();
 
         return true;
     }

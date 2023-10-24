@@ -42,7 +42,8 @@ public class SelectUI : UI_Popup
     {
         Managers.Sound.Play("UI/Popup_ButtonShow");
         Managers.UI.ClosePopupUI();
-        Managers.UI.ShowPopupUI<EquipmentUI>();
+        Managers.GameUI.m_EquipmentUI = Managers.UI.ShowPopupUI<EquipmentUI>();
+        
     }
 
     public void ShowGameOption()

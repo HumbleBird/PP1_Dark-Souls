@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
+using static Define;
 
 public class ClassSelector : MonoBehaviour
 {
@@ -48,15 +49,13 @@ public class ClassSelector : MonoBehaviour
         player.playerInventoryManager.Clear();
 
         // 현재 장착
-        player.playerEquipmentManager.m_HelmetEquipment = classGear[classChosen].headEquipment;
-        player.playerEquipmentManager.m_TorsoEquipment = classGear[classChosen].chestEquipment;
-        player.playerEquipmentManager.m_LegEquipment = classGear[classChosen].legEquipment;
-        player.playerEquipmentManager.m_HandEquipment = classGear[classChosen].handEquipment;
+        player.playerEquipmentManager.ChangeEquipment(E_EquipmentSlotsPartType.Helmt, classGear[classChosen].headEquipment);
+        player.playerEquipmentManager.ChangeEquipment(E_EquipmentSlotsPartType.Chest_Armor, classGear[classChosen].chestEquipment);
+        player.playerEquipmentManager.ChangeEquipment(E_EquipmentSlotsPartType.Gantlets, classGear[classChosen].handEquipment);
+        player.playerEquipmentManager.ChangeEquipment(E_EquipmentSlotsPartType.Leggings, classGear[classChosen].legEquipment);
 
-        player.playerEquipmentManager.m_RightWeaponsSlots[0] = classGear[classChosen].primaryWeapon;
-        player.playerEquipmentManager.m_LeftWeaponsSlots[0] = classGear[classChosen].offHandWeapon;
-        player.playerEquipmentManager.m_CurrentHandRightWeapon = player.playerEquipmentManager.m_RightWeaponsSlots[0];
-        player.playerEquipmentManager.m_CurrentHandLeftWeapon = player.playerEquipmentManager.m_LeftWeaponsSlots[0];
+        player.playerEquipmentManager.ChangeEquipment(E_EquipmentSlotsPartType.Right_Hand_Weapon, classGear[classChosen].primaryWeapon);
+        player.playerEquipmentManager.ChangeEquipment(E_EquipmentSlotsPartType.Left_Hand_Weapon, classGear[classChosen].offHandWeapon);
 
         // 인벤토리에 넣기
         player.playerInventoryManager.Add(classGear[classChosen].primaryWeapon);

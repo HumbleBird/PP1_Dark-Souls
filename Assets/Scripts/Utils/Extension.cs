@@ -26,4 +26,9 @@ public static class Extension
 		return go != null && go.activeSelf;
 	}
 
+	public static void UIEventTrigger(this GameObject go, EventTriggerType type, Action action)
+	{
+		Managers.GameUI.UIEventTrigger(go, type, action);
+	}
+
 }

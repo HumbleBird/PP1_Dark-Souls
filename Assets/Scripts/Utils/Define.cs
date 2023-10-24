@@ -13,17 +13,17 @@ public class Define
         ReinforcedMaterial,
         Valuables,
         Magic,
-        MeleeWeapon,
+        MeleeWeapon = 5,
         RangeWeapon,
         Catalyst,
-        Shield,
+        Shield = 8,
         Helmet,
         ChestArmor,
         Gauntlets,
-        Leggings,
+        Leggings = 12,
         Ammo,
         Ring,
-        Pledge
+        Pledge = 15
     }
 
     public enum ToolItemType
