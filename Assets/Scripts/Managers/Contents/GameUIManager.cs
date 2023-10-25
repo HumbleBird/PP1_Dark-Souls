@@ -32,4 +32,45 @@ public class GameUIManager
     {
         action.Invoke();
     }
+
+    public T ShowPopupUI<T>(bool isPlayerStop = true, string name = null) where T : UI_Popup
+    {
+        if(isPlayerStop)
+        {
+            // UI 갯수 체크해서 마우스 커서 On/OFF
+            if (Managers.UI._popupStack.Count == 0)
+            {
+                Managers.Cursor.PowerOn();
+                Managers.Game.PlayerisStop();
+            }
+        }
+
+        T popup =  Managers.UI.ShowPopupUI<T>();
+
+        return popup;
+    }
+
+    public void ClosePopupUI()
+    {
+        Managers.UI.ClosePopupUI();
+
+        // UI 갯수 체크해서 마우스 커서 On/OFF
+
+        if (Managers.UI._popupStack.Count == 0)
+        {
+            Managers.Cursor.PowerOff();
+            Managers.GameUI.m_EquipmentUI = null;
+            Managers.Game.PlayerisStop(false);
+        }
+    }
+
+    public void CloseAllPopupUI()
+    {
+        Managers.UI.CloseAllPopupUI();
+
+        Managers.Cursor.PowerOff();
+        Managers.GameUI.m_EquipmentUI = null;
+        Managers.Game.PlayerisStop(false);
+    }
+
 }

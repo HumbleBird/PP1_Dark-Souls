@@ -409,8 +409,7 @@ public class InputHandler : MonoBehaviour
         {
             if (Managers.UI._popupStack.Count > 0)
             {
-                Managers.UI.CloseAllPopupUI();
-                Managers.GameUI.m_EquipmentUI = null;
+                Managers.GameUI.CloseAllPopupUI();
 
                 // TODO
 
@@ -424,16 +423,16 @@ public class InputHandler : MonoBehaviour
             // 선택 창을 처음 켰다면.
             if(selectFlag)
             {
-                Managers.UI.ShowPopupUI<SelectUI>();
+                Managers.GameUI.m_GameSceneUI.quickSlotsUI.gameObject.SetActive(false);
+                Managers.GameUI.ShowPopupUI<SelectUI>();
                 Managers.Sound.Play("UI/Popup_ButtonClose");
-                player.m_GameSceneUI.gameObject.SetActive(false);
             }
             // 선택 창을 끄는 거라면
             else
             {
-                Managers.UI.ClosePopupUI();
+                Managers.GameUI.m_GameSceneUI.quickSlotsUI.gameObject.SetActive(true);
+                Managers.GameUI.ClosePopupUI();
                 Managers.Sound.Play("UI/Popup_ButtonShow");
-                player.m_GameSceneUI.gameObject.SetActive(true);
             }
         }
     }

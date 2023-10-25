@@ -42,8 +42,8 @@ public class InventoryItemSlotUI : ItemSlotUI
 
         Managers.Game.PlayAction(() =>
         {
-            Managers.UI.ClosePopupUI();
-            EquipmentUI eui = Managers.UI.ShowPopupUI<EquipmentUI>();
+            Managers.GameUI.ClosePopupUI();
+            EquipmentUI eui = Managers.GameUI.ShowPopupUI<EquipmentUI>();
             Managers.GameUI.m_EquipmentUI = eui;
             eui.m_TempPrivateItem = m_Item;
             eui.m_CurrentEquipmentsUI.ChangeSlotsBindEvent();

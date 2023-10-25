@@ -4,45 +4,92 @@ using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class UIBossHealthBar : MonoBehaviour
+public class UIBossHealthBar : UI_Base
 {
-    public TextMeshProUGUI bossName;
-    public Slider slider;
+    public TextMeshProUGUI m_BossNameText;
+    public TextMeshProUGUI m_DamageValueText;
 
-    private void Awake()
+    AICharacterManager m_AICharacterManager;
+
+    public Image m_HealthBarFill;
+    public Image m_DownHealthBarFill;
+
+    public int m_iDamageValueSum;
+    float m_DamageValueAddTime = 0;
+    float m_ShowDamageTime = 3f;
+
+    public GameObject m_goPanel;
+
+    public override bool Init()
     {
-        slider = GetComponentInChildren<Slider>();
-        bossName = GetComponentInChildren<TextMeshProUGUI>();
+        if (base.Init() == false)
+            return false;
+
+        m_DamageValueText.enabled = false;
+        m_goPanel.gameObject.SetActive(false);
+
+        return true;
     }
 
-    private void Start()
+    public void Update()
     {
-        SetUIHealthBarToInactive();
+        if(m_DamageValueAddTime != 0)
+        {
+            m_DamageValueAddTime -= Time.deltaTime;
+
+            if(m_DamageValueAddTime <= 0)
+            {
+                m_DamageValueAddTime = m_ShowDamageTime;
+                m_DamageValueText.enabled = false;
+            }
+        }
     }
 
-    public void SetBossName(string name)
+    public void SetInfo(AICharacterManager aiCharacter)
     {
-        bossName.text = name;
+        m_AICharacterManager = aiCharacter;
+        m_BossNameText.text = m_AICharacterManager.name;
     }
 
-    public void SetUIHealthBarToActive()
+    public void  SetUIHealthBarToActive()
     {
-        slider.gameObject.SetActive(true);
+        m_goPanel.gameObject.SetActive(true);
+
     }
 
-    public void SetUIHealthBarToInactive()
+    public override void RefreshUI()
     {
-        slider.gameObject.SetActive(false);
+        m_HealthBarFill.fillAmount = m_AICharacterManager.aiCharacterStatsManager.currentHealth / (float)m_AICharacterManager.aiCharacterStatsManager.maxHealth;
+        StartCoroutine(DownHP());
+        ShowDamageValue();
     }
 
-    public void SetBossMaxHealth(int maxHealth)
+    public IEnumerator DownHP()
     {
-        slider.maxValue = maxHealth;
-        slider.value = maxHealth;
+        yield return new WaitForSeconds(0.5f);
+
+        while (true)
+        {
+            m_DownHealthBarFill.fillAmount -= Time.deltaTime;
+            if (m_DownHealthBarFill.fillAmount <= m_AICharacterManager.aiCharacterStatsManager.currentHealth / (float)m_AICharacterManager.aiCharacterStatsManager.maxHealth)
+            {
+                m_DownHealthBarFill.fillAmount = m_AICharacterManager.aiCharacterStatsManager.currentHealth / (float)m_AICharacterManager.aiCharacterStatsManager.maxHealth;
+                yield break;
+            }
+
+            yield return null;
+        }
     }
 
-    public void SetBossCurrentHealth(int currentHealth)
+    public void ShowDamageValue()
     {
-        slider.value = currentHealth;
+        m_DamageValueText.enabled = true;
+
+        m_DamageValueAddTime = m_ShowDamageTime;
+
+        int damage = m_AICharacterManager.aiCharacterStatsManager.maxHealth - m_AICharacterManager.aiCharacterStatsManager.currentHealth;
+        m_iDamageValueSum += damage;
+
+        m_DamageValueText.text = m_iDamageValueSum.ToString();
     }
 }

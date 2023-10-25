@@ -15,6 +15,7 @@ public class Managers : MonoBehaviour
     GameManager _game = new GameManager();
     CameraManager _camera = new CameraManager();
     GameUIManager _gameUI = new GameUIManager();
+    CursorManager _cursor = new CursorManager();
 
     public static WorldSaveGameManager Save { get { return Instance._save; } }
     public static WorldItemDataBase ItemData { get { return Instance._itemData; } }
@@ -22,6 +23,7 @@ public class Managers : MonoBehaviour
     public static GameManager Game { get { return Instance._game; } }
     public static CameraManager Camera { get { return Instance._camera; } }
     public static GameUIManager GameUI { get { return Instance._gameUI; } }
+    public static CursorManager Cursor { get { return Instance._cursor; } }
 
     #endregion
 
@@ -65,6 +67,7 @@ public class Managers : MonoBehaviour
             s_instance._pool.Init();
             s_instance._sound.Init();
             s_instance._table.Init();
+            s_instance._cursor.Init();
             //s_instance._camera.Init();
             //s_instance._photon.Init();
         }

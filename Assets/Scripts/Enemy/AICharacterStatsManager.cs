@@ -29,10 +29,33 @@ public class AICharacterStatsManager : CharacterStatsManager
     {
         base.Start();
 
-        SetAbilityValueFromLevel();
+        LoadStat();
     }
 
-    public override int SetMaxHealth()
+    // 능력치를 CSV 테이블에서 로드
+    public override void LoadStat()
+    {
+        // CSV 에서 정보 로드
+
+        InitAbility();
+    }
+
+    // 가져온 스텟을 이용해 능력치 정하기
+    public override void InitAbility()
+    {
+        maxHealth = SetMaxHealth();
+
+        FullRecovery();
+    }
+
+    // Current HP,Stamina FP 완전 회복
+    public override void FullRecovery()
+    {
+        currentHealth = maxHealth;
+
+    }
+
+    protected override int SetMaxHealth()
     {
         // 플레이어는 vigorlevel에 따라 결정
 
@@ -51,7 +74,7 @@ public class AICharacterStatsManager : CharacterStatsManager
         }
         else if (isBoss && aiCharacter.aiCharacterBossManager != null)
         {
-            aiCharacter.aiCharacterBossManager.UpdateBossHealthBar(currentHealth, maxHealth);
+            aiCharacter.aiCharacterBossManager.RefreshUI();
 
         }
     }
@@ -66,12 +89,10 @@ public class AICharacterStatsManager : CharacterStatsManager
         if (!isBoss)
         {
             aiCharacterHealthBar.RefreshUI(damage);
-
-
         }
         else if (isBoss && aiCharacter.aiCharacterBossManager != null)
         {
-            aiCharacter.aiCharacterBossManager.UpdateBossHealthBar(currentHealth, maxHealth);
+            aiCharacter.aiCharacterBossManager.RefreshUI();
 
         }
 
@@ -91,15 +112,5 @@ public class AICharacterStatsManager : CharacterStatsManager
     {
         aiCharacterHealthBar.RefreshUI(damage);
 
-    }
-
-    public override void SetAbilityValueFromLevel()
-    {
-        maxHealth = SetMaxHealth();
-    }
-
-    public override void InitStats()
-    {
-        currentHealth = maxHealth;
     }
 }

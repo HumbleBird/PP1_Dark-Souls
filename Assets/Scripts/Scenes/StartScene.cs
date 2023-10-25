@@ -10,6 +10,8 @@ public class StartScene : BaseScene
         base.Init();
 
         SceneType = Define.Scene.Start;
+        Managers.Cursor.PowerOn();
+
     }
 
     public override void Clear()

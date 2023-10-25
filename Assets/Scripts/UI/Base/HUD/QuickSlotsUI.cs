@@ -10,7 +10,12 @@ public class QuickSlotsUI : UI_Base
         ConsumableItemSlotImage,
         SpellSlotImage,
         RightHandSlotImage,
-        LeftHandSlotImage
+        LeftHandSlotImage,
+
+        ConsumableItemPlateImage,
+        SpellPlateImage,
+        RightHandPlateImage,
+        LeftHandPlateImage
     }
 
     PlayerManager player;
@@ -41,11 +46,13 @@ public class QuickSlotsUI : UI_Base
         {
             GetImage((int)Images.SpellSlotImage).sprite = player.playerEquipmentManager.m_CurrentHandSpell.itemIcon;
             GetImage((int)Images.SpellSlotImage).enabled = true;
+            GetImage((int)Images.SpellPlateImage).enabled = true;
         }
         else
         {
             GetImage((int)Images.SpellSlotImage).sprite = null;
             GetImage((int)Images.SpellSlotImage).enabled = false;
+            GetImage((int)Images.SpellPlateImage).enabled = false;
         }
 
         // Consumable Item Slot (Down Slot)
@@ -53,11 +60,13 @@ public class QuickSlotsUI : UI_Base
         {
             GetImage((int)Images.ConsumableItemSlotImage).sprite = player.playerEquipmentManager.m_CurrentHandConsumable.itemIcon;
             GetImage((int)Images.ConsumableItemSlotImage).enabled = true;
+            GetImage((int)Images.ConsumableItemPlateImage).enabled = true;
         }
         else
         {
             GetImage((int)Images.ConsumableItemSlotImage).sprite = null;
             GetImage((int)Images.ConsumableItemSlotImage).enabled = false;
+            GetImage((int)Images.ConsumableItemPlateImage).enabled = false;
         }
 
         // Right Hand Slot (Right Slot)
@@ -65,11 +74,13 @@ public class QuickSlotsUI : UI_Base
         {
             GetImage((int)Images.RightHandSlotImage).sprite = player.playerEquipmentManager.m_CurrentHandRightWeapon.itemIcon;
             GetImage((int)Images.RightHandSlotImage).enabled = true;
+            GetImage((int)Images.RightHandPlateImage).enabled = true;
         }
         else
         {
             GetImage((int)Images.RightHandSlotImage).sprite = null;
             GetImage((int)Images.RightHandSlotImage).enabled = false;
+            GetImage((int)Images.RightHandPlateImage).enabled = false;
         }
 
         // Left Hand Slot (Left Slot)
@@ -77,11 +88,13 @@ public class QuickSlotsUI : UI_Base
         {
             GetImage((int)Images.LeftHandSlotImage).sprite = player.playerEquipmentManager.m_CurrentHandLeftWeapon.itemIcon;
             GetImage((int)Images.LeftHandSlotImage).enabled = true;
+            GetImage((int)Images.LeftHandPlateImage).enabled = true;
         }
         else
         {
             GetImage((int)Images.LeftHandSlotImage).sprite = null;
             GetImage((int)Images.LeftHandSlotImage).enabled = false;
+            GetImage((int)Images.LeftHandPlateImage).enabled = false;
         }
 
     }

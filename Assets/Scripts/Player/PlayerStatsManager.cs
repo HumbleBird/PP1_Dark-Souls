@@ -59,57 +59,69 @@ public class PlayerStatsManager : CharacterStatsManager
         base.Awake();
         player = GetComponent<PlayerManager>();
         teamIDNumber = (int)E_TeamId.Player;
-
     }
 
     protected override void Start()
     {
         base.Start();
 
-        SetAbilityValueFromLevel();
+        LoadStat();
     }
 
-    public override void SetAbilityValueFromLevel()
+    // 능력치를 CSV 테이블에서 로드
+    public override void LoadStat()
     {
+        if (Managers.Game.m_isNewGame == false)
+        {
+            // 능력치 로드
+        }
+
+        InitAbility();
+    }
+
+    // 가져온 스텟을 이용해 능력치 정하기
+    public override void InitAbility()
+    {
+        // Vigor 생명력. 최대 생명력이 오름
         maxHealth = SetMaxHealth();
-        maxStamina = SetMaxStamina();
+
+        // Attunement 집중력. 최대 FP가 오름
         maxfocusPoint = SetMaxfocusPoints();
 
-        InitStats();
+        // Endurance 지구력. 최대 스테미너가 오름
+        maxStamina = SetMaxStamina();
+
+        // Vitality 체력. 장비중량과 물리 방어력, 독 내성이 오름
+        CalculateAndSetMaxEquipload();
+
+        // Strength 근력. 근력 보정을 받는 무기의 공격력과 화염 내성, 물리 방어력을 상승, 손에 든 장비를 양손잡기하면 현 스탯의 1.5배로 계산
+        CalculateStrength();
+
+        // Dexterity 기량. 기량 보정을 받는 무기의 공격력이 상승
+        CalculateDexterity();
+
+        // Intelligence 지성. 마술과 주술의 위력이 상승, 마력 방어력이 오름
+        CalculateIntelligence();
+
+        // Faith 신앙. 기적과 주술의 위력이 상승, 어둠 방어력이 오름
+        CalculateFaith();
+
+        // Luck 운. 아이템의 발견율과 속성 내성치가 상승함.
+        CalculateLuck();
+
+        FullRecovery();
+
+        Managers.GameUI.m_GameSceneUI.m_StatBarsUI.SetBGWidthUI(E_StatUI.All);
     }
 
-    public override void InitStats()
+    // Current HP,Stamina FP 완전 회복
+    public override void FullRecovery()
     {
         currentHealth = maxHealth;
         currentStamina = maxStamina;
         currentFocusPoints = maxfocusPoint;
-    }
 
-
-    // 게임 로드시 캐릭터 정보 로드
-    public void LoadAbilityValue()
-    {
-        // 저장된 DB에서 능력치를 가져옴.
-        // 최대, 현재 값들 등.
-    }
-
-
-    public override int SetMaxHealth()
-    {
-        maxHealth = m_iVigorLevel * 10;
-        return maxHealth;
-    }
-
-    public  float SetMaxStamina()
-    {
-        maxStamina = m_iEnduranceLevel * 10;
-        return maxStamina;
-    }
-
-    public  float SetMaxfocusPoints()
-    {
-        maxfocusPoint = m_iAttunementLevel * 10;
-        return maxfocusPoint;
+        Managers.GameUI.m_GameSceneUI.m_StatBarsUI.RefreshUI();
     }
 
     public override void HandlePoiseResetTime()
@@ -226,7 +238,7 @@ public class PlayerStatsManager : CharacterStatsManager
     public void AddSouls(int souls)
     {
         currentSoulCount += souls;
-        player.m_GameSceneUI.RefreshUI();
+        player.m_GameSceneUI.SoulsRefreshUI(true, souls);
     }
 
     public override void HealthBarUIUpdate(int damage)
@@ -234,6 +246,26 @@ public class PlayerStatsManager : CharacterStatsManager
         base.HealthBarUIUpdate(damage);
 
         player.m_GameSceneUI.m_StatBarsUI.RefreshUI(E_StatUI.Hp);
+    }
+
+
+    #region Set Abillity  From Level
+    protected override int SetMaxHealth()
+    {
+        maxHealth = m_iVigorLevel * 10;
+        return maxHealth;
+    }
+
+    float SetMaxStamina()
+    {
+        maxStamina = m_iEnduranceLevel * 10;
+        return maxStamina;
+    }
+
+    float SetMaxfocusPoints()
+    {
+        maxfocusPoint = m_iAttunementLevel * 10;
+        return maxfocusPoint;
     }
 
     public void CalculateAndSetMaxEquipload()
@@ -281,30 +313,29 @@ public class PlayerStatsManager : CharacterStatsManager
         }
     }
 
-
-    public void CalculateStrength()
+    void CalculateStrength()
     {
 
     }
 
-    public void CalculateDexterity()
+    void CalculateDexterity()
     {
 
     }
 
-    public void CalculateIntelligence()
+    void CalculateIntelligence()
     {
 
     }
 
-    public void CalculateFaith()
+    void CalculateFaith()
     {
 
     }
 
-    public void CalculateLuck()
+    void CalculateLuck()
     {
 
     }
-
+    #endregion
 }

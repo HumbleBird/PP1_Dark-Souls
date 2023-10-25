@@ -24,6 +24,8 @@ public class PlayerLocomotionManager : CharacterLocomotionManager
     int backstepStaminaCost = 12;
     int sprintStaminaCost = 1;
 
+    public bool m_isCanMove = true;
+
     protected override void Awake()
     {
         base.Awake();
@@ -43,6 +45,8 @@ public class PlayerLocomotionManager : CharacterLocomotionManager
 
     public void HandleRotation()
     {
+        if (m_isCanMove == false)
+            return;
 
         if (player.canRotate)
         {
@@ -118,6 +122,9 @@ public class PlayerLocomotionManager : CharacterLocomotionManager
 
     public void HandleGroundedMovement()
     {
+        if (m_isCanMove == false)
+            return;
+
         if (player.inputHandler.rollFlag)
             return;
 

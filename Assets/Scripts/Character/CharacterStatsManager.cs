@@ -86,12 +86,14 @@ public abstract class CharacterStatsManager : MonoBehaviour
         totalPoiseDefence = armorPoiseBonus;
     }
 
-    // 능력치 csv 테이블에서 로드
-    public abstract void SetAbilityValueFromLevel();
+    // 능력치를 CSV 테이블에서 로드
+    public abstract void LoadStat();
 
-    // 능력치 초기화
-    // 현재 체력을 최대 체력으로
-    public abstract void InitStats();
+    // 가져온 스텟을 이용해 능력치 정하기
+    public abstract void InitAbility();
+
+    // Current HP,Stamina FP 완전 회복
+    public abstract void FullRecovery();
 
     public virtual void TakeDamageNoAnimation(int damage, int fireDamage)
     {
@@ -131,7 +133,7 @@ public abstract class CharacterStatsManager : MonoBehaviour
     {
     }
 
-    public abstract int SetMaxHealth();
+    protected abstract int SetMaxHealth();
 
     public virtual void HealCharacter(int healAmount)
     {

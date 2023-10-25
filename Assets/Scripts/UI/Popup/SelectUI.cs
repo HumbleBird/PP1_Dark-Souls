@@ -1,17 +1,32 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
 using UnityEngine.EventSystems;
+using UnityEngine.UI;
 
 public class SelectUI : UI_Popup
 {
-
     enum GameObjects
     {
-        SelectInventory,
-        SelectEquipment,
-        SelectGameOptions
+        Equipment,
+        Inventory,
+        Status,
+        Message,
+        System,
     }
+
+    enum Images
+    {
+        EquipmentSelectIcon,
+        InventorySelectIcon,
+        StatusSelectIcon,
+        MessageSelectIcon,
+        SystemSelectIcon,
+    }
+
+    public TextMeshProUGUI m_TopSelectText;
 
     public override bool Init()
     {
@@ -19,52 +34,98 @@ public class SelectUI : UI_Popup
             return false;
 
         BindObject(typeof(GameObjects));
+        BindImage(typeof(Images));
 
-        GetObject((int)GameObjects.SelectInventory).BindEvent(() => ShowInventory());
-        GetObject((int)GameObjects.SelectEquipment).BindEvent(() => ShowEquipment());
-        GetObject((int)GameObjects.SelectGameOptions).BindEvent(() => ShowGameOption());
+        m_TopSelectText.text = "";
 
-        PointerDown(GetObject((int)GameObjects.SelectInventory));
-        PointerDown(GetObject((int)GameObjects.SelectEquipment));
-        PointerDown(GetObject((int)GameObjects.SelectGameOptions));
+        // Equipment
+        {
+            GameObject go = GetObject((int)GameObjects.Equipment);
+            Image img = GetImage((int)Images.EquipmentSelectIcon);
+
+            ImageTrigger(go, img, SelectEquipment);
+        }
+
+        // Inventory
+        {
+            GameObject go = GetObject((int)GameObjects.Inventory);
+            Image img = GetImage((int)Images.InventorySelectIcon);
+
+            ImageTrigger(go, img, SelectInventory);
+        }
+
+        // Status
+        {
+            GameObject go = GetObject((int)GameObjects.Status);
+            Image img = GetImage((int)Images.StatusSelectIcon);
+
+            ImageTrigger(go, img, SelectStatus);
+        }
+
+        // Message
+        {
+            GameObject go = GetObject((int)GameObjects.Message);
+            Image img = GetImage((int)Images.MessageSelectIcon);
+
+            ImageTrigger(go, img, SelectMessage);
+        }
+
+        // Setting
+        {
+            GameObject go = GetObject((int)GameObjects.System);
+            Image img = GetImage((int)Images.SystemSelectIcon);
+
+            ImageTrigger(go, img, SelectSystem);
+        }
+
 
         return true;
     }
 
-    public void ShowInventory()
+    void SelectEquipment()
     {
-        Managers.Sound.Play("UI/Popup_ButtonShow");
-        Managers.UI.ClosePopupUI();
-        Managers.UI.ShowPopupUI<InventoryUI>();
+        Managers.GameUI.m_EquipmentUI = Managers.GameUI.ShowPopupUI<EquipmentUI>();
     }
 
-    public void ShowEquipment()
+    void SelectInventory()
     {
-        Managers.Sound.Play("UI/Popup_ButtonShow");
-        Managers.UI.ClosePopupUI();
-        Managers.GameUI.m_EquipmentUI = Managers.UI.ShowPopupUI<EquipmentUI>();
-        
+        Managers.GameUI.ShowPopupUI<InventoryUI>();
     }
 
-    public void ShowGameOption()
+    void SelectStatus()
     {
-        Managers.Sound.Play("UI/Popup_ButtonShow");
-        Managers.UI.ClosePopupUI();
+        //Managers.GameUI.ShowPopupUI<StatusUI>();
 
     }
 
-    void PointerDown(GameObject go)
+    void SelectMessage()
     {
-        EventTrigger trigger = go.GetOrAddComponent<EventTrigger>();
 
-        EventTrigger.Entry entry2 = new EventTrigger.Entry();
-        entry2.eventID = EventTriggerType.PointerEnter;
-        entry2.callback.AddListener((data) => { PointerDownSoundPlay((PointerEventData)data); });
-        trigger.triggers.Add(entry2);
     }
 
-    void PointerDownSoundPlay(PointerEventData data)
+    void SelectSystem()
     {
-        Managers.Sound.Play("UI/Popup_OrderButtonSelect");
+        // 저장 여부 확인
+    }
+
+    void ImageTrigger(GameObject go, Image image, Action action)
+    {
+        go.UIEventTrigger(EventTriggerType.PointerEnter, () => { image.enabled = true; });
+
+        image.gameObject.UIEventTrigger(EventTriggerType.PointerEnter, () => 
+        { 
+            Managers.Sound.Play("UI/Popup_OrderButtonSelect");
+            m_TopSelectText.gameObject.SetActive(true);
+            m_TopSelectText.text = go.name;
+        });
+
+        image.gameObject.UIEventTrigger(EventTriggerType.PointerExit, () =>
+        {
+            m_TopSelectText.gameObject.SetActive(false);
+            image.enabled = false;
+        });
+
+        image.gameObject.UIEventTrigger(EventTriggerType.Select, () =>
+        { Managers.Game.PlayAction( () => { Managers.Sound.Play("UI/Popup_ButtonShow"); Managers.GameUI.ClosePopupUI(); action(); } ); });
     }
 }

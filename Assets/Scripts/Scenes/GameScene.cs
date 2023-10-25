@@ -14,7 +14,6 @@ public class GameScene : BaseScene
         base.Init();
 
         SceneType = Define.Scene.Game;
-        //Cursor.lockState = CursorLockMode.Locked;
 
         Managers.Game.m_isNewGame = m_isNewGame;
 
@@ -24,6 +23,8 @@ public class GameScene : BaseScene
             // 인트로씬 처음으로 보여주기
             Managers.GameUI.ShowIntro("StartOpening");
         }
+
+        Managers.Cursor.PowerOff();
     }
 
     public void Start()

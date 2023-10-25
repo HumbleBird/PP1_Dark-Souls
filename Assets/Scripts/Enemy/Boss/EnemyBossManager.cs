@@ -7,37 +7,30 @@ public class EnemyBossManager : MonoBehaviour
     public string bossName;
 
     AICharacterManager enemy;
-    UIBossHealthBar bossHealthBar;
 
     BossCombatStanceState bossCombatStanceState;
 
     [Header("Second Phase FX")]
     public GameObject particleFX;
 
+    UIBossHealthBar m_UIBossHealthBar;
+
     private void Awake()
     {
-        bossHealthBar = FindObjectOfType<UIBossHealthBar>();
-
         enemy = GetComponent<AICharacterManager>();
+        Managers.GameUI.m_GameSceneUI.m_BossHealthBar.SetInfo(enemy);
 
         bossCombatStanceState = GetComponentInChildren<BossCombatStanceState>();
     }
 
     private void Start()
     {
-        bossHealthBar.SetBossName(bossName);
-        bossHealthBar.SetBossMaxHealth(enemy.aiCharacterStatsManager.maxHealth);
+        m_UIBossHealthBar = Managers.GameUI.m_GameSceneUI.m_BossHealthBar;
     }
 
-    public void UpdateBossHealthBar(int currentHealth, int maxHealth)
+    public void RefreshUI()
     {
-        bossHealthBar.SetBossCurrentHealth(currentHealth);
-
-        if (currentHealth <= maxHealth / 2 && !bossCombatStanceState.hasPhaseShifted)
-        {
-            bossCombatStanceState.hasPhaseShifted = true;
-            ShiftToSecondPhase();
-        }
+        m_UIBossHealthBar.RefreshUI();
     }
 
     public void ShiftToSecondPhase()

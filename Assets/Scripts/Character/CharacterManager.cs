@@ -127,7 +127,7 @@ public class CharacterManager : MonoBehaviour
         animator.SetFloat("Horizontal", 0);
 
         // 체력 값 초기화
-        characterStatsManager.InitStats();
+        characterStatsManager.FullRecovery();
 
         // 위치 초기화
         transform.position = m_StartPos;

@@ -56,6 +56,8 @@ public class CameraHandler : MonoBehaviour
     public CharacterManager m_trleftLockTarget;
     public CharacterManager m_trRightLockTarget;
 
+    public bool m_isCanRotate = true;
+
     #endregion
 
     private void Awake()
@@ -103,6 +105,9 @@ public class CameraHandler : MonoBehaviour
     // Rotate the  Camera
     public void HandleCameraRotation()
     {
+        if (m_isCanRotate == false)
+            return;
+
         if(inputHandler.lockOnFlag && m_trCurrentLockOnTarget != null)
         {
             HandleLockedCameraRotation();
@@ -117,7 +122,7 @@ public class CameraHandler : MonoBehaviour
         }
     }
 
-    public void HandleStandardCameraRotation()
+    void HandleStandardCameraRotation()
     {
         leftAndRightAngle += inputHandler.mouseX * leftAndRightLookSpeed * Time.deltaTime;
         upAndDownAngle -= inputHandler.mouseY * unAndDownLookSpeed * Time.deltaTime;
@@ -214,6 +219,9 @@ public class CameraHandler : MonoBehaviour
     // Handle Lock On
     public void HandleLockOn()
     {
+        if (m_isCanRotate == false)
+            return;
+
         float shortDistance = Mathf.Infinity;
         float shorttestDistanceOfLeftTarget = -Mathf.Infinity;
         float shorttestDistanceOfRightTarget = Mathf.Infinity;

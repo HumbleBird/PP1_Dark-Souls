@@ -78,4 +78,10 @@ public class GameManager
 
         yield break;
     }
+
+    public void PlayerisStop(bool isStop = true)
+    {
+        Managers.Camera.m_Camera.m_isCanRotate = !isStop;
+        Managers.Object.m_MyPlayer.playerLocomotionManager.m_isCanMove = !isStop;
+    }
 }

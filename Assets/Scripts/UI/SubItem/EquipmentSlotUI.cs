@@ -168,9 +168,9 @@ public class EquipmentSlotUI : ItemSlotUI
 
             Managers.Game.PlayAction(() =>
             {
-                Managers.UI.ClosePopupUI();
+                Managers.GameUI.ClosePopupUI();
                 Managers.GameUI.m_EquipmentUI = null;
-                Managers.UI.ShowPopupUI<InventoryUI>();
+                Managers.GameUI.ShowPopupUI<InventoryUI>();
             });
         }
     }

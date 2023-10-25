@@ -10,6 +10,8 @@ public class LobbyScene : BaseScene
 
         SceneType = Define.Scene.Lobby;
         Managers.Sound.Play("Premonition", 1, Define.Sound.Bgm);
+        Managers.Cursor.PowerOn();
+
     }
 
     public override void Clear()

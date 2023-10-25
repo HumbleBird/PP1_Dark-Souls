@@ -7,13 +7,8 @@ using static Define;
 
 public class GameSceneUI : UI_Scene
 {
-    enum Texts
-    {
-        SoulCountText,
-    }
-
     [Header("Childes")]
-    public TextMeshProUGUI m_textSoulCount;
+    public HUD_SoulUI m_HUD_SoulUI;
     public QuickSlotsUI quickSlotsUI;
     public StatBarsUI m_StatBarsUI;
     public GameObject m_goCrosshair;
@@ -31,14 +26,11 @@ public class GameSceneUI : UI_Scene
         if (base.Init() == false)
             return false;
 
-        BindText(typeof(Texts));
-
-        m_textSoulCount = GetText((int)Texts.SoulCountText);
-
         quickSlotsUI = GetComponentInChildren<QuickSlotsUI>();
         m_BossHealthBar = GetComponentInChildren<UIBossHealthBar>();
         m_StatBarsUI = GetComponentInChildren<StatBarsUI>();
         m_AreaUI = GetComponentInChildren<AreaUI>();
+        m_HUD_SoulUI = GetComponentInChildren<HUD_SoulUI>();
 
         m_FadeInOutScreenUI = GetComponentInChildren<FadeInOutScreenUI>();
 
@@ -52,16 +44,25 @@ public class GameSceneUI : UI_Scene
     public void Start()
     {
         m_Player = Managers.Object.m_MyPlayer;
-
-        RefreshUI();
     }
 
     public void RefreshUI(E_StatUI stat = E_StatUI.All)
     {
         base.RefreshUI();
 
-        m_textSoulCount.text = m_Player.playerStatsManager.currentSoulCount.ToString();
         m_StatBarsUI.RefreshUI(stat);
+    }
+
+    public void SoulsRefreshUI(bool isSousAdd, int addsous, bool isImmediately = false)
+    {
+        if(isSousAdd)
+        {
+            m_HUD_SoulUI.AddSouls(addsous, isImmediately);
+        }
+        else
+        {
+            m_HUD_SoulUI.LoseSouls();
+        }
     }
 
     public void ShowYouDied()

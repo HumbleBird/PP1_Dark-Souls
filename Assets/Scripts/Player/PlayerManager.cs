@@ -134,7 +134,7 @@ public class PlayerManager : CharacterManager
         {
             if (Managers.GameUI.m_InteractablePopupUI != null)
             {
-                Managers.UI.ClosePopupUI();
+                Managers.GameUI.ClosePopupUI();
                 Managers.GameUI.m_InteractablePopupUI = null;
                 Managers.Game.m_Interactable = null;
             }
@@ -282,6 +282,7 @@ public class PlayerManager : CharacterManager
 
         // 소울 초기화
         playerStatsManager.currentSoulCount = 0;
+        Managers.GameUI.m_GameSceneUI.SoulsRefreshUI(false, 0, false);
 
         StopCoroutine(Managers.Game.PlayerDead());
         StartCoroutine(Managers.Game.PlayerDead()); 

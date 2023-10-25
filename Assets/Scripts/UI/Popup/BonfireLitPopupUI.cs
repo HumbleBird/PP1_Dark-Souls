@@ -5,50 +5,20 @@ using UnityEngine.UI;
 
 public class BonfireLitPopupUI : MonoBehaviour
 {
-    Image image;
+    public Animator m_Animator;
 
     public void Start()
     {
-        image = GetComponentInChildren<Image>();
+        m_Animator = GetComponent<Animator>();
 
-        StartCoroutine(FadeInPopup());
+        m_Animator.Play("BonFireLit");
+
+        StartCoroutine(Close());
     }
 
-    IEnumerator FadeInPopup()
+    IEnumerator Close()
     {
-        Color c = image.color;
-
-        while (true)
-        {
-            c.a += Time.deltaTime;
-            image.color = c;
-
-            if (c.a >= 1)
-            {
-                c.a = 1;
-                image.color = c;
-                yield return StartCoroutine(FadeOutPopup());
-            }
-
-            yield return new WaitForSeconds(0.05f);
-        }
-    }
-
-    IEnumerator FadeOutPopup()
-    {
-        Color c = image.color;
-
-        while (true)
-        {
-            c.a -= Time.deltaTime;
-            image.color = c;
-
-            if (c.a <= 0.01f)
-            {
-                Managers.Resource.Destroy(gameObject);
-            }
-
-            yield return new WaitForSeconds(0.05f);
-        }
+        yield return new WaitForSeconds(2f);
+        Managers.Resource.Destroy(gameObject);
     }
 }

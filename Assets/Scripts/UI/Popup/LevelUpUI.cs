@@ -4,6 +4,7 @@ using UnityEngine;
 using TMPro;
 using UnityEngine.UI;
 using System;
+using static Define;
 
 public class LevelUpUI : UI_Popup
 {
@@ -366,45 +367,16 @@ public class LevelUpUI : UI_Popup
         playerManager.playerStatsManager.m_iFaithLevel = m_iProjectedFaithLevel;
         playerManager.playerStatsManager.m_iLuckLevel = m_iProjectedLuckLevel;
 
-        // 특성 파생 효과 업데이트
-
-        // Vigor 생명력. 최대 생명력이 오름
-        playerManager.playerStatsManager.maxHealth = playerManager.playerStatsManager.SetMaxHealth();
-        playerManager.playerStatsManager.currentHealth = playerManager.playerStatsManager.maxHealth;
-
-        // Attunement 집중력. 최대 FP가 오름
-        playerManager.playerStatsManager.maxfocusPoint = playerManager.playerStatsManager.SetMaxfocusPoints();
-        playerManager.playerStatsManager.currentFocusPoints = playerManager.playerStatsManager.maxfocusPoint;
-
-        // Endurance 지구력. 최대 스테미너가 오름
-        playerManager.playerStatsManager.maxStamina = playerManager.playerStatsManager.SetMaxStamina();
-        playerManager.playerStatsManager.currentStamina = playerManager.playerStatsManager.maxStamina;
-
-        // Vitality 체력. 장비중량과 물리 방어력, 독 내성이 오름
-        playerManager.playerStatsManager.CalculateAndSetMaxEquipload();
-
-        // Strength 근력. 근력 보정을 받는 무기의 공격력과 화염 내성, 물리 방어력을 상승, 손에 든 장비를 양손잡기하면 현 스탯의 1.5배로 계산
-        playerManager.playerStatsManager.CalculateStrength();
-
-        // Dexterity 기량. 기량 보정을 받는 무기의 공격력이 상승
-        playerManager.playerStatsManager.CalculateDexterity();
-
-        // Intelligence 지성. 마술과 주술의 위력이 상승, 마력 방어력이 오름
-        playerManager.playerStatsManager.CalculateIntelligence();
-
-        // Faith 신앙. 기적과 주술의 위력이 상승, 어둠 방어력이 오름
-        playerManager.playerStatsManager.CalculateFaith();
-
-        // Luck 운. 아이템의 발견율과 속성 내성치가 상승함.
-        playerManager.playerStatsManager.CalculateLuck();
-
         // 소울 비용 계산
         playerManager.playerStatsManager.currentSoulCount -= m_iRequiredSouls;
-        playerManager.m_GameSceneUI.m_textSoulCount.text = playerManager.playerStatsManager.currentSoulCount.ToString();
+        Managers.GameUI.m_GameSceneUI.SoulsRefreshUI(false, 0, false);
         m_iRequiredSouls = 0;
 
-        // Celar 
+        // Stat Init 
+        playerManager.playerStatsManager.InitAbility();
 
+        // Stat Bar Ui RefreshUI
+        Managers.GameUI.m_GameSceneUI.m_StatBarsUI.SetBGWidthUI(E_StatUI.All);
 
         gameObject.SetActive(false);
     }

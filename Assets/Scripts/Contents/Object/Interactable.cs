@@ -26,7 +26,7 @@ public class Interactable : MonoBehaviour
     public virtual void Interact(PlayerManager playermanager)
     {
         Managers.GameUI.m_InteractablePopupUI = null;
-        Managers.UI.ClosePopupUI();
+        Managers.GameUI.ClosePopupUI();
     }
 
     // ÆË¾÷ ¶Ù¿ì±â
@@ -35,7 +35,7 @@ public class Interactable : MonoBehaviour
         if(Managers.GameUI.m_InteractablePopupUI == null)
         {
             Managers.Game.m_Interactable = this;
-            Managers.GameUI.m_InteractablePopupUI = Managers.UI.ShowPopupUI<InteractablePopupUI>();
+            Managers.GameUI.m_InteractablePopupUI = Managers.GameUI.ShowPopupUI<InteractablePopupUI>(false);
             Managers.GameUI.m_InteractablePopupUI.m_InteractionText.text = interactableText;
         }
     }
