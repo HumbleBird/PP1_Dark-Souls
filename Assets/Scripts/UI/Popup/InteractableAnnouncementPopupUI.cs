@@ -4,7 +4,7 @@ using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class InteractablePopupUI : UI_Popup
+public class InteractableAnnouncementPopupUI : UI_Popup
 {
     enum Texts
     {

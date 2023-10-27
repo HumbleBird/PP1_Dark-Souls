@@ -94,7 +94,7 @@ public class SelectUI : UI_Popup
 
     void SelectStatus()
     {
-        //Managers.GameUI.ShowPopupUI<StatusUI>();
+        Managers.GameUI.ShowPopupUI<StatusUI>();
 
     }
 
@@ -125,7 +125,8 @@ public class SelectUI : UI_Popup
             image.enabled = false;
         });
 
-        image.gameObject.UIEventTrigger(EventTriggerType.Select, () =>
-        { Managers.Game.PlayAction( () => { Managers.Sound.Play("UI/Popup_ButtonShow"); Managers.GameUI.ClosePopupUI(); action(); } ); });
+        image.gameObject.BindEvent(() => { Managers.Sound.Play("UI/Popup_ButtonShow"); Managers.GameUI.ClosePopupUI(); action();  });
+        //image.gameObject.UIEventTrigger(EventTriggerType.Select, () =>
+        //{ Managers.Game.PlayAction( () => { Managers.Sound.Play("UI/Popup_ButtonShow"); Managers.GameUI.ClosePopupUI(); action(); } ); });
     }
 }

@@ -56,14 +56,14 @@ public class ItemInfo_Armor : ItemInfo_Base
         GetText((int)Texts.Armor_DurabilityValueText).text = item.m_fDurability.ToString();
 
 
-        GetText((int)Texts.Armor_AbsorptionPhysicalValueText ).text = item.m_fPhysicalDefense  .ToString();
-        GetText((int)Texts.Armor_AbsorptionVsStrikeValueText ).text = item.m_fVSStrikeDefense  .ToString();
-        GetText((int)Texts.Armor_AbsorptionVsSlashValueText  ).text = item.m_fVSSlashDefense   .ToString();
-        GetText((int)Texts.Armor_AbsorptionVsThrustValueText ).text = item.m_fVSThrustDefense  .ToString();
-        GetText((int)Texts.Armor_AbsorptionMagicValueText    ).text = item.m_fMagicDefense     .ToString();
-        GetText((int)Texts.Armor_AbsorptionFireValueText     ).text = item.m_fFireDefense      .ToString();
-        GetText((int)Texts.Armor_AbsorptionLightningValueText).text = item.m_fLightningDefense .ToString();
-        GetText((int)Texts.Armor_AbsorptionDarkValueText).text =      item.m_fDarkDefense.ToString();
+        GetText((int)Texts.Armor_AbsorptionPhysicalValueText ).text = item.m_fPhysicalDamageAbsorption  .ToString();
+        GetText((int)Texts.Armor_AbsorptionVsStrikeValueText ).text = item.m_fVSStrikeDamageAbsorption  .ToString();
+        GetText((int)Texts.Armor_AbsorptionVsSlashValueText  ).text = item.m_fVSSlashDamageAbsorption   .ToString();
+        GetText((int)Texts.Armor_AbsorptionVsThrustValueText ).text = item.m_fVSThrustDamageAbsorption  .ToString();
+        GetText((int)Texts.Armor_AbsorptionMagicValueText    ).text = item.m_fMagicDamageAbsorption     .ToString();
+        GetText((int)Texts.Armor_AbsorptionFireValueText     ).text = item.m_fFireDamageAbsorption      .ToString();
+        GetText((int)Texts.Armor_AbsorptionLightningValueText).text = item.m_fLightningDamageAbsorption .ToString();
+        GetText((int)Texts.Armor_AbsorptionDarkValueText).text =      item.m_fDarkDamageAbsorption.ToString();
 
         GetText((int)Texts.Armor_ResistanceBleedValueText ).text = item.m_fBleedResistance .ToString();
         GetText((int)Texts.Armor_ResistancePoisonValueText).text = item.m_fPoisonResistance.ToString();

@@ -6,6 +6,10 @@ public class LevelUpInteractable : Interactable
 {
     public override void Interact(PlayerManager playermanager)
     {
-        //playermanager.m_GameUIManager.m_PlayerPrivateUI.m_LevelUpUI.gameObject.SetActive(true); 
+        base.Interact(playermanager);
+
+        if(Managers.GameUI.m_InteractableNPCPopupUI == null)
+            Managers.GameUI.m_InteractableNPCPopupUI = Managers.GameUI.ShowPopupUI<LevelUpUI>();
+
     }
 }

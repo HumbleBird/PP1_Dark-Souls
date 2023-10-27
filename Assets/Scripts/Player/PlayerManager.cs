@@ -132,10 +132,10 @@ public class PlayerManager : CharacterManager
         }
         else
         {
-            if (Managers.GameUI.m_InteractablePopupUI != null)
+            if (Managers.GameUI.m_InteractableAnnouncementPopupUI != null)
             {
                 Managers.GameUI.ClosePopupUI();
-                Managers.GameUI.m_InteractablePopupUI = null;
+                Managers.GameUI.m_InteractableAnnouncementPopupUI = null;
                 Managers.Game.m_Interactable = null;
             }
         }

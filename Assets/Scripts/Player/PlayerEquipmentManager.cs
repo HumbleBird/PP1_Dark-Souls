@@ -39,7 +39,7 @@ public class PlayerEquipmentManager : CharacterEquipmentManager
 
     #endregion
 
-    float poisonResistance = 0;
+    int poisonArmorResistance = 0;
     float totalEquipmentLoad = 0;
 
     protected override void Awake()
@@ -52,7 +52,7 @@ public class PlayerEquipmentManager : CharacterEquipmentManager
 
     private void Start()
     {
-        player.playerStatsManager.CalculateAndSetMaxEquipload();
+        player.playerStatsManager.CalculateAndSetMaxEquipload(player.playerStatsManager.m_iEnduranceLevel);
 
         Naked_HelmetEquipment.m_HelmEquipmentItemName = "0";
 
@@ -92,7 +92,9 @@ public class PlayerEquipmentManager : CharacterEquipmentManager
     #region Equipment Ability
     private void EquipAllEquipmentAbilityValue()
     {
-        poisonResistance = 0;
+        player.playerStatsManager.m_fPhysicalDamageAbsorption = 0;
+
+        poisonArmorResistance = 0;
         totalEquipmentLoad = 0;
 
         EquipHeadEquipmentAbilityValue();
@@ -100,7 +102,7 @@ public class PlayerEquipmentManager : CharacterEquipmentManager
         EquipHandEquipmentAbilityValue();
         EquipLegEquipmentAbilityValue();
 
-        player.playerStatsManager.poisonResistance = poisonResistance;
+        player.playerStatsManager.m_iPoisonArmorResistance = poisonArmorResistance;
         player.playerStatsManager.CaculateAndSetCurrentEquipLoad(totalEquipmentLoad);
     }
 
@@ -109,13 +111,9 @@ public class PlayerEquipmentManager : CharacterEquipmentManager
         if (m_HelmetEquipment != null)
         {
             // 아이템 종류를 보고 넣어야 지.
-            player.playerStatsManager.physicalDamageAbsorptionHead = m_HelmetEquipment.m_fPhysicalDefense;
-            poisonResistance += m_HelmetEquipment.m_fPoisonResistance;
+            player.playerStatsManager.m_fPhysicalDamageAbsorption += m_HelmetEquipment.m_fPhysicalDamageAbsorption;
+            poisonArmorResistance += m_HelmetEquipment.m_fPoisonResistance;
             totalEquipmentLoad += m_HelmetEquipment.m_fWeight;
-        }
-        else
-        {
-            player.playerStatsManager.physicalDamageAbsorptionHead = 0;
         }
     }
 
@@ -123,13 +121,9 @@ public class PlayerEquipmentManager : CharacterEquipmentManager
     {
         if (m_TorsoEquipment != null)
         {
-            player.playerStatsManager.physicalDamageAbsorptionBody = m_TorsoEquipment.m_fPhysicalDefense;
-            poisonResistance += m_TorsoEquipment.m_fPoisonResistance;
+            player.playerStatsManager.m_fPhysicalDamageAbsorption += m_TorsoEquipment.m_fPhysicalDamageAbsorption;
+            poisonArmorResistance += m_TorsoEquipment.m_fPoisonResistance;
             totalEquipmentLoad += m_TorsoEquipment.m_fWeight;
-        }
-        else
-        {
-            player.playerStatsManager.physicalDamageAbsorptionBody = 0;
         }
     }
 
@@ -137,13 +131,9 @@ public class PlayerEquipmentManager : CharacterEquipmentManager
     {
         if (m_HandEquipment != null)
         {
-            player.playerStatsManager.physicalDamageAbsorptionHands = m_HandEquipment.m_fPhysicalDefense;
-            poisonResistance += m_HandEquipment.m_fPoisonResistance;
+            player.playerStatsManager.m_fPhysicalDamageAbsorption += m_HandEquipment.m_fPhysicalDamageAbsorption;
+            poisonArmorResistance += m_HandEquipment.m_fPoisonResistance;
             totalEquipmentLoad += m_HandEquipment.m_fWeight;
-        }
-        else
-        {
-            player.playerStatsManager.physicalDamageAbsorptionHands = 0;
         }
     }
 
@@ -151,14 +141,9 @@ public class PlayerEquipmentManager : CharacterEquipmentManager
     {
         if (m_LegEquipment != null)
         {
-            player.playerStatsManager.physicalDamageAbsorptionLegs = m_LegEquipment.m_fPhysicalDefense;
-            poisonResistance += m_LegEquipment.m_fPoisonResistance;
+            player.playerStatsManager.m_fPhysicalDamageAbsorption += m_LegEquipment.m_fPhysicalDamageAbsorption;
+            poisonArmorResistance += m_LegEquipment.m_fPoisonResistance;
             totalEquipmentLoad += m_LegEquipment.m_fWeight;
-        }
-        else
-        {
-
-            player.playerStatsManager.physicalDamageAbsorptionLegs = 0;
         }
     }
     #endregion

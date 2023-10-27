@@ -7,7 +7,8 @@ using UnityEngine.UI;
 
 public class GameUIManager
 {
-    public InteractablePopupUI m_InteractablePopupUI;
+    public InteractableAnnouncementPopupUI m_InteractableAnnouncementPopupUI;
+    public InteractableNPCPopupUI m_InteractableNPCPopupUI;
     public GameSceneUI m_GameSceneUI;
     public bool m_isShowingInteratablePopup = false;
     public EquipmentUI m_EquipmentUI;
@@ -61,6 +62,8 @@ public class GameUIManager
             Managers.Cursor.PowerOff();
             Managers.GameUI.m_EquipmentUI = null;
             Managers.Game.PlayerisStop(false);
+            m_InteractableNPCPopupUI = null;
+
         }
     }
 
@@ -71,6 +74,7 @@ public class GameUIManager
         Managers.Cursor.PowerOff();
         Managers.GameUI.m_EquipmentUI = null;
         Managers.Game.PlayerisStop(false);
+        m_InteractableNPCPopupUI = null;
     }
 
 }

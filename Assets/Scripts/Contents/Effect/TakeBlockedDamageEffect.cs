@@ -58,7 +58,10 @@ public class TakeBlockedDamageEffect : CharacterEffect
         if (character.isDead)
             return;
 
-        if(characterCausingDamage != null)
+        // 데미지 공식
+        // (물리 공격력-물리 방어력) * (1-물리 감소율) + (속성 공격력 - 속성 방어력) * (1-속성 감소율)
+
+        if (characterCausingDamage != null)
         {
             // Damage defense 계산 전, 공격 데미지 수치 체크
             physicalDamage = Mathf.RoundToInt(physicalDamage * (characterCausingDamage.characterStatsManager.physicalDamagePercentageModifier / 100));
@@ -67,22 +70,11 @@ public class TakeBlockedDamageEffect : CharacterEffect
 
         character.characterAnimatorManager.EraseHandIKForWeapon();
 
-        float totalPhysicalDamageAbsorption = 1 -
-            (1 - character.characterStatsManager.physicalDamageAbsorptionHead / 100) *
-            (1 - character.characterStatsManager.physicalDamageAbsorptionBody / 100) *
-            (1 - character.characterStatsManager.physicalDamageAbsorptionLegs / 100) *
-            (1 - character.characterStatsManager.physicalDamageAbsorptionHands / 100);
+        // 데미지 - 장비 방어율%
+        physicalDamage = Mathf.RoundToInt(physicalDamage - (physicalDamage * (1 - character.characterStatsManager.m_fPhysicalDamageAbsorption / 100)));
+        fireDamage = Mathf.RoundToInt(fireDamage - (fireDamage * (1 - character.characterStatsManager.m_fFireDamageAbsorption / 100)));
 
-        physicalDamage = Mathf.RoundToInt(physicalDamage - (physicalDamage * totalPhysicalDamageAbsorption));
-
-        float totalfireDamageAbsorption = 1 -
-            (1 - character.characterStatsManager.fireDamageAbsorptionHead / 100) *
-            (1 - character.characterStatsManager.fireDamageAbsorptionBody / 100) *
-            (1 - character.characterStatsManager.fireDamageAbsorptionLegs / 100) *
-            (1 - character.characterStatsManager.fireDamageAbsorptionHands / 100);
-
-        fireDamage = Mathf.RoundToInt(fireDamage - (fireDamage * totalfireDamageAbsorption));
-
+        // 데미지 - 속성 흡수 퍼센티지 수정자
         physicalDamage = physicalDamage - Mathf.RoundToInt(physicalDamage * (character.characterStatsManager.physicalAbsorptionPercentageModifier / 100));
         fireDamage = fireDamage - Mathf.RoundToInt(fireDamage * (character.characterStatsManager.fireAbsorptionPercentageModifier / 100));
 

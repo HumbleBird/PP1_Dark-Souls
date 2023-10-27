@@ -20,30 +20,9 @@ public abstract class CharacterStatsManager : MonoBehaviour
     public int maxHealth;
     public int currentHealth;
 
-    [Header("Character Defense")]
-    public float physicalDamageAbsorptionHead;
-    public float physicalDamageAbsorptionBody;
-    public float physicalDamageAbsorptionLegs;
-    public float physicalDamageAbsorptionHands;
-
-    public float fireDamageAbsorptionHead;
-    public float fireDamageAbsorptionBody;
-    public float fireDamageAbsorptionLegs;
-    public float fireDamageAbsorptionHands;
-
     public float blockingPhysicalDamageAbsorption;
     public float blockingFireDamageAbsorption;
     public float blockingStabilityRating;
-
-    public float m_fMagicDefense;
-    public float m_fLightningDefense;
-    public float m_fDarkDefense;
-
-    [Header("Character Resistances")]
-    public float poisonResistance;
-    public float m_fBleedResistance;
-    public float m_fFrostResistance;
-    public float m_fCurseResistance;
 
     [Header("Attunement Slots")]
     public int AttunementSlots = 0;
@@ -68,6 +47,54 @@ public abstract class CharacterStatsManager : MonoBehaviour
     public bool isPoisoned;
     public float poisonBuildup = 0; // 독 수치 100에 도달한 후 플레이어를 중독시키는 시간 경과에 따른 빌드업
     public float poisonAmount = 100; // 플레이어가 무독화되기 전에 처리해야 하는 독의 양
+
+    // 플레이어 레벨
+    #region Defense 
+    public int m_fPhysicalDefense;
+    public int m_fVSStrikeDefense;
+    public int m_fVSSlashDefense;
+    public int m_fVSThrustDefense;
+    public int m_fMagicDefense;
+    public int m_fFireDefense;
+    public int m_fLightningDefense;
+    public int m_fDarkDefense;
+    #endregion
+
+    // 갑옷, 무기
+    #region Absorption
+    [Header("Character Defense")]
+    public float m_fPhysicalDamageAbsorption        ;
+    public float m_fVSStrikeDamageAbsorption            ;
+    public float m_fVSSlashDamageAbsorption         ;
+    public float m_fVSThrustDamageAbsorption            ;
+    public float m_fMagicDamageAbsorption           ;
+    public float m_fFireDamageAbsorption            ;
+    public float m_fLightningDamageAbsorption           ;
+    public float m_fDarkDamageAbsorption            ;
+
+    #endregion
+
+    #region 속성 감소율
+    [Header("Character Resistances")]
+    public int m_fBleedResistance;
+    public int m_iPoisonArmorResistance;
+    public int m_fFrostResistance;
+    public int m_fCurseResistance;
+    #endregion
+
+    #region 속성 방어력
+
+    [Header("Character Armor")]
+    public float m_fBleedArmor;
+    public float m_iPoisoArmore;
+    public float m_fFrostArmor;
+    public float m_fCurseArmor;
+
+    #endregion
+
+    #region Speical Effect Armor
+
+    #endregion
 
     protected virtual void Awake()
     {

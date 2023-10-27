@@ -123,7 +123,10 @@ public class PlayerLocomotionManager : CharacterLocomotionManager
     public void HandleGroundedMovement()
     {
         if (m_isCanMove == false)
+        {
+            player.playerAnimatorManager.UpdateAnimatorValues(0, 0, false);
             return;
+        }
 
         if (player.inputHandler.rollFlag)
             return;

@@ -11,15 +11,15 @@ public class PlayerStatsManager : CharacterStatsManager
     public int playerLevel;
 
     [Header("Character Attributes Stat")]
-    public int m_iVigorLevel = 10; // 생명력. 최대 생명력이 오름
-    public int m_iAttunementLevel = 10; // 집중력. 최대 FP가 오름
-    public int m_iEnduranceLevel = 10; // 지구력. 최대 스테미너가 오름
-    public int m_iVitalityLevel = 10; // 체력. 장비중량과 물리 방어력, 독 내성이 오름
-    public int m_iStrengthLevel = 10; // 근력. 근력 보정을 받는 무기의 공격력과 화염 내성, 물리 방어력을 상승, 손에 든 장비를 양손잡기하면 현 스탯의 1.5배로 계산
-    public int m_iDexterityLevel = 10; // 기량. 기량 보정을 받는 무기의 공격력이 상승
-    public int m_iIntelligenceLevel = 10; // 지성. 마술과 주술의 위력이 상승, 마력 방어력이 오름
-    public int m_iFaithLevel = 10; // 신앙. 기적과 주술의 위력이 상승, 어둠 방어력이 오름
-    public int m_iLuckLevel = 10; // 운. 아이템의 발견율과 속성 내성치가 상승함.
+    public int m_iVigorLevel            = 10; // 생명력. 최대 생명력이 오름
+    public int m_iAttunementLevel           = 10; // 집중력. 최대 FP가 오름
+    public int m_iEnduranceLevel            = 10; // 지구력. 최대 스테미너가 오름
+    public int m_iVitalityLevel             = 10; // 체력. 장비중량과 물리 방어력, 독 내성이 오름
+    public int m_iStrengthLevel         = 10; // 근력. 근력 보정을 받는 무기의 공격력과 화염 내성, 물리 방어력을 상승, 손에 든 장비를 양손잡기하면 현 스탯의 1.5배로 계산
+    public int m_iDexterityLevel        = 10; // 기량. 기량 보정을 받는 무기의 공격력이 상승
+    public int m_iIntelligenceLevel         = 10; // 지성. 마술과 주술의 위력이 상승, 마력 방어력이 오름
+    public int m_iFaithLevel             = 10; // 신앙. 기적과 주술의 위력이 상승, 어둠 방어력이 오름
+    public int m_iLuckLevel             = 10; // 운. 아이템의 발견율과 속성 내성치가 상승함.
 
     // FP
     public float maxfocusPoint;
@@ -35,7 +35,7 @@ public class PlayerStatsManager : CharacterStatsManager
     public EncumbranceLevel encumbranceLevel;
 
     // Poise
-    public int poiseLevel = 10;
+    public int CurrentPoise = 10;
 
     // Item Discovery
     public int m_iItemDiscovery = 10;
@@ -92,7 +92,7 @@ public class PlayerStatsManager : CharacterStatsManager
         maxStamina = SetMaxStamina();
 
         // Vitality 체력. 장비중량과 물리 방어력, 독 내성이 오름
-        CalculateAndSetMaxEquipload();
+        maxEquipLoad = CalculateAndSetMaxEquipload(m_iEnduranceLevel);
 
         // Strength 근력. 근력 보정을 받는 무기의 공격력과 화염 내성, 물리 방어력을 상승, 손에 든 장비를 양손잡기하면 현 스탯의 1.5배로 계산
         CalculateStrength();
@@ -268,7 +268,7 @@ public class PlayerStatsManager : CharacterStatsManager
         return maxfocusPoint;
     }
 
-    public void CalculateAndSetMaxEquipload()
+    public float CalculateAndSetMaxEquipload(int EnduranceLevel)
     {
         float totalEquipLoad = 40;
 
@@ -290,7 +290,7 @@ public class PlayerStatsManager : CharacterStatsManager
             }
         }
 
-        maxEquipLoad = totalEquipLoad;
+        return totalEquipLoad;
     }
 
     public void CaculateAndSetCurrentEquipLoad(float equipLoad)
