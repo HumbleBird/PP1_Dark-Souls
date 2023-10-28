@@ -61,7 +61,7 @@ public class GameSceneUI : UI_Scene
         }
         else
         {
-            m_HUD_SoulUI.LoseSouls();
+            m_HUD_SoulUI.LoseSouls(isImmediately);
         }
     }
 

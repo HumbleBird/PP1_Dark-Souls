@@ -11,31 +11,33 @@ public class PlayerStatsManager : CharacterStatsManager
     public int playerLevel;
 
     [Header("Character Attributes Stat")]
-    public int m_iVigorLevel            = 10; // 생명력. 최대 생명력이 오름
-    public int m_iAttunementLevel           = 10; // 집중력. 최대 FP가 오름
-    public int m_iEnduranceLevel            = 10; // 지구력. 최대 스테미너가 오름
-    public int m_iVitalityLevel             = 10; // 체력. 장비중량과 물리 방어력, 독 내성이 오름
-    public int m_iStrengthLevel         = 10; // 근력. 근력 보정을 받는 무기의 공격력과 화염 내성, 물리 방어력을 상승, 손에 든 장비를 양손잡기하면 현 스탯의 1.5배로 계산
-    public int m_iDexterityLevel        = 10; // 기량. 기량 보정을 받는 무기의 공격력이 상승
-    public int m_iIntelligenceLevel         = 10; // 지성. 마술과 주술의 위력이 상승, 마력 방어력이 오름
-    public int m_iFaithLevel             = 10; // 신앙. 기적과 주술의 위력이 상승, 어둠 방어력이 오름
-    public int m_iLuckLevel             = 10; // 운. 아이템의 발견율과 속성 내성치가 상승함.
+    public int m_iVigorLevel = 10; // 생명력. 최대 생명력이 오름
+    public int m_iAttunementLevel = 10; // 집중력. 최대 FP가 오름
+    public int m_iEnduranceLevel = 10; // 지구력. 최대 스테미너가 오름
+    public int m_iVitalityLevel = 10; // 체력. 장비중량과 물리 방어력, 독 내성이 오름
+    public int m_iStrengthLevel = 10; // 근력. 근력 보정을 받는 무기의 공격력과 화염 내성, 물리 방어력을 상승, 손에 든 장비를 양손잡기하면 현 스탯의 1.5배로 계산
+    public int m_iDexterityLevel = 10; // 기량. 기량 보정을 받는 무기의 공격력이 상승
+    public int m_iIntelligenceLevel = 10; // 지성. 마술과 주술의 위력이 상승, 마력 방어력이 오름
+    public int m_iFaithLevel = 10; // 신앙. 기적과 주술의 위력이 상승, 어둠 방어력이 오름
+    public int m_iLuckLevel = 10; // 운. 아이템의 발견율과 속성 내성치가 상승함.
 
     // FP
-    public float maxfocusPoint;
-    public float currentFocusPoints;
+    public int maxfocusPoint;
+    public int currentFocusPoints;
 
     // Stamina
-    public float maxStamina = 1;
-    public float currentStamina = 1;
+    public int maxStamina = 1;
+    public int currentStamina = 1;
 
     // Equip Load
-    public float currentEquipLoad = 0;
-    public float maxEquipLoad = 0;
+    float currentEqiupLoad = 0;
+    public float m_CurrentEquipLoad { set { currentEqiupLoad = value; } get { return Mathf.Floor(currentEqiupLoad * 10f) / 10f; } }
+    float maxEquipLoad = 0;
+    public float m_MaxEquipLoad { set { maxEquipLoad = value; } get { return Mathf.Floor(maxEquipLoad * 10f) / 10f; } }
     public EncumbranceLevel encumbranceLevel;
 
     // Poise
-    public int CurrentPoise = 10;
+    public float CurrentPoise = 10;
 
     // Item Discovery
     public int m_iItemDiscovery = 10;
@@ -48,7 +50,7 @@ public class PlayerStatsManager : CharacterStatsManager
     public int m_iLWeapon2;
     public int m_iLWeapon3;
 
-    public float staminaRegenerationAmount = 10;
+    public float staminaRegenerationAmount = 20;
     public float staminaRegenerationAmountWhilstBlocking = 0.1f;
     public float staminaRegenTimer = 0;
 
@@ -82,17 +84,20 @@ public class PlayerStatsManager : CharacterStatsManager
     // 가져온 스텟을 이용해 능력치 정하기
     public override void InitAbility()
     {
+        // Stat Clear
+        m_iPhysicalDefense = 0;
+
         // Vigor 생명력. 최대 생명력이 오름
-        maxHealth = SetMaxHealth();
+        CalculateVigor();
 
         // Attunement 집중력. 최대 FP가 오름
-        maxfocusPoint = SetMaxfocusPoints();
+        CalculateAttunement();
 
         // Endurance 지구력. 최대 스테미너가 오름
-        maxStamina = SetMaxStamina();
+        CalculateEndurance();
 
         // Vitality 체력. 장비중량과 물리 방어력, 독 내성이 오름
-        maxEquipLoad = CalculateAndSetMaxEquipload(m_iEnduranceLevel);
+        CalculateVitality();
 
         // Strength 근력. 근력 보정을 받는 무기의 공격력과 화염 내성, 물리 방어력을 상승, 손에 든 장비를 양손잡기하면 현 스탯의 1.5배로 계산
         CalculateStrength();
@@ -109,8 +114,10 @@ public class PlayerStatsManager : CharacterStatsManager
         // Luck 운. 아이템의 발견율과 속성 내성치가 상승함.
         CalculateLuck();
 
+        // 현재 HP, FP, Stamina 완전 회복
         FullRecovery();
 
+        // HUD Bar Refresh
         Managers.GameUI.m_GameSceneUI.m_StatBarsUI.SetBGWidthUI(E_StatUI.All);
     }
 
@@ -163,17 +170,17 @@ public class PlayerStatsManager : CharacterStatsManager
 
     public override void DeductStamina(float staminaToDeduct)
     {
-        currentStamina -= staminaToDeduct;
+        currentStamina -= Mathf.RoundToInt( staminaToDeduct);
         player.m_GameSceneUI.m_StatBarsUI.RefreshUI(E_StatUI.Stamina);
     }
 
-    public  void DeductSprintingStamina(float staminaToDeduct)
+    public void DeductSprintingStamina(int staminaToDeduct)
     {
-        if(player.isSprinting)
+        if (player.isSprinting)
         {
             spritingTimer += Time.deltaTime;
 
-            if(spritingTimer > 0.1f)
+            if (spritingTimer > 0.1f)
             {
                 spritingTimer = 0;
                 currentStamina -= staminaToDeduct;
@@ -195,17 +202,17 @@ public class PlayerStatsManager : CharacterStatsManager
         }
         else
         {
-            staminaRegenTimer +=  Time.deltaTime;
+            staminaRegenTimer += Time.deltaTime;
 
             if (currentStamina < maxStamina && staminaRegenTimer > 1f)
             {
-                if(player.isBlocking)
+                if (player.isBlocking)
                 {
-                    currentStamina += staminaRegenerationAmountWhilstBlocking * Time.deltaTime;
+                    currentStamina += Mathf.RoundToInt(staminaRegenerationAmountWhilstBlocking * Time.deltaTime);
                 }
                 else
                 {
-                    currentStamina += staminaRegenerationAmount * Time.deltaTime;
+                    currentStamina += Mathf.RoundToInt(staminaRegenerationAmount * Time.deltaTime);
                 }
 
                 player.m_GameSceneUI.m_StatBarsUI.RefreshUI(E_StatUI.Stamina);
@@ -227,7 +234,7 @@ public class PlayerStatsManager : CharacterStatsManager
     {
         currentFocusPoints -= focusPoints;
 
-        if(currentFocusPoints < 0 )
+        if (currentFocusPoints < 0)
         {
             currentFocusPoints = 0;
         }
@@ -250,29 +257,163 @@ public class PlayerStatsManager : CharacterStatsManager
 
 
     #region Set Abillity  From Level
-    protected override int SetMaxHealth()
+
+    // Vigor
+    // HP, Frost Resistance
+    public void CalculateVigor()
     {
-        maxHealth = m_iVigorLevel * 10;
-        return maxHealth;
+        // Vigor 생명력. 최대 생명력이 오름
+        maxHealth = CalculateMaxHP(m_iVigorLevel);
+        m_iFrostResistance = CalculateFrostResistance(m_iVigorLevel);
     }
 
-    float SetMaxStamina()
+    // Attunement
+    // FP, Attunement Slot
+    public void CalculateAttunement()
     {
-        maxStamina = m_iEnduranceLevel * 10;
-        return maxStamina;
+        maxfocusPoint = CalculateMaxfocusPoint(m_iAttunementLevel);
+        m_iAttunementSlots = CalculateAttunementSlot(m_iAttunementLevel);
     }
 
-    float SetMaxfocusPoints()
+    // Endurance
+    // Stamina, Lightning Resistance, Bleed Resistance
+    public void CalculateEndurance()
     {
-        maxfocusPoint = m_iAttunementLevel * 10;
-        return maxfocusPoint;
+        maxStamina = CalculateMaxStamina(m_iEnduranceLevel);
+        m_iLightningDefense =  CalculateLightningDefense(m_iEnduranceLevel);
+        m_iBleedResistance =  CalculateBleedResistance(m_iEnduranceLevel);
     }
+
+    // Vitality
+    // Equip Load, Physical Defense, Posion Resistance
+    public void CalculateVitality()
+    {
+        m_MaxEquipLoad = CalculateAndSetMaxEquipload(m_iVitalityLevel);
+        m_iPhysicalDefense += CalculatePhysicalDefenseFromVitalityLevel(m_iVitalityLevel);
+        m_iPoisonResistance = CalculatePosionResistance(m_iVitalityLevel);
+    }
+
+    // Strength
+    // 근력 보정을 받는 무기의 공격력, 물리 방어, 화염 내성
+    void CalculateStrength()
+    {
+        // TODO 근력 보정을 받는 무기의 공격력
+
+        m_iPhysicalDefense += CalculatePhysicalDefenseFromStrengthLevel(m_iStrengthLevel);
+        m_iFireDefense = CalculateFireDefense(m_iStrengthLevel);
+    }
+
+    // Dexterity
+    // 기량 보정을 받는 무기의 피해량 증가, 영창 시간 줄어듬, 낙하 데미지 감소
+
+    void CalculateDexterity()
+    {
+        // TODO
+        // 기량 보정을 받는 무기의 피해량 증가, 영창 시간 줄어듬, 낙하 데미지 감소
+    }
+
+    // Intelligence
+    // 지성. 마술과 주술의 위력이 상승, 마력 방어력이 오름
+    void CalculateIntelligence()
+    {
+        // TODO 마술과 주술의 위력이 상승
+        m_iMagicDefense = CalculateMagicDefense(m_iMagicDefense);
+    }
+
+    // Faith
+    // 신앙
+    // 기적과 주술의 위력이 상승, 어둠 방어력이 오름
+    void CalculateFaith()
+    {
+        // TODO 기적과 주술의 위력이 상승
+
+        m_iDarkDefense = CalculateDarkDefense(m_iFaithLevel);
+    }
+
+    // Luck
+    // 아이템의 발견율과 저주 속성 내성치가 상승함.
+    // 특정 출혈 및 독 무기의 질병 축적을 증가
+    void CalculateLuck()
+    {
+        m_iItemDiscovery = CalculateItemDiscovery(m_iLuckLevel);
+        m_iCurseResistance = CalculateCurseResistance(m_iLuckLevel);
+    }
+    #endregion
+
+    #region Detail Abililty Stat
+
+    // Vigor
+    // HP, Frost Resistance
+    public override int CalculateMaxHP(int level)
+    {
+        return level * 10;
+    }
+
+    public int CalculateFrostResistance(int level)
+    {
+        return level * 7;
+    }
+
+    // Attunement
+    // FP, Attunement Slot
+    public int CalculateMaxfocusPoint(int Attunementlevel)
+    {
+        return Attunementlevel * 10;
+    }
+
+    public int CalculateAttunementSlot(int Attunementlevel)
+    {
+        int slotCount = 0;
+        if (Attunementlevel >= 10)
+            slotCount++;
+        if (Attunementlevel >= 14)
+            slotCount++;
+        if (Attunementlevel >= 18)
+            slotCount++;
+        if (Attunementlevel >= 24)
+            slotCount++;
+        if (Attunementlevel >= 30)
+            slotCount++;
+        if (Attunementlevel >= 40)
+            slotCount++;
+        if (Attunementlevel >= 50)
+            slotCount++;
+        if (Attunementlevel >= 60)
+            slotCount++;
+        if (Attunementlevel >= 80)
+            slotCount++;
+        if (Attunementlevel >= 99)
+            slotCount++;
+
+        return slotCount;
+    }
+
+    // Endurance
+    // Stamina, Lightning Resistance, Bleed Resistance
+
+    public int CalculateMaxStamina(int EnduranceLevel)
+    {
+        return EnduranceLevel * 10;
+    }
+
+    public int CalculateLightningDefense(int Endurancelevel)
+    {
+        return Endurancelevel * 10;
+    }
+
+    public int CalculateBleedResistance(int Endurancelevel)
+    {
+        return Endurancelevel * 10;
+    }
+
+    // Vitality
+    // Equip Load, Physical Defense, Posion Resistance
 
     public float CalculateAndSetMaxEquipload(int EnduranceLevel)
     {
         float totalEquipLoad = 40;
 
-        for (int i = 0; i < m_iEnduranceLevel; i++)
+        for (int i = 0; i < EnduranceLevel; i++)
         {
             if (i < 25)
             {
@@ -295,47 +436,90 @@ public class PlayerStatsManager : CharacterStatsManager
 
     public void CaculateAndSetCurrentEquipLoad(float equipLoad)
     {
-        currentEquipLoad = equipLoad;
+        m_CurrentEquipLoad = equipLoad;
 
         encumbranceLevel = EncumbranceLevel.Light;
 
-        if (currentEquipLoad > (maxEquipLoad * 0.3f))
+        if (m_CurrentEquipLoad > (m_MaxEquipLoad * 0.3f))
         {
             encumbranceLevel = EncumbranceLevel.Medium;
         }
-        if (currentEquipLoad > (maxEquipLoad * 0.7f))
+        if (m_CurrentEquipLoad > (m_MaxEquipLoad * 0.7f))
         {
             encumbranceLevel = EncumbranceLevel.Heavy;
         }
-        if (currentEquipLoad > (maxEquipLoad))
+        if (m_CurrentEquipLoad > (m_MaxEquipLoad))
         {
             encumbranceLevel = EncumbranceLevel.Overloaded;
         }
     }
 
-    void CalculateStrength()
+    public int CalculatePhysicalDefenseFromVitalityLevel(int VitalityLevel)
     {
-
+        return VitalityLevel * 5;
     }
 
-    void CalculateDexterity()
+    public int CalculatePosionResistance(int VitalityLevel)
     {
-
+        return VitalityLevel * 3;
     }
 
-    void CalculateIntelligence()
-    {
+    // Strength
+    // 근력 보정을 받는 무기의 공격력, 물리 방어, 화염 내성
 
+    // TODO 근력 보정을 받는 무기의 공격력
+
+    public int CalculatePhysicalDefenseFromStrengthLevel(int StrengthLevel)
+    {
+        return StrengthLevel * 3;
     }
 
-    void CalculateFaith()
+    public int CalculateFireDefense(int StrengthLevel)
     {
-
+        return StrengthLevel * 4;
     }
 
-    void CalculateLuck()
-    {
+    // Dexterity
+    // 기량 보정을 받는 무기의 피해량 증가, 영창 시간 줄어듬, 낙하 데미지 감소
 
+    // TODO
+
+    // Intelligence
+    // 지성. 마술과 주술의 위력이 상승, 마력 방어력이 오름
+
+    // TODO 마술과 주술의 위력이 상승
+
+    public int CalculateMagicDefense(int IntelligenceLevel)
+    {
+        return IntelligenceLevel * 4;
     }
+
+    // Faith
+    // 신앙
+    // 기적과 주술의 위력이 상승, 어둠 방어력이 오름
+
+    // TODO 기적과 주술의 위력이 상승
+
+    public int CalculateDarkDefense(int FaithLevel)
+    {
+        return FaithLevel * 4;
+    }
+
+    // Luck
+    // 아이템의 발견율과 저주 속성 내성치가 상승함.
+    // 특정 출혈 및 독 무기의 질병 축적을 증가
+
+    public int CalculateItemDiscovery(int level)
+    {
+        return level * 1;
+    }
+
+    public int CalculateCurseResistance(int FaithLevel)
+    {
+        return FaithLevel * 4;
+    }
+
+
+
     #endregion
 }

@@ -106,7 +106,7 @@ public class StatusUI : UI_Popup
         GetText((int)Texts.HPValueText).text = string.Format("{0, 0} / {1, 10}", player.playerStatsManager.currentHealth, player.playerStatsManager.maxHealth);
         GetText((int)Texts.FPValueText).text = string.Format("{0, 0} / {1, 10}", player.playerStatsManager.currentFocusPoints, player.playerStatsManager.maxfocusPoint);
         GetText((int)Texts.StaminaValueText).text = player.playerStatsManager.maxStamina.ToString();
-        GetText((int)Texts.EquipLoadValueText).text = string.Format("{0, 0} / {1, 10}", player.playerStatsManager.currentEquipLoad.ToString("0.00"), player.playerStatsManager.maxEquipLoad.ToString("0.00")); ;
+        GetText((int)Texts.EquipLoadValueText).text = string.Format("{0, 0} / {1, 10}", player.playerStatsManager.m_CurrentEquipLoad.ToString("0.00"), player.playerStatsManager.m_MaxEquipLoad.ToString("0.00")); ;
         GetText((int)Texts.PoiseValueText).text = player.playerStatsManager.totalPoiseDefence.ToString("0.00");
         GetText((int)Texts.ItemDiscoveryValueText).text = player.playerStatsManager.m_iItemDiscovery.ToString();
 
@@ -130,12 +130,12 @@ public class StatusUI : UI_Popup
 
 
         // Right - Resistances / Armor
-        GetText((int)Texts.BleedResistancesArmorValueText).text = string.Format("{0, 0} / {1, 52}", player.playerStatsManager.m_fBleedResistance, player.playerStatsManager.m_fBleedArmor); // Ä³¸¯ÅÍ ½ºÅÝ ÀúÇ×, °ª¿Ê
-        GetText((int)Texts.PoisonResistancesArmorValueText).text = string.Format("{0, 0} / {1, 52}", player.playerStatsManager.m_iPoisonArmorResistance, player.playerStatsManager.m_iPoisoArmore);
-        GetText((int)Texts.FrostResistancesArmorValueText).text = string.Format("{0, 0} / {1, 52}", player.playerStatsManager.m_fFrostResistance, player.playerStatsManager.m_fFrostArmor);
-        GetText((int)Texts.CurseResistancesArmorValueText).text = string.Format("{0, 0} / {1, 52}", player.playerStatsManager.m_fCurseResistance, player.playerStatsManager.m_fCurseArmor);
+        GetText((int)Texts.BleedResistancesArmorValueText).text = string.Format("{0, 0} / {1, 52}", player.playerStatsManager.m_iBleedResistance, player.playerStatsManager.m_fBleedArmor); // Ä³¸¯ÅÍ ½ºÅÝ ÀúÇ×, °ª¿Ê
+        GetText((int)Texts.PoisonResistancesArmorValueText).text = string.Format("{0, 0} / {1, 52}", player.playerStatsManager.m_iPoisonResistance, player.playerStatsManager.m_iPoisoArmore);
+        GetText((int)Texts.FrostResistancesArmorValueText).text = string.Format("{0, 0} / {1, 52}", player.playerStatsManager.m_iFrostResistance, player.playerStatsManager.m_fFrostArmor);
+        GetText((int)Texts.CurseResistancesArmorValueText).text = string.Format("{0, 0} / {1, 52}", player.playerStatsManager.m_iCurseResistance, player.playerStatsManager.m_fCurseArmor);
 
-        GetText((int)Texts.AttunementSlotsValueText).text = player.playerStatsManager.AttunementSlots.ToString();
+        GetText((int)Texts.AttunementSlotsValueText).text = player.playerStatsManager.m_iAttunementSlots.ToString();
 
         if (player.playerEquipmentManager.m_CurrentHandSpell != null)
         {

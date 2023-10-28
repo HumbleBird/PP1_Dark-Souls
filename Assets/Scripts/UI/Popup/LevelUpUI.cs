@@ -101,6 +101,9 @@ public class LevelUpUI : InteractableNPCPopupUI
         CaluateFrostResistanceText,
         CurrentCurseResistanceText,
         CaluateCurseResistanceText,
+
+        CurrentAttunementSlotsText,
+        CaluateAttunementSlotsText
     }
 
     enum GameObjects
@@ -136,10 +139,10 @@ public class LevelUpUI : InteractableNPCPopupUI
 
     // Base Power
     int m_iCalculateHP;
-    float m_iCalculateFP;
-    float m_iCalculateStamina;
+    int m_iCalculateFP;
+    int m_iCalculateStamina;
     float m_iCalculateEquipLoad;
-    int m_iCalculatePoise;
+    float m_iCalculatePoise;
     int m_iCalculateItemDiscovery;
 
     // Attack Power
@@ -165,6 +168,7 @@ public class LevelUpUI : InteractableNPCPopupUI
     int m_iCaluateFrostResistance;
     int m_iCaluateCurseResistance;
 
+    int m_iCaluateAttunementSlot;
 
     public int baseLevelUpCost = 5;
 
@@ -236,14 +240,14 @@ public class LevelUpUI : InteractableNPCPopupUI
         m_iCalculateHP = playerManager.playerStatsManager.maxHealth;
         m_iCalculateFP = playerManager.playerStatsManager.maxfocusPoint;
         m_iCalculateStamina = playerManager.playerStatsManager.maxStamina;
-        m_iCalculateEquipLoad = playerManager.playerStatsManager.maxEquipLoad;
+        m_iCalculateEquipLoad = playerManager.playerStatsManager.m_MaxEquipLoad;
         m_iCalculatePoise = playerManager.playerStatsManager.CurrentPoise;
         m_iCalculateItemDiscovery = playerManager.playerStatsManager.m_iItemDiscovery;
 
         InitStat(m_iCalculateHP, GetText((int)Texts.CurrentHPText), GetText((int)Texts.CaluateHPText));
-        InitStat(Mathf.RoundToInt(m_iCalculateFP), GetText((int)Texts.CurrentFPText), GetText((int)Texts.CaluateFPText));
-        InitStat(Mathf.RoundToInt(m_iCalculateStamina), GetText((int)Texts.CurrentStaminaText), GetText((int)Texts.CaluateStaminaText));
-        InitStat(Mathf.RoundToInt(m_iCalculateEquipLoad), GetText((int)Texts.CurrentEquipLoadText), GetText((int)Texts.CaluateEquipLoadText));
+        InitStat(m_iCalculateFP, GetText((int)Texts.CurrentFPText), GetText((int)Texts.CaluateFPText));
+        InitStat(m_iCalculateStamina, GetText((int)Texts.CurrentStaminaText), GetText((int)Texts.CaluateStaminaText));
+        InitStat(m_iCalculateEquipLoad, GetText((int)Texts.CurrentEquipLoadText), GetText((int)Texts.CaluateEquipLoadText));
         InitStat(m_iCalculatePoise, GetText((int)Texts.CurrentPoiseText), GetText((int)Texts.CaluatePoiseText));
         InitStat(m_iCalculateItemDiscovery, GetText((int)Texts.CurrentItemDiscoveryText), GetText((int)Texts.CaluateItemDiscoveryText));
 
@@ -265,14 +269,14 @@ public class LevelUpUI : InteractableNPCPopupUI
 
         #region Defense, Resistances
                                                                                                   ;
-        m_iCalculatePhysicalDefense = playerManager.playerStatsManager.m_fPhysicalDefense          ;
-        m_iCalculateVSStrikeDefense = playerManager.playerStatsManager.m_fVSStrikeDefense;
-        m_iCalculateVSSlashDefense  = playerManager.playerStatsManager.m_fVSSlashDefense  ;
-        m_iCalculateVSThrustDefense = playerManager.playerStatsManager.m_fVSThrustDefense;
-        m_iCalculateMagickDefense   = playerManager.playerStatsManager.m_fMagicDefense     ;
-        m_iCalculateFireDefense     = playerManager.playerStatsManager.m_fFireDefense        ;
-        m_iCalculateLightning       = playerManager.playerStatsManager.m_fLightningDefense     ;
-        m_iCalculateDarkDefense     = playerManager.playerStatsManager.m_fDarkDefense        ;
+        m_iCalculatePhysicalDefense = playerManager.playerStatsManager.m_iPhysicalDefense          ;
+        m_iCalculateVSStrikeDefense = playerManager.playerStatsManager.m_iVSStrikeDefense;
+        m_iCalculateVSSlashDefense  = playerManager.playerStatsManager.m_iVSSlashDefense  ;
+        m_iCalculateVSThrustDefense = playerManager.playerStatsManager.m_iVSThrustDefense;
+        m_iCalculateMagickDefense   = playerManager.playerStatsManager.m_iMagicDefense     ;
+        m_iCalculateFireDefense     = playerManager.playerStatsManager.m_iFireDefense        ;
+        m_iCalculateLightning       = playerManager.playerStatsManager.m_iLightningDefense     ;
+        m_iCalculateDarkDefense     = playerManager.playerStatsManager.m_iDarkDefense        ;
 
         InitStat(m_iCalculatePhysicalDefense, GetText((int)Texts.CurrentPhysicalDefenseText ), GetText((int)Texts.CaluatePhysicalDefenseText  ));
         InitStat(m_iCalculateVSStrikeDefense, GetText((int)Texts.CurrentVSStrikeDefenseText ), GetText((int)Texts.CaluateVSStrikeDefenseText  ));
@@ -285,15 +289,20 @@ public class LevelUpUI : InteractableNPCPopupUI
 
 
         // 속성
-        m_iCaluateBleedResistance = playerManager.playerStatsManager.m_fBleedResistance;
-        m_iCaluatePoisonResistanc = playerManager.playerStatsManager.m_fBleedResistance           ;
-        m_iCaluateFrostResistance = playerManager.playerStatsManager.m_fFrostResistance           ;
-        m_iCaluateCurseResistance = playerManager.playerStatsManager.m_fCurseResistance; ;
+        m_iCaluateBleedResistance = playerManager.playerStatsManager.m_iBleedResistance;
+        m_iCaluatePoisonResistanc = playerManager.playerStatsManager.m_iBleedResistance           ;
+        m_iCaluateFrostResistance = playerManager.playerStatsManager.m_iFrostResistance           ;
+        m_iCaluateCurseResistance = playerManager.playerStatsManager.m_iCurseResistance; ;
 
         InitStat( m_iCaluateBleedResistance, GetText((int)Texts.CurrentBleedResistanceText ), GetText((int)Texts.CaluateBleedResistanceText ));
         InitStat( m_iCaluatePoisonResistanc, GetText((int)Texts.CurrentPoisonResistanceText), GetText((int)Texts.CaluatePoisonResistanceText));
         InitStat( m_iCaluateFrostResistance, GetText((int)Texts.CurrentFrostResistanceText ), GetText((int)Texts. CaluateFrostResistanceText ));
         InitStat(m_iCaluateCurseResistance,  GetText((int)Texts.CurrentCurseResistanceText), GetText((int)Texts.CaluateCurseResistanceText));
+
+        // Attunement Slot
+        m_iCaluateAttunementSlot = playerManager.playerStatsManager.m_iAttunementSlots;
+        InitStat(m_iCaluateAttunementSlot, GetText((int)Texts.CurrentAttunementSlotsText), GetText((int)Texts.CaluateAttunementSlotsText));
+
 
         #endregion
 
@@ -301,6 +310,14 @@ public class LevelUpUI : InteractableNPCPopupUI
     }
 
     void InitStat(int level, TextMeshProUGUI currnetText, TextMeshProUGUI projectedText)
+    {
+        GetText((int)Texts.CurrentIntelligenceLevelText).text = level.ToString();
+        currnetText.text = level.ToString();
+        projectedText.text = level.ToString();
+        projectedText.color = new Color(1f, 1f, 1f);
+    }
+
+    void InitStat(float level, TextMeshProUGUI currnetText, TextMeshProUGUI projectedText)
     {
         GetText((int)Texts.CurrentIntelligenceLevelText).text = level.ToString();
         currnetText.text = level.ToString();
@@ -366,28 +383,41 @@ public class LevelUpUI : InteractableNPCPopupUI
         GetText((int)Texts.ProjectedIntelligenceLevelText).text = m_iProjectedLuckLevel.ToString();
 
         // Base Power
-        GetText((int)Texts.CaluateHPText).text = (m_iProjectedVigorLevel * 10).ToString();
-        GetText((int)Texts.CaluateFPText).text = (m_iProjectedAttunementLevel * 10).ToString();
-        GetText((int)Texts.CaluateStaminaText).text = (m_iProjectedEnduranceLevel * 10).ToString();
-        GetText((int)Texts.CaluateEquipLoadText).text = Mathf.RoundToInt(playerManager.playerStatsManager.CalculateAndSetMaxEquipload(m_iProjectedEnduranceLevel)).ToString();
-        //GetText((int)Texts.CaluatePoiseText).text = "00"; playerManager.playerStatsManager.CurrentPoise.ToString();
-        //GetText((int)Texts.CurrentItemDiscoveryText).text = playerManager.playerStatsManager.m_iItemDiscovery.ToString();
+        GetText((int)Texts.CaluateHPText).text = playerManager.playerStatsManager.CalculateMaxHP(m_iProjectedVigorLevel).ToString();
+        GetText((int)Texts.CaluateFPText).text = playerManager.playerStatsManager.CalculateMaxfocusPoint(m_iProjectedAttunementLevel).ToString();
+        GetText((int)Texts.CaluateStaminaText).text = playerManager.playerStatsManager.CalculateMaxStamina(m_iProjectedEnduranceLevel).ToString();
+        GetText((int)Texts.CaluateEquipLoadText).text = Mathf.RoundToInt(playerManager.playerStatsManager.CalculateAndSetMaxEquipload(m_iProjectedVitalityLevel)).ToString();
+        GetText((int)Texts.CaluatePoiseText).text = playerManager.playerStatsManager.CurrentPoise.ToString(); // only 장비로 인해서만 수치에 영향을 받음
+        GetText((int)Texts.CaluateItemDiscoveryText).text = playerManager.playerStatsManager.CalculateItemDiscovery(m_iProjectedLuckLevel).ToString();
 
 
         // Attack Power
         // TODO
+        // 어디서?
 
 
         // Defense
-        // TODO
-
+        GetText((int)Texts.CaluatePhysicalDefenseText).text = (playerManager.playerStatsManager.CalculatePhysicalDefenseFromVitalityLevel(m_iProjectedVitalityLevel) + playerManager.playerStatsManager.CalculatePhysicalDefenseFromStrengthLevel(m_iProjectedStrengthLevel)).ToString();
+        // TODO VS
+        GetText((int)Texts.CaluateMagiclDefenseText).text = playerManager.playerStatsManager.CalculateMagicDefense(m_iProjectedIntelligenceLevel).ToString();
+        GetText((int)Texts.CaluateFireDefenseText).text = playerManager.playerStatsManager.CalculateFireDefense(m_iProjectedIntelligenceLevel).ToString();
+        GetText((int)Texts.CaluateLightningDefenseText).text = playerManager.playerStatsManager.CalculateLightningDefense(m_iProjectedIntelligenceLevel).ToString();
+        GetText((int)Texts.CaluateDarkDefenseText).text = playerManager.playerStatsManager.CalculateDarkDefense(m_iProjectedFaithLevel).ToString();
 
         // Resistances
-        // TODO
+        GetText((int)Texts.CaluateBleedResistanceText).text = playerManager.playerStatsManager.CalculateDarkDefense(m_iProjectedEnduranceLevel).ToString();
+        GetText((int)Texts.CaluatePoisonResistanceText).text = playerManager.playerStatsManager.CalculatePosionResistance(m_iProjectedVitalityLevel).ToString();
+        GetText((int)Texts.CaluateFrostResistanceText).text = playerManager.playerStatsManager.CalculateFrostResistance(m_iProjectedVigorLevel).ToString();
+        GetText((int)Texts.CaluateCurseResistanceText).text = playerManager.playerStatsManager.CalculateCurseResistance(m_iProjectedLuckLevel).ToString();
+
+        // Attunement Slot
+        GetText((int)Texts.CaluateAttunementSlotsText).text = playerManager.playerStatsManager.CalculateAttunementSlot(m_iProjectedAttunementLevel).ToString();
 
         m_iRequiredSouls = 0;
         m_iRequiredSouls = CalculateSoulCostToLevelUp();
         UpdateProjectedPlayerLevel();
+
+        Managers.Sound.Play("UI/Popup_OrderButtonSelect");
     }
 
     // 플레이어 레벨 변화 수치 계산
@@ -434,10 +464,12 @@ public class LevelUpUI : InteractableNPCPopupUI
         SetColor(m_iCurrentPlayerLevel, m_iProjectedPlayerLevel, GetText((int)Texts.CaluateToSoulsText));
 
         // 코스트 
-        SetColor(m_iRequiredSouls, 0       , GetText((int)Texts.CaluateToSoulsText));
+        if (m_iRequiredSouls == 0)
+            GetText((int)Texts.CaluateToSoulsText).color = new Color(1f, 1f, 1f);
+        else
+            GetText((int)Texts.CaluateToSoulsText).color = new Color(1f, 0f, 0f);
 
         // 스텟
-
         SetColor(playerManager.playerStatsManager.m_iVigorLevel       , m_iProjectedVigorLevel       , GetText((int)Texts.ProjectedVigorLevelText       ));
         SetColor(playerManager.playerStatsManager.m_iAttunementLevel  , m_iProjectedAttunementLevel  , GetText((int)Texts.ProjectedAttunementLevelText  ));
         SetColor(playerManager.playerStatsManager.m_iEnduranceLevel   , m_iProjectedEnduranceLevel   , GetText((int)Texts.ProjectedEnduranceLevelText   ));
@@ -447,9 +479,46 @@ public class LevelUpUI : InteractableNPCPopupUI
         SetColor(playerManager.playerStatsManager.m_iIntelligenceLevel, m_iProjectedFaithLevel       , GetText((int)Texts.ProjectedFaithLevelText       ));
         SetColor(playerManager.playerStatsManager.m_iFaithLevel       , m_iProjectedIntelligenceLevel, GetText((int)Texts.ProjectedIntelligenceLevelText));
         SetColor(playerManager.playerStatsManager.m_iLuckLevel, m_iProjectedLuckLevel,                 GetText((int)Texts.ProjectedLuckLevelText        ));
+
+        // Base Power
+        SetColor(playerManager.playerStatsManager.maxHealth       , playerManager.playerStatsManager.CalculateMaxHP(m_iProjectedVigorLevel), GetText((int)Texts.CaluateHPText));
+        SetColor(playerManager.playerStatsManager.maxfocusPoint, playerManager.playerStatsManager.CalculateMaxfocusPoint(m_iProjectedAttunementLevel), GetText((int)Texts.CaluateFPText));
+        SetColor(playerManager.playerStatsManager.maxStamina, playerManager.playerStatsManager.CalculateMaxStamina(m_iProjectedEnduranceLevel), GetText((int)Texts.CaluateStaminaText));
+        SetColor(playerManager.playerStatsManager.m_MaxEquipLoad, playerManager.playerStatsManager.CalculateAndSetMaxEquipload(m_iProjectedVitalityLevel), GetText((int)Texts.CaluateEquipLoadText));
+        //SetColor(playerManager.playerStatsManager.CurrentPoise, playerManager.playerStatsManager.CalculateMaxHP(CaluatePoiseT)       , GetText((int)Texts.CaluatePoiseText));
+        SetColor(playerManager.playerStatsManager.m_iItemDiscovery, playerManager.playerStatsManager.CalculateItemDiscovery(m_iProjectedLuckLevel), GetText((int)Texts.CaluateItemDiscoveryText));
+
+        // Attack Power
+        // TODO
+
+        // Defefnse
+        SetColor(playerManager.playerStatsManager.m_iPhysicalDefense, playerManager.playerStatsManager.CalculatePhysicalDefenseFromVitalityLevel(m_iProjectedVitalityLevel) + playerManager.playerStatsManager.CalculatePhysicalDefenseFromStrengthLevel(m_iProjectedStrengthLevel), GetText((int)Texts.CaluatePhysicalDefenseText));
+        // VS TODO
+        SetColor(playerManager.playerStatsManager.m_iMagicDefense, playerManager.playerStatsManager.CalculateMagicDefense(m_iProjectedIntelligenceLevel), GetText((int)Texts.CaluateMagiclDefenseText));
+        SetColor(playerManager.playerStatsManager.m_iFireDefense, playerManager.playerStatsManager.CalculateFireDefense(m_iProjectedStrengthLevel), GetText((int)Texts.CaluateFireDefenseText));
+        SetColor(playerManager.playerStatsManager.m_iLightningDefense, playerManager.playerStatsManager.CalculateLightningDefense(m_iProjectedEnduranceLevel), GetText((int)Texts.CaluateLightningDefenseText));
+        SetColor(playerManager.playerStatsManager.m_iDarkDefense, playerManager.playerStatsManager.CalculateDarkDefense(m_iProjectedFaithLevel), GetText((int)Texts.CaluateDarkDefenseText));
+
+        // Resistance
+        SetColor(playerManager.playerStatsManager.m_iBleedResistance, playerManager.playerStatsManager.CalculateBleedResistance(m_iProjectedEnduranceLevel), GetText((int)Texts.CaluateMagiclDefenseText));
+        SetColor(playerManager.playerStatsManager.m_iPoisonResistance, playerManager.playerStatsManager.CalculatePosionResistance(m_iProjectedVitalityLevel), GetText((int)Texts.CaluateMagiclDefenseText));
+        SetColor(playerManager.playerStatsManager.m_iFrostResistance, playerManager.playerStatsManager.CalculateFrostResistance(m_iProjectedVigorLevel), GetText((int)Texts.CaluateMagiclDefenseText));
+        SetColor(playerManager.playerStatsManager.m_iCurseResistance, playerManager.playerStatsManager.CalculateCurseResistance(m_iProjectedLuckLevel), GetText((int)Texts.CaluateMagiclDefenseText));
+
+        SetColor(playerManager.playerStatsManager.m_iAttunementSlots, playerManager.playerStatsManager.CalculateAttunementSlot(m_iProjectedAttunementLevel), GetText((int)Texts.CaluateAttunementSlotsText));
+
     }
 
     void SetColor(int beforeValue, int AfterValue, TextMeshProUGUI text)
+    {
+        // Luck
+        if (beforeValue == AfterValue)
+            text.color = new Color(1f, 1f, 1f);
+        else
+            text.color = new Color(0f, 0f, 1f);
+    }
+
+    void SetColor(float beforeValue, float AfterValue, TextMeshProUGUI text)
     {
         // Luck
         if (beforeValue == AfterValue)
@@ -477,7 +546,7 @@ public class LevelUpUI : InteractableNPCPopupUI
 
         // 소울 비용 계산
         playerManager.playerStatsManager.currentSoulCount -= m_iRequiredSouls;
-        Managers.GameUI.m_GameSceneUI.SoulsRefreshUI(false, 0, false);
+        Managers.GameUI.m_GameSceneUI.SoulsRefreshUI(false, 0, true);
         m_iRequiredSouls = 0;
 
         // Stat Init 
@@ -486,6 +555,6 @@ public class LevelUpUI : InteractableNPCPopupUI
         // Stat Bar Ui RefreshUI
         Managers.GameUI.m_GameSceneUI.m_StatBarsUI.SetBGWidthUI(E_StatUI.All);
 
-        gameObject.SetActive(false);
+        Managers.Sound.Play("UI/Popup_ButtonClose");
     }
 }

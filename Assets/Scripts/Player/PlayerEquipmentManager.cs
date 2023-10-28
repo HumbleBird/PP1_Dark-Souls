@@ -102,7 +102,7 @@ public class PlayerEquipmentManager : CharacterEquipmentManager
         EquipHandEquipmentAbilityValue();
         EquipLegEquipmentAbilityValue();
 
-        player.playerStatsManager.m_iPoisonArmorResistance = poisonArmorResistance;
+        player.playerStatsManager.m_iPoisonResistance = poisonArmorResistance;
         player.playerStatsManager.CaculateAndSetCurrentEquipLoad(totalEquipmentLoad);
     }
 

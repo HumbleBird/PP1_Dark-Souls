@@ -20,16 +20,16 @@ public class PoisonBuildUpEffect : CharacterEffect
         // 플레이어 저항 수치를 계산 후에 posion build up
         float finalPoisonBuildUp = 0;
 
-        if(character.characterStatsManager.m_iPoisonArmorResistance >= 0)
+        if(character.characterStatsManager.m_iPoisonResistance >= 0)
         {
             // 독 저항 수치가 100이라면 무적임
-            if(character.characterStatsManager.m_iPoisonArmorResistance >= 100)
+            if(character.characterStatsManager.m_iPoisonResistance >= 100)
             {
                 finalPoisonBuildUp = 0;
             }
             else
             {
-                float resistancePercentage = character.characterStatsManager.m_iPoisonArmorResistance / 100;
+                float resistancePercentage = character.characterStatsManager.m_iPoisonResistance / 100;
 
                 if (resistancePercentage > 0)
                     finalPoisonBuildUp = basePoisonBuildUpAmount - (basePoisonBuildUpAmount * resistancePercentage);

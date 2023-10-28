@@ -25,7 +25,7 @@ public abstract class CharacterStatsManager : MonoBehaviour
     public float blockingStabilityRating;
 
     [Header("Attunement Slots")]
-    public int AttunementSlots = 0;
+    public int m_iAttunementSlots = 0;
 
     [Header("Poise Details")]
     public float totalPoiseDefence; // poise 동안의 총 방어력
@@ -50,14 +50,14 @@ public abstract class CharacterStatsManager : MonoBehaviour
 
     // 플레이어 레벨
     #region Defense 
-    public int m_fPhysicalDefense;
-    public int m_fVSStrikeDefense;
-    public int m_fVSSlashDefense;
-    public int m_fVSThrustDefense;
-    public int m_fMagicDefense;
-    public int m_fFireDefense;
-    public int m_fLightningDefense;
-    public int m_fDarkDefense;
+    public int m_iPhysicalDefense;
+    public int m_iVSStrikeDefense;
+    public int m_iVSSlashDefense;
+    public int m_iVSThrustDefense;
+    public int m_iMagicDefense;
+    public int m_iFireDefense;
+    public int m_iLightningDefense;
+    public int m_iDarkDefense;
     #endregion
 
     // 갑옷, 무기
@@ -76,13 +76,13 @@ public abstract class CharacterStatsManager : MonoBehaviour
 
     #region 속성 감소율
     [Header("Character Resistances")]
-    public int m_fBleedResistance;
-    public int m_iPoisonArmorResistance;
-    public int m_fFrostResistance;
-    public int m_fCurseResistance;
+    public int m_iBleedResistance;
+    public int m_iPoisonResistance;
+    public int m_iFrostResistance;
+    public int m_iCurseResistance;
     #endregion
 
-    #region 속성 방어력
+    #region 속성 값옷 방어력
 
     [Header("Character Armor")]
     public float m_fBleedArmor;
@@ -160,7 +160,7 @@ public abstract class CharacterStatsManager : MonoBehaviour
     {
     }
 
-    protected abstract int SetMaxHealth();
+    public abstract int CalculateMaxHP(int data);
 
     public virtual void HealCharacter(int healAmount)
     {

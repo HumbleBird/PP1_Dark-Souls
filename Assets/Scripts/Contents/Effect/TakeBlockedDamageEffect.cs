@@ -103,7 +103,7 @@ public class TakeBlockedDamageEffect : CharacterEffect
         PlayerManager player = character as PlayerManager;
         if (player != null)
         {
-            player.playerStatsManager.currentStamina -= staminaDamageAfterAbsorption;
+            player.playerStatsManager.currentStamina -= Mathf.RoundToInt( staminaDamageAfterAbsorption);
         }
     }
 

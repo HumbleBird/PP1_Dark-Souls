@@ -43,7 +43,7 @@ public class AICharacterStatsManager : CharacterStatsManager
     // 가져온 스텟을 이용해 능력치 정하기
     public override void InitAbility()
     {
-        maxHealth = SetMaxHealth();
+        maxHealth = CalculateMaxHP(0);
 
         FullRecovery();
     }
@@ -55,7 +55,7 @@ public class AICharacterStatsManager : CharacterStatsManager
 
     }
 
-    protected override int SetMaxHealth()
+    public override int CalculateMaxHP(int MonsterId)
     {
         // 플레이어는 vigorlevel에 따라 결정
 

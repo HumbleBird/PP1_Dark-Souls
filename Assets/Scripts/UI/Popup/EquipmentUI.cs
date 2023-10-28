@@ -29,9 +29,9 @@ public class EquipmentUI : UI_Popup
         BindText(typeof(Texts));
 
         PlayerManager player = Managers.Object.m_MyPlayer;
-        GetText((int)Texts.EquipLoadValueText).text = string.Format("{0:0.0} /   {1:0.0}", player.playerStatsManager.currentEquipLoad, player.playerStatsManager.maxEquipLoad);
+        GetText((int)Texts.EquipLoadValueText).text = string.Format("{0:0.0} /   {1:0.0}", player.playerStatsManager.m_CurrentEquipLoad, player.playerStatsManager.m_MaxEquipLoad);
 
-        float weightRatio = (player.playerStatsManager.currentEquipLoad / player.playerStatsManager.maxEquipLoad) * 100;
+        float weightRatio = (player.playerStatsManager.m_CurrentEquipLoad / player.playerStatsManager.m_MaxEquipLoad) * 100;
         GetText((int)Texts.WeightRatioValueText).text = string.Format("{0:0.0}%", weightRatio);
 
         m_CurrentEquipmentsUI = GetComponentInChildren<CurrentEquipmentsUI>();
