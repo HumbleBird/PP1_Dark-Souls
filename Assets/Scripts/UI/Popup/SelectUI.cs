@@ -106,6 +106,8 @@ public class SelectUI : UI_Popup
     void SelectSystem()
     {
         // 저장 여부 확인
+        Managers.GameUI.ShowPopupUI<SystemUI>();
+
     }
 
     void ImageTrigger(GameObject go, Image image, Action action)

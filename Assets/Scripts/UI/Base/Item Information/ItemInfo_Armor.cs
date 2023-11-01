@@ -51,7 +51,7 @@ public class ItemInfo_Armor : ItemInfo_Base
 
     void ShowItem(EquipmentItem item)
     {
-        GetText((int)Texts.Armor_ItemNameText).text = item.itemName;
+        GetText((int)Texts.Armor_ItemNameText).text = item.m_ItemName;
         GetText((int)Texts.Armor_EquipLoadValueText).text = item.m_fWeight.ToString();
         GetText((int)Texts.Armor_DurabilityValueText).text = item.m_fDurability.ToString();
 

@@ -48,7 +48,7 @@ public class ItemInfo_Ammo : ItemInfo_Base
     void ShowItem(AmmoItem item)
     {
         // Property
-        GetText((int)Texts.Ammo_ItemNameText).text = item.itemName;
+        GetText((int)Texts.Ammo_ItemNameText).text = item.m_ItemName;
         GetText((int)Texts.Ammo_WeaponTypeText).text = item.ammoType.ToString();
         GetText((int)Texts.Ammo_AttackTypeText).text = item.AttackType.ToString();
         GetText((int)Texts.Ammo_CurrentCountValueText).text = item.m_iCurrentCount.ToString() + "/ " + item.m_iMaxCount.ToString();

@@ -5,9 +5,23 @@ using UnityEngine;
 [CreateAssetMenu(menuName = "Items/Eqipment/Gantlets Armor")]
 public class GantletsEquipmentItem : EquipmentItem
 {
-    GantletsEquipmentItem()
+    public GantletsEquipmentItem(int id) : base(id)
     {
-        m_EItemType = Define.E_ItemType.Gauntlets;
+        SetInfo(id);
+
+
+        if (id == 1003)
+        {
+            Elbow_Attachment_Right = 0;
+            Elbow_Attachment_Left = 0;
+
+            Arm_Upper_RightName=6;
+            Arm_Upper_LeftName=6;
+            Arm_Lower_RightName=16;
+            Arm_Lower_LeftName=16;
+            Hand_RightName=12;
+            Hand_LeftName=12;
+        }
     }
 
     [Header("Item All Gender Parts Name")]
@@ -16,7 +30,7 @@ public class GantletsEquipmentItem : EquipmentItem
     public string m_Elbow_Attachment_Right { get { return "Chr_ElbowAttachRight_" + Elbow_Attachment_Right.ToString("00"); } }
     public string m_Elbow_Attachment_Left { get { return "Chr_ElbowAttachLeft_" + Elbow_Attachment_Left.ToString("00"); } }
 
-    [Header("Male_Parts Item Name")]
+    [Header("Gender_Parts Item Name")]
     [SerializeField] int Arm_Upper_RightName;
     [SerializeField] int Arm_Upper_LeftName;
     [SerializeField] int Arm_Lower_RightName;

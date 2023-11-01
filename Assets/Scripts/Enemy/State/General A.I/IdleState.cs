@@ -13,6 +13,12 @@ public class IdleState : State
     public LayerMask detectionLayer;
     public LayerMask layerThatBlockLineOfSight;
 
+    private void Awake()
+    {
+        pursueTargetState = GetComponent<PursueTargetState>();
+        detectionLayer = 1 << 9;
+    }
+
     public override State Tick(AICharacterManager aiCharacter)
     {
         // detection radius 반경 내의 적을 탐색

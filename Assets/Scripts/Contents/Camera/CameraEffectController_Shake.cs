@@ -78,7 +78,7 @@ public partial class CameraEffectController : MonoBehaviour
 
     public void Shake(int _nCameraID)
     {
-        Table_Camera.Info info = Managers.Table.m_Camera.Get(_nCameraID);
+        Table_Camera_Shake.Info info = Managers.Table.m_Camera_Shake.Get(_nCameraID);
 
         if (null == info)
             return;

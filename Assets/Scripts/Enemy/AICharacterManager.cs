@@ -29,6 +29,7 @@ public class AICharacterManager : CharacterManager
     public float maximumDetectionAngle = 50;
     public float currentRecoveryTime = 0;
     public float stoppingDistance = 1.2f; // 그들 앞에 멈추거나 앞으로 나아가기 전에 우리가 목표물에 얼마나 근접하는가
+    public E_InitAICharacterState e_InitAICharacterState;
 
     [Header("ADVANCED A.I SETTING")]
     public bool allowAIToPerformBlock;
@@ -75,7 +76,35 @@ public class AICharacterManager : CharacterManager
         navMeshAgent = GetComponentInChildren<NavMeshAgent>();
         navMeshAgent.enabled = false;
 
-        currentState = GetComponentInChildren<IdleStateHumanoid>();
+        switch (e_InitAICharacterState)
+        {
+            case E_InitAICharacterState.Idle:
+                {
+                    IdleStateHumanoid state = GetComponentInChildren<IdleStateHumanoid>();
+                    if (state != null)
+                        currentState = state;
+                }
+                {
+                    IdleState state = GetComponentInChildren<IdleState>();
+                    if (state != null)
+                        currentState = state;
+                }
+                {
+                    CompanionStateIdle state = GetComponentInChildren<CompanionStateIdle>();
+                    if (state != null)
+                        currentState = state;
+                }
+                break;
+            case E_InitAICharacterState.Patrol:
+                currentState = GetComponentInChildren<PatrolStateHumanoid>();
+                break;
+            case E_InitAICharacterState.Ambush:
+                currentState = GetComponentInChildren<AmbushState>();
+                ((AmbushState)currentState).isSleeping = true;
+                break;
+            default:
+                break;
+        }
     }
 
     protected override void Start()

@@ -6,10 +6,25 @@ public class Table_Item_Armor : Table_Base
     [Serializable] 
     public class Info
     {
-        public int    m_nID;
-        public string m_sName;
-        public int    m_iArmorType;
-        public float  m_fPhysicalResitance;
+        public int               m_nID                                                   ;
+        public string            m_sName                                                   ;
+        public string            m_sIconPath                                                                             ;
+        public int               m_iArmorType                                                   ; // 1 - helmet, 2-torso, 3- hand, 4-leg
+        public float             m_iDamage_Reduction_Physical                                                   ;
+        public float             m_iDamage_Reduction_VSStrike                                                   ;
+        public float             m_iDamage_Reduction_VSSlash                                                   ;
+        public float             m_iDamage_Reduction_Thrust                                                   ;
+        public float             m_iDamage_Reduction_Magic                                                   ;
+        public float             m_iDamage_Reduction_Fire                                                   ;
+        public float             m_iDamage_Reduction_Lightning                                                   ;
+        public float             m_iDamage_Reduction_Dark                                                   ;
+        public int               m_iResistance_Bleeding                                                   ;
+        public int               m_iResistance_Posion                                                   ;
+        public int               m_iResistance_Frost                                                   ;
+        public int               m_iResistance_Curse                                                   ;
+        public float m_fResistance_Poise                                                   ;
+        public int               m_iDurability                                                   ;
+        public float               m_fWeight                                                   ;
     }
 
     public Dictionary<int, Info> m_Dictionary = new Dictionary<int, Info>();
@@ -54,10 +69,25 @@ public class Table_Item_Armor : Table_Base
         if (_reader.reset_row(_nRow, _nStartCol) == false)
             return false;
 
-        _reader.get(_nRow, ref _info.m_nID);
-        _reader.get(_nRow, ref _info.m_sName);
-        _reader.get(_nRow, ref _info.m_iArmorType);
-        _reader.get(_nRow, ref _info.m_fPhysicalResitance);
+        _reader.get(_nRow, ref _info.m_nID                          );
+        _reader.get(_nRow, ref _info.m_sName                        );
+        _reader.get(_nRow, ref _info.m_sIconPath                    );
+        _reader.get(_nRow, ref _info.m_iArmorType                   );
+        _reader.get(_nRow, ref _info.m_iDamage_Reduction_Physical   );
+        _reader.get(_nRow, ref _info.m_iDamage_Reduction_VSStrike   );
+        _reader.get(_nRow, ref _info.m_iDamage_Reduction_VSSlash    );
+        _reader.get(_nRow, ref _info.m_iDamage_Reduction_Thrust     );
+        _reader.get(_nRow, ref _info.m_iDamage_Reduction_Magic      );
+        _reader.get(_nRow, ref _info.m_iDamage_Reduction_Fire       );
+        _reader.get(_nRow, ref _info.m_iDamage_Reduction_Lightning  );
+        _reader.get(_nRow, ref _info.m_iDamage_Reduction_Dark       );
+        _reader.get(_nRow, ref _info.m_iResistance_Bleeding         );
+        _reader.get(_nRow, ref _info.m_iResistance_Posion           );
+        _reader.get(_nRow, ref _info.m_iResistance_Frost            );
+        _reader.get(_nRow, ref _info.m_iResistance_Curse            );
+        _reader.get(_nRow, ref _info.m_fResistance_Poise            );
+        _reader.get(_nRow, ref _info.m_iDurability                  );
+        _reader.get(_nRow, ref _info.m_fWeight                      );
 
         return true;
     }

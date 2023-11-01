@@ -5,6 +5,12 @@ using UnityEngine;
 [CreateAssetMenu(menuName = "Spells/Healing Spell")]
 public class HealingSpell : SpellItem
 {
+    public HealingSpell()
+    {
+        spellWarmUpFX = Managers.Resource.Load<GameObject>("Art/Models/Items/Spell/Heal_Spell_Cast_Fx");
+        spellCastFX = Managers.Resource.Load<GameObject>("Art/Models/Items/Spell/Heal_Spell_Warm_Up_Fx");
+    }
+
     public int healAmount;
 
     public override void AttemptToCastSpell(CharacterManager character)

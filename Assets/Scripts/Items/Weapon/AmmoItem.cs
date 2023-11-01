@@ -8,7 +8,7 @@ public class AmmoItem : Item
 {
     public AmmoItem()
     {
-        m_EItemType = Define.E_ItemType.Ammo;
+        m_eItemType = Define.E_ItemType.Ammo;
     }
 
     [Header("Property")]

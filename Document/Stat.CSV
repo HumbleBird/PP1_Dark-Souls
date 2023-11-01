@@ -1,16 +1,6 @@
-Idx,Hp,MP,Stamina,Atk,Def,WalkSpeed,RunSpeed
-아이디,체력,체력,스테미너,공격력,방어력,걷는 속도,달리기 속도
-1,403,93,94,0,0,3,5
-2,150,30,30,0,0,3,5
-101,170,0,0,5,1,2.5,4
-102,154,0,0,5,1,2.5,4
-103,120,0,0,10,0,2,3
-1001,5000,0,0,10,5,2,2
-1002,1500,0,0,15,1,2,3
-,,,,,,,
-,,,,,,,
-,,,,,,,
-,,,,,,,
-,,,,,,1,Player
-,,,,,,11,Monster
-,,,,,,101,Boss
+Idx,Name,Souls,Rewards,Hp,PhysicalDamage,MagicDamage,FireDamage,LightningDamage,DarkDamage,Weak,Resistant,Immune
+아이디,이름,보상 소울,보상 아이템,체력,공격력 - 물리,공격력 - 마법,공격력 - 화염,공격력 - 번개,공격력 - 어둠,약점,저항률,면역
+1,Skeleton Warior,300,0,403,50,0,0,0,0,0,0,0
+2,Skeleton Knight,700,0,301,30,0,0,0,0,0,0,0
+3,Skeleton Archer,500,0,505,40,0,0,0,0,0,0,0
+101,Skeleton Warior King,10000,0,2000,55,0,0,0,0,0,0,0

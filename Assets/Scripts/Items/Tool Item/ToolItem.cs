@@ -6,9 +6,32 @@ using static Define;
 [CreateAssetMenu(menuName = "Items/Tool")]
 public class ToolItem : Item
 {
+    public ToolItem(int id)
+    {
+        Table_Item_Tool.Info data = Managers.Table.m_Item_Tool.Get(id);
+
+        if (data == null)
+            return;
+
+        m_iItemID = id;
+        m_ItemName = data.m_sName;
+        m_ItemIcon = Managers.Resource.Load<Sprite>(data.m_sIconPath);
+        m_sPrefabPath = data.m_sPrefabPath;
+        m_ToolType = (ToolItemType)data.m_iisLimitied;
+        m_iMaxCount = data.m_iMaxCurrentCount;
+        m_iMaxSaveCount = data.m_iMaxSaveCount;
+        m_sItemDescription = data.m_sItemEffectDescription;
+        m_iAttributeBonusStrength = data.m_iParam_Bonus_Strength;
+        m_iAttributeBonusDexterity = data.m_iParam_Bonus_Dexterity;
+        m_iAttributeBonusIntelligence = data.m_iParam_Bonus_Intelligence;
+        m_iAttributeBonusFaith = data.m_iParam_Bonus_Faith;
+
+        m_eItemType = E_ItemType.Tool;
+    }
+
     public ToolItem()
     {
-        m_EItemType = E_ItemType.Tool;
+
     }
 
     public ToolItemType m_ToolType;

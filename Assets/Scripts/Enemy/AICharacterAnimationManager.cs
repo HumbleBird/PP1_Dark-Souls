@@ -34,7 +34,7 @@ public class AICharacterAnimationManager : CharacterAnimatorManager
         //if (character.isInteracting == false)
         //    return;
         
-        if(Managers.Game.isReSeting)
+        if(Managers.Game.isReSetting)
         {
             transform.position = aiCharacter.m_StartPos;
             transform.eulerAngles = aiCharacter.m_StartRo;

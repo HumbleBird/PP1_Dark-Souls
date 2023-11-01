@@ -90,6 +90,7 @@ public class ObjectManager
 	public void Clear()
 	{
 		_objects.Clear();
+		m_MyPlayer = null;
 	}
 
 

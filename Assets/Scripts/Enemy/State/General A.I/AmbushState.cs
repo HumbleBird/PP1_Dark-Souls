@@ -13,6 +13,11 @@ public class AmbushState : State
 
     public PursueTargetState pursueTargetState;
 
+    private void Awake()
+    {
+        pursueTargetState = GetComponent<PursueTargetState>();
+    }
+
     public override State Tick(AICharacterManager enemy)
     {
         if(isSleeping && enemy.isInteracting == false)

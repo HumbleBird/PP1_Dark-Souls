@@ -17,15 +17,16 @@ public class EnemyBossManager : MonoBehaviour
 
     private void Awake()
     {
-        enemy = GetComponent<AICharacterManager>();
-        Managers.GameUI.m_GameSceneUI.m_BossHealthBar.SetInfo(enemy);
 
-        bossCombatStanceState = GetComponentInChildren<BossCombatStanceState>();
     }
 
     private void Start()
     {
+        enemy = GetComponent<AICharacterManager>();
         m_UIBossHealthBar = Managers.GameUI.m_GameSceneUI.m_BossHealthBar;
+        m_UIBossHealthBar.SetInfo(enemy);
+
+        bossCombatStanceState = GetComponentInChildren<BossCombatStanceState>();
     }
 
     public void RefreshUI()

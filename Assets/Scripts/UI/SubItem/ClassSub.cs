@@ -40,23 +40,9 @@ public class ClassSub : MonoBehaviour
             Camera.main.GetComponent<CharacterPreviewCamera>().ChangeCameraPreviewTransform(E_CharacterCreationPreviewCamera.None);
         });
 
-        // Event Trigger
-        EventTrigger trigger = gameObject.GetOrAddComponent<EventTrigger>();
-
-        EventTrigger.Entry entry = new EventTrigger.Entry();
-        entry.eventID = EventTriggerType.Select;
-        entry.callback.AddListener((data) => { OnSelectAndPointerDown((PointerEventData)data); });
-        trigger.triggers.Add(entry);
-
-        EventTrigger.Entry entry2 = new EventTrigger.Entry();
-        entry2.eventID = EventTriggerType.PointerEnter;
-        entry2.callback.AddListener((data) => { OnSelectAndPointerDown((PointerEventData)data); });
-        trigger.triggers.Add(entry2);
-    }
-
-    void OnSelectAndPointerDown(PointerEventData data)
-    {
-        Managers.Sound.Play("UI/Popup_OrderButtonSelect");
-        classSelector.AssignClass(count);
+        gameObject.UIEventTrigger(EventTriggerType.PointerEnter, () => {
+            Managers.Sound.Play("UI/Popup_OrderButtonSelect");
+            classSelector.AssignClass(count);
+        });
     }
 }

@@ -9,10 +9,12 @@ public class OpenChest : Interactable
 
     public Transform playerStandingPosing;
     public GameObject itemSpawner;
-    public WeaponItem itemInChest;
+    public Item itemInChest;
 
-    private void Awake()
+    protected override void Awake()
     {
+        base.Awake();
+
         animator = GetComponent<Animator>();
         openChest = GetComponent<OpenChest>();
     }
@@ -35,7 +37,7 @@ public class OpenChest : Interactable
 
         if (weaponPickup != null)
         {
-            weaponPickup.weapon = itemInChest;
+            weaponPickup.item = itemInChest;
         }
     }
 

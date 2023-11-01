@@ -16,6 +16,6 @@ public class StartScene : BaseScene
 
     public override void Clear()
     {
-
+        Managers.Object.Clear();
     }
 }

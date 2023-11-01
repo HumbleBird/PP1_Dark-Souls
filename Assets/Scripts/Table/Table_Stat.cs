@@ -6,14 +6,19 @@ public class Table_Stat : Table_Base
     [Serializable] 
     public class Info
     {
-        public int   m_nID;
-        public int   m_iHp;
-        public int   m_iMp;
-        public int   m_fStemina;
-        public int   m_iAtk;
-        public int   m_iDef;
-        public float m_fWalkSpeed;
-        public float m_fRunSpeed;
+        public int       m_nID                                                   ;
+        public string    m_sName                                                   ;
+        public int       m_iRewardSouls                                                   ;
+        public int       m_iRewardItem                                                   ;
+        public int       m_iHP                                                   ;
+        public int       m_PhysicalDamage                   ;
+        public int       m_MagicDamage                   ;
+        public int       m_FireDamage                   ;
+        public int       m_LightningDamage                   ;
+        public int       m_DarkDamage                   ;
+        public int       m_iWeak                                                   ;
+        public int       m_iResistant                                                   ;
+        public int       m_iImmune                                                   ;
     }
 
     public Dictionary<int, Info> m_Dictionary = new Dictionary<int, Info>();
@@ -58,14 +63,19 @@ public class Table_Stat : Table_Base
         if (_reader.reset_row(_nRow, _nStartCol) == false)
             return false;
 
-        _reader.get(_nRow, ref _info.m_nID);
-        _reader.get(_nRow, ref _info.m_iHp);
-        _reader.get(_nRow, ref _info.m_iMp);
-        _reader.get(_nRow, ref _info.m_fStemina);
-        _reader.get(_nRow, ref _info.m_iAtk);
-        _reader.get(_nRow, ref _info.m_iDef);
-        _reader.get(_nRow, ref _info.m_fWalkSpeed);
-        _reader.get(_nRow, ref _info.m_fRunSpeed);
+        _reader.get(_nRow, ref _info.m_nID                          );
+        _reader.get(_nRow, ref _info.m_sName                        );
+        _reader.get(_nRow, ref _info.m_iRewardSouls                 );
+        _reader.get(_nRow, ref _info.m_iRewardItem                  );
+        _reader.get(_nRow, ref _info.m_iHP                          );
+        _reader.get(_nRow, ref _info.m_PhysicalDamage               );
+        _reader.get(_nRow, ref _info.m_MagicDamage                  );
+        _reader.get(_nRow, ref _info.m_FireDamage                   );
+        _reader.get(_nRow, ref _info.m_LightningDamage              );
+        _reader.get(_nRow, ref _info.m_DarkDamage                   );
+        _reader.get(_nRow, ref _info.m_iWeak                        );
+        _reader.get(_nRow, ref _info.m_iResistant                   );
+        _reader.get(_nRow, ref _info.m_iImmune                      );
 
         return true;
     }

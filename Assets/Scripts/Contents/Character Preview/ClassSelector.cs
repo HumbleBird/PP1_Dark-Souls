@@ -18,61 +18,162 @@ public class ClassSelector : MonoBehaviour
     [Header("Class Starting Gear")]
     public ClassGear[] classGear;
 
+    CharacterCreationScreen characterCreationScreen;
+
     private void Start()
     {
         player = Managers.Object.m_MyPlayer;
+        characterCreationScreen = FindObjectOfType<CharacterCreationScreen>();
     }
 
-    private void AssignClassStats(int classChosen)
+    private void AssignClassStats(Table_StartClassStat.Info data)
     {
-        player.playerStatsManager.playerLevel          = classStats[classChosen].m_sClassLevel;
-        player.playerStatsManager.m_iVigorLevel        = classStats[classChosen].m_iVigorLevel       ;
-        player.playerStatsManager.m_iAttunementLevel   = classStats[classChosen].m_iAttunementLevel  ;
-        player.playerStatsManager.m_iEnduranceLevel    = classStats[classChosen].m_iEnduranceLevel   ;
-        player.playerStatsManager.m_iVitalityLevel     = classStats[classChosen].m_iVitalityLevel    ;
-        player.playerStatsManager.m_iStrengthLevel     = classStats[classChosen].m_iStrengthLevel    ;
-        player.playerStatsManager.m_iDexterityLevel    = classStats[classChosen].m_iDexterityLevel   ;
-        player.playerStatsManager.m_iIntelligenceLevel = classStats[classChosen].m_iIntelligenceLevel;
-        player.playerStatsManager.m_iFaithLevel        = classStats[classChosen].m_iFaithLevel       ; 
-        player.playerStatsManager.m_iLuckLevel         = classStats[classChosen].m_iLuckLevel           ;
+        player.playerStatsManager.playerLevel          = data.m_iPlayerLevel;
+        player.playerStatsManager.m_iVigorLevel        = data.m_iVigorLevel       ;
+        player.playerStatsManager.m_iAttunementLevel   = data.m_iAttunementLevel  ;
+        player.playerStatsManager.m_iEnduranceLevel    = data.m_iEnduranceLevel   ;
+        player.playerStatsManager.m_iVitalityLevel     = data.m_iVitalityLevel    ;
+        player.playerStatsManager.m_iStrengthLevel     = data.m_iStrengthLevel    ;
+        player.playerStatsManager.m_iDexterityLevel    = data.m_iDexterityLevel   ;
+        player.playerStatsManager.m_iIntelligenceLevel = data.m_iIntelligenceLevel;
+        player.playerStatsManager.m_iFaithLevel        = data.m_iFaithLevel       ; 
+        player.playerStatsManager.m_iLuckLevel         = data.m_iLuckLevel           ;
 
-        CharacterCreationScreen characterCreationScreen = FindObjectOfType<CharacterCreationScreen>();
-        characterCreationScreen.m_CharacterCreationMiddlePannelUI.classChosen = classChosen;
+        characterCreationScreen.m_CharacterCreationMiddlePannelUI.classChosen = data;
         characterCreationScreen.m_CharacterCreationMiddlePannelUI.RefreshUI();
 
-        classDescription.text = classStats[classChosen].m_sClassDecription;
+        classDescription.text = data.m_sClassDescrition;
     }
 
-    private void AssignClassEquipment(int classChosen)
+    private void AssignClassEquipment(Table_StartClassStat.Info data)
     {
         // 전 아이템 전부 처분 후 바꿔뀌기
         player.playerInventoryManager.Clear();
 
         // 현재 장착
-        player.playerEquipmentManager.ChangeEquipment(E_EquipmentSlotsPartType.Helmt, classGear[classChosen].headEquipment);
-        player.playerEquipmentManager.ChangeEquipment(E_EquipmentSlotsPartType.Chest_Armor, classGear[classChosen].chestEquipment);
-        player.playerEquipmentManager.ChangeEquipment(E_EquipmentSlotsPartType.Gantlets, classGear[classChosen].handEquipment);
-        player.playerEquipmentManager.ChangeEquipment(E_EquipmentSlotsPartType.Leggings, classGear[classChosen].legEquipment);
 
-        player.playerEquipmentManager.ChangeEquipment(E_EquipmentSlotsPartType.Right_Hand_Weapon, classGear[classChosen].primaryWeapon);
-        player.playerEquipmentManager.ChangeEquipment(E_EquipmentSlotsPartType.Left_Hand_Weapon, classGear[classChosen].offHandWeapon);
+        // Left Hand1
+        {
+            Table_Item_Weapon.Info weapon = Managers.Table.m_Item_Weapon.Get(data.m_iLeftHand1Id);
+            if (weapon != null)
+            {
+                WeaponItem item = (WeaponItem)Managers.Game.MakeItem(E_ItemType.MeleeWeapon, data.m_iLeftHand1Id);
+                player.playerEquipmentManager.ChangeEquipment(E_EquipmentSlotsPartType.Left_Hand_Weapon, item);
+                player.playerInventoryManager.Add(item);
+            }
 
-        // 인벤토리에 넣기
-        player.playerInventoryManager.Add(classGear[classChosen].primaryWeapon);
-        player.playerInventoryManager.Add(classGear[classChosen].offHandWeapon);
 
-        player.playerInventoryManager.Add(classGear[classChosen].headEquipment);
-        player.playerInventoryManager.Add(classGear[classChosen].chestEquipment);
-        player.playerInventoryManager.Add(classGear[classChosen].legEquipment);
-        player.playerInventoryManager.Add(classGear[classChosen].handEquipment);
+        }
+
+        // Right Hand1
+        {
+            Table_Item_Weapon.Info weapon = Managers.Table.m_Item_Weapon.Get(data.m_iRightHand1Id);
+            if (weapon != null)
+            {
+                WeaponItem item = (WeaponItem)Managers.Game.MakeItem(E_ItemType.MeleeWeapon, data.m_iRightHand1Id);
+                player.playerEquipmentManager.ChangeEquipment(E_EquipmentSlotsPartType.Right_Hand_Weapon, item);
+                player.playerInventoryManager.Add(item);
+            }
+        }
+
+        // Head
+        {
+            Table_Item_Armor.Info armor = Managers.Table.m_Item_Armor.Get(data.m_iHeadArmorId);
+            if (armor != null)
+            {
+                HelmEquipmentItem item = (HelmEquipmentItem)Managers.Game.MakeItem(E_ItemType.Helmet, data.m_iHeadArmorId);
+                player.playerEquipmentManager.ChangeEquipment(E_EquipmentSlotsPartType.Helmt, item);
+                player.playerInventoryManager.Add(item);
+            }
+        }
+
+        // Chest Armor
+        {
+            Table_Item_Armor.Info armor = Managers.Table.m_Item_Armor.Get(data.m_iChestArmorId);
+            if (armor != null)
+            {
+                TorsoEquipmentItem item = (TorsoEquipmentItem)Managers.Game.MakeItem(E_ItemType.ChestArmor, data.m_iChestArmorId);
+                player.playerEquipmentManager.ChangeEquipment(E_EquipmentSlotsPartType.Chest_Armor, item);
+                player.playerInventoryManager.Add(item);
+            }
+
+        }
+
+        // Hand
+        {
+            Table_Item_Armor.Info armor = Managers.Table.m_Item_Armor.Get(data.m_iHandArmorId);
+            if (armor != null)
+            {
+                GantletsEquipmentItem item = (GantletsEquipmentItem)Managers.Game.MakeItem(E_ItemType.Gauntlets, data.m_iHandArmorId);
+                player.playerEquipmentManager.ChangeEquipment(E_EquipmentSlotsPartType.Gantlets, item);
+                player.playerInventoryManager.Add(item);
+            }
+        }
+
+        // Leg
+        {
+            Table_Item_Armor.Info armor = Managers.Table.m_Item_Armor.Get(data.m_iLegArmorId);
+            if (armor != null)
+            {
+                LeggingsEquipmentItem item = (LeggingsEquipmentItem)Managers.Game.MakeItem(E_ItemType.Leggings, data.m_iLegArmorId);
+                player.playerEquipmentManager.ChangeEquipment(E_EquipmentSlotsPartType.Leggings, item);
+                player.playerInventoryManager.Add(item);
+            }
+        }
+
+        // Spell
+        {
+            // 1
+            Table_Item_Spell.Info spll = Managers.Table.m_Item_Spell.Get(data.m_iSpell1Id);
+            if (spll != null)
+            {
+                SpellItem item = (SpellItem)Managers.Game.MakeItem(E_ItemType.Magic, data.m_iSpell1Id);
+                item.m_bEquipped = true;
+                player.playerEquipmentManager.m_CurrentHandSpell = item;
+                player.playerInventoryManager.Add(item);
+            }
+        }
+
+        // Ring
+        {
+            Table_Item_Ring.Info ring = Managers.Table.m_Item_Ring.Get(data.m_iRindId);
+            if (ring != null)
+            {
+                RingItem item = (RingItem)Managers.Game.MakeItem(E_ItemType.Magic, data.m_iRindId);
+                player.playerEquipmentManager.ChangeEquipment(E_EquipmentSlotsPartType.Ring, item);
+                player.playerInventoryManager.Add(item);
+            }
+        }
+
+        // Toll
+        {
+            // 에스트
+            ToolItem item = (ToolItem)Managers.Game.MakeItem(E_ItemType.Tool, 1);
+            player.playerEquipmentManager.ChangeEquipment(E_EquipmentSlotsPartType.Consumable, item);
+            player.playerInventoryManager.Add(item);
+        }
+        {
+            // 추가 아이템
+            Table_Item_Tool.Info tool = Managers.Table.m_Item_Tool.Get(data.m_iToolItemId);
+            if (tool != null)
+            {
+                ToolItem item = (ToolItem)Managers.Game.MakeItem(E_ItemType.Tool, data.m_iToolItemId);
+                player.playerEquipmentManager.ChangeEquipment(E_EquipmentSlotsPartType.Consumable, item);
+                player.playerInventoryManager.Add(item);
+            }
+        }
 
         player.playerEquipmentManager.EquipAllEquipmentModel();
         player.playerWeaponSlotManager.LoadBothWeaponsOnSlots();
     }
 
-    public void AssignClass(int num)
+    public void AssignClass(int id)
     {
-        AssignClassStats(num);
-        AssignClassEquipment(num);
+        Table_StartClassStat.Info data = Managers.Table.m_StartClassStat.Get(id);
+        if (data == null)
+            return;
+
+        AssignClassStats(data);
+        AssignClassEquipment(data);
     }
 }

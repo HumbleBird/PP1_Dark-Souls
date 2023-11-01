@@ -26,6 +26,8 @@ public class CharacterSoundFXManager : MonoBehaviour
         m_AudioSource = gameObject.GetOrAddComponent<AudioSource>();
         m_AudioSource.playOnAwake = false;
         m_AudioSource.loop = false;
+        m_AudioSource.spatialBlend = 1;
+        m_AudioSource.maxDistance = 3;
     }
 
     public void PlayRandomSound(E_RandomSoundType type, List<AudioClip> audioClips)

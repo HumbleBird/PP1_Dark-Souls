@@ -191,6 +191,9 @@ public class CharacterAnimatorManager : MonoBehaviour
 
     public virtual void SetHandIKForWeapon(RightHandIKTarget rightHandTarget, LeftHandIKTarget leftHandTarget, bool isTwoHandingWeapon)
     {
+        if (rightHandConstraint == null || leftHandConstraint == null)
+            return;
+
         if(isTwoHandingWeapon)
         {
             if(rightHandTarget != null)

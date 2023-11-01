@@ -5,6 +5,12 @@ using UnityEngine;
 [CreateAssetMenu(menuName ="Items/Consumables/Bomb Item")]
 public class BombConsumeableItem : ToolItem
 {
+    //public BombConsumeableItem()
+    //{
+    //    itemModel = Managers.Resource.Load<GameObject>(m_sPrefabPath);
+    //    liveBombModel = Managers.Resource.Load<GameObject>("Items/Tool/Firebomb");
+    //}
+
     [Header("Velocity")]
     public int upwardVelocity = 50;
     public int forwardVelocity = 50;

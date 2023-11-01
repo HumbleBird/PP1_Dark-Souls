@@ -11,7 +11,7 @@ public class WeaponPickup : Interactable
     [SerializeField] bool hasBeenLooted;
 
     [Header("Item")]
-    public WeaponItem weapon;
+    public Item item;
 
     protected override void Awake()
     {
@@ -55,7 +55,7 @@ public class WeaponPickup : Interactable
         // �κ��丮�� ����ֱ�
         PickUpItem(playermanager);
 
-
+        Managers.Sound.Play("Object/Item_Get");
     }
 
     private void PickUpItem(PlayerManager playerManager)
@@ -70,12 +70,12 @@ public class WeaponPickup : Interactable
 
         playerLocomotionManager.GetComponent<Rigidbody>().velocity = Vector3.zero;
         playerAnimatorManager.PlayTargetAnimation("Pick Up Item", true);
-        playerInventoryManager.Add(weapon);
+        playerInventoryManager.Add(item);
 
         Managers.GameUI.m_InteractableAnnouncementPopupUI.m_InteractionText.gameObject.SetActive(false);
         Managers.GameUI.m_InteractableAnnouncementPopupUI.m_ItemText.gameObject.SetActive(true);
-        Managers.GameUI.m_InteractableAnnouncementPopupUI.m_ItemText.text = weapon.itemName;
-        Managers.GameUI.m_InteractableAnnouncementPopupUI.m_ItemImage.sprite = weapon.itemIcon;
+        Managers.GameUI.m_InteractableAnnouncementPopupUI.m_ItemText.text = item.m_ItemName;
+        Managers.GameUI.m_InteractableAnnouncementPopupUI.m_ItemImage.sprite = item.m_ItemIcon;
 
         Destroy(gameObject);
 

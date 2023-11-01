@@ -66,7 +66,7 @@ public class CharacterCreationMiddlePannelUI : UI_Base
     HelmetHider hider;
     PlayerManager player;
 
-    public int classChosen;
+    public Table_StartClassStat.Info classChosen;
 
     CharacterCreationScreen m_CharacterCreationScreen;
     public List<ExternalFeaturesSubItem> m_listExternalFeaturesSubItem = new List<ExternalFeaturesSubItem>();
@@ -131,7 +131,7 @@ public class CharacterCreationMiddlePannelUI : UI_Base
         foreach (Transform child in gridPannel.transform)
             Managers.Resource.Destroy(child.gameObject);
 
-        for (int i = 0; i < (int)E_CharacterClass.MaxCount; i++)
+        for (int i = 1; i < (int)E_CharacterClass.MaxCount; i++)
         {
             GameObject go = Managers.Resource.Instantiate("UI/SubItem/ClassSubItem", gridPannel.transform);
             ClassSub item = go.GetOrAddComponent<ClassSub>();
@@ -219,6 +219,6 @@ public class CharacterCreationMiddlePannelUI : UI_Base
         GetText((int)Texts.FaithLevelText       ).text                 = string.Format("{0, -1 } {1, 1}", "FaithLevel\n", player.playerStatsManager.m_iFaithLevel.ToString());
         GetText((int)Texts.LuckLevelText).text                         = string.Format("{0, -1 } {1, 1}", "LuckLevel\n", player.playerStatsManager.m_iLuckLevel.ToString());
 
-        GetText((int)Texts.ClassDescrtionText).text = FindObjectOfType< ClassSelector>().classStats[classChosen].m_sClassDecription;
+        GetText((int)Texts.ClassDescrtionText).text = classChosen.m_sClassDescrition;
     }
 }

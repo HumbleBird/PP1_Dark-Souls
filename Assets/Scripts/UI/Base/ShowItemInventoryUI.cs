@@ -68,38 +68,38 @@ public class ShowItemInventoryUI : UI_Base
             case E_EquipmentSlotsPartType.Right_Hand_Weapon:
             case E_EquipmentSlotsPartType.Left_Hand_Weapon:
                 items = player.playerInventoryManager.FindItems(
-                    i => i.m_EItemType == E_ItemType.MeleeWeapon ||
-                    i.m_EItemType == E_ItemType.RangeWeapon ||
-                    i.m_EItemType == E_ItemType.Catalyst ||
-                    i.m_EItemType == E_ItemType.Shield);
+                    i => i.m_eItemType == E_ItemType.MeleeWeapon ||
+                    i.m_eItemType == E_ItemType.RangeWeapon ||
+                    i.m_eItemType == E_ItemType.Catalyst ||
+                    i.m_eItemType == E_ItemType.Shield);
 
                 break;
             case E_EquipmentSlotsPartType.Arrow:
-                items = player.playerInventoryManager.FindItems(i => i.m_EItemType == E_ItemType.Ammo && ((AmmoItem)i).ammoType == AmmoType.Arrow);
+                items = player.playerInventoryManager.FindItems(i => i.m_eItemType == E_ItemType.Ammo && ((AmmoItem)i).ammoType == AmmoType.Arrow);
                 break;
             case E_EquipmentSlotsPartType.Bolt:
-                items = player.playerInventoryManager.FindItems(i => i.m_EItemType == E_ItemType.Ammo && ((AmmoItem)i).ammoType == AmmoType.Bolt);
+                items = player.playerInventoryManager.FindItems(i => i.m_eItemType == E_ItemType.Ammo && ((AmmoItem)i).ammoType == AmmoType.Bolt);
                 break;
             case E_EquipmentSlotsPartType.Helmt:
-                items = player.playerInventoryManager.FindItems(i => i.m_EItemType == E_ItemType.Helmet);
+                items = player.playerInventoryManager.FindItems(i => i.m_eItemType == E_ItemType.Helmet);
                 break;
             case E_EquipmentSlotsPartType.Chest_Armor:
-                items = player.playerInventoryManager.FindItems(i => i.m_EItemType == E_ItemType.ChestArmor);
+                items = player.playerInventoryManager.FindItems(i => i.m_eItemType == E_ItemType.ChestArmor);
                 break;
             case E_EquipmentSlotsPartType.Gantlets:
-                items = player.playerInventoryManager.FindItems(i => i.m_EItemType == E_ItemType.Gauntlets);
+                items = player.playerInventoryManager.FindItems(i => i.m_eItemType == E_ItemType.Gauntlets);
                 break;
             case E_EquipmentSlotsPartType.Leggings:
-                items = player.playerInventoryManager.FindItems(i => i.m_EItemType == E_ItemType.Leggings);
+                items = player.playerInventoryManager.FindItems(i => i.m_eItemType == E_ItemType.Leggings);
                 break;
             case E_EquipmentSlotsPartType.Ring:
-                items = player.playerInventoryManager.FindItems(i => i.m_EItemType == E_ItemType.Ring);
+                items = player.playerInventoryManager.FindItems(i => i.m_eItemType == E_ItemType.Ring);
                 break;
             case E_EquipmentSlotsPartType.Consumable:
-                items = player.playerInventoryManager.FindItems(i => i.m_EItemType == E_ItemType.Tool);
+                items = player.playerInventoryManager.FindItems(i => i.m_eItemType == E_ItemType.Tool);
                 break;
             case E_EquipmentSlotsPartType.Pledge:
-                items = player.playerInventoryManager.FindItems(i => i.m_EItemType == E_ItemType.Pledge);
+                items = player.playerInventoryManager.FindItems(i => i.m_eItemType == E_ItemType.Pledge);
                 break;
             default:
                 break;

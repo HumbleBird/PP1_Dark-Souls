@@ -33,7 +33,7 @@ public class ItemInfo_Pledge : ItemInfo_Base
 
     void ShowToolItem(PledgeItem item)
     {
-        GetText((int)Texts.Pledge_ItemNameText).text = item.itemName;
+        GetText((int)Texts.Pledge_ItemNameText).text = item.m_ItemName;
 
         GetText((int)Texts.ItemEffectDescriptionText).text = item.m_sItemDescription.ToString();
     }

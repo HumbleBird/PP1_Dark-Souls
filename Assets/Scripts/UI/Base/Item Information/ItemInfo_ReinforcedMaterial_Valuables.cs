@@ -31,15 +31,15 @@ public class ItemInfo_ReinforcedMaterial_Valuables : ItemInfo_Base
         base.ShowItemInfo(item);
 
 
-        if(item.m_EItemType == Define.E_ItemType.ReinforcedMaterial)
+        if(item.m_eItemType == Define.E_ItemType.ReinforcedMaterial)
             ShowReinforcedMaterialItemItem((ReinforcedMaterialItem)item);
-        else if (item.m_EItemType == Define.E_ItemType.Valuables)
+        else if (item.m_eItemType == Define.E_ItemType.Valuables)
             ShowValuablesItemMaterialItemItem((ValuablesItem)item);
     }
 
     void ShowReinforcedMaterialItemItem(ReinforcedMaterialItem item)
     {
-        GetText((int)Texts.ReinforcedMaterial_Valuables_ItemNameText).text = item.itemName;
+        GetText((int)Texts.ReinforcedMaterial_Valuables_ItemNameText).text = item.m_ItemName;
         GetText((int)Texts.ReinforcedMaterial_Valuables_CurrentCountValueText).text = item.m_iCurrentCount.ToString() + "/ " + item.m_iMaxCount.ToString();
         GetText((int)Texts.ReinforcedMaterial_Valuables_SaveCountValueText).text = item.m_iCurrentCount.ToString();
 
@@ -48,7 +48,7 @@ public class ItemInfo_ReinforcedMaterial_Valuables : ItemInfo_Base
 
     void ShowValuablesItemMaterialItemItem(ValuablesItem item)
     {
-        GetText((int)Texts.ReinforcedMaterial_Valuables_ItemNameText).text = item.itemName;
+        GetText((int)Texts.ReinforcedMaterial_Valuables_ItemNameText).text = item.m_ItemName;
         GetText((int)Texts.ReinforcedMaterial_Valuables_CurrentCountValueText).text = item.m_iCurrentCount.ToString() + "/ " + item.m_iMaxCount.ToString();
         GetText((int)Texts.ReinforcedMaterial_Valuables_SaveCountValueText).text = item.m_iCurrentCount.ToString();
 

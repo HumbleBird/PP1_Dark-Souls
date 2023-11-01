@@ -11,13 +11,13 @@ public class NameCharacter : MonoBehaviour
     public void NameMyCharacter()
     {
         PlayerManager player = Managers.Object.m_MyPlayer;
-        player.playerStatsManager.characterName = inputField.text;
+        player.playerStatsManager.m_sCharacterName = inputField.text;
 
-        if(player.characterStatsManager.characterName == "")
+        if(player.characterStatsManager.m_sCharacterName == "")
         {
-            player.playerStatsManager.characterName = "Nameless";
+            player.playerStatsManager.m_sCharacterName = "Nameless";
         }
 
-        nameButtonText.text = player.playerStatsManager.characterName;
+        nameButtonText.text = player.playerStatsManager.m_sCharacterName;
     }
 }

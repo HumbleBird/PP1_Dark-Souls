@@ -1,0 +1,89 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 75903184b4e53fc48b307604981a6365, type: 3}
+  m_Name: East-West Shield
+  m_EditorClassIdentifier: 
+  m_ItemIcon: {fileID: 21300000, guid: 50fe552d3438bef438db4708651fc174, type: 3}
+  m_ItemName: East-West Shield
+  m_iItemID: 5
+  m_eItemType: 8
+  m_isEquiping: 0
+  m_EquipingType: 0
+  m_iEquipSlotNum: 0
+  m_bIsUnarmed: 0
+  m_sPrefabPath: Prefabs/Items/Weapons/Shield/Shield
+  isUnarmed: 0
+  weaponController: {fileID: 22100000, guid: f33c2fdd2dd49214b9fe54c8d1b7abc7, type: 2}
+  m_eWeaponType: 26
+  AttackType: 'Strike '
+  Skill: 'Parry '
+  FocusCost: 0
+  m_iAttributeRequirementStrength: 8
+  m_iAttributeRequirementDexterity: 0
+  m_iAttributeRequirementIntelligence: 0
+  m_iAttributeRequirementFaith: 0
+  m_iAttributeBonusStrength: 3
+  m_iAttributeBonusDexterity: 0
+  m_iAttributeBonusIntelligence: 0
+  m_iAttributeBonusFaith: 0
+  m_iPhysicalDamage: 76
+  m_iMagicDamage: 0
+  m_iFireDamage: 0
+  m_iLightningDamage: 0
+  m_iDarkDamage: 0
+  m_iCriticalDamage: 100
+  m_iMagicAdjustment: 0
+  m_iAttackRange: 0
+  m_iPhysicalDamageReduction: 55
+  m_iMagicDamageReduction: 70
+  m_iFireDamageReduction: 53
+  m_iLightningDamageReduction: 56
+  m_iDarkDamageReduction: 46
+  m_iStability: 45
+  m_iBleeding: 0
+  m_iPoison: 0
+  m_iFrost: 0
+  m_iCurse: 0
+  m_iDurability: 60
+  m_iWeight: 2
+  lightAttackDamageModifier: 0
+  heavyAttackDaamgeModifier: 0
+  criticalDamagemuiltiplier: 4
+  guardBreakModifier: 1
+  poiseBreak: 0
+  offensivePoiseBonus: 0
+  physicalBlockingDamageAbsorption: 90
+  fireBlockingDamageAbsorption: 50
+  baseStaminaCost: 0
+  lightAttackStaminaMultiplier: 0
+  heavyAttackStaminaMultiplier: 0
+  oh_tap_RB_Action: {fileID: 0}
+  oh_hold_RB_Action: {fileID: 0}
+  oh_tap_RT_Action: {fileID: 0}
+  oh_hold_RT_Action: {fileID: 0}
+  oh_tap_LB_Action: {fileID: 0}
+  oh_hold_LB_Action: {fileID: 11400000, guid: db8c0c932e1e7ce4cba1528e6f0bce2e, type: 2}
+  oh_tap_LT_Action: {fileID: 11400000, guid: 420debeb6f4896c49ac1169b21df9391, type: 2}
+  oh_hold_LT_Action: {fileID: 0}
+  th_tap_RB_Action: {fileID: 0}
+  th_hold_RB_Action: {fileID: 0}
+  th_tap_RT_Action: {fileID: 0}
+  th_hold_RT_Action: {fileID: 0}
+  th_tap_LB_Action: {fileID: 0}
+  th_hold_LB_Action: {fileID: 0}
+  th_tap_LT_Action: {fileID: 0}
+  th_hold_LT_Action: {fileID: 0}
+  canBeBeffued: 1
+  weaponWhooshes: []
+  blockingNoises: []
+  m_isLeftHandEquiping: 0
+  m_SecondE_EquipmentSlotsPartType: 0

@@ -6,8 +6,11 @@ public class PassThroughFogWall : Interactable
 {
     WorldEventManager worldEventManager;
 
-    private void Awake()
+    protected override void Awake()
     {
+        base.Awake();
+
+
         worldEventManager = FindObjectOfType<WorldEventManager>();
     }
 

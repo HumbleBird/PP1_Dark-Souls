@@ -8,7 +8,7 @@ public abstract class CharacterStatsManager : MonoBehaviour
     CharacterManager character;
 
     [Header("Name")]
-    public string characterName = "Nameless";
+    public string m_sCharacterName = "Nameless";
 
     [Header("Team I.D")]
     public int teamIDNumber = 0;
@@ -48,16 +48,28 @@ public abstract class CharacterStatsManager : MonoBehaviour
     public float poisonBuildup = 0; // 독 수치 100에 도달한 후 플레이어를 중독시키는 시간 경과에 따른 빌드업
     public float poisonAmount = 100; // 플레이어가 무독화되기 전에 처리해야 하는 독의 양
 
+    #region Attack Value
+    public float m_fPhysicalDamage;
+    public float m_fMagicDamage;
+    public float m_fFireDamage;
+    public float m_fLightningDamage;
+    public float m_fDarkDamage;
+    public float m_fAuxiliaryEffectsBleedDamage;
+    public float m_fAuxiliaryEffectsPoisonDamage;
+    public float m_fAuxiliaryEffectsFrostDamage;
+    public float m_fAuxiliaryEffectsCurseDamage;
+    #endregion
+
     // 플레이어 레벨
     #region Defense 
-    public int m_iPhysicalDefense;
-    public int m_iVSStrikeDefense;
-    public int m_iVSSlashDefense;
-    public int m_iVSThrustDefense;
-    public int m_iMagicDefense;
-    public int m_iFireDefense;
-    public int m_iLightningDefense;
-    public int m_iDarkDefense;
+    public int m_iPhysicalDefense                   ;
+    public int m_iVSStrikeDefense                   ;
+    public int m_iVSSlashDefense                   ;
+    public int m_iVSThrustDefense                   ;
+    public int m_iMagicDefense                   ;
+    public int m_iFireDefense                   ;
+    public int m_iLightningDefense                   ;
+    public int m_iDarkDefense                   ;
     #endregion
 
     // 갑옷, 무기
@@ -76,23 +88,19 @@ public abstract class CharacterStatsManager : MonoBehaviour
 
     #region 속성 감소율
     [Header("Character Resistances")]
-    public int m_iBleedResistance;
-    public int m_iPoisonResistance;
-    public int m_iFrostResistance;
-    public int m_iCurseResistance;
+    public int m_iBleedResistance           ;
+    public int m_iPoisonResistance          ;
+    public int m_iFrostResistance           ;
+    public int m_iCurseResistance           ;
     #endregion
 
     #region 속성 값옷 방어력
 
     [Header("Character Armor")]
-    public float m_fBleedArmor;
+    public float m_fBleedArmor ;
     public float m_iPoisoArmore;
-    public float m_fFrostArmor;
-    public float m_fCurseArmor;
-
-    #endregion
-
-    #region Speical Effect Armor
+    public float m_fFrostArmor ;
+    public float m_fCurseArmor ;
 
     #endregion
 

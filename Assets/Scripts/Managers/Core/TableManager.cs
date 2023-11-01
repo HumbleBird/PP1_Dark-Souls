@@ -5,38 +5,30 @@ using UnityEngine;
 
 public class TableManager
 {
-    public Table_Camera m_Camera = new Table_Camera();
-    public Table_Stat m_Stat = new Table_Stat();
-    public Table_Attack m_Attack = new Table_Attack();
-    public Table_Player m_Player = new Table_Player();
-    public Table_Boss m_Boss = new Table_Boss();
-    public Table_AI m_AI = new Table_AI();
-    public Table_Monster m_Monster = new Table_Monster();
-    public Table_Item m_Item = new Table_Item();
-    public Table_Item_Weapon m_Item_Weapon = new Table_Item_Weapon();
-    public Table_Item_Armor m_Item_Armor = new Table_Item_Armor();
-    public Table_Item_Consumable m_Item_Consumable = new Table_Item_Consumable();
-    public Table_Sound m_Sound = new Table_Sound();
-    public Table_Dialogue m_Dialogue = new Table_Dialogue();
-    public Table_Shop m_Shop = new Table_Shop();
+    public Table_Camera_Shake   m_Camera_Shake       = new Table_Camera_Shake();
+    public Table_Camera_Zoom    m_Camera_Zoom           = new Table_Camera_Zoom();
+    public Table_Item_Armor     m_Item_Armor            = new Table_Item_Armor();
+    public Table_Item_Weapon    m_Item_Weapon           = new Table_Item_Weapon();
+    public Table_Item_Spell     m_Item_Spell             = new Table_Item_Spell();
+    public Table_Item_Ring      m_Item_Ring         = new Table_Item_Ring();
+    public Table_Item_Tool      m_Item_Tool              = new Table_Item_Tool();
+    public Table_Stat            m_Stat             = new Table_Stat();
+    public Table_StartClassStat m_StartClassStat = new Table_StartClassStat();
+    public Table_Monster         m_Monster       = new Table_Monster();
 
     public void Init()
     {
 #if UNITY_EDITOR
-        m_Camera.Init_CSV("Camera_Shake", 2, 0);
-        //m_Stat.Init_CSV("Stat", 2, 0);
-        //m_Attack.Init_CSV("Attack", 2, 0);
-        //m_Player.Init_CSV("Player", 2, 0);
-        //m_Boss.Init_CSV("Boss", 2, 0);
-        //m_AI.Init_CSV("AI", 2, 0);
-        //m_Monster.Init_CSV("Monster", 2, 0);
-        //m_Item.Init_CSV("Item", 2, 0);
-        //m_Item_Weapon.Init_CSV("Weapon", 2, 0);
-        //m_Item_Armor.Init_CSV("Armor", 2, 0);
-        //m_Item_Consumable.Init_CSV("Consumable", 2, 0);
-        //m_Sound.Init_CSV("Sound", 2, 0);
-        //m_Dialogue.Init_CSV("Dialogue", 2, 0);
-        //m_Shop.Init_CSV("Shop", 2, 0);
+        m_Camera_Shake      .Init_CSV("Camera_Shake", 2, 0);
+        m_Camera_Zoom       .Init_CSV("Camera_Zoom", 2, 0);
+        m_Item_Armor        .Init_CSV("Armor", 2, 0);
+        m_Item_Weapon       .Init_CSV("Weapon", 2, 0);
+        m_Item_Spell        .Init_CSV("Spell", 2, 0);
+        m_Item_Ring         .Init_CSV("Ring", 2, 0);
+        m_Item_Tool         .Init_CSV("ToolItem", 2, 0);
+        m_Stat              .Init_CSV("Stat", 2, 0);
+        m_StartClassStat    .Init_CSV("StartClassStat", 2, 0);
+        m_Monster           .Init_CSV("Monster", 2, 0);
 #else
         m_Camera.Init_Binary("Camera");
 #endif
@@ -44,20 +36,16 @@ public class TableManager
 
     public void Save()
     {
-        m_Camera.Save_Binary("Camera");
-        //m_Stat.Save_Binary("Stat");
-        //m_Attack.Save_Binary("Attack");
-        //m_Player.Save_Binary("Player");
-        //m_Boss.Save_Binary("Boss");
-        //m_AI.Save_Binary("AI");
-        //m_Monster.Save_Binary("Monster");
-        //m_Item.Save_Binary("Item");
-        //m_Item_Weapon.Save_Binary("Weapon");
-        //m_Item_Armor.Save_Binary("Armor");
-        //m_Item_Consumable.Save_Binary("Consumable");
-        //m_Sound.Save_Binary("Sound");
-        //m_Dialogue.Save_Binary("Dialogue");
-        //m_Shop.Save_Binary("Shop");
+        m_Camera_Shake  .Save_Binary("Camera_Shake");
+        m_Camera_Zoom   .Save_Binary("Camera_Zoom");
+        m_Item_Armor    .Save_Binary("Armor");
+        m_Item_Weapon   .Save_Binary("Weapon");
+        m_Item_Spell    .Save_Binary("Spell");
+        m_Item_Ring     .Save_Binary("Ring");
+        m_Item_Tool     .Save_Binary("ToolItem");
+        m_Stat          .Save_Binary("Stat");
+        m_StartClassStat.Save_Binary("StartClassStat");
+        m_Monster       .Save_Binary("Monster");
 
 #if UNITY_EDITOR
         AssetDatabase.Refresh();

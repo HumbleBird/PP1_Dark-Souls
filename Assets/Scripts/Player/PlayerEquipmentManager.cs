@@ -39,15 +39,31 @@ public class PlayerEquipmentManager : CharacterEquipmentManager
 
     #endregion
 
-    int poisonArmorResistance = 0;
-    float totalEquipmentLoad = 0;
+    // Armor
+    float m_iArmorDamage_Reduction_Physical    = 0 ;
+    float m_iArmorDamage_Reduction_VSStrike    = 0 ;
+    float m_iArmorDamage_Reduction_VSSlash     = 0 ;
+    float m_iArmorDamage_Reduction_Thrust      = 0 ;
+    float m_iArmorDamage_Reduction_Magic       = 0 ;
+    float m_iArmorDamage_Reduction_Fire        = 0 ;
+    float m_iArmorDamage_Reduction_Lightning   = 0 ;
+    float m_iArmorDamage_Reduction_Dark        = 0 ;
+    float m_iArmorResistance_Bleeding          = 0 ;
+    float m_iArmorResistance_Posion            = 0 ;
+    float m_iArmorResistance_Frost             = 0 ;
+    float m_iArmorResistance_Curse             = 0 ;
+    float m_iArmorResistance_Poise = 0;
+        
+    float m_ftotalEquipmentLoad = 0;
 
     protected override void Awake()
     {
         base.Awake();
 
         player = GetComponent<PlayerManager>();
-
+        m_AllGenderPartsModelChanger.Clear();
+        m_FemaleGenderPartsModelChanger.Clear();
+        m_MaleGenderPartsModelChanger.Clear();
     }
 
     private void Start()
@@ -92,28 +108,78 @@ public class PlayerEquipmentManager : CharacterEquipmentManager
     #region Equipment Ability
     private void EquipAllEquipmentAbilityValue()
     {
+        // Value Clear
         player.playerStatsManager.m_fPhysicalDamageAbsorption = 0;
+        player.playerStatsManager.m_fPhysicalDamageAbsorption    =0;
+        player.playerStatsManager.m_fVSStrikeDamageAbsorption   =0;
+        player.playerStatsManager.m_fVSSlashDamageAbsorption    =0;
+        player.playerStatsManager.m_fVSThrustDamageAbsorption   =0;
+        player.playerStatsManager.m_fMagicDamageAbsorption      =0;
+        player.playerStatsManager.m_fFireDamageAbsorption       =0;
+        player.playerStatsManager.m_fLightningDamageAbsorption  =0;
+        player.playerStatsManager.m_fDarkDamageAbsorption       =0;
+        player.playerStatsManager.m_fBleedArmor                 =0;
+        player.playerStatsManager.m_iPoisoArmore                =0;
+        player.playerStatsManager.m_fFrostArmor                 =0;
+        player.playerStatsManager.m_fCurseArmor                 =0;
+        player.playerStatsManager.CurrentPoise                  = 0;
 
-        poisonArmorResistance = 0;
-        totalEquipmentLoad = 0;
+        m_iArmorDamage_Reduction_Physical                    = 0;
+        m_iArmorDamage_Reduction_VSStrike                    = 0;
+        m_iArmorDamage_Reduction_VSSlash                    = 0;
+        m_iArmorDamage_Reduction_Thrust                    = 0;
+        m_iArmorDamage_Reduction_Magic                    = 0;
+        m_iArmorDamage_Reduction_Fire                    = 0;
+        m_iArmorDamage_Reduction_Lightning                    = 0;
+        m_iArmorDamage_Reduction_Dark                    = 0;
+        m_iArmorResistance_Bleeding                    = 0;
+        m_iArmorResistance_Posion                    = 0;
+        m_iArmorResistance_Frost                    = 0;
+        m_iArmorResistance_Curse                    = 0;
+        m_iArmorResistance_Poise                    = 0;
+
+        m_ftotalEquipmentLoad = 0;
 
         EquipHeadEquipmentAbilityValue();
         EquipChestEquipmentAbilityValue();
         EquipHandEquipmentAbilityValue();
         EquipLegEquipmentAbilityValue();
 
-        player.playerStatsManager.m_iPoisonResistance = poisonArmorResistance;
-        player.playerStatsManager.CaculateAndSetCurrentEquipLoad(totalEquipmentLoad);
+        player.playerStatsManager.m_fPhysicalDamageAbsorption   = m_iArmorDamage_Reduction_Physical  ;
+        player.playerStatsManager.m_fVSStrikeDamageAbsorption   = m_iArmorDamage_Reduction_VSStrike  ;
+        player.playerStatsManager.m_fVSSlashDamageAbsorption    = m_iArmorDamage_Reduction_VSSlash   ;
+        player.playerStatsManager.m_fVSThrustDamageAbsorption   = m_iArmorDamage_Reduction_Thrust    ;
+        player.playerStatsManager.m_fMagicDamageAbsorption      = m_iArmorDamage_Reduction_Magic     ;
+        player.playerStatsManager.m_fFireDamageAbsorption       = m_iArmorDamage_Reduction_Fire      ;
+        player.playerStatsManager.m_fLightningDamageAbsorption  = m_iArmorDamage_Reduction_Lightning ;
+        player.playerStatsManager.m_fDarkDamageAbsorption       = m_iArmorDamage_Reduction_Dark      ;
+        player.playerStatsManager.m_fBleedArmor  =                m_iArmorResistance_Bleeding        ;
+        player.playerStatsManager.m_iPoisoArmore =                m_iArmorResistance_Posion          ;
+        player.playerStatsManager.m_fFrostArmor  =                m_iArmorResistance_Frost           ;
+        player.playerStatsManager.m_fCurseArmor =                 m_iArmorResistance_Curse;
+        player.playerStatsManager.CurrentPoise =                  m_iArmorResistance_Poise;
+
+        player.playerStatsManager.CaculateAndSetCurrentEquipLoad(m_ftotalEquipmentLoad);
     }
 
     private void EquipHeadEquipmentAbilityValue()
     {
         if (m_HelmetEquipment != null)
         {
-            // 아이템 종류를 보고 넣어야 지.
-            player.playerStatsManager.m_fPhysicalDamageAbsorption += m_HelmetEquipment.m_fPhysicalDamageAbsorption;
-            poisonArmorResistance += m_HelmetEquipment.m_fPoisonResistance;
-            totalEquipmentLoad += m_HelmetEquipment.m_fWeight;
+            m_iArmorDamage_Reduction_Physical  = m_HelmetEquipment.m_fPhysicalDamageAbsorption  ;
+            m_iArmorDamage_Reduction_VSStrike  = m_HelmetEquipment.m_fVSStrikeDamageAbsorption  ;
+            m_iArmorDamage_Reduction_VSSlash   = m_HelmetEquipment.m_fVSSlashDamageAbsorption   ;
+            m_iArmorDamage_Reduction_Thrust    = m_HelmetEquipment.m_fVSThrustDamageAbsorption  ;
+            m_iArmorDamage_Reduction_Magic     = m_HelmetEquipment.m_fMagicDamageAbsorption     ;
+            m_iArmorDamage_Reduction_Fire      = m_HelmetEquipment.m_fFireDamageAbsorption      ;
+            m_iArmorDamage_Reduction_Lightning = m_HelmetEquipment.m_fLightningDamageAbsorption ;
+            m_iArmorDamage_Reduction_Dark      = m_HelmetEquipment.m_fDarkDamageAbsorption;
+            m_iArmorResistance_Bleeding        = m_HelmetEquipment.m_fBleedResistance  ;
+            m_iArmorResistance_Posion          = m_HelmetEquipment.m_fPoisonResistance ;
+            m_iArmorResistance_Frost           = m_HelmetEquipment.m_fFrostResistance  ;
+            m_iArmorResistance_Curse          = m_HelmetEquipment.m_fCurseResistance  ;
+            m_iArmorResistance_Poise = m_HelmetEquipment.m_fPoiseResistance;
+            m_ftotalEquipmentLoad = m_HelmetEquipment.m_fWeight;
         }
     }
 
@@ -121,9 +187,20 @@ public class PlayerEquipmentManager : CharacterEquipmentManager
     {
         if (m_TorsoEquipment != null)
         {
-            player.playerStatsManager.m_fPhysicalDamageAbsorption += m_TorsoEquipment.m_fPhysicalDamageAbsorption;
-            poisonArmorResistance += m_TorsoEquipment.m_fPoisonResistance;
-            totalEquipmentLoad += m_TorsoEquipment.m_fWeight;
+            m_iArmorDamage_Reduction_Physical = m_TorsoEquipment.m_fPhysicalDamageAbsorption;
+            m_iArmorDamage_Reduction_VSStrike = m_TorsoEquipment.m_fVSStrikeDamageAbsorption;
+            m_iArmorDamage_Reduction_VSSlash = m_TorsoEquipment.m_fVSSlashDamageAbsorption;
+            m_iArmorDamage_Reduction_Thrust = m_TorsoEquipment.m_fVSThrustDamageAbsorption;
+            m_iArmorDamage_Reduction_Magic = m_TorsoEquipment.m_fMagicDamageAbsorption;
+            m_iArmorDamage_Reduction_Fire = m_TorsoEquipment.m_fFireDamageAbsorption;
+            m_iArmorDamage_Reduction_Lightning = m_TorsoEquipment.m_fLightningDamageAbsorption;
+            m_iArmorDamage_Reduction_Dark = m_TorsoEquipment.m_fDarkDamageAbsorption;
+            m_iArmorResistance_Bleeding = m_TorsoEquipment.m_fBleedResistance;
+            m_iArmorResistance_Posion = m_TorsoEquipment.m_fPoisonResistance;
+            m_iArmorResistance_Frost = m_TorsoEquipment.m_fFrostResistance;
+            m_iArmorResistance_Curse = m_TorsoEquipment.m_fCurseResistance;
+            m_iArmorResistance_Poise = m_TorsoEquipment.m_fPoiseResistance;
+            m_ftotalEquipmentLoad = m_TorsoEquipment.m_fWeight;
         }
     }
 
@@ -131,9 +208,20 @@ public class PlayerEquipmentManager : CharacterEquipmentManager
     {
         if (m_HandEquipment != null)
         {
-            player.playerStatsManager.m_fPhysicalDamageAbsorption += m_HandEquipment.m_fPhysicalDamageAbsorption;
-            poisonArmorResistance += m_HandEquipment.m_fPoisonResistance;
-            totalEquipmentLoad += m_HandEquipment.m_fWeight;
+            m_iArmorDamage_Reduction_Physical = m_HandEquipment.m_fPhysicalDamageAbsorption;
+            m_iArmorDamage_Reduction_VSStrike = m_HandEquipment.m_fVSStrikeDamageAbsorption;
+            m_iArmorDamage_Reduction_VSSlash = m_HandEquipment.m_fVSSlashDamageAbsorption;
+            m_iArmorDamage_Reduction_Thrust = m_HandEquipment.m_fVSThrustDamageAbsorption;
+            m_iArmorDamage_Reduction_Magic = m_HandEquipment.m_fMagicDamageAbsorption;
+            m_iArmorDamage_Reduction_Fire = m_HandEquipment.m_fFireDamageAbsorption;
+            m_iArmorDamage_Reduction_Lightning = m_HandEquipment.m_fLightningDamageAbsorption;
+            m_iArmorDamage_Reduction_Dark = m_HandEquipment.m_fDarkDamageAbsorption;
+            m_iArmorResistance_Bleeding = m_HandEquipment.m_fBleedResistance;
+            m_iArmorResistance_Posion = m_HandEquipment.m_fPoisonResistance;
+            m_iArmorResistance_Frost = m_HandEquipment.m_fFrostResistance;
+            m_iArmorResistance_Curse = m_HandEquipment.m_fCurseResistance;
+            m_iArmorResistance_Poise = m_HandEquipment.m_fPoiseResistance;
+            m_ftotalEquipmentLoad = m_HandEquipment.m_fWeight;
         }
     }
 
@@ -141,9 +229,20 @@ public class PlayerEquipmentManager : CharacterEquipmentManager
     {
         if (m_LegEquipment != null)
         {
-            player.playerStatsManager.m_fPhysicalDamageAbsorption += m_LegEquipment.m_fPhysicalDamageAbsorption;
-            poisonArmorResistance += m_LegEquipment.m_fPoisonResistance;
-            totalEquipmentLoad += m_LegEquipment.m_fWeight;
+            m_iArmorDamage_Reduction_Physical = m_LegEquipment.m_fPhysicalDamageAbsorption;
+            m_iArmorDamage_Reduction_VSStrike = m_LegEquipment.m_fVSStrikeDamageAbsorption;
+            m_iArmorDamage_Reduction_VSSlash = m_LegEquipment.m_fVSSlashDamageAbsorption;
+            m_iArmorDamage_Reduction_Thrust = m_LegEquipment.m_fVSThrustDamageAbsorption;
+            m_iArmorDamage_Reduction_Magic = m_LegEquipment.m_fMagicDamageAbsorption;
+            m_iArmorDamage_Reduction_Fire = m_LegEquipment.m_fFireDamageAbsorption;
+            m_iArmorDamage_Reduction_Lightning = m_LegEquipment.m_fLightningDamageAbsorption;
+            m_iArmorDamage_Reduction_Dark = m_LegEquipment.m_fDarkDamageAbsorption;
+            m_iArmorResistance_Bleeding = m_LegEquipment.m_fBleedResistance;
+            m_iArmorResistance_Posion = m_LegEquipment.m_fPoisonResistance;
+            m_iArmorResistance_Frost = m_LegEquipment.m_fFrostResistance;
+            m_iArmorResistance_Curse = m_LegEquipment.m_fCurseResistance;
+            m_iArmorResistance_Poise = m_LegEquipment.m_fPoiseResistance;
+            m_ftotalEquipmentLoad = m_LegEquipment.m_fWeight;
         }
     }
     #endregion
@@ -568,9 +667,10 @@ public class PlayerEquipmentManager : CharacterEquipmentManager
         // Spell Item
 
         // HUD - Quick Slot Update
-        player.m_GameSceneUI.quickSlotsUI.RefreshUI();
+        if(Managers.GameUI.m_GameSceneUI != null)
+             player.m_GameSceneUI.quickSlotsUI.RefreshUI();
 
-        if(Managers.GameUI.m_EquipmentUI != null)
+        if (Managers.GameUI.m_EquipmentUI != null)
             Managers.GameUI.m_EquipmentUI.m_CurrentEquipmentsUI.RefreshUI();
     }
 
@@ -842,5 +942,10 @@ public class PlayerEquipmentManager : CharacterEquipmentManager
 
 
         Refresh();
+    }
+
+    public void CurrentEquipmentClear()
+    {
+
     }
 }

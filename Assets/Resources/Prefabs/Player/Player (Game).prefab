@@ -38,15 +38,15 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 347833055415664871}
-  m_LocalRotation: {x: 0, y: -0.7071068, z: 0, w: 0.7071068}
-  m_LocalPosition: {x: 33.78, y: 5.015, z: -14.021}
+  m_LocalRotation: {x: 0, y: 0.7190911, z: 0, w: 0.6949158}
+  m_LocalPosition: {x: -21.093746, y: 5, z: -23.651674}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 3775640246154021718}
   m_Father: {fileID: 0}
   m_RootOrder: 0
-  m_LocalEulerAnglesHint: {x: 0, y: -90, z: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 91.959, z: 0}
 --- !u!114 &7888674121781100882
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -149,7 +149,6 @@ MonoBehaviour:
   inputHandler: {fileID: 0}
   cameraHandler: {fileID: 0}
   m_GameSceneUI: {fileID: 0}
-  m_goModel: {fileID: 3779579137455606854}
   playerStatsManager: {fileID: 0}
   playerWeaponSlotManager: {fileID: 0}
   playerCombatManager: {fileID: 0}
@@ -254,12 +253,12 @@ MonoBehaviour:
   m_LegEquipment: {fileID: 11400000, guid: 7c4a0d900189cd748ba634ec09e9a8f5, type: 2}
   m_HandEquipment: {fileID: 11400000, guid: 345d66b9b13601740905041d4fcf5c76, type: 2}
   m_RingSlots:
-  - {fileID: 0}
+  - {fileID: 11400000, guid: 80e4c0cd2bd972d4dba3828826b36b35, type: 2}
   - {fileID: 0}
   - {fileID: 0}
   - {fileID: 0}
   m_ConsumableItemSlots:
-  - {fileID: 0}
+  - {fileID: 11400000, guid: c7963e088a06f74478bd8375ab885623, type: 2}
   - {fileID: 0}
   - {fileID: 0}
   - {fileID: 0}
@@ -339,13 +338,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_Items:
   - {fileID: 11400000, guid: 345d66b9b13601740905041d4fcf5c76, type: 2}
-  - {fileID: 11400000, guid: 941c776a633cbfb4ca0eabe7b8a67b81, type: 2}
   - {fileID: 11400000, guid: c3934700670d4784d9fd70c0da2708c6, type: 2}
-  - {fileID: 11400000, guid: 988aab8869179614eae84faa3284d2a2, type: 2}
   - {fileID: 11400000, guid: 7c4a0d900189cd748ba634ec09e9a8f5, type: 2}
-  - {fileID: 11400000, guid: f98e935e2857ce846ade7b13ea0eee98, type: 2}
   - {fileID: 11400000, guid: 0748845b2b5a3734b9e7a81badaf57cc, type: 2}
-  - {fileID: 11400000, guid: 2cf022a44c0c75c4d81f4804639beeef, type: 2}
   - {fileID: 11400000, guid: 80e4c0cd2bd972d4dba3828826b36b35, type: 2}
   - {fileID: 11400000, guid: c7963e088a06f74478bd8375ab885623, type: 2}
   - {fileID: 11400000, guid: 1614219e8d659ea4ca5ab8011ad5a67b, type: 2}
@@ -388,6 +383,7 @@ MonoBehaviour:
   rotationSpeed: 10
   fallingSpeed: 70
   rollStaminaCost: 15
+  m_isCanMove: 1
 --- !u!114 &3780201453589398865
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -525,25 +521,10 @@ MonoBehaviour:
   currentSoulCount: 8500
   maxHealth: 0
   currentHealth: 0
-  physicalDamageAbsorptionHead: 0
-  physicalDamageAbsorptionBody: 0
-  physicalDamageAbsorptionLegs: 0
-  physicalDamageAbsorptionHands: 0
-  fireDamageAbsorptionHead: 0
-  fireDamageAbsorptionBody: 0
-  fireDamageAbsorptionLegs: 0
-  fireDamageAbsorptionHands: 0
   blockingPhysicalDamageAbsorption: 0
   blockingFireDamageAbsorption: 0
   blockingStabilityRating: 0
-  m_fMagicDefense: 0
-  m_fLightningDefense: 0
-  m_fDarkDefense: 0
-  poisonResistance: 0
-  m_fBleedResistance: 0
-  m_fFrostResistance: 0
-  m_fCurseResistance: 0
-  AttunementSlots: 0
+  m_iAttunementSlots: 0
   totalPoiseDefence: 0
   offensivePoiseBonus: 0
   armorPoiseBonus: 0
@@ -556,10 +537,34 @@ MonoBehaviour:
   isPoisoned: 0
   poisonBuildup: 0
   poisonAmount: 100
+  m_iPhysicalDefense: 0
+  m_iVSStrikeDefense: 0
+  m_iVSSlashDefense: 0
+  m_iVSThrustDefense: 0
+  m_iMagicDefense: 0
+  m_iFireDefense: 0
+  m_iLightningDefense: 0
+  m_iDarkDefense: 0
+  m_fPhysicalDamageAbsorption: 0
+  m_fVSStrikeDamageAbsorption: 0
+  m_fVSSlashDamageAbsorption: 0
+  m_fVSThrustDamageAbsorption: 0
+  m_fMagicDamageAbsorption: 0
+  m_fFireDamageAbsorption: 0
+  m_fLightningDamageAbsorption: 0
+  m_fDarkDamageAbsorption: 0
+  m_iBleedResistance: 0
+  m_iPoisonResistance: 0
+  m_iFrostResistance: 0
+  m_iCurseResistance: 0
+  m_fBleedArmor: 0
+  m_iPoisoArmore: 0
+  m_fFrostArmor: 0
+  m_fCurseArmor: 0
   playerLevel: 9
-  m_iVigorLevel: 1
-  m_iAttunementLevel: 1
-  m_iEnduranceLevel: 10
+  m_iVigorLevel: 17
+  m_iAttunementLevel: 11
+  m_iEnduranceLevel: 12
   m_iVitalityLevel: 0
   m_iStrengthLevel: 10
   m_iDexterityLevel: 10
@@ -570,10 +575,8 @@ MonoBehaviour:
   currentFocusPoints: 100
   maxStamina: 100
   currentStamina: 100
-  currentEquipLoad: 0
-  maxEquipLoad: 0
   encumbranceLevel: 0
-  poiseLevel: 10
+  CurrentPoise: 10
   m_iItemDiscovery: 10
   m_iRWeapon1: 0
   m_iRWeapon2: 0
@@ -581,7 +584,7 @@ MonoBehaviour:
   m_iLWeapon1: 0
   m_iLWeapon2: 0
   m_iLWeapon3: 0
-  staminaRegenerationAmount: 10
+  staminaRegenerationAmount: 20
   staminaRegenerationAmountWhilstBlocking: 0.1
   staminaRegenTimer: 0
   spritingTimer: 0

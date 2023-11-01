@@ -1,10 +1,7 @@
-Idx,Name,WeaponType,Physical,Damage Reduction
-아이디,이름,무기 타입,물리,피해 감소율 (%)
-1,Dagger,1,65,0
-2,Parrying Dagger,1,60,0
-3,Bandit's Knife,1,64,0
-4,Shortsword,2,99,0
-5,Broadsword,2,117,0
-6,Broken Straight Sword,2,70,0
-7,Uchigatana,5,95,0
-8,East-West Shield,25,65,100
+Idx,Name,Icon,Prefab_Path,Weapon_Type,Attack_Type,Skill,Cost_FP,Requirement_Strength,Requirement_Dexterity,Requirement_Intelligence,Requirement_Faith,Parameter_Bonus_Strength,Parameter_Bonus_Dexterity,Parameter_Bonus_Intelligence,Parameter_Bonus_Faith,Attack_Physical,Attack_Magic,Attack_Fire,Attack_Lightning,Attack_Dark,Attack_Critical,Attack_Spell_Buff,Attack_Range,Damage_Reduction_Physical,Damage_Reduction_Magic,Damage_Reduction_Fire,Damage_Reduction_Lightning,Damage_Reduction_Dark,Auxiliary_Effects_Bleeding,Auxiliary_Effects_Posion,Auxiliary_Effects_Frost,Auxiliary_Effects_Curse,Durability,Weight,Stability
+아이디,이름,아이콘,프리팹 경로,무기 타입,공격 타입,스킬,소모 FP,필요 능력치_힘,필요 능력치 손재주,필요 능력치 _ 지능,필요 능력치 신앙,능력 보정 - 힘,능력 보정 - 손재주,능력 보정 - 지능,능력 보정 - 신앙,공격력 - 물리,공격력 - 마법,공격력 - 불,공격력 - 번개,공격력 - 어둠,공격력 - 크리티컬,스펠 전용 버프,원거리 공격 범위,데미지 경감 - 물리,데미지 경감 - 마법,데미지 경감 - 불,데미지 경감 - 번개,데미지 경감 - 어둠,특수효과 - 출혈,특수효과 - 독,특수효과 - 냉기,특수효과 - 저주,내구도,무게,안정성
+1,Broad sword,Art/Textures/UI/high res icons/01_weapons/Broad sword,Prefabs/Items/Weapons/MeleeWeapon/Broad Sword,2,Standard,Stance,17,10,10,0,0,4,3,0,0,117,0,0,0,0,100,0,0,45,30,25,25,30,0,0,0,0,30,3,30
+2,Phyromancy Flame,Art/Textures/UI/high res icons/01_weapons/Phyromancy Flame,Prefabs/Items/Weapons/Catalyst/Pyromancy Flame,21,Strike,Combustion,12,0,0,0,0,0,0,4,4,0,0,100,0,0,100,144,0,0,0,0,0,0,0,0,0,0,50,0,0
+3,Talisman,Art/Textures/UI/high res icons/01_weapons/Talisman,Prefabs/Items/Weapons/Catalyst/Talisman,22,Strike/Thrust,Unfaltering Prayer,8,4,0,0,10,2,0,0,5,52,0,0,0,0,100,100,0,25,15,10,10,15,0,0,0,0,50,0.5,10
+4,Short Bow,Art/Textures/UI/high res icons/01_weapons/Short Bow,Prefabs/Items/Weapons/RangeWeapon/Short Bow,17,None,Rapid Fire,4,7,12,0,0,2,3,0,0,77,0,0,0,0,100,0,42,0,0,0,0,0,0,0,0,0,40,2,0
+5,East-West Shield,Art/Textures/UI/high res icons/02_shields/East-West Shield,Prefabs/Items/Weapons/Shield/Shield,25,Strike,Parry,0,8,0,0,0,3,0,0,0,76,0,0,0,0,100,0,0,55,70,53,56,46,0,0,0,0,60,2,45

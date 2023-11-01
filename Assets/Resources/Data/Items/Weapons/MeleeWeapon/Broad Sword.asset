@@ -12,33 +12,37 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e9416480da7440c4e927cdef65207060, type: 3}
   m_Name: Broad Sword
   m_EditorClassIdentifier: 
-  itemIcon: {fileID: 1771037046, guid: 0e47a7c3cb8b6054fbeeef4741da20e7, type: 3}
-  itemName: Broad Sword
-  itemID: 10001
-  m_EItemType: 5
-  modelPrefab: {fileID: 7694254933542424885, guid: 9f7ab65cf543caa4a83ff3fb687a3f7e, type: 3}
+  m_ItemIcon: {fileID: 21300000, guid: f266a164663774a41a0969d1966b6208, type: 3}
+  m_ItemName: Broad sword
+  m_iItemID: 1
+  m_eItemType: 0
+  m_isEquiping: 0
+  m_EquipingType: 0
+  m_iEquipSlotNum: 0
+  m_bIsUnarmed: 0
+  m_sPrefabPath: Prefabs/Items/Weapons/MeleeWeapon/Broad Sword
   isUnarmed: 0
   weaponController: {fileID: 22100000, guid: 10f21dedf98d2174498bb58bc4091ab7, type: 2}
-  weaponType: 4
+  m_eWeaponType: 0
   AttackType: 'Standard '
   Skill: Stance
   FocusCost: 17
-  m_iRequirementStrength: 10
-  m_iRequirementDexterity: 10
-  m_iRequirementIntelligence: 0
-  m_iRequirementFaith: 0
-  m_iParameterBonusStrength: 4
-  m_iParameterBonusDexterity: 3
-  m_iParameterBonusIntelligence: 0
-  m_iParameterBonusFaith: 0
+  m_iAttributeRequirementStrength: 10
+  m_iAttributeRequirementDexterity: 10
+  m_iAttributeRequirementIntelligence: 0
+  m_iAttributeRequirementFaith: 0
+  m_iAttributeBonusStrength: 4
+  m_iAttributeBonusDexterity: 3
+  m_iAttributeBonusIntelligence: 0
+  m_iAttributeBonusFaith: 0
   m_iPhysicalDamage: 117
   m_iMagicDamage: 0
   m_iFireDamage: 0
   m_iLightningDamage: 0
   m_iDarkDamage: 0
   m_iCriticalDamage: 100
-  m_iSpellBuff: 0
-  m_iRange: 0
+  m_iMagicAdjustment: 0
+  m_iAttackRange: 0
   m_iPhysicalDamageReduction: 45
   m_iMagicDamageReduction: 30
   m_iFireDamageReduction: 25
@@ -59,7 +63,7 @@ MonoBehaviour:
   offensivePoiseBonus: 0
   physicalBlockingDamageAbsorption: 0
   fireBlockingDamageAbsorption: 0
-  baseStaminaCost: 25
+  baseStaminaCost: 10
   lightAttackStaminaMultiplier: 1
   heavyAttackStaminaMultiplier: 2
   oh_tap_RB_Action: {fileID: 11400000, guid: abe37ab07ff660740a9771befa258c1d, type: 2}
@@ -78,8 +82,10 @@ MonoBehaviour:
   th_hold_LB_Action: {fileID: 0}
   th_tap_LT_Action: {fileID: 0}
   th_hold_LT_Action: {fileID: 0}
+  canBeBeffued: 1
   weaponWhooshes:
   - {fileID: 8300000, guid: 0b867adebbe5e0443976247c82bc787f, type: 3}
   - {fileID: 8300000, guid: 5c8dc9a8ce349654797b0cfb5581fb09, type: 3}
   blockingNoises: []
-  canBeBeffued: 1
+  m_isLeftHandEquiping: 0
+  m_SecondE_EquipmentSlotsPartType: 0

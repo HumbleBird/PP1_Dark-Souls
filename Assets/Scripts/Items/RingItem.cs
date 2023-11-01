@@ -5,12 +5,13 @@ using UnityEngine;
 [CreateAssetMenu(menuName = "Items/Ring")]
 public class RingItem : Item
 {
-    RingItem()
-    {
-        m_EItemType = Define.E_ItemType.Ring;
-    }
+    //RingItem()
+    //{
+    //    m_eItemType = Define.E_ItemType.Ring;
+    //    effect = Managers.Resource.Load<StaticCharacterEffect>("Data/Character Effects/Modify Physical Damage");
+    //}
 
-    public int m_iWeight;
+    public float m_iWeight;
 
     [Header("Item Description")]
     public string m_sItemDescription;

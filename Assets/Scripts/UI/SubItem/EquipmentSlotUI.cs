@@ -69,10 +69,10 @@ public class EquipmentSlotUI : ItemSlotUI
         switch (m_EquipmentSlotType)
         {
             case E_EquipmentSlotsPartType.Right_Hand_Weapon:
-                if (m_EquipmentUI.m_TempPrivateItem.m_EItemType == E_ItemType.MeleeWeapon ||
-                    m_EquipmentUI.m_TempPrivateItem.m_EItemType == E_ItemType.RangeWeapon ||
-                    m_EquipmentUI.m_TempPrivateItem.m_EItemType == E_ItemType.Catalyst ||
-                    m_EquipmentUI.m_TempPrivateItem.m_EItemType == E_ItemType.Shield)
+                if (m_EquipmentUI.m_TempPrivateItem.m_eItemType == E_ItemType.MeleeWeapon ||
+                    m_EquipmentUI.m_TempPrivateItem.m_eItemType == E_ItemType.RangeWeapon ||
+                    m_EquipmentUI.m_TempPrivateItem.m_eItemType == E_ItemType.Catalyst ||
+                    m_EquipmentUI.m_TempPrivateItem.m_eItemType == E_ItemType.Shield)
                 {
                     player.playerEquipmentManager.m_RightWeaponsSlots[m_iSlotNum] = (WeaponItem)m_EquipmentUI.m_TempPrivateItem;
                     isSuccess = true;
@@ -80,17 +80,17 @@ public class EquipmentSlotUI : ItemSlotUI
                 break;
 
             case E_EquipmentSlotsPartType.Left_Hand_Weapon:
-                if(m_EquipmentUI.m_TempPrivateItem.m_EItemType == E_ItemType.MeleeWeapon ||
-                    m_EquipmentUI.m_TempPrivateItem.m_EItemType == E_ItemType.RangeWeapon ||
-                    m_EquipmentUI.m_TempPrivateItem.m_EItemType == E_ItemType.Catalyst ||
-                    m_EquipmentUI.m_TempPrivateItem.m_EItemType == E_ItemType.Shield)
+                if(m_EquipmentUI.m_TempPrivateItem.m_eItemType == E_ItemType.MeleeWeapon ||
+                    m_EquipmentUI.m_TempPrivateItem.m_eItemType == E_ItemType.RangeWeapon ||
+                    m_EquipmentUI.m_TempPrivateItem.m_eItemType == E_ItemType.Catalyst ||
+                    m_EquipmentUI.m_TempPrivateItem.m_eItemType == E_ItemType.Shield)
                 {
                     player.playerEquipmentManager.m_LeftWeaponsSlots[m_iSlotNum] = (WeaponItem)m_EquipmentUI.m_TempPrivateItem;
                     isSuccess = true;
                 }
                 break;
             case E_EquipmentSlotsPartType.Arrow:
-                if (m_EquipmentUI.m_TempPrivateItem.m_EItemType == E_ItemType.Ammo &&
+                if (m_EquipmentUI.m_TempPrivateItem.m_eItemType == E_ItemType.Ammo &&
                     (((AmmoItem)m_EquipmentUI.m_TempPrivateItem).ammoType == AmmoType.Arrow))
                 {
                     player.playerEquipmentManager.m_ArrowAmmoSlots[m_iSlotNum] = (AmmoItem)m_EquipmentUI.m_TempPrivateItem;
@@ -98,7 +98,7 @@ public class EquipmentSlotUI : ItemSlotUI
                 }
                 break;
             case E_EquipmentSlotsPartType.Bolt:
-                if (m_EquipmentUI.m_TempPrivateItem.m_EItemType == E_ItemType.Ammo &&
+                if (m_EquipmentUI.m_TempPrivateItem.m_eItemType == E_ItemType.Ammo &&
                     (((AmmoItem)m_EquipmentUI.m_TempPrivateItem).ammoType == AmmoType.Bolt))
                 {
                     player.playerEquipmentManager.m_ArrowAmmoSlots[m_iSlotNum] = (AmmoItem)m_EquipmentUI.m_TempPrivateItem;
@@ -106,49 +106,49 @@ public class EquipmentSlotUI : ItemSlotUI
                 }
                 break;
             case E_EquipmentSlotsPartType.Helmt:
-                if (m_EquipmentUI.m_TempPrivateItem.m_EItemType == E_ItemType.Helmet)
+                if (m_EquipmentUI.m_TempPrivateItem.m_eItemType == E_ItemType.Helmet)
                 {
                     player.playerEquipmentManager.m_HelmetEquipment = (HelmEquipmentItem)m_EquipmentUI.m_TempPrivateItem;
                     isSuccess = true;
                 }
                 break;
             case E_EquipmentSlotsPartType.Chest_Armor:
-                if (m_EquipmentUI.m_TempPrivateItem.m_EItemType == E_ItemType.ChestArmor)
+                if (m_EquipmentUI.m_TempPrivateItem.m_eItemType == E_ItemType.ChestArmor)
                 {
                     player.playerEquipmentManager.m_TorsoEquipment = (TorsoEquipmentItem)m_EquipmentUI.m_TempPrivateItem;
                     isSuccess = true;
                 }
                 break;
             case E_EquipmentSlotsPartType.Gantlets:
-                if (m_EquipmentUI.m_TempPrivateItem.m_EItemType == E_ItemType.Gauntlets)
+                if (m_EquipmentUI.m_TempPrivateItem.m_eItemType == E_ItemType.Gauntlets)
                 {
                     player.playerEquipmentManager.m_HandEquipment = (GantletsEquipmentItem)m_EquipmentUI.m_TempPrivateItem;
                     isSuccess = true;
                 }
                 break;
             case E_EquipmentSlotsPartType.Leggings:
-                if (m_EquipmentUI.m_TempPrivateItem.m_EItemType == E_ItemType.Leggings)
+                if (m_EquipmentUI.m_TempPrivateItem.m_eItemType == E_ItemType.Leggings)
                 {
                     player.playerEquipmentManager.m_LegEquipment = (LeggingsEquipmentItem)m_EquipmentUI.m_TempPrivateItem;
                     isSuccess = true;
                 }
                 break;
             case E_EquipmentSlotsPartType.Ring:
-                if (m_EquipmentUI.m_TempPrivateItem.m_EItemType == E_ItemType.Ring)
+                if (m_EquipmentUI.m_TempPrivateItem.m_eItemType == E_ItemType.Ring)
                 {
                     player.playerEquipmentManager.m_RingSlots[m_iSlotNum] = (RingItem)m_EquipmentUI.m_TempPrivateItem;
                     isSuccess = true;
                 }
                 break;
             case E_EquipmentSlotsPartType.Consumable:
-                if (m_EquipmentUI.m_TempPrivateItem.m_EItemType == E_ItemType.Tool)
+                if (m_EquipmentUI.m_TempPrivateItem.m_eItemType == E_ItemType.Tool)
                 {
                     player.playerEquipmentManager.m_ConsumableItemSlots[m_iSlotNum] = (ToolItem)m_EquipmentUI.m_TempPrivateItem;
                     isSuccess = true;
                 }
                 break;
             case E_EquipmentSlotsPartType.Pledge:
-                if (m_EquipmentUI.m_TempPrivateItem.m_EItemType == E_ItemType.Pledge)
+                if (m_EquipmentUI.m_TempPrivateItem.m_eItemType == E_ItemType.Pledge)
                 {
                     player.playerEquipmentManager.m_CurrentPledge = (PledgeItem)m_EquipmentUI.m_TempPrivateItem;
                     isSuccess = true;

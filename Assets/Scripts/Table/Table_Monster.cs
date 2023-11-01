@@ -8,9 +8,8 @@ public class Table_Monster : Table_Base
     {
         public int    m_nID;
         public string m_sName;
-        public int m_iClass;
         public string m_sPrefabPath;
-        public int    m_iAI;
+        public int    m_iStatID;
     }
 
     public Dictionary<int, Info> m_Dictionary = new Dictionary<int, Info>();
@@ -57,9 +56,8 @@ public class Table_Monster : Table_Base
 
         _reader.get(_nRow, ref _info.m_nID);
         _reader.get(_nRow, ref _info.m_sName);
-        _reader.get(_nRow, ref _info.m_iClass);
         _reader.get(_nRow, ref _info.m_sPrefabPath);
-        _reader.get(_nRow, ref _info.m_iAI);
+        _reader.get(_nRow, ref _info.m_iStatID);
 
         return true;                 
     }

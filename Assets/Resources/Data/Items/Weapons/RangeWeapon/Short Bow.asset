@@ -12,14 +12,18 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c92353b4be4650b4cb2754d3c0795952, type: 3}
   m_Name: Short Bow
   m_EditorClassIdentifier: 
-  itemIcon: {fileID: 21300000, guid: 55b668f45eace2245bd9b55991317a72, type: 3}
-  itemName: Short Bow
-  itemID: 0
-  m_EItemType: 6
-  modelPrefab: {fileID: 7694254933542424885, guid: e7468f845fa35214b808b838155390e0, type: 3}
+  m_ItemIcon: {fileID: 0}
+  m_ItemName: 
+  m_iItemID: 0
+  m_eItemType: 6
+  m_isEquiping: 0
+  m_EquipingType: 0
+  m_iEquipSlotNum: 0
+  m_bIsUnarmed: 0
+  m_sPrefabPath: Prefabs/Items/Weapons/RangeWeapon/Short Bow
   isUnarmed: 0
   weaponController: {fileID: 22100000, guid: 22d5de4468c37da489e7bcf2fba8efb0, type: 2}
-  weaponType: 7
+  m_eWeaponType: 0
   AttackType: 
   Skill: 
   FocusCost: 0
@@ -37,8 +41,8 @@ MonoBehaviour:
   m_iLightningDamage: 0
   m_iDarkDamage: 0
   m_iCriticalDamage: 0
-  m_iSpellBuff: 0
-  m_iRange: 0
+  m_iMagicAdjustment: 0
+  m_iAttackRange: 50
   m_iPhysicalDamageReduction: 0
   m_iMagicDamageReduction: 0
   m_iFireDamageReduction: 0
@@ -78,6 +82,8 @@ MonoBehaviour:
   th_hold_LB_Action: {fileID: 11400000, guid: 0f25974ff900cc64096def5c7366e927, type: 2}
   th_tap_LT_Action: {fileID: 0}
   th_hold_LT_Action: {fileID: 0}
+  canBeBeffued: 1
   weaponWhooshes: []
   blockingNoises: []
-  m_iAttackRange: 50
+  m_isLeftHandEquiping: 0
+  m_SecondE_EquipmentSlotsPartType: 0

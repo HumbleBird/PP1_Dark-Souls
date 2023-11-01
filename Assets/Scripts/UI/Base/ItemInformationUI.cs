@@ -44,9 +44,9 @@ public class ItemInformationUI : UI_Base
 
         m_ItemBasePlateIcon.enabled = true;
         m_ItemIcon.enabled = true;
-        m_ItemIcon.sprite = item.itemIcon;
+        m_ItemIcon.sprite = item.m_ItemIcon;
 
-        switch (item.m_EItemType)
+        switch (item.m_eItemType)
         {
             case Define.E_ItemType.Tool:
                 m_ItemInfo_Tool.gameObject.SetActive(true);

@@ -34,7 +34,7 @@ public class ItemInfo_Ring : ItemInfo_Base
 
     void ShowToolItem(RingItem item)
     {
-        GetText((int)Texts.Ring_ItemNameText).text = item.itemName;
+        GetText((int)Texts.Ring_ItemNameText).text = item.m_ItemName;
         GetText((int)Texts.Ring_EquipLoadValueText).text = item.m_iWeight.ToString();
 
         GetText((int)Texts.ItemEffectDescriptionText).text = item.m_sItemDescription.ToString();

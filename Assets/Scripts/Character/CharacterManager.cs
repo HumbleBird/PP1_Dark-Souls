@@ -63,9 +63,11 @@ public class CharacterManager : MonoBehaviour
     // backstab(뒤잡기) or riposte (패링 데미지?)
     public int pendingCriticalDamage;
 
+    public int m_CharacterID = 0;
+
     protected virtual void Awake()
     {
-        characterController = GetComponent<CharacterController>();
+        characterController = gameObject.GetOrAddComponent<CharacterController>();
         animator = GetComponent<Animator>();
         characterAnimatorManager = GetComponent<CharacterAnimatorManager>();
         characterWeaponSlotManager = GetComponent<CharacterWeaponSlotManager>();

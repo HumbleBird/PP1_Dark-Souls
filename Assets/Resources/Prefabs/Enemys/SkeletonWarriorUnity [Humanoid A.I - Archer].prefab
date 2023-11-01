@@ -2411,6 +2411,7 @@ GameObject:
   - component: {fileID: 588308184874017117}
   - component: {fileID: 3487662552594357294}
   - component: {fileID: 3487662552594357281}
+  - component: {fileID: 7270878655530224026}
   m_Layer: 9
   m_Name: SkeletonWarriorUnity [Humanoid A.I - Archer]
   m_TagString: Character
@@ -2470,30 +2471,15 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5fac9d561d0f1ba4cb0371be659e376f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  characterName: Nameless
+  m_sCharacterName: Nameless
   teamIDNumber: 0
   currentSoulCount: 0
   maxHealth: 0
   currentHealth: 0
-  physicalDamageAbsorptionHead: 0
-  physicalDamageAbsorptionBody: 0
-  physicalDamageAbsorptionLegs: 0
-  physicalDamageAbsorptionHands: 0
-  fireDamageAbsorptionHead: 0
-  fireDamageAbsorptionBody: 0
-  fireDamageAbsorptionLegs: 0
-  fireDamageAbsorptionHands: 0
   blockingPhysicalDamageAbsorption: 0
   blockingFireDamageAbsorption: 0
   blockingStabilityRating: 0
-  m_fMagicDefense: 0
-  m_fLightningDefense: 0
-  m_fDarkDefense: 0
-  poisonResistance: 0
-  m_fBleedResistance: 0
-  m_fFrostResistance: 0
-  m_fCurseResistance: 0
-  AttunementSlots: 0
+  m_iAttunementSlots: 0
   totalPoiseDefence: 0
   offensivePoiseBonus: 0
   armorPoiseBonus: 0
@@ -2506,6 +2492,39 @@ MonoBehaviour:
   isPoisoned: 0
   poisonBuildup: 0
   poisonAmount: 100
+  m_fPhysicalDamage: 0
+  m_fMagicDamage: 0
+  m_fFireDamage: 0
+  m_fLightningDamage: 0
+  m_fDarkDamage: 0
+  m_fAuxiliaryEffectsBleedDamage: 0
+  m_fAuxiliaryEffectsPoisonDamage: 0
+  m_fAuxiliaryEffectsFrostDamage: 0
+  m_fAuxiliaryEffectsCurseDamage: 0
+  m_iPhysicalDefense: 0
+  m_iVSStrikeDefense: 0
+  m_iVSSlashDefense: 0
+  m_iVSThrustDefense: 0
+  m_iMagicDefense: 0
+  m_iFireDefense: 0
+  m_iLightningDefense: 0
+  m_iDarkDefense: 0
+  m_fPhysicalDamageAbsorption: 0
+  m_fVSStrikeDamageAbsorption: 0
+  m_fVSSlashDamageAbsorption: 0
+  m_fVSThrustDamageAbsorption: 0
+  m_fMagicDamageAbsorption: 0
+  m_fFireDamageAbsorption: 0
+  m_fLightningDamageAbsorption: 0
+  m_fDarkDamageAbsorption: 0
+  m_iBleedResistance: 0
+  m_iPoisonResistance: 0
+  m_iFrostResistance: 0
+  m_iCurseResistance: 0
+  m_fBleedArmor: 0
+  m_iPoisoArmore: 0
+  m_fFrostArmor: 0
+  m_fCurseArmor: 0
   soulsAwardedOnDeath: 50
   aiCharacterHealthBar: {fileID: 0}
   isBoss: 0
@@ -2560,6 +2579,7 @@ MonoBehaviour:
   isGrounded: 1
   isFiringSpell: 0
   pendingCriticalDamage: 0
+  m_CharacterID: 2
   aiCharacterBossManager: {fileID: 0}
   aiCharacterLocomotionManager: {fileID: 0}
   aiCharacterAnimationManager: {fileID: 0}
@@ -2579,11 +2599,12 @@ MonoBehaviour:
   maximumDetectionAngle: 50
   currentRecoveryTime: 0
   stoppingDistance: 1.2
+  e_InitAICharacterState: 0
   allowAIToPerformBlock: 0
   blockLikelyHood: 0
   allowAIToPerformDodge: 0
   dodgeLikelyHood: 100
-  allowAIToPerformParry: 1
+  allowAIToPerformParry: 0
   ParryLikelyHood: 100
   allowAIToPerformCombos: 1
   isPhaseShifting: 0
@@ -2612,7 +2633,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8f810d13bec010c45a786e16e7b2eafe, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  unarmWeapon: {fileID: 11400000, guid: 950c54dd3d5db784f9220334c914a1db, type: 2}
+  unarmWeapon: {fileID: 11400000, guid: 05f178e33ececfd468fb3f3dec1b077d, type: 2}
   leftHandSlot: {fileID: 0}
   rightHandSlot: {fileID: 0}
   leftHandDamageCollider: {fileID: 0}
@@ -2902,7 +2923,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   currentItemBeingUsed: {fileID: 0}
   m_CurrentHandSpell: {fileID: 0}
-  m_CurrentHandRightWeapon: {fileID: 11400000, guid: af58329a590b58043bbd92298063ed42, type: 2}
+  m_CurrentHandRightWeapon: {fileID: 11400000, guid: ae9bfb5fc7a0cb24dab19f2e3295b285, type: 2}
   m_CurrentHandLeftWeapon: {fileID: 0}
   m_CurrentHandConsumable: {fileID: 0}
   m_CurrentHandAmmo: {fileID: 0}
@@ -2965,6 +2986,22 @@ MonoBehaviour:
   - {fileID: 8300000, guid: be235f8d4a2c1634a9ffad5a9ef0a7d5, type: 3}
   - {fileID: 8300000, guid: 8955b56d1a87945479ae70ef02ea3354, type: 3}
   - {fileID: 8300000, guid: 31affb79c7969ae4992dec318113263b, type: 3}
+  m_bCanStepL: 0
+  m_bCanStepR: 0
+--- !u!136 &7270878655530224026
+CapsuleCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3487662551812223566}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  m_Radius: 0.3
+  m_Height: 1.8
+  m_Direction: 1
+  m_Center: {x: 0, y: 0.97, z: 0}
 --- !u!1 &3487662551866894317
 GameObject:
   m_ObjectHideFlags: 0

@@ -5,6 +5,12 @@ using UnityEngine;
 [CreateAssetMenu(menuName ="Spells/Projectile Spell")]
 public class ProjectileSpell : SpellItem
 {
+    public ProjectileSpell()
+    {
+        spellWarmUpFX = Managers.Resource.Load<GameObject>("Art/Models/Items/Projectile/FireBall_WARM_UP");
+        spellCastFX = Managers.Resource.Load<GameObject>("Art/Models/Items/Projectile/FireBall_OBJECT");
+    }
+
     [Header("Projectile Damage")]
     public float baseDamage;
 

@@ -5,5 +5,4 @@ using UnityEngine;
 [CreateAssetMenu(menuName = "Items/Melee Weapon Item")]
 public class MeleeWeaponItem : WeaponItem
 {
-    public bool canBeBeffued = true;
 }

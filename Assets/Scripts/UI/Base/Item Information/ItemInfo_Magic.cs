@@ -40,11 +40,11 @@ public class ItemInfo_Magic : ItemInfo_Base
 
     void ShowReinforcedMaterialItemItem(SpellItem item)
     {
-        GetText((int)Texts.Magic_ItemNameText).text = item.itemName;
+        GetText((int)Texts.Magic_ItemNameText).text = item.m_ItemName;
 
         GetText((int)Texts.Magic_CurrentCountValueText).text = item.m_iCurrentCount.ToString() + "/ " + item.m_iMaxCount.ToString();
         GetText((int)Texts.Magic_SaveCountValueText).text = item.m_iCurrentCount.ToString();
-        GetText((int)Texts.Magic_FocusCostValueText).text = item.focusPointCost.ToString();
+        GetText((int)Texts.Magic_FocusCostValueText).text = item.m_iCostFP.ToString();
         GetText((int)Texts.Magic_MagicUseSlotValueText).text = item.m_iMagicUseSlot.ToString();
 
         GetText((int)Texts.ItemEffectDescriptionText).text = item.m_sItemDescription.ToString();

@@ -15,11 +15,11 @@ public class ParryAction : ItemAction
 
         WeaponItem parryingWeapon = character.characterEquipmentManager.currentItemBeingUsed as WeaponItem;
 
-        if(parryingWeapon.weaponType == WeaponType.SmallShield)
+        if(parryingWeapon.m_eWeaponType == WeaponType.SmallShield)
         {
             character.characterAnimatorManager.PlayTargetAnimation("Parry_01", true);
         }
-        else if (parryingWeapon.weaponType == WeaponType.Shield)
+        else if (parryingWeapon.m_eWeaponType == WeaponType.Shield)
         {
             character.characterAnimatorManager.PlayTargetAnimation("Parry_01", true);
         }

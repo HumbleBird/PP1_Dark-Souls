@@ -7,8 +7,7 @@ public class CatalystWeaponItem : WeaponItem
 {
     CatalystWeaponItem()
     {
-        m_EItemType = Define.E_ItemType.Catalyst;
+        m_eItemType = Define.E_ItemType.Catalyst;
     }
 
-    public int m_iMagicAdjustment;
 }

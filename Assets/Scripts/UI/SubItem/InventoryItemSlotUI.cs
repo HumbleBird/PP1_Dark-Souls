@@ -37,7 +37,7 @@ public class InventoryItemSlotUI : ItemSlotUI
     // 장비창에서 아이템을 교체 혹은 장착하려고 함.
     void EquipmentItemChange()
     {
-        if (m_Item.m_EItemType == Define.E_ItemType.Magic)
+        if (m_Item.m_eItemType == Define.E_ItemType.Magic)
             return;
 
         Managers.Game.PlayAction(() =>
@@ -62,6 +62,6 @@ public class InventoryItemSlotUI : ItemSlotUI
         m_InventoryUI.ShowItemInfo(m_Item);
 
         m_ItemSlotSubUI.m_ItemSelectIcon.enabled = true;
-        m_InventoryUI.m_InventoryItemMainUI.m_iCurrentSelectItemSlotNum = m_iSlotNum;
+        Managers.Game.m_iInventoryCurrentSelectItemSlotNum = m_iSlotNum;
     }
 }

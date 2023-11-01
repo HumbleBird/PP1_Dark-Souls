@@ -1,12 +1,33 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using static Define;
 
 public class SpellItem : Item
 {
+    public SpellItem(int id)
+    {
+        Table_Item_Spell.Info data = Managers.Table.m_Item_Spell.Get(id);
+
+        if (data == null)
+            return;
+
+        m_iItemID = data.m_iID;
+        m_ItemName = data.m_sName;
+        m_ItemIcon = Managers.Resource.Load<Sprite>(data.m_sIconPath);
+        m_sItemDescription = data.m_sItem_Decription;
+        m_eSpellType = (E_SpellType)data.m_iSpell_Type;
+        m_iCostFP = data.m_iCost_FP;
+        m_iMagicUseSlot = data.m_iSlots;
+        m_iAttributeRequirementIntelligence = data.m_iRequirment_Intelligence;
+        m_iAttributeRequirementFaith = data.m_iRequirment_Faith;
+
+        m_eItemType = Define.E_ItemType.Magic;
+    }
+
     public SpellItem()
     {
-        m_EItemType = Define.E_ItemType.Magic;
+
     }
 
     [Header("Current Count")]
@@ -20,16 +41,14 @@ public class SpellItem : Item
     [Header("Spell Description")]
     public string m_sItemDescription;
 
-    public int m_iUseSlot;
-
     [Header("Requirement Ability")] // 필요 능력치 F = 1, E = 2, D = 3, C = 4, B = 5, A = 6
     public int m_iAttributeRequirementIntelligence;
     public int m_iAttributeRequirementFaith;
 
     [Header("Spell Cost")]
-    public int focusPointCost;
+    public int m_iCostFP;
 
-    [Header("Magic Use Slot")]
+    [Header("Cost Slots")]
     public int m_iMagicUseSlot;
 
     [Header("Game Models")]
@@ -39,11 +58,7 @@ public class SpellItem : Item
     public string spellAnimation;
 
     [Header("Spell Type")]
-    public bool isFaithSpell;
-    public bool isMagicSpell;
-    public bool isPyroSpell;
-
-
+    public E_SpellType m_eSpellType;
 
     public virtual void AttemptToCastSpell(CharacterManager character)
     {
@@ -57,7 +72,7 @@ public class SpellItem : Item
 
         if(player != null)
         {
-            player.playerStatsManager.DeductFocusPoints(focusPointCost);
+            player.playerStatsManager.DeductFocusPoints(m_iCostFP);
 
         }
     }

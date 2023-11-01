@@ -21,4 +21,8 @@ public class ClassGear
     public LeggingsEquipmentItem legEquipment;
     public GantletsEquipmentItem handEquipment;
 
+    public SpellItem m_SpellItem_1;
+    public SpellItem m_SpellItem_2;
+    public RingItem m_RingItem;
+    public ToolItem m_ToolItem1;
 }

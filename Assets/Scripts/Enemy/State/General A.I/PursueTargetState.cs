@@ -10,6 +10,11 @@ public class PursueTargetState : State
 {
     public CombatStanceState combatStanceState;
 
+    private void Awake()
+    {
+        combatStanceState = GetComponent<CombatStanceState>();
+    }
+
     public override State Tick(AICharacterManager enemy)
     {
 

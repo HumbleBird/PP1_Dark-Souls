@@ -5,9 +5,20 @@ using UnityEngine;
 [CreateAssetMenu(menuName = "Items/Eqipment/Leggings Armor")]
 public class LeggingsEquipmentItem : EquipmentItem
 {
-    LeggingsEquipmentItem()
+    public LeggingsEquipmentItem(int id) : base(id)
     {
-        m_EItemType = Define.E_ItemType.Leggings;
+        SetInfo(id);
+
+
+        if (id == 1004)
+        {
+            Hips_Attachment=0;
+            Knee_Attachement_Right=0;
+            Knee_Attachement_Left=0;
+            HipName=2;
+            LeftLeggingName=16;
+            RightLeggingName=16;
+        }
     }
 
     [Header("Item All Gender Parts Name")]

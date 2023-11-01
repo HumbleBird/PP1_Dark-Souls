@@ -5,9 +5,18 @@ using UnityEngine;
 [CreateAssetMenu(menuName = "Items/Eqipment/Torso Armor")]
 public class TorsoEquipmentItem : EquipmentItem
 {
-    TorsoEquipmentItem()
+    public TorsoEquipmentItem(int id) : base(id)
     {
-        m_EItemType = Define.E_ItemType.ChestArmor;
+        SetInfo(id);
+
+        if (id == 1002)
+        {
+            Back_Attachment = 0;
+            Shoulder_Attachment_Right = 5;
+            Shoulder_Attachment_Left = 5;
+            TorsoEquipmentItemName = 22;
+
+        }
     }
 
     [Header("Item All Gender Parts Name")]

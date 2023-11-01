@@ -76,7 +76,7 @@ public class StatusUI : UI_Popup
         PlayerManager player = Managers.Object.m_MyPlayer;
 
         // Left- Property
-        GetText((int)Texts.PlayerNameText).text = player.playerStatsManager.characterName;
+        GetText((int)Texts.PlayerNameText).text = player.playerStatsManager.m_sCharacterName;
 
         if (player.playerEquipmentManager.m_CurrentPledge != null)
         {
@@ -140,7 +140,7 @@ public class StatusUI : UI_Popup
         if (player.playerEquipmentManager.m_CurrentHandSpell != null)
         {
             GetImage((int)Images.CurrentSpellImage).enabled = true;
-            GetImage((int)Images.CurrentSpellImage).sprite = player.playerEquipmentManager.m_CurrentHandSpell.itemIcon;
+            GetImage((int)Images.CurrentSpellImage).sprite = player.playerEquipmentManager.m_CurrentHandSpell.m_ItemIcon;
         }
         else
         {

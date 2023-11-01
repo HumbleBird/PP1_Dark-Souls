@@ -31,11 +31,6 @@ public class InventoryItemMainUI : UI_Base
 
     public GameObject m_InventoryItemSlotsPanel;
 
-    public int m_iCurrentSelectItemSlotNum = 0;
-    public int m_iShowItemTapLeftNum = 0;
-    public int m_iShowItemTapRightNum = 4;
-    public int m_iCurrentSelectTapNum = 0;
-
     public override bool Init()
     {
         if (base.Init() == false)
@@ -53,14 +48,20 @@ public class InventoryItemMainUI : UI_Base
             m_UnSelectedItemTaps[i - 1].SetInit(i);
         }
 
-        m_iCurrentSelectItemSlotNum = 0;
+        Managers.Game.m_iInventoryCurrentSelectItemSlotNum = 0;
 
         GetObject((int)GameObjects.LBText).BindEvent(() => TapSlotMove(true)); ;
         GetObject((int)GameObjects.RBText).BindEvent(() => TapSlotMove(false)); ;
 
         SelectShowUnTaps();
 
+
         return true;
+    }
+
+    private void Start()
+    {
+        m_SelectUnSelectedItemTaps[Managers.Game.m_iInventoryCurrentSelectTapNum].SelectTap();
     }
 
     // 보여줄 5개의 탭을 설정
@@ -77,7 +78,7 @@ public class InventoryItemMainUI : UI_Base
         // 보여줄 5개 Tap 선정
         // 이미지 갱신
         int count = 0;
-        for (int i = m_iShowItemTapLeftNum; i <= m_iShowItemTapRightNum; i++)
+        for (int i = Managers.Game.m_iInventoryShowItemTapLeftNum; i <= Managers.Game.m_iInventoryShowItemTapRightNum; i++)
         {
             m_UnSelectedItemTaps[i].ShowTap(count);
 
@@ -103,47 +104,47 @@ public class InventoryItemMainUI : UI_Base
         if(isLeft)
         {
             // 현재 활성화 탭이 어느 위치에 있는가
-            if (m_iCurrentSelectTapNum == 0) // 이미 왼쪽 걸 클릭한 상태였다면
+            if (Managers.Game.m_iInventoryCurrentSelectTapNum == 0) // 이미 왼쪽 걸 클릭한 상태였다면
             {
-                if(m_iShowItemTapLeftNum == 0) // 가장 왼쪽의 Tool Tap을 이미 선택한 상태였다면 가장 오른쪽으로 이동
+                if(Managers.Game.m_iInventoryShowItemTapLeftNum == 0) // 가장 왼쪽의 Tool Tap을 이미 선택한 상태였다면 가장 오른쪽으로 이동
                 {
-                    m_iCurrentSelectTapNum = 4; // 활성화 탭을 가장 오른쪽으로 이동
+                    Managers.Game.m_iInventoryCurrentSelectTapNum = 4; // 활성화 탭을 가장 오른쪽으로 이동
 
-                    m_iShowItemTapLeftNum = 10;
-                    m_iShowItemTapRightNum = 14;
+                    Managers.Game.m_iInventoryShowItemTapLeftNum = 10;
+                    Managers.Game.m_iInventoryShowItemTapRightNum = 14;
                 }
                 else // Tool Tap이 더 왼쪽으로 갈 수 있다면 한 칸씩 이동
                 {
-                    m_iShowItemTapLeftNum--;
-                    m_iShowItemTapRightNum--;
+                    Managers.Game.m_iInventoryShowItemTapLeftNum--;
+                    Managers.Game.m_iInventoryShowItemTapRightNum--;
                 }
             }
             else // 2~5번째 탭을 선택한 상황이라면, 활성화 탭을 왼쪽으로 이동
             {
-                m_iCurrentSelectTapNum--;
+                Managers.Game.m_iInventoryCurrentSelectTapNum--;
             }
         }
         else
         {
             // 현재 활성화 탭이 어느 위치에 있는가
-            if (m_iCurrentSelectTapNum == 4) // 이미 왼쪽 걸 클릭한 상태였다면
+            if (Managers.Game.m_iInventoryCurrentSelectTapNum == 4) // 이미 왼쪽 걸 클릭한 상태였다면
             {
-                if (m_iShowItemTapRightNum == 14) // 가장 오른쪽의 서약 Tap을 이미 선택한 상태였다면 Tool 탭으로 이동
+                if (Managers.Game.m_iInventoryShowItemTapRightNum == 14) // 가장 오른쪽의 서약 Tap을 이미 선택한 상태였다면 Tool 탭으로 이동
                 {
-                    m_iCurrentSelectTapNum = 0; // 활성화 탭을 가장 왼쪽으로 이동
-
-                    m_iShowItemTapLeftNum = 0;
-                    m_iShowItemTapRightNum = 4;
+                    Managers.Game.m_iInventoryCurrentSelectTapNum = 0; // 활성화 탭을 가장 왼쪽으로 이동
+                    
+                    Managers.Game.m_iInventoryShowItemTapLeftNum = 0;
+                    Managers.Game.m_iInventoryShowItemTapRightNum = 4;
                 }
                 else // 보여주는 가장 오른쪽의 탭이 서약 탭이 아니라면
                 {
-                    m_iShowItemTapLeftNum++;
-                    m_iShowItemTapRightNum++;
+                    Managers.Game.m_iInventoryShowItemTapLeftNum++;
+                    Managers.Game.m_iInventoryShowItemTapRightNum++;
                 }
             }
             else // 1~4번째 탭을 선택한 상황이라면, 활성화 탭을 오른쪽으로 이동
             {
-                m_iCurrentSelectTapNum++;
+                Managers.Game.m_iInventoryCurrentSelectTapNum++;
             }
         }
 
@@ -165,6 +166,6 @@ public class InventoryItemMainUI : UI_Base
     // 가지고 온 넘버를 가지고 해당 탭의 정보를 갱신
     void RefreshAfterMoveTap()
     {
-        m_SelectUnSelectedItemTaps[m_iCurrentSelectTapNum].SelectTap();
+        m_SelectUnSelectedItemTaps[Managers.Game.m_iInventoryCurrentSelectTapNum].SelectTap();
     }
 }

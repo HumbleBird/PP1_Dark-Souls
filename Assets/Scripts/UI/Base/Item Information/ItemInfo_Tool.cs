@@ -40,7 +40,7 @@ public class ItemInfo_Tool : ItemInfo_Base
 
     void ShowToolItem(ToolItem item)
     {
-        GetText((int)Texts.Tool_ItemNameText).text = item.itemName;
+        GetText((int)Texts.Tool_ItemNameText).text = item.m_ItemName;
         GetText((int)Texts.Tool_ItemTypeText).text = item.m_ToolType.ToString();
         GetText((int)Texts.Tool_CurrentCountValueText).text = item.m_iCurrentCount.ToString() + "/ " + item.m_iMaxCount.ToString();
         GetText((int)Texts.Tool_SaveCountValueText).text = item.m_iCurrentCount.ToString();

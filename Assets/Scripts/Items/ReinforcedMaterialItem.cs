@@ -7,7 +7,7 @@ public class ReinforcedMaterialItem : Item
 {
     public ReinforcedMaterialItem()
     {
-        m_EItemType = E_ItemType.ReinforcedMaterial;
+        m_eItemType = E_ItemType.ReinforcedMaterial;
     }
 
     [Header("Current Count")]

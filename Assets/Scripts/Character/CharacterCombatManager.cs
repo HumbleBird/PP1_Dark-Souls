@@ -50,6 +50,7 @@ public class CharacterCombatManager : MonoBehaviour
     protected virtual void Awake()
     {
         character = GetComponent<CharacterManager>();
+        characterLayer = 1 << 8;
     }
 
     public virtual void SetBlockingAbsorptionsFromBlockingWeapon()

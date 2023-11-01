@@ -12,18 +12,23 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d8362b4d53ba4874fbde841af22a0170, type: 3}
   m_Name: Knight Leggings
   m_EditorClassIdentifier: 
-  itemIcon: {fileID: 21300000, guid: a0975f1cbe2cb894eb249669dd84dbb2, type: 3}
-  itemName: Knight Leggings
-  itemID: 0
-  m_EItemType: 12
-  m_fPhysicalDefense: 8.1
-  m_fStrikeDefense: 6.9
-  m_fSlashDefense: 7.4
-  m_fThrustDefense: 7.7
-  m_fMagicDefense: 4.9
-  m_fFireDefense: 6.2
-  m_fLightningDefense: 4.4
-  m_fDarkDefense: 5.4
+  m_ItemIcon: {fileID: 21300000, guid: 97e9b57580263e74fa5f2b60446be6ff, type: 3}
+  m_ItemName: Knight Leggings
+  m_iItemID: 0
+  m_eItemType: 12
+  m_isEquiping: 0
+  m_EquipingType: 0
+  m_iEquipSlotNum: 0
+  m_bIsUnarmed: 0
+  m_sPrefabPath: 
+  m_fPhysicalDamageAbsorption: 5
+  m_fVSStrikeDamageAbsorption: 5
+  m_fVSSlashDamageAbsorption: 5
+  m_fVSThrustDamageAbsorption: 5
+  m_fMagicDamageAbsorption: 5
+  m_fFireDamageAbsorption: 5
+  m_fLightningDamageAbsorption: 5
+  m_fDarkDamageAbsorption: 5
   m_fBleedResistance: 26
   m_fPoisonResistance: 23
   m_fFrostResistance: 22

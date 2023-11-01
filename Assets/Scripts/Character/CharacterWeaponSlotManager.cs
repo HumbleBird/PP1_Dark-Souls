@@ -155,6 +155,9 @@ public class CharacterWeaponSlotManager : MonoBehaviour
         leftHandIKTarget = rightHandSlot.currentWeaponModel.GetComponentInChildren<LeftHandIKTarget>();
         rightHandIKTarget = rightHandSlot.currentWeaponModel.GetComponentInChildren<RightHandIKTarget>();
 
+        if (leftHandIKTarget == null || rightHandIKTarget == null)
+            return;
+
         character.characterAnimatorManager.SetHandIKForWeapon(rightHandIKTarget, leftHandIKTarget, isTwoHandingWeapon);
     }
 

@@ -5,9 +5,15 @@ using UnityEngine;
 [CreateAssetMenu(menuName = "Items/Eqipment/Helm Armor")]
 public class HelmEquipmentItem : EquipmentItem
 {
-    HelmEquipmentItem()
+    public HelmEquipmentItem(int id) : base(id)
     {
-        m_EItemType = Define.E_ItemType.Helmet;
+        SetInfo(id);
+
+        if(id == 1001)
+        {
+            HelmEquipmentItemName = 6;
+            m_bisHideFacialFeatures = true;
+        }
     }
 
     [Header("Item All Gender Parts Name")]

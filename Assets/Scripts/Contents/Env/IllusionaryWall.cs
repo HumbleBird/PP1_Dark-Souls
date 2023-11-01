@@ -8,17 +8,12 @@ public class IllusionaryWall : MonoBehaviour
     public Material illusionaryWallMaterial;
     public float alpha;
     public float fadetimer = 2.5f;
-    BoxCollider wallCollider;
-
-    AudioSource audioSource;
-    public AudioClip illusionarWallSound;
+    Collider wallCollider;
 
     private void Awake()
     {
         //illusionaryWallMaterial = GetComponent<Material>();
-        wallCollider = GetComponent<BoxCollider>();
-        audioSource = GetComponent<AudioSource>();
-        audioSource.clip = illusionarWallSound;
+        wallCollider = GetComponent<Collider>();
         illusionaryWallMaterial.color = new Color(1, 1, 1, 255);
     }
 
@@ -45,12 +40,12 @@ public class IllusionaryWall : MonoBehaviour
         if(wallCollider.enabled)
         {
             wallCollider.enabled = false;
-            audioSource.PlayOneShot(illusionarWallSound);
+            Managers.Sound.Play("Area/Illusory Wall Break");
         }
 
         if(alpha <= 0)
         {
-            Destroy(this);
+            Managers.Resource.Destroy(gameObject);
         }
     }
 }

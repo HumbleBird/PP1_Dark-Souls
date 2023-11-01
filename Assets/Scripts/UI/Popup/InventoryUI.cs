@@ -41,7 +41,7 @@ public class InventoryUI : UI_Popup
     public void ShowItemInfo(Item item)
     {
         m_ItemInformationUI.ShowItemInformation(item);
-        m_InventoryItemMainUI.ShowItemName(item.itemName);
+        m_InventoryItemMainUI.ShowItemName(item.m_ItemName);
     }
 
     public void CloseItemInfo()

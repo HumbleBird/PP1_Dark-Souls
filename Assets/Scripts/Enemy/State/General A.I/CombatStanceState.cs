@@ -18,6 +18,12 @@ public class CombatStanceState : State
     protected float verticalMovementValue = 0;
     protected float horizontalMovementValue = 0;
 
+    private void Awake()
+    {
+        attackState = GetComponent<AttackState>();
+        pursueTargetState = GetComponent<PursueTargetState>();
+    }
+
     public override State Tick(AICharacterManager enemy)
     {
         enemy.animator.SetFloat("Vertical", verticalMovementValue, 0.2f, Time.deltaTime);

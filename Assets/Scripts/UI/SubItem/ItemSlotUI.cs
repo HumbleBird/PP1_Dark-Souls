@@ -54,7 +54,7 @@ public abstract class ItemSlotUI : UI_Base
     {
         if (m_Item != null)
         {
-            m_ItemSlotSubUI.m_ItemIcon.sprite = m_Item.itemIcon;
+            m_ItemSlotSubUI.m_ItemIcon.sprite = m_Item.m_ItemIcon;
             m_ItemSlotSubUI.m_ItemIcon.enabled = true;
             m_ItemSlotSubUI.m_ItemPlateIcon.enabled = true;
 

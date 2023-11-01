@@ -18,6 +18,13 @@ public class AttackState : State
     bool willDoComboOnNextAttack = false;
     public bool hasPerformedAttack = false;
 
+    private void Awake()
+    {
+        rotateTowardsTargetState = GetComponent<RotateTowardsTargetState>();
+        combatStanceState = GetComponent<CombatStanceState>();
+        pursueTargetState = GetComponent<PursueTargetState>();
+    }
+
     public override State Tick(AICharacterManager enemy)
     {
         float distancefromTarget = Vector3.Distance(enemy.currentTarget.transform.position, enemy.transform.position);

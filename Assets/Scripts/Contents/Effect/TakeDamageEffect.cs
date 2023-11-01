@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using static Define;
 
 [CreateAssetMenu(menuName = "Character Effects/Take Damage")]
 public class TakeDamageEffect : CharacterEffect
@@ -9,9 +10,13 @@ public class TakeDamageEffect : CharacterEffect
     public CharacterManager characterCausingDamage; // 데미지 유발이 캐릭터라면, they are listed here?
 
     [Header("Damage")]
-    public float finalDamage = 0;
-    public float physicalDamage = 0;
-    public float fireDamage = 0;
+    public float m_fFinalDamage;
+    public float m_PhysicalDamage;
+    public float m_MagicDamage;
+    public float m_FireDamage;
+    public float m_LightningDamage;
+    public float m_DarkDamage;
+
 
     [Header("Poise")]
     public float poiseDamage = 0;
@@ -65,34 +70,69 @@ public class TakeDamageEffect : CharacterEffect
         SetCameraShake(character);
     }
 
-    private void CalculateDamage(CharacterManager  character)
+    private void CalculateDamage(CharacterManager  character) // character가 공격 당하는 놈
     {
-        // 데미지 공식
-        // (물리 공격력-물리 방어력) * (1-물리 감소율) + (속성 공격력 - 속성 방어력) * (1-속성 감소율)
 
-        if (characterCausingDamage != null)
+        // 플레이어
+        if(character.characterStatsManager.teamIDNumber == (int)E_TeamId.Player)
         {
-            // Damage defense 계산 전, 공격 데미지 수치 체크
-            physicalDamage = Mathf.RoundToInt(physicalDamage * (characterCausingDamage.characterStatsManager.physicalDamagePercentageModifier / 100));
-            fireDamage = Mathf.RoundToInt(fireDamage * (characterCausingDamage.characterStatsManager.fireDamagePercentageModifier / 100));
+            // 데미지 공식
+            // (물리 공격력-물리 방어력) * (1-물리 감소율) + (속성 공격력 - 속성 방어력) * (1-속성 감소율)
+            PlayerManager player = character as PlayerManager;
+
+            if (characterCausingDamage != null)
+            {
+                // (물리 공격력-물리 방어력)
+                float physicalDamage =  Mathf.Max(0, characterCausingDamage.characterStatsManager.m_fPhysicalDamage - character.characterStatsManager.m_iPhysicalDefense);
+
+                // (1-물리 감소율)
+                float physicalDamageReductionValue = 1 - character.characterStatsManager.m_fPhysicalDamageAbsorption / 100;
+
+                // (속성 공격력 - 속성 방어력) * (1-속성 감소율)
+                // Magic
+                float MagicDamage = Mathf.Max(0, characterCausingDamage.characterStatsManager.m_fMagicDamage - character.characterStatsManager.m_iMagicDefense);
+                float MagicDamageReductionValue = 1 - character.characterStatsManager.m_fMagicDamageAbsorption / 100;
+
+                // Fire
+                float FireDamage = Mathf.Max(0, characterCausingDamage.characterStatsManager.m_fFireDamage - character.characterStatsManager.m_iFireDefense);
+                float FireDamageReductionValue = 1 - character.characterStatsManager.m_fFireDamageAbsorption / 100;
+
+                // Lightning
+                float LightningDamage = Mathf.Max(0, characterCausingDamage.characterStatsManager.m_fLightningDamage - character.characterStatsManager.m_iLightningDefense);
+                float LightningDamageReductionValue = 1 - character.characterStatsManager.m_fLightningDamageAbsorption / 100;
+
+                //Dark
+                float DarkDamage = Mathf.Max(0, characterCausingDamage.characterStatsManager.m_fDarkDamage - character.characterStatsManager.m_iDarkDefense);
+                float DarkDamageReductionValue = 1 - character.characterStatsManager.m_fDarkDamageAbsorption / 100;
+
+                // 특수 효과
+                // Bleed
+                // Poison
+                // Frost
+                // Curse
+
+               m_PhysicalDamage         = physicalDamage * physicalDamageReductionValue;
+               m_MagicDamage            = MagicDamage * MagicDamageReductionValue;
+               m_FireDamage             = FireDamage * FireDamageReductionValue;
+               m_LightningDamage        = LightningDamage * LightningDamageReductionValue;
+               m_DarkDamage             = DarkDamage * DarkDamageReductionValue;
+            }
+        }
+        // 몬스터
+        else
+        {
+            // 면역 판정
+            // 체력 - (공격력 * 약점) / 저항
+            //m_PhysicalDamage = characterCausingDamage.characterStatsManager.m_fPhysicalDamage;
+            //m_MagicDamage = characterCausingDamage.characterStatsManager.m_fMagicDamage;
+            //m_FireDamage = characterCausingDamage.characterStatsManager.m_fFireDamage;
+            //m_LightningDamage = characterCausingDamage.characterStatsManager.m_fLightningDamage;
+            //m_DarkDamage = characterCausingDamage.characterStatsManager.m_fDarkDamage;
         }
 
-        character.characterAnimatorManager.EraseHandIKForWeapon();
+        m_fFinalDamage = m_PhysicalDamage + m_MagicDamage + m_FireDamage + m_LightningDamage + m_DarkDamage;
 
-        // 데미지 - 장비 방어율%
-        physicalDamage = Mathf.RoundToInt(physicalDamage - (physicalDamage * (character.characterStatsManager.physicalAbsorptionPercentageModifier / 100)));
-        fireDamage = Mathf.RoundToInt(fireDamage - (fireDamage * (character.characterStatsManager.fireAbsorptionPercentageModifier / 100)));
-
-        // 데미지 - 속성 흡수 퍼센티지 수정자
-        physicalDamage = physicalDamage - Mathf.RoundToInt(physicalDamage * (character.characterStatsManager.physicalAbsorptionPercentageModifier / 100));
-        fireDamage = fireDamage - Mathf.RoundToInt(fireDamage * (character.characterStatsManager.fireAbsorptionPercentageModifier / 100));
-
-        // 최종 데미지
-        finalDamage = physicalDamage + fireDamage; // + fire + mage + lightning + dark Damage
-
-        character.characterStatsManager.currentHealth = Mathf.RoundToInt(character.characterStatsManager.currentHealth - finalDamage);
-
-
+        character.characterStatsManager.currentHealth = Mathf.RoundToInt(character.characterStatsManager.currentHealth - m_fFinalDamage);
 
         if(character.characterStatsManager.totalPoiseDefence < poiseDamage)
         {
@@ -250,7 +290,7 @@ public class TakeDamageEffect : CharacterEffect
         // 몬스터라면 지 아래에 있는 Helath Bar를 수정
 
         // 플레이어라면 UI를 수정
-        character.characterStatsManager.HealthBarUIUpdate(Mathf.RoundToInt( finalDamage));
+        character.characterStatsManager.HealthBarUIUpdate(Mathf.RoundToInt(m_fFinalDamage));
     }
     
 
@@ -258,7 +298,7 @@ public class TakeDamageEffect : CharacterEffect
     {
         character.characterSoundFXManager.PlayRandomDamageSound();
 
-        if(fireDamage > 0)
+        if(m_FireDamage > 0)
         {
             Managers.Sound.Play(elementalDamageSoundSFX);
         }

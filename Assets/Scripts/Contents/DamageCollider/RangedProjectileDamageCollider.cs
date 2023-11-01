@@ -51,8 +51,12 @@ public class RangedProjectileDamageCollider : DamageCollider
             angleHitFrom = Vector3.SignedAngle(characterManager.transform.forward, enemyManager.transform.forward, Vector3.up);
 
             TakeDamageEffect takeDamageEffect = new TakeDamageEffect();
-            takeDamageEffect.physicalDamage = physicalDamage;
-            takeDamageEffect.fireDamage = fireDamage;
+            takeDamageEffect.characterCausingDamage = characterManager;
+            takeDamageEffect.m_PhysicalDamage = physicalDamage;
+            takeDamageEffect.m_MagicDamage = magicDamage;
+            takeDamageEffect.m_FireDamage = fireDamage;
+            takeDamageEffect.m_LightningDamage = lightningDamage;
+            takeDamageEffect.m_DarkDamage = darkDamage;
             takeDamageEffect.poiseDamage = poiseDamage;
             takeDamageEffect.contactPoint = contactPoint;
             takeDamageEffect.angleHitFrom = angleHitFrom;

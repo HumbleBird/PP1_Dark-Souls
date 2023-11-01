@@ -24,6 +24,7 @@ GameObject:
   - component: {fileID: 3780201453589398861}
   - component: {fileID: 1461314987884993446}
   - component: {fileID: 7888674121781100870}
+  - component: {fileID: 1378021907508765895}
   m_Layer: 9
   m_Name: Player (Creation Menu)
   m_TagString: Character
@@ -118,6 +119,8 @@ MonoBehaviour:
   characterEquipmentManager: {fileID: 0}
   lockOnTransform: {fileID: 7119120353931914124}
   criticalAttackRayCastStartPoint: {fileID: 7119120353170246266}
+  m_StartPos: {x: 0, y: 0, z: 0}
+  m_StartRo: {x: 0, y: 0, z: 0}
   isInteracting: 0
   isDead: 0
   canBeRiposted: 0
@@ -146,7 +149,7 @@ MonoBehaviour:
   pendingCriticalDamage: 0
   inputHandler: {fileID: 0}
   cameraHandler: {fileID: 0}
-  GameSceneUI: {fileID: 0}
+  m_GameSceneUI: {fileID: 0}
   playerStatsManager: {fileID: 0}
   playerWeaponSlotManager: {fileID: 0}
   playerCombatManager: {fileID: 0}
@@ -155,6 +158,7 @@ MonoBehaviour:
   playerAnimatorManager: {fileID: 0}
   playerLocomotionManager: {fileID: 0}
   playerEffectsManager: {fileID: 0}
+  playerSoundFXManager: {fileID: 0}
 --- !u!114 &3780201453589398857
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -245,10 +249,10 @@ MonoBehaviour:
   m_BoltAmmoSlots:
   - {fileID: 0}
   - {fileID: 0}
-  m_HelmetEquipment: {fileID: 11400000, guid: 988aab8869179614eae84faa3284d2a2, type: 2}
-  m_TorsoEquipment: {fileID: 11400000, guid: 2cf022a44c0c75c4d81f4804639beeef, type: 2}
-  m_LegEquipment: {fileID: 11400000, guid: f98e935e2857ce846ade7b13ea0eee98, type: 2}
-  m_HandEquipment: {fileID: 11400000, guid: 941c776a633cbfb4ca0eabe7b8a67b81, type: 2}
+  m_HelmetEquipment: {fileID: 0}
+  m_TorsoEquipment: {fileID: 0}
+  m_LegEquipment: {fileID: 0}
+  m_HandEquipment: {fileID: 0}
   m_RingSlots:
   - {fileID: 0}
   - {fileID: 0}
@@ -277,7 +281,10 @@ MonoBehaviour:
   Naked_TorsoEquipment: {fileID: 11400000, guid: 2cf022a44c0c75c4d81f4804639beeef, type: 2}
   Naked_LegEquipment: {fileID: 11400000, guid: f98e935e2857ce846ade7b13ea0eee98, type: 2}
   Naked_HandEquipment: {fileID: 11400000, guid: 941c776a633cbfb4ca0eabe7b8a67b81, type: 2}
-  facialFeatures: []
+  facialFeatures:
+  - {fileID: 3779575296532013814}
+  - {fileID: 3778669045509627008}
+  - {fileID: 3778949813239863980}
   currentHairStyle: {fileID: 0}
   currentHairItem: {fileID: 0}
   currentEyelashesBtn: {fileID: 0}
@@ -354,6 +361,7 @@ MonoBehaviour:
   rotationSpeed: 10
   fallingSpeed: 70
   rollStaminaCost: 15
+  m_isCanMove: 1
 --- !u!114 &3780201453589398864
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -372,6 +380,8 @@ MonoBehaviour:
   - {fileID: 8300000, guid: be235f8d4a2c1634a9ffad5a9ef0a7d5, type: 3}
   - {fileID: 8300000, guid: 8955b56d1a87945479ae70ef02ea3354, type: 3}
   - {fileID: 8300000, guid: 31affb79c7969ae4992dec318113263b, type: 3}
+  m_bCanStepL: 0
+  m_bCanStepR: 0
 --- !u!114 &3780201453589398865
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -509,25 +519,10 @@ MonoBehaviour:
   currentSoulCount: 8500
   maxHealth: 0
   currentHealth: 0
-  physicalDamageAbsorptionHead: 0
-  physicalDamageAbsorptionBody: 0
-  physicalDamageAbsorptionLegs: 0
-  physicalDamageAbsorptionHands: 0
-  fireDamageAbsorptionHead: 0
-  fireDamageAbsorptionBody: 0
-  fireDamageAbsorptionLegs: 0
-  fireDamageAbsorptionHands: 0
   blockingPhysicalDamageAbsorption: 0
   blockingFireDamageAbsorption: 0
   blockingStabilityRating: 0
-  m_fMagicDefense: 0
-  m_fLightningDefense: 0
-  m_fDarkDefense: 0
-  poisonResistance: 0
-  m_fBleedResistance: 0
-  m_fFrostResistance: 0
-  m_fCurseResistance: 0
-  AttunementSlots: 0
+  m_iAttunementSlots: 0
   totalPoiseDefence: 0
   offensivePoiseBonus: 0
   armorPoiseBonus: 0
@@ -540,6 +535,39 @@ MonoBehaviour:
   isPoisoned: 0
   poisonBuildup: 0
   poisonAmount: 100
+  m_fPhysicalDamage: 0
+  m_fMagicDamage: 0
+  m_fFireDamage: 0
+  m_fLightningDamage: 0
+  m_fDarkDamage: 0
+  m_fAuxiliaryEffectsBleedDamage: 0
+  m_fAuxiliaryEffectsPoisonDamage: 0
+  m_fAuxiliaryEffectsFrostDamage: 0
+  m_fAuxiliaryEffectsCurseDamage: 0
+  m_iPhysicalDefense: 0
+  m_iVSStrikeDefense: 0
+  m_iVSSlashDefense: 0
+  m_iVSThrustDefense: 0
+  m_iMagicDefense: 0
+  m_iFireDefense: 0
+  m_iLightningDefense: 0
+  m_iDarkDefense: 0
+  m_fPhysicalDamageAbsorption: 0
+  m_fVSStrikeDamageAbsorption: 0
+  m_fVSSlashDamageAbsorption: 0
+  m_fVSThrustDamageAbsorption: 0
+  m_fMagicDamageAbsorption: 0
+  m_fFireDamageAbsorption: 0
+  m_fLightningDamageAbsorption: 0
+  m_fDarkDamageAbsorption: 0
+  m_iBleedResistance: 0
+  m_iPoisonResistance: 0
+  m_iFrostResistance: 0
+  m_iCurseResistance: 0
+  m_fBleedArmor: 0
+  m_iPoisoArmore: 0
+  m_fFrostArmor: 0
+  m_fCurseArmor: 0
   playerLevel: 9
   m_iVigorLevel: 1000
   m_iAttunementLevel: 1000
@@ -554,10 +582,8 @@ MonoBehaviour:
   currentFocusPoints: 0
   maxStamina: 0
   currentStamina: 0
-  currentEquipLoad: 0
-  maxEquipLoad: 0
   encumbranceLevel: 0
-  poiseLevel: 10
+  CurrentPoise: 10
   m_iItemDiscovery: 10
   m_iRWeapon1: 0
   m_iRWeapon2: 0
@@ -565,10 +591,25 @@ MonoBehaviour:
   m_iLWeapon1: 0
   m_iLWeapon2: 0
   m_iLWeapon3: 0
-  staminaRegenerationAmount: 1
+  staminaRegenerationAmount: 20
   staminaRegenerationAmountWhilstBlocking: 0.1
   staminaRegenTimer: 0
   spritingTimer: 0
+--- !u!114 &1378021907508765895
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 347833055415664871}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 516168af45b1df04d93ba35c85e6c6ee, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  takingDamageSounds: []
+  m_bCanStepL: 0
+  m_bCanStepR: 0
 --- !u!1 &2032616575613666571
 GameObject:
   m_ObjectHideFlags: 0

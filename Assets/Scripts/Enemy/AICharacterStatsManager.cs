@@ -23,6 +23,31 @@ public class AICharacterStatsManager : CharacterStatsManager
         aiCharacterHealthBar = Managers.UI.MakeWorldSpaceUI<UIAICharacterHealthBar>(transform);
 
         teamIDNumber = (int)E_TeamId.Monster;
+
+        if(aiCharacter.m_CharacterID != 0 )
+        {
+            Table_Monster.Info data = Managers.Table.m_Monster.Get(aiCharacter.m_CharacterID);
+
+            if (data == null)
+                return;
+
+            m_sCharacterName = data.m_sName;
+
+            Table_Stat.Info statData = Managers.Table.m_Stat.Get(data.m_iStatID);
+
+            if (statData == null)
+                return;
+
+            soulsAwardedOnDeath = statData.m_iRewardSouls;
+            // Drop Reward Item
+            maxHealth = statData.m_iHP;
+            currentHealth = maxHealth;
+            m_fPhysicalDamage = statData.m_PhysicalDamage;
+            m_fMagicDamage= statData.m_MagicDamage;
+            m_fFireDamage= statData.m_FireDamage;
+            m_fLightningDamage= statData.m_LightningDamage;
+            m_fDarkDamage= statData.m_DarkDamage;
+        }
     }
 
     protected override void Start()
@@ -43,7 +68,7 @@ public class AICharacterStatsManager : CharacterStatsManager
     // 가져온 스텟을 이용해 능력치 정하기
     public override void InitAbility()
     {
-        maxHealth = CalculateMaxHP(0);
+        maxHealth = CalculateMaxHP(aiCharacter.m_CharacterID);
 
         FullRecovery();
     }
@@ -57,10 +82,19 @@ public class AICharacterStatsManager : CharacterStatsManager
 
     public override int CalculateMaxHP(int MonsterId)
     {
-        // 플레이어는 vigorlevel에 따라 결정
+        Table_Monster.Info data = Managers.Table.m_Monster.Get(aiCharacter.m_CharacterID);
 
-        // 그 외는 전부 테이블에서 가져오기
-        return 100;
+        if (data == null)
+            return 1 ;
+
+        m_sCharacterName = data.m_sName;
+
+        Table_Stat.Info statData = Managers.Table.m_Stat.Get(data.m_iStatID);
+
+        if (statData == null)
+            return 1 ;
+
+        return statData.m_iHP;
     }
 
     public override void TakeDamageNoAnimation(int damage, int fireDamage)

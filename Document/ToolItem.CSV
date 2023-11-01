@@ -1,18 +1,6 @@
-Idx,Name,icon,prefab,isLimitied,MaxCurrentCount,MaxSaveCount,ItemEffectDescription,Strength,Dexterity,Intelligence,Faith,,,,
-아이디,이름,아이콘,프리팹,무제한/소비,최대 소지수,최대 처장수,아이템 효과,능력 보정 - 근력,능력 보정 - 기량,능력 보정 - 지성,능력 보정 - 신앙,,,,
-1,Estus Flask,,,0,1,0,"The Undead treasure these dull green flasks. Fill with Estus at bonfires, and drink to restore HP. The journey of an Undead has always traced the bonfires, and no journey of import has been made without an Estus Flask",0,0,0,0,,,,
-2,Fire Buff Item,,,1,99,600,Medicinal pellet made from crushed insects. The red type temporarily boosts fire damage absorption.,0,0,0,0,,,,
-3,Firebomb,,,1,99,600,Throw at enemies to deal fire damage.,0,0,0,0,,,,
-4,PuppleMossClump,,,1,99,600,Medicinal purple moss clump. Reduces poison build-up. Cures poison.,0,0,0,0,,,,
-,,,,,,,,,,,,,,,
-,,,,,,,,,,,,,,,UI
-,,,,,,,,,,,,,,1,Art/Textures/UI/Item/Weapons/
-,,,,,,,,,,,,,,2,Art/Textures/UI/Item/Armors/
-,,,,,,,,,,,,,,3,Art/Textures/UI/Item/Consumabls/
-,,,,,,,,,,,,,,,Prefabs
-,,,,,,,,,,,,,,1,Item/Weapons/
-,,,,,,,,,,,,,,2,Item/Armors/
-,,,,,,,,,,,,,,3,Item/Consumabls/
-,,,,,,,,,,,,,,,
-,,,,,,,,,,,,,,"CONCAT(VLOOKUP(C3, $I$3:$J$5, 2), B3)",
-,,,,,,,,,,,,,,"CONCAT(VLOOKUP(C3, $I$7:$J$9, 2), B3)",
+Idx,Name,icon,prefab,isLimitied,MaxCurrentCount,MaxSaveCount,ItemEffectDescription,Strength,Dexterity,Intelligence,Faith
+아이디,이름,아이콘,프리팹,무제한/소비,최대 소지수,최대 처장수,아이템 효과,능력 보정 - 근력,능력 보정 - 기량,능력 보정 - 지성,능력 보정 - 신앙
+1,Estus Flask,Art/Textures/UI/high res icons/00_items/Estus Flask,Prefabs/Items/Tool/Estus Flask,0,1,0,The Undead treasure these dull green flasks. Fill with Estus at bonfires and drink to restore HP. The journey of an Undead has always traced the bonfires and no journey of import has been made without an Estus Flask,0,0,0,0
+2,Fire Buff Item,Art/Textures/UI/high res icons/00_items/Fire Buff Item,0,1,99,600,Medicinal pellet made from crushed insects. The red type temporarily boosts fire damage absorption.,0,0,0,0
+3,Firebomb,Art/Textures/UI/high res icons/00_items/Firebomb,Prefabs/Items/Tool/Firebomb,1,99,600,Throw at enemies to deal fire damage.,0,0,0,0
+4,PuppleMossClump,Art/Textures/UI/high res icons/00_items/PuppleMossClump,Prefabs/Items/Tool/Pupple Moss Clump,1,99,600,Medicinal purple moss clump. Reduces poison build-up. Cures poison.,0,0,0,0

@@ -6,6 +6,11 @@ public class RotateTowardsTargetState : State
 {
     public CombatStanceState combatStanceState;
 
+    private void Awake()
+    {
+        combatStanceState = GetComponent<CombatStanceState>();
+    }
+
     public override State Tick(AICharacterManager enemy)
     {
         enemy.animator.SetFloat("Vertical", 0);

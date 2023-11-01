@@ -58,6 +58,7 @@ public class StatBarsUI : UI_Base
 
         //m_PoisonBuildDownFill = GetImage((int)Images.PoisonBuildDownFill);
         //m_PoisonBar = GetObject((int)GameObjects.PoisonBar);
+        m_Player = Managers.Object.m_MyPlayer;
 
         m_PoisonBar.SetActive(false);
 

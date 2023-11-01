@@ -4,8 +4,25 @@ using UnityEngine;
 
 public class Define
 {
+    #region AI Character
+
+    public enum E_InitAICharacterState
+    {
+        Idle,
+        Patrol,
+        Ambush
+    }
+
+    #endregion
+
     #region Item
 
+    public enum E_SpellType
+    {
+        Faith = 1,
+        Magic = 2,
+        Pyro = 3,
+    }
 
     public enum E_ItemType
     {
@@ -38,27 +55,13 @@ public class Define
         Bolt
     }
 
-
-
-    public enum WeaponType
-    {
-        PyroCaster,
-        FaithCaster,
-        SpellCaster,
-        Unarmed,
-        StraightSwords,
-        SmallShield,
-        Shield,
-        Bow
-    }
-
     public enum eWeaponTrail
     {
         Normal,
         Fire
     }
 
-    public enum WeaponType2
+    public enum WeaponType
     {
         Daggers = 1,
         StraightSwords,
@@ -78,6 +81,7 @@ public class Define
         Halberds,
         Reapers,
         Whips,
+
         Bows,
         Greatbows,
         Crossbows,
@@ -86,7 +90,8 @@ public class Define
         Flames,
         Talismans,
         SacredChimes,
-        Shield = 25
+        SmallShield,
+        Shield,
     }
     #endregion
 
@@ -143,7 +148,7 @@ public class Define
 
     public enum E_CharacterClass
     {
-        Knight = 0,
+        Knight = 1,
         Mercenary,
         Warrior,
         Herald,

@@ -118,7 +118,8 @@ public class PlayerStatsManager : CharacterStatsManager
         FullRecovery();
 
         // HUD Bar Refresh
-        Managers.GameUI.m_GameSceneUI.m_StatBarsUI.SetBGWidthUI(E_StatUI.All);
+        if(Managers.GameUI.m_GameSceneUI != null)
+             Managers.GameUI.m_GameSceneUI.m_StatBarsUI.SetBGWidthUI(E_StatUI.All);
     }
 
     // Current HP,Stamina FP 완전 회복
@@ -127,8 +128,9 @@ public class PlayerStatsManager : CharacterStatsManager
         currentHealth = maxHealth;
         currentStamina = maxStamina;
         currentFocusPoints = maxfocusPoint;
-
-        Managers.GameUI.m_GameSceneUI.m_StatBarsUI.RefreshUI();
+        
+        if(Managers.GameUI.m_GameSceneUI != null)
+            Managers.GameUI.m_GameSceneUI.m_StatBarsUI.RefreshUI();
     }
 
     public override void HandlePoiseResetTime()

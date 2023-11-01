@@ -7,8 +7,7 @@ public class RangeWeaponItem : WeaponItem
 {
     RangeWeaponItem()
     {
-        m_EItemType = Define.E_ItemType.RangeWeapon;
+        m_eItemType = Define.E_ItemType.RangeWeapon;
     }
-    public int m_iAttackRange;
 
 }

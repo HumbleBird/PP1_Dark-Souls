@@ -14,7 +14,7 @@ public class StartSceneUI : UI_Scene
     {
         PressAnyButtonText  ,
         ContinueText        ,
-        LoadGameText        ,
+        //LoadGameText        ,
         NewGameText         ,
         QuitText            ,
     }
@@ -26,7 +26,6 @@ public class StartSceneUI : UI_Scene
 		MainMenu
 	}
 
-
     bool m_bIsButtonPress = false;
 
     Action m_FadeOutAction = null;
@@ -34,6 +33,8 @@ public class StartSceneUI : UI_Scene
     GameObject m_Intro; // 게임 회사 타이틀을 보여줌
     GameObject m_Start; // 아무거나 키를 클릭하면 메인 메뉴로
     GameObject m_MainMenu; // 새 게임 시작, 로그 게임, 나가기 등
+
+    public GameObject m_goContinue;
 
     Animator m_Animator;
 
@@ -52,17 +53,26 @@ public class StartSceneUI : UI_Scene
         // Button Event
         GetText((int)Texts.PressAnyButtonText).gameObject.BindEvent(() => m_bIsButtonPress = true);
         GetText((int)Texts.ContinueText      ).gameObject.BindEvent(() => { Continue(); });
-        GetText((int)Texts.LoadGameText      ).gameObject.BindEvent(() => { LoadGame(); });
+        //GetText((int)Texts.LoadGameText      ).gameObject.BindEvent(() => { LoadGame(); });
         GetText((int)Texts.NewGameText       ).gameObject.BindEvent(() => { NewGame(); });
         GetText((int)Texts.QuitText).gameObject.BindEvent(() => { QuitGame(); });
 
         // Button Sound
         PointerDown(GetText((int)Texts.PressAnyButtonText).gameObject);
         PointerDown(GetText((int)Texts.ContinueText      ).gameObject);
-        PointerDown(GetText((int)Texts.LoadGameText      ).gameObject);
+        //PointerDown(GetText((int)Texts.LoadGameText      ).gameObject);
         PointerDown(GetText((int)Texts.NewGameText       ).gameObject);
         PointerDown(GetText((int)Texts.QuitText).gameObject);
 
+        // 로딩 데이터가 없다면
+        if(Managers.Game.m_isNewGame == true)
+        {
+            m_goContinue.SetActive(true);
+        }
+        else
+        {
+            m_goContinue.SetActive(false);
+        }
 
         m_Animator = GetComponentInChildren<Animator>();
         m_FadeInOutScreenUI = GetComponentInChildren<FadeInOutScreenUI>();
@@ -164,6 +174,9 @@ public class StartSceneUI : UI_Scene
 	void Continue()
     {
         // 캐릭터 정보 로드
+        m_bIsButtonPress = true;
+        m_Animator.Play("SelectButton_Continue");
+        m_FadeOutAction = () => { Managers.Scene.LoadScene(Define.Scene.Game); };
     }
 
     void LoadGame()

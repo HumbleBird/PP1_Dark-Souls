@@ -12,13 +12,15 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0ee5c67afd2ebe3479ea5782bb61dd8f, type: 3}
   m_Name: Ruby Ring
   m_EditorClassIdentifier: 
-  itemIcon: {fileID: 21300000, guid: 49b0bb7b0c7b9814085ace6ac94ebee1, type: 3}
-  itemName: Ruby Ring
-  itemID: 0
-  m_EItemType: 14
+  m_ItemIcon: {fileID: 21300000, guid: 49b0bb7b0c7b9814085ace6ac94ebee1, type: 3}
+  m_ItemName: Ruby Ring
+  m_iItemID: 0
+  m_eItemType: 14
   m_isEquiping: 1
   m_EquipingType: 8
   m_iEquipSlotNum: 1
-  m_iWeight: 0
+  m_bIsUnarmed: 0
+  m_sPrefabPath: 
+  m_iWeight: 2.2
   m_sItemDescription: 
   effect: {fileID: 11400000, guid: a662e3a6ff4f68a42a5738ed17e537b7, type: 2}

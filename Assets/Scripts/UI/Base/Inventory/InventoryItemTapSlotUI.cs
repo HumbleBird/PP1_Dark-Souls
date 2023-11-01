@@ -71,7 +71,7 @@ public class InventoryItemTapSlotUI : UI_Base
         m_listInventoryItemSlotUI.Clear();
 
         // 해당 탭의 아이템을 모조리 가져온다.
-        items = m_Player.playerInventoryManager.FindItems(i => i.m_EItemType == type);
+        items = m_Player.playerInventoryManager.FindItems(i => i.m_eItemType == type);
 
         int makeSlotCountMax = 0;
 
@@ -117,7 +117,7 @@ public class InventoryItemTapSlotUI : UI_Base
         // 전에 활성화 되었던 탭을 모조리 비활성화
         m_InventoryItemMainUI.TapsSelectClear();
         m_InventoryItemMainUI.m_goSelectedItemTaps[m_iShowTapNum].gameObject.SetActive(true);
-        m_InventoryItemMainUI.m_iCurrentSelectTapNum = m_iShowTapNum;
+        Managers.Game.m_iInventoryCurrentSelectTapNum = m_iShowTapNum;
         string num = m_iNum.ToString("00");
         m_InventoryItemMainUI.m_SelectedItemSlotImage[m_iShowTapNum].sprite = Managers.Resource.Load<Sprite>($"Art/Textures/UI/menu/Inventory/MENU_ItemTab/Middle/MENU_ItemTab_Middle_{num}");
     }
@@ -125,15 +125,15 @@ public class InventoryItemTapSlotUI : UI_Base
     // 현재 선택되어 있는 아이템 슬롯을 이용해 다른 탭으로 넘어가도 해당 슬롯을 가리키는 번호는 유지함.
     public void ShowCurrentSelectItemSlotFromItemNum()
     {
-        if (items == null || m_listInventoryItemSlotUI[m_InventoryItemMainUI.m_iCurrentSelectItemSlotNum].m_Item == null)
+        if (items == null || m_listInventoryItemSlotUI[Managers.Game.m_iInventoryCurrentSelectItemSlotNum].m_Item == null)
         {
             //m_listInventoryItemSlotUI[inventoryItemMainUI.m_iCurrentSelectItemSlotNum].m_ItemSelectIcon.enabled = false;
             m_InventoryUI.CloseItemInfo();
             return;
         }
 
-        m_listInventoryItemSlotUI[m_InventoryItemMainUI.m_iCurrentSelectItemSlotNum].m_ItemSlotSubUI.m_ItemSelectIcon.enabled = true;
-        m_InventoryUI.ShowItemInfo(items[m_InventoryItemMainUI.m_iCurrentSelectItemSlotNum]);
+        m_listInventoryItemSlotUI[Managers.Game.m_iInventoryCurrentSelectItemSlotNum].m_ItemSlotSubUI.m_ItemSelectIcon.enabled = true;
+        m_InventoryUI.ShowItemInfo(items[Managers.Game.m_iInventoryCurrentSelectItemSlotNum]);
     }
 
     public void ShowTap(int ShowTapNum)
@@ -169,9 +169,9 @@ public class InventoryItemTapSlotUI : UI_Base
 
     public void PriviousSlotClear()
     {
-        if (m_listInventoryItemSlotUI[m_InventoryItemMainUI.m_iCurrentSelectItemSlotNum] != null)
+        if (m_listInventoryItemSlotUI[Managers.Game.m_iInventoryCurrentSelectItemSlotNum] != null)
         {
-            m_listInventoryItemSlotUI[m_InventoryItemMainUI.m_iCurrentSelectItemSlotNum].m_ItemSlotSubUI.m_ItemSelectIcon.enabled = false;
+            m_listInventoryItemSlotUI[Managers.Game.m_iInventoryCurrentSelectItemSlotNum].m_ItemSlotSubUI.m_ItemSelectIcon.enabled = false;
         }
     }
 }

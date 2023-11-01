@@ -13,9 +13,6 @@ public class PlayerManager : CharacterManager
     [Header("UI")]
     public GameSceneUI m_GameSceneUI;
 
-    [Header("Model")]
-    public GameObject m_goModel;
-
     [Header("Player")]
     public PlayerStatsManager playerStatsManager;
     public PlayerWeaponSlotManager playerWeaponSlotManager;
@@ -52,22 +49,27 @@ public class PlayerManager : CharacterManager
         if (Managers.Game.m_isNewGame)
         {
             // 위치
-            m_StartPos = new Vector3(36.36f, 4.95f, -14.23298f);
-            m_StartRo = new Vector3(0f, -90f, 0f);
+            m_StartPos = new Vector3(-25.688f, -4.981f, 4.910397f);
+            m_StartRo = new Vector3(0f, 90f, 0f);
+
+            transform.position = m_StartPos;
+            transform.eulerAngles = m_StartRo;
         }
         // 정보 로드
         else
         {
             // 위치
-            m_StartPos = new Vector3(36.36f, 4.95f, -14.23298f);
-            m_StartRo = new Vector3(0f, -90f, 0f);
-        }
+            //m_StartPos = new Vector3(-25.688f, -4.981f, 4.910397f);
+            //m_StartRo = new Vector3(0f, 90f, 0f);
 
-        transform.position = m_StartPos;
-        transform.eulerAngles = m_StartRo;
+            //transform.position = m_StartPos;
+            //transform.eulerAngles = m_StartRo;
+        }
 
         cameraHandler = FindObjectOfType<CameraHandler>();
         m_GameSceneUI = FindObjectOfType<GameSceneUI>();
+
+        playerStatsManager.InitAbility();
 
         Managers.Camera.m_Camera.StartGame();
     }
@@ -164,19 +166,19 @@ public class PlayerManager : CharacterManager
     #region Player Save & Load Data
     public void SaveCharacterdataToCurrentSaveData(ref CharacterSaveData currentCharacterSaveData)
     {
-        currentCharacterSaveData.characterName  = playerStatsManager.characterName;
+        currentCharacterSaveData.characterName  = playerStatsManager.m_sCharacterName;
         currentCharacterSaveData.characterLevel = playerStatsManager.playerLevel;
 
         currentCharacterSaveData.xPosition      = transform.position.x;
         currentCharacterSaveData.yPosition      = transform.position.y;
         currentCharacterSaveData.zPosition      = transform.position.z;
 
-        currentCharacterSaveData.currentRightHandWeaponID = playerEquipmentManager.m_CurrentHandRightWeapon.itemID;
-        currentCharacterSaveData.currentLeftHandWeaponID  = playerEquipmentManager.m_CurrentHandLeftWeapon.itemID ;
+        currentCharacterSaveData.currentRightHandWeaponID = playerEquipmentManager.m_CurrentHandRightWeapon.m_iItemID;
+        currentCharacterSaveData.currentLeftHandWeaponID  = playerEquipmentManager.m_CurrentHandLeftWeapon.m_iItemID ;
 
         if(playerEquipmentManager.m_HelmetEquipment != null)
         {
-            currentCharacterSaveData.currentHeadGearItemID     = playerEquipmentManager.m_HelmetEquipment.itemID;
+            currentCharacterSaveData.currentHeadGearItemID     = playerEquipmentManager.m_HelmetEquipment.m_iItemID;
         }
         else
         {
@@ -185,7 +187,7 @@ public class PlayerManager : CharacterManager
 
         if(playerEquipmentManager.m_TorsoEquipment != null)
         {
-            currentCharacterSaveData.currentChestGearItemID = playerEquipmentManager.m_TorsoEquipment.itemID;
+            currentCharacterSaveData.currentChestGearItemID = playerEquipmentManager.m_TorsoEquipment.m_iItemID;
         }
         else
         {
@@ -194,7 +196,7 @@ public class PlayerManager : CharacterManager
 
         if(playerEquipmentManager.m_LegEquipment != null)
         {
-            currentCharacterSaveData.currentLegGearItemID = playerEquipmentManager.m_LegEquipment.itemID;
+            currentCharacterSaveData.currentLegGearItemID = playerEquipmentManager.m_LegEquipment.m_iItemID;
         }
         else
         {
@@ -203,7 +205,7 @@ public class PlayerManager : CharacterManager
 
         if(playerEquipmentManager.m_HandEquipment != null)
         {
-            currentCharacterSaveData.currentHandGearItemID = playerEquipmentManager.m_HandEquipment.itemID;
+            currentCharacterSaveData.currentHandGearItemID = playerEquipmentManager.m_HandEquipment.m_iItemID;
         }
         else
         {
@@ -214,7 +216,7 @@ public class PlayerManager : CharacterManager
 
     public void LoadCharacterDataFromCurrentCharacterSaveData(ref CharacterSaveData currentCharacterSaveData)
     {
-        playerStatsManager.characterName  =     currentCharacterSaveData.characterName ;
+        playerStatsManager.m_sCharacterName  =     currentCharacterSaveData.characterName ;
         playerStatsManager.playerLevel = currentCharacterSaveData.characterLevel;
 
         transform.position = new Vector3(currentCharacterSaveData.xPosition, currentCharacterSaveData.yPosition, currentCharacterSaveData.zPosition);

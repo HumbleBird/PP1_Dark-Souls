@@ -5,6 +5,12 @@ using UnityEngine;
 [CreateAssetMenu(menuName = "Items/Consumables/Weapon Buff")]
 public class WeaponBuffConsumableItem : ToolItem
 {
+    //public WeaponBuffConsumableItem()
+    //{
+    //    weaponBuffEffect = Managers.Resource.Load<WeaponBuffEffect>("Data/Character Effects/Fire Buff Weapon Effect");
+    //    buffTriggerSound = Managers.Resource.Load<AudioClip>("Item/Weapon/mixkit-fire-woosh-1348");
+    //}
+
     [Header("Effect")]
     [SerializeField] WeaponBuffEffect weaponBuffEffect;
 
@@ -46,9 +52,7 @@ public class WeaponBuffConsumableItem : ToolItem
         if (player.playerEquipmentManager.m_CurrentHandConsumable.m_iCurrentCount <= 0)
             return false;
 
-        MeleeWeaponItem meleeWeapon = player.playerEquipmentManager.m_CurrentHandRightWeapon as MeleeWeaponItem;
-
-        if(meleeWeapon != null && meleeWeapon.canBeBeffued)
+        if(player.playerEquipmentManager.m_CurrentHandRightWeapon != null && player.playerEquipmentManager.m_CurrentHandRightWeapon.canBeBeffued)
         {
             return true;
         }

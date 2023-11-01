@@ -44,7 +44,7 @@ public class QuickSlotsUI : UI_Base
         // Spell Slot
         if(player.playerEquipmentManager.m_CurrentHandSpell != null)
         {
-            GetImage((int)Images.SpellSlotImage).sprite = player.playerEquipmentManager.m_CurrentHandSpell.itemIcon;
+            GetImage((int)Images.SpellSlotImage).sprite = player.playerEquipmentManager.m_CurrentHandSpell.m_ItemIcon;
             GetImage((int)Images.SpellSlotImage).enabled = true;
             GetImage((int)Images.SpellPlateImage).enabled = true;
         }
@@ -58,7 +58,7 @@ public class QuickSlotsUI : UI_Base
         // Consumable Item Slot (Down Slot)
         if(player.playerEquipmentManager.m_CurrentHandConsumable != null)
         {
-            GetImage((int)Images.ConsumableItemSlotImage).sprite = player.playerEquipmentManager.m_CurrentHandConsumable.itemIcon;
+            GetImage((int)Images.ConsumableItemSlotImage).sprite = player.playerEquipmentManager.m_CurrentHandConsumable.m_ItemIcon;
             GetImage((int)Images.ConsumableItemSlotImage).enabled = true;
             GetImage((int)Images.ConsumableItemPlateImage).enabled = true;
         }
@@ -70,9 +70,9 @@ public class QuickSlotsUI : UI_Base
         }
 
         // Right Hand Slot (Right Slot)
-        if(player.playerEquipmentManager.m_CurrentHandRightWeapon != null)
+        if(player.playerEquipmentManager.m_CurrentHandRightWeapon != null && player.playerEquipmentManager.m_CurrentHandRightWeapon != player.playerEquipmentManager.m_Unarmed)
         {
-            GetImage((int)Images.RightHandSlotImage).sprite = player.playerEquipmentManager.m_CurrentHandRightWeapon.itemIcon;
+            GetImage((int)Images.RightHandSlotImage).sprite = player.playerEquipmentManager.m_CurrentHandRightWeapon.m_ItemIcon;
             GetImage((int)Images.RightHandSlotImage).enabled = true;
             GetImage((int)Images.RightHandPlateImage).enabled = true;
         }
@@ -84,9 +84,9 @@ public class QuickSlotsUI : UI_Base
         }
 
         // Left Hand Slot (Left Slot)
-        if (player.playerEquipmentManager.m_CurrentHandLeftWeapon != null)
+        if (player.playerEquipmentManager.m_CurrentHandLeftWeapon != null && player.playerEquipmentManager.m_CurrentHandLeftWeapon != player.playerEquipmentManager.m_Unarmed)
         {
-            GetImage((int)Images.LeftHandSlotImage).sprite = player.playerEquipmentManager.m_CurrentHandLeftWeapon.itemIcon;
+            GetImage((int)Images.LeftHandSlotImage).sprite = player.playerEquipmentManager.m_CurrentHandLeftWeapon.m_ItemIcon;
             GetImage((int)Images.LeftHandSlotImage).enabled = true;
             GetImage((int)Images.LeftHandPlateImage).enabled = true;
         }

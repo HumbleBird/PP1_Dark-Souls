@@ -66,6 +66,7 @@ public class CameraHandler : MonoBehaviour
         ignoreLayers = ~(1 << 8 | 1 << 9 | 1 << 10 |  1 << 12);
         cameraObject = Camera.main;
         Managers.Camera.m_Camera = this;
+        playerManager = Managers.Object.m_MyPlayer;
     }
 
     public void StartGame()
@@ -78,6 +79,8 @@ public class CameraHandler : MonoBehaviour
     // Follow the Player
     public void FollowTarget()
     {
+        if (targetTransform == null)
+            return;
 
         if(playerManager.isAiming)
         {

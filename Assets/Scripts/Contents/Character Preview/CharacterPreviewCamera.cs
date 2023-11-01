@@ -12,11 +12,47 @@ public class CharacterPreviewCamera : MonoBehaviour
     Vector3 m_HairZoomPreviewPos = new Vector3(1.25f, 1.7f, -3.9f);
     Vector3 m_AllZoomPreviewPos = new Vector3(1.25f, 0.87f, -2.87f);
 
+    Vector3 m_offPosSet = Vector3.zero;
+    Vector3 m_offRotSet = Vector3.zero;
+
+
+    public bool m_isGameScene = false;
+    PlayerManager m_playerManager;
 
     private void Awake()
     {
         myImg = GetComponent<RectTransform>();
-        ChangeCameraPreviewTransform(E_CharacterCreationPreviewCamera.None);
+        if(m_isGameScene)
+        {
+
+        }
+        else // Lobby
+        {
+            ChangeCameraPreviewTransform(E_CharacterCreationPreviewCamera.None);
+        }
+    }
+
+    private void Start()
+    {
+        if (m_isGameScene)
+        {
+            m_playerManager = Managers.Object.m_MyPlayer;
+
+            m_offPosSet = m_playerManager.transform.position - transform.position;
+            m_offRotSet = m_playerManager.transform.eulerAngles - transform.eulerAngles;
+        }
+    }
+
+    public void LateUpdate()
+    {
+        if (m_isGameScene)
+        {
+            // 항상 캐릭터의 정면을 바라보게
+
+            transform.position = m_playerManager.transform.position - m_offPosSet;
+            transform.eulerAngles = m_playerManager.transform.eulerAngles - m_offRotSet;
+
+        }
     }
 
 

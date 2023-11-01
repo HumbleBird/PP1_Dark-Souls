@@ -85,9 +85,9 @@ public class ItemInfo_Weapon : ItemInfo_Base
     void ShowWeaponItem(WeaponItem item)
     {
         // Property
-        GetText((int)Texts.ItemNameText).text = item.itemName;
+        GetText((int)Texts.ItemNameText).text = item.m_ItemName;
 
-        GetText((int)Texts.WeaponTypeText).text = item.weaponType.ToString();
+        GetText((int)Texts.WeaponTypeText).text = item.m_eWeaponType.ToString();
         GetText((int)Texts.AttackTypeText).text = item.AttackType;
         GetText((int)Texts.SkillText).text = item.Skill;
         GetText((int)Texts.FocusCostValueText).text = item.FocusCost.ToString();
@@ -128,17 +128,17 @@ public class ItemInfo_Weapon : ItemInfo_Base
         GetText((int)Texts.AttributeRequirementIntelligenceValueText).text = item.m_iAttributeRequirementIntelligence.ToString();
         GetText((int)Texts.AttributeRequirementFaithValueText).text = item.m_iAttributeRequirementFaith.ToString();
 
-        switch (item.m_EItemType)
+        switch (item.m_eItemType)
         {
             case Define.E_ItemType.RangeWeapon:
                 m_goMagicAdjustment.SetActive(false);
                 m_goAttackRange.SetActive(true);
-                GetText((int)Texts.AttackRangeValueText).text = ((RangeWeaponItem)item).m_iAttackRange.ToString();
+                GetText((int)Texts.AttackRangeValueText).text = item.m_iAttackRange.ToString();
                 break;
             case Define.E_ItemType.Catalyst:
                 m_goAttackRange.SetActive(false);
                 m_goMagicAdjustment.SetActive(true);
-                GetText((int)Texts.MagicAdjustmentValueText).text = ((CatalystWeaponItem)item).m_iMagicAdjustment.ToString();
+                GetText((int)Texts.MagicAdjustmentValueText).text = item.m_iMagicAdjustment.ToString();
                 break;
             case Define.E_ItemType.MeleeWeapon:
             case Define.E_ItemType.Shield:

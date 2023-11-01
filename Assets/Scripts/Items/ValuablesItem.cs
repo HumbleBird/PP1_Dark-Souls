@@ -7,7 +7,7 @@ public class ValuablesItem : Item
 {
     public ValuablesItem()
     {
-        m_EItemType = Define.E_ItemType.Valuables;
+        m_eItemType = Define.E_ItemType.Valuables;
     }
 
     [Header("Current Count")]

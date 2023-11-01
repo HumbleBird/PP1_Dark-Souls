@@ -7,7 +7,7 @@ public class PledgeItem : Item
 {
     PledgeItem()
     {
-        m_EItemType = Define.E_ItemType.Pledge;
+        m_eItemType = Define.E_ItemType.Pledge;
     }
 
     [Header("Item Description")]
