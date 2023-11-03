@@ -20,7 +20,16 @@ public class AICharacterStatsManager : CharacterStatsManager
         base.Awake();
 
         aiCharacter = GetComponent<AICharacterManager>();
-        aiCharacterHealthBar = Managers.UI.MakeWorldSpaceUI<UIAICharacterHealthBar>(transform);
+
+
+        if(isBoss)
+        {
+
+        }
+        else
+        {
+            aiCharacterHealthBar = Managers.UI.MakeWorldSpaceUI<UIAICharacterHealthBar>(transform);
+        }
 
         teamIDNumber = (int)E_TeamId.Monster;
 
@@ -70,6 +79,9 @@ public class AICharacterStatsManager : CharacterStatsManager
     {
         maxHealth = CalculateMaxHP(aiCharacter.m_CharacterID);
 
+        // Poise
+        m_fTotalPoiseDefence = m_fStatPoise;
+
         FullRecovery();
     }
 
@@ -108,7 +120,7 @@ public class AICharacterStatsManager : CharacterStatsManager
         }
         else if (isBoss && aiCharacter.aiCharacterBossManager != null)
         {
-            aiCharacter.aiCharacterBossManager.RefreshUI();
+            aiCharacter.aiCharacterBossManager.HealthRefresh();
 
         }
     }
@@ -126,13 +138,14 @@ public class AICharacterStatsManager : CharacterStatsManager
         }
         else if (isBoss && aiCharacter.aiCharacterBossManager != null)
         {
-            aiCharacter.aiCharacterBossManager.RefreshUI();
+            aiCharacter.aiCharacterBossManager.HealthRefresh();
 
         }
 
         if (currentHealth <= 0)
         {
             aiCharacter.Dead();
+
             aiCharacter.aiCharacterAnimationManager.PlayTargetAnimation("Dead_01", true);
         }
     }
@@ -144,7 +157,14 @@ public class AICharacterStatsManager : CharacterStatsManager
 
     public override void HealthBarUIUpdate(int damage)
     {
-        aiCharacterHealthBar.RefreshUI(damage);
+        if (!isBoss)
+        {
+            aiCharacterHealthBar.RefreshUI(damage);
+        }
+        else if (isBoss && aiCharacter.aiCharacterBossManager != null)
+        {
+            aiCharacter.aiCharacterBossManager.HealthRefresh();
 
+        }
     }
 }

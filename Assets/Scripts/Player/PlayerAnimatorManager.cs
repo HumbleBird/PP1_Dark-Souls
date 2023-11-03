@@ -86,11 +86,13 @@ public class PlayerAnimatorManager : CharacterAnimatorManager
     public void DisableCollision()
     {
         player.characterController.enabled = false;
+        player.m_Collider.enabled = false;
     }
 
     public void EnableCollision()
     {
         player.characterController.enabled = true;
+        player.m_Collider.enabled = true;
     }
 
     public virtual void SucessFullyUseCurrentConsumable()

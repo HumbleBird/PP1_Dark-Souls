@@ -89,7 +89,7 @@ public class CompanionStateAttackTarget : State
         {
             ResetStateFlags();
             aiCharacter.currentTarget = null;
-            return this;
+            return combatStanceState;
         }
 
         if (aiCharacter.distancefromTarget > aiCharacter.MaximumAggroRadius)

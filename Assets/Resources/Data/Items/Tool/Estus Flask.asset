@@ -21,7 +21,8 @@ MonoBehaviour:
   m_iEquipSlotNum: 0
   m_bIsUnarmed: 0
   m_sPrefabPath: Prefabs/Items/Tool/Estus Flask
-  m_ToolType: 0
+  m_Tool_LimitiedType: 0
+  m_eToolType: 3
   m_iCurrentCount: 10
   m_iMaxCount: 10
   m_iCurrentSaveCount: 0
@@ -30,14 +31,12 @@ MonoBehaviour:
     at bonfires, and drink to restore HP. The journey of an Undead has always traced
     the bonfires, and no journey of import has been made without an Estus Flask."'
   itemModel: {fileID: 7694254933542424885, guid: 0f51766a926e5e74f8354c9951bfc5ff, type: 3}
-  consumeAnimation: Drinking
+  m_sPlayAnimationName: Drinking
   isInteracting: 0
   m_iAttributeBonusStrength: 0
   m_iAttributeBonusDexterity: 0
   m_iAttributeBonusIntelligence: 0
   m_iAttributeBonusFaith: 0
-  estusFlask: 1
-  ashenFlask: 0
+  m_EatSound: {fileID: 8300000, guid: ef4553d6ed45dcf43bffa2fa333d2396, type: 3}
   healthRecoverAmount: 250
   focusPointsRecoverAmount: 0
-  recoveryFX: {fileID: 138182169165516461, guid: deafd5bc56c610b4ebc01f16d3055413, type: 3}

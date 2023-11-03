@@ -190,7 +190,7 @@ public class EquipmentSlotUI : ItemSlotUI
         else
         {
             m_EquipmentUI.m_ItemInformationUI.ShowItemInformation(m_Item);
-            m_EquipmentUI.m_CurrentEquipmentsUI.ShowItemInformation(m_Item.name, m_sSlotPartName);
+            m_EquipmentUI.m_CurrentEquipmentsUI.ShowItemInformation(m_Item.m_ItemName, m_sSlotPartName);
         }
 
     }

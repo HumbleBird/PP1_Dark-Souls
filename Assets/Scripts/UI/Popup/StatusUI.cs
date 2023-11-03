@@ -107,7 +107,7 @@ public class StatusUI : UI_Popup
         GetText((int)Texts.FPValueText).text = string.Format("{0, 0} / {1, 10}", player.playerStatsManager.currentFocusPoints, player.playerStatsManager.maxfocusPoint);
         GetText((int)Texts.StaminaValueText).text = player.playerStatsManager.maxStamina.ToString();
         GetText((int)Texts.EquipLoadValueText).text = string.Format("{0, 0} / {1, 10}", player.playerStatsManager.m_CurrentEquipLoad.ToString("0.00"), player.playerStatsManager.m_MaxEquipLoad.ToString("0.00")); ;
-        GetText((int)Texts.PoiseValueText).text = player.playerStatsManager.totalPoiseDefence.ToString("0.00");
+        GetText((int)Texts.PoiseValueText).text = player.playerStatsManager.m_fTotalPoiseDefence.ToString("0.00");
         GetText((int)Texts.ItemDiscoveryValueText).text = player.playerStatsManager.m_iItemDiscovery.ToString();
 
         // Middle - Attack power

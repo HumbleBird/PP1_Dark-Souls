@@ -6,9 +6,23 @@ using static Define;
 [CreateAssetMenu(menuName = "Items/Ammo")]
 public class AmmoItem : Item
 {
+    public AmmoItem(int id)
+    {
+        m_eItemType = Define.E_ItemType.Ammo;
+
+        ammoType = AmmoType.Arrow;
+
+        loadedItemModel = Managers.Resource.Load<GameObject>("Prefabs/Items/Weapons/Ammo/Standard Arrow_Loaded_Model");
+        liveAmmoModel = Managers.Resource.Load<GameObject>("Prefabs/Items/Weapons/Ammo/Standard Arrow_Live_Model");
+        penetratedModel = Managers.Resource.Load<GameObject>("Prefabs/Items/Weapons/Ammo/Standard Arrow_Penetrated_Model");
+    }
+
     public AmmoItem()
     {
         m_eItemType = Define.E_ItemType.Ammo;
+
+        ammoType = AmmoType.Arrow;
+
     }
 
     [Header("Property")]
@@ -23,11 +37,8 @@ public class AmmoItem : Item
     public int m_iCurrentSaveCount; // 현재 저장한 수
     public int m_iMaxSaveCount; // 최대 저장한 가능한 수
 
-    [Header("Ammo Base Damage")]
-    public int physicalDamage = 50;
-
     [Header("Attack Values")]
-    public int m_iPhysicalDamage;
+    public int m_iPhysicalDamage = 50;
     public int m_iMagicDamage;
     public int m_iFireDamage;
     public int m_iLightningDamage;
@@ -45,7 +56,7 @@ public class AmmoItem : Item
     public float ammoMass = 0;
     public bool useGravity = false;
 
-
+    public CharacterManager m_Shooter;
 
 
     [Header("Item Modles")]

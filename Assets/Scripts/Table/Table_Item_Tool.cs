@@ -10,6 +10,7 @@ public class Table_Item_Tool : Table_Base
         public string    m_sName                          ;
         public string    m_sIconPath                            ;
         public string    m_sPrefabPath                     ;
+        public int m_iToolType;
         public int       m_iisLimitied                ;
         public int       m_iMaxCurrentCount           ;
         public int       m_iMaxSaveCount                  ;
@@ -66,6 +67,7 @@ public class Table_Item_Tool : Table_Base
         _reader.get(_nRow, ref _info.m_sName                    );
         _reader.get(_nRow, ref _info.m_sIconPath                );
         _reader.get(_nRow, ref _info.m_sPrefabPath              );
+        _reader.get(_nRow, ref _info.m_iToolType              );
         _reader.get(_nRow, ref _info.m_iisLimitied              );
         _reader.get(_nRow, ref _info.m_iMaxCurrentCount         );
         _reader.get(_nRow, ref _info.m_iMaxSaveCount            );

@@ -25,14 +25,12 @@ public class WeaponBuffConsumableItem : ToolItem
 
         if (m_iCurrentCount > 0)
         {
-            player.playerAnimatorManager.PlayTargetAnimation(consumeAnimation, isInteracting, true);
+            player.playerAnimatorManager.PlayTargetAnimation(m_sPlayAnimationName, isInteracting, true);
         }
         else
         {
             player.playerAnimatorManager.PlayTargetAnimation("Shrug", true);
         }
-
-
     }
 
     public override void SucessToConsumeItem(PlayerManager player)

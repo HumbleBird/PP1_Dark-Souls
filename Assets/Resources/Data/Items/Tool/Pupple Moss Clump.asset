@@ -21,18 +21,19 @@ MonoBehaviour:
   m_iEquipSlotNum: 0
   m_bIsUnarmed: 0
   m_sPrefabPath: 'Prefabs/Items/Tool/Pupple Moss Clump '
-  m_ToolType: 1
-  m_iCurrentCount: 0
-  m_iMaxCount: 0
+  m_goPrefab: {fileID: 0}
+  m_Tool_LimitiedType: 1
+  m_eToolType: 3
+  m_iCurrentCount: 10
+  m_iMaxCount: 10
   m_iCurrentSaveCount: 0
   m_iMaxSaveCount: 0
-  m_sItemDescription: 
+  m_sItemDescription: Art/Textures/UI/high res icons/00_items/PuppleMossClump
   itemModel: {fileID: 50553412056502599, guid: b8fea9f4cfc08324a8bc7a0b914d6423, type: 3}
-  consumeAnimation: Drinking
+  m_sPlayAnimationName: Drinking
   isInteracting: 0
   m_iAttributeBonusStrength: 0
   m_iAttributeBonusDexterity: 0
   m_iAttributeBonusIntelligence: 0
   m_iAttributeBonusFaith: 0
-  clumpConsumeFX: {fileID: 0}
-  curePoison: 1
+  m_EatSound: {fileID: 0}

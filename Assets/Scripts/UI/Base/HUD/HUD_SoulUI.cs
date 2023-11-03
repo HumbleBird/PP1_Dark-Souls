@@ -23,7 +23,7 @@ public class HUD_SoulUI : MonoBehaviour
         m_CurrentSoulsText.text = m_iCurrentSouls.ToString();
     }
 
-    public void AddSouls(int AddSous, bool isImmediately = false)
+    public void AddSouls(int AddSouls, bool isImmediately = false)
     {
         if(isImmediately)
         {
@@ -33,10 +33,41 @@ public class HUD_SoulUI : MonoBehaviour
         }
         else
         {
-            m_AddSouls.text = "+" + AddSous.ToString();
-            StartCoroutine(IAddSouls());
+            m_AddSouls.text = "+" + AddSouls.ToString();
+            StartCoroutine(IAddSouls(AddSouls));
         }
     }
+
+    IEnumerator IAddSouls(int AddSouls)
+    {
+        yield return new WaitForSeconds(1f);
+
+        // Animator Play
+        // 1. add souls animator
+        m_Animator.Play("AddSouls");
+
+        yield return new WaitForSeconds(1.5f);
+
+        // 2. 1번이 끝나면 current souls animator play
+        // 3. 2번과 동시에 코루틴으로 1씩 증가.
+        while (true)
+        {
+            if (m_Player.playerStatsManager.currentSoulCount <= m_iCurrentSouls)
+            {
+                m_iCurrentSouls = m_Player.playerStatsManager.currentSoulCount;
+                m_CurrentSoulsText.text = m_iCurrentSouls.ToString();
+
+                yield break;
+            }
+
+            m_iCurrentSouls += Mathf.RoundToInt(AddSouls * Time.deltaTime / 2);
+            m_CurrentSoulsText.text = m_iCurrentSouls.ToString();
+
+            yield return null;
+        }
+
+    }
+
 
     public void LoseSouls(bool isImmediately = false)
     {
@@ -53,45 +84,31 @@ public class HUD_SoulUI : MonoBehaviour
 
     }
 
-    IEnumerator IAddSouls()
-    {
-        yield return new WaitForSeconds(1f);
-
-        // Animator Play
-        // 1. add souls animator
-        m_Animator.Play("AddSouls");
-
-        yield return new WaitForSeconds(1.5f);
-
-        // 2. 1번이 끝나면 current souls animator play
-        // 3. 2번과 동시에 코루틴으로 1씩 증가.
-        while (true)
-        {
-            if (m_Player.playerStatsManager.currentSoulCount == m_iCurrentSouls)
-            {
-
-                yield break;
-            }
-
-            m_iCurrentSouls++;
-            m_CurrentSoulsText.text = m_iCurrentSouls.ToString();
-
-            yield return null;
-        }
-
-    }
-
     IEnumerator ILoseSouls()
     {
+        int oriSoul = m_iCurrentSouls;
+        float downSpeed = 0;
+        if (oriSoul > 100000)
+            downSpeed = 1;
+        else if (oriSoul >= 50000)
+            downSpeed = 3;
+        else if (oriSoul >= 20000)
+            downSpeed = 5;
+        else 
+            downSpeed = 7;
+
+
         while (true)
         {
-            if (m_Player.playerStatsManager.currentSoulCount == m_iCurrentSouls)
+            if (m_Player.playerStatsManager.currentSoulCount <= m_iCurrentSouls)
             {
+                m_iCurrentSouls = 0;
+                m_CurrentSoulsText.text = m_iCurrentSouls.ToString();
 
                 yield break;
             }
 
-            m_iCurrentSouls--;
+            m_iCurrentSouls -= Mathf.RoundToInt(oriSoul * Time.deltaTime / downSpeed);
             m_CurrentSoulsText.text = m_iCurrentSouls.ToString();
 
             yield return null;

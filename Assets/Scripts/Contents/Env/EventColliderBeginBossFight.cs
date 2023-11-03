@@ -4,18 +4,19 @@ using UnityEngine;
 
 public class EventColliderBeginBossFight : MonoBehaviour
 {
-    WorldEventManager worldEventManager;
-
-    private void Awake()
-    {
-        worldEventManager = FindObjectOfType<WorldEventManager>();
-    }
+    public AICharacterManager m_boss;
+    public FogWall m_FogWall;
 
     private void OnTriggerEnter(Collider other)
     {
-        if(other.tag == "Player")
+        PlayerManager player = other.GetComponent<PlayerManager>();
+
+        if (player != null)
         {
-            worldEventManager.ActivateBossFight();
+            if(m_boss.isDead == false)
+            {
+                Managers.Game.ActivateBossFight(m_FogWall, m_boss);
+            }
         }
     }
 }

@@ -14,7 +14,7 @@ public class IllusionaryWall : MonoBehaviour
     {
         //illusionaryWallMaterial = GetComponent<Material>();
         wallCollider = GetComponent<Collider>();
-        illusionaryWallMaterial.color = new Color(1, 1, 1, 255);
+        illusionaryWallMaterial.color = new Color(1, 1, 1, 1);
     }
 
     private void Update()
@@ -33,7 +33,7 @@ public class IllusionaryWall : MonoBehaviour
     public void FadeIllusionaryWall()
     {
         alpha = illusionaryWallMaterial.color.a;
-        alpha = alpha - Time.deltaTime / fadetimer;
+        alpha = alpha - (Time.deltaTime / fadetimer);
         Color fadedWallColor = new Color(1, 1, 1, alpha);
         illusionaryWallMaterial.color = fadedWallColor;
 

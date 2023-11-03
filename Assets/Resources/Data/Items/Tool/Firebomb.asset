@@ -9,7 +9,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 1f2bbf0878cb5ed4da513822c7478a13, type: 3}
+  m_Script: {fileID: 11500000, guid: 3a0586773accdcd47b402a400470c1ed, type: 3}
   m_Name: Firebomb
   m_EditorClassIdentifier: 
   m_ItemIcon: {fileID: 21300000, guid: 6de58fc87cfbb984e9547b5487468666, type: 3}
@@ -20,23 +20,26 @@ MonoBehaviour:
   m_EquipingType: 0
   m_iEquipSlotNum: 0
   m_bIsUnarmed: 0
-  m_sPrefabPath: 'Prefabs/Items/Tool/Firebomb '
-  m_ToolType: 1
+  m_sPrefabPath: Prefabs/Items/Tool/Firebomb
+  m_goPrefab: {fileID: 0}
+  m_Tool_LimitiedType: 1
+  m_eToolType: 5
   m_iCurrentCount: 10
-  m_iMaxCount: 10
+  m_iMaxCount: 0
   m_iCurrentSaveCount: 0
   m_iMaxSaveCount: 0
-  m_sItemDescription: 
-  itemModel: {fileID: 939402196391381232, guid: 9b78f95bdd9040b489845af596f7ef6a, type: 3}
-  consumeAnimation: Throw
+  m_sItemDescription: Throw at enemies to deal fire damage.
+  itemModel: {fileID: 8661123208684589935, guid: 097dc4573d5c8b648a02abea8542c738, type: 3}
+  m_sPlayAnimationName: Throw
   isInteracting: 0
   m_iAttributeBonusStrength: 0
   m_iAttributeBonusDexterity: 0
   m_iAttributeBonusIntelligence: 0
   m_iAttributeBonusFaith: 0
-  upwardVelocity: 300
-  forwardVelocity: 300
-  bombMass: 1
+  m_EatSound: {fileID: 0}
+  upwardVelocity: 0
+  forwardVelocity: 0
+  bombMass: 0
   liveBombModel: {fileID: 939402196391381232, guid: 9b78f95bdd9040b489845af596f7ef6a, type: 3}
-  baseDamage: 200
-  explosiveDamage: 75
+  baseDamage: 0
+  explosiveDamage: 0

@@ -90,7 +90,7 @@ public class CharacterWeaponSlotManager : MonoBehaviour
                 rightHandSlot.LoadWeaponModel(weaponItem);
                 LoadRightWeaponDamageCollider();
                 LoadTwoHandIKTargtets(character.isTwoHandingWeapon);
-                character.animator.runtimeAnimatorController = weaponItem.weaponController;
+                //character.animator.runtimeAnimatorController = weaponItem.weaponController;
             }
 
         }
@@ -112,7 +112,7 @@ public class CharacterWeaponSlotManager : MonoBehaviour
                 rightHandSlot.currentWeapon = unarmWeapon;
                 rightHandSlot.LoadWeaponModel(unarmWeapon);
                 LoadRightWeaponDamageCollider();
-                character.animator.runtimeAnimatorController = weaponItem.weaponController;
+                //character.animator.runtimeAnimatorController = weaponItem.weaponController;
 
             }
         }
@@ -189,11 +189,11 @@ public class CharacterWeaponSlotManager : MonoBehaviour
     public virtual void GrantWeaponAttackingPoiseBonus()
     {
         WeaponItem currentWeaponBeingUsed = character.characterEquipmentManager.currentItemBeingUsed as WeaponItem;
-        character.characterStatsManager.totalPoiseDefence = character.characterStatsManager.totalPoiseDefence + currentWeaponBeingUsed.offensivePoiseBonus;
+        character.characterStatsManager.m_fTotalPoiseDefence = character.characterStatsManager.m_fTotalPoiseDefence + currentWeaponBeingUsed.offensivePoiseBonus;
     }
 
     public virtual void ResetWeaponAttackingPoiseBonus()
     {
-        character.characterStatsManager.totalPoiseDefence = character.characterStatsManager.armorPoiseBonus;
+        character.characterStatsManager.m_fTotalPoiseDefence = character.characterStatsManager.m_fStatPoise;
     }
 }

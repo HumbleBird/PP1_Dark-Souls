@@ -5,7 +5,7 @@ using UnityEngine;
 public class BossCombatStanceState : CombatStanceState
 {
     [Header("Second Phase Attacks")]
-    public bool hasPhaseShifted;
+    public bool hasPhaseShifted = false;
     public AICharacterAttackAction[] secondPhaseAttacks;
 
     protected override void GetNewAttack(AICharacterManager enemyManager)

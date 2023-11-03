@@ -31,6 +31,9 @@ public class PlayerEffectsManager : CharacterEffectsManager
         }
         Destroy(instantiatedFXModel2.gameObject);
         player.playerWeaponSlotManager.LoadBothWeaponsOnSlots();
+
+        // Sound
+        Managers.Sound.Play("Item/Consumable/Estus Flask Drink");
     }
 
     protected override void ProcessBuildUpDecay()

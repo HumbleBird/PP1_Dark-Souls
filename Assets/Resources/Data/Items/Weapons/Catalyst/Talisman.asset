@@ -12,45 +12,50 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 21a9429bbcaa16c46a8a82790d6954ca, type: 3}
   m_Name: Talisman
   m_EditorClassIdentifier: 
-  itemIcon: {fileID: 21300000, guid: 52b6c36079851f144926bbf3cd431d7e, type: 3}
-  itemName: Talisman
-  itemID: 0
-  m_EItemType: 7
-  modelPrefab: {fileID: 7694254933542424885, guid: 0cfd39d66170d3b438fff6b37a7e75e7, type: 3}
+  m_ItemIcon: {fileID: 21300000, guid: 024fa43842201b8419e274a82d9526b4, type: 3}
+  m_ItemName: Talisman
+  m_iItemID: 5
+  m_eItemType: 7
+  m_isEquiping: 0
+  m_EquipingType: 0
+  m_iEquipSlotNum: 0
+  m_bIsUnarmed: 0
+  m_sPrefabPath: Prefabs/Items/Weapons/Catalyst/Talisman
+  m_goPrefab: {fileID: 0}
   isUnarmed: 0
-  weaponController: {fileID: 0}
-  weaponType: 1
-  AttackType: 
-  Skill: 
-  FocusCost: 0
-  m_iAttributeRequirementStrength: 0
-  m_iAttributeRequirementDexterity: 0
+  weaponController: {fileID: 22100000, guid: 10f21dedf98d2174498bb58bc4091ab7, type: 2}
+  m_eWeaponType: 23
+  AttackType: Strike/Thrust
+  Skill: Unfaltering Prayer
+  FocusCost: 8
+  m_iAttributeRequirementStrength: 8
+  m_iAttributeRequirementDexterity: 4
   m_iAttributeRequirementIntelligence: 0
-  m_iAttributeRequirementFaith: 0
-  m_iAttributeBonusStrength: 0
+  m_iAttributeRequirementFaith: 10
+  m_iAttributeBonusStrength: 2
   m_iAttributeBonusDexterity: 0
   m_iAttributeBonusIntelligence: 0
-  m_iAttributeBonusFaith: 0
-  m_iPhysicalDamage: 0
+  m_iAttributeBonusFaith: 5
+  m_iPhysicalDamage: 52
   m_iMagicDamage: 0
   m_iFireDamage: 0
   m_iLightningDamage: 0
   m_iDarkDamage: 0
-  m_iCriticalDamage: 0
-  m_iSpellBuff: 0
-  m_iRange: 0
-  m_iPhysicalDamageReduction: 0
-  m_iMagicDamageReduction: 0
-  m_iFireDamageReduction: 0
-  m_iLightningDamageReduction: 0
-  m_iDarkDamageReduction: 0
-  m_iStability: 0
+  m_iCriticalDamage: 100
+  m_iMagicAdjustment: 100
+  m_iAttackRange: 0
+  m_iPhysicalDamageReduction: 25
+  m_iMagicDamageReduction: 15
+  m_iFireDamageReduction: 10
+  m_iLightningDamageReduction: 10
+  m_iDarkDamageReduction: 15
+  m_iStability: 10
   m_iBleeding: 0
   m_iPoison: 0
   m_iFrost: 0
   m_iCurse: 0
-  m_iDurability: 0
-  m_iWeight: 0
+  m_iDurability: 50
+  m_iWeight: 0.5
   lightAttackDamageModifier: 0
   heavyAttackDaamgeModifier: 0
   criticalDamagemuiltiplier: 4
@@ -59,10 +64,10 @@ MonoBehaviour:
   offensivePoiseBonus: 0
   physicalBlockingDamageAbsorption: 0
   fireBlockingDamageAbsorption: 0
-  baseStaminaCost: 0
-  lightAttackStaminaMultiplier: 0
-  heavyAttackStaminaMultiplier: 0
-  oh_tap_RB_Action: {fileID: 0}
+  baseStaminaCost: 20
+  lightAttackStaminaMultiplier: 1
+  heavyAttackStaminaMultiplier: 2
+  oh_tap_RB_Action: {fileID: 11400000, guid: 87333b00b77393f49af36afa2887b8bb, type: 2}
   oh_hold_RB_Action: {fileID: 0}
   oh_tap_RT_Action: {fileID: 0}
   oh_hold_RT_Action: {fileID: 0}
@@ -78,6 +83,10 @@ MonoBehaviour:
   th_hold_LB_Action: {fileID: 0}
   th_tap_LT_Action: {fileID: 0}
   th_hold_LT_Action: {fileID: 0}
-  weaponWhooshes: []
-  blockingNoises: []
-  m_iMagicAdjustment: 0
+  canBeBeffued: 1
+  m_SwrodWeaponWhooshes: []
+  m_listBlockingNoises: []
+  m_listWeaponChargeSounds: []
+  m_listBowWhooshes: []
+  m_isLeftHandEquiping: 0
+  m_SecondE_EquipmentSlotsPartType: 0

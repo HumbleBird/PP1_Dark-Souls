@@ -122,7 +122,7 @@ public class PlayerEquipmentManager : CharacterEquipmentManager
         player.playerStatsManager.m_iPoisoArmore                =0;
         player.playerStatsManager.m_fFrostArmor                 =0;
         player.playerStatsManager.m_fCurseArmor                 =0;
-        player.playerStatsManager.CurrentPoise                  = 0;
+        player.playerStatsManager.m_fStatPoise = 0;
 
         m_iArmorDamage_Reduction_Physical                    = 0;
         m_iArmorDamage_Reduction_VSStrike                    = 0;
@@ -157,7 +157,7 @@ public class PlayerEquipmentManager : CharacterEquipmentManager
         player.playerStatsManager.m_iPoisoArmore =                m_iArmorResistance_Posion          ;
         player.playerStatsManager.m_fFrostArmor  =                m_iArmorResistance_Frost           ;
         player.playerStatsManager.m_fCurseArmor =                 m_iArmorResistance_Curse;
-        player.playerStatsManager.CurrentPoise =                  m_iArmorResistance_Poise;
+        player.playerStatsManager.m_fStatPoise =                  m_iArmorResistance_Poise;
 
         player.playerStatsManager.CaculateAndSetCurrentEquipLoad(m_ftotalEquipmentLoad);
     }
@@ -587,42 +587,47 @@ public class PlayerEquipmentManager : CharacterEquipmentManager
     {
         index++;
 
-        // 마지막 슬롯에서 넘어가서 다시 처음 슬롯으로
-        if (index > itemSlots.Length - 1)
-            index = 0;
+        index = LastIndecCheck(itemSlots, index);
 
-        // 왼쪽 키 Left Hand slot
         for (int i = 0; i < itemSlots.Length; i++)
         {
             // 다음 슬롯에 아이템이 있다면 아이템 로드
             if (index == i && itemSlots[i] != null)
             {
                 Refresh();
-                break;
+                return;
             }
             // 다음 슬롯에 아이템이 없다면 건너뛰기
             else if (index == i && itemSlots[i] == null)
             {
                 index += 1;
 
-                // 마지막 슬롯에서 넘어가서 다시 처음 슬롯으로
-                if (index > itemSlots.Length - 1)
-                    index = 0;
+                index = LastIndecCheck(itemSlots, index);
 
                 for (int x = 0; x < itemSlots.Length; x++)
                 {
-                    if (itemSlots[i] == null)
+                    if (itemSlots[index] == null)
                     {
                         index += 1;
 
-                        // 마지막 슬롯에서 넘어가서 다시 처음 슬롯으로
-                        if (index > itemSlots.Length - 1)
-                            index = 0;
+                        index = LastIndecCheck(itemSlots, index);
                     }
                     else
+                    {
+                        Refresh();
                         break;
+                    }
                 }
             }
+        }
+
+        // 마지막 슬롯에서 넘어가서 다시 처음 슬롯으로
+        int LastIndecCheck(Item[] itemSlots, int index)
+        {
+            // 마지막 슬롯에서 넘어가서 다시 처음 슬롯으로
+            if (index > itemSlots.Length - 1)
+                index = 0;
+            return index;
         }
     }
 

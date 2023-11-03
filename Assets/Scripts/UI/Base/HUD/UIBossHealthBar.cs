@@ -15,6 +15,7 @@ public class UIBossHealthBar : UI_Base
     public Image m_DownHealthBarFill;
 
     public int m_iDamageValueSum;
+    public int m_iPreHP;
     float m_DamageValueAddTime = 0;
     float m_ShowDamageTime = 3f;
 
@@ -33,13 +34,13 @@ public class UIBossHealthBar : UI_Base
 
     public void Update()
     {
-        if(m_DamageValueAddTime != 0)
+        if(m_DamageValueAddTime > 0)
         {
             m_DamageValueAddTime -= Time.deltaTime;
 
             if(m_DamageValueAddTime <= 0)
             {
-                m_DamageValueAddTime = m_ShowDamageTime;
+                m_iDamageValueSum = 0;
                 m_DamageValueText.enabled = false;
             }
         }
@@ -48,13 +49,9 @@ public class UIBossHealthBar : UI_Base
     public void SetInfo(AICharacterManager aiCharacter)
     {
         m_AICharacterManager = aiCharacter;
-        m_BossNameText.text = m_AICharacterManager.name;
-    }
-
-    public void  SetUIHealthBarToActive()
-    {
+        m_BossNameText.text = m_AICharacterManager.aiCharacterStatsManager.m_sCharacterName;
         m_goPanel.gameObject.SetActive(true);
-
+        m_iPreHP = m_AICharacterManager.aiCharacterStatsManager.currentHealth;
     }
 
     public override void RefreshUI()
@@ -87,9 +84,15 @@ public class UIBossHealthBar : UI_Base
 
         m_DamageValueAddTime = m_ShowDamageTime;
 
-        int damage = m_AICharacterManager.aiCharacterStatsManager.maxHealth - m_AICharacterManager.aiCharacterStatsManager.currentHealth;
+        int damage = m_iPreHP - m_AICharacterManager.aiCharacterStatsManager.currentHealth;
+        m_iPreHP = m_AICharacterManager.aiCharacterStatsManager.currentHealth;
         m_iDamageValueSum += damage;
 
         m_DamageValueText.text = m_iDamageValueSum.ToString();
+    }
+
+    public void Clear()
+    {
+        m_goPanel.gameObject.SetActive(false);
     }
 }

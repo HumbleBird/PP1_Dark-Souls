@@ -241,7 +241,7 @@ public class LevelUpUI : InteractableNPCPopupUI
         m_iCalculateFP = playerManager.playerStatsManager.maxfocusPoint;
         m_iCalculateStamina = playerManager.playerStatsManager.maxStamina;
         m_iCalculateEquipLoad = playerManager.playerStatsManager.m_MaxEquipLoad;
-        m_iCalculatePoise = playerManager.playerStatsManager.CurrentPoise;
+        m_iCalculatePoise = playerManager.playerStatsManager.m_fStatPoise;
         m_iCalculateItemDiscovery = playerManager.playerStatsManager.m_iItemDiscovery;
 
         InitStat(m_iCalculateHP, GetText((int)Texts.CurrentHPText), GetText((int)Texts.CaluateHPText));
@@ -387,7 +387,7 @@ public class LevelUpUI : InteractableNPCPopupUI
         GetText((int)Texts.CaluateFPText).text = playerManager.playerStatsManager.CalculateMaxfocusPoint(m_iProjectedAttunementLevel).ToString();
         GetText((int)Texts.CaluateStaminaText).text = playerManager.playerStatsManager.CalculateMaxStamina(m_iProjectedEnduranceLevel).ToString();
         GetText((int)Texts.CaluateEquipLoadText).text = Mathf.RoundToInt(playerManager.playerStatsManager.CalculateAndSetMaxEquipload(m_iProjectedVitalityLevel)).ToString();
-        GetText((int)Texts.CaluatePoiseText).text = playerManager.playerStatsManager.CurrentPoise.ToString(); // only 장비로 인해서만 수치에 영향을 받음
+        GetText((int)Texts.CaluatePoiseText).text = playerManager.playerStatsManager.m_fStatPoise.ToString(); // only 장비로 인해서만 수치에 영향을 받음
         GetText((int)Texts.CaluateItemDiscoveryText).text = playerManager.playerStatsManager.CalculateItemDiscovery(m_iProjectedLuckLevel).ToString();
 
 

@@ -12,30 +12,36 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: cede40fb387dff844b776344d93819d9, type: 3}
   m_Name: Fire Ball
   m_EditorClassIdentifier: 
-  m_ItemIcon: {fileID: 0}
-  m_ItemName: 
-  m_iItemID: 0
+  m_ItemIcon: {fileID: 21300000, guid: 01d4bfd96b3a2b74f902c9f952a18f37, type: 3}
+  m_ItemName: Fire Ball
+  m_iItemID: 102
   m_eItemType: 4
   m_isEquiping: 0
   m_EquipingType: 0
   m_iEquipSlotNum: 0
   m_bIsUnarmed: 0
-  m_sPrefabPath: 
-  m_iCurrentCount: 0
-  m_iMaxCount: 0
+  m_sPrefabPath: Prefabs/Items/Weapons/Catalyst/Pyromancy Flame
+  m_goPrefab: {fileID: 0}
+  m_iCurrentCount: 10
+  m_iMaxCount: 10
   m_iCurrentSaveCount: 0
   m_iMaxSaveCount: 0
-  m_sItemDescription: 
-  m_iAttributeRequirementIntelligence: 0
-  m_iAttributeRequirementFaith: 0
+  m_sItemDescription: Elementary pyromancy. Hurls a fireball. To use sorceries. equip
+    a flame and attune a pyromancy at a bonfire.
+  m_iAttributeRequirementIntelligence: 6
+  m_iAttributeRequirementFaith: 6
   m_iCostFP: 0
   m_iMagicUseSlot: 0
-  spellWarmUpFX: {fileID: 6233643976222738395, guid: 3a2544effd611a34a9cb4729d4d76e15, type: 3}
+  spellWarmUpFX: {fileID: 1094037032521078272, guid: 378c12b3bba3a364891f3b8dd0192e31, type: 3}
   spellCastFX: {fileID: 6233643976222738395, guid: 3035cd28609514b4580c85602ba1b82d, type: 3}
-  spellAnimation: Spell_Throw_Start
-  m_eSpellType: 0
+  m_sSpellAnimation: Spell_Throw_Start
+  m_eSpellType: 3
   baseDamage: 75
   projectileForwardVelocity: 500
   projectileUpwardVelocity: 150
   projectileMass: 25
   isEffectedByGravity: 1
+  rigidBody: {fileID: 0}
+  healAmount: 0
+  m_sAttemptToCastSpellSound: Item/Magic/Spell_AttemptToCastSpell_Fire
+  m_sSuccessfullyCastSpellSound: Item/Magic/Spell_SuccessfullyCastSpell_Fire

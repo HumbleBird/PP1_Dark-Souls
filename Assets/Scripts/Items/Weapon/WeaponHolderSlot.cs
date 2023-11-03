@@ -39,8 +39,13 @@ public class WeaponHolderSlot : MonoBehaviour
             return;
         }
 
-        GameObject model = Managers.Resource.Instantiate(weaponItem.m_sPrefabPath);
 
+        GameObject model;
+
+        if (weaponItem.m_goPrefab != null)
+            model = weaponItem.m_goPrefab;
+        else
+            model = Managers.Resource.Instantiate(weaponItem.m_sPrefabPath);
 
         if(model != null)
         {

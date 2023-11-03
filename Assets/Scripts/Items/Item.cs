@@ -18,4 +18,5 @@ public class Item : ScriptableObject
     public bool m_bEquipped { get; set; } = false;
     public bool m_bIsUnarmed = false;
     public string m_sPrefabPath;
+    public GameObject m_goPrefab;
 }

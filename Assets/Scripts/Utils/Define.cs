@@ -17,11 +17,25 @@ public class Define
 
     #region Item
 
+    public enum E_ToolType
+    {
+        KeyItems = 1,
+        MultiplayerItmes = 2,
+        Consumables = 3,
+        Tools = 4,
+        Projectiles = 5,
+        Ammunition = 6,
+        Souls = 7,
+        BossSouls = 8,
+        Ore = 9,
+        Ashes = 10,
+    }
+
     public enum E_SpellType
     {
-        Faith = 1,
-        Magic = 2,
-        Pyro = 3,
+        Sorcerie = 1,
+        Miracle = 2,
+        Pyromancie = 3,
     }
 
     public enum E_ItemType
@@ -43,7 +57,7 @@ public class Define
         Pledge = 15
     }
 
-    public enum ToolItemType
+    public enum E_Tool_LimitiedType
     {
         Unlimited,
         limited

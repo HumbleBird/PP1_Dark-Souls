@@ -113,9 +113,6 @@ public class CombatStanceState : State
         {
             horizontalMovementValue = -0.5f;
         }
-
-        Debug.Log("WalkAroundTarget " + horizontalMovementValue);
-
     }
 
     protected virtual void GetNewAttack(AICharacterManager enemy)

@@ -76,15 +76,9 @@ public class DamageCollider : MonoBehaviour
 
                 charactersDamageDuringThisCalculation.Add(enemyManager);
 
-                if (enemyManager.characterStatsManager.teamIDNumber == teamIDNumber)
-                    return;
-
                 CheckForParry(enemyManager);
 
                 CheckForBlock(enemyManager);
-
-                if (enemyManager.characterStatsManager.teamIDNumber == teamIDNumber)
-                    return;
 
                 if (hasBeenParried)
                     return;
@@ -93,7 +87,7 @@ public class DamageCollider : MonoBehaviour
                     return;
 
                 enemyManager.characterStatsManager.poiseResetTimer = enemyManager.characterStatsManager.totalPoiseResetTime;
-                enemyManager.characterStatsManager.totalPoiseDefence = enemyManager.characterStatsManager.totalPoiseDefence - poiseDamage;
+                enemyManager.characterStatsManager.m_fTotalPoiseDefence = enemyManager.characterStatsManager.m_fTotalPoiseDefence - poiseDamage;
 
                 // 무기 콜라이더가 어디 부분에서 처음 부딪치는지 탐지
                 contactPoint = other.gameObject.GetComponent<Collider>().ClosestPointOnBounds(transform.position);

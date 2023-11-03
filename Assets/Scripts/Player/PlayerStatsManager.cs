@@ -36,8 +36,7 @@ public class PlayerStatsManager : CharacterStatsManager
     public float m_MaxEquipLoad { set { maxEquipLoad = value; } get { return Mathf.Floor(maxEquipLoad * 10f) / 10f; } }
     public EncumbranceLevel encumbranceLevel;
 
-    // Poise
-    public float CurrentPoise = 10;
+
 
     // Item Discovery
     public int m_iItemDiscovery = 10;
@@ -114,6 +113,9 @@ public class PlayerStatsManager : CharacterStatsManager
         // Luck 운. 아이템의 발견율과 속성 내성치가 상승함.
         CalculateLuck();
 
+        // Poise
+        m_fTotalPoiseDefence = m_fStatPoise;
+
         // 현재 HP, FP, Stamina 완전 회복
         FullRecovery();
 
@@ -143,7 +145,7 @@ public class PlayerStatsManager : CharacterStatsManager
         }
         else if (poiseResetTimer <= 0 && !player.isInteracting)
         {
-            totalPoiseDefence = armorPoiseBonus;
+            m_fTotalPoiseDefence = m_fStatPoise;
         }
     }
 

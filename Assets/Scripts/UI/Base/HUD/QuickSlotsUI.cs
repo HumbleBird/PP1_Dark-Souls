@@ -42,7 +42,7 @@ public class QuickSlotsUI : UI_Base
 
 
         // Spell Slot
-        if(player.playerEquipmentManager.m_CurrentHandSpell != null)
+        if(player.playerEquipmentManager.m_CurrentHandSpell != null && player.playerEquipmentManager.m_CurrentHandSpell != player.playerEquipmentManager.m_Unarmed)
         {
             GetImage((int)Images.SpellSlotImage).sprite = player.playerEquipmentManager.m_CurrentHandSpell.m_ItemIcon;
             GetImage((int)Images.SpellSlotImage).enabled = true;
@@ -56,7 +56,7 @@ public class QuickSlotsUI : UI_Base
         }
 
         // Consumable Item Slot (Down Slot)
-        if(player.playerEquipmentManager.m_CurrentHandConsumable != null)
+        if(player.playerEquipmentManager.m_CurrentHandConsumable != null && player.playerEquipmentManager.m_CurrentHandConsumable != player.playerEquipmentManager.m_Unarmed)
         {
             GetImage((int)Images.ConsumableItemSlotImage).sprite = player.playerEquipmentManager.m_CurrentHandConsumable.m_ItemIcon;
             GetImage((int)Images.ConsumableItemSlotImage).enabled = true;

@@ -2449,7 +2449,7 @@ Animator:
   m_GameObject: {fileID: 3487662551812223566}
   m_Enabled: 1
   m_Avatar: {fileID: 9000000, guid: 8bbf8b7b8b5f1144ba263c0e541f0452, type: 3}
-  m_Controller: {fileID: 9100000, guid: 13e312810cdb19f42b9a16be8b0855ee, type: 2}
+  m_Controller: {fileID: 9100000, guid: 7ec74b30ee1b4544abb71c7f9462fc06, type: 2}
   m_CullingMode: 1
   m_UpdateMode: 0
   m_ApplyRootMotion: 1
@@ -2480,9 +2480,9 @@ MonoBehaviour:
   blockingFireDamageAbsorption: 0
   blockingStabilityRating: 0
   m_iAttunementSlots: 0
-  totalPoiseDefence: 0
+  m_fPoiseHealth: 100
+  m_fTotalPoiseDefence: 0
   offensivePoiseBonus: 0
-  armorPoiseBonus: 0
   totalPoiseResetTime: 15
   poiseResetTimer: 0
   physicalDamagePercentageModifier: 100
@@ -2926,7 +2926,7 @@ MonoBehaviour:
   m_CurrentHandRightWeapon: {fileID: 11400000, guid: ae9bfb5fc7a0cb24dab19f2e3295b285, type: 2}
   m_CurrentHandLeftWeapon: {fileID: 0}
   m_CurrentHandConsumable: {fileID: 0}
-  m_CurrentHandAmmo: {fileID: 0}
+  m_CurrentHandAmmo: {fileID: 11400000, guid: 8bbc8a8655511bb419c966629a5bf179, type: 2}
   m_RightWeaponsSlots:
   - {fileID: 0}
   - {fileID: 0}

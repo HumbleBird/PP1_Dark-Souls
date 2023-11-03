@@ -21,7 +21,6 @@ public class PlayerWeaponSlotManager : CharacterWeaponSlotManager
                 leftHandSlot.currentWeapon = weaponItem;
                 leftHandSlot.LoadWeaponModel(weaponItem);
                 LoadLeftWeaponDamageCollider();
-                //player.playerAnimatorManager.PlayerTargetAnimation(weaponItem.offHandIdleAnimation, false, true);
             }
             else
             {
@@ -79,7 +78,7 @@ public class PlayerWeaponSlotManager : CharacterWeaponSlotManager
     public void SucessfullyThrowFireBomb()
     {
         Destroy(player.playerEffectsManager.instantiatedFXModel2);
-        BombConsumeableItem fireBombItem = player.playerEquipmentManager.m_CurrentHandConsumable as BombConsumeableItem;
+        ToolItem_Projectiles fireBombItem = player.playerEquipmentManager.m_CurrentHandConsumable as ToolItem_Projectiles;
         GameObject activeModelBomb = Instantiate(fireBombItem.liveBombModel, rightHandSlot.transform.position, player.cameraHandler.cameraPivotTranform.rotation);
         activeModelBomb.GetComponentInChildren<BombDamageColider>().characterManager = player;
         activeModelBomb.transform.rotation = Quaternion.Euler(player.cameraHandler.cameraPivotTranform.eulerAngles.x, player.lockOnTransform.eulerAngles.y, 0);

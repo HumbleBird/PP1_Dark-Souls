@@ -31,7 +31,7 @@ public class CharacterManager : MonoBehaviour
     public bool isDead;
 
     [Header("Combat Flaged")]
-    public bool canBeRiposted;
+    public bool canBeRiposted = true;
     public bool canDoCombo;
     public bool canBeParryied;
     public bool canRoll = true;
@@ -65,6 +65,8 @@ public class CharacterManager : MonoBehaviour
 
     public int m_CharacterID = 0;
 
+    public Collider m_Collider;
+
     protected virtual void Awake()
     {
         characterController = gameObject.GetOrAddComponent<CharacterController>();
@@ -76,6 +78,8 @@ public class CharacterManager : MonoBehaviour
         characterSoundFXManager = GetComponent<CharacterSoundFXManager>();
         characterCombatManager = GetComponent<CharacterCombatManager>();
         characterEquipmentManager = GetComponent<CharacterEquipmentManager>();
+
+        m_Collider = GetComponent<Collider>();
 
         Managers.Object.Add(gameObject);
     }

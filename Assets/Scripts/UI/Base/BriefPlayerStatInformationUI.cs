@@ -57,7 +57,7 @@ public class BriefPlayerStatInformationUI : UI_Base
 
 
         GetText((int)Texts.EquipLoadValueText).text = string.Format("{0, -3} / {1, 3}", player.playerStatsManager.m_CurrentEquipLoad.ToString(), player.playerStatsManager.m_MaxEquipLoad.ToString("0.00"));
-        GetText((int)Texts.PoiseValueText           ).text = player.playerStatsManager.CurrentPoise.ToString("0.00");
+        GetText((int)Texts.PoiseValueText           ).text = player.playerStatsManager.m_fStatPoise.ToString("0.00");
         GetText((int)Texts.ItemDiscoveryValueText   ).text = player.playerStatsManager.m_iItemDiscovery.ToString();
         GetText((int)Texts.AttunementSlotValueText).text = player.playerStatsManager.m_iAttunementLevel.ToString();
 

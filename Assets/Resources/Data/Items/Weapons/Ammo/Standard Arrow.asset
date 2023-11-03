@@ -12,20 +12,21 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d21022789b84d654c93bac0f7273e1da, type: 3}
   m_Name: Standard Arrow
   m_EditorClassIdentifier: 
-  itemIcon: {fileID: 21300000, guid: 5f25bc8d8ba0f824895ee674ba8f47da, type: 3}
-  itemName: Standard Arrow
-  itemID: 0
-  m_EItemType: 13
+  m_ItemIcon: {fileID: 21300000, guid: fadb4c83be725c441998438a417f95dc, type: 3}
+  m_ItemName: Standard Arrow
+  m_iItemID: 0
+  m_eItemType: 13
   m_isEquiping: 0
   m_EquipingType: 0
   m_iEquipSlotNum: 0
+  m_bIsUnarmed: 0
+  m_sPrefabPath: 
   ammoType: 0
   AttackType: 
   m_iCurrentCount: 10
   m_iMaxCount: 0
   m_iCurrentSaveCount: 0
   m_iMaxSaveCount: 0
-  physicalDamage: 50
   m_iPhysicalDamage: 0
   m_iMagicDamage: 0
   m_iFireDamage: 0

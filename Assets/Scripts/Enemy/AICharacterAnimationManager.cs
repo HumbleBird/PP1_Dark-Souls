@@ -21,7 +21,7 @@ public class AICharacterAnimationManager : CharacterAnimatorManager
     public void InstantiateBossParticleFX()
     {
         BossFXTransform bossFXTransform = GetComponentInChildren<BossFXTransform>();
-        GameObject phaseFX = Instantiate(aiCharacter.aiCharacterBossManager.particleFX, bossFXTransform.transform);
+        Managers.Game.m_goBossParticle = Instantiate(aiCharacter.aiCharacterBossManager.particleFX, bossFXTransform.transform);
     }
 
     public void PlayWeaponTrailFX()
@@ -31,8 +31,6 @@ public class AICharacterAnimationManager : CharacterAnimatorManager
 
     public override void OnAnimatorMove()
     {
-        //if (character.isInteracting == false)
-        //    return;
         
         if(Managers.Game.isReSetting)
         {

@@ -6,13 +6,6 @@ using static Define;
 [CreateAssetMenu(menuName = "Character Effects/Weapon Buff Effect")]
 public class WeaponBuffEffect : CharacterEffect
 {
-
-    //public WeaponBuffEffect()
-    //{
-    //    buffAmbientSound = Managers.Resource.Load<AudioClip>("Item/Weapon/mixkit-big-fire-spell-burning-1332");
-
-    //}
-
     [Header("Buff Info")]
     [SerializeField] BuffClass buffClass;
     [SerializeField] float lengthOfBuff = 60;

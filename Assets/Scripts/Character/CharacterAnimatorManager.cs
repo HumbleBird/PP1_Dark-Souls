@@ -187,6 +187,9 @@ public class CharacterAnimatorManager : MonoBehaviour
     {
         character.characterStatsManager.TakeDamageNoAnimation(character.pendingCriticalDamage, 0);
         character.pendingCriticalDamage = 0;
+
+        // Sound
+        Managers.Sound.Play("Battle/Critical Hit");
     }
 
     public virtual void SetHandIKForWeapon(RightHandIKTarget rightHandTarget, LeftHandIKTarget leftHandTarget, bool isTwoHandingWeapon)

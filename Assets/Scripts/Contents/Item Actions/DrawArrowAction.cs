@@ -29,5 +29,7 @@ public class DrawArrowAction : ItemAction
         bowAnimator.SetBool("isDrawn", true);
         bowAnimator.Play("BowObject_TH_Draw_01");
 
+        // Sound
+        Managers.Sound.Play("Item/Weapon/Bow/Bow_Draw_01");
     }
 }

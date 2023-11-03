@@ -4,6 +4,8 @@ using UnityEngine;
 
 public class AmbushState : State
 {
+    public PursueTargetState pursueTargetState;
+
     public bool isSleeping;
     public float detectionRadius = 2;
     public string sleepAnimation;
@@ -11,11 +13,11 @@ public class AmbushState : State
 
     public LayerMask detectionLayer;
 
-    public PursueTargetState pursueTargetState;
 
     private void Awake()
     {
         pursueTargetState = GetComponent<PursueTargetState>();
+        detectionLayer = 1 << 9;
     }
 
     public override State Tick(AICharacterManager enemy)
@@ -31,7 +33,7 @@ public class AmbushState : State
 
         for (int i = 0; i < colliders.Length; i++)
         {
-            CharacterManager character = colliders[i].transform.GetComponent<CharacterManager>();
+            CharacterManager character = colliders[i].transform.GetComponent<PlayerManager>();
 
             if(character != null)
             {

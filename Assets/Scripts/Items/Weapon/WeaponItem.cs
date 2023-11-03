@@ -60,6 +60,7 @@ public class WeaponItem : Item
             SetAttackSound(m_eWeaponType);
             Typeclassification(m_eWeaponType);
             SetBaseStaminaCost(m_eWeaponType);
+            SetSound();
         }
     }
 
@@ -162,8 +163,10 @@ public class WeaponItem : Item
     public bool canBeBeffued = true;
 
     [Header("SOUND FX")]
-    public List<AudioClip> weaponWhooshes = new List<AudioClip>();
-    public List<AudioClip> blockingNoises = new List<AudioClip>();
+    public List<AudioClip> m_SwrodWeaponWhooshes = new List<AudioClip>();
+    public List<AudioClip> m_listBlockingNoises = new List<AudioClip>();
+    public List<AudioClip> m_listWeaponChargeSounds = new List<AudioClip>();
+    public List<AudioClip> m_listBowWhooshes = new List<AudioClip>();
 
     [Header("Equip State")]
     public bool m_isLeftHandEquiping = false;
@@ -297,10 +300,10 @@ public class WeaponItem : Item
             case WeaponType.Staves:
                 clip = Managers.Resource.Load<AudioClip>("Sounds/Effect/Item/Weapon/mixkit-dagger-woosh-1487");
                 if(clip != null)
-                   weaponWhooshes.Add(clip);
+                   m_SwrodWeaponWhooshes.Add(clip);
                 clip = Managers.Resource.Load<AudioClip>("Sounds/Effect/Item/Weapon/ixkit-fast-sword-whoosh-2792");
                 if(clip != null)
-                  weaponWhooshes.Add(clip);
+                  m_SwrodWeaponWhooshes.Add(clip);
                 break;
             case WeaponType.Bows:
             case WeaponType.Greatbows:
@@ -409,6 +412,66 @@ public class WeaponItem : Item
             case WeaponType.Shield:
                 baseStaminaCost = 10;
 
+                break;
+            default:
+                break;
+        }
+    }
+
+    void SetSound()
+    {
+        switch (m_eWeaponType)
+        {
+            case WeaponType.Daggers:
+            case WeaponType.StraightSwords:
+            case WeaponType.Greatswords:
+            case WeaponType.UltraGreatswords:
+            case WeaponType.CurvedSword:
+            case WeaponType.Katanas:
+            case WeaponType.CurvedGreatswords:
+            case WeaponType.PiercingSwords:
+            case WeaponType.Axes:
+            case WeaponType.Greataxes:
+            case WeaponType.Hammers:
+            case WeaponType.GreatHammers:
+            case WeaponType.FistAndClaws:
+            case WeaponType.SpearsAndPikes:
+            case WeaponType.Halberds:
+            case WeaponType.Reapers:
+            case WeaponType.Whips:
+                {
+                    {
+                        AudioClip audio = Managers.Resource.Load<AudioClip>("Item/Weapon/Daggers_WeaponWhooshe_01");
+                        m_SwrodWeaponWhooshes.Add(audio);
+                    }
+                    {
+                        AudioClip audio = Managers.Resource.Load<AudioClip>("Item/Weapon/StraightSwords_WeaponWhooshe_01");
+                        m_SwrodWeaponWhooshes.Add(audio);
+                    }
+                }
+
+                break;
+            case WeaponType.Bows:
+            case WeaponType.Greatbows:
+            case WeaponType.Crossbows:
+                break;
+            case WeaponType.Staves:
+            case WeaponType.Flames:
+            case WeaponType.Talismans:
+            case WeaponType.SacredChimes:
+                break;
+            case WeaponType.SmallShield:
+            case WeaponType.Shield:
+                {
+                    {
+                        AudioClip audio = Managers.Resource.Load<AudioClip>("Item/Weapon/Shield/Shield_Block_01");
+                        m_listBlockingNoises.Add(audio);
+                    }
+                    {
+                        AudioClip audio = Managers.Resource.Load<AudioClip>("Item/Weapon/Shield/Shield_Block_02");
+                        m_listBlockingNoises.Add(audio);
+                    }
+                }
                 break;
             default:
                 break;

@@ -12,13 +12,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3df016c821b7e3449b3c235e0482c1d7, type: 3}
   m_Name: Second Phase Attack 01
   m_EditorClassIdentifier: 
-  actionAnimation: 
-  isRightHandedAction: 0
+  actionAnimation: OH_Light__Attack_03
+  isRightHandedAction: 1
   canCombo: 1
   comboAction: {fileID: 11400000, guid: 2d8f4b38dd758744985a8b03cbfeb013, type: 2}
   attackScore: 3
   recoveryTime: 2
   maximumAttackAngle: 35
   minimumAttackAngle: -35
-  maximumDistanceNeededToAttack: 3
+  maximumDistanceNeededToAttack: 4.5
   minimumDistanceNeededToAttack: 0

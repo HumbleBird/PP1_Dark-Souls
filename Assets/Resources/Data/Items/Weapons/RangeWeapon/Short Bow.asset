@@ -12,35 +12,36 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c92353b4be4650b4cb2754d3c0795952, type: 3}
   m_Name: Short Bow
   m_EditorClassIdentifier: 
-  m_ItemIcon: {fileID: 0}
-  m_ItemName: 
-  m_iItemID: 0
+  m_ItemIcon: {fileID: 21300000, guid: 26144b5295fcf2d42a6d7d7b034d5b58, type: 3}
+  m_ItemName: Short Bow
+  m_iItemID: 4
   m_eItemType: 6
   m_isEquiping: 0
   m_EquipingType: 0
   m_iEquipSlotNum: 0
   m_bIsUnarmed: 0
   m_sPrefabPath: Prefabs/Items/Weapons/RangeWeapon/Short Bow
+  m_goPrefab: {fileID: 0}
   isUnarmed: 0
   weaponController: {fileID: 22100000, guid: 22d5de4468c37da489e7bcf2fba8efb0, type: 2}
-  m_eWeaponType: 0
-  AttackType: 
-  Skill: 
-  FocusCost: 0
-  m_iAttributeRequirementStrength: 0
-  m_iAttributeRequirementDexterity: 0
+  m_eWeaponType: 18
+  AttackType: None
+  Skill: Rapid Fire
+  FocusCost: 4
+  m_iAttributeRequirementStrength: 7
+  m_iAttributeRequirementDexterity: 12
   m_iAttributeRequirementIntelligence: 0
   m_iAttributeRequirementFaith: 0
-  m_iAttributeBonusStrength: 0
-  m_iAttributeBonusDexterity: 0
+  m_iAttributeBonusStrength: 2
+  m_iAttributeBonusDexterity: 3
   m_iAttributeBonusIntelligence: 0
   m_iAttributeBonusFaith: 0
-  m_iPhysicalDamage: 0
+  m_iPhysicalDamage: 77
   m_iMagicDamage: 0
   m_iFireDamage: 0
   m_iLightningDamage: 0
   m_iDarkDamage: 0
-  m_iCriticalDamage: 0
+  m_iCriticalDamage: 100
   m_iMagicAdjustment: 0
   m_iAttackRange: 50
   m_iPhysicalDamageReduction: 0
@@ -53,8 +54,8 @@ MonoBehaviour:
   m_iPoison: 0
   m_iFrost: 0
   m_iCurse: 0
-  m_iDurability: 0
-  m_iWeight: 0
+  m_iDurability: 40
+  m_iWeight: 2
   lightAttackDamageModifier: 0
   heavyAttackDaamgeModifier: 0
   criticalDamagemuiltiplier: 4
@@ -63,9 +64,9 @@ MonoBehaviour:
   offensivePoiseBonus: 0
   physicalBlockingDamageAbsorption: 0
   fireBlockingDamageAbsorption: 0
-  baseStaminaCost: 0
-  lightAttackStaminaMultiplier: 0
-  heavyAttackStaminaMultiplier: 0
+  baseStaminaCost: 10
+  lightAttackStaminaMultiplier: 1
+  heavyAttackStaminaMultiplier: 2
   oh_tap_RB_Action: {fileID: 11400000, guid: 787f7096a0a7d174a8ba2bffb0122f9e, type: 2}
   oh_hold_RB_Action: {fileID: 11400000, guid: 639765a0d658eae46971baea9dcbb3dc, type: 2}
   oh_tap_RT_Action: {fileID: 0}
@@ -83,7 +84,9 @@ MonoBehaviour:
   th_tap_LT_Action: {fileID: 0}
   th_hold_LT_Action: {fileID: 0}
   canBeBeffued: 1
-  weaponWhooshes: []
-  blockingNoises: []
+  m_SwrodWeaponWhooshes: []
+  m_listBlockingNoises: []
+  m_listWeaponChargeSounds: []
+  m_listBowWhooshes: []
   m_isLeftHandEquiping: 0
   m_SecondE_EquipmentSlotsPartType: 0

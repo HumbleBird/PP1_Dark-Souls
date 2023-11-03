@@ -134,7 +134,9 @@ public class TakeDamageEffect : CharacterEffect
 
         character.characterStatsManager.currentHealth = Mathf.RoundToInt(character.characterStatsManager.currentHealth - m_fFinalDamage);
 
-        if(character.characterStatsManager.totalPoiseDefence < poiseDamage)
+        // Temp
+        poiseDamage = 30;
+        if (character.characterStatsManager.m_fTotalPoiseDefence < poiseDamage)
         {
             poiseIsBroken = true;
         }
@@ -308,13 +310,14 @@ public class TakeDamageEffect : CharacterEffect
     {
         // light 혹은 heavy에 의한 데미지 애니메이션이 실행 중이라면
         // light damage 애니메이션이 재생되는 것을 원지 않고, heavy animation이 마무리 되기 원함.
-
-        if (character.isInteracting && character.characterCombatManager.previousPoiseDamageTaken > poiseDamage)
+        if (character.isInteracting && character.isDead == false)//&& character.characterCombatManager.previousPoiseDamageTaken > poiseDamage)
         {
             // interacting 중이고 previous Pose Damage가 0보다 위라면,  damage animation이 재생 되어야 함.
             // previous poise가 current poise보다 크다면 데미지 애니메이션을 더 가벼운 애니메이션으로 변화하지 않는다 
             return;
         }
+
+
 
         if(character.isDead)
         {
@@ -323,6 +326,10 @@ public class TakeDamageEffect : CharacterEffect
         }
         else
         {
+            AICharacterManager boss = character.GetComponent<AICharacterManager>();
+            if (boss != null && boss.aiCharacterStatsManager.isBoss)
+                return;
+
             // 캐릭터 poise broken이 되지 않았다면, 데미지 애니메이션을 재생하지 않는다
             if (!poiseIsBroken)
             {

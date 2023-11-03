@@ -10,7 +10,7 @@ public class PyromancySpellAction : ItemAction
         if (character.isInteracting)
             return;
 
-        if (character.characterEquipmentManager.m_CurrentHandSpell != null && character.characterEquipmentManager.m_CurrentHandSpell.m_eSpellType == Define.E_SpellType.Pyro)
+        if (character.characterEquipmentManager.m_CurrentHandSpell != null && character.characterEquipmentManager.m_CurrentHandSpell.m_eSpellType == Define.E_SpellType.Pyromancie)
         {
             PlayerManager player = character as PlayerManager;
             if (player != null)

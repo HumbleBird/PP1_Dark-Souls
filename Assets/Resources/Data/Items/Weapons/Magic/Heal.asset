@@ -12,26 +12,37 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 81054a0547419114aa89f3e454cc3d8c, type: 3}
   m_Name: Heal
   m_EditorClassIdentifier: 
-  m_ItemIcon: {fileID: 0}
-  m_ItemName: 
-  m_iItemID: 0
+  m_ItemIcon: {fileID: 21300000, guid: d46255d3a19bd634380b8e15270188bb, type: 3}
+  m_ItemName: Heal
+  m_iItemID: 101
   m_eItemType: 4
   m_isEquiping: 0
   m_EquipingType: 0
   m_iEquipSlotNum: 0
   m_bIsUnarmed: 0
   m_sPrefabPath: 
-  m_iCurrentCount: 0
-  m_iMaxCount: 0
+  m_goPrefab: {fileID: 0}
+  m_iCurrentCount: 10
+  m_iMaxCount: 10
   m_iCurrentSaveCount: 0
   m_iMaxSaveCount: 0
-  m_sItemDescription: 
-  m_iAttributeRequirementIntelligence: 0
-  m_iAttributeRequirementFaith: 0
+  m_sItemDescription: Elementary miracle cast by clerics. Restores HP for self and
+    those in the vicinity. To use miracles. equip a talisman or sacred chime and
+    attune a miracle at a bonfire.
+  m_iAttributeRequirementIntelligence: 12
+  m_iAttributeRequirementFaith: 12
   m_iCostFP: 0
   m_iMagicUseSlot: 0
   spellWarmUpFX: {fileID: 2965222256817593503, guid: a164e676dbbd6e54587237e619372c98, type: 3}
   spellCastFX: {fileID: 138182169165516461, guid: deafd5bc56c610b4ebc01f16d3055413, type: 3}
-  spellAnimation: Spell_Heal
-  m_eSpellType: 0
+  m_sSpellAnimation: Spell_Heal
+  m_eSpellType: 1
+  baseDamage: 0
+  projectileForwardVelocity: 0
+  projectileUpwardVelocity: 0
+  projectileMass: 0
+  isEffectedByGravity: 0
+  rigidBody: {fileID: 0}
   healAmount: 50
+  m_sAttemptToCastSpellSound: Item/Magic/Spell_AttemptToCastSpell_Heal
+  m_sSuccessfullyCastSpellSound: Item/Magic/Spell_SuccessfullyCastSpell_Heal

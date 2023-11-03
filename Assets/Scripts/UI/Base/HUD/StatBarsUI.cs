@@ -42,6 +42,8 @@ public class StatBarsUI : UI_Base
     public RectTransform m_StaminaBG;
     public RectTransform m_FPBG;
 
+    public int m_iPreHp; // HP Refresh Àü HP
+
     public override bool Init()
     {
         if (base.Init() == false)
@@ -59,6 +61,8 @@ public class StatBarsUI : UI_Base
         //m_PoisonBuildDownFill = GetImage((int)Images.PoisonBuildDownFill);
         //m_PoisonBar = GetObject((int)GameObjects.PoisonBar);
         m_Player = Managers.Object.m_MyPlayer;
+
+        m_iPreHp = m_Player.playerStatsManager.currentHealth;
 
         m_PoisonBar.SetActive(false);
 
@@ -137,10 +141,41 @@ public class StatBarsUI : UI_Base
         }
     }
 
+    public IEnumerator UpHP()
+    {
+        yield return new WaitForSeconds(0.5f);
+
+        while (true)
+        {
+            m_HealthBarFill.fillAmount += Time.deltaTime;
+            if (m_HealthBarFill.fillAmount >= m_Player.playerStatsManager.currentHealth / (float)m_Player.playerStatsManager.maxHealth)
+            {
+                m_HealthBarFill.fillAmount = m_Player.playerStatsManager.currentHealth / (float)m_Player.playerStatsManager.maxHealth;
+                m_DownHealthBarFill.fillAmount = m_Player.playerStatsManager.currentHealth / (float)m_Player.playerStatsManager.maxHealth;
+
+                yield break;
+            }
+
+            yield return null;
+        }
+    }
+
     void RefreshHPBar()
     {
-        m_HealthBarFill.fillAmount = m_Player.playerStatsManager.currentHealth / (float)m_Player.playerStatsManager.maxHealth;
-        StartCoroutine(DownHP());
+        // Hp Up
+        if(m_iPreHp < m_Player.playerStatsManager.currentHealth)
+        {
+            StartCoroutine(UpHP());
+
+        }
+        // HP Down
+        else if (m_iPreHp > m_Player.playerStatsManager.currentHealth)
+        {
+            m_HealthBarFill.fillAmount = m_Player.playerStatsManager.currentHealth / (float)m_Player.playerStatsManager.maxHealth;
+            StartCoroutine(DownHP());
+        }
+
+        m_iPreHp = m_Player.playerStatsManager.currentHealth;
     }
 
     void RefreshStaminaBar()

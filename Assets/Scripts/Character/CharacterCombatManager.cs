@@ -50,7 +50,7 @@ public class CharacterCombatManager : MonoBehaviour
     protected virtual void Awake()
     {
         character = GetComponent<CharacterManager>();
-        characterLayer = 1 << 8;
+        characterLayer = 1 << 9;
     }
 
     public virtual void SetBlockingAbsorptionsFromBlockingWeapon()
@@ -128,7 +128,6 @@ public class CharacterCombatManager : MonoBehaviour
             transform.parent = characterPerformingBackStab.characterCombatManager.backstabReceiverTransform;
             transform.localPosition = characterPerformingBackStab.characterCombatManager.backstabReceiverTransform.localPosition;
             transform.parent = null;
-            Debug.Log("Running corountine");
             yield return new WaitForSeconds(0.05f);
         }
     }
@@ -189,6 +188,7 @@ public class CharacterCombatManager : MonoBehaviour
                 int roundedCriticalDamage = Mathf.RoundToInt(criticalDamage);
                 enemycharacter.characterCombatManager.pendingCriticalDamage = roundedCriticalDamage;
                 enemycharacter.characterCombatManager.GetBackStabbed(character);
+
             }
         }
     }
@@ -214,6 +214,7 @@ public class CharacterCombatManager : MonoBehaviour
                 int roundedCriticalDamage = Mathf.RoundToInt(criticalDamage);
                 enemycharacter.characterCombatManager.pendingCriticalDamage = roundedCriticalDamage;
                 enemycharacter.characterCombatManager.GetRiposeted(character);
+
             }
         }
     }
@@ -226,6 +227,9 @@ public class CharacterCombatManager : MonoBehaviour
     private void ApplyPendingDamage()
     {
         character.characterStatsManager.TakeDamageNoAnimation(pendingCriticalDamage, 0);
+
+        // Sound
+        Managers.Sound.Play("Battle/Critical Hit");
     }
 
     public void EnableCanBeParried()

@@ -16,7 +16,6 @@ public abstract class CharacterStatsManager : MonoBehaviour
     public int currentSoulCount = 0;
     
     [Header("Character Base Power")]
-    // HP
     public int maxHealth;
     public int currentHealth;
 
@@ -28,10 +27,20 @@ public abstract class CharacterStatsManager : MonoBehaviour
     public int m_iAttunementSlots = 0;
 
     [Header("Poise Details")]
-    public float totalPoiseDefence; // poise 동안의 총 방어력
-    public float offensivePoiseBonus; // 무기로 공격할 때 얻을 수 있는 자세
-    public float armorPoiseBonus;     // 장작 동안의 자세 보너스
-    public float totalPoiseResetTime = 15;
+    // Stat Poise는 Poise Health에 가하는 Poise Damage를 Stat Poise 만큼 감소시킨다.
+
+    float fStatPoise;
+    public float m_fStatPoise 
+    { 
+        set { fStatPoise = value; } 
+        get { return Mathf.Floor(fStatPoise * 10f) / 10f; }
+    } 
+    // 최대 Poise Value
+    public float m_fPoiseHealth = 100; // 캐릭터가 공격을 받으면 이 값도 감소 됨. 0이 되면 현재 공격 여부와 상관 없이 비틀거림.
+
+    public float m_fTotalPoiseDefence; // 현재 총 균형 값, 하이퍼아머 프레임(울트라 대검, 그레이트 해머, 2손 대검 밑 특정 WA) 동안의 추가 Poise 증가 스텟 + Stat poise의 합
+    public float offensivePoiseBonus; // 하이퍼아머 프레임(울트라 대검, 그레이트 해머, 2손 대검 밑 특정 WA) 동안의 추가 Poise 증가 스텟
+    public float totalPoiseResetTime = 15; // Poise Reset Time
     public float poiseResetTimer = 0;
 
     // 이 플레이어가 처리한 모든 피해는 이 금액에 의해 수정됩니다
@@ -118,7 +127,6 @@ public abstract class CharacterStatsManager : MonoBehaviour
 
     protected virtual void Start()
     {
-        totalPoiseDefence = armorPoiseBonus;
     }
 
     // 능력치를 CSV 테이블에서 로드
@@ -160,7 +168,7 @@ public abstract class CharacterStatsManager : MonoBehaviour
         }
         else
         {
-            totalPoiseDefence = armorPoiseBonus;
+            m_fTotalPoiseDefence = m_fStatPoise;
         }
     }
 

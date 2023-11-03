@@ -27,6 +27,7 @@ public class AttackState : State
 
     public override State Tick(AICharacterManager enemy)
     {
+
         float distancefromTarget = Vector3.Distance(enemy.currentTarget.transform.position, enemy.transform.position);
 
         RotateTowardsTargetWhilstAttacking(enemy);
@@ -44,7 +45,7 @@ public class AttackState : State
             // set cool down time
         }
 
-        if (!hasPerformedAttack)
+        if (!hasPerformedAttack && currentAttack != null)
         {
             //Attack
             AttackTarget(enemy);

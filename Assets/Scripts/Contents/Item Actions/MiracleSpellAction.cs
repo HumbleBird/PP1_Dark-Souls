@@ -10,7 +10,7 @@ public class MiracleSpellAction : ItemAction
         if (character.isInteracting)
             return;
 
-        if (character.characterEquipmentManager.m_CurrentHandSpell != null && character.characterEquipmentManager.m_CurrentHandSpell.m_eSpellType == Define.E_SpellType.Faith)
+        if (character.characterEquipmentManager.m_CurrentHandSpell != null && character.characterEquipmentManager.m_CurrentHandSpell.m_eSpellType == Define.E_SpellType.Sorcerie)
         {
 
             PlayerManager player = character as PlayerManager;

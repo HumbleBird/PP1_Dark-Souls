@@ -59,7 +59,8 @@ public class SoundManager
 			if (audioSource.isPlaying)
 				audioSource.Stop();
 
-			audioSource.pitch = pitch;
+            audioSource.mute = false;
+            audioSource.pitch = pitch;
 			audioSource.clip = audioClip;
 			audioSource.Play();
 		}
@@ -93,21 +94,34 @@ public class SoundManager
         source.Play();
     }
 
-    // TODO 뮤트 기능
-    //bool m_bMute = false;
-    public void MuteBgm(AudioClip audioClip, bool _bMute = true)
+    public void MuteBgm(AudioClip audioClip)
     {
         if (audioClip == null)
             return;
 
-        // 해당하는 현재 브금을 찾아서 뮤트하기
-
         AudioSource audioSource = _audioSources[(int)Define.Sound.Bgm];
 
-        audioSource.mute = _bMute;
+        audioSource.mute = true;
+    }
 
-        if (_bMute)
-            audioSource.Play();
+    public IEnumerator IBgmSlowDown()
+    {
+        AudioSource audioSource = _audioSources[(int)Define.Sound.Bgm];
+
+        while (true)
+        {
+            audioSource.volume -= Time.deltaTime;
+
+            if(audioSource.volume <= 0)
+            {
+                audioSource.clip = null;
+                audioSource.volume = 1;
+
+                yield break;
+            }
+
+            yield return null;
+        }
     }
 
 	AudioClip GetOrAddAudioClip(string path, Define.Sound type = Define.Sound.Effect)

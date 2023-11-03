@@ -29,10 +29,13 @@ public class RangedProjectileDamageCollider : DamageCollider
 
         CharacterManager enemyManager = collision.gameObject.GetComponentInParent<CharacterManager>();
 
+        if (enemyManager == ammoItem.m_Shooter)
+            return;
+
         if (enemyManager != null)
         {
-            if (enemyManager.characterStatsManager.teamIDNumber == teamIDNumber)
-                return;
+            //if (enemyManager.characterStatsManager.teamIDNumber == teamIDNumber)
+            //    return;
 
             CheckForParry(enemyManager);
 
@@ -45,7 +48,7 @@ public class RangedProjectileDamageCollider : DamageCollider
                 return;
 
             enemyManager.characterStatsManager.poiseResetTimer = enemyManager.characterStatsManager.totalPoiseResetTime;
-            enemyManager.characterStatsManager.totalPoiseDefence = enemyManager.characterStatsManager.totalPoiseDefence - poiseDamage;
+            enemyManager.characterStatsManager.m_fTotalPoiseDefence = enemyManager.characterStatsManager.m_fTotalPoiseDefence - poiseDamage;
 
             contactPoint = collision.gameObject.GetComponent<Collider>().ClosestPointOnBounds(transform.position);
             angleHitFrom = Vector3.SignedAngle(characterManager.transform.forward, enemyManager.transform.forward, Vector3.up);

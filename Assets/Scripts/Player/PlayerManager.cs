@@ -283,6 +283,7 @@ public class PlayerManager : CharacterManager
         base.Dead();
 
         // 소울 초기화
+        Managers.Game.m_iPlayerDeadSoul = playerStatsManager.currentSoulCount;
         playerStatsManager.currentSoulCount = 0;
         Managers.GameUI.m_GameSceneUI.SoulsRefreshUI(false, 0, false);
 

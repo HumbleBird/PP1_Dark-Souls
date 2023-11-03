@@ -17,6 +17,7 @@ public class IdleState : State
     {
         pursueTargetState = GetComponent<PursueTargetState>();
         detectionLayer = 1 << 9;
+        layerThatBlockLineOfSight = 1 << 0;
     }
 
     public override State Tick(AICharacterManager aiCharacter)
@@ -26,7 +27,7 @@ public class IdleState : State
 
         for (int i = 0; i < colliders.Length; i++)
         {
-            CharacterManager targetCharacter = colliders[i].transform.GetComponent<CharacterManager>();
+            CharacterManager targetCharacter = colliders[i].transform.GetComponent<PlayerManager>();
 
             // 적을 찾아 냈다면 같은 팀인지 아닌지를 판별 후 다음 스텝으로
             if (targetCharacter != null)

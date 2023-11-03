@@ -580,5 +580,16 @@ public class InputHandler : MonoBehaviour
 
         // Inventory, Equipment, Item ...
     }
+
+    public void Clear()
+    {
+        //Lock On
+        if (lockOnFlag)
+        {
+            lockOnInput = false;
+            lockOnFlag = false;
+            player.cameraHandler.ClearLockOnTargets();
+        }
+    }
 }
 

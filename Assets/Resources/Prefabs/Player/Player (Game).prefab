@@ -38,15 +38,15 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 347833055415664871}
-  m_LocalRotation: {x: 0, y: 0.7190911, z: 0, w: 0.6949158}
-  m_LocalPosition: {x: -21.093746, y: 5, z: -23.651674}
+  m_LocalRotation: {x: -0.03268117, y: 0.19308962, z: -0.003812141, w: -0.98062927}
+  m_LocalPosition: {x: -7.9314203, y: 0.001, z: 2.077}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 3775640246154021718}
   m_Father: {fileID: 0}
   m_RootOrder: 0
-  m_LocalEulerAnglesHint: {x: 0, y: 91.959, z: 0}
+  m_LocalEulerAnglesHint: {x: 3.759, y: -22.288, z: -0.295}
 --- !u!114 &7888674121781100882
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -146,6 +146,7 @@ MonoBehaviour:
   isGrounded: 0
   isFiringSpell: 0
   pendingCriticalDamage: 0
+  m_CharacterID: 0
   inputHandler: {fileID: 0}
   cameraHandler: {fileID: 0}
   m_GameSceneUI: {fileID: 0}
@@ -170,7 +171,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6d7913421ecce434e9544807e3741e7b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  unarmWeapon: {fileID: 11400000, guid: 950c54dd3d5db784f9220334c914a1db, type: 2}
+  unarmWeapon: {fileID: 11400000, guid: 05f178e33ececfd468fb3f3dec1b077d, type: 2}
   leftHandSlot: {fileID: 0}
   rightHandSlot: {fileID: 0}
   leftHandDamageCollider: {fileID: 0}
@@ -229,18 +230,18 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   currentItemBeingUsed: {fileID: 0}
-  m_CurrentHandSpell: {fileID: 11400000, guid: c366cbf2bcc1a0144a1e21b313bba1be, type: 2}
-  m_CurrentHandRightWeapon: {fileID: 11400000, guid: 48e75f5a988fd65469bab7cd58a33b5c, type: 2}
-  m_CurrentHandLeftWeapon: {fileID: 11400000, guid: 29d9d6db760280a45bcf164a2a748c8c, type: 2}
-  m_CurrentHandConsumable: {fileID: 11400000, guid: c7963e088a06f74478bd8375ab885623, type: 2}
+  m_CurrentHandSpell: {fileID: 0}
+  m_CurrentHandRightWeapon: {fileID: 11400000, guid: 738dfc03529570541837bdf196901c52, type: 2}
+  m_CurrentHandLeftWeapon: {fileID: 11400000, guid: 25fdf3d8acb5ce249a77f2340961a26b, type: 2}
+  m_CurrentHandConsumable: {fileID: 11400000, guid: 576e765f1a3f5564eba8a65eec788ac4, type: 2}
   m_CurrentHandAmmo: {fileID: 0}
   m_RightWeaponsSlots:
-  - {fileID: 11400000, guid: 48e75f5a988fd65469bab7cd58a33b5c, type: 2}
+  - {fileID: 11400000, guid: 738dfc03529570541837bdf196901c52, type: 2}
   - {fileID: 0}
-  - {fileID: 11400000, guid: 24a4e7211d2165b4b85c891c62082805, type: 2}
+  - {fileID: 0}
   m_LeftWeaponsSlots:
-  - {fileID: 11400000, guid: 29d9d6db760280a45bcf164a2a748c8c, type: 2}
-  - {fileID: 11400000, guid: 29d9d6db760280a45bcf164a2a748c8c, type: 2}
+  - {fileID: 11400000, guid: 25fdf3d8acb5ce249a77f2340961a26b, type: 2}
+  - {fileID: 0}
   - {fileID: 0}
   m_ArrowAmmoSlots:
   - {fileID: 0}
@@ -248,17 +249,17 @@ MonoBehaviour:
   m_BoltAmmoSlots:
   - {fileID: 0}
   - {fileID: 0}
-  m_HelmetEquipment: {fileID: 11400000, guid: c3934700670d4784d9fd70c0da2708c6, type: 2}
-  m_TorsoEquipment: {fileID: 11400000, guid: 0748845b2b5a3734b9e7a81badaf57cc, type: 2}
-  m_LegEquipment: {fileID: 11400000, guid: 7c4a0d900189cd748ba634ec09e9a8f5, type: 2}
-  m_HandEquipment: {fileID: 11400000, guid: 345d66b9b13601740905041d4fcf5c76, type: 2}
+  m_HelmetEquipment: {fileID: 11400000, guid: c6b52b06e8daac74b80ac85fa1b418b4, type: 2}
+  m_TorsoEquipment: {fileID: 11400000, guid: e04b9b52b46a5974ab560c731549abe7, type: 2}
+  m_LegEquipment: {fileID: 11400000, guid: 8bd1bab6a2f3c7943bb0d6311cb964f4, type: 2}
+  m_HandEquipment: {fileID: 11400000, guid: 8d476f83d81da9245962bb64a72ffb58, type: 2}
   m_RingSlots:
-  - {fileID: 11400000, guid: 80e4c0cd2bd972d4dba3828826b36b35, type: 2}
+  - {fileID: 11400000, guid: 103c248a6803d3249b1948acf5fec050, type: 2}
   - {fileID: 0}
   - {fileID: 0}
   - {fileID: 0}
   m_ConsumableItemSlots:
-  - {fileID: 11400000, guid: c7963e088a06f74478bd8375ab885623, type: 2}
+  - {fileID: 11400000, guid: 576e765f1a3f5564eba8a65eec788ac4, type: 2}
   - {fileID: 0}
   - {fileID: 0}
   - {fileID: 0}
@@ -276,10 +277,10 @@ MonoBehaviour:
   m_iCurrentAmmoBoltIndex: 0
   m_iCurrentConsumableItemndex: 0
   m_bIsFemale: 0
-  Naked_HelmetEquipment: {fileID: 11400000, guid: 988aab8869179614eae84faa3284d2a2, type: 2}
-  Naked_TorsoEquipment: {fileID: 11400000, guid: 2cf022a44c0c75c4d81f4804639beeef, type: 2}
-  Naked_LegEquipment: {fileID: 11400000, guid: f98e935e2857ce846ade7b13ea0eee98, type: 2}
-  Naked_HandEquipment: {fileID: 11400000, guid: 941c776a633cbfb4ca0eabe7b8a67b81, type: 2}
+  Naked_HelmetEquipment: {fileID: 11400000, guid: 39a11010c483cd549b5dfc20d17704dc, type: 2}
+  Naked_TorsoEquipment: {fileID: 11400000, guid: 3ac240e0348db464f91adfe71d108bcf, type: 2}
+  Naked_LegEquipment: {fileID: 11400000, guid: 63657c0ec173a134c90778a9119390ec, type: 2}
+  Naked_HandEquipment: {fileID: 11400000, guid: 434f146eae8efba45b1f8c49ca669846, type: 2}
   facialFeatures:
   - {fileID: 3778669045509627008}
   - {fileID: 3779331342643374970}
@@ -337,24 +338,23 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Items:
-  - {fileID: 11400000, guid: 345d66b9b13601740905041d4fcf5c76, type: 2}
-  - {fileID: 11400000, guid: c3934700670d4784d9fd70c0da2708c6, type: 2}
-  - {fileID: 11400000, guid: 7c4a0d900189cd748ba634ec09e9a8f5, type: 2}
-  - {fileID: 11400000, guid: 0748845b2b5a3734b9e7a81badaf57cc, type: 2}
-  - {fileID: 11400000, guid: 80e4c0cd2bd972d4dba3828826b36b35, type: 2}
-  - {fileID: 11400000, guid: c7963e088a06f74478bd8375ab885623, type: 2}
-  - {fileID: 11400000, guid: 1614219e8d659ea4ca5ab8011ad5a67b, type: 2}
-  - {fileID: 11400000, guid: cc6fb931e1871e441862ea869f60eb76, type: 2}
-  - {fileID: 11400000, guid: 1c10eb1cd6e990b44a64c744c3eabf59, type: 2}
-  - {fileID: 11400000, guid: 061614e8ff311344782b09816f7fc630, type: 2}
-  - {fileID: 11400000, guid: f6bd9669d2c7f9940a76073d21213ad2, type: 2}
-  - {fileID: 11400000, guid: 28c722eaff913d24b89c257716829ae3, type: 2}
-  - {fileID: 11400000, guid: c366cbf2bcc1a0144a1e21b313bba1be, type: 2}
-  - {fileID: 11400000, guid: 92f3f30cec432e24c890a8b99d90b115, type: 2}
-  - {fileID: 11400000, guid: 96a4fefc7750e24459d8e8a5f20f1332, type: 2}
-  - {fileID: 11400000, guid: 48e75f5a988fd65469bab7cd58a33b5c, type: 2}
-  - {fileID: 11400000, guid: 21488bd7987bf3b458e4b1c26bf9ecc4, type: 2}
-  - {fileID: 11400000, guid: 29d9d6db760280a45bcf164a2a748c8c, type: 2}
+  - {fileID: 11400000, guid: 8d476f83d81da9245962bb64a72ffb58, type: 2}
+  - {fileID: 11400000, guid: c6b52b06e8daac74b80ac85fa1b418b4, type: 2}
+  - {fileID: 11400000, guid: 8bd1bab6a2f3c7943bb0d6311cb964f4, type: 2}
+  - {fileID: 11400000, guid: e04b9b52b46a5974ab560c731549abe7, type: 2}
+  - {fileID: 11400000, guid: 103c248a6803d3249b1948acf5fec050, type: 2}
+  - {fileID: 11400000, guid: 576e765f1a3f5564eba8a65eec788ac4, type: 2}
+  - {fileID: 11400000, guid: 2ba844b38f4297c4b8b36f9d34683dad, type: 2}
+  - {fileID: 11400000, guid: 3557916619374aa4ca185137a22ed3de, type: 2}
+  - {fileID: 11400000, guid: 3814ee46f87cef34896ca422bfa3f91d, type: 2}
+  - {fileID: 11400000, guid: 8bbc8a8655511bb419c966629a5bf179, type: 2}
+  - {fileID: 11400000, guid: 9fe5806f8763ecd41b76d4248dda50f7, type: 2}
+  - {fileID: 11400000, guid: 5b12c4f3c405c5c4e826ba05acb739f4, type: 2}
+  - {fileID: 11400000, guid: 88ee4b58fc786fc4b986e1682671e512, type: 2}
+  - {fileID: 11400000, guid: c5c00d3687ed6c440a456c52e8ce1abf, type: 2}
+  - {fileID: 11400000, guid: 738dfc03529570541837bdf196901c52, type: 2}
+  - {fileID: 11400000, guid: ae9bfb5fc7a0cb24dab19f2e3295b285, type: 2}
+  - {fileID: 11400000, guid: 25fdf3d8acb5ce249a77f2340961a26b, type: 2}
 --- !u!114 &7888674121781100883
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -516,7 +516,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 30cb461b5e3124146b8e8aa84f952625, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  characterName: Nameless
+  m_sCharacterName: Nameless
   teamIDNumber: 0
   currentSoulCount: 8500
   maxHealth: 0
@@ -525,9 +525,9 @@ MonoBehaviour:
   blockingFireDamageAbsorption: 0
   blockingStabilityRating: 0
   m_iAttunementSlots: 0
-  totalPoiseDefence: 0
+  m_fPoiseHealth: 100
+  m_fTotalPoiseDefence: 0
   offensivePoiseBonus: 0
-  armorPoiseBonus: 0
   totalPoiseResetTime: 15
   poiseResetTimer: 0
   physicalDamagePercentageModifier: 100
@@ -537,6 +537,15 @@ MonoBehaviour:
   isPoisoned: 0
   poisonBuildup: 0
   poisonAmount: 100
+  m_fPhysicalDamage: 0
+  m_fMagicDamage: 0
+  m_fFireDamage: 0
+  m_fLightningDamage: 0
+  m_fDarkDamage: 0
+  m_fAuxiliaryEffectsBleedDamage: 0
+  m_fAuxiliaryEffectsPoisonDamage: 0
+  m_fAuxiliaryEffectsFrostDamage: 0
+  m_fAuxiliaryEffectsCurseDamage: 0
   m_iPhysicalDefense: 0
   m_iVSStrikeDefense: 0
   m_iVSSlashDefense: 0
@@ -576,7 +585,6 @@ MonoBehaviour:
   maxStamina: 100
   currentStamina: 100
   encumbranceLevel: 0
-  CurrentPoise: 10
   m_iItemDiscovery: 10
   m_iRWeapon1: 0
   m_iRWeapon2: 0

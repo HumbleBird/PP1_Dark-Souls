@@ -57,13 +57,21 @@ public class UIAICharacterHealthBar : UI_Base
     private void Start()
     {
         m_AICharacterManager = GetComponentInParent<AICharacterManager>();
-        transform.localPosition = Vector3.zero;
+        Collider col = m_AICharacterManager.GetComponent<Collider>();
+        Vector3 head = new Vector3(0.0f, col.bounds.extents.y * 2, 0.0f);
+        RectTransform rect = GetComponent<RectTransform>();
+        rect.anchoredPosition3D = head;
     }
 
     private void Update()
     {
         if (m_AICharacterManager.isDead)
+        {
+            timeUntilBarIsHidden = 0;
+            DamageSum = 0;
+            m_HealthBar.SetActive(false);
             return;
+        }
 
         if (m_HealthBar.activeSelf == false)
             return;

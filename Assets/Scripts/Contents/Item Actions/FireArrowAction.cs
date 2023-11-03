@@ -68,7 +68,8 @@ public class FireArrowAction : ItemAction
             // damage collider set
             damageCollider.characterManager = character;
             damageCollider.ammoItem = character.characterEquipmentManager.m_CurrentHandAmmo;
-            damageCollider.physicalDamage = character.characterEquipmentManager.m_CurrentHandAmmo.physicalDamage;
+            damageCollider.physicalDamage = character.characterEquipmentManager.m_CurrentHandAmmo.m_iPhysicalDamage;
+            damageCollider.ammoItem.m_Shooter = character;
         }
         // Fire the Arrow as an A.I character
 
@@ -101,10 +102,13 @@ public class FireArrowAction : ItemAction
             // damage collider set
             damageCollider.characterManager = enemy;
             damageCollider.ammoItem = enemy.characterEquipmentManager.m_CurrentHandAmmo;
-            damageCollider.physicalDamage = enemy.characterEquipmentManager.m_CurrentHandAmmo.physicalDamage;
+            damageCollider.ammoItem.m_Shooter = character;
+            damageCollider.physicalDamage = enemy.characterEquipmentManager.m_CurrentHandAmmo.m_iPhysicalDamage;
             damageCollider.teamIDNumber = enemy.characterStatsManager.teamIDNumber;
         }
 
-        
+
+        // Sound
+        Managers.Sound.Play("Item/Weapon/Bow/Bow_Fire_01");
     }
 }

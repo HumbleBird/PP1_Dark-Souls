@@ -21,7 +21,9 @@ MonoBehaviour:
   m_iEquipSlotNum: 0
   m_bIsUnarmed: 0
   m_sPrefabPath: 0
-  m_ToolType: 1
+  m_goPrefab: {fileID: 0}
+  m_Tool_LimitiedType: 1
+  m_eToolType: 3
   m_iCurrentCount: 10
   m_iMaxCount: 0
   m_iCurrentSaveCount: 0
@@ -29,11 +31,12 @@ MonoBehaviour:
   m_sItemDescription: 'Medicinal pellet made from crushed insects. The red type temporarily
     boosts fire damage absorption. '
   itemModel: {fileID: 0}
-  consumeAnimation: Buff_Weapon_01
+  m_sPlayAnimationName: Drinking
   isInteracting: 1
   m_iAttributeBonusStrength: 0
   m_iAttributeBonusDexterity: 0
   m_iAttributeBonusIntelligence: 0
   m_iAttributeBonusFaith: 0
+  m_EatSound: {fileID: 0}
   weaponBuffEffect: {fileID: 11400000, guid: e8c7558b445ee714896f7134c3ec47b0, type: 2}
   buffTriggerSound: {fileID: 8300000, guid: c4ac1dae86efd2f4d9019f5924fe1b77, type: 3}

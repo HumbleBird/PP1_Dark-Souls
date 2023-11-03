@@ -94,7 +94,7 @@ public class AttackStateHumanoid : State
         if (aiCharacter.currentTarget.isDead)
         {
             ResetStateFlags();
-            aiCharacter.currentTarget = null;
+            //aiCharacter.currentTarget = null;
             return this;
         }
 
