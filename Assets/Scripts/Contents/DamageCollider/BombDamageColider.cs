@@ -35,7 +35,6 @@ public class BombDamageColider : DamageCollider
                 {
 
                     TakeDamageEffect takeDamageEffect = new TakeDamageEffect();
-                    // Instantiate(Managers.WorldEffect.takeDamageEffect);
                     takeDamageEffect.characterCausingDamage = characterManager;
                     takeDamageEffect.m_PhysicalDamage = physicalDamage;
                     takeDamageEffect.m_MagicDamage = magicDamage;
@@ -46,7 +45,6 @@ public class BombDamageColider : DamageCollider
                     takeDamageEffect.contactPoint = contactPoint;
                     takeDamageEffect.angleHitFrom = angleHitFrom;
                     character.characterEffectsManager.ProcessEffectInstantly(takeDamageEffect);
-
                 }
             }
 
@@ -61,13 +59,24 @@ public class BombDamageColider : DamageCollider
 
         foreach (Collider objectsInExplosion in characters)
         {
-            CharacterStatsManager character = objectsInExplosion.GetComponent<CharacterStatsManager>();
+            CharacterManager character = objectsInExplosion.GetComponent<CharacterManager>();
 
             if(character != null)
             {
-                if (character.teamIDNumber != teamIDNumber)
+                if (character.characterStatsManager.teamIDNumber != teamIDNumber)
                 {
-                    //character.TakeDamage(0, explosionSplashDamage, currentDamageAnimation, characterManager);
+                    TakeDamageEffect takeDamageEffect = new TakeDamageEffect();
+                    // Instantiate(Managers.WorldEffect.takeDamageEffect);
+                    takeDamageEffect.characterCausingDamage = characterManager;
+                    takeDamageEffect.m_PhysicalDamage = physicalDamage;
+                    takeDamageEffect.m_MagicDamage = magicDamage;
+                    takeDamageEffect.m_FireDamage = fireDamage;
+                    takeDamageEffect.m_LightningDamage = lightningDamage;
+                    takeDamageEffect.m_DarkDamage = darkDamage;
+                    takeDamageEffect.poiseDamage = poiseDamage;
+                    takeDamageEffect.contactPoint = contactPoint;
+                    takeDamageEffect.angleHitFrom = angleHitFrom;
+                    character.characterEffectsManager.ProcessEffectInstantly(takeDamageEffect);
                 }
 
             }

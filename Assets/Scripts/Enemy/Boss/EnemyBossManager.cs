@@ -17,7 +17,14 @@ public class EnemyBossManager : MonoBehaviour
 
     public AudioClip m_audioClip;
     public FogWall m_FogWall;
+
+    public bool bossFightIsActive; // 현재 싸우고 있는가
+    public bool bossHasBeenAwakened; // 이미 싸움 중에 한 번 죽어는가/이미 보스가 깨어져 있는가
+    public bool bossHasBeenDefeated; // 보스가 죽었는가
+    public bool m_isBossSoundPlaying = false;
     public bool m_isNextPhase = false;
+
+    public GameObject m_goBossParticle;
 
     private void Start()
     {
@@ -62,5 +69,19 @@ public class EnemyBossManager : MonoBehaviour
     {
         bossCombatStanceState.hasPhaseShifted = false;
         m_isNextPhase = false;
+
+        if (bossHasBeenDefeated == false)
+        {
+            bossCombatStanceState.hasPhaseShifted = false;
+
+            if (m_goBossParticle != null)
+            {
+                Managers.Resource.Destroy(m_goBossParticle);
+                m_goBossParticle = null;
+            }
+        }
+
+        // Sound
+        Managers.Sound.RemoveBgm();
     }
 }

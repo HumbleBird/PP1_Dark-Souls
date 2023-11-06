@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using static Define;
 
 [CreateAssetMenu(menuName = "Items/Eqipment/Leggings Armor")]
 public class LeggingsEquipmentItem : EquipmentItem
@@ -10,7 +11,7 @@ public class LeggingsEquipmentItem : EquipmentItem
         SetInfo(id);
 
 
-        if (id == 1004)
+        if (id == (int)E_ArmorItemID.KnightLeggings)
         {
             Hips_Attachment=0;
             Knee_Attachement_Right=0;
@@ -18,6 +19,43 @@ public class LeggingsEquipmentItem : EquipmentItem
             HipName=2;
             LeftLeggingName=16;
             RightLeggingName=16;
+        }
+        else if (id == (int)E_ArmorItemID.AssassinLeggings)
+        {
+            Hips_Attachment = 4;
+            Knee_Attachement_Right = 0;
+            Knee_Attachement_Left = 0;
+            HipName = 13;
+            LeftLeggingName = 9;
+            RightLeggingName = 9;
+        }
+        else if (id == (int)E_ArmorItemID.HeraldLeggings)
+        {
+            Hips_Attachment = 1;
+            Hips_Attachment = 10; // 2°³ // TODO
+            Knee_Attachement_Right = 0;
+            Knee_Attachement_Left = 0;
+            HipName = 1;
+            LeftLeggingName = 5;
+            RightLeggingName = 5;
+        }
+        else if (id == (int)E_ArmorItemID.PyromancerLeggings)
+        {
+            Hips_Attachment = 0;
+            Knee_Attachement_Right = 0;
+            Knee_Attachement_Left = 0;
+            HipName = 6;
+            LeftLeggingName = 4;
+            RightLeggingName = 4;
+        }
+        else if (id == (int)E_ArmorItemID.WarriorLeggings)
+        {
+            Hips_Attachment = 0;
+            Knee_Attachement_Right = 0;
+            Knee_Attachement_Left = 0;
+            HipName = 15;
+            LeftLeggingName = 8;
+            RightLeggingName = 8;
         }
     }
 

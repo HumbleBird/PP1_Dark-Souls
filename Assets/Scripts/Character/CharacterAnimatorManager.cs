@@ -183,6 +183,16 @@ public class CharacterAnimatorManager : MonoBehaviour
         character.canBeRiposted = false;
     }
 
+    public void DisableCollision()
+    {
+        character.characterController.enabled = false;
+    }
+
+    public void EnableCollision()
+    {
+        character.characterController.enabled = true;
+    }
+
     public virtual void TakeCriticalDamageAnimationEvent()
     {
         character.characterStatsManager.TakeDamageNoAnimation(character.pendingCriticalDamage, 0);
@@ -274,10 +284,7 @@ public class CharacterAnimatorManager : MonoBehaviour
         character.transform.rotation *= character.animator.deltaRotation;
     }
 
-    public virtual void AwardSoulsOnDeath()
-    {
 
-    }
 
     public virtual void RollCameraShake()
     {

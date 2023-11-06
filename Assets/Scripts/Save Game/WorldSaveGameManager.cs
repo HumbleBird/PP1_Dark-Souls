@@ -22,7 +22,7 @@ public class WorldSaveGameManager
         saveGameDataWriter.dataSaveFileName = fileName;
 
         // 문자 데이터를 현재 저장 파일로 전달
-        Managers.Object.m_MyPlayer.SaveCharacterdataToCurrentSaveData(ref currentCharacterSaveData);
+        //Managers.Object.m_MyPlayer.SaveCharacterdataToCurrentSaveData(ref currentCharacterSaveData);
 
         // 현재 캐릭터 데이터를 Json File로 작성중, 그리고 저장을 이 저장장치에 함.
         saveGameDataWriter.WriteCharacterDataToSaveFile(currentCharacterSaveData);
@@ -57,7 +57,7 @@ public class WorldSaveGameManager
             yield return null;
         }
 
-        Managers.Object.m_MyPlayer.LoadCharacterDataFromCurrentCharacterSaveData(ref currentCharacterSaveData);
+        //Managers.Object.m_MyPlayer.LoadCharacterDataFromCurrentCharacterSaveData(ref currentCharacterSaveData);
 
     }
 }

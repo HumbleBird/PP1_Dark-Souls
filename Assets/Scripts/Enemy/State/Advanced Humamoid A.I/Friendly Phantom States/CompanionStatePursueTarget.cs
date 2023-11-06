@@ -5,6 +5,7 @@ using static Define;
 
 public class CompanionStatePursueTarget : State
 {
+    CompanionStateIdle idleState;
     CompanionStateCombatStance combatStanceState;
     CompanionStateFollowHost followHostState;
 
@@ -12,10 +13,18 @@ public class CompanionStatePursueTarget : State
     {
         combatStanceState = GetComponent<CompanionStateCombatStance>();
         followHostState = GetComponent<CompanionStateFollowHost>();
+        idleState = GetComponent<CompanionStateIdle>();
     }
 
     public override State Tick(AICharacterManager aiCharacter)
     {
+        // »ç¸Á Ã¼Å©
+        if (aiCharacter.currentTarget.isDead)
+        {
+            aiCharacter.currentTarget = null;
+            return idleState;
+        }
+
         if (aiCharacter.distanceFromCompanion > aiCharacter.maxDistanceFromCompanion)
         {
             return followHostState;
@@ -65,6 +74,8 @@ public class CompanionStatePursueTarget : State
 
     private State ProcessArcherCombatSyle(AICharacterManager aiCharacter)
     {
+
+
         HandleRotateTowardTarget(aiCharacter);
 
         if (aiCharacter.isInteracting)

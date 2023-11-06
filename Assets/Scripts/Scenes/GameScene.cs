@@ -8,6 +8,7 @@ using static Define;
 public class GameScene : BaseScene
 {
     public bool m_isNewGame = true;
+    public bool m_isDeveling = true;
 
     protected override void Init()
     {
@@ -16,6 +17,7 @@ public class GameScene : BaseScene
         SceneType = Define.Scene.Game;
 
         Managers.Game.m_isNewGame = m_isNewGame;
+        Managers.Game.m_Develing = m_isDeveling;
 
         // 게임을 처음 시작했다면
         if (Managers.Game.m_isNewGame)

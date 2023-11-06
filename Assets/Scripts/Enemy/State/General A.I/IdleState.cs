@@ -27,7 +27,7 @@ public class IdleState : State
 
         for (int i = 0; i < colliders.Length; i++)
         {
-            CharacterManager targetCharacter = colliders[i].transform.GetComponent<PlayerManager>();
+            CharacterManager targetCharacter = colliders[i].transform.GetComponent<CharacterManager>();
 
             // 적을 찾아 냈다면 같은 팀인지 아닌지를 판별 후 다음 스텝으로
             if (targetCharacter != null)
@@ -42,7 +42,7 @@ public class IdleState : State
                     {
                         if (Physics.Linecast(aiCharacter.lockOnTransform.position, targetCharacter.lockOnTransform.position, layerThatBlockLineOfSight))
                         {
-                            return this;
+                            
                         }
                         else
                         {

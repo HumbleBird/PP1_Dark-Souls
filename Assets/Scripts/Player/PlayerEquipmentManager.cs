@@ -270,7 +270,7 @@ public class PlayerEquipmentManager : CharacterEquipmentManager
             // all gender Ã³¸®
             HelmEquipmentItem temp = m_HelmetEquipment;
 
-            if (temp.m_HeadCoverings_Base_Hair != "Chr_HeadCoverings_Base_00")
+            if (temp.m_HeadCoverings_Base_Hair != "Chr_HeadCoverings_Base_Hair_00")
             {
                 m_AllGenderPartsModelChanger[All_GenderItemPartsType.HeadCoverings_Base_Hair].EquipEquipmentsModelByName(temp.m_HeadCoverings_Base_Hair);
             }
@@ -289,7 +289,7 @@ public class PlayerEquipmentManager : CharacterEquipmentManager
 
             if (m_bIsFemale)
             {
-                if (temp == player.playerEquipmentManager.Naked_HelmetEquipment)
+                if (temp == player.playerEquipmentManager.Naked_HelmetEquipment || temp.m_HelmEquipmentItemName.Contains("00"))
                 {
                     m_FemaleGenderPartsModelChanger[E_SingleGenderEquipmentArmorParts.Head].EquipEquipmentsModelByName(temp.m_HelmEquipmentItemName);
                 }
@@ -300,7 +300,7 @@ public class PlayerEquipmentManager : CharacterEquipmentManager
             }
             else
             {
-                if (temp == player.playerEquipmentManager.Naked_HelmetEquipment)
+                if (temp == player.playerEquipmentManager.Naked_HelmetEquipment || temp.m_HelmEquipmentItemName.Contains("00"))
                 {
                     m_MaleGenderPartsModelChanger[E_SingleGenderEquipmentArmorParts.Head].EquipEquipmentsModelByName(temp.m_HelmEquipmentItemName);
                 }
@@ -952,5 +952,47 @@ public class PlayerEquipmentManager : CharacterEquipmentManager
     public void CurrentEquipmentClear()
     {
 
+    }
+
+    public void Clear()
+    {
+        // First All UnEquipment
+        ModelChangerUnEquipAllItem();
+
+        m_CurrentHandSpell = null;
+        m_CurrentHandRightWeapon = null;
+        m_CurrentHandLeftWeapon = null;
+        m_CurrentHandConsumable = null;
+        m_CurrentHandAmmo = null;
+
+        for (int i = 0; i < m_RightWeaponsSlots.Length; i++)
+        {
+            m_RightWeaponsSlots[i] = null;
+            m_LeftWeaponsSlots[i] = null;
+
+        }
+
+        for (int i = 0; i < m_ArrowAmmoSlots.Length; i++)
+        {
+            m_ArrowAmmoSlots[i] = null;
+            m_BoltAmmoSlots[i] = null;
+        }
+
+        m_HelmetEquipment = null;
+        m_TorsoEquipment = null;
+        m_LegEquipment = null;
+        m_HandEquipment = null;
+
+        for (int i = 0; i < m_RingSlots.Length; i++)
+        {
+            m_RingSlots[i] = null;
+        }
+
+        for (int i = 0; i < m_ConsumableItemSlots.Length; i++)
+        {
+            m_ConsumableItemSlots[i] = null;
+        }
+
+        m_CurrentPledge = null;
     }
 }

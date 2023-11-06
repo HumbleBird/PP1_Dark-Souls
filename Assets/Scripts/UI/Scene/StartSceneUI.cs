@@ -174,6 +174,7 @@ public class StartSceneUI : UI_Scene
 	void Continue()
     {
         // 캐릭터 정보 로드
+        Managers.Game.m_isNewGame = false;
         m_bIsButtonPress = true;
         m_Animator.Play("SelectButton_Continue");
         m_FadeOutAction = () => { Managers.Scene.LoadScene(Define.Scene.Game); };
@@ -181,7 +182,10 @@ public class StartSceneUI : UI_Scene
 
     void LoadGame()
     {
-
+        Managers.Game.m_isNewGame = false;
+        m_bIsButtonPress = true;
+        m_Animator.Play("SelectButton_Load Game");
+        m_FadeOutAction = () => { Managers.Scene.LoadScene(Define.Scene.Lobby); };
     }
 
     void NewGame()

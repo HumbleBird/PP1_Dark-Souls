@@ -382,6 +382,8 @@ public class InputHandler : MonoBehaviour
 
     private void HandleQuickSlotsInput()
     {
+        if (player.isInteracting)
+            return;
 
         if (d_Pad_Left)
         {

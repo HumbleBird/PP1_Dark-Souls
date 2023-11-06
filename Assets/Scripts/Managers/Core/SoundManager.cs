@@ -5,7 +5,6 @@ using UnityEngine;
 public class SoundManager
 {
     AudioSource[] _audioSources = new AudioSource[(int)Define.Sound.MaxCount];
-    Dictionary<string, AudioSource> _characterAudioSources = new Dictionary<string, AudioSource>();
     Dictionary<string, AudioClip> _audioClips = new Dictionary<string, AudioClip>();
 
     // MP3 Player   -> AudioSource
@@ -94,14 +93,24 @@ public class SoundManager
         source.Play();
     }
 
-    public void MuteBgm(AudioClip audioClip)
+    public void MuteBgm()
     {
-        if (audioClip == null)
-            return;
-
         AudioSource audioSource = _audioSources[(int)Define.Sound.Bgm];
 
         audioSource.mute = true;
+    }
+
+    public void TurnOnBgm()
+    {
+        AudioSource audioSource = _audioSources[(int)Define.Sound.Bgm];
+        audioSource.mute = false;
+    }
+
+    public void RemoveBgm()
+    {
+        AudioSource audioSource = _audioSources[(int)Define.Sound.Bgm];
+        audioSource.clip = null;
+
     }
 
     public IEnumerator IBgmSlowDown()

@@ -37,6 +37,8 @@ public class StatBarsUI : UI_Base
     Image m_PoisonBuildUpFill           ;
     public Image m_PoisonBuildDownFill         ; // 가끔 오류나서 Bind가 안 
     public Image m_Pledge         ;
+    public Image m_MENU_Condition_Poisoned;
+    public Image m_MENU_Condition_PoisonBuild;
 
     public RectTransform m_HPBG;
     public RectTransform m_StaminaBG;
@@ -197,22 +199,35 @@ public class StatBarsUI : UI_Base
         // 중독 전
         if (m_Player.playerStatsManager.isPoisoned == false)
         {
+            // Condition Image
+            m_MENU_Condition_PoisonBuild.gameObject.SetActive(true);
+            m_MENU_Condition_Poisoned.gameObject.SetActive(false);
+
+            // Posion build Down Bar Image
             m_PoisonBuildDownFill.gameObject.SetActive(false);
 
+            // Posion build Up Bar Image
             m_PoisonBuildUpFill.gameObject.SetActive(true);
-            m_PoisonBuildUpFill.fillAmount = m_Player.playerStatsManager.poisonBuildup / (float)m_Player.playerStatsManager.poisonAmount;
+            m_PoisonBuildUpFill.fillAmount = m_Player.playerStatsManager.poisonBuildup / (float)100;
 
-            if (m_Player.playerStatsManager.poisonBuildup <= m_Player.playerStatsManager.poisonAmount)
+
+            if (m_Player.playerStatsManager.poisonBuildup <= 0)
                 m_PoisonBar.SetActive(false);
         }
         // 중독 후
         else
         {
+            // Condition Image
+            m_MENU_Condition_PoisonBuild.gameObject.SetActive(false);
+            m_MENU_Condition_Poisoned.gameObject.SetActive(true);
+
             m_PoisonBuildUpFill.gameObject.SetActive(false);
 
             m_PoisonBuildDownFill.gameObject.SetActive(true);
-            m_PoisonBuildDownFill.fillAmount = m_Player.playerStatsManager.poisonBuildup / (float)m_Player.playerStatsManager.poisonAmount;
+            m_PoisonBuildDownFill.fillAmount = m_Player.playerStatsManager.poisonAmount / (float)100;
 
+            if (m_Player.playerStatsManager.poisonAmount <= 0)
+                m_PoisonBar.SetActive(false);
         }
     }
 

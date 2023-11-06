@@ -8,7 +8,7 @@ public class Table_StartClassStat : Table_Base
     {
         public int               m_nID                   ;
         public string            m_sClass               ;
-        public int            m_iPlayerLevel             ;
+        public int               m_iPlayerLevel             ;
         public int               m_iVigorLevel              ;
         public int               m_iAttunementLevel             ;
         public int               m_iEnduranceLevel              ;

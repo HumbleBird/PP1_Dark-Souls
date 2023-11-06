@@ -6,11 +6,11 @@ public class PoisonSurface: MonoBehaviour
 {
     public float poisonBuildUpAmount = 7;
 
-    public List<CharacterManager> charactersInsidePoisonSurface;
+    public List<PlayerManager> charactersInsidePoisonSurface;
 
     private void OnTriggerEnter(Collider other)
     {
-        CharacterManager character = other.GetComponent<CharacterManager>();
+        PlayerManager character = other.GetComponent<PlayerManager>();
 
         if(character != null)
         {
@@ -20,7 +20,7 @@ public class PoisonSurface: MonoBehaviour
 
     private void OnTriggerExit(Collider other)
     {
-        CharacterManager character = other.GetComponent<CharacterManager>();
+        PlayerManager character = other.GetComponent<PlayerManager>();
 
         if (character != null)
         {
@@ -30,7 +30,7 @@ public class PoisonSurface: MonoBehaviour
 
     private void OnTriggerStay(Collider other)
     {
-        foreach (CharacterManager character in charactersInsidePoisonSurface)
+        foreach (PlayerManager character in charactersInsidePoisonSurface)
         {
             if (character.characterStatsManager.isPoisoned)
                 return;

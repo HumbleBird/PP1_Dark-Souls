@@ -8,10 +8,15 @@ public class GenderPartsModelChanger : ModelChangerManager
     public E_SingleGenderEquipmentArmorParts m_EEquipmentArmorParts;
     public bool m_bisFemalePart = true;
 
-    protected override void Start()
+    protected override void Awake()
     {
-        base.Start();
+        base.Awake();
 
+
+    }
+
+    private void Start()
+    {
         // Bind
         if (m_bisFemalePart)
         {
@@ -23,6 +28,7 @@ public class GenderPartsModelChanger : ModelChangerManager
             m_playerManager.playerEquipmentManager.m_MaleGenderPartsModelChanger.Add(m_EEquipmentArmorParts, this);
 
         }
+
     }
 
     protected override void FindItemChild()

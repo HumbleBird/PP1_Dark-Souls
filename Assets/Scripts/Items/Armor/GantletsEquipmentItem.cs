@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using static Define;
 
 [CreateAssetMenu(menuName = "Items/Eqipment/Gantlets Armor")]
 public class GantletsEquipmentItem : EquipmentItem
@@ -10,7 +11,7 @@ public class GantletsEquipmentItem : EquipmentItem
         SetInfo(id);
 
 
-        if (id == 1003)
+        if (id == (int)E_ArmorItemID.KnightGauntlets)
         {
             Elbow_Attachment_Right = 0;
             Elbow_Attachment_Left = 0;
@@ -21,6 +22,54 @@ public class GantletsEquipmentItem : EquipmentItem
             Arm_Lower_LeftName=16;
             Hand_RightName=12;
             Hand_LeftName=12;
+        }
+        else if (id == (int)E_ArmorItemID.AssassinGauntlets)
+        {
+            Elbow_Attachment_Right = 0;
+            Elbow_Attachment_Left = 0;
+
+            Arm_Upper_RightName = 7;
+            Arm_Upper_LeftName = 7;
+            Arm_Lower_RightName = 4;
+            Arm_Lower_LeftName = 4;
+            Hand_RightName = 2;
+            Hand_LeftName = 2;
+        }
+        else if (id == (int)E_ArmorItemID.HeraldGauntlets)
+        {
+            Elbow_Attachment_Right = 0;
+            Elbow_Attachment_Left = 0;
+
+            Arm_Upper_RightName = 3;
+            Arm_Upper_LeftName = 3;
+            Arm_Lower_RightName = 15;
+            Arm_Lower_LeftName = 15;
+            Hand_RightName = 2;
+            Hand_LeftName = 11;
+        }
+        else if (id == (int)E_ArmorItemID.PyromancerGauntlets)
+        {
+            Elbow_Attachment_Right = 0;
+            Elbow_Attachment_Left = 0;
+
+            Arm_Upper_RightName = 1;
+            Arm_Upper_LeftName = 1;
+            Arm_Lower_RightName = 3;
+            Arm_Lower_LeftName = 3;
+            Hand_RightName = 4;
+            Hand_LeftName = 4;
+        }
+        else if (id == (int)E_ArmorItemID.WarriorGauntlets)
+        {
+            Elbow_Attachment_Right = 0;
+            Elbow_Attachment_Left = 0;
+
+            Arm_Upper_RightName = 7;
+            Arm_Upper_LeftName = 7;
+            Arm_Lower_RightName = 12;
+            Arm_Lower_LeftName = 12;
+            Hand_RightName = 1;
+            Hand_LeftName = 1;
         }
     }
 

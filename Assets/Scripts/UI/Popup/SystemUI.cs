@@ -48,6 +48,7 @@ public class SystemUI : UI_Popup
             Managers.Sound.Play("UI/Popup_ButtonClose");
 
             // 게임 데이터 저장
+            Managers.Object.m_MyPlayer.SaveData();
 
             // 게임 저장 여부 확인
             Managers.Game.m_isNewGame = false;

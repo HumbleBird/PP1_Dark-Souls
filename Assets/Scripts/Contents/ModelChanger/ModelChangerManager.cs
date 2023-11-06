@@ -17,12 +17,8 @@ public class ModelChangerManager : MonoBehaviour
     protected virtual void Awake()
     {
         m_playerManager = GetComponentInParent<PlayerManager>();
-
-    }
-
-    protected virtual void Start()
-    {
         FindItemChild();
+
     }
 
     protected virtual void FindItemChild()

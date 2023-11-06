@@ -98,6 +98,8 @@ public class ToolItem : Item
                 break;
             case E_ToolType.Consumables:
                m_sPlayAnimationName = "Drinking";
+                if(m_iItemID == 2)
+                    m_sPlayAnimationName = "Buff_Weapon_01";
                 m_EatSound = Managers.Resource.Load<AudioClip>("Item/Consumable/Estus Flask Drink");
                 break;
             case E_ToolType.Tools:

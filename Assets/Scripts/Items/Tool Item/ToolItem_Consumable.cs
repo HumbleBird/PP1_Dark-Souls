@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using static Define;
 
 [CreateAssetMenu(menuName ="Items/Consumables/Cure Effect Clump")]
 public class ToolItem_Consumable : ToolItem
@@ -10,6 +11,10 @@ public class ToolItem_Consumable : ToolItem
         SetInfo(id);
     }
 
+    public ToolItem_Consumable()
+    {
+    }
+
     #region AttemptToConsumeItem
     public override void AttemptToConsumeItem(PlayerManager player)
     {
@@ -17,23 +22,31 @@ public class ToolItem_Consumable : ToolItem
 
         if(m_iItemID == 1) // Estus Flask
         {
-            EstusFlask(player);
+            Attempt_EstusFlask(player);
         }
 
         else if (m_iItemID == 2) // Fire Buff Item
         {
-            BuffItem(player);
+            Attempt_BuffItem(player);
         }
 
         else if(m_iItemID == 4) // PuppleMossClump
         {
-            PuppleMossClump(player);
+            Attempt_PuppleMossClump(player);
         }
 
-        player.playerWeaponSlotManager.rightHandSlot.UnloadWeapon();
+
+
+        if (m_iItemID == 2) // Fire Buff Item
+        {
+        }
+        else
+        {
+            player.playerWeaponSlotManager.rightHandSlot.UnloadWeapon();
+        }
     }
 
-    void EstusFlask(PlayerManager player)
+    void Attempt_EstusFlask(PlayerManager player)
     {
         // Recovery Amount
         int healthRecoverAmount = 250;
@@ -47,7 +60,7 @@ public class ToolItem_Consumable : ToolItem
         player.playerWeaponSlotManager.rightHandSlot.UnloadWeapon();
     }
 
-    void PuppleMossClump(PlayerManager player)
+    void Attempt_PuppleMossClump(PlayerManager player)
     {
         GameObject clump = Instantiate(itemModel, player.playerWeaponSlotManager.rightHandSlot.transform);
         player.playerEffectsManager.instantiatedFXModel2 = clump;
@@ -56,6 +69,7 @@ public class ToolItem_Consumable : ToolItem
         {
             player.playerStatsManager.poisonBuildup = 0;
             player.playerStatsManager.isPoisoned = false;
+            Managers.GameUI.m_GameSceneUI.m_StatBarsUI.RefreshUI(Define.E_StatUI.Posion);
 
             if (player.playerEffectsManager.currentParticleFX != null)
             {
@@ -64,22 +78,14 @@ public class ToolItem_Consumable : ToolItem
         }
     }
 
-    void BuffItem(PlayerManager player)
+    void Attempt_BuffItem(PlayerManager player)
     {
-
-
         // 아이템 사용 불가시, 아무것도 하지 않기
         if (!CanUseThisItem(player))
             return;
 
-        if (m_iCurrentCount > 0)
-        {
-            player.playerAnimatorManager.PlayTargetAnimation(m_sPlayAnimationName, isInteracting, true);
-        }
-        else
-        {
-            player.playerAnimatorManager.PlayTargetAnimation("Shrug", true);
-        }
+        player.playerAnimatorManager.PlayTargetAnimation(m_sPlayAnimationName, isInteracting, true);
+        Managers.Sound.Play("Item/Weapon/Buff_Ambient_Fire");
     }
 
     #endregion
@@ -91,25 +97,20 @@ public class ToolItem_Consumable : ToolItem
 
         if (m_iItemID == 2) // Fire Buff Item
         {
-            BuffItem(player);
+            SucessBuffItem(player);
         }
     }
 
     void SucessBuffItem(PlayerManager player)
     {
-        // Effect
-        WeaponBuffEffect weaponBuffEffect;
-        weaponBuffEffect = Managers.Resource.Load<WeaponBuffEffect>("Data/Character Effects/Fire Buff Weapon Effect");
-
         // Sound
-        AudioClip buffTriggerSound;
-        buffTriggerSound = Managers.Resource.Load<AudioClip>("Item/Weapon/Fire_WeaponWhooshe_01");
-
+        AudioClip buffTriggerSound = Managers.Resource.Load<AudioClip>("Item/Weapon/Fire_WeaponWhooshe_01");
         Managers.Sound.Play(buffTriggerSound);
 
-        WeaponBuffEffect weaponBuff = Instantiate(weaponBuffEffect);
-        weaponBuff.isRightHandedBuff = true;
-        player.playerEffectsManager.rightWeaponBuffEffect = weaponBuff;
+        // Effect
+        WeaponBuffEffect weaponBuffEffect = new WeaponBuffEffect(E_WeaponBuffType.Fire);
+        weaponBuffEffect.isRightHandedBuff = true;
+        player.playerEffectsManager.rightWeaponBuffEffect = weaponBuffEffect;
         player.playerEffectsManager.ProcessWeaponBuffs();
     }
 
@@ -117,9 +118,6 @@ public class ToolItem_Consumable : ToolItem
 
     public override bool CanUseThisItem(PlayerManager player)
     {
-        if (player.playerEquipmentManager.m_CurrentHandConsumable.m_iCurrentCount <= 0)
-            return false;
-
         if(m_iItemID == 2)
         {
             return CanUseBuffItem(player);

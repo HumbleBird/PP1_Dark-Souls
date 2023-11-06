@@ -1933,7 +1933,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &3487662551497056200
 Transform:
   m_ObjectHideFlags: 0
@@ -2449,7 +2449,7 @@ Animator:
   m_GameObject: {fileID: 3487662551812223566}
   m_Enabled: 1
   m_Avatar: {fileID: 9000000, guid: 8bbf8b7b8b5f1144ba263c0e541f0452, type: 3}
-  m_Controller: {fileID: 9100000, guid: 7ec74b30ee1b4544abb71c7f9462fc06, type: 2}
+  m_Controller: {fileID: 22100000, guid: 22d5de4468c37da489e7bcf2fba8efb0, type: 2}
   m_CullingMode: 1
   m_UpdateMode: 0
   m_ApplyRootMotion: 1
@@ -2528,6 +2528,7 @@ MonoBehaviour:
   soulsAwardedOnDeath: 50
   aiCharacterHealthBar: {fileID: 0}
   isBoss: 0
+  m_isFriend: 0
 --- !u!114 &3487662551812223540
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2580,6 +2581,7 @@ MonoBehaviour:
   isFiringSpell: 0
   pendingCriticalDamage: 0
   m_CharacterID: 2
+  m_Collider: {fileID: 0}
   aiCharacterBossManager: {fileID: 0}
   aiCharacterLocomotionManager: {fileID: 0}
   aiCharacterAnimationManager: {fileID: 0}
@@ -2869,6 +2871,8 @@ MonoBehaviour:
   fallStartYVelocity: -7
   gravityForce: -25
   groundCheckSphereRadius: 1
+  m_FallingDamageCanTime: 0.5
+  m_FallingDeadTime: 1.7
   movementSpeed: 1
   walkingSpeed: 2
   sprintSpeed: 4
@@ -2902,7 +2906,7 @@ CharacterController:
   m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 2
-  m_Height: 1.6
+  m_Height: 2
   m_Radius: 0.3
   m_SlopeLimit: 45
   m_StepOffset: 0.3
@@ -2986,8 +2990,7 @@ MonoBehaviour:
   - {fileID: 8300000, guid: be235f8d4a2c1634a9ffad5a9ef0a7d5, type: 3}
   - {fileID: 8300000, guid: 8955b56d1a87945479ae70ef02ea3354, type: 3}
   - {fileID: 8300000, guid: 31affb79c7969ae4992dec318113263b, type: 3}
-  m_bCanStepL: 0
-  m_bCanStepR: 0
+  m_AudioSource: {fileID: 0}
 --- !u!136 &7270878655530224026
 CapsuleCollider:
   m_ObjectHideFlags: 0
@@ -3113,7 +3116,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &3487662551971541748
 Transform:
   m_ObjectHideFlags: 0
@@ -3342,14 +3345,14 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 3487662552054831361}
-  m_LocalRotation: {x: -0.5650709, y: 0.47949514, z: 0.10246388, w: -0.6635363}
-  m_LocalPosition: {x: 0.077, y: -0.075, z: 0}
+  m_LocalRotation: {x: -0.97312546, y: 0.099163525, z: 0.07766709, w: -0.19277295}
+  m_LocalPosition: {x: -0.067, y: 0.025, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 3487662551027089404}
   m_RootOrder: 6
-  m_LocalEulerAnglesHint: {x: 40.665, y: -97.457, z: 296.663}
+  m_LocalEulerAnglesHint: {x: 21.087, y: -168.288, z: 193.824}
 --- !u!114 &3487662552054831367
 MonoBehaviour:
   m_ObjectHideFlags: 0

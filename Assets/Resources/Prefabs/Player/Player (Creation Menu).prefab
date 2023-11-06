@@ -31,7 +31,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &7879022753532149868
 Transform:
   m_ObjectHideFlags: 0
@@ -147,6 +147,7 @@ MonoBehaviour:
   isGrounded: 0
   isFiringSpell: 0
   pendingCriticalDamage: 0
+  m_CharacterID: 0
   inputHandler: {fileID: 0}
   cameraHandler: {fileID: 0}
   m_GameSceneUI: {fileID: 0}
@@ -171,7 +172,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6d7913421ecce434e9544807e3741e7b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  unarmWeapon: {fileID: 11400000, guid: 950c54dd3d5db784f9220334c914a1db, type: 2}
+  unarmWeapon: {fileID: 11400000, guid: 05f178e33ececfd468fb3f3dec1b077d, type: 2}
   leftHandSlot: {fileID: 0}
   rightHandSlot: {fileID: 0}
   leftHandDamageCollider: {fileID: 0}
@@ -270,17 +271,17 @@ MonoBehaviour:
   - {fileID: 0}
   - {fileID: 0}
   m_CurrentPledge: {fileID: 0}
-  m_Unarmed: {fileID: 0}
+  m_Unarmed: {fileID: 11400000, guid: 05f178e33ececfd468fb3f3dec1b077d, type: 2}
   m_iCurrentRightWeaponIndex: 0
   m_iCurrentLeftWeaponIndex: 0
   m_iCurrentAmmoArrowIndex: 0
   m_iCurrentAmmoBoltIndex: 0
   m_iCurrentConsumableItemndex: 0
   m_bIsFemale: 0
-  Naked_HelmetEquipment: {fileID: 11400000, guid: 988aab8869179614eae84faa3284d2a2, type: 2}
-  Naked_TorsoEquipment: {fileID: 11400000, guid: 2cf022a44c0c75c4d81f4804639beeef, type: 2}
-  Naked_LegEquipment: {fileID: 11400000, guid: f98e935e2857ce846ade7b13ea0eee98, type: 2}
-  Naked_HandEquipment: {fileID: 11400000, guid: 941c776a633cbfb4ca0eabe7b8a67b81, type: 2}
+  Naked_HelmetEquipment: {fileID: 11400000, guid: 39a11010c483cd549b5dfc20d17704dc, type: 2}
+  Naked_TorsoEquipment: {fileID: 11400000, guid: 3ac240e0348db464f91adfe71d108bcf, type: 2}
+  Naked_LegEquipment: {fileID: 11400000, guid: 63657c0ec173a134c90778a9119390ec, type: 2}
+  Naked_HandEquipment: {fileID: 11400000, guid: 434f146eae8efba45b1f8c49ca669846, type: 2}
   facialFeatures:
   - {fileID: 3779575296532013814}
   - {fileID: 3778669045509627008}
@@ -355,6 +356,8 @@ MonoBehaviour:
   fallStartYVelocity: -7
   gravityForce: -25
   groundCheckSphereRadius: 0.25
+  m_FallingDamageCanTime: 0.5
+  m_FallingDeadTime: 1.7
   movementSpeed: 5
   walkingSpeed: 3
   sprintSpeed: 7
@@ -380,8 +383,7 @@ MonoBehaviour:
   - {fileID: 8300000, guid: be235f8d4a2c1634a9ffad5a9ef0a7d5, type: 3}
   - {fileID: 8300000, guid: 8955b56d1a87945479ae70ef02ea3354, type: 3}
   - {fileID: 8300000, guid: 31affb79c7969ae4992dec318113263b, type: 3}
-  m_bCanStepL: 0
-  m_bCanStepR: 0
+  m_AudioSource: {fileID: 0}
 --- !u!114 &3780201453589398865
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -443,13 +445,13 @@ CharacterController:
   m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 2
-  m_Height: 1.9
+  m_Height: 1.74
   m_Radius: 0.3
   m_SlopeLimit: 45
   m_StepOffset: 0.42
   m_SkinWidth: 0.08
   m_MinMoveDistance: 0.001
-  m_Center: {x: 0, y: 0.94, z: 0}
+  m_Center: {x: 0, y: 0.79, z: 0}
 --- !u!54 &1461314987884993441
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -514,18 +516,18 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 30cb461b5e3124146b8e8aa84f952625, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  characterName: Nameless
+  m_sCharacterName: Nameless
   teamIDNumber: 0
-  currentSoulCount: 8500
+  currentSoulCount: 0
   maxHealth: 0
   currentHealth: 0
   blockingPhysicalDamageAbsorption: 0
   blockingFireDamageAbsorption: 0
   blockingStabilityRating: 0
   m_iAttunementSlots: 0
-  totalPoiseDefence: 0
+  m_fPoiseHealth: 100
+  m_fTotalPoiseDefence: 0
   offensivePoiseBonus: 0
-  armorPoiseBonus: 0
   totalPoiseResetTime: 15
   poiseResetTimer: 0
   physicalDamagePercentageModifier: 100
@@ -583,7 +585,6 @@ MonoBehaviour:
   maxStamina: 0
   currentStamina: 0
   encumbranceLevel: 0
-  CurrentPoise: 10
   m_iItemDiscovery: 10
   m_iRWeapon1: 0
   m_iRWeapon2: 0
@@ -608,8 +609,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   takingDamageSounds: []
-  m_bCanStepL: 0
-  m_bCanStepR: 0
+  m_AudioSource: {fileID: 0}
 --- !u!1 &2032616575613666571
 GameObject:
   m_ObjectHideFlags: 0
@@ -10579,7 +10579,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &3781501583721402574
 Transform:
   m_ObjectHideFlags: 0
@@ -29134,7 +29134,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &3781398491028020932
 Transform:
   m_ObjectHideFlags: 0
@@ -57687,7 +57687,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &3775631248023163884
 Transform:
   m_ObjectHideFlags: 0

@@ -27,6 +27,8 @@ public class CharacterWeaponSlotManager : MonoBehaviour
     {
         character = GetComponent<CharacterManager>();
 
+        unarmWeapon = Managers.Resource.Load<WeaponItem>("Data/Items/Unarmed");
+
         LoadWeaponHolderSlots();
     }
 

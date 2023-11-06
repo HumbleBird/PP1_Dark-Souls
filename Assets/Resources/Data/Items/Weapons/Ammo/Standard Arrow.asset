@@ -21,10 +21,11 @@ MonoBehaviour:
   m_iEquipSlotNum: 0
   m_bIsUnarmed: 0
   m_sPrefabPath: 
+  m_goPrefab: {fileID: 0}
   ammoType: 0
   AttackType: 
   m_iCurrentCount: 10
-  m_iMaxCount: 0
+  m_iMaxCount: 10
   m_iCurrentSaveCount: 0
   m_iMaxSaveCount: 0
   m_iPhysicalDamage: 0
@@ -40,6 +41,7 @@ MonoBehaviour:
   upwardVelocity: 0
   ammoMass: 0
   useGravity: 0
+  m_Shooter: {fileID: 0}
   loadedItemModel: {fileID: 7663977274526283475, guid: 554de0a7deb60e44ea77b7c1ec2ed35a, type: 3}
   liveAmmoModel: {fileID: 7663977274526283475, guid: 275f1e66ef68aab43904b4e445c4be02, type: 3}
   penetratedModel: {fileID: 7663977274526283475, guid: 733667d424f5c0f41ba4fe83f59d6cd6, type: 3}

@@ -12,16 +12,12 @@ public class AICharacterAnimationManager : CharacterAnimatorManager
         aiCharacter = GetComponent<AICharacterManager>();
     }
 
-    public override void AwardSoulsOnDeath()
-    {
-        PlayerManager player = Managers.Object.m_MyPlayer;
-        player.playerStatsManager.AddSouls(aiCharacter.aiCharacterStatsManager.soulsAwardedOnDeath);
-    }
+
 
     public void InstantiateBossParticleFX()
     {
         BossFXTransform bossFXTransform = GetComponentInChildren<BossFXTransform>();
-        Managers.Game.m_goBossParticle = Instantiate(aiCharacter.aiCharacterBossManager.particleFX, bossFXTransform.transform);
+        aiCharacter.aiCharacterBossManager.m_goBossParticle = Instantiate(aiCharacter.aiCharacterBossManager.particleFX, bossFXTransform.transform);
     }
 
     public void PlayWeaponTrailFX()

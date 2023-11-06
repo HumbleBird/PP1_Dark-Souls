@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
+using static Define;
 
 public class WeaponPickup : Interactable
 {
@@ -12,6 +13,8 @@ public class WeaponPickup : Interactable
 
     [Header("Item")]
     public Item item;
+    public E_ItemType m_ItemType;
+    public int m_iItemID;
 
     protected override void Awake()
     {
@@ -42,7 +45,6 @@ public class WeaponPickup : Interactable
     {
         base.Interact(playermanager);
 
-        // �÷��̾ �ֿ����� �ٽ� ������ �ʿ䰡 ���ٰ� Character Data�� �����ϱ�
         if (Managers.Save.currentCharacterSaveData.itemsInWorld.ContainsKey(itemPickUpID))
         {
             Managers.Save.currentCharacterSaveData.itemsInWorld.Remove(itemPickUpID);
@@ -52,7 +54,6 @@ public class WeaponPickup : Interactable
 
         hasBeenLooted = true;
 
-        // �κ��丮�� ����ֱ�
         PickUpItem(playermanager);
 
         Managers.Sound.Play("Object/Item_Get");
@@ -60,17 +61,13 @@ public class WeaponPickup : Interactable
 
     private void PickUpItem(PlayerManager playerManager)
     {
-        PlayerInventoryManager playerInventoryManager;
-        PlayerLocomotionManager playerLocomotionManager;
-        PlayerAnimatorManager playerAnimatorManager;
+        playerManager.playerLocomotionManager.GetComponent<Rigidbody>().velocity = Vector3.zero;
+        playerManager.playerAnimatorManager.PlayTargetAnimation("Pick Up Item", true);
 
-        playerInventoryManager = playerManager.GetComponent<PlayerInventoryManager>();
-        playerLocomotionManager = playerManager.GetComponent<PlayerLocomotionManager>();
-        playerAnimatorManager = playerManager.GetComponentInChildren<PlayerAnimatorManager>();
+        if (item == null)
+            item = Managers.Game.MakeItem(m_ItemType, m_iItemID);
 
-        playerLocomotionManager.GetComponent<Rigidbody>().velocity = Vector3.zero;
-        playerAnimatorManager.PlayTargetAnimation("Pick Up Item", true);
-        playerInventoryManager.Add(item);
+        playerManager.playerInventoryManager.Add(item);
 
         Managers.GameUI.m_InteractableAnnouncementPopupUI.m_InteractionText.gameObject.SetActive(false);
         Managers.GameUI.m_InteractableAnnouncementPopupUI.m_ItemText.gameObject.SetActive(true);

@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 1741623211}
   - component: {fileID: 1741623213}
   - component: {fileID: 1741623212}
-  m_Layer: 0
+  m_Layer: 16
   m_Name: Fog Entrance
   m_TagString: Interactable
   m_Icon: {fileID: 0}
@@ -26,7 +26,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1741623210}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0.39, y: 0, z: 0}
+  m_LocalPosition: {x: 0.39, y: 0, z: 55}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -71,7 +71,7 @@ GameObject:
   - component: {fileID: 1225887639689877774}
   - component: {fileID: 6548308594289071773}
   - component: {fileID: 3180838118813241516}
-  m_Layer: 0
+  m_Layer: 16
   m_Name: Fog Wall
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -87,7 +87,7 @@ Transform:
   m_GameObject: {fileID: 1225887639689877773}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: -15.22, y: 4.38, z: 2.82}
-  m_LocalScale: {x: 0.33225, y: 1, z: 1}
+  m_LocalScale: {x: 3, y: 0.29893, z: -0.0014826}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 1225887639557199209}
@@ -106,8 +106,8 @@ BoxCollider:
   m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 1, y: 7.9291534, z: 8.640966}
-  m_Center: {x: 0, y: -0.4424672, z: -0.32046032}
+  m_Size: {x: 3, y: 10, z: 3}
+  m_Center: {x: 0, y: -0.4424672, z: 2.13}
 --- !u!114 &3180838118813241516
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -145,19 +145,19 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7700174016425988568, guid: 9d8872e8bf2086f4ab19fe2d2b8d3957, type: 3}
       propertyPath: m_LocalRotation.w
-      value: 0.7070799
+      value: 0.5
       objectReference: {fileID: 0}
     - target: {fileID: 7700174016425988568, guid: 9d8872e8bf2086f4ab19fe2d2b8d3957, type: 3}
       propertyPath: m_LocalRotation.x
-      value: 0.7070799
+      value: 0.5
       objectReference: {fileID: 0}
     - target: {fileID: 7700174016425988568, guid: 9d8872e8bf2086f4ab19fe2d2b8d3957, type: 3}
       propertyPath: m_LocalRotation.y
-      value: 0.006170608
+      value: -0.5
       objectReference: {fileID: 0}
     - target: {fileID: 7700174016425988568, guid: 9d8872e8bf2086f4ab19fe2d2b8d3957, type: 3}
       propertyPath: m_LocalRotation.z
-      value: -0.006170608
+      value: 0.5
       objectReference: {fileID: 0}
     - target: {fileID: 7700174016425988568, guid: 9d8872e8bf2086f4ab19fe2d2b8d3957, type: 3}
       propertyPath: m_LocalEulerAnglesHint.x
@@ -165,15 +165,19 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7700174016425988568, guid: 9d8872e8bf2086f4ab19fe2d2b8d3957, type: 3}
       propertyPath: m_LocalEulerAnglesHint.y
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 7700174016425988568, guid: 9d8872e8bf2086f4ab19fe2d2b8d3957, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
-      value: 0
+      value: 90
       objectReference: {fileID: 0}
     - target: {fileID: 7700174016425988569, guid: 9d8872e8bf2086f4ab19fe2d2b8d3957, type: 3}
       propertyPath: m_Name
       value: Fog
+      objectReference: {fileID: 0}
+    - target: {fileID: 7700174016425988569, guid: 9d8872e8bf2086f4ab19fe2d2b8d3957, type: 3}
+      propertyPath: m_Layer
+      value: 16
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 9d8872e8bf2086f4ab19fe2d2b8d3957, type: 3}

@@ -17,6 +17,30 @@ public class Define
 
     #region Item
 
+    public enum E_ArmorItemID
+    {
+        KnightHelm = 1001,
+        KnightTorso,
+        KnightGauntlets,
+        KnightLeggings,
+        AssassinHelm,
+        AssassinTorso,
+        AssassinGauntlets,
+        AssassinLeggings,
+        HeraldHelm,
+        HeraldTorso,
+        HeraldGauntlets,
+        HeraldLeggings,
+        PyromancerHelm,
+        PyromancerTorso,
+        PyromancerGauntlets,
+        PyromancerLeggings,
+        WarriorHelm,
+        WarriorTorso,
+        WarriorGauntlets,
+        WarriorLeggings,
+    }
+
     public enum E_ToolType
     {
         KeyItems = 1,
@@ -128,10 +152,14 @@ public class Define
         Frost
     }
 
-    public enum BuffClass
+    public enum E_WeaponBuffType
     {
-        Physical,
-        Fire
+        Physical                 ,
+        Fire                 ,
+        Magic                 ,
+        Lightning                 ,
+        Dark
+
     }
 
     public enum Damagetype

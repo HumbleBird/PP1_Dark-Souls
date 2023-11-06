@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using static Define;
 
 [CreateAssetMenu(menuName = "Items/Eqipment/Torso Armor")]
 public class TorsoEquipmentItem : EquipmentItem
@@ -9,13 +10,40 @@ public class TorsoEquipmentItem : EquipmentItem
     {
         SetInfo(id);
 
-        if (id == 1002)
+        if (id == (int)E_ArmorItemID.KnightTorso)
         {
             Back_Attachment = 0;
             Shoulder_Attachment_Right = 5;
             Shoulder_Attachment_Left = 5;
             TorsoEquipmentItemName = 22;
-
+        }
+        if (id == (int)E_ArmorItemID.AssassinTorso)
+        {
+            Back_Attachment = 15;
+            Shoulder_Attachment_Right = 14;
+            Shoulder_Attachment_Left = 14;
+            TorsoEquipmentItemName = 13;
+        }
+        if (id == (int)E_ArmorItemID.HeraldTorso)
+        {
+            Back_Attachment = 0;
+            Shoulder_Attachment_Right = 6;
+            Shoulder_Attachment_Left = 6;
+            TorsoEquipmentItemName = 2;
+        }
+        if (id == (int)E_ArmorItemID.PyromancerTorso)
+        {
+            Back_Attachment = 0;
+            Shoulder_Attachment_Right = 15;
+            Shoulder_Attachment_Left = 15;
+            TorsoEquipmentItemName = 3;
+        }
+        if (id == (int)E_ArmorItemID.WarriorTorso)
+        {
+            Back_Attachment = 0;
+            Shoulder_Attachment_Right = 17;
+            Shoulder_Attachment_Left = 17;
+            TorsoEquipmentItemName = 15;
         }
     }
 

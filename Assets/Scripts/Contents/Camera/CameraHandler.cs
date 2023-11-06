@@ -235,7 +235,7 @@ public class CameraHandler : MonoBehaviour
         {
             CharacterManager character = colliders[i].GetComponent<CharacterManager>();
 
-            if(character != null)
+            if(character != null && character.isDead == false)
             {
                 Vector3 lockTargetDirection = character.transform.position - targetTransform.position;
                 float distanceFromTarget = Vector3.Distance(targetTransform.position, character.transform.position);

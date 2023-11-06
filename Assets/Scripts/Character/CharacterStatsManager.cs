@@ -192,4 +192,9 @@ public abstract class CharacterStatsManager : MonoBehaviour
     {
 
     }
+
+    public virtual void AwardSoulsOnDeath()
+    {
+
+    }
 }

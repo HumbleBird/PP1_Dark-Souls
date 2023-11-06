@@ -21,6 +21,7 @@ public class GameSceneUI : UI_Scene
 
     public FadeInOutScreenUI m_FadeInOutScreenUI;
 
+
     public override bool Init()
     {
         if (base.Init() == false)

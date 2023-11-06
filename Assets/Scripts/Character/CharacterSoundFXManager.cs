@@ -15,10 +15,7 @@ public class CharacterSoundFXManager : MonoBehaviour
     private AudioClip m_LastBlockDamageAudioClip;
     private AudioClip m_LastWeaponWhooshes;
 
-    AudioSource m_AudioSource;
-
-    public bool m_bCanStepL;
-    public bool m_bCanStepR = false;
+    public AudioSource m_AudioSource;
 
     protected virtual void Awake()
     {
@@ -142,7 +139,7 @@ public class CharacterSoundFXManager : MonoBehaviour
 
     public void RollSoundPlay()
     {
-        string audioClipPath = $"Sounds/Effect/Character/Footsteps/Footsteps_Tile/Footsteps_Tile_Jump/Footsteps_Tile_Jump_Land_01";
+        string audioClipPath = "Character/Common/Roll";
         Managers.Sound.SoundPlayFromCharacter(gameObject, audioClipPath, m_AudioSource);
     }
 }

@@ -65,8 +65,6 @@ public class CharacterManager : MonoBehaviour
 
     public int m_CharacterID = 0;
 
-    public Collider m_Collider;
-
     protected virtual void Awake()
     {
         characterController = gameObject.GetOrAddComponent<CharacterController>();
@@ -79,14 +77,11 @@ public class CharacterManager : MonoBehaviour
         characterCombatManager = GetComponent<CharacterCombatManager>();
         characterEquipmentManager = GetComponent<CharacterEquipmentManager>();
 
-        m_Collider = GetComponent<Collider>();
-
         Managers.Object.Add(gameObject);
     }
 
     protected virtual void Start()
     {
-
     }
 
     protected virtual void FixedUpdate()
@@ -132,6 +127,16 @@ public class CharacterManager : MonoBehaviour
         animator.SetFloat("Vertical", 0);
         animator.SetFloat("Horizontal", 0);
 
+        // State Clear
+        characterStatsManager.poisonBuildup = 0;
+
+        // Effect
+        characterEffectsManager.RemoveTimedEffectParticle(Define.EffectParticleType.Poison);
+        characterEffectsManager.RemoveTimedEffectParticle(Define.EffectParticleType.Bleed);
+        characterEffectsManager.RemoveTimedEffectParticle(Define.EffectParticleType.Frost);
+        characterEffectsManager.RemoveTimedEffectParticle(Define.EffectParticleType.Curse);
+        characterEffectsManager.timedEffects.Clear();
+
         // 체력 값 초기화
         characterStatsManager.FullRecovery();
 
@@ -159,10 +164,9 @@ public class CharacterManager : MonoBehaviour
         isBeingRiposted= false;
         isPerformingBackstab= false;
         isPerformingRipost= false;
-
         isDead = false;
-
         isInteracting = false;
+        characterController.detectCollisions = true;
     }
 
     // 죽었을 때
@@ -171,6 +175,10 @@ public class CharacterManager : MonoBehaviour
         characterStatsManager.currentHealth = 0;
         isDead = true;
 
+        // Sound
+        Managers.Sound.Play("Character/Common/Kill");
+
+        characterController.detectCollisions = false;
     }
 }
  

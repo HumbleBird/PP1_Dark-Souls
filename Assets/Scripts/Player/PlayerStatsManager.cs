@@ -460,7 +460,7 @@ public class PlayerStatsManager : CharacterStatsManager
 
     public int CalculatePhysicalDefenseFromVitalityLevel(int VitalityLevel)
     {
-        return VitalityLevel * 5;
+        return VitalityLevel * 1;
     }
 
     public int CalculatePosionResistance(int VitalityLevel)
@@ -475,7 +475,7 @@ public class PlayerStatsManager : CharacterStatsManager
 
     public int CalculatePhysicalDefenseFromStrengthLevel(int StrengthLevel)
     {
-        return StrengthLevel * 3;
+        return StrengthLevel * 1;
     }
 
     public int CalculateFireDefense(int StrengthLevel)

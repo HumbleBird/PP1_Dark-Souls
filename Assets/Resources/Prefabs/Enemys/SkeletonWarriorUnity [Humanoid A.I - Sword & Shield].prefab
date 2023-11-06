@@ -186,9 +186,9 @@ MonoBehaviour:
   blockingFireDamageAbsorption: 0
   blockingStabilityRating: 0
   m_iAttunementSlots: 0
-  totalPoiseDefence: 0
+  m_fPoiseHealth: 100
+  m_fTotalPoiseDefence: 0
   offensivePoiseBonus: 0
-  armorPoiseBonus: 0
   totalPoiseResetTime: 15
   poiseResetTimer: 0
   physicalDamagePercentageModifier: 100
@@ -234,6 +234,7 @@ MonoBehaviour:
   soulsAwardedOnDeath: 50
   aiCharacterHealthBar: {fileID: 0}
   isBoss: 0
+  m_isFriend: 0
 --- !u!114 &2876479769587392760
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -286,6 +287,7 @@ MonoBehaviour:
   isFiringSpell: 0
   pendingCriticalDamage: 0
   m_CharacterID: 1
+  m_Collider: {fileID: 0}
   aiCharacterBossManager: {fileID: 0}
   aiCharacterLocomotionManager: {fileID: 0}
   aiCharacterAnimationManager: {fileID: 0}
@@ -525,6 +527,8 @@ MonoBehaviour:
   fallStartYVelocity: -7
   gravityForce: -25
   groundCheckSphereRadius: 1
+  m_FallingDamageCanTime: 0.5
+  m_FallingDeadTime: 1.7
   movementSpeed: 1
   walkingSpeed: 2
   sprintSpeed: 4
@@ -558,7 +562,7 @@ CharacterController:
   m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 2
-  m_Height: 1.6
+  m_Height: 2
   m_Radius: 0.3
   m_SlopeLimit: 45
   m_StepOffset: 0.3
@@ -692,8 +696,7 @@ MonoBehaviour:
   - {fileID: 8300000, guid: be235f8d4a2c1634a9ffad5a9ef0a7d5, type: 3}
   - {fileID: 8300000, guid: 8955b56d1a87945479ae70ef02ea3354, type: 3}
   - {fileID: 8300000, guid: 31affb79c7969ae4992dec318113263b, type: 3}
-  m_bCanStepL: 0
-  m_bCanStepR: 0
+  m_AudioSource: {fileID: 0}
 --- !u!136 &5304055169720046048
 CapsuleCollider:
   m_ObjectHideFlags: 0

@@ -4,8 +4,6 @@ using UnityEngine;
 
 public class FogWall : MonoBehaviour
 {
-
-
     private void Awake()
     {
         gameObject.SetActive(false);

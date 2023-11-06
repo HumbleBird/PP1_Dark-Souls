@@ -7,6 +7,7 @@ public class CompanionStateCombatStance : State
 {
     public ItemBasedAttackAction[] enemyAttacks;
 
+    CompanionStateIdle idleState;
     CompanionStateFollowHost   followHostState;
     CompanionStatePursueTarget pursueTargetState;
     CompanionStateAttackTarget attackState;
@@ -33,10 +34,17 @@ public class CompanionStateCombatStance : State
         followHostState = GetComponent<CompanionStateFollowHost>();
         pursueTargetState = GetComponent<CompanionStatePursueTarget>();
         attackState         = GetComponent<CompanionStateAttackTarget>();
+        idleState = GetComponent<CompanionStateIdle>();
     }
 
     public override State Tick(AICharacterManager aiCharacter)
     {
+        if(aiCharacter.currentTarget.isDead)
+        {
+            aiCharacter.currentTarget = null;
+            return idleState;
+        }
+
         // 동료(플레이어)로부터 멀리 떨어져 있다면 다시 플레이어에게 이동
         if (aiCharacter.distanceFromCompanion > aiCharacter.maxDistanceFromCompanion)
         {

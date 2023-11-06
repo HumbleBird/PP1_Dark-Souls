@@ -35,23 +35,30 @@ public class CompanionStateIdle : State
             // 적을 찾아 냈다면 같은 팀인지 아닌지를 판별 후 다음 스텝으로
             if (targetCharacter != null)
             {
-                if (targetCharacter.characterStatsManager.teamIDNumber != aiCharacter.aiCharacterStatsManager.teamIDNumber)
-                {
-                    Vector3 TargetDirection = targetCharacter.transform.position - transform.position;
-                    float viewableAngle = Vector3.Angle(TargetDirection, transform.forward);
+                Vector3 TargetDirection = targetCharacter.transform.position - transform.position;
+                float viewableAngle = Vector3.Angle(TargetDirection, transform.forward);
 
-                    // 적을 찾았고, 이 객체의 시야 반경 안(앞)에 있는지
-                    if (viewableAngle > aiCharacter.minimumDetectionAngle && viewableAngle < aiCharacter.maximumDetectionAngle)
+                // 적을 찾았고, 이 객체의 시야 반경 안(앞)에 있는지
+                if (viewableAngle > aiCharacter.minimumDetectionAngle && viewableAngle < aiCharacter.maximumDetectionAngle)
+                {
+                    // 적과 A.I 사이에 장애물이 있다면 current Target에 추가하지 않음.
+                    if (Physics.Linecast(aiCharacter.lockOnTransform.position, targetCharacter.lockOnTransform.position, layerThatBlockLineOfSight))
                     {
-                        // 적과 A.I 사이에 장애물이 있다면 current Target에 추가하지 않음.
-                        if (Physics.Linecast(aiCharacter.lockOnTransform.position, targetCharacter.lockOnTransform.position, layerThatBlockLineOfSight))
+
+                    }
+                    else
+                    {
+                        if (targetCharacter.characterStatsManager.teamIDNumber != aiCharacter.aiCharacterStatsManager.teamIDNumber)
                         {
-                            return this;
+                            aiCharacter.currentTarget = targetCharacter;
+
                         }
                         else
                         {
-                            aiCharacter.currentTarget = targetCharacter;
+                            if (aiCharacter.companion == null && targetCharacter != aiCharacter)
+                                aiCharacter.companion = targetCharacter;
                         }
+
                     }
                 }
             }

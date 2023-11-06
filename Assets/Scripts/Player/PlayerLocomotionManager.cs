@@ -281,4 +281,16 @@ public class PlayerLocomotionManager : CharacterLocomotionManager
     }
 
     #endregion
+
+    protected override void FallingDeadCheck()
+    {
+        base.FallingDeadCheck();
+
+        // 사망
+        if (inAirTimer >= m_FallingDeadTime)
+        {
+            // 비명 지름
+            Managers.Sound.Play("Character/Player/Falling scream");
+        }
+    }
 }

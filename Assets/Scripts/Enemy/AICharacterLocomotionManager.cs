@@ -82,4 +82,16 @@ public class AICharacterLocomotionManager : CharacterLocomotionManager
             }
         }
     }
+
+    protected override void FallingDeadCheck()
+    {
+        base.FallingDeadCheck();
+
+        // 사망
+        if (inAirTimer >= 2.5f)
+        {
+            // 플레이어에게 소울 지급
+            aiCharacter.aiCharacterStatsManager.AwardSoulsOnDeath();
+        }
+    }
 }

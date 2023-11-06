@@ -16,12 +16,17 @@ public class PoisonedEffect : CharacterEffect
             {
 
                 character.characterStatsManager.poisonAmount -= 1;
-                Debug.Log("Damage");
+                character.characterStatsManager.currentHealth -= 1;
 
                 if(player != null)
                 {
                     player.m_GameSceneUI.m_StatBarsUI.RefreshUI(Define.E_StatUI.Posion);
+                    player.m_GameSceneUI.m_StatBarsUI.RefreshUI(Define.E_StatUI.Hp);
                 }
+
+                if (character.characterStatsManager.currentHealth <= 0)
+                    character.Dead();
+
             }
             else
             {

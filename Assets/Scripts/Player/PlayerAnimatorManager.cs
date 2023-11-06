@@ -83,19 +83,7 @@ public class PlayerAnimatorManager : CharacterAnimatorManager
         player.animator.SetFloat("Horizontal", h, 0.1f, Time.deltaTime);
     }
 
-    public void DisableCollision()
-    {
-        player.characterController.enabled = false;
-        player.m_Collider.enabled = false;
-    }
-
-    public void EnableCollision()
-    {
-        player.characterController.enabled = true;
-        player.m_Collider.enabled = true;
-    }
-
-    public virtual void SucessFullyUseCurrentConsumable()
+    public void SucessFullyUseCurrentConsumable()
     {
         if (character.characterEquipmentManager.m_CurrentHandConsumable != null)
         {
@@ -106,5 +94,23 @@ public class PlayerAnimatorManager : CharacterAnimatorManager
     public override void RollCameraShake()
     {
         Managers.Camera.CameraShake(1);
+    }
+
+    public override void OnAnimatorMove()
+    {
+        if (character.isInteracting == false)
+            return;
+
+        Vector3 velocity = character.animator.deltaPosition;
+
+        if (character.characterController.enabled == true)
+        {
+            character.characterController.Move(velocity);
+            character.transform.rotation *= character.animator.deltaRotation;
+        }
+        else
+        {
+            transform.position += velocity;
+        }
     }
 }

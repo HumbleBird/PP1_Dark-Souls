@@ -206,5 +206,15 @@ public class AICharacterManager : CharacterManager
 
         // 몬스터의 현재 타깃 초기화
         currentTarget = null;
+
+        if (aiCharacterStatsManager.isBoss)
+            aiCharacterBossManager.Clear();
+    }
+
+    public override void Dead()
+    {
+        base.Dead();
+
+        Managers.Game.PlayerLockOnCheck();
     }
 }

@@ -7,26 +7,26 @@ public class CharacterLocomotionManager : MonoBehaviour
     CharacterManager character;
 
     public Vector3 moveDirection;
-    public LayerMask groundLayer = 1;
+    public LayerMask groundLayer = 1 << 0;
 
     [Header("Gravity Settings")]
     public float inAirTimer;
     [SerializeField] protected Vector3 yVelocity;
-    [SerializeField] protected float groundedYVelocity = -20;
+    [SerializeField] protected float groundedYVelocity = -7.5f;
     [SerializeField] protected float fallStartYVelocity = -7;
-    [SerializeField] protected float gravityForce = -25;
-    [SerializeField]  float groundCheckSphereRadius = 1f;
+    [SerializeField] protected float gravityForce = -10;
+    [SerializeField]  float groundCheckSphereRadius = 0.1f;
+    [SerializeField] protected float m_FallingDamageCanTime = 0.5f;
+    [SerializeField] protected float m_FallingDeadTime = 1.7f;
     protected bool fallingVelocity = false;
 
     protected virtual void Awake()
     {
         character = GetComponent<CharacterManager>();
-
     }
 
     protected virtual void Start()
     {
-
     }
 
 
@@ -37,16 +37,43 @@ public class CharacterLocomotionManager : MonoBehaviour
         HandleGroundCheck();
     }
 
-    public virtual void HandleGroundCheck()
+    void OnDrawGizmosSelected()
     {
+        Gizmos.DrawSphere(transform.position, groundCheckSphereRadius);
+    }
+
+    public void HandleGroundCheck()
+    {
+        if (character.isDead)
+            return;
+
         if(character.isGrounded)
         {
-            if(yVelocity.y < 0)
+            if(inAirTimer > 0)
             {
-                inAirTimer = 0;
-                fallingVelocity = false;
-                yVelocity.y = groundedYVelocity;
+                // Damage Check
+                if (inAirTimer <= m_FallingDeadTime && inAirTimer >= m_FallingDamageCanTime)
+                {
+                    // Stat
+                    character.characterStatsManager.currentHealth -= Mathf.RoundToInt(inAirTimer * 5);
+
+                    // UI Refresh
+                    character.characterStatsManager.HealthBarUIUpdate(Mathf.RoundToInt(Mathf.RoundToInt(inAirTimer * 5)));
+
+                    // Sound
+                    Managers.Sound.SoundPlayFromCharacter(gameObject, "Character/Common/Fall_Land", character.characterSoundFXManager.m_AudioSource);
+
+                    inAirTimer = 0;
+                    fallingVelocity = false;
+                    yVelocity.y = groundedYVelocity;
+                }
             }
+            //if(yVelocity.y < 0)
+            //{
+            //    inAirTimer = 0;
+            //    fallingVelocity = false;
+            //    yVelocity.y = groundedYVelocity;
+            //}
         }
         else
         {
@@ -58,14 +85,28 @@ public class CharacterLocomotionManager : MonoBehaviour
 
             inAirTimer += Time.deltaTime;
             yVelocity.y += gravityForce * Time.deltaTime;
-        }
 
-        character.animator.SetFloat("inAirTimer", inAirTimer);
-        character.characterController.Move(yVelocity * Time.deltaTime);
+            FallingDeadCheck();
+
+            character.animator.SetFloat("inAirTimer", inAirTimer);
+            character.characterController.Move(yVelocity * Time.deltaTime);
+        }
     }
 
-    private void OnDrawGizmosSelected()
+    protected virtual void FallingDeadCheck()
     {
-        //Gizmos.DrawSphere(character.transform.position, groundCheckSphereRadius);
+        // »ç¸Á
+        if (inAirTimer >= m_FallingDeadTime)
+        {
+            character.characterStatsManager.currentHealth = 0;
+            character.Dead();
+
+            //Animation
+            character.characterAnimatorManager.PlayTargetAnimation("Dead_01", true);
+
+            // UI Refresh
+            character.characterStatsManager.HealthBarUIUpdate(Mathf.RoundToInt(Mathf.RoundToInt(inAirTimer * 5)));
+
+        }
     }
 }

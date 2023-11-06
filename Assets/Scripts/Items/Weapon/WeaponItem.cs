@@ -203,6 +203,16 @@ public class WeaponItem : Item
                 th_hold_RB_Action = new CriticalAttackAction();
                 th_tap_RT_Action = new HeavyAttackAction();
                 th_hold_RT_Action = new ChargeAttackActon();
+
+                oh_tap_LB_Action = new LightAttackAction();
+                oh_hold_LB_Action = new CriticalAttackAction();
+                oh_tap_LT_Action = new HeavyAttackAction();
+                oh_hold_LT_Action = new ChargeAttackActon();
+
+                th_tap_LB_Action = new LightAttackAction();
+                th_hold_LB_Action = new CriticalAttackAction();
+                th_tap_LT_Action = new HeavyAttackAction();
+                th_hold_LT_Action = new ChargeAttackActon();
                 break;
             case WeaponType.Bows:
             case WeaponType.Greatbows:
@@ -217,9 +227,11 @@ public class WeaponItem : Item
                 break;
             case WeaponType.Flames:
                 oh_tap_RB_Action = new PyromancySpellAction();
+                oh_tap_LB_Action = new PyromancySpellAction();
                 break;
             case WeaponType.Talismans:
                 oh_tap_RB_Action = new MiracleSpellAction();
+                oh_tap_LB_Action = new MiracleSpellAction();
                 break;
             case WeaponType.SacredChimes:
                 break;
@@ -418,63 +430,124 @@ public class WeaponItem : Item
         }
     }
 
-    void SetSound()
+    public void SetSound(E_WeaponBuffType buffClass = E_WeaponBuffType.Physical)
     {
-        switch (m_eWeaponType)
-        {
-            case WeaponType.Daggers:
-            case WeaponType.StraightSwords:
-            case WeaponType.Greatswords:
-            case WeaponType.UltraGreatswords:
-            case WeaponType.CurvedSword:
-            case WeaponType.Katanas:
-            case WeaponType.CurvedGreatswords:
-            case WeaponType.PiercingSwords:
-            case WeaponType.Axes:
-            case WeaponType.Greataxes:
-            case WeaponType.Hammers:
-            case WeaponType.GreatHammers:
-            case WeaponType.FistAndClaws:
-            case WeaponType.SpearsAndPikes:
-            case WeaponType.Halberds:
-            case WeaponType.Reapers:
-            case WeaponType.Whips:
-                {
-                    {
-                        AudioClip audio = Managers.Resource.Load<AudioClip>("Item/Weapon/Daggers_WeaponWhooshe_01");
-                        m_SwrodWeaponWhooshes.Add(audio);
-                    }
-                    {
-                        AudioClip audio = Managers.Resource.Load<AudioClip>("Item/Weapon/StraightSwords_WeaponWhooshe_01");
-                        m_SwrodWeaponWhooshes.Add(audio);
-                    }
-                }
+        m_SwrodWeaponWhooshes.Clear();
 
-                break;
-            case WeaponType.Bows:
-            case WeaponType.Greatbows:
-            case WeaponType.Crossbows:
-                break;
-            case WeaponType.Staves:
-            case WeaponType.Flames:
-            case WeaponType.Talismans:
-            case WeaponType.SacredChimes:
-                break;
-            case WeaponType.SmallShield:
-            case WeaponType.Shield:
-                {
+        if(buffClass == E_WeaponBuffType.Physical)
+        {
+            switch (m_eWeaponType)
+            {
+                case WeaponType.Daggers:
+                case WeaponType.StraightSwords:
+                case WeaponType.Greatswords:
+                case WeaponType.UltraGreatswords:
+                case WeaponType.CurvedSword:
+                case WeaponType.Katanas:
+                case WeaponType.CurvedGreatswords:
+                case WeaponType.PiercingSwords:
+                case WeaponType.Axes:
+                case WeaponType.Greataxes:
+                case WeaponType.Hammers:
+                case WeaponType.GreatHammers:
+                case WeaponType.FistAndClaws:
+                case WeaponType.SpearsAndPikes:
+                case WeaponType.Halberds:
+                case WeaponType.Reapers:
+                case WeaponType.Whips:
                     {
-                        AudioClip audio = Managers.Resource.Load<AudioClip>("Item/Weapon/Shield/Shield_Block_01");
-                        m_listBlockingNoises.Add(audio);
+                        {
+                            AudioClip audio = Managers.Resource.Load<AudioClip>("Sounds/Effect/Item/Weapon/Daggers_WeaponWhooshe_01");
+                            m_SwrodWeaponWhooshes.Add(audio);
+                        }
+                        {
+                            AudioClip audio = Managers.Resource.Load<AudioClip>("Sounds/Effect/Item/Weapon/StraightSwords_WeaponWhooshe_01");
+                            m_SwrodWeaponWhooshes.Add(audio);
+                        }
                     }
+
+                    break;
+                case WeaponType.Bows:
+                case WeaponType.Greatbows:
+                case WeaponType.Crossbows:
+                    break;
+                case WeaponType.Staves:
+                case WeaponType.Flames:
+                case WeaponType.Talismans:
+                case WeaponType.SacredChimes:
+                    break;
+                case WeaponType.SmallShield:
+                case WeaponType.Shield:
                     {
-                        AudioClip audio = Managers.Resource.Load<AudioClip>("Item/Weapon/Shield/Shield_Block_02");
-                        m_listBlockingNoises.Add(audio);
+                        {
+                            AudioClip audio = Managers.Resource.Load<AudioClip>("Sounds/Effect/Item/Weapon/Shield/Shield_Block_01");
+                            m_listBlockingNoises.Add(audio);
+                        }
+                        {
+                            AudioClip audio = Managers.Resource.Load<AudioClip>("Sounds/Effect/Item/Weapon/Shield/Shield_Block_02");
+                            m_listBlockingNoises.Add(audio);
+                        }
                     }
-                }
-                break;
-            default:
-                break;
+                    break;
+                default:
+                    break;
+            }
+
+        }
+        else if (buffClass == E_WeaponBuffType.Fire)
+        {
+            switch (m_eWeaponType)
+            {
+                case WeaponType.Daggers:
+                case WeaponType.StraightSwords:
+                case WeaponType.Greatswords:
+                case WeaponType.UltraGreatswords:
+                case WeaponType.CurvedSword:
+                case WeaponType.Katanas:
+                case WeaponType.CurvedGreatswords:
+                case WeaponType.PiercingSwords:
+                case WeaponType.Axes:
+                case WeaponType.Greataxes:
+                case WeaponType.Hammers:
+                case WeaponType.GreatHammers:
+                case WeaponType.FistAndClaws:
+                case WeaponType.SpearsAndPikes:
+                case WeaponType.Halberds:
+                case WeaponType.Reapers:
+                case WeaponType.Whips:
+                    {
+                        {
+                            AudioClip audio = Managers.Resource.Load<AudioClip>("Sounds/Effect/Item/Weapon/Fire_WeaponWhooshe_01");
+                            m_SwrodWeaponWhooshes.Add(audio);
+                        }
+                    }
+
+                    break;
+                case WeaponType.Bows:
+                case WeaponType.Greatbows:
+                case WeaponType.Crossbows:
+                    break;
+                case WeaponType.Staves:
+                case WeaponType.Flames:
+                case WeaponType.Talismans:
+                case WeaponType.SacredChimes:
+                    break;
+                case WeaponType.SmallShield:
+                case WeaponType.Shield:
+                    {
+                        {
+                            AudioClip audio = Managers.Resource.Load<AudioClip>("Sounds/Effect/Item/Weapon/Shield/Shield_Block_01");
+                            m_listBlockingNoises.Add(audio);
+                        }
+                        {
+                            AudioClip audio = Managers.Resource.Load<AudioClip>("Sounds/Effect/Item/Weapon/Shield/Shield_Block_02");
+                            m_listBlockingNoises.Add(audio);
+                        }
+                    }
+                    break;
+                default:
+                    break;
+            }
         }
     }
 }

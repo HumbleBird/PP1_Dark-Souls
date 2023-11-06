@@ -9,6 +9,7 @@ public class SpellDamageCollider : DamageCollider
     public GameObject muzzleParticles;
 
     bool hasColliede = false;
+    public bool m_isCanCollide = false;
 
     CharacterManager spellTarget;
     Rigidbody rigidBody;
@@ -38,8 +39,22 @@ public class SpellDamageCollider : DamageCollider
 
     private void OnCollisionEnter(Collision collision)
     {
+        if (m_isCanCollide == false)
+            return;
+
         if (!hasColliede)
         {
+            if (collision.gameObject.layer == LayerMask.NameToLayer("Default"))
+            {
+                impactParticles = Instantiate(impactParticles, transform.position, Quaternion.FromToRotation(Vector3.up, impactNormal));
+
+                Destroy(projectileParticles);
+                Destroy(impactParticles, 5f);
+                Destroy(gameObject, 5f);
+
+                hasColliede = true;
+            }
+
             spellTarget = collision.transform.GetComponent<CharacterManager>();
 
             if (spellTarget != null && spellTarget.characterStatsManager.teamIDNumber != teamIDNumber)
@@ -56,16 +71,19 @@ public class SpellDamageCollider : DamageCollider
                 takeDamageEffect.contactPoint = contactPoint;
                 takeDamageEffect.angleHitFrom = angleHitFrom;
                 spellTarget.characterEffectsManager.ProcessEffectInstantly(takeDamageEffect);
+
+
+                impactParticles = Instantiate(impactParticles, transform.position, Quaternion.FromToRotation(Vector3.up, impactNormal));
+
+                Destroy(projectileParticles);
+                Destroy(impactParticles, 5f);
+                Destroy(gameObject, 5f);
+
+                hasColliede = true;
             }
             else
                 return;
 
-            hasColliede = true;
-            impactParticles = Instantiate(impactParticles, transform.position, Quaternion.FromToRotation(Vector3.up, impactNormal));
-
-            Destroy(projectileParticles);
-            Destroy(impactParticles, 5f);
-            Destroy(gameObject, 5f);
         }
     }
 }

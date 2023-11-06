@@ -11,6 +11,7 @@ public class GameManager
 
     public bool m_isNewGame = true;
     public bool isReSetting = false;
+    public bool m_Develing = true;
 
     DeadSouls m_goDeadSouls;
     public int m_iPlayerDeadSoul = 0;
@@ -23,15 +24,23 @@ public class GameManager
 
     // Boss
     public EnemyBossManager m_Boss;
-    public bool bossFightIsActive; // 현재 싸우고 있는가
-    public bool bossHasBeenAwakened; // 이미 싸움 중에 한 번 죽어는가/이미 보스가 깨어져 있는가
-    public bool bossHasBeenDefeated; // 보스가 죽었는가
-    public bool m_isBossSoundPlaying = false;
-    public GameObject m_goBossParticle;
+
+    // Area
+    public Dictionary<string, Area> m_DicAreas = new Dictionary<string, Area>();
 
     public void GameStart()
     {
-        m_Player = Managers.Object.m_MyPlayer;
+        if(Managers.Object.m_MyPlayer == null)
+        {
+            GameObject player =  Managers.Resource.Instantiate("Player/Player (Game)");
+            PlayerManager pm =player.GetComponent<PlayerManager>();
+            m_Player = pm;
+
+        }
+        else
+        {
+            m_Player = Managers.Object.m_MyPlayer;
+        }
 
         m_Player.StartGame();
     }
@@ -39,13 +48,6 @@ public class GameManager
     public void PlayAction(Action action)
     {
         action.Invoke();
-    }
-
-    public void EntryNewArea(string name)
-    {
-        // UI로 화면 뛰우기
-        m_Player.m_GameSceneUI.m_AreaUI.ShowNewAreaName(name);
-
     }
 
     public IEnumerator PlayerDead()
@@ -73,28 +75,16 @@ public class GameManager
         m_goDeadSouls.m_iSoulsCount = m_iPlayerDeadSoul;
         m_iPlayerDeadSoul = 0;
 
+        // 지역 초기화
+        foreach (Area area in m_DicAreas.Values)
+        {
+            area.Clear();
+        }
+
         // UI 업데이트
         m_Player.m_GameSceneUI.RefreshUI(Define.E_StatUI.All);
         Managers.GameUI.CloseAllPopupUI();
         Managers.GameUI.m_GameSceneUI.m_BossHealthBar.Clear();
-
-        // Boss
-        if(bossHasBeenDefeated == false)
-        {
-            m_Boss.bossCombatStanceState.hasPhaseShifted = false;
-
-            if (m_goBossParticle != null)
-            {
-                Managers.Resource.Destroy(m_goBossParticle);
-                m_goBossParticle = null;
-            }
-        }
-
-        // Player Input Clear
-        m_Player.inputHandler.Clear();
-
-        // Sound
-        Managers.Sound.MuteBgm(m_Boss.m_audioClip);
 
         //모든 캐릭터 초기화
         foreach (GameObject go in Managers.Object._objects)
@@ -156,6 +146,7 @@ public class GameManager
                 item = new AmmoItem(id);
                 break;
             case E_ItemType.Ring:
+                item = new RingItem(id);
                 break;
             case E_ItemType.Pledge:
                 break;
@@ -217,17 +208,17 @@ public class GameManager
         bossHealthBar.SetInfo(boss);
 
         // FLAG
-        bossFightIsActive = true;
-        bossHasBeenAwakened = true;
+        m_Boss.bossFightIsActive = true;
+        m_Boss.bossHasBeenAwakened = true;
 
         // FogWall
         fogWall.ActivateFogWall();
 
         // Sound
-        if(m_isBossSoundPlaying == false)
+        if(m_Boss.m_isBossSoundPlaying == false)
         {
             Managers.Sound.Play(m_Boss.m_audioClip, 1, Sound.Bgm);
-            m_isBossSoundPlaying = true;
+            m_Boss.m_isBossSoundPlaying = true;
         }
     }
 
@@ -237,17 +228,17 @@ public class GameManager
         Managers.GameUI.m_GameSceneUI.m_BossHealthBar.Clear();
 
         // FLAG
-        bossFightIsActive = false;
-        bossHasBeenAwakened = false;
+        m_Boss.bossFightIsActive = false;
+        m_Boss.bossHasBeenAwakened = false;
 
         // FogWall
         fogWall.DeactivateFogWall();
 
         // Sound
-        if (m_isBossSoundPlaying == true)
+        if (m_Boss.m_isBossSoundPlaying == true)
         {
-            Managers.Sound.MuteBgm(m_Boss.m_audioClip);
-            m_isBossSoundPlaying = false;
+            Managers.Sound.RemoveBgm();
+            m_Boss.m_isBossSoundPlaying = false;
         }
     }
 
@@ -256,5 +247,54 @@ public class GameManager
 
     }
 
+    #endregion
+
+    #region Monster
+
+    public void PlayerLockOnCheck()
+    {
+        // 카메라 락온 체크
+        if (m_Player.inputHandler.lockOnFlag == false)
+            return;
+
+        // 근처에 다른 적이 있는지 체크
+        // 있다면 왼쪽인지 오른쪽인지 체크
+        m_Player.cameraHandler.HandleLockOn();
+        if(m_Player.cameraHandler.m_trNearestLockOnTarget != null)
+        {
+            if (m_Player.cameraHandler.m_trleftLockTarget != null)
+            {
+                m_Player.cameraHandler.m_trCurrentLockOnTarget = m_Player.cameraHandler.m_trleftLockTarget;
+            }
+            else if (m_Player.cameraHandler.m_trRightLockTarget != null)
+            {
+                m_Player.cameraHandler.m_trCurrentLockOnTarget = m_Player.cameraHandler.m_trRightLockTarget;
+            }
+        }
+        // 근처에 적이 없다면 해제
+        else
+        {
+            m_Player.inputHandler.lockOnFlag = false;
+            m_Player.cameraHandler.ClearLockOnTargets();
+        }
+    }
+
+    #endregion
+
+    #region Option
+
+    public void GameQuit()
+    {
+        // Save & Load
+
+
+        // Game Inner
+        List<Item> items = m_Player.playerInventoryManager.FindItems((i) => i.m_eItemType == E_ItemType.MeleeWeapon);
+
+        foreach (Item item in items)
+        {
+            ((WeaponItem)item).SetSound();
+        }
+    }
     #endregion
 }

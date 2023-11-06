@@ -7,11 +7,16 @@ public class AllGenderPartModelChanger : ModelChangerManager
 {
     public All_GenderItemPartsType m_EAll_GenderItemPartsType = All_GenderItemPartsType.HeadCoverings_Base_Hair;
 
-    protected override void Start()
+    protected override void Awake()
     {
-        base.Start();
+        base.Awake();
 
+    }
+
+    private void Start()
+    {
         m_playerManager.playerEquipmentManager.m_AllGenderPartsModelChanger.Add(m_EAll_GenderItemPartsType, this);
+
     }
 
     protected override void FindItemChild()

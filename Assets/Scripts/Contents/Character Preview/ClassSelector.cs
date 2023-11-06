@@ -12,12 +12,6 @@ public class ClassSelector : MonoBehaviour
     [Header("Class Info UI")]
     public TextMeshProUGUI classDescription;
 
-    [Header("Class Starting Stats")]
-    public ClassStats[] classStats;
-
-    [Header("Class Starting Gear")]
-    public ClassGear[] classGear;
-
     CharacterCreationScreen characterCreationScreen;
 
     private void Start()
@@ -47,10 +41,11 @@ public class ClassSelector : MonoBehaviour
 
     private void AssignClassEquipment(Table_StartClassStat.Info data)
     {
-        // 전 아이템 전부 처분 후 바꿔뀌기
+        // 인벤토리 Clear
         player.playerInventoryManager.Clear();
 
-        // 현재 장착
+        // Equipment Clear
+        player.playerEquipmentManager.Clear();
 
         // Left Hand1
         {
@@ -61,8 +56,6 @@ public class ClassSelector : MonoBehaviour
                 player.playerEquipmentManager.ChangeEquipment(E_EquipmentSlotsPartType.Left_Hand_Weapon, item);
                 player.playerInventoryManager.Add(item);
             }
-
-
         }
 
         // Right Hand1
@@ -139,7 +132,7 @@ public class ClassSelector : MonoBehaviour
             Table_Item_Ring.Info ring = Managers.Table.m_Item_Ring.Get(data.m_iRindId);
             if (ring != null)
             {
-                RingItem item = (RingItem)Managers.Game.MakeItem(E_ItemType.Magic, data.m_iRindId);
+                RingItem item = (RingItem)Managers.Game.MakeItem(E_ItemType.Ring, data.m_iRindId);
                 player.playerEquipmentManager.ChangeEquipment(E_EquipmentSlotsPartType.Ring, item);
                 player.playerInventoryManager.Add(item);
             }
@@ -149,6 +142,7 @@ public class ClassSelector : MonoBehaviour
         {
             // 에스트
             ToolItem item = (ToolItem)Managers.Game.MakeItem(E_ItemType.Tool, 1);
+            item.m_iCurrentCount = 10; // Temp
             player.playerEquipmentManager.ChangeEquipment(E_EquipmentSlotsPartType.Consumable, item);
             player.playerInventoryManager.Add(item);
         }

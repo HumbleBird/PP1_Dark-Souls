@@ -14,6 +14,7 @@ public class AICharacterStatsManager : CharacterStatsManager
     public UIAICharacterHealthBar aiCharacterHealthBar;
 
     public bool isBoss;
+    public bool m_isFriend = false;
 
     protected override void Awake()
     {
@@ -22,41 +23,18 @@ public class AICharacterStatsManager : CharacterStatsManager
         aiCharacter = GetComponent<AICharacterManager>();
 
 
-        if(isBoss)
-        {
-
-        }
-        else
+        if(isBoss == false)
         {
             aiCharacterHealthBar = Managers.UI.MakeWorldSpaceUI<UIAICharacterHealthBar>(transform);
         }
 
-        teamIDNumber = (int)E_TeamId.Monster;
+        if(m_isFriend == false)
+            teamIDNumber = (int)E_TeamId.Monster;
+        else
+            teamIDNumber = (int)E_TeamId.Player;
 
-        if(aiCharacter.m_CharacterID != 0 )
-        {
-            Table_Monster.Info data = Managers.Table.m_Monster.Get(aiCharacter.m_CharacterID);
 
-            if (data == null)
-                return;
 
-            m_sCharacterName = data.m_sName;
-
-            Table_Stat.Info statData = Managers.Table.m_Stat.Get(data.m_iStatID);
-
-            if (statData == null)
-                return;
-
-            soulsAwardedOnDeath = statData.m_iRewardSouls;
-            // Drop Reward Item
-            maxHealth = statData.m_iHP;
-            currentHealth = maxHealth;
-            m_fPhysicalDamage = statData.m_PhysicalDamage;
-            m_fMagicDamage= statData.m_MagicDamage;
-            m_fFireDamage= statData.m_FireDamage;
-            m_fLightningDamage= statData.m_LightningDamage;
-            m_fDarkDamage= statData.m_DarkDamage;
-        }
     }
 
     protected override void Start()
@@ -70,14 +48,43 @@ public class AICharacterStatsManager : CharacterStatsManager
     public override void LoadStat()
     {
         // CSV 에서 정보 로드
+        if (aiCharacter.m_CharacterID != 0)
+        {
+            int id = 0;
 
-        InitAbility();
-    }
+            // Monster
+            if (teamIDNumber == (int)E_TeamId.Monster)
+            {
+                Table_Monster.Info monsterData = Managers.Table.m_Monster.Get(aiCharacter.m_CharacterID);
 
-    // 가져온 스텟을 이용해 능력치 정하기
-    public override void InitAbility()
-    {
-        maxHealth = CalculateMaxHP(aiCharacter.m_CharacterID);
+                if (monsterData == null)
+                    return;
+
+                id = monsterData.m_iStatID;
+            }
+
+            // AI NPC
+            else if (teamIDNumber == (int)E_TeamId.Player)
+            {
+                id = aiCharacter.m_CharacterID;
+            }
+
+            Table_Stat.Info statData = Managers.Table.m_Stat.Get(id);
+
+            if (statData == null)
+                return;
+
+            m_sCharacterName = statData.m_sName;
+            soulsAwardedOnDeath = statData.m_iRewardSouls;
+            // Drop Reward Item
+            maxHealth = statData.m_iHP;
+            currentHealth = maxHealth;
+            m_fPhysicalDamage = statData.m_PhysicalDamage;
+            m_fMagicDamage = statData.m_MagicDamage;
+            m_fFireDamage = statData.m_FireDamage;
+            m_fLightningDamage = statData.m_LightningDamage;
+            m_fDarkDamage = statData.m_DarkDamage;
+        }
 
         // Poise
         m_fTotalPoiseDefence = m_fStatPoise;
@@ -85,28 +92,16 @@ public class AICharacterStatsManager : CharacterStatsManager
         FullRecovery();
     }
 
+    // 가져온 스텟을 이용해 능력치 정하기
+    public override void InitAbility()
+    {
+    }
+
     // Current HP,Stamina FP 완전 회복
     public override void FullRecovery()
     {
         currentHealth = maxHealth;
 
-    }
-
-    public override int CalculateMaxHP(int MonsterId)
-    {
-        Table_Monster.Info data = Managers.Table.m_Monster.Get(aiCharacter.m_CharacterID);
-
-        if (data == null)
-            return 1 ;
-
-        m_sCharacterName = data.m_sName;
-
-        Table_Stat.Info statData = Managers.Table.m_Stat.Get(data.m_iStatID);
-
-        if (statData == null)
-            return 1 ;
-
-        return statData.m_iHP;
     }
 
     public override void TakeDamageNoAnimation(int damage, int fireDamage)
@@ -166,5 +161,16 @@ public class AICharacterStatsManager : CharacterStatsManager
             aiCharacter.aiCharacterBossManager.HealthRefresh();
 
         }
+    }
+
+    public override void AwardSoulsOnDeath()
+    {
+        PlayerManager player = Managers.Object.m_MyPlayer;
+        player.playerStatsManager.AddSouls(aiCharacter.aiCharacterStatsManager.soulsAwardedOnDeath);
+    }
+
+    public override int CalculateMaxHP(int data)
+    {
+        throw new NotImplementedException();
     }
 }

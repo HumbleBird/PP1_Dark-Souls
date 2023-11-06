@@ -15,6 +15,8 @@ public class TableManager
     public Table_Stat            m_Stat             = new Table_Stat();
     public Table_StartClassStat m_StartClassStat = new Table_StartClassStat();
     public Table_Monster         m_Monster       = new Table_Monster();
+    public Table_SaveData_Character m_SaveData_Character = new Table_SaveData_Character();
+    public Table_SaveData_Inventory m_SaveData_Inventory = new Table_SaveData_Inventory();
 
     public void Init()
     {
@@ -29,23 +31,15 @@ public class TableManager
         m_Stat              .Init_CSV("Stat", 2, 0);
         m_StartClassStat    .Init_CSV("StartClassStat", 2, 0);
         m_Monster           .Init_CSV("Monster", 2, 0);
-#else
-        m_Camera.Init_Binary("Camera");
+        //m_SaveData_Character           .Init_CSV("SaveData_Character", 2, 0);
+        //m_SaveData_Inventory.Init_CSV("SaveData_Inventory", 2, 0);
 #endif
     }
 
     public void Save()
     {
-        m_Camera_Shake  .Save_Binary("Camera_Shake");
-        m_Camera_Zoom   .Save_Binary("Camera_Zoom");
-        m_Item_Armor    .Save_Binary("Armor");
-        m_Item_Weapon   .Save_Binary("Weapon");
-        m_Item_Spell    .Save_Binary("Spell");
-        m_Item_Ring     .Save_Binary("Ring");
-        m_Item_Tool     .Save_Binary("ToolItem");
-        m_Stat          .Save_Binary("Stat");
-        m_StartClassStat.Save_Binary("StartClassStat");
-        m_Monster       .Save_Binary("Monster");
+        //m_SaveData_Character.Save_Binary("SaveData_Character");
+        //m_SaveData_Inventory.Save_Binary("SaveData_Inventory");
 
 #if UNITY_EDITOR
         AssetDatabase.Refresh();
@@ -54,6 +48,5 @@ public class TableManager
 
     public void Clear()
     {
-
     }
 }
