@@ -16,7 +16,7 @@ MonoBehaviour:
   m_ItemName: Firebomb
   m_iItemID: 3
   m_eItemType: 1
-  m_isEquiping: 0
+  m_isEquiping: 1
   m_EquipingType: 0
   m_iEquipSlotNum: 0
   m_bIsUnarmed: 0
@@ -25,21 +25,21 @@ MonoBehaviour:
   m_Tool_LimitiedType: 1
   m_eToolType: 5
   m_iCurrentCount: 10
-  m_iMaxCount: 0
+  m_iMaxCount: 10
   m_iCurrentSaveCount: 0
   m_iMaxSaveCount: 0
   m_sItemDescription: Throw at enemies to deal fire damage.
   itemModel: {fileID: 8661123208684589935, guid: 097dc4573d5c8b648a02abea8542c738, type: 3}
   m_sPlayAnimationName: Throw
-  isInteracting: 0
+  isInteracting: 1
   m_iAttributeBonusStrength: 0
   m_iAttributeBonusDexterity: 0
   m_iAttributeBonusIntelligence: 0
   m_iAttributeBonusFaith: 0
   m_EatSound: {fileID: 0}
-  upwardVelocity: 0
-  forwardVelocity: 0
-  bombMass: 0
+  upwardVelocity: 5
+  forwardVelocity: 15
+  bombMass: 1
   liveBombModel: {fileID: 939402196391381232, guid: 9b78f95bdd9040b489845af596f7ef6a, type: 3}
-  baseDamage: 0
-  explosiveDamage: 0
+  baseDamage: 200
+  explosiveDamage: 75

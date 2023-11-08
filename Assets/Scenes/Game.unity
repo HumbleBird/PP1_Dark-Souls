@@ -1891,6 +1891,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 2131131853, guid: f2364dbd084da4c48bb002f14c888e58, type: 3}
+      propertyPath: currentSoulCount
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 347833055415664871, guid: f2364dbd084da4c48bb002f14c888e58, type: 3}
       propertyPath: m_Name
       value: Player (Game)

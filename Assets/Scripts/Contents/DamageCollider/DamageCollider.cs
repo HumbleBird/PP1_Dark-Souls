@@ -22,7 +22,6 @@ public class DamageCollider : MonoBehaviour
     float finalMagicDamage     ;
     float finalLightningDamage ;
     float finalDarkDamage      ;
-    float finalDamage;
 
     [Header("Damage")]
     public int physicalDamage;
@@ -202,54 +201,77 @@ public class DamageCollider : MonoBehaviour
 
         // Right Weapon Modifire
         if (characterManager.isUsingRightHand)
+        {
+            if (characterManager.isTwoHandingWeapon)
             {
-            if (characterManager.characterCombatManager.currentAttackType == AttackType.light)
-            {
-                finalDamage = finalPhysicalDamage * characterManager.characterEquipmentManager.m_CurrentHandRightWeapon.lightAttackStaminaMultiplier;
-                finalDamage += finalFireDamage * characterManager.characterEquipmentManager.m_CurrentHandRightWeapon.lightAttackStaminaMultiplier;
-                finalDamage += finalMagicDamage * characterManager.characterEquipmentManager.m_CurrentHandRightWeapon.lightAttackStaminaMultiplier;
-                finalDamage += finalLightningDamage * characterManager.characterEquipmentManager.m_CurrentHandRightWeapon.lightAttackStaminaMultiplier;
-                finalDamage += finalDarkDamage * characterManager.characterEquipmentManager.m_CurrentHandRightWeapon.lightAttackStaminaMultiplier;
+                if (characterManager.characterCombatManager.currentAttackType == AttackType.light)
+                {
+                    finalPhysicalDamage = finalPhysicalDamage * characterManager.characterEquipmentManager.m_CurrentHandRightWeapon.lightAttackDamageModifier + finalPhysicalDamage * characterManager.characterEquipmentManager.m_CurrentHandRightWeapon.m_fTHAttackDamageModifire;
+                    finalFireDamage = finalFireDamage * characterManager.characterEquipmentManager.m_CurrentHandRightWeapon.lightAttackDamageModifier + finalFireDamage * characterManager.characterEquipmentManager.m_CurrentHandRightWeapon.m_fTHAttackDamageModifire;
+                    finalMagicDamage = finalMagicDamage * characterManager.characterEquipmentManager.m_CurrentHandRightWeapon.lightAttackDamageModifier + finalMagicDamage * characterManager.characterEquipmentManager.m_CurrentHandRightWeapon.m_fTHAttackDamageModifire;
+                    finalLightningDamage = finalLightningDamage * characterManager.characterEquipmentManager.m_CurrentHandRightWeapon.lightAttackDamageModifier + finalLightningDamage * characterManager.characterEquipmentManager.m_CurrentHandRightWeapon.m_fTHAttackDamageModifire;
+                    finalDarkDamage = finalDarkDamage * characterManager.characterEquipmentManager.m_CurrentHandRightWeapon.lightAttackDamageModifier + finalDarkDamage * characterManager.characterEquipmentManager.m_CurrentHandRightWeapon.m_fTHAttackDamageModifire;
+                }
+                else if (characterManager.characterCombatManager.currentAttackType == AttackType.heavy)
+                {
+                    finalPhysicalDamage *= characterManager.characterEquipmentManager.m_CurrentHandRightWeapon.heavyAttackDamgeModifier;
+                    finalFireDamage *= characterManager.characterEquipmentManager.m_CurrentHandRightWeapon.heavyAttackDamgeModifier;
+                    finalMagicDamage *= characterManager.characterEquipmentManager.m_CurrentHandRightWeapon.heavyAttackDamgeModifier;
+                    finalLightningDamage *= characterManager.characterEquipmentManager.m_CurrentHandRightWeapon.heavyAttackDamgeModifier;
+                    finalDarkDamage *= characterManager.characterEquipmentManager.m_CurrentHandRightWeapon.heavyAttackDamgeModifier;
+                }
             }
-            else if (characterManager.characterCombatManager.currentAttackType == AttackType.heavy)
+            else
             {
-                finalDamage = finalPhysicalDamage * characterManager.characterEquipmentManager.m_CurrentHandRightWeapon.heavyAttackStaminaMultiplier;
-                finalDamage += finalFireDamage * characterManager.characterEquipmentManager.m_CurrentHandRightWeapon.heavyAttackStaminaMultiplier;
-                finalDamage += finalMagicDamage * characterManager.characterEquipmentManager.m_CurrentHandRightWeapon.heavyAttackStaminaMultiplier;
-                finalDamage += finalLightningDamage * characterManager.characterEquipmentManager.m_CurrentHandRightWeapon.heavyAttackStaminaMultiplier;
-                finalDamage += finalDarkDamage * characterManager.characterEquipmentManager.m_CurrentHandRightWeapon.heavyAttackStaminaMultiplier;
+                if (characterManager.characterCombatManager.currentAttackType == AttackType.light)
+                {
+                    finalPhysicalDamage *= characterManager.characterEquipmentManager.m_CurrentHandRightWeapon.lightAttackDamageModifier;
+                    finalFireDamage *= characterManager.characterEquipmentManager.m_CurrentHandRightWeapon.lightAttackDamageModifier;
+                    finalMagicDamage *= characterManager.characterEquipmentManager.m_CurrentHandRightWeapon.lightAttackDamageModifier;
+                    finalLightningDamage *= characterManager.characterEquipmentManager.m_CurrentHandRightWeapon.lightAttackDamageModifier;
+                    finalDarkDamage *= characterManager.characterEquipmentManager.m_CurrentHandRightWeapon.lightAttackDamageModifier;
+                }
+                else if (characterManager.characterCombatManager.currentAttackType == AttackType.heavy)
+                {
+                    finalPhysicalDamage *= characterManager.characterEquipmentManager.m_CurrentHandRightWeapon.heavyAttackDamgeModifier;
+                    finalFireDamage *= characterManager.characterEquipmentManager.m_CurrentHandRightWeapon.heavyAttackDamgeModifier;
+                    finalMagicDamage *= characterManager.characterEquipmentManager.m_CurrentHandRightWeapon.heavyAttackDamgeModifier;
+                    finalLightningDamage *= characterManager.characterEquipmentManager.m_CurrentHandRightWeapon.heavyAttackDamgeModifier;
+                    finalDarkDamage *= characterManager.characterEquipmentManager.m_CurrentHandRightWeapon.heavyAttackDamgeModifier;
+                }
             }
+
         }
         // Left Weapon Modifire
         else if (characterManager.isUsingLeftHand)
         {
             if (characterManager.characterCombatManager.currentAttackType == AttackType.light)
             {
-                finalDamage = finalPhysicalDamage * characterManager.characterEquipmentManager.m_CurrentHandLeftWeapon.lightAttackStaminaMultiplier;
-                finalDamage += finalFireDamage * characterManager.characterEquipmentManager.m_CurrentHandLeftWeapon.lightAttackStaminaMultiplier;
-                finalDamage += finalMagicDamage * characterManager.characterEquipmentManager.m_CurrentHandLeftWeapon.lightAttackStaminaMultiplier;
-                finalDamage += finalLightningDamage * characterManager.characterEquipmentManager.m_CurrentHandLeftWeapon.lightAttackStaminaMultiplier;
-                finalDamage += finalDarkDamage * characterManager.characterEquipmentManager.m_CurrentHandLeftWeapon.lightAttackStaminaMultiplier;
+                finalPhysicalDamage    *=      characterManager.characterEquipmentManager.m_CurrentHandLeftWeapon.lightAttackDamageModifier;
+                finalFireDamage        *=  characterManager.characterEquipmentManager.m_CurrentHandLeftWeapon.lightAttackDamageModifier;
+                finalMagicDamage       *=  characterManager.characterEquipmentManager.m_CurrentHandLeftWeapon.lightAttackDamageModifier;
+                finalLightningDamage  *=   characterManager.characterEquipmentManager.m_CurrentHandLeftWeapon.lightAttackDamageModifier;
+                finalDarkDamage *= characterManager.characterEquipmentManager.m_CurrentHandLeftWeapon.lightAttackDamageModifier;
 
             }
             else if (characterManager.characterCombatManager.currentAttackType == AttackType.heavy)
             {
-                finalDamage = finalPhysicalDamage * characterManager.characterEquipmentManager.m_CurrentHandLeftWeapon.heavyAttackStaminaMultiplier;
-                finalDamage += finalFireDamage * characterManager.characterEquipmentManager.m_CurrentHandLeftWeapon.heavyAttackStaminaMultiplier;
-                finalDamage += finalMagicDamage * characterManager.characterEquipmentManager.m_CurrentHandLeftWeapon.heavyAttackStaminaMultiplier;
-                finalDamage += finalLightningDamage * characterManager.characterEquipmentManager.m_CurrentHandLeftWeapon.heavyAttackStaminaMultiplier;
-                finalDamage += finalDarkDamage * characterManager.characterEquipmentManager.m_CurrentHandLeftWeapon.heavyAttackStaminaMultiplier;
+                finalPhysicalDamage    *=       characterManager.characterEquipmentManager.m_CurrentHandLeftWeapon.heavyAttackDamgeModifier;
+                finalFireDamage        *=   characterManager.characterEquipmentManager.m_CurrentHandLeftWeapon.heavyAttackDamgeModifier;
+                finalMagicDamage       *=   characterManager.characterEquipmentManager.m_CurrentHandLeftWeapon.heavyAttackDamgeModifier;
+                finalLightningDamage  *=    characterManager.characterEquipmentManager.m_CurrentHandLeftWeapon.heavyAttackDamgeModifier;
+                finalDarkDamage *= characterManager.characterEquipmentManager.m_CurrentHandLeftWeapon.heavyAttackDamgeModifier;
 
             }
         }
 
         TakeDamageEffect takeDamageEffect = new TakeDamageEffect();
         takeDamageEffect.characterCausingDamage = characterManager;
-        takeDamageEffect.m_PhysicalDamage = physicalDamage;
-        takeDamageEffect.m_MagicDamage = magicDamage;
-        takeDamageEffect.m_FireDamage = fireDamage;
-        takeDamageEffect.m_LightningDamage = lightningDamage;
-        takeDamageEffect.m_DarkDamage = darkDamage;
+        takeDamageEffect.m_PhysicalDamage = finalPhysicalDamage;
+        takeDamageEffect.m_MagicDamage = finalMagicDamage;
+        takeDamageEffect.m_FireDamage = finalFireDamage;
+        takeDamageEffect.m_LightningDamage = finalLightningDamage;
+        takeDamageEffect.m_DarkDamage = finalDarkDamage;
         takeDamageEffect.poiseDamage = poiseDamage;
         takeDamageEffect.contactPoint = contactPoint;
         takeDamageEffect.angleHitFrom = angleHitFrom;
@@ -263,7 +285,6 @@ public class DamageCollider : MonoBehaviour
         finalMagicDamage = fireDamage;
         finalLightningDamage = fireDamage;
         finalDarkDamage = fireDamage;
-        finalDamage = 0;
     }
 
     void DealDamage_MeleeWeapon()
@@ -273,6 +294,5 @@ public class DamageCollider : MonoBehaviour
         finalMagicDamage           = fireDamage    + m_MeleeWeapon_BuffDamage_Magic;
         finalLightningDamage      = fireDamage     + m_MeleeWeapon_BuffDamage_Lightning;
         finalDarkDamage           = fireDamage     + m_MeleeWeapon_BuffDamage_Dark;
-        finalDamage            = 0;
     }
 }

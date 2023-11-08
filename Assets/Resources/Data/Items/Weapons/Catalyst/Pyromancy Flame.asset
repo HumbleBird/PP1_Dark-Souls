@@ -55,9 +55,11 @@ MonoBehaviour:
   m_iFrost: 0
   m_iCurse: 0
   m_iDurability: 50
-  m_iWeight: 100
+  m_iWeight: 0
   lightAttackDamageModifier: 0
-  heavyAttackDaamgeModifier: 0
+  heavyAttackDamgeModifier: 1.5
+  m_fOHAttackDamageModifire: 1
+  m_fTHAttackDamageModifire: 1.5
   criticalDamagemuiltiplier: 4
   guardBreakModifier: 1
   poiseBreak: 0
@@ -67,6 +69,8 @@ MonoBehaviour:
   baseStaminaCost: 0
   lightAttackStaminaMultiplier: 0
   heavyAttackStaminaMultiplier: 0
+  m_fOHAttackStaminaMultiplier: 1
+  m_fTHAttackStaminaMultiplier: 1.5
   oh_tap_RB_Action: {fileID: 11400000, guid: cfde88c1c62b9d94b9c5d826483a9ee8, type: 2}
   oh_hold_RB_Action: {fileID: 0}
   oh_tap_RT_Action: {fileID: 0}

@@ -37,7 +37,10 @@ public class Interactable : MonoBehaviour
     // ÆË¾÷ ¶Ù¿ì±â
     public virtual void CanInteractable()
     {
-        if(Managers.GameUI.m_InteractableAnnouncementPopupUI == null && Managers.Game.m_Interactable == null)
+        if (Managers.Game.m_bisWatingButtonClose == true)
+            return;
+
+            if (Managers.GameUI.m_InteractableAnnouncementPopupUI == null && Managers.Game.m_Interactable == null)
         {
             Managers.Game.m_Interactable = this;
             Managers.GameUI.m_InteractableAnnouncementPopupUI = Managers.GameUI.ShowPopupUI<InteractableAnnouncementPopupUI>(false);

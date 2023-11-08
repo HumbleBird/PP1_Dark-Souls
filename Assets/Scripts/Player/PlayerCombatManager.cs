@@ -19,14 +19,29 @@ public class PlayerCombatManager : CharacterCombatManager
     {
         if (player.isUsingRightHand)
         {
-            if (currentAttackType == AttackType.light)
+            if (player.isTwoHandingWeapon)
             {
-                player.playerStatsManager.DeductStamina(player.playerEquipmentManager.m_CurrentHandRightWeapon.baseStaminaCost * player.playerEquipmentManager.m_CurrentHandRightWeapon.lightAttackStaminaMultiplier);
+                if (currentAttackType == AttackType.light)
+                {
+                    player.playerStatsManager.DeductStamina(player.playerEquipmentManager.m_CurrentHandRightWeapon.baseStaminaCost * player.playerEquipmentManager.m_CurrentHandRightWeapon.lightAttackStaminaMultiplier + player.playerEquipmentManager.m_CurrentHandRightWeapon.baseStaminaCost * player.playerEquipmentManager.m_CurrentHandRightWeapon.m_fTHAttackStaminaMultiplier);
+                }
+                else if (currentAttackType == AttackType.heavy)
+                {
+                    player.playerStatsManager.DeductStamina(player.playerEquipmentManager.m_CurrentHandRightWeapon.baseStaminaCost * player.playerEquipmentManager.m_CurrentHandRightWeapon.heavyAttackStaminaMultiplier + player.playerEquipmentManager.m_CurrentHandRightWeapon.baseStaminaCost * player.playerEquipmentManager.m_CurrentHandRightWeapon.m_fTHAttackStaminaMultiplier);
+                }
             }
-            else if (currentAttackType == AttackType.heavy)
+            else
             {
-                player.playerStatsManager.DeductStamina(player.playerEquipmentManager.m_CurrentHandRightWeapon.baseStaminaCost * player.playerEquipmentManager.m_CurrentHandRightWeapon.heavyAttackStaminaMultiplier);
+                if (currentAttackType == AttackType.light)
+                {
+                    player.playerStatsManager.DeductStamina(player.playerEquipmentManager.m_CurrentHandRightWeapon.baseStaminaCost * player.playerEquipmentManager.m_CurrentHandRightWeapon.lightAttackStaminaMultiplier);
+                }
+                else if (currentAttackType == AttackType.heavy)
+                {
+                    player.playerStatsManager.DeductStamina(player.playerEquipmentManager.m_CurrentHandRightWeapon.baseStaminaCost * player.playerEquipmentManager.m_CurrentHandRightWeapon.heavyAttackStaminaMultiplier);
+                }
             }
+
         }
         else if (player.isUsingLeftHand)
         {

@@ -28,9 +28,12 @@ public class GameManager
     // Area
     public Dictionary<string, Area> m_DicAreas = new Dictionary<string, Area>();
 
+    // Action
+    public bool m_bisWatingButtonClose = false;
+
     public void GameStart()
     {
-        if(Managers.Object.m_MyPlayer == null)
+        if (Managers.Object.m_MyPlayer == null)
         {
             GameObject player =  Managers.Resource.Instantiate("Player/Player (Game)");
             PlayerManager pm =player.GetComponent<PlayerManager>();

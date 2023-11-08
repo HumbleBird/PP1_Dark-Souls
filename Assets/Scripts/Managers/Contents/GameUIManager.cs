@@ -36,6 +36,9 @@ public class GameUIManager
 
     public T ShowPopupUI<T>(bool isPlayerStop = true, string name = null) where T : UI_Popup
     {
+        if (Managers.Object.m_MyPlayer.isInteracting)
+            return null;
+
         if(isPlayerStop)
         {
             // UI 갯수 체크해서 마우스 커서 On/OFF
@@ -45,6 +48,8 @@ public class GameUIManager
                 Managers.Game.PlayerisStop();
             }
         }
+
+        m_isShowingInteratablePopup = true;
 
         T popup =  Managers.UI.ShowPopupUI<T>();
 
@@ -59,11 +64,7 @@ public class GameUIManager
 
         if (Managers.UI._popupStack.Count == 0)
         {
-            Managers.Cursor.PowerOff();
-            Managers.GameUI.m_EquipmentUI = null;
-            Managers.Game.PlayerisStop(false);
-            m_InteractableNPCPopupUI = null;
-
+            AllPopupClose();
         }
     }
 
@@ -71,10 +72,17 @@ public class GameUIManager
     {
         Managers.UI.CloseAllPopupUI();
 
+        AllPopupClose();
+    }
+
+    void AllPopupClose()
+    {
         Managers.Cursor.PowerOff();
         Managers.GameUI.m_EquipmentUI = null;
         Managers.Game.PlayerisStop(false);
         m_InteractableNPCPopupUI = null;
+        Managers.Game.m_Interactable = null;
+        m_InteractableAnnouncementPopupUI = null;
+        m_isShowingInteratablePopup = false;
     }
-
 }

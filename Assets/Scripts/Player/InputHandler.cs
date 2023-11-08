@@ -574,7 +574,13 @@ public class InputHandler : MonoBehaviour
         // Interactble
         if (a_Input)
         {
-            if(Managers.Game.m_Interactable != null)
+            if (Managers.Game.m_bisWatingButtonClose == true)
+            {
+                Managers.Game.m_bisWatingButtonClose = false;
+                return;
+            }
+
+            if (Managers.Game.m_Interactable != null)
             {
                 Managers.Game.m_Interactable.Interact(player);
             }

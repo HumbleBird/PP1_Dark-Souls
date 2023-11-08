@@ -120,12 +120,18 @@ public class PlayerManager : CharacterManager
 
     public void CheckForInteractableObject()
     {
+
+
         RaycastHit hit;
 
         if (Physics.SphereCast(transform.position, 0.3f, transform.forward, out hit, 1f, cameraHandler.ignoreLayers))
         {
             if (hit.collider.tag == "Interactable")
             {
+                // 다른 팝업창이 켜져 있다면 제거
+                if (Managers.GameUI.m_isShowingInteratablePopup)
+                    return;
+
                 Interactable interactable = hit.collider.GetComponent<Interactable>();
 
                 if (interactable != null)

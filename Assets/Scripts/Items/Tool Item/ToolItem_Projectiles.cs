@@ -13,8 +13,8 @@ public class ToolItem_Projectiles : ToolItem
     }
 
     [Header("Velocity")]
-    public int upwardVelocity = 50;
-    public int forwardVelocity = 50;
+    public int upwardVelocity = 5;
+    public int forwardVelocity = 15;
     public int bombMass = 1;
 
     [Header("Live Bomb Model")]

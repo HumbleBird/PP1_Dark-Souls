@@ -122,7 +122,9 @@ public class WeaponItem : Item
 
     [Header("Damage Modifiers")]
     public float lightAttackDamageModifier = 1;
-    public float heavyAttackDaamgeModifier = 2;
+    public float heavyAttackDamgeModifier = 1.5f;
+    public float m_fOHAttackDamageModifire = 1;
+    public float m_fTHAttackDamageModifire = 1.5f;
     public int criticalDamagemuiltiplier = 4;
     public float guardBreakModifier = 1;
 
@@ -138,6 +140,8 @@ public class WeaponItem : Item
     public int baseStaminaCost;
     public float lightAttackStaminaMultiplier = 1;
     public float heavyAttackStaminaMultiplier = 2;
+    public float m_fOHAttackStaminaMultiplier = 1;
+    public float m_fTHAttackStaminaMultiplier = 1.5f;
 
     [Header("Item Actions")]
     public ItemAction oh_tap_RB_Action;

@@ -79,18 +79,21 @@ public class PlayerWeaponSlotManager : CharacterWeaponSlotManager
     {
         Destroy(player.playerEffectsManager.instantiatedFXModel2);
         ToolItem_Projectiles fireBombItem = player.playerEquipmentManager.m_CurrentHandConsumable as ToolItem_Projectiles;
+
         GameObject activeModelBomb = Instantiate(fireBombItem.liveBombModel, rightHandSlot.transform.position, player.cameraHandler.cameraPivotTranform.rotation);
         activeModelBomb.GetComponentInChildren<BombDamageColider>().characterManager = player;
-        activeModelBomb.transform.rotation = Quaternion.Euler(player.cameraHandler.cameraPivotTranform.eulerAngles.x, player.lockOnTransform.eulerAngles.y, 0);
+
         Rigidbody rigidBody = activeModelBomb.GetComponentInChildren<Rigidbody>();
         rigidBody.constraints = RigidbodyConstraints.None;
+
+        activeModelBomb.transform.rotation = Quaternion.Euler(player.cameraHandler.cameraPivotTranform.eulerAngles.x, player.lockOnTransform.eulerAngles.y, 0);
 
         BombDamageColider damageCollider = activeModelBomb.GetComponentInChildren<BombDamageColider>();
 
         damageCollider.explosionDamage = fireBombItem.baseDamage;
         damageCollider.explosionSplashDamage = fireBombItem.explosiveDamage;
-        damageCollider.bombRigidBody.AddForce(activeModelBomb.transform.forward * fireBombItem.forwardVelocity);
-        damageCollider.bombRigidBody.AddForce(activeModelBomb.transform.up * fireBombItem.upwardVelocity);
+        rigidBody.AddForce(activeModelBomb.transform.forward * fireBombItem.forwardVelocity, ForceMode.Impulse);
+        rigidBody.AddForce(activeModelBomb.transform.up * fireBombItem.upwardVelocity, ForceMode.Impulse);
         damageCollider.teamIDNumber = player.playerStatsManager.teamIDNumber;
         LoadWeaponOnSlot(player.playerEquipmentManager.m_CurrentHandRightWeapon, false);
 

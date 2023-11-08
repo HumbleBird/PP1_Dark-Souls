@@ -415,7 +415,7 @@ public class PlayerStatsManager : CharacterStatsManager
 
     public float CalculateAndSetMaxEquipload(int EnduranceLevel)
     {
-        float totalEquipLoad = 40;
+        float totalEquipLoad = 50;
 
         for (int i = 0; i < EnduranceLevel; i++)
         {
