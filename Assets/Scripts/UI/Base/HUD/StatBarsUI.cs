@@ -62,9 +62,7 @@ public class StatBarsUI : UI_Base
 
         //m_PoisonBuildDownFill = GetImage((int)Images.PoisonBuildDownFill);
         //m_PoisonBar = GetObject((int)GameObjects.PoisonBar);
-        m_Player = Managers.Object.m_MyPlayer;
 
-        m_iPreHp = m_Player.playerStatsManager.currentHealth;
 
         m_PoisonBar.SetActive(false);
 
@@ -74,6 +72,8 @@ public class StatBarsUI : UI_Base
     public void Start()
     {
         m_Player = Managers.Object.m_MyPlayer;
+
+        m_iPreHp = m_Player.playerStatsManager.currentHealth;
     }
 
     public void RefreshUI(E_StatUI stat)

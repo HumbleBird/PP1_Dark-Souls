@@ -198,6 +198,8 @@ public class AICharacterManager : CharacterManager
     {
         base.InitCharacterManager();
 
+        gameObject.SetActive(true);
+
         // 공격 시간 초기화
         currentRecoveryTime = 0;
 
@@ -209,6 +211,8 @@ public class AICharacterManager : CharacterManager
 
         if (aiCharacterStatsManager.isBoss)
             aiCharacterBossManager.Clear();
+
+        companion = null;
     }
 
     public override void Dead()
@@ -216,5 +220,15 @@ public class AICharacterManager : CharacterManager
         base.Dead();
 
         Managers.Game.PlayerLockOnCheck();
+
+        StartCoroutine(IDeadEffect());
+    }
+
+    // 추후 스르륵 사라지게
+    IEnumerator IDeadEffect()
+    {
+        yield return new WaitForSeconds(5f);
+
+        gameObject.SetActive(false);
     }
 }

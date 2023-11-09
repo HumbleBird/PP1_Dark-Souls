@@ -70545,7 +70545,9 @@ MonoBehaviour:
   characterSoundFXManager: {fileID: 0}
   characterCombatManager: {fileID: 0}
   characterEquipmentManager: {fileID: 0}
+  characterLocomotionManager: {fileID: 0}
   lockOnTransform: {fileID: 6348325235050588619}
+  targetTransformWhileAiming: {fileID: 0}
   criticalAttackRayCastStartPoint: {fileID: 6348325235883542589}
   m_StartPos: {x: 0, y: 0, z: 0}
   m_StartRo: {x: 0, y: 0, z: 0}
@@ -70576,7 +70578,6 @@ MonoBehaviour:
   isFiringSpell: 0
   pendingCriticalDamage: 0
   m_CharacterID: 0
-  m_Collider: {fileID: 0}
   inputHandler: {fileID: 0}
   cameraHandler: {fileID: 0}
   m_GameSceneUI: {fileID: 0}
@@ -70800,10 +70801,10 @@ MonoBehaviour:
   yVelocity: {x: 0, y: 0, z: 0}
   groundedYVelocity: -20
   fallStartYVelocity: -7
-  gravityForce: -3.5
+  gravityForce: -0.8
   groundCheckSphereRadius: 0.25
   m_FallingDamageCanTime: 0.5
-  m_FallingDeadTime: 1.7
+  m_FallingDeadTime: 1
   movementSpeed: 5
   walkingSpeed: 3
   sprintSpeed: 7
@@ -70872,13 +70873,13 @@ CharacterController:
   m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 2
-  m_Height: 1.73
+  m_Height: 1.68
   m_Radius: 0.3
   m_SlopeLimit: 45
   m_StepOffset: 0.42
   m_SkinWidth: 0.08
   m_MinMoveDistance: 0.001
-  m_Center: {x: 0, y: 0.94, z: 0}
+  m_Center: {x: 0, y: 0.87, z: 0}
 --- !u!54 &3355841609443645926
 Rigidbody:
   m_ObjectHideFlags: 0

@@ -12,6 +12,7 @@ public abstract class ItemSlotUI : UI_Base
     public Item m_Item;
 
     public int m_iSlotNum = -1;
+    public bool m_isChageEvent = false;
 
     public override bool Init()
     {
@@ -19,7 +20,8 @@ public abstract class ItemSlotUI : UI_Base
             return false;
 
         m_ItemSlotSubUI = GetComponentInChildren<ItemSlotSubUI>();
-        m_ItemSlotSubUI.m_ItemSelectIcon.gameObject.BindEvent(() => { ShowHowtoItem(); });
+        if(m_isChageEvent == false) 
+            m_ItemSlotSubUI.m_ItemSelectIcon.gameObject.BindEvent(() => { ShowHowtoItem(); });
 
         gameObject.UIEventTrigger(EventTriggerType.PointerEnter, ShowItemInformation);
 

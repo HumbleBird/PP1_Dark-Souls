@@ -16,14 +16,23 @@ public class EquipmentSlotUI : ItemSlotUI
 
     public override bool Init()
     {
-        if (base.Init() == false)
-            return false;
+        m_ItemSlotSubUI = GetComponentInChildren<ItemSlotSubUI>();
+
+        gameObject.UIEventTrigger(EventTriggerType.PointerEnter, ShowItemInformation);
+
+        RefreshUI();
 
         m_EquipmentUI = GetComponentInParent<EquipmentUI>();
 
         SetSlotPartName();
 
         return true;
+    }
+
+    private void Start()
+    {
+        if (m_isChageEvent == false)
+            m_ItemSlotSubUI.m_ItemSelectIcon.gameObject.BindEvent(() => { ShowHowtoItem(); });
     }
 
     void SetSlotPartName()
@@ -57,6 +66,7 @@ public class EquipmentSlotUI : ItemSlotUI
 
     public void ItemChangeFromInventoryBindEvent()
     {
+        m_isChageEvent = true;
         m_ItemSlotSubUI.m_ItemSelectIcon.gameObject.BindEvent(() => ChangeBindEvent()); ;
     }
 

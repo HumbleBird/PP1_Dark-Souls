@@ -13,9 +13,11 @@ public class CharacterManager : MonoBehaviour
     public CharacterSoundFXManager characterSoundFXManager;
     public CharacterCombatManager characterCombatManager;
     public CharacterEquipmentManager characterEquipmentManager;
+    public CharacterLocomotionManager characterLocomotionManager;
 
     [Header("Lock On Tranform")]
     public Transform lockOnTransform;
+    public Transform targetTransformWhileAiming;
 
     [Header("Ray Casts")]
     public Transform criticalAttackRayCastStartPoint;
@@ -76,6 +78,7 @@ public class CharacterManager : MonoBehaviour
         characterSoundFXManager = GetComponent<CharacterSoundFXManager>();
         characterCombatManager = GetComponent<CharacterCombatManager>();
         characterEquipmentManager = GetComponent<CharacterEquipmentManager>();
+        characterLocomotionManager = GetComponent<CharacterLocomotionManager>();
 
         Managers.Object.Add(gameObject);
     }
@@ -179,6 +182,8 @@ public class CharacterManager : MonoBehaviour
         Managers.Sound.Play("Character/Common/Kill");
 
         characterController.detectCollisions = false;
+
+        characterLocomotionManager.inAirTimer = 0;
     }
 }
  

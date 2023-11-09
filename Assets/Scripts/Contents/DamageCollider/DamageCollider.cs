@@ -82,7 +82,6 @@ public class DamageCollider : MonoBehaviour
 
             if (enemyManager != null)
             {
-                AICharacterManager aiCharacter = enemyManager as AICharacterManager;
 
                 if (charactersDamageDuringThisCalculation.Contains(enemyManager))
                     return;
@@ -96,9 +95,6 @@ public class DamageCollider : MonoBehaviour
                 if (hasBeenParried)
                     return;
 
-                if (shieldHasBeenHit)
-                    return;
-
                 enemyManager.characterStatsManager.poiseResetTimer = enemyManager.characterStatsManager.totalPoiseResetTime;
                 enemyManager.characterStatsManager.m_fTotalPoiseDefence = enemyManager.characterStatsManager.m_fTotalPoiseDefence - poiseDamage;
 
@@ -109,8 +105,11 @@ public class DamageCollider : MonoBehaviour
                 // 딜 계산
                 DealDamage(enemyManager);
 
-                if(aiCharacter != null)
+                AICharacterManager aiCharacter = enemyManager as AICharacterManager;
+                if (aiCharacter != null)
                 {
+
+                    if(characterManager.characterStatsManager.teamIDNumber != enemyManager.characterStatsManager.teamIDNumber)
                     // 타겟이 A.I라면, ai가 새로운 타겟은 리서치. 새 타겟을 공격
                     aiCharacter.currentTarget = characterManager;
                 }
@@ -121,14 +120,12 @@ public class DamageCollider : MonoBehaviour
         {
             IllusionaryWall illusionaryWall = other.GetComponent<IllusionaryWall>();
 
-            if(illusionaryWall != null)
+            if(illusionaryWall != null && characterManager.characterStatsManager.teamIDNumber == (int)E_TeamId.Player)
             {
                 illusionaryWall.wallHasBennHit = true;
             }
         }
     }
-
-
 
     protected virtual void CheckForParry(CharacterManager enemyManager)
     {
@@ -149,13 +146,7 @@ public class DamageCollider : MonoBehaviour
         {
             shieldHasBeenHit = true;
 
-            TakeBlockedDamageEffect takeBlockedDamage = new TakeBlockedDamageEffect();// Instantiate(Managers.WorldEffect.takeBlockedDamageEffect);
-            takeBlockedDamage.physicalDamage = physicalDamage;
-            takeBlockedDamage.fireDamage = fireDamage;
-            takeBlockedDamage.poiseDamage = poiseDamage;
-            takeBlockedDamage.staminaDamage = poiseDamage;
 
-            enemyManager.characterEffectsManager.ProcessEffectInstantly(takeBlockedDamage);
         }
     }
 
@@ -261,21 +252,38 @@ public class DamageCollider : MonoBehaviour
                 finalMagicDamage       *=   characterManager.characterEquipmentManager.m_CurrentHandLeftWeapon.heavyAttackDamgeModifier;
                 finalLightningDamage  *=    characterManager.characterEquipmentManager.m_CurrentHandLeftWeapon.heavyAttackDamgeModifier;
                 finalDarkDamage *= characterManager.characterEquipmentManager.m_CurrentHandLeftWeapon.heavyAttackDamgeModifier;
-
             }
         }
 
-        TakeDamageEffect takeDamageEffect = new TakeDamageEffect();
-        takeDamageEffect.characterCausingDamage = characterManager;
-        takeDamageEffect.m_PhysicalDamage = finalPhysicalDamage;
-        takeDamageEffect.m_MagicDamage = finalMagicDamage;
-        takeDamageEffect.m_FireDamage = finalFireDamage;
-        takeDamageEffect.m_LightningDamage = finalLightningDamage;
-        takeDamageEffect.m_DarkDamage = finalDarkDamage;
-        takeDamageEffect.poiseDamage = poiseDamage;
-        takeDamageEffect.contactPoint = contactPoint;
-        takeDamageEffect.angleHitFrom = angleHitFrom;
-        enemyManager.characterEffectsManager.ProcessEffectInstantly(takeDamageEffect);
+
+
+        if (shieldHasBeenHit)
+        {
+            TakeBlockedDamageEffect takeBlockedDamage = new TakeBlockedDamageEffect();
+            takeBlockedDamage.characterCausingDamage = characterManager;
+            takeBlockedDamage.m_PhysicalDamage = finalPhysicalDamage;
+            takeBlockedDamage.m_MagicDamage = finalMagicDamage;
+            takeBlockedDamage.m_FireDamage = finalFireDamage;
+            takeBlockedDamage.m_LightningDamage = finalLightningDamage;
+            takeBlockedDamage.m_DarkDamage = finalDarkDamage;
+            takeBlockedDamage.poiseDamage = poiseDamage;
+
+            enemyManager.characterEffectsManager.ProcessEffectInstantly(takeBlockedDamage);
+        }
+        else
+        {
+            TakeDamageEffect takeDamageEffect = new TakeDamageEffect();
+            takeDamageEffect.characterCausingDamage = characterManager;
+            takeDamageEffect.m_PhysicalDamage = finalPhysicalDamage;
+            takeDamageEffect.m_MagicDamage = finalMagicDamage;
+            takeDamageEffect.m_FireDamage = finalFireDamage;
+            takeDamageEffect.m_LightningDamage = finalLightningDamage;
+            takeDamageEffect.m_DarkDamage = finalDarkDamage;
+            takeDamageEffect.poiseDamage = poiseDamage;
+            takeDamageEffect.contactPoint = contactPoint;
+            takeDamageEffect.angleHitFrom = angleHitFrom;
+            enemyManager.characterEffectsManager.ProcessEffectInstantly(takeDamageEffect);
+        }
     }
 
     void DealDamage_Default()

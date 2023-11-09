@@ -288,7 +288,7 @@ public class InputHandler : MonoBehaviour
             {
                 if (player.playerEquipmentManager.m_CurrentHandRightWeapon.oh_tap_LB_Action != null)
                 {
-                    player.UpdateWhichHandCharacterIsUsing(true);
+                    player.UpdateWhichHandCharacterIsUsing(false);
                     player.characterEquipmentManager.currentItemBeingUsed = player.playerEquipmentManager.m_CurrentHandRightWeapon;
                     player.playerEquipmentManager.m_CurrentHandRightWeapon.oh_tap_LB_Action.PerformAction(player);
                 }
@@ -297,7 +297,7 @@ public class InputHandler : MonoBehaviour
             {
                 if (player.playerEquipmentManager.m_CurrentHandLeftWeapon.oh_tap_LB_Action != null)
                 {
-                    player.UpdateWhichHandCharacterIsUsing(true);
+                    player.UpdateWhichHandCharacterIsUsing(false);
                     player.characterEquipmentManager.currentItemBeingUsed = player.playerEquipmentManager.m_CurrentHandLeftWeapon;
                     player.playerEquipmentManager.m_CurrentHandLeftWeapon.oh_tap_LB_Action.PerformAction(player);
                 }
@@ -321,7 +321,7 @@ public class InputHandler : MonoBehaviour
             {
                 if (player.playerEquipmentManager.m_CurrentHandRightWeapon.oh_hold_LB_Action != null)
                 {
-                    player.UpdateWhichHandCharacterIsUsing(true);
+                    player.UpdateWhichHandCharacterIsUsing(false);
                     player.characterEquipmentManager.currentItemBeingUsed = player.playerEquipmentManager.m_CurrentHandRightWeapon;
                     player.playerEquipmentManager.m_CurrentHandRightWeapon.oh_hold_LB_Action.PerformAction(player);
                 }
@@ -330,7 +330,7 @@ public class InputHandler : MonoBehaviour
             {
                 if (player.playerEquipmentManager.m_CurrentHandLeftWeapon.oh_hold_LB_Action != null)
                 {
-                    player.UpdateWhichHandCharacterIsUsing(true);
+                    player.UpdateWhichHandCharacterIsUsing(false);
                     player.characterEquipmentManager.currentItemBeingUsed = player.playerEquipmentManager.m_CurrentHandLeftWeapon;
                     player.playerEquipmentManager.m_CurrentHandLeftWeapon.oh_hold_LB_Action.PerformAction(player);
                 }
@@ -363,7 +363,7 @@ public class InputHandler : MonoBehaviour
             {
                 if (player.playerEquipmentManager.m_CurrentHandRightWeapon.oh_tap_LT_Action != null)
                 {
-                    player.UpdateWhichHandCharacterIsUsing(true);
+                    player.UpdateWhichHandCharacterIsUsing(false);
                     player.characterEquipmentManager.currentItemBeingUsed = player.playerEquipmentManager.m_CurrentHandRightWeapon;
                     player.playerEquipmentManager.m_CurrentHandRightWeapon.oh_tap_LT_Action.PerformAction(player);
                 }
@@ -372,7 +372,7 @@ public class InputHandler : MonoBehaviour
             {
                 if (player.playerEquipmentManager.m_CurrentHandLeftWeapon.oh_tap_LT_Action != null)
                 {
-                    player.UpdateWhichHandCharacterIsUsing(true);
+                    player.UpdateWhichHandCharacterIsUsing(false);
                     player.characterEquipmentManager.currentItemBeingUsed = player.playerEquipmentManager.m_CurrentHandLeftWeapon;
                     player.playerEquipmentManager.m_CurrentHandLeftWeapon.oh_tap_LT_Action.PerformAction(player);
                 }

@@ -17,6 +17,4 @@ public class AICharacterAttackAction : AICharacterAction
 
     public float maximumDistanceNeededToAttack = 3;
     public float minimumDistanceNeededToAttack = 0;
-
-
 }

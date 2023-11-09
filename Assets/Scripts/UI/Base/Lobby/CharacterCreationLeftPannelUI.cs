@@ -311,6 +311,7 @@ public class CharacterCreationLeftPannelUI : UI_Base
         // Hair
         m_HairBtn.interactable = isTrue;
         m_HairColorBtn.interactable = isTrue;
+        m_HairItemBtn.interactable = isTrue;
 
         // Face
         //EyelashesBtn.interactable = isTrue;

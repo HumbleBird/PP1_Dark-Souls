@@ -16,6 +16,12 @@ public class TakeDamageEffect : CharacterEffect
     public float m_FireDamage;
     public float m_LightningDamage;
     public float m_DarkDamage;
+    public int m_iCritiCalDamage;
+
+    [Header("SpeicalEffect")]
+    public int m_iBleed ;
+    public int m_iPosion;
+    public int m_iForst ;
 
 
     [Header("Poise")]
@@ -359,6 +365,9 @@ public class TakeDamageEffect : CharacterEffect
 
         if(aiCharacter != null && characterCausingDamage != null)
         {
+            if (aiCharacter.aiCharacterStatsManager.teamIDNumber == characterCausingDamage.characterStatsManager.teamIDNumber)
+                return;
+
             aiCharacter.currentTarget = characterCausingDamage;
         }
     }

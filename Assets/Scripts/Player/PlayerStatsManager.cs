@@ -121,7 +121,10 @@ public class PlayerStatsManager : CharacterStatsManager
 
         // HUD Bar Refresh
         if(Managers.GameUI.m_GameSceneUI != null)
-             Managers.GameUI.m_GameSceneUI.m_StatBarsUI.SetBGWidthUI(E_StatUI.All);
+        {
+            Managers.GameUI.m_GameSceneUI.m_StatBarsUI.m_Player = player;
+            Managers.GameUI.m_GameSceneUI.m_StatBarsUI.SetBGWidthUI(E_StatUI.All);
+        }
     }
 
     // Current HP,Stamina FP 완전 회복

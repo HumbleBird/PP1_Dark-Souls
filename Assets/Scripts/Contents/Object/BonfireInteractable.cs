@@ -53,6 +53,9 @@ public class BonfireInteractable : Interactable
             fireFX.gameObject.SetActive(true);
             fireFX.Play();
             Managers.Sound.Play(bonfireActivationSoundFX);
+
+            // 위치 갱신
+            playermanager.m_StartPos = bonfireTeleportTransform.position;
         }
     }
 

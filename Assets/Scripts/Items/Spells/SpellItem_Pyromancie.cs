@@ -45,7 +45,6 @@ public class SpellItem_Pyromancie : SpellItem
                 instantiatedSpellFX = Instantiate(spellCastFX, player.playerWeaponSlotManager.rightHandSlot.transform.position, player.cameraHandler.cameraPivotTranform.rotation);
 
             SpellDamageCollider spellDamageCollider = instantiatedSpellFX.GetComponent<SpellDamageCollider>();
-            spellDamageCollider.teamIDNumber = player.playerStatsManager.teamIDNumber;
             spellDamageCollider.characterManager = character;
             spellDamageCollider.m_isCanCollide = true;
             rigidBody = instantiatedSpellFX.GetComponent<Rigidbody>();

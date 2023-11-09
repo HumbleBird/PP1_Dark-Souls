@@ -23,11 +23,15 @@ public class FireArrowAction : ItemAction
         character.characterAnimatorManager.PlayTargetAnimation("Bow_TH_Fire_01", true);
         character.animator.SetBool("isHoldingArrow", false);
 
+        GameObject liveArrow;
         // Fire the Arrow as a player character
-        if(player != null)
+        if (player != null)
         {
+            // Stamina
+            player.characterCombatManager.DrainStaminaBasedOnAttack();
+
             // live arrow 持失
-            GameObject liveArrow = Instantiate(character.characterEquipmentManager.m_CurrentHandAmmo.liveAmmoModel, arrowInstantiationLocation.transform.position, player.cameraHandler.cameraPivotTranform.rotation);
+            liveArrow = Instantiate(character.characterEquipmentManager.m_CurrentHandAmmo.liveAmmoModel, arrowInstantiationLocation.transform.position, player.cameraHandler.cameraPivotTranform.rotation);
             Rigidbody rigidBody = liveArrow.GetComponent<Rigidbody>();
             RangedProjectileDamageCollider damageCollider = liveArrow.GetComponent<RangedProjectileDamageCollider>();
 
@@ -70,6 +74,11 @@ public class FireArrowAction : ItemAction
             damageCollider.ammoItem = character.characterEquipmentManager.m_CurrentHandAmmo;
             damageCollider.physicalDamage = character.characterEquipmentManager.m_CurrentHandAmmo.m_iPhysicalDamage;
             damageCollider.ammoItem.m_Shooter = character;
+
+            if (character.isUsingRightHand == true)
+                damageCollider.m_BowItem = character.characterEquipmentManager.m_CurrentHandRightWeapon;
+            else if (character.isUsingLeftHand == true)
+                damageCollider.m_BowItem = character.characterEquipmentManager.m_CurrentHandLeftWeapon;
         }
         // Fire the Arrow as an A.I character
 
@@ -78,7 +87,7 @@ public class FireArrowAction : ItemAction
             AICharacterManager enemy = character as AICharacterManager;
 
             // live arrow 持失
-            GameObject liveArrow = Instantiate
+            liveArrow = Instantiate
                 (character.characterEquipmentManager.m_CurrentHandAmmo.liveAmmoModel, 
                 arrowInstantiationLocation.transform.position, 
                 Quaternion.identity);
@@ -105,10 +114,14 @@ public class FireArrowAction : ItemAction
             damageCollider.ammoItem.m_Shooter = character;
             damageCollider.physicalDamage = enemy.characterEquipmentManager.m_CurrentHandAmmo.m_iPhysicalDamage;
             damageCollider.teamIDNumber = enemy.characterStatsManager.teamIDNumber;
+
+            damageCollider.m_BowItem = character.characterEquipmentManager.m_CurrentHandRightWeapon;
         }
 
 
         // Sound
         Managers.Sound.Play("Item/Weapon/Bow/Bow_Fire_01");
+
+        Destroy(liveArrow, 5);
     }
 }

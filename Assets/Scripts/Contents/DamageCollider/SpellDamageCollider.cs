@@ -44,8 +44,9 @@ public class SpellDamageCollider : DamageCollider
 
         if (!hasColliede)
         {
-            if (collision.gameObject.layer == LayerMask.NameToLayer("Default"))
+            if (collision.gameObject.layer == LayerMask.NameToLayer("Default") && characterManager.gameObject != collision.gameObject)
             {
+
                 impactParticles = Instantiate(impactParticles, transform.position, Quaternion.FromToRotation(Vector3.up, impactNormal));
 
                 Destroy(projectileParticles);
@@ -57,7 +58,7 @@ public class SpellDamageCollider : DamageCollider
 
             spellTarget = collision.transform.GetComponent<CharacterManager>();
 
-            if (spellTarget != null && spellTarget.characterStatsManager.teamIDNumber != teamIDNumber)
+            if (spellTarget != null)
             {
 
                 TakeDamageEffect takeDamageEffect = new TakeDamageEffect();//Instantiate(Managers.WorldEffect.takeDamageEffect);

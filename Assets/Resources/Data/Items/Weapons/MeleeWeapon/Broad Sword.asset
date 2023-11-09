@@ -17,8 +17,8 @@ MonoBehaviour:
   m_iItemID: 1
   m_eItemType: 5
   m_isEquiping: 1
-  m_EquipingType: 0
-  m_iEquipSlotNum: 0
+  m_EquipingType: 1
+  m_iEquipSlotNum: 2
   m_bIsUnarmed: 0
   m_sPrefabPath: Prefabs/Items/Weapons/MeleeWeapon/Broad Sword
   m_goPrefab: {fileID: 0}
@@ -57,7 +57,9 @@ MonoBehaviour:
   m_iDurability: 30
   m_iWeight: 3
   lightAttackDamageModifier: 1
-  heavyAttackDaamgeModifier: 2
+  heavyAttackDamgeModifier: 1.5
+  m_fOHAttackDamageModifire: 1
+  m_fTHAttackDamageModifire: 1.5
   criticalDamagemuiltiplier: 4
   guardBreakModifier: 1
   poiseBreak: 25
@@ -67,22 +69,24 @@ MonoBehaviour:
   baseStaminaCost: 10
   lightAttackStaminaMultiplier: 1
   heavyAttackStaminaMultiplier: 2
+  m_fOHAttackStaminaMultiplier: 1
+  m_fTHAttackStaminaMultiplier: 1.5
   oh_tap_RB_Action: {fileID: 11400000, guid: abe37ab07ff660740a9771befa258c1d, type: 2}
   oh_hold_RB_Action: {fileID: 11400000, guid: e2ab1c279d5b3a5418c493df024fc7ba, type: 2}
   oh_tap_RT_Action: {fileID: 11400000, guid: 93b86fe8370f15c42afb30ab58dbd765, type: 2}
   oh_hold_RT_Action: {fileID: 11400000, guid: 857ba5af1c357bb489101f2bc2bdb47e, type: 2}
-  oh_tap_LB_Action: {fileID: 0}
-  oh_hold_LB_Action: {fileID: 0}
-  oh_tap_LT_Action: {fileID: 0}
-  oh_hold_LT_Action: {fileID: 0}
+  oh_tap_LB_Action: {fileID: 11400000, guid: abe37ab07ff660740a9771befa258c1d, type: 2}
+  oh_hold_LB_Action: {fileID: 11400000, guid: e2ab1c279d5b3a5418c493df024fc7ba, type: 2}
+  oh_tap_LT_Action: {fileID: 11400000, guid: 93b86fe8370f15c42afb30ab58dbd765, type: 2}
+  oh_hold_LT_Action: {fileID: 11400000, guid: 857ba5af1c357bb489101f2bc2bdb47e, type: 2}
   th_tap_RB_Action: {fileID: 11400000, guid: abe37ab07ff660740a9771befa258c1d, type: 2}
   th_hold_RB_Action: {fileID: 11400000, guid: e2ab1c279d5b3a5418c493df024fc7ba, type: 2}
   th_tap_RT_Action: {fileID: 11400000, guid: 93b86fe8370f15c42afb30ab58dbd765, type: 2}
   th_hold_RT_Action: {fileID: 11400000, guid: 857ba5af1c357bb489101f2bc2bdb47e, type: 2}
-  th_tap_LB_Action: {fileID: 0}
-  th_hold_LB_Action: {fileID: 0}
-  th_tap_LT_Action: {fileID: 0}
-  th_hold_LT_Action: {fileID: 0}
+  th_tap_LB_Action: {fileID: 11400000, guid: abe37ab07ff660740a9771befa258c1d, type: 2}
+  th_hold_LB_Action: {fileID: 11400000, guid: e2ab1c279d5b3a5418c493df024fc7ba, type: 2}
+  th_tap_LT_Action: {fileID: 11400000, guid: 93b86fe8370f15c42afb30ab58dbd765, type: 2}
+  th_hold_LT_Action: {fileID: 11400000, guid: 857ba5af1c357bb489101f2bc2bdb47e, type: 2}
   canBeBeffued: 1
   m_SwrodWeaponWhooshes:
   - {fileID: 8300000, guid: 0b867adebbe5e0443976247c82bc787f, type: 3}
@@ -90,5 +94,5 @@ MonoBehaviour:
   m_listBlockingNoises: []
   m_listWeaponChargeSounds: []
   m_listBowWhooshes: []
-  m_isLeftHandEquiping: 0
+  m_isLeftHandEquiping: 1
   m_SecondE_EquipmentSlotsPartType: 0

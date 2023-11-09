@@ -10,10 +10,19 @@ public class TakeBlockedDamageEffect : CharacterEffect
     public CharacterManager characterCausingDamage; // 데미지 유발이 캐릭터라면, they are listed here?
 
     [Header("Base Damage")]
-    public float physicalDamage = 0;
-    public float fireDamage = 0;
-    public float staminaDamage = 0;
+    public float m_fFinalDamage;
+    public float m_PhysicalDamage;
+    public float m_MagicDamage;
+    public float m_FireDamage;
+    public float m_LightningDamage;
+    public float m_DarkDamage;
+
+    public float staminaDamage = 10;
+
+
+    [Header("Poise")]
     public float poiseDamage = 0;
+    public bool poiseIsBroken = false;
 
     [Header("Animation")]
     public string blockAnimation;
@@ -40,6 +49,9 @@ public class TakeBlockedDamageEffect : CharacterEffect
         // 데미지 block 애니메이션 재생
         PlayBlockDamageAnimation(character);
 
+        // UI 업데이트
+        CharacterHealthBarUIUpdate(character);
+
         // Block 사운드
         PlayBlockDamageSoundFX(character);
 
@@ -58,35 +70,120 @@ public class TakeBlockedDamageEffect : CharacterEffect
         if (character.isDead)
             return;
 
-        // 데미지 공식
-        // (물리 공격력-물리 방어력) * (1-물리 감소율) + (속성 공격력 - 속성 방어력) * (1-속성 감소율)
-
-        if (characterCausingDamage != null)
+        // 플레이어
+        if (character.characterStatsManager.teamIDNumber == (int)E_TeamId.Player)
         {
-            // Damage defense 계산 전, 공격 데미지 수치 체크
-            physicalDamage = Mathf.RoundToInt(physicalDamage * (characterCausingDamage.characterStatsManager.physicalDamagePercentageModifier / 100));
-            fireDamage = Mathf.RoundToInt(fireDamage * (characterCausingDamage.characterStatsManager.fireDamagePercentageModifier / 100));
+            // 데미지 공식
+            // (물리 공격력-물리 방어력) * (1-물리 감소율) + (속성 공격력 - 속성 방어력) * (1-속성 감소율)
+            if (characterCausingDamage != null)
+            {
+                // (물리 공격력-물리 방어력)
+                float physicalDamage = Mathf.Max(0, characterCausingDamage.characterStatsManager.m_fPhysicalDamage - character.characterStatsManager.m_iPhysicalDefense);
+
+                // (1-물리 감소율)
+                float physicalDamageReductionValue = 1 - character.characterStatsManager.m_fPhysicalDamageAbsorption / 100;
+
+                // (속성 공격력 - 속성 방어력) * (1-속성 감소율)
+                // Magic
+                float MagicDamage = Mathf.Max(0, characterCausingDamage.characterStatsManager.m_fMagicDamage - character.characterStatsManager.m_iMagicDefense);
+                float MagicDamageReductionValue = 1 - character.characterStatsManager.m_fMagicDamageAbsorption / 100;
+
+                // Fire
+                float FireDamage = Mathf.Max(0, characterCausingDamage.characterStatsManager.m_fFireDamage - character.characterStatsManager.m_iFireDefense);
+                float FireDamageReductionValue = 1 - character.characterStatsManager.m_fFireDamageAbsorption / 100;
+
+                // Lightning
+                float LightningDamage = Mathf.Max(0, characterCausingDamage.characterStatsManager.m_fLightningDamage - character.characterStatsManager.m_iLightningDefense);
+                float LightningDamageReductionValue = 1 - character.characterStatsManager.m_fLightningDamageAbsorption / 100;
+
+                //Dark
+                float DarkDamage = Mathf.Max(0, characterCausingDamage.characterStatsManager.m_fDarkDamage - character.characterStatsManager.m_iDarkDefense);
+                float DarkDamageReductionValue = 1 - character.characterStatsManager.m_fDarkDamageAbsorption / 100;
+
+                // 특수 효과
+                // Bleed
+                // Poison
+                // Frost
+                // Curse
+
+                m_PhysicalDamage = physicalDamage * physicalDamageReductionValue;
+                m_MagicDamage = MagicDamage * MagicDamageReductionValue;
+                m_FireDamage = FireDamage * FireDamageReductionValue;
+                m_LightningDamage = LightningDamage * LightningDamageReductionValue;
+                m_DarkDamage = DarkDamage * DarkDamageReductionValue;
+            }
+        }
+        // 몬스터
+        else
+        {
+            // 면역 판정
+            // 체력 - (공격력 * 약점) / 저항
+            //m_PhysicalDamage = characterCausingDamage.characterStatsManager.m_fPhysicalDamage;
+            //m_MagicDamage = characterCausingDamage.characterStatsManager.m_fMagicDamage;
+            //m_FireDamage = characterCausingDamage.characterStatsManager.m_fFireDamage;
+            //m_LightningDamage = characterCausingDamage.characterStatsManager.m_fLightningDamage;
+            //m_DarkDamage = characterCausingDamage.characterStatsManager.m_fDarkDamage;
         }
 
         character.characterAnimatorManager.EraseHandIKForWeapon();
 
-        // 데미지 - 장비 방어율%
-        physicalDamage = Mathf.RoundToInt(physicalDamage - (physicalDamage * (1 - character.characterStatsManager.m_fPhysicalDamageAbsorption / 100)));
-        fireDamage = Mathf.RoundToInt(fireDamage - (fireDamage * (1 - character.characterStatsManager.m_fFireDamageAbsorption / 100)));
-
-        // 데미지 - 속성 흡수 퍼센티지 수정자
-        physicalDamage = physicalDamage - Mathf.RoundToInt(physicalDamage * (character.characterStatsManager.physicalAbsorptionPercentageModifier / 100));
-        fireDamage = fireDamage - Mathf.RoundToInt(fireDamage * (character.characterStatsManager.fireAbsorptionPercentageModifier / 100));
-
-        float finalDamage = physicalDamage + fireDamage; // + magic + lightning + dark Damage
-
-        character.characterStatsManager.currentHealth = Mathf.RoundToInt(character.characterStatsManager.currentHealth - finalDamage);
-
-        // character가 Player라면 UI 갱신
-        PlayerManager player = character as PlayerManager;
-        if (player != null)
+        WeaponItem ShiledItem;
+        float Modifier = 1;
+        // Block Caculated
+        if(character.isUsingRightHand)
         {
-            player.m_GameSceneUI.m_StatBarsUI.RefreshUI(E_StatUI.Hp);
+            if (character.isTwoHandingWeapon)
+            {
+                Modifier = 1.5f;
+            }
+            ShiledItem = character.characterEquipmentManager.m_CurrentHandRightWeapon;
+
+        }
+        else if (character.isUsingLeftHand)
+        {
+            ShiledItem = character.characterEquipmentManager.m_CurrentHandLeftWeapon;
+        }
+
+        // Blcok 데미지 계산
+        {
+
+            // (1-감소율)
+            float physicalDamageGuardAbsorption = 1 - character.characterStatsManager.m_fPhysicalDamageAbsorption / 100;
+
+            // Magic
+            float MagicDamageGuardAbsorption = 1 - character.characterStatsManager.m_fMagicDamageAbsorption / 100;
+
+            // Fire
+            float FireDamageGuardAbsorption = 1 - character.characterStatsManager.m_fFireDamageAbsorption / 100;
+
+            // Lightning
+            float LightningDamageGuardAbsorption = 1 - character.characterStatsManager.m_fLightningDamageAbsorption / 100;
+
+            //Dark
+            float DarkDamageGuardAbsorption = 1 - character.characterStatsManager.m_fDarkDamageAbsorption / 100;
+
+            m_PhysicalDamage *= physicalDamageGuardAbsorption;
+            m_MagicDamage *= MagicDamageGuardAbsorption;
+            m_FireDamage *= FireDamageGuardAbsorption;
+            m_LightningDamage  *= LightningDamageGuardAbsorption;
+            m_DarkDamage *= DarkDamageGuardAbsorption;
+        }
+
+        // 특수 효과
+        // Bleed
+        // Poison
+        // Frost
+        // Curse
+
+        m_fFinalDamage = m_PhysicalDamage + m_MagicDamage + m_FireDamage + m_LightningDamage + m_DarkDamage;
+
+        character.characterStatsManager.currentHealth = Mathf.RoundToInt(character.characterStatsManager.currentHealth - m_fFinalDamage);
+
+        // Temp
+        poiseDamage = 30;
+        if (character.characterStatsManager.m_fTotalPoiseDefence < poiseDamage)
+        {
+            poiseIsBroken = true;
         }
 
         if (character.characterStatsManager.currentHealth <= 0)
@@ -104,6 +201,7 @@ public class TakeBlockedDamageEffect : CharacterEffect
         if (player != null)
         {
             player.playerStatsManager.currentStamina -= Mathf.RoundToInt( staminaDamageAfterAbsorption);
+            Managers.GameUI.m_GameSceneUI.m_StatBarsUI.RefreshUI(E_StatUI.Stamina);
         }
     }
 
@@ -198,8 +296,12 @@ public class TakeBlockedDamageEffect : CharacterEffect
     {
         AICharacterManager aiCharacter = character as AICharacterManager;
 
+
         if (aiCharacter != null && characterCausingDamage != null)
         {
+            if (aiCharacter.aiCharacterStatsManager.teamIDNumber == characterCausingDamage.characterStatsManager.teamIDNumber)
+                return;
+
             aiCharacter.currentTarget = characterCausingDamage;
         }
     }
@@ -232,5 +334,13 @@ public class TakeBlockedDamageEffect : CharacterEffect
         {
             Managers.Camera.CameraShake(1);
         }
+    }
+
+    private void CharacterHealthBarUIUpdate(CharacterManager character)
+    {
+        // 몬스터라면 지 아래에 있는 Helath Bar를 수정
+
+        // 플레이어라면 UI를 수정
+        character.characterStatsManager.HealthBarUIUpdate(Mathf.RoundToInt(m_fFinalDamage));
     }
 }

@@ -39,15 +39,15 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 347833055415664871}
-  m_LocalRotation: {x: 0.032676335, y: -0.193088, z: 0.0038144835, w: 0.98062974}
-  m_LocalPosition: {x: -7.9314203, y: 0.001, z: 2.077}
+  m_LocalRotation: {x: 0, y: 0.6342178, z: 0, w: 0.77315444}
+  m_LocalPosition: {x: -27.03523, y: -5.006, z: 4.8870544}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 3775640246154021718}
   m_Father: {fileID: 0}
   m_RootOrder: 0
-  m_LocalEulerAnglesHint: {x: 3.759, y: -22.288, z: -0.295}
+  m_LocalEulerAnglesHint: {x: 0, y: 78.724, z: 0}
 --- !u!114 &7888674121781100882
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -117,7 +117,9 @@ MonoBehaviour:
   characterSoundFXManager: {fileID: 0}
   characterCombatManager: {fileID: 0}
   characterEquipmentManager: {fileID: 0}
+  characterLocomotionManager: {fileID: 0}
   lockOnTransform: {fileID: 7119120353931914124}
+  targetTransformWhileAiming: {fileID: 3300042733810835939}
   criticalAttackRayCastStartPoint: {fileID: 7119120353170246266}
   m_StartPos: {x: 0, y: 0, z: 0}
   m_StartRo: {x: 0, y: 0, z: 0}
@@ -148,7 +150,6 @@ MonoBehaviour:
   isFiringSpell: 0
   pendingCriticalDamage: 0
   m_CharacterID: 0
-  m_Collider: {fileID: 0}
   inputHandler: {fileID: 0}
   cameraHandler: {fileID: 0}
   m_GameSceneUI: {fileID: 0}
@@ -357,6 +358,7 @@ MonoBehaviour:
   - {fileID: 11400000, guid: 738dfc03529570541837bdf196901c52, type: 2}
   - {fileID: 11400000, guid: ae9bfb5fc7a0cb24dab19f2e3295b285, type: 2}
   - {fileID: 11400000, guid: 25fdf3d8acb5ce249a77f2340961a26b, type: 2}
+  - {fileID: 11400000, guid: 9c87eebb7a85561499e8c0429ced48e8, type: 2}
 --- !u!114 &7888674121781100883
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -449,13 +451,13 @@ CharacterController:
   m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 2
-  m_Height: 1.73
+  m_Height: 1.68
   m_Radius: 0.3
   m_SlopeLimit: 45
   m_StepOffset: 0.42
   m_SkinWidth: 0.08
   m_MinMoveDistance: 0.001
-  m_Center: {x: 0, y: 0.94, z: 0}
+  m_Center: {x: 0, y: 0.87, z: 0}
 --- !u!54 &1461314987884993441
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -522,7 +524,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_sCharacterName: Nameless
   teamIDNumber: 0
-  currentSoulCount: 8500
+  currentSoulCount: 0
   maxHealth: 0
   currentHealth: 0
   blockingPhysicalDamageAbsorption: 0
@@ -865,7 +867,7 @@ Transform:
   - {fileID: 3300042734579340667}
   - {fileID: 3300042733046652274}
   m_Father: {fileID: 3775640246154021718}
-  m_RootOrder: 5
+  m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &3300042734347596242
 MonoBehaviour:
@@ -58205,7 +58207,6 @@ Transform:
   m_Children:
   - {fileID: 3775559845509338892}
   - {fileID: 3775677125111953534}
-  - {fileID: 7119120353931914124}
   - {fileID: 7119120353854060416}
   - {fileID: 7119120354489404313}
   - {fileID: 3300042734347596241}
@@ -71235,7 +71236,7 @@ Transform:
   m_Children:
   - {fileID: 7119120353170246266}
   m_Father: {fileID: 3775640246154021718}
-  m_RootOrder: 3
+  m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &7119120353931914125
 GameObject:
@@ -71260,13 +71261,13 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 7119120353931914125}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 1.261, z: 0}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 1.2610002, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
-  m_Father: {fileID: 3775640246154021718}
-  m_RootOrder: 2
+  m_Father: {fileID: 7119120354489404313}
+  m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &7119120354046459006
 GameObject:
@@ -71349,6 +71350,7 @@ Transform:
   - {fileID: 6381512278837149836}
   - {fileID: 3300042733810835939}
   - {fileID: 2032616575613666568}
+  - {fileID: 7119120353931914124}
   m_Father: {fileID: 3775640246154021718}
-  m_RootOrder: 4
+  m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}

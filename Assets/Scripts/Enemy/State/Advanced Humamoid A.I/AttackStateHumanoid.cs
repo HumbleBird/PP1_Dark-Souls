@@ -28,6 +28,8 @@ public class AttackStateHumanoid : State
 
     public override State Tick(AICharacterManager aiCharacter)
     {
+        //FlagCheck(aiCharacter);
+
         if (aiCharacter.combatStyle == AICombatStyle.swordAndShield)
         {
             return ProcessSwordAndShieldCombatStyle(aiCharacter);
@@ -166,6 +168,15 @@ public class AttackStateHumanoid : State
                 currentAttack = null;
             }
 
+        }
+    }
+
+    void FlagCheck(AICharacterManager aiCharacter)
+    {
+        if (willDoComboOnNextAttack && hasPerformedAttack && aiCharacter.canDoCombo == false)
+        {
+            willDoComboOnNextAttack = false;
+            hasPerformedAttack = false;
         }
     }
 

@@ -69,6 +69,14 @@ public class CameraHandler : MonoBehaviour
         playerManager = Managers.Object.m_MyPlayer;
     }
 
+    private void Start()
+    {
+        Managers.Camera.m_Camera = this;
+        playerManager = Managers.Object.m_MyPlayer;
+        inputHandler = playerManager.GetComponent<InputHandler>();
+        targetTransform = playerManager.transform;
+    }
+
     public void StartGame()
     {
         playerManager = Managers.Object.m_MyPlayer;
@@ -84,7 +92,7 @@ public class CameraHandler : MonoBehaviour
 
         if(playerManager.isAiming)
         {
-            Vector3 targetPositoin = Vector3.SmoothDamp(transform.position, targetTransformWhileAiming.position, ref cameraFollwVelocity, Time.deltaTime * groundedFollowSpeed);
+            Vector3 targetPositoin = Vector3.SmoothDamp(transform.position, playerManager.targetTransformWhileAiming.position, ref cameraFollwVelocity, Time.deltaTime * groundedFollowSpeed);
             transform.position = targetPositoin;
 
         }

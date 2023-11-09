@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using static Define;
 
 public class RangedProjectileDamageCollider : DamageCollider
 {
@@ -9,6 +10,7 @@ public class RangedProjectileDamageCollider : DamageCollider
 
     Rigidbody arrowRigidbody;
     CapsuleCollider arrowCapsuleCollider;
+    public WeaponItem m_BowItem = null;
 
     protected override void Awake()
     {
@@ -53,14 +55,22 @@ public class RangedProjectileDamageCollider : DamageCollider
             contactPoint = collision.gameObject.GetComponent<Collider>().ClosestPointOnBounds(transform.position);
             angleHitFrom = Vector3.SignedAngle(characterManager.transform.forward, enemyManager.transform.forward, Vector3.up);
 
+
+
             TakeDamageEffect takeDamageEffect = new TakeDamageEffect();
             takeDamageEffect.characterCausingDamage = characterManager;
-            takeDamageEffect.m_PhysicalDamage = physicalDamage;
-            takeDamageEffect.m_MagicDamage = magicDamage;
-            takeDamageEffect.m_FireDamage = fireDamage;
-            takeDamageEffect.m_LightningDamage = lightningDamage;
-            takeDamageEffect.m_DarkDamage = darkDamage;
-            takeDamageEffect.poiseDamage = poiseDamage;
+            takeDamageEffect.m_PhysicalDamage = m_BowItem.m_iPhysicalDamage + ammoItem.m_iPhysicalDamage;
+            takeDamageEffect.m_MagicDamage = m_BowItem.m_iMagicDamage + ammoItem.m_iMagicDamage;
+            takeDamageEffect.m_FireDamage = m_BowItem.m_iFireDamage + ammoItem.m_iFireDamage;
+            takeDamageEffect.m_LightningDamage = m_BowItem.m_iLightningDamage + ammoItem.m_iLightningDamage;
+            takeDamageEffect.m_DarkDamage = m_BowItem.m_iDarkDamage + ammoItem.m_iDarkDamage;
+            takeDamageEffect.m_iCritiCalDamage = m_BowItem.m_iCriticalDamage + ammoItem.m_iCriticalDamage;
+
+            takeDamageEffect.m_iBleed  = m_BowItem.m_iBleeding + ammoItem.m_iBleeding; 
+            takeDamageEffect.m_iPosion = m_BowItem.m_iPoison + ammoItem.m_iPoison;
+            takeDamageEffect.m_iForst = m_BowItem.m_iFrost + ammoItem.m_iFrost;
+
+            takeDamageEffect.poiseDamage = poiseDamage + ammoItem.m_iPhysicalDamage;
             takeDamageEffect.contactPoint = contactPoint;
             takeDamageEffect.angleHitFrom = angleHitFrom;
             enemyManager.characterEffectsManager.ProcessEffectInstantly(takeDamageEffect);
@@ -71,7 +81,7 @@ public class RangedProjectileDamageCollider : DamageCollider
         {
             IllusionaryWall illusionaryWall = collision.gameObject.GetComponent<IllusionaryWall>();
 
-            if (illusionaryWall != null)
+            if (illusionaryWall != null && characterManager.characterStatsManager.teamIDNumber == (int)E_TeamId.Player)
             {
                 illusionaryWall.wallHasBennHit = true;
             }

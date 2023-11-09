@@ -38,7 +38,7 @@ public class AmmoItem : Item
     public int m_iMaxSaveCount; // 최대 저장한 가능한 수
 
     [Header("Attack Values")]
-    public int m_iPhysicalDamage = 50;
+    public int m_iPhysicalDamage = 10;
     public int m_iMagicDamage;
     public int m_iFireDamage;
     public int m_iLightningDamage;

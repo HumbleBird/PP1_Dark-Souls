@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e9416480da7440c4e927cdef65207060, type: 3}
   m_Name: Battle Axe
   m_EditorClassIdentifier: 
-  m_ItemIcon: {fileID: 21300000, guid: f266a164663774a41a0969d1966b6208, type: 3}
+  m_ItemIcon: {fileID: 21300000, guid: d3eed6d182dc2134e8a6ab531fac9287, type: 3}
   m_ItemName: Battle Axe
   m_iItemID: 1
   m_eItemType: 5
@@ -57,7 +57,9 @@ MonoBehaviour:
   m_iDurability: 30
   m_iWeight: 3
   lightAttackDamageModifier: 1
-  heavyAttackDaamgeModifier: 2
+  heavyAttackDamgeModifier: 1.5
+  m_fOHAttackDamageModifire: 1
+  m_fTHAttackDamageModifire: 1.5
   criticalDamagemuiltiplier: 4
   guardBreakModifier: 1
   poiseBreak: 25
@@ -67,6 +69,8 @@ MonoBehaviour:
   baseStaminaCost: 10
   lightAttackStaminaMultiplier: 1
   heavyAttackStaminaMultiplier: 2
+  m_fOHAttackStaminaMultiplier: 1
+  m_fTHAttackStaminaMultiplier: 1.5
   oh_tap_RB_Action: {fileID: 11400000, guid: abe37ab07ff660740a9771befa258c1d, type: 2}
   oh_hold_RB_Action: {fileID: 11400000, guid: e2ab1c279d5b3a5418c493df024fc7ba, type: 2}
   oh_tap_RT_Action: {fileID: 11400000, guid: 93b86fe8370f15c42afb30ab58dbd765, type: 2}

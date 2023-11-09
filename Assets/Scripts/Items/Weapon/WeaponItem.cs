@@ -228,6 +228,15 @@ public class WeaponItem : Item
                 th_tap_RB_Action = new FireArrowAction();
                 th_hold_RB_Action = new DrawArrowAction();
                 th_hold_LB_Action = new AimAction();
+
+
+                oh_tap_LB_Action = new FireArrowAction();
+                oh_hold_LB_Action = new DrawArrowAction();
+                oh_hold_RB_Action = new AimAction();
+
+                th_tap_LB_Action = new FireArrowAction();
+                th_hold_LB_Action = new DrawArrowAction();
+                th_hold_RB_Action = new AimAction();
                 break;
             case WeaponType.Flames:
                 oh_tap_RB_Action = new PyromancySpellAction();
@@ -243,6 +252,9 @@ public class WeaponItem : Item
             case WeaponType.Shield:
                 oh_hold_LB_Action = new BlockingAction();
                 oh_tap_LT_Action = new ParryAction();
+
+                oh_hold_RB_Action = new BlockingAction();
+                oh_tap_RT_Action = new ParryAction();
                 break;
             default:
                 break;

@@ -25,22 +25,23 @@ public class AttackState : State
         pursueTargetState = GetComponent<PursueTargetState>();
     }
 
-    public override State Tick(AICharacterManager enemy)
+    public override State Tick(AICharacterManager aiCharacter)
     {
+        //FlagCheck(aiCharacter);
 
-        float distancefromTarget = Vector3.Distance(enemy.currentTarget.transform.position, enemy.transform.position);
+        float distancefromTarget = Vector3.Distance(aiCharacter.currentTarget.transform.position, aiCharacter.transform.position);
 
-        RotateTowardsTargetWhilstAttacking(enemy);
+        RotateTowardsTargetWhilstAttacking(aiCharacter);
 
-        if (distancefromTarget > enemy.MaximumAggroRadius)
+        if (distancefromTarget > aiCharacter.MaximumAggroRadius)
         {
             return pursueTargetState;
         }
 
-        if(willDoComboOnNextAttack && enemy.canDoCombo)
+        if(willDoComboOnNextAttack && aiCharacter.canDoCombo)
         {
             // Attack with combo
-            AttackTargetWithCombo(enemy);
+            AttackTargetWithCombo(aiCharacter);
 
             // set cool down time
         }
@@ -48,10 +49,10 @@ public class AttackState : State
         if (!hasPerformedAttack && currentAttack != null)
         {
             //Attack
-            AttackTarget(enemy);
+            AttackTarget(aiCharacter);
 
             // Roll for a combo change
-            RollForComboChance(enemy);
+            RollForComboChance(aiCharacter);
         }
 
         if(willDoComboOnNextAttack && hasPerformedAttack)
@@ -120,6 +121,15 @@ public class AttackState : State
                 currentAttack = null;
             }
 
+        }
+    }
+
+    void FlagCheck(AICharacterManager aiCharacter)
+    {
+        if (willDoComboOnNextAttack && hasPerformedAttack && aiCharacter.canDoCombo == false)
+        {
+            willDoComboOnNextAttack = false;
+            hasPerformedAttack = false;
         }
     }
 }

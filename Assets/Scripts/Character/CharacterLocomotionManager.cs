@@ -14,10 +14,10 @@ public class CharacterLocomotionManager : MonoBehaviour
     [SerializeField] protected Vector3 yVelocity;
     [SerializeField] protected float groundedYVelocity = -7.5f;
     [SerializeField] protected float fallStartYVelocity = -7;
-    [SerializeField] protected float gravityForce = -10;
-    [SerializeField]  float groundCheckSphereRadius = 0.1f;
+    [SerializeField] protected float gravityForce = -0.8f;
+    [SerializeField]  float groundCheckSphereRadius = 0.17f;
     [SerializeField] protected float m_FallingDamageCanTime = 0.5f;
-    [SerializeField] protected float m_FallingDeadTime = 1.7f;
+    [SerializeField] protected float m_FallingDeadTime = 1f;
     protected bool fallingVelocity = false;
 
     protected virtual void Awake()
@@ -49,6 +49,7 @@ public class CharacterLocomotionManager : MonoBehaviour
 
         if(character.isGrounded)
         {
+
             if(inAirTimer > 0)
             {
                 // Damage Check
@@ -68,6 +69,8 @@ public class CharacterLocomotionManager : MonoBehaviour
                     yVelocity.y = groundedYVelocity;
                 }
             }
+
+            inAirTimer = 0;
             //if(yVelocity.y < 0)
             //{
             //    inAirTimer = 0;

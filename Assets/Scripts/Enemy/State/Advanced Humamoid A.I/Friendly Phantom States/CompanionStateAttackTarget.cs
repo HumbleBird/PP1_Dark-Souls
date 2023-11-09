@@ -22,6 +22,8 @@ public class CompanionStateAttackTarget : State
 
     public override State Tick(AICharacterManager aiCharacter)
     {
+        //FlagCheck(aiCharacter);
+
         if (aiCharacter.combatStyle == AICombatStyle.swordAndShield)
         {
             return ProcessSwordAndShieldCombatStyle(aiCharacter);
@@ -176,6 +178,15 @@ public class CompanionStateAttackTarget : State
             hasPerformedAttack = true;
             aiCharacterManager.characterEquipmentManager.currentItemBeingUsed = aiCharacterManager.characterEquipmentManager.m_CurrentHandRightWeapon;
             aiCharacterManager.characterEquipmentManager.m_CurrentHandRightWeapon.th_tap_RB_Action.PerformAction(aiCharacterManager);
+        }
+    }
+
+    void FlagCheck(AICharacterManager aiCharacter)
+    {
+        if (willDoComboOnNextAttack && hasPerformedAttack && aiCharacter.canDoCombo == false)
+        {
+            willDoComboOnNextAttack = false;
+            hasPerformedAttack = false;
         }
     }
 }
